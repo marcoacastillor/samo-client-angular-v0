@@ -1,0 +1,41 @@
+<div class="row margin-top">
+    <div *ngIf="!showOperation" class="col-sm-8">
+        <app-new-order
+        [providerList]="providerList"
+        [paymentTypeList]="paymentTypeList"
+        [categoryList]="categoryList"
+        [presentationList]="presentationList"
+        [taxesList]="taxesList"
+        [discountsList]="discountsList"
+        [purchase]="purchase"
+        [product]="product"
+        (getByCode)="onGetByCode($event)"
+        (resetProduct)="onResetProduct($event)"
+        (create)="onCreate($event)"
+        (udpate)="onUpdate($event)"
+        (cancel)="onCancel($event)"
+        (createProduct)="onCreateProduct($event)"
+        (createEnterprise)="onCreateEnterprise($event)"
+        >
+        </app-new-order>
+    </div>
+    <div *ngIf="showOperation" class="col-sm-8">
+        <app-show-order
+        [operation]="operation"
+        [enterprise]="enterprise"
+        (create)="onCreatePayment($event)"
+        >
+        </app-show-order>
+    </div>
+    <div class="col-sm-4">
+        <app-list-order
+        [orderList]="orderList"
+        [actualPg]="actualPg"
+        [regPerPg]="regPerPg"
+        (viewOrder)="onView($event)"
+        (updateOrder)="onUpdate($event)"
+        (search)="onSearch($event)"
+        >
+        </app-list-order>
+    </div>
+</div>

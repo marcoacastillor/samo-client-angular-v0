@@ -1,0 +1,26 @@
+<div class="row margin-top">
+    <div *ngIf="!showRol" class="col-sm-8">
+        <app-new-rol
+        [rol]="rol"
+        [moduleList]="moduleList"
+        (update)="onUpdate($event)"
+        (create)="onCreate($event)">
+        </app-new-rol>
+    </div>
+    <div *ngIf="showRol" class="col-sm-8">
+        <app-show-rol
+        [rol]="rol"
+        [moduleList]="moduleList"
+        (cancel)="onCancelShow($event)">
+        </app-show-rol>
+    </div>
+    <div class="col-sm-4">
+        <app-list-rol
+        [rolList]="rolList"
+        (delRol)=onDelete($event)
+        (newRol)=onNew($event)
+        (showRol)=onShow($event)>
+        </app-list-rol>
+    </div>
+</div>
+        

@@ -1,0 +1,53 @@
+<app-card caption="Gestión de información de gasto">
+    <main>
+        <h5>Creación de gasto</h5>
+        <form [formGroup]="expenseForm">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="type_expense">Tipo de gasto</label>
+                        <select class="form-control form-control-sm text-small" formControlName="type_expense" required>
+                            <option value="{{type.value}}" *ngFor="let type of lstTypes[0]">{{type.name}}</option>
+                        </select>
+                        <small *ngIf="mustShowError('type_expense')" class="form-text alert-danger">
+                            Tipo de gasto, es obligatorio
+                        </small>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="value">Valor del gasto</label>
+                        <input type="number" class="form-control text-small" placeholder="Valor" formControlName="value" required>
+                        <small *ngIf="mustShowError('value')" class="form-text alert-danger">
+                            Valor, es obligatorio
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="description">Descripción del gasto</label>
+                        <textarea maxlength="200" class="form-control text-small" placeholder="Descripción" formControlName="description" required></textarea>
+                        <small class="form-text alert alert-info" role="alert">
+                            La descripción del pago, no puede superar los 200 caracteres.
+                        </small>
+                        <div *ngIf="mustShowError('description')" class="form-text alert-danger">
+                            <small *ngIf="hasError('description','required')">
+                                El campo es obligatorio
+                            </small>                        
+                            <small *ngIf="hasError('description','maxLength')">
+                                Valor no puede ser mayor a <strong>{{ this.getErrors('description').maxLength.maxLength }}</strong>
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </main>
+    <footer>
+        <button *ngIf="!expense.pk_id_expense" type="submit" class="btn btn-outline-success btn-sm mb-2 mr-1" [disabled]="expenseForm.invalid" data-dismiss="modal" (click)="createExpense()">Guardar</button>
+        <button *ngIf="expense.pk_id_expense" type="submit" class="btn btn-outline-primary btn-sm mb-2 mr-1" [disabled]="expenseForm.invalid" data-dismiss="modal" (click)="updateExpense()">Actualizar</button>
+        <button type="button" class="btn btn-outline-danger btn-sm mb-2 mr-1" data-dismiss="modal">Cancelar</button>
+    </footer>
+</app-card>      

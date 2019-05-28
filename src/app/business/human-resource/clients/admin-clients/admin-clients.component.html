@@ -1,0 +1,28 @@
+<div class="row margin-top">
+    <div *ngIf="!showClient" class="col-sm-7">
+        <app-new-clients
+            [person]="person"
+            [typesIdList]="typesIdList"
+            (create)="onCreate($event)"
+            (update)="onUpdate($event)"
+        >
+        </app-new-clients>
+    </div>
+    <div *ngIf="showClient" class="col-sm-7">
+        <app-show-clients
+            [person]="person"
+        >
+        </app-show-clients>
+    </div>
+    <div class="col-sm-5">
+        <app-list-clients
+            [clientList]="clientList"
+            [actualPg]="actualPg"
+            [regPerPg]="regPerPg"
+            (search)="onSearch($event)"
+            (selectShow)="onSelectShow($event)"
+            (selectUpdate)="onSelectUpdate($event)"
+        >
+        </app-list-clients>
+    </div>
+</div>

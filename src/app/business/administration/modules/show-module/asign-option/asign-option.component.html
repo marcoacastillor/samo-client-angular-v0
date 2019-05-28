@@ -1,0 +1,82 @@
+<app-card caption="Seleccionar opciones">
+    <main>
+        <form [formGroup]="searchForm">
+            <div class="row alert alert-info" role="alert">
+                En ésta ventana se pueden asociar opciones al un determinado componente. Ésto con el fin de poder dar acceso a un rol específico a nivel de opciones.
+            </div>
+            <div class="row alert alert-warning" role="alert">
+                Se puede buscar por código y/o palabras clave en la descripción de la opción.
+            </div>
+            <div class="row align-items-end alert alert-success" role="alert">
+                <div class="col-sm-10">
+                    <div class="form-group">
+                        <label for="name">Filtro</label>    
+                        <input name="name" #filterRef type="text"  class="form-control text-small" placeholder="nombre" formControlName="filter">
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-outline-success btn-sm mb-2 mr-1" (click)="filterOption()">Buscar</button>
+                    </div>
+                </div>
+            </div>
+        </form> 
+        
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="row container" *ngIf="optionsList">
+                    <table class="table table-sm table-striped">
+                        <thead>
+                            <tr>
+                                <th>Agregar opción</th>
+                                <th>Opción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let opt of optionsList; let i=index;">
+                                <td>
+                                    <button href="#" (click)="addOption(opt,i,optionsList)" class="badge badge-success">
+                                        agregar
+                                    </button>
+                                </td>
+                                <td>
+                                    {{ opt.code }}<br />
+                                    {{ opt.description }}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>    
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="row container" *ngIf="optionsList">
+                    <table class="table table-sm table-striped">
+                        <thead>
+                            <tr>
+                                <th>Quitar opción</th>
+                                <th>Opción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of searchForm.get('options').controls; let i = index">
+                                <td>
+                                    <button href="#" (click)="delOption(item.value,i,optionsList)" class="badge badge-danger">
+                                        quitar
+                                    </button>
+                                </td>
+                                <td>
+                                    {{ item.value.code }}<br />
+                                    {{ item.value.description }}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>    
+                </div>
+            </div>
+        </div>        
+    </main>
+    <footer>
+        <button type="submit" data-dismiss="modal" class="btn btn-outline-primary btn-sm mb-2 mr-1" [disabled]="searchForm.invalid" (click)="asignOptionByComponent()">Guardar</button>
+    </footer>
+</app-card>      
+

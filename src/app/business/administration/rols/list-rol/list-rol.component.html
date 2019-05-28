@@ -1,0 +1,65 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-4">
+                    <button type="button" (click)="onNew()" class="btn text-small btn-sm btn-outline-primary">
+                        <fa-icon [icon]="faPlusCircle" class="text-primary mb-2 mr-1" title="Crear registro"></fa-icon>Nuevo rol
+                    </button>
+                </div>
+                <div class="col-sm-8">
+                    <div class="text-sm-right">
+                    </div>
+                </div>
+            </div>
+            <div class="table-responsive container">
+            <!-- Primera fila: buscador y definición de tamaño-->
+            <div class="row">
+            </div>
+            <!-- Fin primera fila -->
+    
+            <!-- Segunda fila: table -->
+            <div class="row">
+                <table class="table">
+                <thead>
+                    <tr>
+                        <th colspan="2">Nombre</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let rol of rolList[0]">
+                        <td>
+                            <div class="row container">
+                                <div class="btn-group">
+                                    <button type="button" class="btn text-ultra-small btn-sm btn-outline-danger dropdown-toggle"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <fa-icon [icon]="faTrashAlt" class="text-danger mb-2 mr-1" title="Eliminar registro"></fa-icon>Eliminar  
+                                    </button>
+                                    <button type="button" class="btn text-ultra-small btn-sm btn-outline-warning" (click)="viewRol(rol.pk_id_rol)">
+                                        <fa-icon [icon]="faEye" class="text-warning mb-2 mr-1" title="Ver registro"></fa-icon>Ver
+                                    </button>
+                                    <button type="button" class="btn text-ultra-small btn-sm btn-outline-success" (click)="updateRol(rol)">
+                                        <fa-icon [icon]="faEdit" class="text-success mb-2 mr-1" title="Actualizar registro"></fa-icon>Actualizar
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <button type="button" class="btn text-ultra-small btn-sm btn-outline-danger text-small" (click)="deleteRol(rol.pk_id_rol)">Confirmar</button>   
+                                        <button type="button" class="btn text-ultra-small btn-sm btn-outline-primary text-small">Cancelar</button>   
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>{{ rol.name }} </td>
+                    </tr>
+                </tbody>
+                </table>
+            </div>
+            <!-- Fin segunda fila -->
+    
+            <!-- Tercera fila: paginador -->
+            <div class="row"></div>
+            <!-- Fin tercera fila -->
+            </div>
+        </div>
+        </div>
+    </div>
+</div>    

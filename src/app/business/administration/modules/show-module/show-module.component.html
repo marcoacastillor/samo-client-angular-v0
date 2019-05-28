@@ -1,0 +1,123 @@
+<app-card caption="Detalle de Módulo ">
+    <main>
+        <div class="card">
+            <div class="card-body">
+                <div class="row ">
+                    <div class="col-sm-3">
+                        <img class="align-self-start mr-3" src="{{ url_storage + module.url_image }}" alt="{{ module.description }}" width="130" height="100">
+                    </div>
+                    <div class="col-sm-9">
+                        <div class="card-title-custom">{{ module.name }}</div>
+                        <pre>{{ module.url_angular_module}}</pre>
+                        <div class="text-small">{{ module.description}}</div>
+                    </div>
+                </div>
+
+                <!-- sección de componentes -->
+                <div class="row">
+                    <!-- sección listado de componentes-->
+                    <div class="col-sm-4">
+                        <div class="row border-type-2">
+                            <div class="col-sm-8 text-sm-left card-title-custom">Componentes</div>
+                            <div class="col-sm-4">
+                                <a href="#" data-toggle="modal" (click)="addCmp()" data-target="#componentModal" class="badge badge-primary">
+                                    <fa-icon [icon]="faPlusCircle" class="text-primary mb-2 mr-1" title="Crear registro"></fa-icon>crear
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 text-sm-left">
+                                <div class="nav flex-column nav-pills" id="v-pills-tab-{{module.pk_id_module}}" role="tablist" aria-orientation="vertical">
+                                    <a (click)="getInfoComponent(component.pk_id_component)" *ngFor="let component of module.components; let j = index" class="border-bottom-1 nav-link" href="#tab-{{ component.pk_id_component}}" id="cont-tab-{{component.pk_id_component}}" data-toggle="pill" role="tab" aria-selected="false">{{component.name}}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- fin sección listado de componentes-->
+
+                    <!-- sección opciones por componentes-->
+                    <div class="col-sm-8">
+                        <div class="tab-content" id="v-pills-tabContent-{{module.pk_id_module}}">
+                            <div *ngFor="let component of module.components;" class="tab-pane fade" id="tab-{{component.pk_id_component}}" role="tabpanel" [attr.aria-labelledby]="'cont-tab-' + component.pk_id_component">
+                                <div class="row border-type-2">
+                                    <div class="col-sm-3 text-sm-left">
+                                        <img class="align-self-end mr-3" src="{{ url_storage + component.url_image }}" alt="{{ component.url_image }}" width="100" height="70">
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="row">
+                                                    <div class="card-title-custom col-sm-12">{{ component.name }}</div>
+                                                    <div class="col-sm-12">
+                                                        <a href="#" class="dropdown-toggle badge badge-danger" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            <fa-icon [icon]="faTrashAlt" class="text-danger mb-2 mr-1" title="Actualizar registro"></fa-icon>eliminar
+                                                        </a>
+                                                        <a href="#" class="badge badge-success" data-toggle="modal" data-target="#componentModal">
+                                                            <fa-icon [icon]="faEdit" class="text-success mb-2 mr-1" title="Actualizar registro"></fa-icon>actualizar
+                                                        </a>
+                                                        <div class="dropdown-menu">
+                                                            <div class="alert alert-danger text-ultra-small">
+                                                                Si decide eliminar el componente, se eliminarán también todas las opciones del mismo. Está seguro?.
+                                                            </div>
+                                                            <button class="badge badge-danger text-ultra-small" (click)="deleteCmp(component)">Confirmar</button>   
+                                                            <button class="badge badge-primary text-ultra-small">Cancelar</button>   
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <div class="text-ultra-small"><b>Module Angular</b> : {{ component.url_angular_component }}</div>
+                                                        <div class="text-ultra-small"><b>Mostrar en menú</b> : {{ component.display_user }}</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Sección de opciones por componente-->
+                                <div class="row border-type-2">
+                                    <div class="col-sm-8 text-sm-left card-title-custom">Opciones</div>
+                                    <div class="col-sm-4 text-right">
+                                        <a href="#" class="badge badge-info" data-toggle="modal" data-target="#asignOptionModal">
+                                            <fa-icon [icon]="faAirFreshener" class="text-info mb-2 mr-1" title="Asociar"></fa-icon>Asociar opciones
+                                        </a>
+                                    </div>
+                                </div>    
+                                <div class="row bg-header-custom">
+                                    <div class="col-sm-4">Código</div>
+                                    <div class="col-sm-8">Descripción</div>
+                                </div>  
+                                <div class="row" *ngFor="let opt of cmp.options; let i = index">
+                                    <div class="col-sm-4">{{ opt.code }}</div>
+                                    <div class="col-sm-8">{{ opt.description }}</div>
+                                </div>    
+                                <!-- fin sección de opciones por componente-->
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <!-- fin sección opciones por componentes-->
+                </div>
+                <!--fin sección de componentes -->
+            </div>
+        </div>
+        <!-- Fin sección de componentes-->
+                
+        <!-- Modal -->
+        <app-modal-component
+            [cmp]="cmp"
+            (createCmp)="createCmp($event)"
+            (updateCmp)="updateCmp($event)"
+        >
+        </app-modal-component>
+
+        <app-modal-asign-option
+            [cmp]="cmp"
+            (asignOption)="onAsignOption($event)"
+        >
+        </app-modal-asign-option>
+    </main>
+    <footer>
+        <button type="button" class="btn btn-outline-success btn-sm mb-2 mr-1"
+        >Cancelar</button>
+    </footer>
+</app-card>      

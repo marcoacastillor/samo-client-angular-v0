@@ -1,0 +1,59 @@
+<app-card caption="Gestión de información de empresa">
+    <main>
+        <h5>Creación de empresa</h5>
+        <div class="alert alert-info" role="alert">En éste formulario se crean empresas tipo -Dueños de almacen-, es decir; empresas que realizan las ventas.</div>
+        <form [formGroup]="enterpriseForm">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="nit">Nit</label>
+                        <input type="text" class="form-control text-small" placeholder="nit" formControlName="nit" required>
+                        <small *ngIf="mustShowError('nit')" class="form-text alert-danger">
+                        Nit es obligatorio
+                        </small>
+                    </div>
+                </div> 
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="name">Nombre</label>
+                        <input type="text" class="form-control text-small" placeholder="name" formControlName="name" required>
+                        <small *ngIf="mustShowError('name')" class="form-text alert-danger">
+                        Nombre es obligatorio
+                        </small>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="address">Dirección</label>
+                        <input type="text" class="form-control text-small" placeholder="dirección" formControlName="address" required>
+                        <small *ngIf="mustShowError('address')" class="form-text alert-danger">
+                        Dirección es obligatorio
+                        </small>
+                    </div>
+                </div> 
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="phone">Teléfono</label>
+                        <input type="text" class="form-control text-small" placeholder="teléfono" formControlName="phone" required>
+                        <small *ngIf="mustShowError('phone')" class="form-text alert-danger">
+                        Teléfono es obligatorio
+                        </small>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="ubication_city">Ubicación - ciudad</label>
+                        <input type="text" class="form-control text-small" placeholder="ubicación" formControlName="ubication_city" required>
+                        <small *ngIf="mustShowError('ubication_city')" class="form-text alert-danger">
+                            Ubicación de la empresa
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </main>
+    <footer>
+        <button type="submit" class="btn btn-outline-primary btn-sm mb-2 mr-1" [disabled]="enterpriseForm.invalid" data-dismiss="modal" (click)="createEnterprise()">Guardar</button>
+        <button type="button" class="btn btn-outline-danger btn-sm mb-2 mr-1" data-dismiss="modal">Cancelar</button>
+    </footer>
+</app-card>      

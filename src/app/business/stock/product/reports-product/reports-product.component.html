@@ -1,0 +1,60 @@
+<app-card caption="Consolidado de productos">
+    <main>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Valor en inventarios</h5>
+                <h1>{{ valueStock }}</h1>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <form [formGroup]="reportForm">
+                    <div class="row">
+                        <div class="col-sm-12 alert alert-info" role="alert">
+                            La siguiente gráfica, muestra los productos más vendidos en un intervalo. Por defecto se encuentra en <strong>{{ days_sold }}</strong> días. <br />
+                            Con los selectores de fechas se puede seleccionar rangos diferentes para poder visualizar la información correspondiente.
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <label for="from_date">Fecha inicial</label>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="btn text-small btn-sm btn-outline-primary" [owlDateTimeTrigger]="from_date"><fa-icon [icon]="faCalendar" class="text-primary"></fa-icon></span>
+                                </div>
+                                <input type="text" class="form-control text-small" placeholder="Desde" formControlName="from_date" [owlDateTime]="from_date">
+                                <owl-date-time [pickerType]="'calendar'" #from_date></owl-date-time>
+                                <div class="col-sm-12">
+                                    <small class="form-text alert-primary">
+                                        Fecha inicial rango de venta.
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="to_date">Fecha final</label>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="btn text-small btn-sm btn-outline-primary" [owlDateTimeTrigger]="to_date"><fa-icon [icon]="faCalendar" class="text-primary"></fa-icon></span>
+                                </div>
+                                <input type="text" class="form-control text-small" placeholder="Hasta" formControlName="to_date" [owlDateTime]="to_date">
+                                <owl-date-time [pickerType]="'calendar'" #to_date></owl-date-time>
+                                <div class="col-sm-12">
+                                    <small class="form-text alert-primary">
+                                        Fecha final de rango de venta.
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 row align-items-center">            
+                            <button type="submit" class="btn btn-outline-primary btn-sm mb-2 mr-1" (click)="loadDataCharset()">Buscar</button>
+                        </div>
+                    </div>
+                </form>
+                <div class="row">
+                    <canvas id="canvas">{{  chart }}</canvas>
+                </div>  
+            </div>
+        </div>
+    </main>
+</app-card>

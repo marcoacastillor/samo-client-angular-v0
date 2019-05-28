@@ -1,0 +1,33 @@
+<app-card caption="Gestión de información de parámetros">
+    <main>
+        <h5 *ngIf="parameter.pk_id_parameter">Actualización de información</h5>
+        <h5 *ngIf="!parameter.pk_id_parameter">Creación de registro</h5>
+        <form [formGroup]="parameterForm">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="name">Nombre del parámetro</label>
+                        <input type="text" class="form-control text-small" placeholder="nombre de parámetro" formControlName="name" required>
+                        <small *ngIf="mustShowError('name')" class="form-text alert-danger">
+                        Nombre es obligatorio
+                        </small>
+                    </div>
+                </div> 
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="value">Valor del parámetro</label>
+                        <input type="text" class="form-control text-small" placeholder="valor de parámetro" formControlName="value" required>
+                        <small *ngIf="mustShowError('value')" class="form-text alert-danger">
+                        Valor es obligatorio
+                        </small>
+                    </div>
+                </div> 
+            </div>
+        </form>
+    </main>
+    <footer>
+        <button *ngIf="parameter.pk_id_parameter" type="submit" class="btn btn-outline-success btn-sm mb-2 mr-1" [disabled]="parameterForm.invalid" data-dismiss="modal" (click)="updateParameter()">Actualizar</button>
+        <button *ngIf="!parameter.pk_id_parameter" type="submit" class="btn btn-outline-primary btn-sm mb-2 mr-1" [disabled]="parameterForm.invalid" data-dismiss="modal" (click)="createParameter()">Guardar</button>
+        <button type="button" class="btn btn-outline-danger btn-sm mb-2 mr-1" data-dismiss="modal" (click)="cancelParameter()">Cancelar</button>
+    </footer>
+</app-card>      

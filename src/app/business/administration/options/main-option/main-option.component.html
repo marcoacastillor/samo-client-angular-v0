@@ -1,0 +1,20 @@
+<div class="row margin-top">
+    <div class="col-sm-6">
+        <app-new-option
+        [option]="option"
+        (create)="onCreate($event)"
+        (update)="onUpdate($event)"
+        >
+        </app-new-option>
+    </div>
+    <div class="col-sm-6">
+        <app-list-option
+            [optionList]="optionList"
+            [actualPg]="actualPg"
+            [regPerPg]="regPerPg"
+            (new)="onNew($event)"
+            (del)="onDelete($event)"
+        >
+        </app-list-option>
+    </div>
+</div>

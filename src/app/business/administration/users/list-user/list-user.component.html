@@ -1,0 +1,79 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-4">
+                    <button type="button" (click)="onNew()" class="btn text-small btn-sm btn-outline-primary">
+                        <fa-icon [icon]="faPlusCircle" class="text-primary mb-2 mr-1" title="Crear registro"></fa-icon>Nuevo usuario
+                    </button>
+                </div>
+                <div class="col-sm-8">
+                    <div class="text-sm-right">
+                    otras operaciones...
+                    </div>
+                </div>
+            </div>
+            <div class="table-responsive container">
+            <!-- Primera fila: buscador y definición de tamaño-->
+            <div class="row">
+            </div>
+            <!-- Fin primera fila -->
+    
+            <!-- Segunda fila: table -->
+            <div class="row">
+                <table class="table">
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let user of userList[0]">
+                        <td>
+                            <button class="btn text-ultra-small btn-sm btn-outline-danger dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <fa-icon [icon]="faTrashAlt" class="text-danger mb-2 mr-1" title="Eliminar registro"></fa-icon>Eliminar  
+                            </button>
+                            <div class="dropdown-menu">
+                                <div class="alert alert-danger text-ultra-small">
+                                    Inactiva el empleado y todos los usuarios asignados a él.
+                                </div>
+                                <button class="badge badge-danger text-ultra-small" (click)="deleteUser(user.pk_id_user)">Confirmar..</button>   
+                                <button class="badge badge-primary text-ultra-small">Cancelar</button>   
+                            </div>
+                        
+                            <button class="btn text-ultra-small btn-sm btn-outline-warning" type="button" (click)="viewUser(user.pk_id_user)">
+                                <fa-icon [icon]="faEye" class="text-warning mb-2 mr-1" title="Ver detalle"></fa-icon>Ver  
+                            </button>
+                        
+                            <button class="btn text-ultra-small btn-sm btn-outline-success" type="button" (click)="updateUser(user)">
+                                <fa-icon [icon]="faEdit" class="text-success mb-2 mr-1" title="Ver detalle"></fa-icon>Editar  
+                            </button>
+                        
+                            <button *ngIf="user.state_user === active" class="btn text-ultra-small btn-sm btn-outline-secondary" type="button" (click)="blockUser(user)">
+                                    <fa-icon [icon]="fasFaBan" class="text-secondary mb-2 mr-1" title="Ver detalle"></fa-icon>Bloquear
+                            </button>
+                            <button *ngIf="user.state_user != active" class="btn text-ultra-small btn-sm btn-outline-primary" type="button" (click)="blockUser(user)">
+                                <fa-icon [icon]="fasFaBan" class="text-primary mb-2 mr-1" title="Ver detalle"></fa-icon>DesBloquear  
+                            </button>
+                        </td>
+                        <td>
+                            {{ user.username }}<br />
+                            {{ user.email }}<br />
+                            {{ user.state_user }} 
+                        </td>
+                    </tr>
+                </tbody>
+                </table>
+            </div>
+            <!-- Fin segunda fila -->
+    
+            <!-- Tercera fila: paginador -->
+            <div class="row"></div>
+            <!-- Fin tercera fila -->
+            </div>
+        </div>
+        </div>
+    </div>
+</div>    

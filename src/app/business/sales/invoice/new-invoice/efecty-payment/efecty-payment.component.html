@@ -1,0 +1,42 @@
+<app-card caption="Confirmación pago en Efectivo">
+    <main>
+        <form [formGroup]="efectyForm">
+            <div class="row title-pg alert alert-info" role="alert">
+                <div class="col-sm-6">
+                    <span class="title-pg">Valor a pagar</span>
+                </div>
+                <div class="col-sm-6">
+                    <span class="title-pg">{{ total_payment | number }}</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="received_money">Valor recibido</label>
+                        <input #received_money type="text" class="form-control text-small" placeholder="efectivo" formControlName="received_money" required>
+                        <div *ngIf="mustShowError('received_money')" class="form-text alert-danger">
+                            <small *ngIf="hasError('received_money','required')">
+                                El campo es obligatorio
+                            </small>
+                            <small *ngIf="hasError('received_money','min')">
+                                Valor no puede ser menor a <strong>{{ this.getErrors('received_money').min.min | number }}</strong>
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row title-pg alert alert-info" role="alert">
+                <div class="col-sm-6">
+                    <span>Cambio</span>
+                </div>
+                <div class="col-sm-6">
+                    <span>{{ efectyForm.value.received_money - total_payment | number }}</span>
+                </div>
+            </div>
+        </form>
+    </main>
+    <footer>
+        <button type="submit" class="btn btn-outline-primary btn-sm mb-2 mr-1" [disabled]="efectyForm.invalid" (click)="saveInvoice()" data-dismiss="modal">Guardar</button>
+        <button type="button" class="btn btn-outline-danger btn-sm mb-2 mr-1" data-dismiss="modal">Cancelar</button>
+    </footer>
+</app-card>      

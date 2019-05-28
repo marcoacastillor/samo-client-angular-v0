@@ -1,0 +1,409 @@
+
+<div class="row">
+    <div class="col-sm-4">
+        <div class="card">
+            <div class="card-header">
+                Información consolidada
+            </div>
+            <div class="card-body">
+                <div class="row" *ngIf="consolidateData.totales">
+                    <div class="col-sm-12 text-ultra-small">
+                        <div class="row order-bottom-2 bg-gray style-header-table">
+                            <div class="col-sm-12">
+                                Total de ventas
+                            </div>
+                        </div>
+                        <div class="row border-bottom-2 bg-gray text-ultra-small">
+                            <div class="col-sm-3">
+                                Total
+                            </div>
+                            <div class="col-sm-3">
+                                Contado
+                            </div>
+                            <div class="col-sm-3">
+                                Crédito
+                            </div>
+                            <div class="col-sm-3">
+                                Separado
+                            </div>
+                        </div>
+                        <div class="row border-bottom-1 text-small">
+                            <div class="col-sm-3">
+                                {{ consolidateData.totales.total_sales | number }}
+                            </div>
+                            <div class="col-sm-3">
+                                {{ consolidateData.totales.efecty_sales | number }}
+                            </div>
+                            <div class="col-sm-3">
+                                {{ consolidateData.totales.credit_sales | number }}
+                            </div>
+                            <div class="col-sm-3">
+                                {{ consolidateData.totales.separated_sales | number }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 text-ultra-small">
+                        <div class="row border-bottom-2 bg-gray style-header-table">
+                            <div class="col-sm-12">
+                                Valor de ventas
+                            </div>
+                        </div>
+                        <div class="row border-bottom-2 bg-gray">
+                            <div class="col-sm-3">
+                                Total
+                            </div>
+                            <div class="col-sm-3">
+                                Contado
+                            </div>
+                            <div class="col-sm-3">
+                                Crédito
+                            </div>
+                            <div class="col-sm-3">
+                                Separado
+                            </div>
+                        </div>
+                        <div class="row border-bottom-1 text-small">
+                            <div class="col-sm-3">
+                                {{ consolidateData.values.total_sales | number }}
+                            </div>
+                            <div class="col-sm-3">
+                                {{ consolidateData.values.efecty_sales | number }}
+                            </div>
+                            <div class="col-sm-3">
+                                {{ consolidateData.values.credit_sales | number }}
+                            </div>
+                            <div class="col-sm-3">
+                                {{ consolidateData.values.separated_sales | number }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 text-ultra-small">
+                        <div class="row border-bottom-2 bg-gray style-header-table">
+                            <div class="col-sm-12">
+                                Consolidado
+                            </div>
+                        </div>
+                        <div class="row border-bottom-2">
+                            <div class="col-sm-6">Total ventas</div>
+                            <div class="col-sm-6 text-big-report text-primary">{{ consolidateData.consolidate.total_sales | number }}</div>
+                        </div>
+                        <div class="row border-bottom-2">
+                            <div class="col-sm-6">Ventas en efectivo</div>
+                            <div class="col-sm-6  text-big-report text-secondary">{{ consolidateData.consolidate.cash | number }}</div>
+                        </div>
+                        <div class="row border-bottom-2">
+                            <div class="col-sm-6">Pagos recibidos por crédito</div>
+                            <div class="col-sm-6 text-big-report text-warning">{{ consolidateData.consolidate.payment_sales | number }}</div>
+                        </div>
+                        <div class="row border-bottom-2">
+                            <div class="col-sm-6">Pagos a proveedores</div>
+                            <div class="col-sm-6  text-big-report text-danger">{{ consolidateData.consolidate.payment_providers | number }}</div>
+                        </div>
+                        <div class="row border-bottom-2">
+                            <div class="col-sm-6">Gastos</div>
+                            <div class="col-sm-6  text-big-report text-danger">{{ consolidateData.consolidate.expenses_value | number }}</div>
+                        </div>
+                        <div class="row border-bottom-2">
+                            <div class="col-sm-6">Ventas por cobrar</div>
+                            <div class="col-sm-6  text-big-report text-success">{{ consolidateData.consolidate.pending | number }}</div>
+                        </div>
+                        <div class="row border-bottom-2">
+                            <div class="col-sm-6">En caja</div>
+                            <div class="col-sm-6  text-big-report text-info">{{ (consolidateData.consolidate.cash + consolidateData.consolidate.payment_sales) - (consolidateData.consolidate.payment_providers + consolidateData.consolidate.expenses_value) | number }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-8" *ngIf="consolidateData.operations">
+        <div class="card">
+            <div class="card-header">
+                Información detallada
+            </div>
+            <div class="card-body">
+                <div class="row alert alert-secondary">
+                    <div class="col-sm-12 text-ultra-small">
+                        <div class="row border-bottom-2 style-header-table">
+                            <div class="col-sm-12">
+                                Ventas en efectivo
+                            </div>
+                        </div>
+                        <div class="row border-bottom-2 bg-gray text-ultra-small">
+                            <div class="col-sm-2">
+                                Acciones
+                            </div>
+                            <div class="col-sm-3">
+                                Factura
+                            </div>
+                            <div class="col-sm-3">
+                                Fecha
+                            </div>
+                            <div class="col-sm-4">
+                                Valor
+                            </div>
+                        </div>
+                        <div class="row border-bottom-1 text-big" *ngFor="let opr of consolidateData.operations.efecty">
+                            <div class="col-sm-2 text-small">
+                                <a href="#" (click)="selectOperation(opr.pk_id_operation)" data-toggle="modal" data-target="#operationViewModal" class="badge badge-light">
+                                    <fa-icon [icon]="faEye" class="text-warning mb-2 mr-1" title="Ver registro"></fa-icon>Ver
+                                </a>
+                            </div>
+                            <div class="col-sm-3 text-small">
+                                {{ opr.number_invoice }}
+                            </div>
+                            <div class="col-sm-3 text-small">
+                                {{ opr.date_operation }}
+                            </div>
+                            <div class="col-sm-4 text-small">
+                                {{ opr.total_operation | number }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row  alert alert-danger">
+                    <div class="col-sm-12 text-ultra-small">
+                        <div class="row border-bottom-2 style-header-table">
+                            <div class="col-sm-12">
+                                Pagos a proveedores
+                            </div>
+                        </div>
+                        <div class="row border-bottom-2 bg-gray text-ultra-small">
+                            <div class="col-sm-2">
+                                Acciones
+                            </div>
+                            <div class="col-sm-3">
+                                Proveedor
+                            </div>
+                            <div class="col-sm-2">
+                                Factura
+                            </div>
+                            <div class="col-sm-3">
+                                Fecha de pago
+                            </div>
+                            <div class="col-sm-2">
+                                Valor de pago
+                            </div>
+                        </div>
+                        <div class="row border-bottom-1 text-big" *ngFor="let opr of consolidateData.operations.pay_purchase">
+                            <div class="col-sm-2 text-small">
+                                <a href="#" (click)="selectOperation(opr.pk_id_operation)" data-toggle="modal" data-target="#operationViewModal" class="badge badge-light">
+                                    <fa-icon [icon]="faEye" class="text-warning mb-2 mr-1" title="Ver registro"></fa-icon>Ver
+                                </a>
+                            </div>
+                            <div class="col-sm-3 text-small">
+                                {{ opr.external_reference.split(":")[2] }}
+                            </div>
+                            <div class="col-sm-2 text-small">
+                                {{ opr.number_invoice }}
+                            </div>
+                            <div class="col-sm-2 text-small">
+                                {{ opr.date_payment }}
+                            </div>
+                            <div class="col-sm-3 text-small">
+                                {{ opr.payment | number}}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- gastos -->
+                    <div class="col-sm-12 text-ultra-small">
+                        <div class="row border-bottom-2 style-header-table">
+                            <div class="col-sm-12">
+                                Gastos
+                            </div>
+                        </div>
+                        <div class="row border-bottom-2 bg-gray text-ultra-small">
+                            <div class="col-sm-3">
+                                Tipo de gasto
+                            </div>
+                            <div class="col-sm-2">
+                                Fecha de gasto
+                            </div>
+                            <div class="col-sm-5">
+                                Descripción
+                            </div>
+                            <div class="col-sm-2">
+                                Valor
+                            </div>
+                        </div>
+                        <div class="row border-bottom-1 text-big" *ngFor="let expense of consolidateData.operations.expenses">
+                            <div class="col-sm-3 text-small">
+                                {{ expense.type_expense }}
+                            </div>
+                            <div class="col-sm-2 text-small">
+                                {{ expense.date_expense }}
+                            </div>
+                            <div class="col-sm-5 text-small">
+                                {{ expense.description }}
+                            </div>
+                            <div class="col-sm-2 text-small">
+                                {{ expense.value | number}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Inicia sección de operaciones-->
+                <div class="row alert alert-success" *ngIf="consolidateData.clients_pending">
+                    <div class="col-sm-12 text-ultra-small">
+                        <div class="row border-bottom-2 style-header-table">
+                            <div class="col-sm-12">
+                                Consolidado por cliente
+                            </div>
+                        </div>
+                        <div class="row border-bottom-2 bg-gray text-ultra-small">
+                            <div class="col-sm-4">
+                                Cliente
+                            </div>
+                            <div class="col-sm-4">
+                                Valor total de factura
+                            </div>
+                            <div class="col-sm-4">
+                                Saldo de factura
+                            </div>
+                        </div>
+                        <div class="row border-bottom-1 text-big" *ngFor="let opr of consolidateData.clients_pending.operations">
+                            <div class="col-sm-4 text-small">
+                                {{ opr.external_reference.split(":")[2] }}  
+                            </div>
+                            <div class="col-sm-4 text-small">
+                                {{ opr.total_operation | number }}
+                            </div>
+                            <div class="col-sm-4 text-small">
+                                {{ opr.total_operation - opr.total_pays | number }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 text-ultra-small">
+                        <div class="row border-bottom-2 style-header-table">
+                            <div class="col-sm-12">
+                                Ventas a crédito
+                            </div>
+                        </div>
+                        <div class="row border-bottom-2 bg-gray text-ultra-small">
+                            <div class="col-sm-2">
+                                Acciones
+                            </div>
+                            <div class="col-sm-2">
+                                Cliente
+                            </div>
+                            <div class="col-sm-2">
+                                Factura
+                            </div>
+                            <div class="col-sm-2">
+                                Fecha
+                            </div>
+                            <div class="col-sm-2">
+                                Valor
+                            </div>
+                            <div class="col-sm-2">
+                                Saldo
+                            </div>
+                        </div>
+                        <div class="row border-bottom-1 text-big" *ngFor="let opr of consolidateData.operations.credit">
+                            <div class="col-sm-2">
+                                <div class="btn-group text-small">
+                                    <a href="#" (click)="selectOperation(opr.pk_id_operation)" data-toggle="modal" data-target="#operationViewModal" class="badge badge-light">
+                                        <fa-icon [icon]="faEye" class="text-warning mb-2 mr-1" title="Ver registro"></fa-icon>Ver
+                                    </a>
+                                    <a *ngIf="(opr.total_operation - opr.total_pays) > 0" href="#" (click)="selectOperation(opr.pk_id_operation)" data-toggle="modal" data-target="#paymentModal" class="badge badge-light">
+                                        <fa-icon [icon]="faMoneyBill" class="text-success mb-2 mr-1" title="Registro de pago"></fa-icon>Pagar
+                                    </a>                            
+                                </div>
+                            </div>
+                            <div class="col-sm-2 text-small">
+                                {{ opr.external_reference.split(":")[2] }}
+                            </div>
+                            <div class="col-sm-2 text-small">
+                                {{ opr.number_invoice }}
+                            </div>
+                            <div class="col-sm-2 text-small">
+                                {{ opr.date_operation }}
+                            </div>
+                            <div class="col-sm-2 text-small">
+                                {{ opr.total_operation | number}}
+                            </div>
+                            <div class="col-sm-2 text-small">
+                                {{ opr.total_operation - opr.total_pays | number}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 text-ultra-small">
+                        <div class="row border-bottom-2 style-header-table">
+                            <div class="col-sm-12">
+                                Ventas separadas
+                            </div>
+                        </div>
+                        <div class="row border-bottom-2 bg-gray text-ultra-small">
+                            <div class="col-sm-2">
+                                Acciones
+                            </div>
+                            <div class="col-sm-2">
+                                Cliente
+                            </div>
+                            <div class="col-sm-2">
+                                Factura
+                            </div>
+                            <div class="col-sm-2">
+                                Fecha
+                            </div>
+                            <div class="col-sm-2">
+                                Valor
+                            </div>
+                            <div class="col-sm-2">
+                                Saldo
+                            </div>
+                        </div>
+                        <div class="row border-bottom-1 text-big" *ngFor="let opr of consolidateData.operations.separated">
+                            <div class="col-sm-2">
+                                <div class="btn-group text-small">
+                                    <a href="#" (click)="selectOperation(opr.pk_id_operation)" data-toggle="modal" data-target="#operationViewModal" class="badge badge-light">
+                                        <fa-icon [icon]="faEye" class="text-warning mb-2 mr-1" title="Ver registro"></fa-icon>Ver
+                                    </a>
+                                    <a *ngIf="(opr.total_operation - opr.total_pays) > 0" href="#" (click)="selectOperation(opr.pk_id_operation)" data-toggle="modal" data-target="#paymentModal" class="badge badge-light">
+                                        <fa-icon [icon]="faMoneyBill" class="text-success mb-2 mr-1" title="Registro de pago"></fa-icon>Pagar
+                                    </a>                            
+                                </div>
+                            </div>
+                            <div class="col-sm-2 text-small">
+                                {{ opr.external_reference.split(":")[2] }}
+                            </div>
+                            <div class="col-sm-2 text-small">
+                                {{ opr.number_invoice }}
+                            </div>
+                            <div class="col-sm-2 text-small">
+                                {{ opr.date_operation }}
+                            </div>
+                            <div class="col-sm-2 text-small">
+                                {{ opr.total_operation | number}}
+                            </div>
+                            <div class="col-sm-2 text-small">
+                                {{ opr.total_operation - opr.total_pays | number}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Finaliza sección de operaciones-->
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-modal-new-payment
+    [pk_id_operation]="operation.pk_id_operation"
+    [value_payment]="operation.total_operation - operation.total_pays"
+    (create)="onCreatePayment($event)"
+>
+</app-modal-new-payment>
+
+<app-modal-show-operation
+    [client]="person"
+    [operation]="operation"
+></app-modal-show-operation>
+
+
+
+

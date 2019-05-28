@@ -1,0 +1,91 @@
+<app-card caption="Consolidado por fechas">
+    <main>
+        <div class="row" *ngIf="totales">
+            <div class="col-sm-12 text-ultra-small">
+                <div class="row border-bottom-2 bg-gray style-header-table">
+                    <div class="col-sm-12">
+                        Total de compras
+                    </div>
+                </div>
+                <div class="row border-bottom-2 bg-gray text-ultra-small">
+                    <div class="col-sm-4">
+                        Total
+                    </div>
+                    <div class="col-sm-4">
+                        Contado
+                    </div>
+                    <div class="col-sm-4">
+                        Crédito
+                    </div>
+                </div>
+                <div class="row border-bottom-1 text-small" *ngIf="totales">
+                    <div class="col-sm-4">
+                        {{ totales.total_sales | number }}
+                    </div>
+                    <div class="col-sm-4">
+                        {{ totales.efecty_sales | number }}
+                    </div>
+                    <div class="col-sm-4">
+                        {{ totales.credit_sales | number }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 text-ultra-small">
+                <div class="row border-bottom-2 bg-gray style-header-table">
+                    <div class="col-sm-12">
+                        Valor de compras
+                    </div>
+                </div>
+                <div class="row border-bottom-2 bg-gray">
+                    <div class="col-sm-4">
+                        Total
+                    </div>
+                    <div class="col-sm-4">
+                        Contado
+                    </div>
+                    <div class="col-sm-4">
+                        Crédito
+                    </div>
+                </div>
+                <div class="row border-bottom-1 text-small" *ngIf="values">
+                    <div class="col-sm-4">
+                        {{ values.total_sales | number }}
+                    </div>
+                    <div class="col-sm-4">
+                        {{ values.efecty_sales | number }}
+                    </div>
+                    <div class="col-sm-4">
+                        {{ values.credit_sales | number }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 text-ultra-small" *ngIf="consolidate">
+                <div class="row border-bottom-2 bg-gray style-header-table">
+                    <div class="col-sm-12">
+                        Consolidado
+                    </div>
+                </div>
+                <div class="row border-bottom-2">
+                    <div class="col-sm-6">Total compras</div>
+                    <div class="col-sm-6 text-big-report text-primary">{{ consolidate.total_sales | number }}</div>
+                </div>
+                <div class="row border-bottom-2">
+                    <div class="col-sm-6">Compras en efectivo</div>
+                    <div class="col-sm-6  text-big-report text-secondary">{{ consolidate.cash | number }}</div>
+                </div>
+                <div class="row border-bottom-2">
+                    <div class="col-sm-6">Pagos a proveedores</div>
+                    <div class="col-sm-6  text-big-report text-danger">{{ consolidate.payment_providers | number }}</div>
+                </div>
+                <div class="row border-bottom-2">
+                    <div class="col-sm-6">Gastos</div>
+                    <div class="col-sm-6  text-big-report text-danger">{{ consolidate.expenses_value | number }}</div>
+                </div>
+                <div class="row border-bottom-2">
+                    <div class="col-sm-6">Compras por pagar</div>
+                    <div class="col-sm-6  text-big-report text-success">{{ consolidate.pending | number }}</div>
+                </div>
+            </div>
+        </div>
+    </main>
+</app-card>

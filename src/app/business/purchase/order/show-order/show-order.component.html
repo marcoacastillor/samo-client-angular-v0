@@ -1,0 +1,160 @@
+<app-card caption="Detalle de órden de compra. Factura: {{ operation.number_invoice }}">
+    <main>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h4>{{ enterprise.name }}</h4>
+                    </div>
+                    <div class="col-sm-12">
+                        Nit: {{ enterprise.nit }}
+                    </div>
+                    <div class="col-sm-12">
+                        Dirección: {{ enterprise.address }}
+                    </div>
+                    <div class="col-sm-12">
+                        Teléfono: {{ enterprise.phone }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="row">
+                    <div class="col-sm-12 text-right">
+                        <h4>Factura: {{ operation.number_invoice }}</h4>
+                    </div>
+                    <div class="col-sm-12 text-right">
+                        Fecha: {{ operation.date_operation }}
+                    </div>
+                    <div class="col-sm-12 text-right">
+                        Tipo de pago: {{ operation.payment_type }}
+                    </div>
+                    <div class="col-sm-12 text-right">
+                        Estado: {{ operation.state_operation }}
+                    </div>
+                    <div class="col-sm-12 text-right" *ngIf="operation.payment_type === credit_payment">
+                        <h4>Saldo: {{ operation.total_operation - operation.total_pays | number }}</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="table-responsive container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Prd</th>
+                                <th>Código</th>
+                                <th>Nombre</th>
+                                <th>Cant</th>
+                                <th>Valor unitario</th>
+                                <th>Impuesto</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let prd of operation.products_list; let i = index;">
+                                <td>{{ i+1 }}</td>    
+                                <td>{{ prd.code }}</td>  
+                                <td>{{ prd.name }}</td>  
+                                <td *ngIf="prd.number_package >= 1">{{ prd.number_package | number }}</td>
+                                <td *ngIf="prd.number_package >= 1">{{ prd.price_package | number }}</td>
+                                <td *ngIf="prd.number_units >= 1">{{ prd.number_units | number }}</td>
+                                <td *ngIf="prd.number_units >= 1">{{ prd.price_unit | number }}</td>
+                                <td>({{ prd.tax }}%) {{ prd.value_tax | number }}</td>
+                                <td>{{ prd.total_product | number }}</td>
+                            </tr>
+                            <tr class="text-big">
+                                <th rowspan="6" colspan="5"></th>
+                                <th>Subtotal</th>
+                                <td><span class="text-right">{{ operation.subtotal_operation | number }}</span></td>
+                            </tr>
+                            <tr class="text-big" *ngIf="operation.total_discounts > 0">
+                                <th>Descuento</th>
+                                <td><span class="text-right">{{ operation.total_discounts | number }}</span></td>
+                            </tr>
+                            <tr class="text-big">
+                                <th>Impuesto</th>
+                                <td><span class="text-right">{{ operation.total_tax | number }}</span></td>
+                            </tr>
+                            <tr class="text-big">
+                                <th>Total factura</th>
+                                <td><span class="text-right">{{ operation.total_operation | number }}</span></td>
+                            </tr>                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- pagos y anotaciones -->
+        <div class="row">
+            <div class="col-sm-6" *ngIf="operation.payment_type != 'Efectivo'">
+                <div class="table-responsive">
+                    <table class="table bg-white">
+                        <thead>
+                            <tr>
+                                <th colspan="3">
+                                    Pagos
+                                    <a *ngIf="operation.state_operation != payment_type_payed" href="#" data-toggle="modal" data-target="#paymentPurchaseModal" class="badge badge-success">
+                                        Pagar  
+                                    </a>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th>#</th>
+                                <th>Fecha</th>
+                                <th>Valor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let pay of operation.payments; let i = index;">
+                                <td>{{ i+1 }}</td>
+                                <td>{{ pay.date_payment }}</td>
+                                <td>{{ pay.value_payment | number }}</td>
+                            </tr>
+                            <tr *ngIf="operation.total_pays > 0">
+                                <th colspan="2" class="text-right">Total</th>
+                                <th>{{ operation.total_pays | number }}</th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="col-sm-6">
+                <div class="table-responsive">
+                    <table class="table bg-white">
+                        <thead>
+                            <tr>
+                                <th colspan="4">Anotaciones</th>
+                            </tr>
+                            <tr>
+                                <th>#</th>
+                                <th>Fecha</th>
+                                <th>Tipo de nota</th>
+                                <th>Descripción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let note of operation.notes; let i = index;">
+                                <td>{{ i+1 }}</td>
+                                <td>{{ note.date_note }}</td>
+                                <td>{{ note.type_note }}</td>
+                                <td>{{ note.description }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- fin pagos y anotaciones -->
+
+        <app-modal-payment
+            [pk_id_operation]="operation.pk_id_operation"
+            [value_payment]="operation.total_operation - operation.total_pays"
+            (create)="onCreatePayment($event)"
+        ></app-modal-payment>
+
+    </main>
+</app-card>

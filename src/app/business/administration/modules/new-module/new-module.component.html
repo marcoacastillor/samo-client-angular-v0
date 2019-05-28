@@ -1,0 +1,58 @@
+<app-card caption="Gestión de información de usuario">
+    <main>
+        <h5 *ngIf="module.pk_id_module">Actualización de información</h5>
+        <h5 *ngIf="!module.pk_id_module">Creación de registro</h5>
+        <form [formGroup]="moduleForm">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="name">Nombre</label>
+                        <input type="text" class="form-control text-small" placeholder="nombre" formControlName="name" required>
+                        <small *ngIf="mustShowError('name')" class="form-text alert-danger">
+                        Username es obligatorio
+                        </small>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="url_angular_module">Módulo angular</label>
+                        <input type="text" class="form-control text-small" placeholder="modulo angular" formControlName="url_angular_module" required>
+                        <small *ngIf="mustShowError('url_angular_module')" class="form-text alert-danger">
+                        Componente Angular es obligatorio
+                        </small>
+                    </div>
+                </div> 
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="description">Descripción</label>
+                        <textarea class="form-control text-small" placeholder="description" formControlName="description" required rows="3"></textarea>
+                        <small *ngIf="mustShowError('description')" class="form-text alert-danger">
+                            Descripción es obligatorio
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="url_image">imagen</label>
+                        <input type="file" (change)="onFileSelected($event)" class="form-control text-small" placeholder="imagen" formControlName="url_image" required />
+                        <small *ngIf="mustShowError('url_image')" class="form-text alert-danger">
+                        Imágen es obligatorio
+                        </small>
+                    </div>
+                </div> 
+            </div>
+        </form>
+    </main>
+    <footer>
+        <button *ngIf="module.pk_id_module" type="submit" class="btn btn-outline-success btn-sm mb-2 mr-1"
+        [disabled]="moduleForm.invalid"
+        (click)="updateModule()">Actualizar</button>
+        <button *ngIf="!module.pk_id_module" type="submit" class="btn btn-outline-primary btn-sm mb-2 mr-1"
+        [disabled]="moduleForm.invalid"
+        (click)="createModule()">Guardar</button>
+    </footer>
+</app-card>      

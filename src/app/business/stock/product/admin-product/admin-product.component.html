@@ -1,0 +1,42 @@
+<div class="row margin-top">
+    <div *ngIf="showNewProduct" class="col-sm-8">
+        <app-new-product
+            [product]="product"
+            [categoryList]="categoryList"
+            [presentationList]="presentationList"
+            [typeProductList]="typeProductList"
+            (update)="onUpdate($event)"
+            (create)="onCreate($event)"
+        >
+        </app-new-product>
+    </div>
+    <div *ngIf="showReports" class="col-sm-8">
+        <app-reports-product
+        [dataSets]="dataSets"
+        [dateEnd]="dateEnd"
+        [dateInit]="dateInit"
+        [days_sold]="days_sold"
+        [valueStock]="valueStock"
+        (loadData)="onLoadData($event)"
+        >
+        </app-reports-product>
+    </div>
+    <div *ngIf="showProduct" class="col-sm-8">
+        <app-show-product
+            [product]="product"
+        >
+        </app-show-product>
+    </div>
+    <div class="col-sm-4">
+        <app-list-product
+            [productList]="productList"
+            [actualPg]="actualPg"
+            [regPerPg]="regPerPg"
+            (search)="onSearch($event)"
+            (show)="onShow($event)"
+            (select)="onSelect($event)"
+            (viewReport)="onViewReport($event)"
+        >
+        </app-list-product>
+    </div>
+</div>

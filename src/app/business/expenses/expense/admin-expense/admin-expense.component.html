@@ -1,0 +1,27 @@
+<div class="row margin-top">
+    <div *ngIf="!showExpense" class="col-sm-8">
+        <app-new-expense
+        [expense]="expense"
+        [lstTypes]="lstTypes"
+        (store)="onStore($event)"
+        (update)="onUpdate($event)"
+        >
+        </app-new-expense>
+    </div>
+    <div *ngIf="showExpense" class="col-sm-8">
+        <app-show-expense
+        [expense]="expense"
+        >
+        </app-show-expense>
+    </div>
+    <div class="col-sm-4">
+        <app-list-expense
+        [expensesList]="expensesList"
+        [actualPg]="actualPg"
+        [regPerPg]="regPerPg"
+        (create)="onCreate($event)"
+        (select)="onSelect($event)"
+        >
+        </app-list-expense>
+    </div>
+</div>

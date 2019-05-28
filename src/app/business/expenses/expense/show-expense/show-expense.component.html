@@ -1,0 +1,55 @@
+<app-card caption="Detalle de gasto">
+    <main>
+        <div class="row">
+            <!-- Inicio información proveedor-->
+            <div class="col-sm-12 text-ultra-small ">
+                <div class="row border-bottom-2 bg-gray style-header-table">
+                    <div class="col-sm-12">
+                        Información de gasto
+                    </div>
+                </div>
+                <div class="row border-bottom-2 style-header-table">
+                    <div class="col-sm-12 text-ultra-small">
+                        <div class="row border-bottom-2 bg-gray style-header-table">
+                            <div class="col-sm-12">
+                                Gasto
+                            </div>
+                        </div>
+                        <div class="row border-bottom-1">
+                            <div class="col-sm-4 text-small">
+                                Tipo: 
+                            </div>
+                            <div class="col-sm-8 card-title-custom bg-gray">
+                                {{ expense.type_expense }}
+                            </div>
+                        </div>
+                        <div class="row border-bottom-1">
+                            <div class="col-sm-4 text-small">
+                                Fecha de gasto: 
+                            </div>
+                            <div class="col-sm-8 card-title-custom bg-gray">
+                                {{ expense.date_expense }}
+                            </div>
+                        </div>
+                        <div class="row border-bottom-1">
+                            <div class="col-sm-4 text-small">
+                                Descripción: 
+                            </div>
+                            <div class="col-sm-8 card-title-custom bg-gray">
+                                {{ expense.description }}
+                            </div>
+                        </div>
+                        <div class="row border-bottom-1">
+                            <div class="col-sm-4 text-small">
+                                Valor: 
+                            </div>
+                            <div class="col-sm-8 card-title-custom bg-gray">
+                                {{ expense.value | number }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</app-card>

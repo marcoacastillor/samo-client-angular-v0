@@ -1,0 +1,323 @@
+<app-card caption="Gestión de información de ventas">
+    <main>
+        <h5 *ngIf="operation.pk_id_operation">Actualización de información</h5>
+        <h5 *ngIf="!operation.pk_id_operation">Órden de venta</h5>
+        <form [formGroup]="operationForm">
+            <div class="row  text-ultra-small">
+                <div class="col-sm-6">
+                    <div class="row spacing-margin alert alert-primary" role="alert">
+                        <div class="col-sm-2">
+                            <button type="button" class="btn btn-sm btn-outline-primary" (click)="setMode('manual')">
+                                <fa-icon [icon]="faHandPaper" class="text-primary mb-2 mr-1" title="Manual"></fa-icon>  
+                            </button>
+                        </div>
+                        <div class="col-sm-10">
+                            <strong>El modo Manual</strong>: permite seleccionar número de unidades que se desean comprar, para poder agregarlo se debe presionar la tecla enter.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="row spacing-margin alert alert-secondary" role="alert">
+                        <div class="col-sm-2">
+                            <button type="button" class="btn btn-sm btn-outline-secondary" (click)="setMode('auto')">
+                                <fa-icon [icon]="faCogs" class="text-secondary mb-2 mr-1" title="Automático"></fa-icon>
+                            </button>
+                        </div>
+                        <div class="col-sm-10">
+                            <strong>El modo Automático</strong>: permite agregar productos de una manera más rápida a la factura. Sin embargo siempre agrega de una unidad por productos.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div formGroupName="product_new">
+                <table class="table table-hover table-sm">
+                    <thead class="bg-header-table" *ngIf="operationForm.value.subtotal_operation > 0">
+                        <tr>
+                            <th scope="col">Código</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Cant</th>
+                            <th scope="col">Valor unitario</th>
+                            <th scope="col">Impuesto</th>
+                            <th scope="col">Valor total</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="operationForm.value.subtotal_operation > 0">
+                        <tr *ngFor="let prd of operationForm.value.products_list; let i=index">
+                            <td>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <button class="btn btn-sm btn-outline-danger" type="button" (click)="delProduct(prd,i)">
+                                            <fa-icon [icon]="faMinusCircle" class="text-danger mb-2 mr-1" title="Eliminar producto"></fa-icon>  
+                                        </button>
+                                    </div>
+                                    <div class="col-sm-8">
+                                        {{ prd.code_product }}
+                                    </div>
+                                </div>
+                            </td>
+                            <td>{{ prd.name_product }}</td>
+                            <td>
+                                {{ prd.units_product }} : U <br />
+                                {{ prd.package_product }} : P
+                            </td>
+                            <td>
+                                {{ prd.value_product_unit | number }} <br />
+                                {{ prd.value_product_package | number }}
+                            </td>
+                            <td>({{ prd.tax_product }}%) {{ prd.value_tax | number }}</td>
+                            <td>{{ prd.value_total_product | number }}</td>
+                        </tr>
+                        <tr>
+                            <th rowspan="5" colspan="4"></th>
+                            <th>Subtotal</th>
+                            <th><span class="text-right">{{ operationForm.value.subtotal_operation | number }}</span></th>
+                        </tr>
+                        <tr>
+                            <th>Impuestos</th>
+                            <th><span class="text-right">{{ operationForm.value.total_taxes | number }}</span></th>
+                        </tr>
+                        <tr>
+                            <th>Total</th>
+                            <th><span class="text-right">{{ (operationForm.value.subtotal_operation + operationForm.value.total_taxes) | number }}</span></th>
+                        </tr>
+                        <tr>
+                            <th>Descuentos ({{ operationForm.value.value_discount }})%</th>
+                            <th><span class="text-right">{{ operationForm.value.total_discounts | number }}</span></th>
+                        </tr>
+                        <tr>
+                            <th>Neto</th>
+                            <th><span class="text-right">{{ (operationForm.value.total_operation) | number }}</span></th>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr *ngIf="mode === 'auto'">
+                            <td colspan="5">
+                                <div class="row alert alert-info" role="alert">
+                                    Para agregar producto, presione la tecla Enter, cuando seleccione paquetes.
+                                </div>
+                                <div class="row alert alert-secondary" role="alert">
+                                    <div class="col-sm-2">
+                                        <label for="code_product">Código</label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <button type="button" class="btn text-small btn-sm btn-outline-secondary" data-toggle="modal" data-target="#searchModal">
+                                                    <fa-icon [icon]="faSearch" class="text-secondary mb-2 mr-1" title="Crear registro"></fa-icon>
+                                                </button>
+                                            </div>
+                                            <input class="form-control form-control-sm text-small" placeholder="código" #code_product (keyup.enter)="loadProductByCode($event.target.value)" formControlName="code_product">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label for="name_product">Nombre</label>
+                                        <input type="text" readonly class="form-control form-control-sm text-small" placeholder="nombre" formControlName="name_product">
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label for="tax_product">IVA</label>
+                                        <select class="form-control form-control-sm text-small" formControlName="tax_product">
+                                            <option value="{{tax.value}}" *ngFor="let tax of taxesList[0]">{{tax.name}}</option>
+                                        </select>
+                                        <div *ngIf="mustShowErrorChild('product_new','tax_product')" class="form-text alert-danger">
+                                            <small *ngIf="hasErrorChild('product_new','tax_product','required')">
+                                                El campo es obligatorio
+                                            </small>
+                                        </div>
+                                    </div> 
+                                    <div class="col-sm-2">
+                                        <label for="units_product">Unidades</label>
+                                        <input type="number" class="form-control form-control-sm text-small" placeholder="unidades" formControlName="units_product">
+                                        <!-- inicio marco -->
+                                        <div class="form-text alert-info text-ultra-small">
+                                            Máximo valor: {{ product.units_available | number }}
+                                        </div>
+                                        <div *ngIf="mustShowErrorChild('product_new','units_product')" class="form-text alert-danger">
+                                            <small *ngIf="hasErrorChild('product_new','units_product','required')">
+                                                El campo es obligatorio
+                                            </small>
+                                            <small *ngIf="hasErrorChild('product_new','units_product','max')">
+                                                Valor no puede ser mayor a <strong>{{ this.getErrorsChild('product_new','units_product').max.max }}</strong>
+                                            </small>
+                                        </div>
+                                        <!-- fin marco -->
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label for="package_product">Paquetes</label>
+                                        <input type="number" class="form-control form-control-sm text-small" placeholder="unidades" formControlName="package_product" (keyup.enter)="addProduct()">
+                                        <!-- inicio marco -->
+                                        
+                                        <div class="form-text alert-info text-ultra-small">
+                                            Máximo valor: {{ (product.units_available / product.units_package)  | number }}
+                                        </div>
+                                        <div *ngIf="mustShowErrorChild('product_new','package_product')" class="form-text alert-danger">
+                                            <small *ngIf="hasErrorChild('product_new','package_product','required')">
+                                                El campo es obligatorio
+                                            </small>
+                                            <small *ngIf="hasErrorChild('product_new','package_product','max')">
+                                                Valor no puede ser mayor a <strong>{{ this.getErrorsChild('product_new','package_product').max.max }}</strong>
+                                            </small>
+                                        </div>
+                                        <!-- fin marco -->
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr *ngIf="mode === 'manual'">
+                            <td colspan="5">
+                                <div class="row alert alert-info" role="alert">
+                                    Para agregar producto, presione la tecla Enter, cuando seleccione paquetes.
+                                </div>
+                                <div class="row alert alert-primary" role="alert">
+                                    <div class="col-sm-2">
+                                        <label for="code_product">Código</label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <button type="button" class="btn text-small btn-sm btn-outline-primary" data-toggle="modal" data-target="#searchModal">
+                                                    <fa-icon [icon]="faSearch" class="text-primary mb-2 mr-1" title="Crear registro"></fa-icon>
+                                                </button> 
+                                            </div>
+                                            <input class="form-control form-control-sm text-small" placeholder="código" #code_product (keyup.enter)="loadProductByCode($event.target.value)" formControlName="code_product">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label for="name_product">Nombre</label>
+                                        <input type="text" readonly class="form-control form-control-sm text-small" placeholder="nombre" formControlName="name_product">
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label for="tax_product">IVA</label>
+                                        <select class="form-control form-control-sm text-small" formControlName="tax_product">
+                                            <option value="{{tax.value}}" *ngFor="let tax of taxesList[0]">{{tax.name}}</option>
+                                        </select>
+                                        <div *ngIf="mustShowErrorChild('product_new','tax_product')" class="form-text alert-danger">
+                                            <small *ngIf="hasErrorChild('product_new','tax_product','required')">
+                                                El campo es obligatorio
+                                            </small>
+                                        </div>
+                                    </div> 
+                                    <div class="col-sm-2">
+                                        <label for="units_product">Unidades</label>
+                                        <input type="number" class="form-control form-control-sm text-small" required formControlName="units_product" (keyup.enter)="addProduct()">
+                                        <!-- inicio marco -->
+                                        <div class="form-text alert-info text-ultra-small">
+                                            Máximo valor: {{ product.units_available | number }}
+                                        </div>
+                                        <div *ngIf="mustShowErrorChild('product_new','units_product')" class="form-text alert-danger">
+                                            <small *ngIf="hasErrorChild('product_new','units_product','required')">
+                                                El campo es obligatorio
+                                            </small>
+                                            <small *ngIf="hasErrorChild('product_new','units_product','max')">
+                                                Valor no puede ser mayor a <strong>{{ this.getErrorsChild('product_new','units_product').max.max }}</strong>
+                                            </small>
+                                        </div>
+                                        <!-- fin marco -->
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label for="package_product">Paquetes</label>
+                                        <input type="number" class="form-control form-control-sm text-small" formControlName="package_product" (keyup.enter)="addProduct()">
+                                        <!-- inicio marco -->
+                                        <div class="form-text alert-info text-ultra-small">
+                                            Máximo valor: {{ (product.units_available / product.units_package)  | number }}
+                                        </div>
+                                        <div *ngIf="mustShowErrorChild('product_new','package_product')" class="form-text alert-danger">
+                                            <small *ngIf="hasErrorChild('product_new','package_product','required')">
+                                                El campo es obligatorio
+                                            </small>
+                                            <small *ngIf="hasErrorChild('product_new','package_product','max')">
+                                                Valor no puede ser mayor a <strong>{{ this.getErrorsChild('product_new','package_product').max.max }}</strong>
+                                            </small>
+                                        </div>
+                                        <!-- fin marco -->
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        
+            <div class="row warning-left">
+                <div class="form-group col-sm-3">
+                    <label for="type_payment">Tipo de pago</label>
+                    <select class="form-control form-control-sm text-small" formControlName="type_payment" (change)="updateState()" required>
+                        <option value="{{type.value}}" *ngFor="let type of paymentTypeList[0]">{{type.name}}</option>
+                    </select>
+                    <small *ngIf="mustShowError('type_payment')" class="form-text alert-danger">
+                        Tipo de pago es obligatorio
+                    </small>
+                </div>
+                <div class="form-group col-sm-3">
+                    <label for="value_discount">Descuentos</label>
+                    <select class="form-control form-control-sm text-small" formControlName="value_discount" (change)="updateDiscount()" required>
+                        <option value="{{discount.value}}" *ngFor="let discount of discountsList[0]">{{discount.name}}</option>
+                    </select>
+                    <small *ngIf="mustShowError('value_discount')" class="form-text alert-danger">
+                        Descuento es obligatorio
+                    </small>
+                </div>
+                <div class="form-group col-sm-3">
+                    <label for="total_discounts">Valor total de descuento</label>
+                    <input type="number" class="form-control form-control-sm text-small" required placeholder="valor de descuento" (change)="updateTotalDiscount()" formControlName="total_discounts">           
+                </div>
+            </div>
+            <div formGroupName="client" class="row info-left spacing-margin" *ngIf="operationForm.value.type_payment != efecty_payment"> 
+                <div class="col-sm-12">
+                    <div class="row">
+                        <div class="form-group col-sm-3">
+                            <label for="type_id">Tipo documento</label>
+                            <select class="form-control form-control-sm text-small" formControlName="type_id">
+                                <option value="{{type.value}}" *ngFor="let type of typeIdsList[0]">{{type.name}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <label for="number_id">Número de identificación</label>
+                            <input class="form-control form-control-sm text-small" (blur)="loadClient()" placeholder="número id" formControlName="number_id">
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <label for="names">Nombres</label>
+                            <input class="form-control form-control-sm text-small" placeholder="nombres" formControlName="names">
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <label for="last_names">Apellidos</label>
+                            <input class="form-control form-control-sm text-small" placeholder="apellidos" formControlName="last_names">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="row">
+                        <div class="form-group col-sm-3">
+                            <label for="value_discount">Dirección</label>
+                            <input class="form-control form-control-sm text-small" placeholder="dirección" formControlName="address">
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <label for="value_discount">Teléfono</label>
+                            <input class="form-control form-control-sm text-small" placeholder="teléfono" formControlName="phone">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row info-left spacing-margin" *ngIf="operationForm.value.type_payment != efecty_payment">
+                <div class="form-group col-sm-3">
+                    <label for="value_payment">Valor de abono</label>
+                    <input type="number" class="form-control form-control-sm text-small" placeholder="Abono" formControlName="value_payment">
+                    <small class="form-text alert-info">
+                        Valor no puede ser mayor a <strong>{{ operationForm.value.total_operation | number}}</strong>
+                    </small>
+                </div>
+            </div>
+        </form>
+
+        <!-- Modal payment, efecty-->
+        <app-modal-payment
+            [total_payment]="operationForm.value.total_operation"
+            (saveInvoice)="onSaveInvoice($event)"
+        ></app-modal-payment>
+
+        <app-modal-search
+            (select)="onSelect($event)">
+        </app-modal-search>
+
+    </main>
+    <footer *ngIf="operationForm.value.value_payment < operationForm.value.total_operation">
+        <button *ngIf="!operation.pk_id_operation && operationForm.value.type_payment === efecty_payment" type="submit" class="btn btn-outline-primary btn-sm mb-2 mr-1" [disabled]="operationForm.invalid" data-toggle="modal" data-target="#efectyPaymentModal">Confirmar</button>
+        <button *ngIf="!operation.pk_id_operation && operationForm.value.type_payment != efecty_payment" type="submit" class="btn btn-outline-primary btn-sm mb-2 mr-1" [disabled]="operationForm.invalid" (click)="createSale()">Guardar</button>
+        <button type="button" class="btn btn-outline-danger btn-sm mb-2 mr-1" (click)="cancelSale()">Cancelar</button>
+    </footer>
+</app-card>      

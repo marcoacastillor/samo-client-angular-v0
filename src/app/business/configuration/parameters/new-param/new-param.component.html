@@ -1,0 +1,33 @@
+<app-card caption="Gestión de información de parámetros">
+    <main>
+        <h5 *ngIf="category.pk_id_category">Actualización de información</h5>
+        <h5 *ngIf="!category.pk_id_category">Creación de registro</h5>
+        <form [formGroup]="categoryForm">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="code">Code</label>
+                        <input type="text" class="form-control text-small" placeholder="código" formControlName="code" required>
+                        <small *ngIf="mustShowError('code')" class="form-text alert-danger">
+                        Código es obligatorio
+                        </small>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="name">Nombre</label>
+                        <input type="text" class="form-control text-small" placeholder="nombre de categoría" formControlName="name" required>
+                        <small *ngIf="mustShowError('name')" class="form-text alert-danger">
+                        Nombre de categoría es obligatorio
+                        </small>
+                    </div>
+                </div> 
+            </div>
+        </form>
+    </main>
+    <footer>
+        <button *ngIf="category.pk_id_category" type="submit" class="btn btn-outline-success btn-sm mb-2 mr-1" [disabled]="categoryForm.invalid" (click)="updateModule()">Actualizar</button>
+        <button *ngIf="!category.pk_id_category" type="submit" class="btn btn-outline-primary btn-sm mb-2 mr-1" [disabled]="categoryForm.invalid" (click)="createModule()">Guardar</button>
+        <button type="button" class="btn btn-outline-danger btn-sm mb-2 mr-1" (click)="cancelModule()">Cancelar</button>
+    </footer>
+</app-card>      
