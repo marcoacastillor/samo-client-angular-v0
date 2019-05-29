@@ -6,20 +6,20 @@
             <div class="row">
                 <div class="col-sm-4">
                     <div class="form-group">
-                        <label for="username">Username</label>
+                        <label for="username">Nombre Usuario</label>
                         <input type="text" class="form-control text-small" placeholder="username" formControlName="username" required>
                         <small *ngIf="mustShowError('username')" class="form-text alert-danger">
-                        Username es obligatorio
+                        Nombre es obligatorio
                         </small>
                     </div>
                 </div>
                 <div class="col-sm-4">
                     <div class="form-group">
-                        <label for="username">email</label>
+                        <label for="username">Correo electronico</label>
                         <input type="text" class="form-control text-small" placeholder="email" formControlName="email" required>
                         <small *ngIf="mustShowError('email')" class="form-text alert-danger">
                         <small *ngIf="hasError('email', 'email')"  class="form-text alert-danger">
-                            Debe ingresar un email válido
+                            Debe ingresar un correo válido
                         </small>
                         </small>
                     </div>
@@ -81,7 +81,7 @@
                     <input type="password" class="form-control text-small" placeholder="password" formControlName="password" required>
                     <span *ngIf="mustShowError('password')">
                         <small *ngIf="hasError('password', 'required')"  class="form-text alert-danger">
-                        contraseña es obligatorio
+                        contraseña es obligatoria
                         </small>
                         <small *ngIf="hasError('password', 'minlength')"  class="form-text alert-danger">
                             La contraseña debe contener al menos {{getErrors('password').minlength.requiredLength}} digitos
@@ -98,7 +98,7 @@
                     </select>
                     <span *ngIf="mustShowError('state_user')">
                         <small *ngIf="hasError('state_user', 'required')"  class="form-text alert-danger">
-                            estaado es obligatorio
+                            Estado es obligatorio
                         </small>
                     </span>
                     </div>

@@ -75,6 +75,8 @@ export class AsignOptionComponent implements OnInit, OnChanges {
     return this.searchForm.get('options') as FormArray;
   }
 
+  get formData() { return <FormArray>this.searchForm.get('options')}
+
   public addOption(option: Option, idx: number, lstOptions: Option[]){
     let opt = this.fb.group(option);
     this.optFormArray.push(opt);

@@ -5,18 +5,18 @@ import { FormToolsService } from 'src/app/shared/services/form-tools.service';
 
 @Component({
   selector: 'app-new-module',
-  templateUrl:'new-module.component.html',
+  templateUrl: 'new-module.component.html',
   styles: []
 })
 export class NewModuleComponent implements OnInit, OnChanges {
   moduleForm: FormGroup;
-  
+
   @Input() public module: Module;
 
   @Output() public create = new EventEmitter<Module>();
   @Output() public update = new EventEmitter<Module>();
   @Output() public cancel = new EventEmitter<boolean>();
-  
+
   constructor(
     private fb: FormBuilder,
     private formToolService: FormToolsService,
@@ -48,19 +48,19 @@ export class NewModuleComponent implements OnInit, OnChanges {
     this.initUpdForm();
   }
 
-  public updateModule()
-  {
+  public updateModule() {
+
     let module = new Module;
     module = this.moduleForm.value;
     this.update.emit(module);
-    //this.moduleForm.reset();
+    // this.moduleForm.reset();
   }
 
   public cancelUser() {
     this.cancel.emit(false);
   }
 
-  public onFileSelected(event){
+  public onFileSelected(event) {
     let reader = new FileReader();
 
     if(event.target.files && event.target.files.length){

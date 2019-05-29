@@ -23,12 +23,12 @@ export class NewUserComponent implements OnInit, OnChanges {
   @Input() public rol: Rol;
   @Input() public user: User;
 
-  //Datos para crear usuario
+  // Datos para crear usuario
   @Input() public typesIdList: Parameter[];
   @Input() public enterpriseList: Enterprise[];
-  @Input() public postitionList : Parameter[];
-  @Input() public laboralStateList : Parameter[];
-  
+  @Input() public postitionList: Parameter[];
+  @Input() public laboralStateList: Parameter[];
+
   @Output() public create = new EventEmitter<User>();
   @Output() public update = new EventEmitter<User>();
   @Output() public cancel = new EventEmitter<boolean>();
