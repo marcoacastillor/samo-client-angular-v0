@@ -7,16 +7,16 @@
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label for="name">Nombre</label>
-                        <input type="text" class="form-control text-small" placeholder="nombre" formControlName="name" required>
+                        <input type="text" class="form-control text-small" placeholder="Nombre" formControlName="name" required>
                         <small *ngIf="mustShowError('name')" class="form-text alert-danger">
-                        Username es obligatorio
+                        Nombre de usuario es obligatorio
                         </small>
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label for="url_angular_module">Módulo angular</label>
-                        <input type="text" class="form-control text-small" placeholder="modulo angular" formControlName="url_angular_module" required>
+                        <input type="text" class="form-control text-small" placeholder="Modulo angular" formControlName="url_angular_module" required>
                         <small *ngIf="mustShowError('url_angular_module')" class="form-text alert-danger">
                         Componente Angular es obligatorio
                         </small>
@@ -27,7 +27,7 @@
                 <div class="col-sm-12">
                     <div class="form-group">
                         <label for="description">Descripción</label>
-                        <textarea class="form-control text-small" placeholder="description" formControlName="description" required rows="3"></textarea>
+                        <textarea class="form-control text-small" placeholder="Descripcion" formControlName="description" required rows="3"></textarea>
                         <small *ngIf="mustShowError('description')" class="form-text alert-danger">
                             Descripción es obligatorio
                         </small>
@@ -38,7 +38,7 @@
                 <div class="col-sm-12">
                     <div class="form-group">
                         <label for="url_image">imagen</label>
-                        <input type="file" (change)="onFileSelected($event)" class="form-control text-small" placeholder="imagen" formControlName="url_image" required />
+                        <input type="file" (change)="onFileSelected($event)" class="form-control text-small" placeholder="Imagen" formControlName="url_image" required />
                         <small *ngIf="mustShowError('url_image')" class="form-text alert-danger">
                         Imágen es obligatorio
                         </small>

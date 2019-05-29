@@ -4,17 +4,17 @@
 
 export const environment = {
   production: false,
-  
-  url_user: 'http://localhost/usuariosV0/public/users',
-  url_module: 'http://localhost/usuariosV0/public/modules',
-  url_component: 'http://localhost/usuariosV0/public/components',
-  url_rol: 'http://localhost/usuariosV0/public/rols',
-  url_rol_option: 'http://localhost/usuariosV0/public/rols_options',
-  url_option: 'http://localhost/usuariosV0/public/options',
-  url_category: 'http://localhost/usuariosV0/public/categories',
-  url_parameter: 'http://localhost/usuariosV0/public/parameters',
-  url_storage: 'http://localhost/usuariosV0/storage/app/public/',
-  url_service_enterprise: 'http://localhost/usuariosV0/public/service_enterprise',
+
+  url_user: 'https://www.sanratsolutions.com/dev/usuarios/public/users',
+  url_module: 'https://www.sanratsolutions.com/dev/usuarios/public/modules',
+  url_component: 'https://www.sanratsolutions.com/dev/usuarios/public/components',
+  url_rol: 'https://www.sanratsolutions.com/dev/usuarios/public/rols',
+  url_rol_option: 'https://www.sanratsolutions.com/dev/usuarios/public/rols_options',
+  url_option: 'https://www.sanratsolutions.com/dev/usuarios/public/options',
+  url_category: 'https://www.sanratsolutions.com/dev/usuarios/public/categories',
+  url_parameter: 'https://www.sanratsolutions.com/dev/usuarios/public/parameters',
+  url_storage: 'https://www.sanratsolutions.com/dev/usuarios/storage/app/public/',
+  url_service_enterprise: 'https://www.sanratsolutions.com/dev/usuarios/public/service_enterprise',
 
   url_authentication: 'https://www.sanratsolutions.com/dev/ventas/public/authentication',
   url_person: 'https://www.sanratsolutions.com/dev/ventas/public/persons',
@@ -23,18 +23,18 @@ export const environment = {
   url_products: 'https://www.sanratsolutions.com/dev/ventas/public/products',
   url_payment: 'https://www.sanratsolutions.com/dev/ventas/public/payments',
   url_expenses: 'https://www.sanratsolutions.com/dev/ventas/public/expenses',
-  
-  
+
+
   clearMessageDelayMs: 5000,
   refreshInterval: 1000,
   min_products: 20,
   medium_products: 50,
   days_sold: 7,
   consolidate_day: 2,
-  
+
   type_operation_purchase: 'PURCHASE',
   type_operation_sale: 'SALE',
-  
+
   state_user: 'STATE_USER',
   type_payment: 'PAYMENT_TYPE',
   type_enterprise: 'TYPE_ENTERPRISE',
@@ -59,7 +59,7 @@ export const environment = {
   rol_client: 'Cliente',
   rol_employee: 'Employee',
   state_rol_person_active: 'Activo',
-  
+
 
   state_initial_purchase: 'CREADA',
   state_payment_purchase: 'PAGADA',

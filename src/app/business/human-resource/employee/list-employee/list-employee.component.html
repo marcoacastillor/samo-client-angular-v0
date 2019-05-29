@@ -17,11 +17,11 @@
                                     <form [formGroup]="searchForm">
                                         <div class="row alert alert-secondary" role="alert">
                                             <div class="col-sm-12  alert alert-info" role="alert">
-                                                El buscador permite buscar por Id, nombres y apellidos. 
+                                                El buscador permite buscar por Id, Nombres y Apellidos. 
                                             </div>
                                             <div class="col-sm-12">
                                                 <div class="input-group mb-3">
-                                                    <input type="text" class="form-control text-ultra-small" placeholder="filter" formControlName="filter">
+                                                    <input type="text" class="form-control text-ultra-small" placeholder="filtro" formControlName="filter">
                                                     <div class="input-group-prepend">
                                                         <button [disabled]="searchForm.invalid" type="button" class="btn text-ultra-small btn-sm btn-outline-secondary"  (click)="searchPerson()">
                                                             <fa-icon [icon]="faSearch" class="text-secondary mb-2 mr-1" title="Buscar registro"></fa-icon>

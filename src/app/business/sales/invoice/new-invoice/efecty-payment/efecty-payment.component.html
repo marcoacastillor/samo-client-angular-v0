@@ -13,7 +13,7 @@
                 <div class="col-sm-12">
                     <div class="form-group">
                         <label for="received_money">Valor recibido</label>
-                        <input #received_money type="text" class="form-control text-small" placeholder="efectivo" formControlName="received_money" required>
+                        <input #received_money type="text" class="form-control text-small" placeholder="Efectivo" formControlName="received_money" required>
                         <div *ngIf="mustShowError('received_money')" class="form-text alert-danger">
                             <small *ngIf="hasError('received_money','required')">
                                 El campo es obligatorio
