@@ -29,6 +29,7 @@ export const environment = {
  url_category: 'http://localhost/usuariosV1/public/categories',
  url_parameter: 'http://localhost/usuariosV1/public/parameters',
  url_storage: 'http://localhost/usuariosV1/storage/app/public/',
+ url_service_enterprise: 'http://localhost/usuariosV0/public/service_enterprise',
 
  url_authentication: 'http://localhost/ventasV1/public/authentication',
  url_person: 'http://localhost/ventasV1/public/persons',

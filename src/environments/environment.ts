@@ -14,6 +14,7 @@ export const environment = {
   url_category: 'http://localhost/usuariosV0/public/categories',
   url_parameter: 'http://localhost/usuariosV0/public/parameters',
   url_storage: 'http://localhost/usuariosV0/storage/app/public/',
+  url_service_enterprise: 'http://localhost/usuariosV0/public/service_enterprise',
 
   url_authentication: 'http://localhost/ventasV0/public/authentication',
   url_person: 'http://localhost/ventasV0/public/persons',
@@ -22,6 +23,7 @@ export const environment = {
   url_products: 'http://localhost/ventasV0/public/products',
   url_payment: 'http://localhost/ventasV0/public/payments',
   url_expenses: 'http://localhost/ventasV0/public/expenses',
+  
   
   clearMessageDelayMs: 5000,
   refreshInterval: 1000,

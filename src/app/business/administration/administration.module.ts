@@ -38,6 +38,11 @@ import { ListOptionComponent } from './options/list-option/list-option.component
 import { NewOptionComponent } from './options/new-option/new-option.component';
 import { ModalAsignOptionComponent } from './modules/show-module/modal-asign-option/modal-asign-option.component';
 import { AsignOptionComponent } from './modules/show-module/asign-option/asign-option.component';
+import { MainServiceManageComponent } from './service-manage/main-service-manage/main-service-manage.component';
+import { ListServiceManageComponent } from './service-manage/list-service-manage/list-service-manage.component';
+import { ShowServiceManageComponent } from './service-manage/show-service-manage/show-service-manage.component';
+import { NewServiceManageComponent } from './service-manage/new-service-manage/new-service-manage.component';
+import { ServiceEnterpriseService } from 'src/app/shared/services/service-enterprise.service';
 
 @NgModule({
   imports: [
@@ -52,8 +57,8 @@ import { AsignOptionComponent } from './modules/show-module/asign-option/asign-o
   declarations: [
     MainUserComponent, ShowUserComponent, ListUserComponent, NewUserComponent, 
     MainRolComponent, ShowRolComponent, ListRolComponent, NewRolComponent, 
-    MainModuleComponent, ListModuleComponent, NewModuleComponent, ShowModuleComponent, NewComponentComponent, NewOptionComponent, ModalComponentComponent, ModalPersonComponent, NewPersonComponent, ModalEnterpriseComponent, NewEnterpriseComponent, MainOptionComponent, ListOptionComponent, ModalAsignOptionComponent, AsignOptionComponent
+    MainModuleComponent, ListModuleComponent, NewModuleComponent, ShowModuleComponent, NewComponentComponent, NewOptionComponent, ModalComponentComponent, ModalPersonComponent, NewPersonComponent, ModalEnterpriseComponent, NewEnterpriseComponent, MainOptionComponent, ListOptionComponent, ModalAsignOptionComponent, AsignOptionComponent, MainServiceManageComponent, ListServiceManageComponent, ShowServiceManageComponent, NewServiceManageComponent
   ],
-  providers: [ EnterpriseService, UserService, RolService, UtilsService, PersonService, ModuleService, ParameterService, ComponentService, OptionService ]
+  providers: [ EnterpriseService, UserService, RolService, UtilsService, PersonService, ModuleService, ParameterService, ComponentService, OptionService, ServiceEnterpriseService ]
 })
 export class AdministrationModule { }

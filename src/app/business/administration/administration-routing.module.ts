@@ -4,6 +4,7 @@ import { MainUserComponent } from './users/main-user/main-user.component';
 import { MainRolComponent } from './rols/main-rol/main-rol.component';
 import { MainModuleComponent } from './modules/main-module/main-module.component';
 import { MainOptionComponent } from './options/main-option/main-option.component';
+import { MainServiceManageComponent } from './service-manage/main-service-manage/main-service-manage.component';
 
 const routes: Routes = [
     {
@@ -21,7 +22,11 @@ const routes: Routes = [
     {
       path: 'options',
       component: MainOptionComponent
-    }
+    },
+    {
+      path: 'service_manage',
+      component: MainServiceManageComponent
+    },
 ];
 
 @NgModule({

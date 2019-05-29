@@ -1,0 +1,21 @@
+<div class="row margin-top">
+    <div *ngIf="!showService" class="col-sm-8">
+        <app-new-service-manage
+        
+        >
+        </app-new-service-manage>
+    </div>
+    <div *ngIf="showModule" class="col-sm-8">
+        <app-show-service-manage
+        
+        >
+        </app-show-service-manage>
+    </div>
+    <div class="col-sm-4">
+        <app-list-service-manage
+        [serviceEnterpriseList]="serviceEnterpriseList"
+        >
+        </app-list-service-manage>
+    </div>
+</div>
+        
