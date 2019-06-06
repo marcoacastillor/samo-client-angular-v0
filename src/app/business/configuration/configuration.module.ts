@@ -12,6 +12,10 @@ import { ModalParameterComponent } from './parameters/show-param/modal-parameter
 import { NewParameterComponent } from './parameters/show-param/new-parameter/new-parameter.component';
 import { NewParamComponent } from './parameters/new-param/new-param.component';
 import { ParameterService } from 'src/app/shared/services/parameter.service';
+import { AdminTypeServiceComponent } from './type-service/admin-type-service/admin-type-service.component';
+import { ListTypeServiceComponent } from './type-service/list-type-service/list-type-service.component';
+import { NewTypeServiceComponent } from './type-service/new-type-service/new-type-service.component';
+import { TypeServiceService } from 'src/app/shared/services/type-service.service';
 
 @NgModule({
   imports: [
@@ -20,8 +24,7 @@ import { ParameterService } from 'src/app/shared/services/parameter.service';
     FontAwesomeModule,
     SharedModule
   ],
-  providers: [ CategoryService, ParameterService],
-  declarations: [AdminParamComponent, ListParamComponent, ShowParamComponent, NewParamComponent, ModalParameterComponent, NewParameterComponent]
-  
+  providers: [ CategoryService, ParameterService, TypeServiceService],
+  declarations: [AdminParamComponent, ListParamComponent, ShowParamComponent, NewParamComponent, ModalParameterComponent, NewParameterComponent, AdminTypeServiceComponent, ListTypeServiceComponent, NewTypeServiceComponent]
 })
 export class ConfigurationModule { }

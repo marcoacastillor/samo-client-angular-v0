@@ -29,7 +29,8 @@ export const environment = {
  url_category: 'https://www.sanratsolutions.com/dev/usuarios/public/categories',
  url_parameter: 'https://www.sanratsolutions.com/dev/usuarios/public/parameters',
  url_storage: 'https://www.sanratsolutions.com/dev/usuarios/storage/app/public/',
- url_service_enterprise: 'http://www.sanratsolutions.com/dev/usuarios/public/service_enterprise',
+ url_service_enterprise: 'https://www.sanratsolutions.com/dev/usuarios/public/service_enterprise',
+ url_type_service: 'https://www.sanratsolutions.com/dev/usuarios/public/type_service',
 
  url_authentication: 'https://www.sanratsolutions.com/dev//ventas/public/authentication',
  url_person: 'https://www.sanratsolutions.com/dev//ventas/public/persons',
@@ -81,5 +82,6 @@ export const environment = {
   sales: 'SALE',
   purchase: 'PURCHASE',
 
-  type_product_purchase: 'COMPRA_PROVEEDORES'
+  type_product_purchase: 'COMPRA_PROVEEDORES',
+  mode_service: 'MODE_SERVICE'
 };

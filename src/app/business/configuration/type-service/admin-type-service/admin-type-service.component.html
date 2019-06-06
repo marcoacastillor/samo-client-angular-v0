@@ -1,0 +1,19 @@
+<div class="row margin-top">
+    <div *ngIf="!showTypeService" class="col-sm-6">
+        <app-new-type-service
+        [typeService]="typeService"
+        [modeServiceList]="modeServiceList"
+        (create)="onCreate($event)"
+        (update)="onUpdate($event)"
+        >
+        </app-new-type-service>
+    </div>
+    <div class="col-sm-6">
+        <app-list-type-service
+        [typeServiceList]="typeServiceList"
+        (delete)="onDelete($event)"
+        (load)="onLoad($event)"
+        >
+        </app-list-type-service>
+    </div>
+</div>

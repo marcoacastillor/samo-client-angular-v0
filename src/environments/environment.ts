@@ -5,24 +5,25 @@
 export const environment = {
   production: false,
 
-  url_user: 'https://www.sanratsolutions.com/dev/usuarios/public/users',
-  url_module: 'https://www.sanratsolutions.com/dev/usuarios/public/modules',
-  url_component: 'https://www.sanratsolutions.com/dev/usuarios/public/components',
-  url_rol: 'https://www.sanratsolutions.com/dev/usuarios/public/rols',
-  url_rol_option: 'https://www.sanratsolutions.com/dev/usuarios/public/rols_options',
-  url_option: 'https://www.sanratsolutions.com/dev/usuarios/public/options',
-  url_category: 'https://www.sanratsolutions.com/dev/usuarios/public/categories',
-  url_parameter: 'https://www.sanratsolutions.com/dev/usuarios/public/parameters',
-  url_storage: 'https://www.sanratsolutions.com/dev/usuarios/storage/app/public/',
-  url_service_enterprise: 'https://www.sanratsolutions.com/dev/usuarios/public/service_enterprise',
+  url_user: 'http://localhost/usuariosV0/public/users',
+  url_module: 'http://localhost/usuariosV0/public/modules',
+  url_component: 'http://localhost/usuariosV0/public/components',
+  url_rol: 'http://localhost/usuariosV0/public/rols',
+  url_rol_option: 'http://localhost/usuariosV0/public/rols_options',
+  url_option: 'http://localhost/usuariosV0/public/options',
+  url_category: 'http://localhost/usuariosV0/public/categories',
+  url_parameter: 'http://localhost/usuariosV0/public/parameters',
+  url_storage: 'http://localhost/usuariosV0/storage/app/public/',
+  url_service_enterprise: 'http://localhost/usuariosV0/public/service_enterprise',
+  url_type_service: 'http://localhost/usuariosV0/public/type_service',
 
-  url_authentication: 'https://www.sanratsolutions.com/dev/ventas/public/authentication',
-  url_person: 'https://www.sanratsolutions.com/dev/ventas/public/persons',
-  url_enterprise: 'https://www.sanratsolutions.com/dev/ventas/public/enterprises',
-  url_operation: 'https://www.sanratsolutions.com/dev/ventas/public/operations',
-  url_products: 'https://www.sanratsolutions.com/dev/ventas/public/products',
-  url_payment: 'https://www.sanratsolutions.com/dev/ventas/public/payments',
-  url_expenses: 'https://www.sanratsolutions.com/dev/ventas/public/expenses',
+  url_authentication: 'http://localhost/ventasV0/public/authentication',
+  url_person: 'http://localhost/ventasV0/public/persons',
+  url_enterprise: 'http://localhost/ventasV0/public/enterprises',
+  url_operation: 'http://localhost/ventasV0/public/operations',
+  url_products: 'http://localhost/ventasV0/public/products',
+  url_payment: 'http://localhost/ventasV0/public/payments',
+  url_expenses: 'http://localhost/ventasV0/public/expenses',
 
 
   clearMessageDelayMs: 5000,
@@ -60,7 +61,6 @@ export const environment = {
   rol_employee: 'Employee',
   state_rol_person_active: 'Activo',
 
-
   state_initial_purchase: 'CREADA',
   state_payment_purchase: 'PAGADA',
   state_opened_purchase: 'ABIERTA',
@@ -68,7 +68,8 @@ export const environment = {
   sales: 'SALE',
   purchase: 'PURCHASE',
 
-  type_product_purchase: 'COMPRA_PROVEEDORES'
+  type_product_purchase: 'COMPRA_PROVEEDORES',
+  mode_service: 'MODE_SERVICE'
 };
 
 /*

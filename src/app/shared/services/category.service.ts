@@ -39,7 +39,7 @@ export class CategoryService {
 
   public show$(id_cmp: number): Observable<Category> {
     const url = this._url + '/' + id_cmp;
-    return this.userService.validateOptionByToken('COMP_SHOW').pipe(
+    return this.userService.validateOptionByToken('CAT_SHOW').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<Category>(url);
