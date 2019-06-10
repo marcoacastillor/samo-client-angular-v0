@@ -6,10 +6,12 @@
             <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <label for="code_service">Código</label>
-                        <input type="text" class="form-control text-small" placeholder="Código" formControlName="code_service" required>
-                        <small *ngIf="mustShowError('code_service')" class="form-text alert-danger">
-                        Código de servicio.
+                        <label for="type_enterprise">Tipo de empresa</label>
+                        <select class="form-control text-small" formControlName="type_enterprise">
+                            <option value="{{param.value}}" *ngFor="let param of sizesEnterpriseList[0]">{{param.name}}</option>
+                        </select>
+                        <small *ngIf="mustShowError('type_enterprise')" class="form-text alert-danger">
+                        Tipo de empresa, es requerido.
                         </small>
                     </div>
                 </div>
@@ -20,19 +22,34 @@
                             <option value="{{param.value}}" *ngFor="let param of modeServiceList[0]">{{param.name}}</option>
                         </select>
                         <small *ngIf="mustShowError('mode_service')" class="form-text alert-danger">
-                        Modo de servicio, puede ser local o remoto.
+                        Modo de servicio, es requerido.
                         </small>
                     </div>
                 </div> 
-            </div>
-            <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <label for="month_value_service">Valor de servicio</label>
-                        <input type="number" class="form-control text-small" placeholder="Valor mensual del servicio" formControlName="month_value_service" required>
-                        <small *ngIf="mustShowError('month_value_service')" class="form-text alert-danger">
-                        Valor mensual del servicio.
+                        <label for="type_service">Modalidad del servicio</label>
+                        <select class="form-control text-small" formControlName="type_service">
+                            <option value="{{param.value}}" *ngFor="let param of typesServiceList[0]">{{param.name}}</option>
+                        </select>
+                        <small *ngIf="mustShowError('type_service')" class="form-text alert-danger">
+                        Tipo de servicio, es requerido.
                         </small>
+                    </div>
+                </div> 
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="value_service">Valor de servicio</label>
+                        <input type="number" class="form-control text-small" placeholder="Valor del servicio" formControlName="value_service" required>
+                        <small *ngIf="mustShowError('value_service')" class="form-text alert-danger">
+                        Valor del servicio es requerido.
+                        </small>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="description">Descripción</label>
+                        <input type="text" class="form-control text-small" placeholder="Descripción" formControlName="description">
                     </div>
                 </div>
             </div>

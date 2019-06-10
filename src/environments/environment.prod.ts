@@ -83,5 +83,7 @@ export const environment = {
   purchase: 'PURCHASE',
 
   type_product_purchase: 'COMPRA_PROVEEDORES',
-  mode_service: 'MODE_SERVICE'
+  mode_service: 'MODE_SERVICE',
+  type_service: 'TYPE_SERVICE',
+  size_enterprise: 'SIZE_ENTERPRISE',
 };

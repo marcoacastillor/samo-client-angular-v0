@@ -17,6 +17,8 @@ export class AdminTypeServiceComponent implements OnInit {
   typeService: TypeService = new TypeService;
 
   modeServiceList: Parameter[] = [];
+  typesServiceList: Parameter[] = [];
+  sizesEnterpriseList: Parameter[] = [];
   
   constructor(
     private typeServiceService: TypeServiceService,
@@ -28,11 +30,25 @@ export class AdminTypeServiceComponent implements OnInit {
   ngOnInit() {
     this.getAllTypesServices();
     this.getModeServiceList();
+    this.getTypesServiceList();
+    this.getSizesEnterpriseList();
   }
 
   public getModeServiceList(){
     this.parametersService.getByCodeCategory$(environment.mode_service).subscribe(
       lstModeTypes => this.modeServiceList = lstModeTypes
+    )
+  }
+
+  public getTypesServiceList(){
+    this.parametersService.getByCodeCategory$(environment.type_service).subscribe(
+      lstTypes => this.typesServiceList = lstTypes
+    )
+  }
+
+  public getSizesEnterpriseList(){
+    this.parametersService.getByCodeCategory$(environment.size_enterprise).subscribe(
+      lstSizesEnterprise => this.sizesEnterpriseList = lstSizesEnterprise
     )
   }
 

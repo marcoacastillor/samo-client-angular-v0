@@ -14,8 +14,10 @@ export class NewTypeServiceComponent implements OnInit {
   
   @Input() public typeService: TypeService;
   @Input() public modeServiceList: Parameter[];
+  @Input() public typesServiceList: Parameter[];
+  @Input() public sizesEnterpriseList: Parameter[];
   
-
+  
   @Output() public create = new EventEmitter<TypeService>();
   @Output() public update = new EventEmitter<TypeService>();
   
@@ -63,9 +65,12 @@ export class NewTypeServiceComponent implements OnInit {
  private initUpdForm() {
   this.typeServiceForm = this.fb.group({
     pk_id_type_service: [this.typeService.pk_id_type_service],
-    code_service: [this.typeService.code_service, Validators.required],
+    type_enterprise: [this.typeService.type_enterprise,Validators.required],
+    code_service: [this.typeService.code_service],
     mode_service: [this.typeService.mode_service, Validators.required],
-    month_value_service: [this.typeService.month_value_service, Validators.required],
+    value_service: [this.typeService.value_service, Validators.required],
+    type_service: [this.typeService.type_service, Validators.required],
+    description: [this.typeService.description],
     });
   }
 
