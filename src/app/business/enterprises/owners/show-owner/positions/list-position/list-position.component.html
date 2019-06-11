@@ -1,0 +1,23 @@
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Listado de cargos</h5>
+        <h6 class="card-subtitle mb-2 text-muted">Cargos por empresa</h6>
+        <p class="card-text">Cada empresa debe tener su propia lista de cargos.</p>
+        <div class="row">
+            <table class="table table-sm">
+                <thead>
+                    <tr>
+                    <th scope="col">Código</th>
+                    <th scope="col">Nombre</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let position of positionsList">
+                        <td>{{ position.code }}</td>
+                        <td>{{ position.name }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

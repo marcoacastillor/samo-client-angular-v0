@@ -101,11 +101,13 @@ export class MainUserComponent implements OnInit {
       ids => this.typesIdList = ids
     );
   }
+
   private loadPosition(){
     this.parameterService.getByCodeCategory$(environment.positions_person).subscribe(
       ids => this.postitionList = ids
     );
   }
+
   private loadEnterprisesOwners(){
     this.enterpriseService.getByType$(environment.enterprise_owner).subscribe(
       enterprises => { this.enterpriseList = enterprises }

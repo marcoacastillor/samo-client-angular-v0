@@ -43,6 +43,10 @@ const routes: Routes = [
         path: 'expenses',
         loadChildren: './expenses/expenses.module#ExpensesModule'
         //loadChildren: () => HumanResourceModule
+      },
+      {
+        path: 'enterprises',
+        loadChildren: './enterprises/enterprises.module#EnterprisesModule'
       }
     ]
   },

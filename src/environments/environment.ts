@@ -14,16 +14,18 @@ export const environment = {
   url_category: 'http://localhost/usuariosV0/public/categories',
   url_parameter: 'http://localhost/usuariosV0/public/parameters',
   url_storage: 'http://localhost/usuariosV0/storage/app/public/',
-  url_service_enterprise: 'http://localhost/usuariosV0/public/service_enterprise',
-  url_type_service: 'http://localhost/usuariosV0/public/type_service',
+  url_ventas_storage: 'http://localhost/ventasV0/storage/app/public/',
+  url_type_service: 'http://localhost/usuariosV0/public/type-service',
 
-  url_authentication: 'http://localhost/ventasV0/public/authentication',
+  url_authentication_ventas: 'http://localhost/ventasV0/public/authentication',
   url_person: 'http://localhost/ventasV0/public/persons',
   url_enterprise: 'http://localhost/ventasV0/public/enterprises',
   url_operation: 'http://localhost/ventasV0/public/operations',
   url_products: 'http://localhost/ventasV0/public/products',
   url_payment: 'http://localhost/ventasV0/public/payments',
   url_expenses: 'http://localhost/ventasV0/public/expenses',
+  url_note: 'http://localhost/ventasV0/public/notes',
+  url_position: 'http://localhost/ventasV0/public/positions',
 
 
   clearMessageDelayMs: 5000,

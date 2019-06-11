@@ -6,4 +6,5 @@ export class Enterprise {
     public address: string;
     public phone: string;
     public ubication_city: string;
+    public external_reference: string;
 }

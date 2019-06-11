@@ -10,7 +10,7 @@ import { switchMap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ServiceEnterpriseService {
-  private _url = environment.url_service_enterprise;
+  private _url = environment.url_enterprise;
   constructor(
     private http: HttpClient,
     private userService: UserService

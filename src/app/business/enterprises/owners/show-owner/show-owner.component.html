@@ -1,0 +1,94 @@
+<app-card caption="Detalle de empresa">
+    <main>
+        <div class="row">
+            <!-- Inicio información proveedor-->
+            <div class="col-sm-12 text-ultra-small ">
+                <div class="row border-bottom-2 bg-gray style-header-table">
+                    <div class="col-sm-12">
+                        Información básica
+                    </div>
+                </div>
+                <div class="row border-bottom-2 style-header-table">
+                    <div class="col-sm-6 text-ultra-small">
+                        <div class="row border-bottom-2 bg-gray style-header-table">
+                            <div class="col-sm-12">
+                                Empresa
+                            </div>
+                        </div>
+                        <div class="row border-bottom-1">
+                            <div class="col-sm-6 text-small">
+                                NIT: 
+                            </div>
+                            <div class="col-sm-6 card-title-custom bg-gray">
+                                {{ registry.nit }}
+                            </div>
+                        </div>
+                        <div class="row border-bottom-1">
+                            <div class="col-sm-6 text-small">
+                                Nombre: 
+                            </div>
+                            <div class="col-sm-6 card-title-custom bg-gray">
+                                {{ registry.name }}
+                            </div>
+                        </div>
+                        <div class="row border-bottom-1">
+                            <div class="col-sm-6 text-small">
+                               Dirección: 
+                            </div>
+                            <div class="col-sm-6 card-title-custom bg-gray">
+                                {{ registry.address }}
+                            </div>
+                        </div>
+                        <div class="row border-bottom-1">
+                            <div class="col-sm-6 text-small">
+                                Teléfono: 
+                            </div>
+                            <div class="col-sm-6 card-title-custom bg-gray">
+                                {{ registry.phone }}
+                            </div>
+                        </div>
+                        <div class="row border-bottom-1">
+                            <div class="col-sm-6 text-small">
+                                Ubicación: 
+                            </div>
+                            <div class="col-sm-6 card-title-custom bg-gray">
+                                {{ registry.ubication_city }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 text-ultra-small">
+                        <div class="row border-bottom-2 bg-gray style-header-table">
+                            <div class="col-sm-12">
+                                Datos adicionales
+                            </div>
+                        </div>
+                        <div class="row border-bottom-1">
+                            <div class="col-sm-4 text-small">
+                                Tipo de empresa: 
+                            </div>
+                            <div class="col-sm-8 card-title-custom bg-gray">
+                                {{ registry.type }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <app-new-position
+                    [position]="position"
+                    [fk_id_enterprise]="registry.pk_id_enterprise"
+                    (create)="onCreate($event)"
+                    (update)="onUpdate($event)"
+                ></app-new-position>
+            </div>
+            <div class="col-sm-6">
+                <app-list-position
+                    [positionsList]="positionsList"
+                ></app-list-position>
+            </div>
+        </div>
+    </main>
+</app-card>

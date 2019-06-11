@@ -17,11 +17,9 @@ export class NewTypeServiceComponent implements OnInit {
   @Input() public typesServiceList: Parameter[];
   @Input() public sizesEnterpriseList: Parameter[];
   
-  
   @Output() public create = new EventEmitter<TypeService>();
   @Output() public update = new EventEmitter<TypeService>();
   
-
   constructor(
     private fb: FormBuilder,
     private formToolService: FormToolsService,

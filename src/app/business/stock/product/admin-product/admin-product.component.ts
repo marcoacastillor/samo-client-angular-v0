@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Results } from 'src/app/shared/models/results';
 import { GlobalStoreService } from 'src/app/core/services/global-store.service';
 import { ProductService } from 'src/app/shared/services/product.service';
-import { tap, switchMap } from 'rxjs/operators';
+import { tap, switchMap, timeout } from 'rxjs/operators';
 import * as moment from 'moment';
 import { environment } from 'src/environments/environment';
 import { Product } from 'src/app/shared/models/product';
@@ -18,6 +18,7 @@ import { ParameterService } from 'src/app/shared/services/parameter.service';
   styles: []
 })
 export class AdminProductComponent implements OnInit {
+  public url_storage: string = environment.url_ventas_storage;
   public showProduct: boolean = false;
   public showReports: boolean = true;
   public showNewProduct: boolean = false;
@@ -93,7 +94,7 @@ export class AdminProductComponent implements OnInit {
   }
 
   public loadProviders(){
-    this.enterpriseService.getAll$().subscribe(
+    this.enterpriseService.getAllByType$(environment.enterprise_provider).subscribe(
       providersList => this.providerList = providersList
     );
   }
@@ -134,6 +135,21 @@ export class AdminProductComponent implements OnInit {
       }
     );
   }
+
+  /*
+  public onGetPDFOnCode(code:string){
+    this.productService.getPDFCode$(code).subscribe(
+      image => {
+        let configuracion_ventana = "menubar=yes,width=500,height=80,location=yes,resizable=yes,scrollbars=yes,status=yes";
+        let w = window.open('',"_blank", configuracion_ventana);
+        w.document.write(image);
+        w.document.close();
+        w.focus();
+        w.print();
+        w.close();
+      }
+    )
+  }*/
 
   /*
   * Funciones invocadas desde LIST

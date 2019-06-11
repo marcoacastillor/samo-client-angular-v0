@@ -1,0 +1,109 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive container">
+                    <div class="row">
+                        <div class="btn-group">
+                            <button type="button" (click)="crtRegistry()" class="btn text-ultra-small btn-sm btn-outline-primary">
+                                <fa-icon [icon]="faPlusCircle" class="text-primary mb-2 mr-1" title="Crear registro"></fa-icon>
+                            </button>
+                            <button type="button" class="btn text-ultra-small btn-sm btn-outline-secondary dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false">
+                                <fa-icon [icon]="faSearch" class="text-secondary mb-2 mr-1" title="Ver registro"></fa-icon>
+                            </button>
+                            <div class="dropdown-menu box-350">
+                                <div class="container text-ultra-small">
+                                    <form [formGroup]="searchForm">
+                                        <div class="row alert alert-secondary" role="alert">
+                                            <div class="col-sm-12  alert alert-info" role="alert">
+                                                Se puede buscar por nombre y/o nit
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <div class="input-group mb-3">
+                                                    <input type="text" class="form-control text-ultra-small" placeholder="filter" formControlName="filter">
+                                                    <div class="input-group-prepend">
+                                                        <button [disabled]="searchForm.invalid" type="button" class="btn text-ultra-small btn-sm btn-outline-secondary"  (click)="searchRegistries()">
+                                                            <fa-icon [icon]="faSearch" class="text-secondary mb-2 mr-1" title="Buscar registro"></fa-icon>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sección de paginación de resultados -->
+                    <div class="row border-type-2 align-items-end">
+                        <div class="col-sm-4 text-ultra-small">
+                            items por página: 
+                            <select class="custom-select" #regPerPag (change)="setRegPerPg(regPerPag.value)">
+                                <option value="5">5</option>
+                                <option value="10">10</option>
+                                <option value="15">15</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-6 text-ultra-small font-weight-bold">
+                            registros : {{ (actualPg*regPerPg)+1 }}  a {{ maxPerPg }} de {{ (registryList.number_results) }} <br /> pagina actual: {{ actualPg }} de {{ (totalPgs-1) }}
+                        </div>
+                        <div class="col-sm-2">
+                            <button *ngIf="(actualPg+1) <= (totalPgs-1)" type="button" class="btn btn-sm btn-outline-success" (click)="addActualPg()">
+                                >>
+                            </button>
+                            <button *ngIf="actualPg > 0" type="button" class="btn btn-sm btn-outline-success" (click)="delActualPg()">
+                                <<
+                            </button>
+                            
+                        </div>
+                    </div>
+                    <!-- Fin sección de paginación de resultados -->
+                    
+                    <!-- Fin tercera fila -->
+                    <div class="row">
+                        <div class="col-sm-6 text-small text-sm-left">
+                            <span class="font-weight-bold text-ultra-small">[Total registros]: </span>{{ registryList.number_results }}
+                        </div>
+                        <div class="col-sm-6 text-small text-sm-right">
+                            <span class="font-weight-bold text-ultra-small">[Criterio]: </span>{{ registryList.criteria }}
+                        </div>       
+                    </div>
+
+                    <!-- Segunda fila: table -->
+                    <div class="row" *ngIf="registryList">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Acciones</th>
+                                    <th>Gastos</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let registry of registryList.data_results | slice:(actualPg*regPerPg):((actualPg*regPerPg))+(regPerPg); let i=index;">
+                                    <td>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn text-ultra-small text-ultra-small btn-sm btn-outline-warning" (click)="selectRegistry(registry.pk_id_enterprise)">
+                                                <fa-icon [icon]="faEye" class="text-warning mb-2 mr-1" title="Ver registro"></fa-icon>Ver
+                                            </button>
+                                            <button type="button" class="btn text-ultra-small text-ultra-small btn-sm btn-outline-success" (click)="updateRegistry(registry)">
+                                                <fa-icon [icon]="faEdit" class="text-success mb-2 mr-1" title="Actualizar registro"></fa-icon>Actualizar
+                                            </button>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="row">
+                                            <div class="col-sm-12"><b>Nit: {{ registry.nit }}</b></div>
+                                            <div class="col-sm-12"><b>Nombre: {{ registry.name }}</b></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Fin segunda fila -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>    

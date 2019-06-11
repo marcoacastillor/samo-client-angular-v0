@@ -1,0 +1,36 @@
+<div class="card">
+    <div class="card-body">
+      <h5 *ngIf="position.pk_id_position">Actualización de información</h5>
+      <h5 *ngIf="!position.pk_id_position">Creación de registro</h5>
+      <h6 class="card-subtitle mb-2 text-muted">Cargos por empresa</h6>
+      <form [formGroup]="positionForm">
+      <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="code">Código</label>
+                    <input type="text" class="form-control text-small" placeholder="Código" formControlName="code">
+                    <small *ngIf="mustShowError('code')" class="form-text alert-danger">
+                    Código, es requerido.
+                    </small>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="name">Nombre</label>
+                    <input type="text" class="form-control text-small" placeholder="Nombre" formControlName="name">
+                    <small *ngIf="mustShowError('name')" class="form-text alert-danger">
+                    Nombre, es requerido.
+                    </small>
+                </div>
+            </div> 
+        </div>
+        </form>
+        <div class="card-footer text-muted">
+            <div class="row">
+                <button *ngIf="position.pk_id_position" type="submit" class="btn btn-outline-success btn-sm mb-2 mr-1" [disabled]="positionForm.invalid" (click)="updateTypeService()">Actualizar</button>
+                <button *ngIf="!position.pk_id_position" type="submit" class="btn btn-outline-primary btn-sm mb-2 mr-1" [disabled]="positionForm.invalid" (click)="createTypeService()">Guardar</button>
+                <button type="button" class="btn btn-outline-danger btn-sm mb-2 mr-1" (click)="clear()">Cancelar</button>
+            </div>
+        </div>                
+    </div>
+  </div>

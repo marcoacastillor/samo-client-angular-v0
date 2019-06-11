@@ -5,6 +5,7 @@ import { UserService } from './user.service';
 import { Observable } from 'rxjs';
 import { Enterprise } from '../models/enterprise';
 import { switchMap } from 'rxjs/operators';
+import { Results } from '../models/results';
 
 @Injectable({
   providedIn: 'root'
@@ -17,11 +18,23 @@ export class EnterpriseService {
     private userService: UserService
     ) {}
 
-  public getAll$(): Observable<Enterprise[]> {
+  public getAllByType$(type: string): Observable<Enterprise[]> {
+    const url = this._url + '/index/'+type;
     return this.userService.validateOptionByToken('ENT_LIST').pipe(
       switchMap(validate => {
         if(validate){
-          return this.http.get<Enterprise[]>(this._url);
+          return this.http.get<Enterprise[]>(url);
+        }
+      })
+    );
+  }
+
+  public getByFilter$(filter: any, type: string): Observable<Results> {
+    const url = this._url + '/get-list-by-filter-and-type/' + type;
+    return this.userService.validateOptionByToken('ENT_LIST_BY_FILTER_AND_TYPE').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.post<Results>(url, filter);
         }
       })
     );
@@ -48,6 +61,8 @@ export class EnterpriseService {
       })
     );
   }
+
+  
   
 
   public show$(id_enterprise: number): Observable<Enterprise> {
@@ -60,6 +75,22 @@ export class EnterpriseService {
       })
     );
   }
+
+  public showLogin$(id_enterprise: number): Observable<Enterprise> {
+    const url = this._url + '/show-login/' + id_enterprise;
+    return this.http.get<Enterprise>(url);
+  }
+
+  public update$(enterprise: Enterprise): Observable<Enterprise> {
+    return this.userService.validateOptionByToken('ENT_UPD').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.put<Enterprise>(this._url, enterprise);
+        }
+      })
+    );
+  }
+
 
   public store$(enterprise: Enterprise): Observable<Enterprise> {
     return this.userService.validateOptionByToken('ENT_CRT').pipe(

@@ -1,0 +1,28 @@
+<div class="row margin-top">
+    <div *ngIf="!showRegistry" class="col-sm-8">
+        <app-new-owner
+        [registry]="registry"
+        (store)="onStore($event)"
+        (update)="onUpdate($event)"
+        >
+        </app-new-owner>
+    </div>
+    <div *ngIf="showRegistry" class="col-sm-8">
+        <app-show-owner
+        [registry]="registry"
+        [positionsList]="positionsList"
+        >
+        </app-show-owner>
+    </div>
+    <div class="col-sm-4">
+        <app-list-owner
+        [registryList]="registryList"
+        [actualPg]="actualPg"
+        [regPerPg]="regPerPg"
+        (create)="onCreate($event)"
+        (select)="onSelect($event)"
+        (update)="onSelectUpd($event)"
+        >
+        </app-list-owner>
+    </div>
+</div>

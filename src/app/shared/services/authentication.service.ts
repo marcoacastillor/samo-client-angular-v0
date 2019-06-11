@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class AuthenticationService {
-  private _url = environment.url_authentication;
+  private _url = environment.url_authentication_ventas;
   constructor(private http: HttpClient) {
   }
 
