@@ -6,6 +6,7 @@ import { Enterprise } from 'src/app/shared/models/enterprise';
 import { faCalendar } from '@fortawesome/free-solid-svg-icons';
 import { Person } from 'src/app/shared/models/person';
 import * as moment from 'moment';
+import { Position } from 'src/app/shared/models/position';
 
 @Component({
   selector: 'app-new-person',
@@ -18,7 +19,7 @@ export class NewPersonComponent implements OnInit {
 
   //Datos para crear usuario
   @Input() public typesIdList: Parameter[];
-  @Input() public postitionList : Parameter[];
+  @Input() public postitionList : Position[];
   @Input() public laboralStateList : Parameter[];
   
 

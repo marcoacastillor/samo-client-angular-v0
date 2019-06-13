@@ -7,7 +7,7 @@
                     <div class="form-group">
                         <label for="type_expense">Tipo de gasto</label>
                         <select class="form-control form-control-sm text-small" formControlName="type_expense" required>
-                            <option value="{{type.value}}" *ngFor="let type of lstTypes[0]">{{type.name}}</option>
+                            <option value="{{type.value}}" *ngFor="let type of lstTypes">{{type.name}}</option>
                         </select>
                         <small *ngIf="mustShowError('type_expense')" class="form-text alert-danger">
                             Tipo de gasto, es obligatorio

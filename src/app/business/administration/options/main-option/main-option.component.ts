@@ -28,7 +28,7 @@ export class MainOptionComponent implements OnInit {
 
   public getAllOptions(){
     this.optionService.getAll$().subscribe(
-      lst => this.optionList = lst[0]
+      lst => this.optionList = lst
     );
   }
 

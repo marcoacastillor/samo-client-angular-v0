@@ -5,6 +5,7 @@ import { Parameter } from 'src/app/shared/models/parameter';
 import { Person } from 'src/app/shared/models/person';
 import { FormToolsService } from 'src/app/shared/services/form-tools.service';
 import * as moment from 'moment';
+import { Position } from 'src/app/shared/models/position';
 
 @Component({
   selector: 'app-new-employee',
@@ -18,7 +19,7 @@ export class NewEmployeeComponent implements OnInit {
   //Datos para crear usuario
   @Input() public person: Person;
   @Input() public typesIdList: Parameter[];
-  @Input() public postitionList: Parameter[];
+  @Input() public postitionList: Position[];
   @Input() public laboralStateList: Parameter[];
   
   @Output() public create = new EventEmitter<Person>();
@@ -60,8 +61,7 @@ export class NewEmployeeComponent implements OnInit {
     address:[this.person.address],
     phone:[this.person.phone],
     pk_id_enterprise_person: [this.person.enterprise_person.pk_id_enterprise_person],
-    fk_id_enterprise: [this.person.enterprise_person.fk_id_enterprise,Validators.required],
-    rol_enterprise: [this.person.enterprise_person.rol_enterprise, Validators.required],
+    fk_id_position: [this.person.enterprise_person.fk_id_position, Validators.required],
     date_register: [this.person.enterprise_person.date_register, Validators.required],
     state: ['Activo'],
     salary: [this.person.enterprise_person.salary, Validators.required],

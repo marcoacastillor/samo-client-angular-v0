@@ -17,6 +17,12 @@ import { GlobalStoreService } from 'src/app/core/services/global-store.service';
 import { NewPositionComponent } from './owners/show-owner/positions/new-position/new-position.component';
 import { ListPositionComponent } from './owners/show-owner/positions/list-position/list-position.component';
 import { PositionService } from 'src/app/shared/services/position.service';
+import { ShowInfoComponent } from './my-enterprise/show-info/show-info.component';
+import { MainInfoComponent } from './my-enterprise/main-info/main-info.component';
+import { PositionsComponent } from './my-enterprise/positions/positions.component';
+import { ParametersComponent } from './my-enterprise/parameters/parameters.component';
+import { EmployeeComponent } from './my-enterprise/employee/employee.component';
+import { PersonService } from 'src/app/shared/services/person.service';
 
 
 @NgModule({
@@ -26,7 +32,7 @@ import { PositionService } from 'src/app/shared/services/position.service';
     SharedModule,
     FontAwesomeModule,
   ],
-  providers: [EnterpriseService, GlobalStoreService, PositionService],
-  declarations: [AdminProviderComponent, AdminOwnerComponent, ShowProviderComponent, ListProviderComponent, NewProviderComponent, ListOwnerComponent, ShowOwnerComponent, NewOwnerComponent, NewPositionComponent, ListPositionComponent]
+  providers: [EnterpriseService, GlobalStoreService, PositionService, PersonService],
+  declarations: [AdminProviderComponent, AdminOwnerComponent, ShowProviderComponent, ListProviderComponent, NewProviderComponent, ListOwnerComponent, ShowOwnerComponent, NewOwnerComponent, NewPositionComponent, ListPositionComponent, ShowInfoComponent, MainInfoComponent, PositionsComponent, ParametersComponent, EmployeeComponent]
 })
 export class EnterprisesModule { }

@@ -43,6 +43,7 @@ import { ListServiceManageComponent } from './service-manage/list-service-manage
 import { ShowServiceManageComponent } from './service-manage/show-service-manage/show-service-manage.component';
 import { NewServiceManageComponent } from './service-manage/new-service-manage/new-service-manage.component';
 import { ServiceEnterpriseService } from 'src/app/shared/services/service-enterprise.service';
+import { PositionService } from 'src/app/shared/services/position.service';
 
 @NgModule({
   imports: [
@@ -59,6 +60,6 @@ import { ServiceEnterpriseService } from 'src/app/shared/services/service-enterp
     MainRolComponent, ShowRolComponent, ListRolComponent, NewRolComponent, 
     MainModuleComponent, ListModuleComponent, NewModuleComponent, ShowModuleComponent, NewComponentComponent, NewOptionComponent, ModalComponentComponent, ModalPersonComponent, NewPersonComponent, ModalEnterpriseComponent, NewEnterpriseComponent, MainOptionComponent, ListOptionComponent, ModalAsignOptionComponent, AsignOptionComponent, MainServiceManageComponent, ListServiceManageComponent, ShowServiceManageComponent, NewServiceManageComponent
   ],
-  providers: [ EnterpriseService, UserService, RolService, UtilsService, PersonService, ModuleService, ParameterService, ComponentService, OptionService, ServiceEnterpriseService ]
+  providers: [ EnterpriseService, UserService, RolService, UtilsService, PersonService, ModuleService, ParameterService, ComponentService, OptionService, ServiceEnterpriseService, PositionService ]
 })
 export class AdministrationModule { }

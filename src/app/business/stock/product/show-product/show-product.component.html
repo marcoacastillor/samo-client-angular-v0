@@ -183,7 +183,7 @@
                 </div>
             </div>
         </form>
-        <div class="row" *ngIf="operationsList[0]">
+        <div class="row" *ngIf="operationsList">
             <div class="col-sm-6 text-ultra-small">
                 <div class="row border-bottom-2 bg-gray style-header-table">
                     <div class="col-sm-12">
@@ -201,7 +201,7 @@
                         Cantidad
                     </div>
                 </div>
-                <div class="row border-bottom-1" *ngFor="let opr of operationsList[0].purchase">
+                <div class="row border-bottom-1" *ngFor="let opr of operationsList.purchase">
                     <div class="col-sm-6 text-small">
                         {{ opr.number_invoice }}
                     </div>
@@ -231,7 +231,7 @@
                     </div>
                 </div>
                 
-                <div class="row border-bottom-1" *ngFor="let opr of operationsList[0].sales">
+                <div class="row border-bottom-1" *ngFor="let opr of operationsList.sales">
                     <div class="col-sm-6 text-small">
                         {{ opr.number_invoice }}
                     </div>
@@ -244,14 +244,14 @@
                 </div>
             </div>
         </div>
-        <div class="row" *ngIf="operationsList[0]">
+        <div class="row" *ngIf="operationsList">
             <div class="col-sm-6 text-ultra-small">
                 <div class="row border-bottom-2 bg-gray style-header-table">
                     <div class="col-sm-9 align-self-end">
                         Total compras
                     </div>
                     <div class="col-sm-3 align-self-end">
-                        {{ operationsList[0].total_purchase[0].units + (operationsList[0].total_purchase[0].packages * product.units_package) }}
+                        {{ operationsList.total_purchase.units + (operationsList.total_purchase.packages * product.units_package) }}
                     </div>
                 </div>
             </div>
@@ -261,7 +261,7 @@
                         Total ventas
                     </div>
                     <div class="col-sm-3 align-self-end">
-                        {{ operationsList[0].total_sales[0].units + (operationsList[0].total_sales[0].packages * product.units_package) }}
+                        {{ operationsList.total_sales.units + (operationsList.total_sales.packages * product.units_package) }}
                     </div>
                 </div>
             </div>

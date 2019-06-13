@@ -37,7 +37,7 @@
                             </div>
                             <select class="form-control form-control-sm text-small" formControlName="fk_id_enterprise" (change)="getEmployeesByEnterprise()" required>
                                 <option value="" selected>Seleccione</option>
-                                <option value="{{enterprise.pk_id_enterprise}}" *ngFor="let enterprise of enterpriseList[0]">{{enterprise.name}}</option>
+                                <option value="{{enterprise.pk_id_enterprise}}" *ngFor="let enterprise of enterpriseList">{{enterprise.name}}</option>
                             </select>
                             <div class="col-sm-12">
                                 <small *ngIf="mustShowError('fk_id_enterprise')" class="form-text alert-danger">
@@ -57,7 +57,7 @@
                         </div>
                         <select class="form-control text-small" formControlName="fk_id_person">
                             <option value="" selected>Seleccione</option>
-                            <option value="{{person.pk_id_person}}" *ngFor="let person of personList[0]">{{person.names}} {{person.last_names}}</option>
+                            <option value="{{person.pk_id_person}}" *ngFor="let person of personList">{{person.names}} {{person.last_names}}</option>
                         </select>
                     </div>
                 </div> 
@@ -66,7 +66,7 @@
                         <label for="rol">rol</label>
                         <select class="form-control text-small" formControlName="fk_id_rol" (change)="getOptions()">
                             <option value="" selected>Seleccione</option>
-                            <option value="{{rol.pk_id_rol}}" *ngFor="let rol of rolList[0]">{{rol.name}}</option>
+                            <option value="{{rol.pk_id_rol}}" *ngFor="let rol of rolList">{{rol.name}}</option>
                         </select>
                         <small *ngIf="mustShowError('fk_id_rol')" class="form-text alert-danger">
                             Rol es obligatorio
@@ -94,7 +94,7 @@
                     <label for="state">Estado de usuario</label>
                     <select class="form-control text-small" formControlName="state_user" required>
                         <option value="" selected>Seleccione</option>
-                        <option value="{{state.value}}" *ngFor="let state of statesUser[0]">{{state.name}}</option>
+                        <option value="{{state.value}}" *ngFor="let state of statesUser">{{state.name}}</option>
                     </select>
                     <span *ngIf="mustShowError('state_user')">
                         <small *ngIf="hasError('state_user', 'required')"  class="form-text alert-danger">

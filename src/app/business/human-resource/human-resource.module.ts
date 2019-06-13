@@ -18,6 +18,7 @@ import { ShowEmployeeComponent } from './employee/show-employee/show-employee.co
 import { NewEmployeeComponent } from './employee/new-employee/new-employee.component';
 import { ListEmployeeComponent } from './employee/list-employee/list-employee.component';
 import { UserService } from 'src/app/shared/services/user.service';
+import { PositionService } from 'src/app/shared/services/position.service';
 
 @NgModule({
   imports: [
@@ -28,7 +29,7 @@ import { UserService } from 'src/app/shared/services/user.service';
     OwlDateTimeModule, 
     OwlNativeDateTimeModule,
   ],
-  providers: [PersonService, GlobalStoreService, ParameterService, EnterpriseService, UserService],
+  providers: [PersonService, GlobalStoreService, ParameterService, EnterpriseService, PositionService, UserService],
   declarations: [AdminClientsComponent, ListClientsComponent, NewClientsComponent, ShowClientsComponent, AdminEmployeeComponent, ShowEmployeeComponent, NewEmployeeComponent, ListEmployeeComponent]
 })
 export class HumanResourceModule { }

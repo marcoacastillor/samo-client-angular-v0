@@ -89,7 +89,7 @@ export class AdminOrderComponent implements OnInit {
   private loadOrders(){
     this.operationService.getByType$(environment.type_operation_purchase).subscribe(
       orders => {
-        this.orderList = orders[0];
+        this.orderList = orders;
       }
     );
   }
@@ -131,7 +131,7 @@ export class AdminOrderComponent implements OnInit {
   }
 
   private loadProduct = (product: Product): void => {
-    this.product = product[0];
+    this.product = product;
   }
 
   public onResetProduct(product: Product){
@@ -159,18 +159,18 @@ export class AdminOrderComponent implements OnInit {
     this.showOperation = true;
     this.operationService.show_purchase$(id_order).pipe(
       tap(this.loadOperation),
-      switchMap((operation: Operation): Observable<Enterprise> => this.enterpriseService.showByExternalReference$(operation[0].external_reference)),
+      switchMap((operation: Operation): Observable<Enterprise> => this.enterpriseService.showByExternalReference$(operation.external_reference)),
       tap(this.loadProvider)
     )
     .subscribe(this.onSuccess, this.onError);
   }
 
   private loadOperation = (operation: Operation): void => {
-    this.operation = operation[0];
+    this.operation = operation;
   }
 
   private loadProvider = (enterprise: Enterprise): void => {
-    this.enterprise = enterprise[0];
+    this.enterprise = enterprise;
   }
 
   public onUpdate(operation: Operation){
@@ -181,7 +181,7 @@ export class AdminOrderComponent implements OnInit {
   public onSearch(filter: string){
     this.operationService.searchByFilter$(filter, environment.type_operation_purchase).subscribe(
       operations => {
-        this.orderList = operations[0];
+        this.orderList = operations;
       }
     );
   }
@@ -210,7 +210,7 @@ export class AdminOrderComponent implements OnInit {
   public onCreatePayment(payment: Payment){
     this.paymentService.store$(payment).subscribe(
       payment => {
-        this.onView(payment[0].fk_id_operation)
+        this.onView(payment.fk_id_operation)
       }
     )
   }

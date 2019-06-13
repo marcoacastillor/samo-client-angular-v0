@@ -62,7 +62,7 @@ export class AdminParamComponent implements OnInit {
   public onCreateParam(parameter: Parameter){
     this.parameterService.store$(parameter).subscribe(
       param => {
-        this.onView(param[0].fk_id_category);
+        this.onView(param.fk_id_category);
       }, 
       this.onError);
   }
@@ -70,7 +70,7 @@ export class AdminParamComponent implements OnInit {
   public onUpdateParam(parameter: Parameter){
     this.parameterService.update$(parameter).subscribe(
       param => {
-        this.onView(param[0].fk_id_category);
+        this.onView(param.fk_id_category);
       },
       this.onError);
   }
@@ -78,7 +78,7 @@ export class AdminParamComponent implements OnInit {
   public onDeleteParam(id_param: number){
     this.parameterService.delete$(id_param).subscribe(
       param => {
-        this.onView(param[0].fk_id_category);
+        this.onView(param.fk_id_category);
       },
       this.onError
     );
@@ -101,7 +101,7 @@ export class AdminParamComponent implements OnInit {
   }
 
   private loadCategory = (category: Category): void => {
-    this.category = category[0];
+    this.category = category;
   }
 
   public onUdp(category: Category){

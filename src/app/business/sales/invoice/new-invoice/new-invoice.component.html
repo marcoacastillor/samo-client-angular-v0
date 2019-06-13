@@ -114,7 +114,7 @@
                                     <div class="col-sm-2">
                                         <label for="tax_product">IVA</label>
                                         <select class="form-control form-control-sm text-small" formControlName="tax_product">
-                                            <option value="{{tax.value}}" *ngFor="let tax of taxesList[0]">{{tax.name}}</option>
+                                            <option value="{{tax.value}}" *ngFor="let tax of taxesList">{{tax.name}}</option>
                                         </select>
                                         <div *ngIf="mustShowErrorChild('product_new','tax_product')" class="form-text alert-danger">
                                             <small *ngIf="hasErrorChild('product_new','tax_product','required')">
@@ -184,7 +184,7 @@
                                     <div class="col-sm-2">
                                         <label for="tax_product">IVA</label>
                                         <select class="form-control form-control-sm text-small" formControlName="tax_product">
-                                            <option value="{{tax.value}}" *ngFor="let tax of taxesList[0]">{{tax.name}}</option>
+                                            <option value="{{tax.value}}" *ngFor="let tax of taxesList">{{tax.name}}</option>
                                         </select>
                                         <div *ngIf="mustShowErrorChild('product_new','tax_product')" class="form-text alert-danger">
                                             <small *ngIf="hasErrorChild('product_new','tax_product','required')">
@@ -237,7 +237,7 @@
                 <div class="form-group col-sm-3">
                     <label for="type_payment">Tipo de pago</label>
                     <select class="form-control form-control-sm text-small" formControlName="type_payment" (change)="updateState()" required>
-                        <option value="{{type.value}}" *ngFor="let type of paymentTypeList[0]">{{type.name}}</option>
+                        <option value="{{type.value}}" *ngFor="let type of paymentTypeList">{{type.name}}</option>
                     </select>
                     <small *ngIf="mustShowError('type_payment')" class="form-text alert-danger">
                         Tipo de pago es obligatorio
@@ -246,7 +246,7 @@
                 <div class="form-group col-sm-3">
                     <label for="value_discount">Descuentos</label>
                     <select class="form-control form-control-sm text-small" formControlName="value_discount" (change)="updateDiscount()" required>
-                        <option value="{{discount.value}}" *ngFor="let discount of discountsList[0]">{{discount.name}}</option>
+                        <option value="{{discount.value}}" *ngFor="let discount of discountsList">{{discount.name}}</option>
                     </select>
                     <small *ngIf="mustShowError('value_discount')" class="form-text alert-danger">
                         Descuento es obligatorio
@@ -263,7 +263,7 @@
                         <div class="form-group col-sm-3">
                             <label for="type_id">Tipo documento</label>
                             <select class="form-control form-control-sm text-small" formControlName="type_id">
-                                <option value="{{type.value}}" *ngFor="let type of typeIdsList[0]">{{type.name}}</option>
+                                <option value="{{type.value}}" *ngFor="let type of typeIdsList">{{type.name}}</option>
                             </select>
                         </div>
                         <div class="form-group col-sm-3">

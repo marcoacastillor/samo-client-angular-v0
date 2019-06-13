@@ -62,7 +62,16 @@ export class EnterpriseService {
     );
   }
 
-  
+  public getInfoEnterprise$(): Observable<Enterprise> {
+    const url = this._url + '/get-info-enterprise';
+    return this.userService.validateOptionByToken('ENT_GET_INFO_ENTERPRISE').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.get<Enterprise>(url);
+        }
+      })
+    );
+  }
   
 
   public show$(id_enterprise: number): Observable<Enterprise> {

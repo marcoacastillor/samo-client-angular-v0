@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
     this.userService.sendCredential$(this.authenticationForm.value).pipe(
       tap(this.loadUser),
       tap(this.setAuthenticationVentas),
-      switchMap((user: User): Observable<Person> => this.personService.showLogin$(user[0].fk_id_person)),
+      switchMap((user: User): Observable<Person> => this.personService.showLogin$(user.fk_id_person)),
       tap(this.setUserSession)
     )
     .subscribe(this.onSuccess, this.onError);
@@ -63,15 +63,15 @@ export class LoginComponent implements OnInit {
   private setAuthenticationVentas = (user: User) : void => {
     // inicio: envío info a sistema de Ventas
     let auth = new Authentication;
-    auth.api_token = user[0].api_token;
-    auth.username = user[0].username;
+    auth.api_token = user.api_token;
+    auth.username = user.username;
 
     this.authenticationService.store$(auth).subscribe();
     // fin: envío info a sistema de Ventas
   }
 
   private loadUser = (user: User): void => {
-    this.userLogin = user[0];
+    this.userLogin = user;
   }
 
   private setUserSession = (person: Person): void => {

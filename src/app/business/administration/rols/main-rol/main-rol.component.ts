@@ -4,8 +4,6 @@ import { GlobalStoreService } from 'src/app/core/services/global-store.service';
 import { RolService } from 'src/app/shared/services/rol.service';
 import { tap } from 'rxjs/operators';
 import { ModuleService } from 'src/app/shared/services/module.service';
-import { Option } from 'src/app/shared/models/option';
-import { ComponentService } from 'src/app/shared/services/component.service';
 
 @Component({
   selector: 'app-main-rol',
@@ -57,14 +55,14 @@ export class MainRolComponent implements OnInit {
   private loadAllModulesByRol(id_rol: number){
     this.moduleService.getAllDetailed$(id_rol).subscribe(
       modules => {
-        this.moduleList = modules[0];
+        this.moduleList = modules;
       }
     );
   }
 
   public onGetRol(id: number) {
     this.rolService.show$(id).subscribe(
-      rol => this.rol = rol[0]
+      rol => this.rol = rol
     );
   }
 
@@ -77,7 +75,7 @@ export class MainRolComponent implements OnInit {
   }
 
   private loadRol = (rol: Rol): void => {
-    this.rol = rol[0];
+    this.rol = rol;
   }
 
   private getOptionRol(id_rol: number){

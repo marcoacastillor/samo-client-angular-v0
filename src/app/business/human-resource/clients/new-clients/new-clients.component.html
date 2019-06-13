@@ -8,7 +8,7 @@
                     <div class="form-group">
                         <label for="type_id">Tipo de identificación</label>
                         <select class="form-control form-control-sm text-small" formControlName="type_id" required>
-                            <option value="{{param.value}}" *ngFor="let param of typesIdList[0]">{{param.name}}</option>
+                            <option value="{{param.value}}" *ngFor="let param of typesIdList">{{param.name}}</option>
                         </select>
                         <small *ngIf="mustShowError('type_id')" class="form-text alert-danger">
                             Tio de id, es obligatorio

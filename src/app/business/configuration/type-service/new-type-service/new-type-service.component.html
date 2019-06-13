@@ -8,7 +8,7 @@
                     <div class="form-group">
                         <label for="type_enterprise">Tipo de empresa</label>
                         <select class="form-control text-small" formControlName="type_enterprise">
-                            <option value="{{param.value}}" *ngFor="let param of sizesEnterpriseList[0]">{{param.name}}</option>
+                            <option value="{{param.value}}" *ngFor="let param of sizesEnterpriseList">{{param.name}}</option>
                         </select>
                         <small *ngIf="mustShowError('type_enterprise')" class="form-text alert-danger">
                         Tipo de empresa, es requerido.
@@ -19,7 +19,7 @@
                     <div class="form-group">
                         <label for="mode_service">Modo de servicio</label>
                         <select class="form-control text-small" formControlName="mode_service">
-                            <option value="{{param.value}}" *ngFor="let param of modeServiceList[0]">{{param.name}}</option>
+                            <option value="{{param.value}}" *ngFor="let param of modeServiceList">{{param.name}}</option>
                         </select>
                         <small *ngIf="mustShowError('mode_service')" class="form-text alert-danger">
                         Modo de servicio, es requerido.
@@ -30,7 +30,7 @@
                     <div class="form-group">
                         <label for="type_service">Modalidad del servicio</label>
                         <select class="form-control text-small" formControlName="type_service">
-                            <option value="{{param.value}}" *ngFor="let param of typesServiceList[0]">{{param.name}}</option>
+                            <option value="{{param.value}}" *ngFor="let param of typesServiceList">{{param.name}}</option>
                         </select>
                         <small *ngIf="mustShowError('type_service')" class="form-text alert-danger">
                         Tipo de servicio, es requerido.

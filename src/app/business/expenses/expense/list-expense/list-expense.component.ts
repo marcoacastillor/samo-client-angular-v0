@@ -68,7 +68,7 @@ export class ListExpenseComponent implements OnInit, OnChanges {
   }
 
   private loadExpenses = (options: Results): void => {
-    this.expensesList = options[0];
+    this.expensesList = options;
   }
 
   public selectExpense(id:number){

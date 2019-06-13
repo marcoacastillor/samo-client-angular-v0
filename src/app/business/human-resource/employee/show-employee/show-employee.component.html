@@ -92,7 +92,7 @@
                                 Cargo: 
                             </div>
                             <div class="col-sm-8 card-title-custom bg-gray">
-                                {{ person.enterprise_person.rol_enterprise }}
+                                {{ person.enterprise_person.position }}
                             </div>
                         </div>
                         <div class="row border-bottom-1">
@@ -101,6 +101,14 @@
                             </div>
                             <div class="col-sm-8 card-title-custom bg-gray">
                                 {{ person.enterprise_person.salary | number}}
+                            </div>
+                        </div>
+                        <div class="row border-bottom-1">
+                            <div class="col-sm-4 text-small">
+                                Tipo de Salario: 
+                            </div>
+                            <div class="col-sm-8 card-title-custom bg-gray">
+                                {{ person.enterprise_person.salary_type}}
                             </div>
                         </div>
                     </div>
@@ -165,6 +173,38 @@
                                     </div>
                                     <div class="col-sm-8 card-title-custom bg-gray">
                                         {{ person.enterprise.ubication_city }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col-sm-4 text-small">
+                                    Regimen: 
+                                    </div>
+                                    <div class="col-sm-8 card-title-custom bg-gray">
+                                        {{ person.enterprise.regimen }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row border-bottom-1">
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col-sm-4 text-small">
+                                        Tamaño de empresa: 
+                                    </div>
+                                    <div class="col-sm-8 card-title-custom bg-gray">
+                                        {{ person.enterprise.size }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col-sm-4 text-small">
+                                    Resolución facturación DIAN: 
+                                    </div>
+                                    <div class="col-sm-8 card-title-custom bg-gray">
+                                        {{ person.enterprise.DIAN_billing_resolution }}
                                     </div>
                                 </div>
                             </div>

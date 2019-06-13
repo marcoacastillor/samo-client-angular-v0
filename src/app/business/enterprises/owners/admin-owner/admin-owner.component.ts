@@ -45,7 +45,7 @@ export class AdminOwnerComponent implements OnInit {
   }
 
   private loadRegistries = (result: any): void => {
-    this.registryList = result[0];
+    this.registryList = result;
   }
 
   public onStore(registry: Enterprise){
@@ -78,7 +78,7 @@ export class AdminOwnerComponent implements OnInit {
   }
 
   private loadRegistry = (registry:Enterprise): void => {
-    this.registry = registry[0];
+    this.registry = registry;
   }
 
   /*

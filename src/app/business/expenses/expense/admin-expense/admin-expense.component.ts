@@ -53,7 +53,7 @@ export class AdminExpenseComponent implements OnInit {
   }
 
   private loadExpenses = (result: Results): void => {
-    this.expensesList = result[0];
+    this.expensesList = result;
   }
 
   private loadAllExpenses = (result: Results): void => {
@@ -85,7 +85,7 @@ export class AdminExpenseComponent implements OnInit {
   }
 
   private loadExpense = (expense:Expense): void => {
-    this.expense = expense[0];
+    this.expense = expense;
   }
 
   /*

@@ -69,7 +69,7 @@ export class ListProviderComponent implements OnInit {
   }
 
   private loadRegistries = (options: Results): void => {
-    this.registryList = options[0];
+    this.registryList = options;
   }
 
   public selectRegistry(id:number){

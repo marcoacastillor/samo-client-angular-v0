@@ -7,7 +7,7 @@
                     <div class="form-group">
                         <label for="category">Categoría</label>
                         <select class="form-control form-control-sm text-small" formControlName="category" required (change)="setInfoByCategory()">
-                            <option value="{{categ.value}}" *ngFor="let categ of categoryList[0]">{{categ.name}}</option>
+                            <option value="{{categ.value}}" *ngFor="let categ of categoryList">{{categ.name}}</option>
                         </select>
                         <small *ngIf="mustShowError('category')" class="form-text alert-danger">
                         Categoría de producto
@@ -38,7 +38,7 @@
                     <div class="form-group">
                         <label for="presentation">Presentación</label>
                         <select class="form-control form-control-sm text-small" formControlName="presentation" required (change)="setInfoByPresentation()">
-                            <option value="{{presentation.value}}" *ngFor="let presentation of presentationList[0]">{{presentation.name}}</option>
+                            <option value="{{presentation.value}}" *ngFor="let presentation of presentationList">{{presentation.name}}</option>
                         </select>
                         <small *ngIf="mustShowError('presentation')" class="form-text alert-danger">
                         Presentación de productoes obligatorio

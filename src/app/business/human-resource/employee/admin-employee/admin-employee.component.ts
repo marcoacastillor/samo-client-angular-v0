@@ -13,6 +13,8 @@ import { tap, switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Enterprise } from 'src/app/shared/models/enterprise';
 import { UserService } from 'src/app/shared/services/user.service';
+import { PositionService } from 'src/app/shared/services/position.service';
+import { Position } from 'src/app/shared/models/position';
 
 @Component({
   selector: 'app-admin-employee',
@@ -30,7 +32,7 @@ export class AdminEmployeeComponent implements OnInit {
   public person: Person = new Person;
   
   public typesIdList: Parameter[] = [];
-  public postitionList: Parameter[] = [];
+  public postitionList: Position[] = [];
   public laboralStateList: Parameter[] = [];
 
   constructor(
@@ -38,7 +40,8 @@ export class AdminEmployeeComponent implements OnInit {
     private userService: UserService,
     private globalStoreService: GlobalStoreService,
     private parameterService: ParameterService,
-    private enterpriseService: EnterpriseService
+    private enterpriseService: EnterpriseService,
+    private positionService: PositionService
   ) { }
 
   ngOnInit() {
@@ -55,8 +58,6 @@ export class AdminEmployeeComponent implements OnInit {
     this.person = new Person;
     this.person.enterprise = new Enterprise;
     this.person.enterprise_person = new EnterprisePerson;
-    this.person.enterprise_person.rol_enterprise = environment.rol_client;
-    this.person.enterprise_person.fk_id_enterprise = this.user.fk_id_enterprise;
     this.person.enterprise_person.state = environment.state_rol_person_active;
   }
 
@@ -71,8 +72,9 @@ export class AdminEmployeeComponent implements OnInit {
       ids => this.typesIdList = ids
     );
   }
+  //
   private loadPosition(){
-    this.parameterService.getByCodeCategory$(environment.positions_person).subscribe(
+    this.positionService.getByEnterpsie$(this.user.fk_id_enterprise).subscribe(
       ids => this.postitionList = ids
     );
   }
@@ -104,24 +106,24 @@ export class AdminEmployeeComponent implements OnInit {
   private showInfoClient(pk_id_person: number){
     this.personService.show$(pk_id_person).pipe(
       tap(this.loadPerson),
-      switchMap((person: Person): Observable<Enterprise> => this.enterpriseService.show$(person[0].enterprise_person.fk_id_enterprise)),
+      switchMap((person: Person): Observable<Enterprise> => this.enterpriseService.show$(person.enterprise_person.fk_id_enterprise)),
       tap(this.loadEnterprise)
     ).
     subscribe()
   }
 
   private loadPerson = (person: Person): void => {
-    this.person = person[0];
+    this.person = person;
   }
 
   private loadEnterprise = (enterprise: Enterprise): void => {
-    this.person.enterprise = enterprise[0];
+    this.person.enterprise = enterprise;
   }
   
   public onSearch(filter: string){
     this.personService.searchEmployeeByFilter$(filter,this.user.fk_id_enterprise).subscribe(
       clients => {
-        this.clientList = clients[0];
+        this.clientList = clients;
       }
     );
   }
@@ -154,7 +156,7 @@ export class AdminEmployeeComponent implements OnInit {
 
   public onInactivate(id:number){
     this.personService.inactivate$(id).pipe(
-      switchMap((enterprisePerson: EnterprisePerson): Observable<any> => this.userService.inactiveUserByPerson$(enterprisePerson[0].fk_id_person)),
+      switchMap((enterprisePerson: EnterprisePerson): Observable<any> => this.userService.inactiveUserByPerson$(enterprisePerson.fk_id_person)),
     ).subscribe(this.onSuccess,this.onError);
   }
 

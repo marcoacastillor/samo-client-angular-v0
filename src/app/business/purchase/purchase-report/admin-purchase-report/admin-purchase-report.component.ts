@@ -51,7 +51,7 @@ export class AdminPurchaseReportComponent implements OnInit {
   {
     this.operationService.show_purchase$(pk_id_operation).pipe(
       tap(this.loadOperation),
-      switchMap((operation: Operation): Observable<Enterprise> => this.enterpriseService.showByExternalReference$(operation[0].external_reference)),
+      switchMap((operation: Operation): Observable<Enterprise> => this.enterpriseService.showByExternalReference$(operation.external_reference)),
       tap(this.loadProvider)
     )
     .subscribe(); 
@@ -62,7 +62,7 @@ export class AdminPurchaseReportComponent implements OnInit {
   }
 
   private loadProvider = (enterprise: Enterprise): void => {
-    this.enterprise = enterprise[0];
+    this.enterprise = enterprise;
   }
 
   /**

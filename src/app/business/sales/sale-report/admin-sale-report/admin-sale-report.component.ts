@@ -52,18 +52,18 @@ export class AdminSaleReportComponent implements OnInit {
   {
     this.operationService.show_purchase$(pk_id_operation).pipe(
       tap(this.loadOperation),
-      switchMap((operation: Operation): Observable<Person> => this.personService.showByExternalReference$(operation[0].external_reference)),
+      switchMap((operation: Operation): Observable<Person> => this.personService.showByExternalReference$(operation.external_reference)),
       tap(this.loadClient)
     )
     .subscribe(); 
   }
 
   private loadOperation = (operation: Operation): void => {
-    this.operation = operation[0];
+    this.operation = operation;
   }
 
   private loadClient = (person: Person): void => {
-    this.person = person[0];
+    this.person = person;
   }
 
   /**

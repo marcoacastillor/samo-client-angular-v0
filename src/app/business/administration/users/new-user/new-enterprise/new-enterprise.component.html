@@ -13,6 +13,20 @@
                         </small>
                     </div>
                 </div> 
+
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="size">Tamaño empresa</label>
+                        <select class="form-control form-control-sm text-small" formControlName="size" required>
+                            <option value="{{ param.name }}" *ngFor="let param of sizeList">{{ param.name }}</option>
+                        </select>
+                        <small *ngIf="mustShowError('size')" class="form-text alert-danger">
+                        Tamaño de empresa es obligatorio
+                        </small>
+                    </div>
+                </div> 
+
+
                 <div class="col-sm-4">
                     <div class="form-group">
                         <label for="name">Nombre</label>

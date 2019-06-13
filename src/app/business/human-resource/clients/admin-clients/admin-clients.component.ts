@@ -49,8 +49,6 @@ export class AdminClientsComponent implements OnInit {
     this.person = new Person;
     this.person.enterprise = new Enterprise;
     this.person.enterprise_person = new EnterprisePerson;
-    this.person.enterprise_person.rol_enterprise = environment.rol_client;
-    this.person.enterprise_person.fk_id_enterprise = this.user.fk_id_enterprise;
     this.person.enterprise_person.state = environment.state_rol_person_active;
     this.person.enterprise_person.salary = 0;
   }
@@ -64,7 +62,7 @@ export class AdminClientsComponent implements OnInit {
   private loadClients(id_enterprise: number){
     this.personService.getClientsByEnterprise$(id_enterprise).subscribe(
       clients => {
-        this.clientList = clients[0];
+        this.clientList = clients;
       }
     );
   }
@@ -87,24 +85,24 @@ export class AdminClientsComponent implements OnInit {
   private showInfoClient(pk_id_person: number){
     this.personService.show$(pk_id_person).pipe(
       tap(this.loadPerson),
-      switchMap((person: Person): Observable<Enterprise> => this.enterpriseService.show$(person[0].enterprise_person.fk_id_enterprise)),
+      switchMap((person: Person): Observable<Enterprise> => this.enterpriseService.show$(person.enterprise_person.fk_id_enterprise)),
       tap(this.loadEnterprise)
     ).
     subscribe()
   }
 
   private loadPerson = (person: Person): void => {
-    this.person = person[0];
+    this.person = person;
   }
 
   private loadEnterprise = (enterprise: Enterprise): void => {
-    this.person.enterprise = enterprise[0];
+    this.person.enterprise = enterprise;
   }
   
   public onSearch(filter: string){
     this.personService.searchClientsByFilter$(filter,this.user.fk_id_enterprise).subscribe(
       clients => {
-        this.clientList = clients[0];
+        this.clientList = clients;
       }
     );
   }

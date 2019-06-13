@@ -13,7 +13,8 @@ import { environment } from 'src/environments/environment';
 })
 export class NewEnterpriseComponent implements OnInit {
   enterpriseForm: FormGroup;
-  
+  sizeList: Parameter[] = [];
+
   @Output() public create = new EventEmitter<Enterprise>();
 
   constructor(
@@ -24,6 +25,13 @@ export class NewEnterpriseComponent implements OnInit {
 
   ngOnInit() {
     this.initUpdForm();
+
+  }
+
+  getSizes(){
+    this.paramsService.getByCodeCategory$(environment.size_enterprise).subscribe(
+      sizes => this.sizeList = sizes
+    )
   }
 
   /*
@@ -40,6 +48,7 @@ export class NewEnterpriseComponent implements OnInit {
     address: ['',Validators.required],
     phone: ['',Validators.required],
     ubication_city: ['',Validators.required],
+    size: ['',Validators.required]
    });
  }
 

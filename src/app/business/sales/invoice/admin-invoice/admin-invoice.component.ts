@@ -72,7 +72,7 @@ export class AdminInvoiceComponent implements OnInit {
   private loadOrders(){
     this.operationService.getByType$(environment.type_operation_sale).subscribe(
       orders => {
-        this.orderList = orders[0];
+        this.orderList = orders;
       }
     );
   }
@@ -105,14 +105,14 @@ export class AdminInvoiceComponent implements OnInit {
     this.showInvoice = true;
     this.operationService.show_purchase$(id_order).pipe(
       tap(this.loadOperation),
-      switchMap((operation: Operation): Observable<Person> => this.personService.showByExternalReference$(operation[0].external_reference)),
+      switchMap((operation: Operation): Observable<Person> => this.personService.showByExternalReference$(operation.external_reference)),
       tap(this.loadClient)
     )
     .subscribe(this.onSuccess, this.onError);
   }
 
   private loadOperation = (operation: Operation): void => {
-    this.operation = operation[0];
+    this.operation = operation;
   }
 
   public onUpdate(operation: Operation){
@@ -126,7 +126,7 @@ export class AdminInvoiceComponent implements OnInit {
   public onSearch(filter: string){
     this.operationService.searchByFilter$(filter, environment.type_operation_sale).subscribe(
       operations => {
-        this.orderList = operations[0];
+        this.orderList = operations;
       }
     );
   }
@@ -152,7 +152,7 @@ export class AdminInvoiceComponent implements OnInit {
   }
 
   private loadProduct = (product: Product): void => {
-    this.product = product[0];
+    this.product = product;
   }
 
   public onGetPerson(person: Person){
@@ -163,7 +163,7 @@ export class AdminInvoiceComponent implements OnInit {
   }
 
   private loadClient = (person: Person): void => {
-    this.client = person[0];
+    this.client = person;
   }
 
   public onResetProduct(product: Product){
@@ -176,7 +176,7 @@ export class AdminInvoiceComponent implements OnInit {
   public onCreatePayment(payment: Payment){
     this.paymentService.store$(payment).subscribe(
       payment => {
-        this.onView(payment[0].fk_id_operation)
+        this.onView(payment.fk_id_operation)
       }
     )
   }

@@ -35,7 +35,7 @@ export class MainModuleComponent implements OnInit {
 
   public onGetComponent(id_component: number){
     this.compService.show$(id_component).subscribe(
-      comp => this.cmp = comp[0]
+      comp => this.cmp = comp
     )
   }
 
@@ -48,14 +48,14 @@ export class MainModuleComponent implements OnInit {
   }
 
   private loadComponent = (cmp: MComponent): void => {
-    this.cmp = cmp[0];
+    this.cmp = cmp;
   }
 
   public onCreateComp(comp: MComponent){
     this.compService.store$(comp).subscribe(
       comp => 
       {
-        this.onShow(comp[0].fk_id_module);
+        this.onShow(comp.fk_id_module);
       },
       this.onError);
   }
@@ -64,8 +64,7 @@ export class MainModuleComponent implements OnInit {
     this.compService.update$(comp).subscribe(
       comp => 
       {
-        //this.onLoadComponent(comp[0].pk_id_component);
-        this.onShow(comp[0].fk_id_module);
+        this.onShow(comp.fk_id_module);
       },
       this.onError);
   }
@@ -74,7 +73,7 @@ export class MainModuleComponent implements OnInit {
     this.compService.delete$(comp.pk_id_component).subscribe(
       comp => 
       {
-        this.onShow(comp[0].fk_id_module);
+        this.onShow(comp.fk_id_module);
       },
       this.onError);
   }
@@ -82,7 +81,7 @@ export class MainModuleComponent implements OnInit {
   public onAsignOption(options_component: any){
     this.compService.addOptionsByComponent$(options_component).subscribe(
       comp => {
-        this.cmp = comp[0]
+        this.cmp = comp
       }
     )
   }
@@ -105,7 +104,7 @@ export class MainModuleComponent implements OnInit {
   }
 
   private loadModule = (module: Module): void => {
-    this.module = module[0];
+    this.module = module;
   }
 
   public onCreate(module: Module) {

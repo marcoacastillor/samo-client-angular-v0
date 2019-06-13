@@ -14,6 +14,8 @@ import { Parameter } from 'src/app/shared/models/parameter';
 import { environment } from 'src/environments/environment';
 import { EnterpriseService } from 'src/app/shared/services/enterprise.service';
 import { Enterprise } from 'src/app/shared/models/enterprise';
+import { PositionService } from 'src/app/shared/services/position.service';
+import { Position } from 'src/app/shared/models/position';
 
 @Component({
   selector: 'app-main-user',
@@ -29,7 +31,7 @@ export class MainUserComponent implements OnInit {
   //datos para crear pesona
   public typesIdList: Parameter[] = [];
   public enterpriseList: Enterprise[] = [];
-  public postitionList: Parameter[] = [];
+  public postitionList: Position[] = [];
   public laboralStateList: Parameter[] = [];
 
   public newUser = false;
@@ -44,7 +46,8 @@ export class MainUserComponent implements OnInit {
     private personService: PersonService,
     private UtilService: UtilsService,
     private parameterService: ParameterService,
-    private enterpriseService: EnterpriseService
+    private enterpriseService: EnterpriseService,
+    private positionService: PositionService
   ) { }
 
   ngOnInit() { 
@@ -103,8 +106,8 @@ export class MainUserComponent implements OnInit {
   }
 
   private loadPosition(){
-    this.parameterService.getByCodeCategory$(environment.positions_person).subscribe(
-      ids => this.postitionList = ids
+    this.positionService.getByEnterpsie$(this.user.fk_id_enterprise).subscribe(
+      positions => this.postitionList = positions
     );
   }
 
@@ -116,13 +119,13 @@ export class MainUserComponent implements OnInit {
 
   public onGetRol(id: number) {
     this.rolService.show$(id).subscribe(
-      rol => this.rol = rol[0]
+      rol => this.rol = rol
     );
   }
 
   public onCreatePerson(person: Person){
     this.personService.store$(person).pipe(
-      switchMap((person: Person): Observable<Person[]> => this.personService.getEmployeesByEnterprise$(person[0].enterprise_person.fk_id_enterprise)),
+      switchMap((person: Person): Observable<Person[]> => this.personService.getEmployeesByEnterprise$(person.enterprise_person.fk_id_enterprise)),
       tap(this.loadEmployees),
     ).subscribe(this.onSuccess, this.onError);
   }
@@ -161,17 +164,17 @@ export class MainUserComponent implements OnInit {
 
     this.usuarioService.show$(id).pipe(
       tap(this.loadUser),
-      switchMap((user: User): Observable<Person> => this.personService.show$(user[0].fk_id_person)),
+      switchMap((user: User): Observable<Person> => this.personService.show$(user.fk_id_person)),
       tap(this.loadPerson),
     ).subscribe(this.onSuccess, this.onError);
   }
 
   private loadUser = (user: User): void => {
-    this.user = user[0];
+    this.user = user;
   }
 
   private loadPerson = (person: Person): void => {
-    this.user.person = person[0];
+    this.user.person = person;
   }
 
   public onNew(user: User) {

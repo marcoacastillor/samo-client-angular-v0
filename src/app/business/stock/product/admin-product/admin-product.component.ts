@@ -114,7 +114,7 @@ export class AdminProductComponent implements OnInit {
   }
 
   private loadDataSet = (dataSet: any): void => {
-    this.dataSets = dataSet[0];
+    this.dataSets = dataSet;
   } 
 
   private loadProducts(){
@@ -125,13 +125,13 @@ export class AdminProductComponent implements OnInit {
   }
 
   private resultProduct = (result: Results): void => {
-    this.productList = result[0];
+    this.productList = result;
   }
 
   public onSearch(product: Product){
     this.productService.searchByFilter$(product).subscribe(
       operations => {
-        this.productList = operations[0];
+        this.productList = operations;
       }
     );
   }
@@ -174,7 +174,7 @@ export class AdminProductComponent implements OnInit {
   }
 
   private loadProdct = (product: Product): void => {
-    this.product = product[0];
+    this.product = product;
   }
 
   public onUpdate(product: Product){

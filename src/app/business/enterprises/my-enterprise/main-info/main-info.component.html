@@ -1,0 +1,54 @@
+<div class="card">
+  <div class="card-header">
+    Mi Información
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Información</h5>
+    <p class="card-text">En ésta sección se muestra la información básica de la empresa</p>
+    <div class="row">
+      <table class="table table-striped table-sm">
+        <tbody>
+          <tr>
+            <th>NIT</th>
+            <td>{{ enterprise.nit }}</td>
+          </tr>
+          <tr>
+            <th>Nombre</th>
+            <td>{{ enterprise.name }}</td>
+          </tr>
+          <tr>
+            <th>Dirección</th>
+            <td>{{ enterprise.address }}</td>
+          </tr>
+          <tr>
+            <th>Teléfono</th>
+            <td>{{ enterprise.phone }}</td>
+          </tr>
+          <tr>
+            <th>Ubicación</th>
+            <td>{{ enterprise.ubication_city }}</td>
+          </tr>
+          <tr>
+            <th>Régimen</th>
+            <td>{{ enterprise.regimen }}</td>
+          </tr>
+          <tr>
+            <th>Resolución de facturación</th>
+            <td>{{ enterprise.DIAN_billing_resolution }}</td>
+          </tr>
+          <tr>
+            <th>Pie de página</th>
+            <td>{{ enterprise.footer_billing }}</td>
+          </tr>
+          <tr>
+            <th>Tamaño</th>
+            <td>{{ enterprise.size }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="card-footer text-muted">
+  2 days ago
+  </div>
+</div>
