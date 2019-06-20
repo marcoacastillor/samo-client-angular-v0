@@ -7,12 +7,28 @@
             <table class="table table-sm">
                 <thead>
                     <tr>
-                    <th scope="col">Código</th>
-                    <th scope="col">Nombre</th>
+                        <th scope="col">Acciones</th>
+                        <th scope="col">Código</th>
+                        <th scope="col">Nombre</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let position of positionsList">
+                        <td>
+                            <button class="btn text-ultra-small btn-sm btn-outline-danger dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <fa-icon [icon]="faTrashAlt" class="text-danger mb-2 mr-1" title="Eliminar registro"></fa-icon>Eliminar  
+                            </button>
+                            <div class="dropdown-menu">
+                                <div class="alert alert-danger text-ultra-small">
+                                    Eliminar cargo seleccionado
+                                </div>
+                                <button class="badge badge-danger text-ultra-small" (click)="deletePosition(position.pk_id_position)">Confirmar..</button>   
+                                <button class="badge badge-primary text-ultra-small">Cancelar</button>   
+                            </div>
+                            <button class="btn text-ultra-small btn-sm btn-outline-success" type="button" (click)="updatePosition(position)">
+                                <fa-icon [icon]="faEdit" class="text-success mb-2 mr-1" title="Ver detalle"></fa-icon>Editar  
+                            </button>
+                        </td>
                         <td>{{ position.code }}</td>
                         <td>{{ position.name }}</td>
                     </tr>

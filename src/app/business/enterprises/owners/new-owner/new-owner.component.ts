@@ -3,6 +3,7 @@ import { Enterprise } from 'src/app/shared/models/enterprise';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FormToolsService } from 'src/app/shared/services/form-tools.service';
 import { environment } from 'src/environments/environment';
+import { Parameter } from 'src/app/shared/models/parameter';
 
 @Component({
   selector: 'app-new-owner',
@@ -12,6 +13,7 @@ import { environment } from 'src/environments/environment';
 export class NewOwnerComponent implements OnInit {
   @Input() public registry: Enterprise;
   @Input() public lstTypes: any;
+  @Input() public sizesList: Parameter[];
   
   enterpriseForm: FormGroup;
   
@@ -53,6 +55,10 @@ export class NewOwnerComponent implements OnInit {
     phone: [this.registry.phone,Validators.required],
     external_reference: [' ',Validators.required],
     ubication_city: [this.registry.ubication_city,Validators.required],
+    size:[this.registry.size,Validators.required],
+    regimen:[this.registry.regimen],
+    DIAN_billing_resolution:[this.registry.DIAN_billing_resolution],
+    footer_billing:[this.registry.footer_billing],
    });
  }
 

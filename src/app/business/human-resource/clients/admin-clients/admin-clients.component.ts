@@ -85,8 +85,6 @@ export class AdminClientsComponent implements OnInit {
   private showInfoClient(pk_id_person: number){
     this.personService.show$(pk_id_person).pipe(
       tap(this.loadPerson),
-      switchMap((person: Person): Observable<Enterprise> => this.enterpriseService.show$(person.enterprise_person.fk_id_enterprise)),
-      tap(this.loadEnterprise)
     ).
     subscribe()
   }
@@ -95,10 +93,6 @@ export class AdminClientsComponent implements OnInit {
     this.person = person;
   }
 
-  private loadEnterprise = (enterprise: Enterprise): void => {
-    this.person.enterprise = enterprise;
-  }
-  
   public onSearch(filter: string){
     this.personService.searchClientsByFilter$(filter,this.user.fk_id_enterprise).subscribe(
       clients => {
@@ -108,7 +102,7 @@ export class AdminClientsComponent implements OnInit {
   }
 
   public onCreate(person: Person){
-    this.personService.store$(person).subscribe(
+    this.personService.createPerson$(person).subscribe(
       person => 
       { 
         this.person = person;

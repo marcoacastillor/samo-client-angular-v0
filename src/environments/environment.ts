@@ -62,6 +62,7 @@ export const environment = {
   rol_client: 'Cliente',
   rol_employee: 'Employee',
   state_rol_person_active: 'Activo',
+  salary_type: 'SALARY_TYPE',
 
   state_initial_purchase: 'CREADA',
   state_payment_purchase: 'PAGADA',

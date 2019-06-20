@@ -34,6 +34,7 @@ export class AdminEmployeeComponent implements OnInit {
   public typesIdList: Parameter[] = [];
   public postitionList: Position[] = [];
   public laboralStateList: Parameter[] = [];
+  public salaryTypeList: Parameter[] = [];
 
   constructor(
     private personService: PersonService,
@@ -52,6 +53,13 @@ export class AdminEmployeeComponent implements OnInit {
     this.loadTypeIds();
     this.loadLaboralState();
     this.loadPosition();
+    this.loadSalaryTypeList();
+  }
+
+  private loadSalaryTypeList(){
+    this.parameterService.getByCodeCategory$(environment.salary_type).subscribe(
+      salaryTypes => this.salaryTypeList = salaryTypes
+    )
   }
 
   private setDataNewPerson(){
@@ -129,7 +137,7 @@ export class AdminEmployeeComponent implements OnInit {
   }
 
   public onCreate(person: Person){
-    this.personService.store$(person).subscribe(
+    this.personService.createEmployee$(person).subscribe(
       person => 
       { 
         this.person = person;

@@ -23,6 +23,7 @@ import { PositionsComponent } from './my-enterprise/positions/positions.componen
 import { ParametersComponent } from './my-enterprise/parameters/parameters.component';
 import { EmployeeComponent } from './my-enterprise/employee/employee.component';
 import { PersonService } from 'src/app/shared/services/person.service';
+import { ParameterService } from 'src/app/shared/services/parameter.service';
 
 
 @NgModule({
@@ -32,7 +33,7 @@ import { PersonService } from 'src/app/shared/services/person.service';
     SharedModule,
     FontAwesomeModule,
   ],
-  providers: [EnterpriseService, GlobalStoreService, PositionService, PersonService],
+  providers: [EnterpriseService, GlobalStoreService, PositionService, PersonService, ParameterService],
   declarations: [AdminProviderComponent, AdminOwnerComponent, ShowProviderComponent, ListProviderComponent, NewProviderComponent, ListOwnerComponent, ShowOwnerComponent, NewOwnerComponent, NewPositionComponent, ListPositionComponent, ShowInfoComponent, MainInfoComponent, PositionsComponent, ParametersComponent, EmployeeComponent]
 })
 export class EnterprisesModule { }

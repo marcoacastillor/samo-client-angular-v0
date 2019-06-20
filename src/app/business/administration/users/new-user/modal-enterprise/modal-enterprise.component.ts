@@ -1,5 +1,6 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { Enterprise } from 'src/app/shared/models/enterprise';
+import { Parameter } from 'src/app/shared/models/parameter';
 
 @Component({
   selector: 'app-modal-enterprise',
@@ -7,6 +8,8 @@ import { Enterprise } from 'src/app/shared/models/enterprise';
   styles: []
 })
 export class ModalEnterpriseComponent implements OnInit {
+
+  @Input() public sizesList: Parameter[];
   @Output() public create = new EventEmitter<Enterprise>();
   constructor() { }
 

@@ -19,12 +19,15 @@ export class NewPersonComponent implements OnInit {
 
   //Datos para crear usuario
   @Input() public typesIdList: Parameter[];
-  @Input() public postitionList : Position[];
   @Input() public laboralStateList : Parameter[];
+  @Input() public positionList : Position[];
+  @Input() public salaryTypeList : Position[];
   
 
   @Output() public create = new EventEmitter<Person>();
   @Input() public pk_id_enterprise : number;
+
+  public postitionList : Position[];
 
   constructor(
     private fb: FormBuilder,
@@ -50,8 +53,9 @@ export class NewPersonComponent implements OnInit {
     address:[''],
     phone:[''],
     fk_id_enterprise: [this.pk_id_enterprise],
-    rol_enterprise: ['',Validators.required],
+    fk_id_position: ['',Validators.required],
     date_register: [moment().format('YYYY-MM-DD'),Validators.required],
+    salary_type: ['', Validators.required],
     state: ['',Validators.required]
    });
   }

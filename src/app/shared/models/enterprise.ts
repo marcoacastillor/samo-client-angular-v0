@@ -7,4 +7,9 @@ export class Enterprise {
     public phone: string;
     public ubication_city: string;
     public external_reference: string;
+
+    public size: string;
+    public DIAN_billing_resolution: string;
+    public regimen: string;
+    public footer_billing: string;
 }

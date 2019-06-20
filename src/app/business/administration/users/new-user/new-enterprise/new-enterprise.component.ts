@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Parameter } from 'src/app/shared/models/parameter';
 import { Enterprise } from 'src/app/shared/models/enterprise';
@@ -15,6 +15,7 @@ export class NewEnterpriseComponent implements OnInit {
   enterpriseForm: FormGroup;
   sizeList: Parameter[] = [];
 
+  @Input() public sizesList: Parameter[];
   @Output() public create = new EventEmitter<Enterprise>();
 
   constructor(
@@ -26,12 +27,6 @@ export class NewEnterpriseComponent implements OnInit {
   ngOnInit() {
     this.initUpdForm();
 
-  }
-
-  getSizes(){
-    this.paramsService.getByCodeCategory$(environment.size_enterprise).subscribe(
-      sizes => this.sizeList = sizes
-    )
   }
 
   /*

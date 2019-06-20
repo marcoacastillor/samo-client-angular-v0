@@ -21,6 +21,7 @@ export class NewEmployeeComponent implements OnInit {
   @Input() public typesIdList: Parameter[];
   @Input() public postitionList: Position[];
   @Input() public laboralStateList: Parameter[];
+  @Input() public salaryTypeList: Parameter[];
   
   @Output() public create = new EventEmitter<Person>();
   @Output() public update = new EventEmitter<Person>();
@@ -63,8 +64,9 @@ export class NewEmployeeComponent implements OnInit {
     pk_id_enterprise_person: [this.person.enterprise_person.pk_id_enterprise_person],
     fk_id_position: [this.person.enterprise_person.fk_id_position, Validators.required],
     date_register: [this.person.enterprise_person.date_register, Validators.required],
-    state: ['Activo'],
+    state: ['Activo', Validators.required],
     salary: [this.person.enterprise_person.salary, Validators.required],
+    salary_type: [this.person.enterprise_person.salary_type, Validators.required],
    });
   }
 

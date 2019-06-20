@@ -35,7 +35,7 @@
                                     <fa-icon [icon]="faPlusCircle" class="text-primary mb-2 mr-1" title="Crear registro"></fa-icon>
                                 </button>
                             </div>
-                            <select class="form-control form-control-sm text-small" formControlName="fk_id_enterprise" (change)="getEmployeesByEnterprise()" required>
+                            <select class="form-control form-control-sm text-small" formControlName="fk_id_enterprise" (change)="getEmployeesByEnterprise(); getPositionByEnterprise()" required>
                                 <option value="" selected>Seleccione</option>
                                 <option value="{{enterprise.pk_id_enterprise}}" *ngFor="let enterprise of enterpriseList">{{enterprise.name}}</option>
                             </select>
@@ -114,13 +114,15 @@
         <app-modal-person
             [pk_id_enterprise]="userForm.value.fk_id_enterprise"
             [typesIdList]="typesIdList"
-            [postitionList]="postitionList"
             [laboralStateList]="laboralStateList"
+            [positionList]="positionList"
+            [salaryTypeList]="salaryTypeList"
             (create)="createPerson($event)"
         >
         </app-modal-person>
         <app-modal-enterprise
         (create)="createEnterprise($event)"
+        [sizesList]="sizesList"
         >
         </app-modal-enterprise>
         

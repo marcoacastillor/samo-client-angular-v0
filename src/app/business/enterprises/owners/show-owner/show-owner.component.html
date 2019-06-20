@@ -71,6 +71,38 @@
                                 {{ registry.type }}
                             </div>
                         </div>
+                        <div class="row border-bottom-1">
+                            <div class="col-sm-4 text-small">
+                                Régimen: 
+                            </div>
+                            <div class="col-sm-8 card-title-custom bg-gray">
+                                {{ registry.regimen }}
+                            </div>
+                        </div>
+                        <div class="row border-bottom-1">
+                            <div class="col-sm-4 text-small">
+                                Tamaño: 
+                            </div>
+                            <div class="col-sm-8 card-title-custom bg-gray">
+                                {{ registry.size }}
+                            </div>
+                        </div>
+                        <div class="row border-bottom-1">
+                            <div class="col-sm-4 text-small">
+                                Resolución de facturación de la DIAN: 
+                            </div>
+                            <div class="col-sm-8 card-title-custom bg-gray">
+                                {{ registry.DIAN_billing_resolution }}
+                            </div>
+                        </div>
+                        <div class="row border-bottom-1">
+                            <div class="col-sm-4 text-small">
+                                Pie de página factura: 
+                            </div>
+                            <div class="col-sm-8 card-title-custom bg-gray">
+                                {{ registry.footer_billing }}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -87,6 +119,8 @@
             <div class="col-sm-6">
                 <app-list-position
                     [positionsList]="positionsList"
+                    (delete)="onDelete($event)"
+                    (select)="onSelect($event)"
                 ></app-list-position>
             </div>
         </div>

@@ -57,12 +57,6 @@ export class NewClientsComponent implements OnInit, OnChanges {
     last_names: [this.person.last_names, Validators.required],
     address:[this.person.address],
     phone:[this.person.phone],
-    pk_id_enterprise_person: [this.person.enterprise_person.pk_id_enterprise_person],
-    fk_id_position: [this.person.enterprise_person.fk_id_position,Validators.required],
-    date_register: [this.person.enterprise_person.date_register],
-    state: [this.person.enterprise_person.state],
-    salary: [this.person.enterprise_person.salary],
-    salary_type: [this.person.enterprise_person.salary_type]
    });
   }
 

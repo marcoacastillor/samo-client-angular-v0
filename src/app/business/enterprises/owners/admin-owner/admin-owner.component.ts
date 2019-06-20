@@ -6,6 +6,8 @@ import { GlobalStoreService } from 'src/app/core/services/global-store.service';
 import { environment } from 'src/environments/environment';
 import { tap } from 'rxjs/operators';
 import { Position } from 'src/app/shared/models/position';
+import { ParameterService } from 'src/app/shared/services/parameter.service';
+import { Parameter } from 'src/app/shared/models/parameter';
 
 @Component({
   selector: 'app-admin-owner',
@@ -20,17 +22,26 @@ export class AdminOwnerComponent implements OnInit {
   
   public registry: Enterprise = new Enterprise();
   public registryList: Results = new Results();
+  public sizesList: Parameter[] = [];
 
   positionsList: Position[] = [];
   
   constructor(
     private enterpriseService: EnterpriseService,
-    private globalStoreService: GlobalStoreService
+    private globalStoreService: GlobalStoreService,
+    private parameterService: ParameterService
   ) { }
 
   ngOnInit() {
     this.loadAllRegistries();
     this.loadDataByUser();
+    this.loadSizesEnterprises();
+  }
+
+  private loadSizesEnterprises(){
+    this.parameterService.getByCodeCategory$(environment.size_enterprise).subscribe(
+      sizes => this.sizesList = sizes
+    );
   }
 
   private loadDataByUser(){

@@ -62,22 +62,25 @@
             <div class="row">
                 <div class="col-sm-3">
                     <div class="form-group">
-                        <label for="rol_enterprise">Cargo</label>
-                        <select class="form-control form-control-sm text-small" formControlName="rol_enterprise" required>
-                            <option value="{{position.pk_id_position}}" *ngFor="let position of postitionList">{{position.name}}</option>
+                        <label for="fk_id_position">Cargo</label>
+                        <select class="form-control form-control-sm text-small" formControlName="fk_id_position" required>
+                            <option value="{{position.pk_id_position}}" *ngFor="let position of positionList">{{position.name}}</option>
                         </select>
-                        <small *ngIf="mustShowError('rol_enterprise')" class="form-text alert-danger">
+                        <small *ngIf="mustShowError('fk_id_position')" class="form-text alert-danger">
                             Cargo en empresa es obligatorio
                         </small>
                     </div>
                 </div>
-                <div class="col-sm-4">
-                    <label for="date_register">Fecha de inicio de actividades</label>
+                <div class="col-sm-3">
+                    <label for="date_register">Fecha inicial</label>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="btn text-small btn-sm btn-outline-primary" [owlDateTimeTrigger]="date_register"><fa-icon [icon]="faCalendar" class="text-primary"></fa-icon></span>
                         </div>
                         <input type="text" class="form-control text-small" placeholder="Fecha inicio contrato" formControlName="date_register" [owlDateTime]="date_register">
+                        <small class="form-text alert-secondary">
+                            Fecha de inicio de actividades en el cargo.
+                        </small>
                         <owl-date-time [pickerType]="'calendar'" #date_register></owl-date-time>
                         <small *ngIf="mustShowError('date_register')" class="form-text alert-danger">
                             Fecha inicio de actividades, es obligatorio
@@ -91,6 +94,17 @@
                             <option value="{{ state.value }}" *ngFor="let state of laboralStateList">{{state.name}}</option>
                         </select>
                         <small *ngIf="mustShowError('state')" class="form-text alert-danger">
+                            Cargo en empresa es obligatorio
+                        </small>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label for="salary_type">Tipo de salario</label>
+                        <select class="form-control form-control-sm text-small" formControlName="salary_type" required>
+                            <option value="{{ salaryType.value }}" *ngFor="let salaryType of salaryTypeList">{{salaryType.name}}</option>
+                        </select>
+                        <small *ngIf="mustShowError('salary_type')" class="form-text alert-danger">
                             Cargo en empresa es obligatorio
                         </small>
                     </div>

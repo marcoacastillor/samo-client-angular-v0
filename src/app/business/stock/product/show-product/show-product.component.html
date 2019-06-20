@@ -1,5 +1,6 @@
 <app-card caption="Detalle de producto {{product.name}}">
     <main>
+        <pre>{{ operationsList | json }}</pre>
         <div class="row">
             <!-- Inicio información proveedor-->
             <div class="col-sm-12 text-ultra-small ">
@@ -183,6 +184,7 @@
                 </div>
             </div>
         </form>
+        
         <div class="row" *ngIf="operationsList">
             <div class="col-sm-6 text-ultra-small">
                 <div class="row border-bottom-2 bg-gray style-header-table">
@@ -244,24 +246,24 @@
                 </div>
             </div>
         </div>
-        <div class="row" *ngIf="operationsList">
-            <div class="col-sm-6 text-ultra-small">
+        <div class="row">
+            <div class="col-sm-6 text-ultra-small" *ngIf="operationsList.purchase">
                 <div class="row border-bottom-2 bg-gray style-header-table">
                     <div class="col-sm-9 align-self-end">
                         Total compras
                     </div>
                     <div class="col-sm-3 align-self-end">
-                        {{ operationsList.total_purchase.units + (operationsList.total_purchase.packages * product.units_package) }}
+                        {{ operationsList.purchase.number_units + (operationsList.purchase.number_package * product.units_package) | number}}
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6 text-ultra-small">
+            <div class="col-sm-6 text-ultra-small" *ngIf="operationsList.sale">
                 <div class="row border-bottom-2 bg-gray style-header-table">
                     <div class="col-sm-9 align-self-end">
                         Total ventas
                     </div>
                     <div class="col-sm-3 align-self-end">
-                        {{ operationsList.total_sales.units + (operationsList.total_sales.packages * product.units_package) }}
+                        {{ operationsList.sale.number_units + (operationsList.sale.number_packages * product.units_package) | number}}
                     </div>
                 </div>
             </div>

@@ -57,19 +57,18 @@
                                 <tr *ngFor="let client of clientList.data_results | slice:(actualPg*regPerPg):((actualPg*regPerPg))+(regPerPg); let i=index;">
                                     <td>
                                         <div class="btn-group">
-                                            <button type="button" class="btn text-ultra-small btn-sm btn-outline-warning" (click)="showClient(client.pk_id_person)">
+                                            <button type="button" class="btn text-ultra-small btn-sm btn-outline-warning" (click)="showClient(client.external_reference.split(':')[1])">
                                                 <fa-icon [icon]="faEye" class="text-warning mb-2 mr-1" title="Ver registro"></fa-icon>Ver
                                             </button>
-                                            <button type="button" class="btn text-ultra-small btn-sm btn-outline-success" (click)="updateClient(client.pk_id_person)">
+                                            <button type="button" class="btn text-ultra-small btn-sm btn-outline-success" (click)="updateClient(client.external_reference.split(':')[1])">
                                                 <fa-icon [icon]="faEdit" class="text-success mb-2 mr-1" title="Ver registro"></fa-icon>Editar
                                             </button>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="row">
-                                            <div class="col-sm-12"><b>Id: {{ client.type_id }} {{ client.number_id}}</b></div>
-                                            <div class="col-sm-12"><b>Nombres: {{ client.names }} {{ client.last_names}}</b></div>
-                                            <div class="col-sm-12"><b>Dirección:</b> {{ client.address }}</div>
+                                            <div class="col-sm-12"><b>Id: {{ client.external_reference.split(":")[3] }}</b></div>
+                                            <div class="col-sm-12"><b>Nombres: {{ client.external_reference.split(":")[2] }}</b></div>
                                         </div>
                                     </td>
                                 </tr>

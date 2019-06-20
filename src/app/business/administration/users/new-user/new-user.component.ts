@@ -7,6 +7,8 @@ import { User } from 'src/app/shared/models/user';
 import { Parameter } from 'src/app/shared/models/parameter';
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import { Enterprise } from 'src/app/shared/models/enterprise';
+import { PositionService } from 'src/app/shared/services/position.service';
+import { Position } from 'src/app/shared/models/position';
 
 @Component({
   selector: 'app-new-user',
@@ -20,14 +22,16 @@ export class NewUserComponent implements OnInit, OnChanges {
   @Input() public rolList: Rol[];
   @Input() public personList: Person[];
   @Input() public statesUser: Parameter[];
+  @Input() public sizesList: Parameter[];
+
   @Input() public rol: Rol;
   @Input() public user: User;
 
   // Datos para crear usuario
   @Input() public typesIdList: Parameter[];
   @Input() public enterpriseList: Enterprise[];
-  @Input() public postitionList: Parameter[];
   @Input() public laboralStateList: Parameter[];
+  @Input() public salaryTypeList : Position[];
 
   @Output() public create = new EventEmitter<User>();
   @Output() public update = new EventEmitter<User>();
@@ -38,9 +42,12 @@ export class NewUserComponent implements OnInit, OnChanges {
   @Output() public onCreateEnterprise = new EventEmitter<Enterprise>();
   @Output() public getEmployees = new EventEmitter<number>();
 
+  positionList: Position[] = [];
+
   constructor(
     private fb: FormBuilder,
     private formToolService: FormToolsService,
+    private positionService: PositionService
   ) { }
 
   ngOnInit() {
@@ -60,6 +67,12 @@ export class NewUserComponent implements OnInit, OnChanges {
 
   public getEmployeesByEnterprise(){
     this.getEmployees.emit(this.userForm.value.fk_id_enterprise);
+  }
+
+  public getPositionByEnterprise(){
+    this.positionService.getByEnterpsie$(this.userForm.value.fk_id_enterprise).subscribe(
+      positions => this.positionList = positions
+    )
   }
 
   /*

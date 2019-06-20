@@ -13,8 +13,9 @@ export class ModalPersonComponent implements OnInit {
   @Input() public postitionList : Parameter[];
   @Input() public pk_id_enterprise : number;
   @Input() public laboralStateList : Parameter[];
+  @Input() public salaryTypeList : Position[];
   
-  
+  @Input() public positionList : Parameter[];
   @Output() public create = new EventEmitter<Person>();
   
   constructor() { }

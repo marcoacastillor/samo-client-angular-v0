@@ -93,6 +93,18 @@
                         </small>
                     </div>
                 </div>
+
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="salary_type">Tipo de Salario</label>
+                        <select class="form-control form-control-sm text-small" formControlName="salary_type" required>
+                            <option value="{{ salaryType.value }}" *ngFor="let salaryType of salaryTypeList">{{salaryType.name}}</option>
+                        </select>
+                        <small *ngIf="mustShowError('salary_type')" class="form-text alert-danger">
+                            Tipo de Salario, es obligatorio
+                        </small>
+                    </div>
+                </div>
             </div>
             <!-- fin datos de empresa-->
         </form>

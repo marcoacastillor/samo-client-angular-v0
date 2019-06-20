@@ -7,14 +7,13 @@ import { UserService } from 'src/app/shared/services/user.service';
 import { RolService } from 'src/app/shared/services/rol.service';
 import { PersonService } from 'src/app/shared/services/person.service';
 import { UtilsService } from 'src/app/shared/services/utils.service';
-import { map, tap, switchMap, mergeMap } from 'rxjs/operators';
+import { tap, switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { ParameterService } from 'src/app/shared/services/parameter.service';
 import { Parameter } from 'src/app/shared/models/parameter';
 import { environment } from 'src/environments/environment';
 import { EnterpriseService } from 'src/app/shared/services/enterprise.service';
 import { Enterprise } from 'src/app/shared/models/enterprise';
-import { PositionService } from 'src/app/shared/services/position.service';
 import { Position } from 'src/app/shared/models/position';
 
 @Component({
@@ -33,11 +32,14 @@ export class MainUserComponent implements OnInit {
   public enterpriseList: Enterprise[] = [];
   public postitionList: Position[] = [];
   public laboralStateList: Parameter[] = [];
+  public sizesList: Parameter[] = [];
+  public salaryTypeList: Parameter[] = [];
 
   public newUser = false;
   public showUser = false;
   public rol: Rol = new Rol;
   public user: User = new User;
+  public activeUser: User = new User;
   
   constructor(
     private globalStoreService: GlobalStoreService,
@@ -47,12 +49,11 @@ export class MainUserComponent implements OnInit {
     private UtilService: UtilsService,
     private parameterService: ParameterService,
     private enterpriseService: EnterpriseService,
-    private positionService: PositionService
   ) { }
 
   ngOnInit() { 
-    let activeUser = this.globalStoreService.getUser();
-    this.onLoadEmployees(activeUser.fk_id_enterprise);
+    this.activeUser = this.globalStoreService.getUser();
+    this.onLoadEmployees(this.activeUser.fk_id_enterprise);
     this.loadDataCreation();
     
     this.user.rol = new Rol;
@@ -65,8 +66,15 @@ export class MainUserComponent implements OnInit {
     this.loadStates();
     this.loadEnterprisesOwners();
     this.loadTypeIds();
-    this.loadPosition();
     this.loadLaboralState();
+    this.loadSizesEnterprises();
+    this.loadSalaryTypeList();
+  }
+
+  private loadSalaryTypeList(){
+    this.parameterService.getByCodeCategory$(environment.salary_type).subscribe(
+      salaryTypes => this.salaryTypeList = salaryTypes
+    )
   }
 
   private loadLaboralState(){
@@ -105,15 +113,15 @@ export class MainUserComponent implements OnInit {
     );
   }
 
-  private loadPosition(){
-    this.positionService.getByEnterpsie$(this.user.fk_id_enterprise).subscribe(
-      positions => this.postitionList = positions
+  private loadSizesEnterprises(){
+    this.parameterService.getByCodeCategory$(environment.size_enterprise).subscribe(
+      sizes => this.sizesList = sizes
     );
   }
 
   private loadEnterprisesOwners(){
     this.enterpriseService.getByType$(environment.enterprise_owner).subscribe(
-      enterprises => { this.enterpriseList = enterprises }
+      enterprises => this.enterpriseList = enterprises
     );
   }
 
@@ -124,7 +132,7 @@ export class MainUserComponent implements OnInit {
   }
 
   public onCreatePerson(person: Person){
-    this.personService.store$(person).pipe(
+    this.personService.createEmployee$(person).pipe(
       switchMap((person: Person): Observable<Person[]> => this.personService.getEmployeesByEnterprise$(person.enterprise_person.fk_id_enterprise)),
       tap(this.loadEmployees),
     ).subscribe(this.onSuccess, this.onError);
@@ -247,3 +255,4 @@ export class MainUserComponent implements OnInit {
   }
 
 }
+

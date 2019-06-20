@@ -51,7 +51,49 @@
                         </small>
                     </div>
                 </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="size">Tamaño empresa</label>
+                        <select class="form-control form-control-sm text-small" formControlName="size" required>
+                            <option value="{{ param.name }}" *ngFor="let param of sizesList">{{ param.name }}</option>
+                        </select>
+                        <small *ngIf="mustShowError('size')" class="form-text alert-danger">
+                        Tamaño de empresa es obligatorio
+                        </small>
+                    </div>
+                </div> 
             </div>
+
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="regimen">Régimen</label>
+                        <input type="text" class="form-control text-small" placeholder="teléfono" formControlName="regimen" required>
+                        <small *ngIf="mustShowError('regimen')" class="form-text alert-danger">
+                            Régimen es obligatorio
+                        </small>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="DIAN_billing_resolution">Resolución de facturación de la DIAN</label>
+                        <input type="text" class="form-control text-small" placeholder="Resolución facturación de la DIAN" formControlName="DIAN_billing_resolution" required>
+                        <small *ngIf="mustShowError('DIAN_billing_resolution')" class="form-text alert-danger">
+                            Ubicación de la empresa
+                        </small>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="footer_billing">footer_billing</label>
+                        <input type="text" class="form-control text-small" placeholder="Pie de factura" formControlName="footer_billing" required>
+                        <small *ngIf="mustShowError('footer_billing')" class="form-text alert-danger">
+                        Tamaño de empresa es obligatorio
+                        </small>
+                    </div>
+                </div> 
+            </div>
+            
         </form>
     </main>
     <footer>

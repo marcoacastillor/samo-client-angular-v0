@@ -48,11 +48,23 @@ export class PersonService {
     );
   }
 
-  public store$(person: Person): Observable<Person> {
+  public createPerson$(person: Person): Observable<Person> {
+    let url = this._url + '/create-person';
     return this.userService.validateOptionByToken('PRS_CRT').pipe(
       switchMap(validate => {
         if(validate){
-          return this.http.post<Person>(this._url, person);
+          return this.http.post<Person>(url, person);
+        }
+      })
+    );
+  }
+
+  public createEmployee$(person: Person): Observable<Person> {
+    let url = this._url + '/create-employee';
+    return this.userService.validateOptionByToken('PRS_CRT').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.post<Person>(url, person);
         }
       })
     );

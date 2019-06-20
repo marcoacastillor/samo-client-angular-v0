@@ -54,7 +54,7 @@ export class ShowOwnerComponent implements OnInit, OnChanges {
     this.positionService.delete$(id).subscribe(this.onSuccess, this.onError);
   }
 
-  public onLoad(position: Position){
+  public onSelect(position: Position){
     this.position = position;
   }
 

@@ -9,7 +9,7 @@
                     </div>
                 </div>
                 <div class="row border-bottom-2 style-header-table">
-                    <div class="col-sm-6 text-ultra-small">
+                    <div class="col-sm-12 text-ultra-small">
                         <div class="row border-bottom-2 bg-gray style-header-table">
                             <div class="col-sm-12">
                                 Persona
@@ -53,96 +53,6 @@
                             </div>
                             <div class="col-sm-8 card-title-custom bg-gray">
                                 {{ person.phone }}
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6 text-ultra-small">
-                        <div class="row border-bottom-2 bg-gray style-header-table">
-                            <div class="col-sm-12">
-                                Datos adicionales
-                            </div>
-                        </div>
-                        <div class="row border-bottom-1">
-                            <div class="col-sm-4 text-small">
-                                Fecha enrolamiento: 
-                            </div>
-                            <div class="col-sm-8 card-title-custom bg-gray">
-                                {{ person.enterprise_person.date_register }}
-                            </div>
-                        </div>
-                        <div class="row border-bottom-1">
-                            <div class="col-sm-4 text-small">
-                                Estado: 
-                            </div>
-                            <div class="col-sm-8 card-title-custom bg-gray">
-                                {{ person.enterprise_person.state }}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row border-bottom-2 style-header-table" *ngIf="person.enterprise">
-                    <div class="col-sm-12 text-ultra-small">
-                        <div class="row border-bottom-2 bg-gray style-header-table">
-                            <div class="col-sm-12">
-                                Empresa
-                            </div>
-                        </div>
-                        <div class="row border-bottom-1">
-                            <div class="col-sm-6">
-                                <div class="row">
-                                    <div class="col-sm-4 text-small">
-                                        Nombres: 
-                                    </div>
-                                    <div class="col-sm-8 card-title-custom bg-gray">
-                                        {{ person.enterprise.name }}
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="row">
-                                    <div class="col-sm-4 text-small">
-                                        NIT: 
-                                    </div>
-                                    <div class="col-sm-8 card-title-custom bg-gray">
-                                        {{ person.enterprise.nit }}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row border-bottom-1">
-                            <div class="col-sm-6">
-                                <div class="row">
-                                    <div class="col-sm-4 text-small">
-                                        Dirección: 
-                                    </div>
-                                    <div class="col-sm-8 card-title-custom bg-gray">
-                                        {{ person.enterprise.address }}
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="row">
-                                    <div class="col-sm-4 text-small">
-                                        Teléfono: 
-                                    </div>
-                                    <div class="col-sm-8 card-title-custom bg-gray">
-                                        {{ person.enterprise.phone }}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row border-bottom-1">
-                            <div class="col-sm-6">
-                                <div class="row">
-                                    <div class="col-sm-4 text-small">
-                                        Ubicación: 
-                                    </div>
-                                    <div class="col-sm-8 card-title-custom bg-gray">
-                                        {{ person.enterprise.ubication_city }}
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
