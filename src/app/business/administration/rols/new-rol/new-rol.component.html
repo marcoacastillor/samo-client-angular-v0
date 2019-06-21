@@ -101,5 +101,6 @@
     <footer>
         <button *ngIf="rol.pk_id_rol" type="submit" class="btn btn-outline-success btn-sm mb-2 mr-1" [disabled]="rolForm.invalid" (click)="updaterol()">Actualizar</button> 
         <button *ngIf="!rol.pk_id_rol" type="submit" class="btn btn-outline-primary btn-sm mb-2 mr-1" [disabled]="rolForm.invalid" (click)="createrol()">Guardar</button>
+        <button type="button" class="btn btn-outline-danger btn-sm mb-2 mr-1" (click)="cancelRol()">Cancelar</button>
     </footer>
 </app-card>      

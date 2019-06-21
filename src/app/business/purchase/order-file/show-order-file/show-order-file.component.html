@@ -1,0 +1,97 @@
+<app-card caption="Detalle de órden de compra. Factura: {{ operation.number_invoice }}">
+    <main>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="row">
+                    <div class="col-sm-12 text-left">
+                        <h4>Factura: {{ operation.number_invoice }}</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="table-responsive container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Prd</th>
+                                <th>Código</th>
+                                <th>Nombre</th>
+                                <th>Cant</th>
+                                <th>Valor unitario</th>
+                                <th>Impuesto</th>
+                                <th>Descuento</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let prd of operation.products_list; let i = index;">
+                                <td>{{ i+1 }}</td>    
+                                <td>{{ prd.code }}</td>  
+                                <td>{{ prd.name }}</td>  
+                                <td *ngIf="prd.number_package >= 1">{{ prd.number_package | number }}</td>
+                                <td *ngIf="prd.number_package >= 1">{{ prd.price_package | number }}</td>
+                                <td *ngIf="prd.number_units >= 1">{{ prd.number_units | number }}</td>
+                                <td *ngIf="prd.number_units >= 1">{{ prd.cost_price | number }}</td>
+                                <td>({{ prd.tax }}%) {{ prd.value_tax | number }}</td>
+                                <td>{{ prd.discount | number }}</td>
+                                <td>{{ prd.total_product | number }}</td>
+                            </tr>
+                            <tr class="text-big">
+                                <th rowspan="6" colspan="5"></th>
+                                <th>Subtotal</th>
+                                <td><span class="text-right">{{ operation.subtotal_operation | number }}</span></td>
+                            </tr>
+                            <tr class="text-big">
+                                <th>Impuesto</th>
+                                <td><span class="text-right">{{ operation.total_tax | number }}</span></td>
+                            </tr>
+                            <tr class="text-big">
+                                <th>Total factura</th>
+                                <td><span class="text-right">{{ operation.total_operation | number }}</span></td>
+                            </tr>                            
+                            <tr class="text-big" *ngIf="operation.total_discounts > 0">
+                                <th>Descuento</th>
+                                <td><span class="text-right">{{ operation.total_discounts | number }}</span></td>
+                            </tr>
+                            <tr class="text-big">
+                                <th>Neto factura</th>
+                                <td><span class="text-right">{{ operation.total_operation - operation.total_discounts | number }}</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <form [formGroup]="orderFileForm">
+            <div class="row">
+                <div class="form-group col-sm-6">
+                    <label for="type_payment">Tipo de pago</label>
+                    <select class="form-control form-control-sm text-small" formControlName="type_payment" (change)="updateState()" required>
+                        <option value="{{type.value}}" *ngFor="let type of lstParams">{{type.name}}</option>
+                    </select>
+                    <small *ngIf="mustShowError('type_payment')" class="form-text alert-danger">
+                        Tipo de pago es obligatorio
+                    </small>
+                </div>
+                <div class="col-sm-6" *ngIf="orderFileForm.value.type_payment === credit_payment">
+                    <label for="value_payment">Valor de abono</label>
+                    <input type="number" class="form-control form-control-sm text-small" placeholder="Abono" formControlName="value_payment">
+                    <small class="form-text alert-info">
+                        Valor no puede ser mayor a <strong>{{ orderFileForm.value.total_purchase | number}}</strong>
+                    </small>
+                    <div *ngIf="mustShowError('value_payment')" class="form-text alert-danger">
+                        <small *ngIf="hasError('value_payment','max')">
+                            Valor no puede ser mayor a <strong>{{ this.getErrors('value_payment').max.max }}</strong>
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </main>
+    <footer>
+        <button type="submit" class="btn btn-outline-primary btn-sm mb-2 mr-1" data-dismiss="modal" [disabled]="orderFileForm.invalid" (click)="createPurchaseFile()">Guardar</button>
+    </footer>
+</app-card>

@@ -125,6 +125,10 @@ export class NewRolComponent implements OnInit, OnChanges {
     this.rolForm.reset();
   }
 
+  public cancelRol() {
+    this.cancel.emit(false);
+  }
+
   /**
    * Funciones de validación de formularios.
    */

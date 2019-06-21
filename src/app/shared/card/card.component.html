@@ -6,6 +6,17 @@
   </header>
   <div class="card-body">
     <div class="card-text">
+      <div *ngIf="lstMessages">
+        <div class="row" *ngFor="let message of lstMessages">
+            <div class="alert alert-danger col-sm-12" *ngIf="message.code != 0">
+                {{ message.code }} : {{ message.desc}} => {{ message.serverDesc }}
+            </div>
+            <div class="alert alert-success col-sm-12" *ngIf="message.code == 0">
+                {{ message.code }} : {{ message.desc}} => {{ message.serverDesc }}
+            </div>
+        </div>
+      </div>
+
       <ng-content select="main"></ng-content>
     </div>
   </div>

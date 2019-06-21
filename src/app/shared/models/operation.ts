@@ -18,6 +18,7 @@ export class Operation {
     public total_pays: number;
     public value_discount: string;
 
+    public value_payment: number;
     public products_list: ProductOperation[];
     public notes: any[];
     public operations: any[];

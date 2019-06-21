@@ -1,5 +1,5 @@
 <div class="row margin-top">
-    <div class="col-sm-6" *ngIf="!showUser">
+    <div class="col-sm-6" [ngClass]="getClassNew()"  *ngIf="!showUser">
         <app-new-user 
         [rolList]="rolList" 
         [personList]="personList" 
@@ -21,13 +21,13 @@
         >
         </app-new-user>
     </div>
-    <div class="col-sm-6" *ngIf="showUser">
+    <div class="col-sm-6" *ngIf="showUser" [ngClass]="getClassShow()">
         <app-show-user 
         [user]="user" 
         (cancel)="onCancelShow($event)">
         </app-show-user>
     </div>
-    <div class="col-sm-6">
+    <div class="col-sm-6" [ngClass]="getClassList()">
         <app-list-user
         [userList]="userList"
         (delUser)=onDelete($event)

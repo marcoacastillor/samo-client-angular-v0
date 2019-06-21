@@ -4,6 +4,7 @@ import { GlobalStoreService } from 'src/app/core/services/global-store.service';
 import { RolService } from 'src/app/shared/services/rol.service';
 import { tap } from 'rxjs/operators';
 import { ModuleService } from 'src/app/shared/services/module.service';
+import { UtilsService } from 'src/app/shared/services/utils.service';
 
 @Component({
   selector: 'app-main-rol',
@@ -14,12 +15,14 @@ export class MainRolComponent implements OnInit {
   public rolList: Rol[] = [];
   public moduleList: any;
   public showRol = false;
+  public new = false;
   public rol: Rol = new Rol;
   
   constructor(
     private globalStoreService: GlobalStoreService,
     private rolService: RolService,
-    private moduleService: ModuleService
+    private moduleService: ModuleService,
+    private UtilService: UtilsService
   ) {
    }
 
@@ -98,6 +101,11 @@ export class MainRolComponent implements OnInit {
       this.loadAllModulesByRol(null);
     }
     this.showRol = false;
+    this.new = true;
+  }
+
+  public onCancel(event: boolean) {
+    this.new = event;
   }
 
   public onCancelShow(event: boolean) {
@@ -118,6 +126,23 @@ export class MainRolComponent implements OnInit {
 
   private onError = (error: any) => {
     this.globalStoreService.dispatchUserMessage(error.status, error.statusText + ' : ' + error.error.error);
+  }
+
+  /*
+  * ------------------------------------------
+  * Funciones visualización
+  * ------------------------------------------
+  */
+  public getClassNew() {
+    return this.UtilService.getClassNew(this.new);
+  }
+
+  public getClassList() {
+    return this.UtilService.getClassList(this.new || this.showRol);
+  }
+
+  public getClassShow() {
+    return this.UtilService.getClassShow(this.showRol);
   }
 
 }

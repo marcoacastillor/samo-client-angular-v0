@@ -13,25 +13,25 @@ export class UtilsService {
   */
  public getClassNew(createFlag: boolean): string {
     if (createFlag) {
-      return 'col-sm-7';
+      return 'visible col-sm-12';
     } else {
-      return 'col-sm-2';
+      return 'hidden';
     }
   }
 
   public getClassList(listFlag: boolean): string {
     if ( listFlag) {
-      return 'col-sm-5';
+      return 'hidden';
     } else {
-      return 'col-sm-12';
+      return 'visible col-sm-12';
     }
   }
 
   public getClassShow(showFlag: boolean): string {
     if ( showFlag) {
-      return 'col-sm-7';
+      return 'visible col-sm-12';
     } else {
-      return 'col-sm-2';
+      return 'hidden';
     }
   }
 
@@ -69,6 +69,15 @@ export class UtilsService {
     }
     else{
       return 'visible';
+    }
+  }
+
+  public getClassHeaderTable(condition: string){
+    if(condition == '0'){
+      return 'myWidth font-weight-bold';
+    }
+    else{
+      return 'myWidth';
     }
   }
 }

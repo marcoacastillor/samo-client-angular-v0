@@ -1,0 +1,39 @@
+<app-card caption="Carga de archivo de compra" [lstMessages]="lstMessages">
+    <main>
+        <h5>Cargar información de compras por archivo</h5>
+        <form [formGroup]="purchaseFileForm">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="file_ref_purchase">Archivo de compra</label>
+                        <input type="file" (change)="onFileSelected($event)" class="form-control text-small" placeholder="archivo de compra" formControlName="file_ref_purchase" required />
+                        <small *ngIf="mustShowError('file_ref_purchase')" class="form-text alert-danger">
+                        Imágen es obligatorio
+                        </small>
+                    </div>
+                </div> 
+            </div>
+        </form>
+
+        <table class="table table-sm table-bordered table-striped" *ngIf="data">
+            <tr *ngFor="let row of data; let i = index">
+                <td [ngClass]="getClassHeaderTable(i)"  *ngFor="let val of row; let j = index">
+                    <span *ngIf="i === 0">{{ val }}</span>
+                    <span *ngIf="j === 13 && i > 0">{{ val | number}}</span>
+                    <span *ngIf="i > 0 && j != 13">{{ val }}</span>
+                </td>
+            </tr>
+        </table>
+
+        <app-modal-show-order-file
+            [data]="data"
+            [operation]="operation"
+            [lstParams]="lstParams"
+            (create)="onCreate($event)"
+        ></app-modal-show-order-file>
+
+    </main>
+    <footer>
+        <button type="submit" data-toggle="modal" data-target="#showOrderFileModal" class="btn btn-outline-primary btn-sm mb-2 mr-1" [disabled]="purchaseFileForm.invalid">Mostrar factura</button>
+    </footer>
+</app-card>      

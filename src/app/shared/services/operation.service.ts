@@ -7,6 +7,7 @@ import { Operation } from '../models/operation';
 import { switchMap } from 'rxjs/operators';
 import { Purchase } from '../models/purchase';
 import { Results } from '../models/results';
+import { StatusMessage } from '../models/status-message';
 
 @Injectable({
   providedIn: 'root'
@@ -69,6 +70,17 @@ export class OperationService {
       switchMap(validate => {
         if(validate){
           return this.http.post<Purchase>(url, purchase);
+        }
+      })
+    );
+  }
+
+  public store_purchase_file$(operation: Operation): Observable<StatusMessage[]> {
+    let url = this._url + '/create-purchase-file';
+    return this.userService.validateOptionByToken('OPE_PURCHASE_FILE_CRT').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.post<StatusMessage[]>(url, operation);
         }
       })
     );

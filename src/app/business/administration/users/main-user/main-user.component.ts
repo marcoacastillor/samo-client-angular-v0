@@ -37,6 +37,7 @@ export class MainUserComponent implements OnInit {
 
   public newUser = false;
   public showUser = false;
+  
   public rol: Rol = new Rol;
   public user: User = new User;
   public activeUser: User = new User;

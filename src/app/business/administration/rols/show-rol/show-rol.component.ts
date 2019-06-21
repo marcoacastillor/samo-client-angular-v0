@@ -17,7 +17,7 @@ export class ShowRolComponent implements OnInit {
   ngOnInit() {
   }
 
-  public cancelUser() {
+  public cancelRol() {
     this.cancel.emit(false);
   }
 }

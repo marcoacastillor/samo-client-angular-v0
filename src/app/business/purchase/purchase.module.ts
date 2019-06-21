@@ -32,6 +32,9 @@ import { ViewOperationComponent } from './purchase-report/view-operation/view-op
 import { PaymentComponent } from './purchase-report/payment/payment.component';
 import { ModalSearchComponent } from './order/new-order/modal-search/modal-search.component';
 import { SearchComponent } from './order/new-order/search/search.component';
+import { NewOrderFileComponent } from './order-file/new-order-file/new-order-file.component';
+import { ShowOrderFileComponent } from './order-file/show-order-file/show-order-file.component';
+import { ModalShowOrderFileComponent } from './order-file/modal-show-order-file/modal-show-order-file.component';
 
 @NgModule({
   imports: [
@@ -43,6 +46,6 @@ import { SearchComponent } from './order/new-order/search/search.component';
     OwlNativeDateTimeModule
   ],
   providers: [ EnterpriseService, ParameterService, UserService, UtilsService, GlobalStoreService, OperationService, ProductService, PaymentService],
-  declarations: [AdminOrderComponent, ListOrderComponent, NewOrderComponent, ShowOrderComponent, ModalEnterpriseComponent, NewEnterpriseComponent, ModalPaymentComponent, NewPaymentComponent, ModalProductComponent, NewProductComponent, AdminPurchaseReportComponent, ConsolidatedComponent, PendingReceiveComponent, ModelPaymentComponent, ModelViewOperationComponent, ViewOperationComponent, PaymentComponent, ModalSearchComponent, SearchComponent]
+  declarations: [AdminOrderComponent, ListOrderComponent, NewOrderComponent, ShowOrderComponent, ModalEnterpriseComponent, NewEnterpriseComponent, ModalPaymentComponent, NewPaymentComponent, ModalProductComponent, NewProductComponent, AdminPurchaseReportComponent, ConsolidatedComponent, PendingReceiveComponent, ModelPaymentComponent, ModelViewOperationComponent, ViewOperationComponent, PaymentComponent, ModalSearchComponent, SearchComponent, NewOrderFileComponent, ShowOrderFileComponent, ModalShowOrderFileComponent]
 })
 export class PurchaseModule { }
