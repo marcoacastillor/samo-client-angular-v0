@@ -52,7 +52,7 @@ export class AsignOptionComponent implements OnInit, OnChanges {
   }
 
   private loadOptions = (options: Results): void => {
-    this.optionsList = options[0].data_results;
+    this.optionsList = options.data_results;
   }
 
   private initUpdForm() {

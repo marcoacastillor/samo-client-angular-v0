@@ -1,13 +1,11 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Product } from 'src/app/shared/models/product';
-import { Enterprise } from 'src/app/shared/models/enterprise';
 import { faTasks, faCalendar } from '@fortawesome/free-solid-svg-icons';
-import { Operation } from 'src/app/shared/models/operation';
 import { OperationService } from 'src/app/shared/services/operation.service';
 import * as moment from 'moment';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { GlobalStoreService } from 'src/app/core/services/global-store.service';
 import { environment } from 'src/environments/environment';
+import { AbstractStock } from 'src/app/shared/models/abstract-stock';
 
 @Component({
   selector: 'app-show-product',
@@ -19,7 +17,7 @@ export class ShowProductComponent implements OnInit, OnChanges {
 
   @Input() public product: Product;
   
-  operationsList: Operation[] = [];
+  operationsList: AbstractStock = new AbstractStock;
 
   faTask = faTasks;
   faCalendar = faCalendar;
@@ -56,7 +54,7 @@ export class ShowProductComponent implements OnInit, OnChanges {
     {
       if(changes.product.currentValue != changes.product.previousValue)
       {
-        this.operationsList = [];
+        this.operationsList = new AbstractStock;
         this.initUpdForm();
       }
     }

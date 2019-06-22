@@ -1,6 +1,5 @@
 <app-card caption="Detalle de producto {{product.name}}">
     <main>
-        <pre>{{ operationsList | json }}</pre>
         <div class="row">
             <!-- Inicio información proveedor-->
             <div class="col-sm-12 text-ultra-small ">
@@ -257,7 +256,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6 text-ultra-small" *ngIf="operationsList.sale">
+            <div class="col-sm-6 text-ultra-small" *ngIf="operationsList.sales">
                 <div class="row border-bottom-2 bg-gray style-header-table">
                     <div class="col-sm-9 align-self-end">
                         Total ventas
