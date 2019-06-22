@@ -150,7 +150,7 @@ export class AdminEmployeeComponent implements OnInit {
   }
 
   public onUpdate(person: Person){
-    this.personService.update$(person).subscribe(
+    this.personService.updateEmployee$(person).subscribe(
       person => 
       { 
         this.person = person;

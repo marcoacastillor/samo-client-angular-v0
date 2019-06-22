@@ -105,23 +105,16 @@ export class AdminClientsComponent implements OnInit {
     this.personService.createPerson$(person).subscribe(
       person => 
       { 
-        this.person = person;
-        this.person.enterprise_person = new EnterprisePerson;
-        this.person.enterprise = new Enterprise;
-        
         this.loadClients(this.user.fk_id_enterprise);
       }
     );
   }
 
   public onUpdate(person: Person){
-    this.personService.update$(person).subscribe(
+    this.personService.updateClient$(person).subscribe(
       person => 
       { 
         this.person = person;
-        this.person.enterprise_person = new EnterprisePerson;
-        this.person.enterprise = new Enterprise;
-
         this.loadClients(this.user.fk_id_enterprise);
       }
     );

@@ -70,11 +70,23 @@ export class PersonService {
     );
   }
 
-  public update$(person: Person): Observable<Person> {
+  public updateClient$(person: Person): Observable<Person> {
+    let url = this._url + '/update-client'
     return this.userService.validateOptionByToken('PRS_UPD').pipe(
       switchMap(validate => {
         if(validate){
-          return this.http.put<Person>(this._url, person);
+          return this.http.put<Person>(url, person);
+        }
+      })
+    );
+  }
+
+  public updateEmployee$(person: Person): Observable<Person> {
+    let url = this._url + '/update-employee'
+    return this.userService.validateOptionByToken('PRS_UPD').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.put<Person>(url, person);
         }
       })
     );
