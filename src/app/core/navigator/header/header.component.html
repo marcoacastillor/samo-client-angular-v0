@@ -6,7 +6,7 @@
             </button>
             <a class="navbar-brand ml-lg-2 ml-3" href="#">
                 <i class="fa fa-thermometer-empty fa-lg" aria-hidden="true"></i>
-                Sales Admin</a>
+                Sales System</a>
             <div class="collapse navbar-collapse ml-lg-0 ml-3" id="navbarCollapse">
                 <div class="row" *ngIf="user">
                     <div class="nav-item dropdown" *ngFor="let module of user.modules">
@@ -26,7 +26,7 @@
                         </a>
                         <div class="dropdown-menu text-small" aria-labelledby="userDropdwon">
                             <div class="col-sm-12 text-small">
-                                <a class="nav-link dropdown-item" href="#">Logout</a>
+                                <a class="nav-link dropdown-item" href="#">Salir</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="nav-link dropdown-item" [routerLink]="['./sales-admin/modules']">Menú principal</a> 
                             </div>
