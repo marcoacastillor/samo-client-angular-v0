@@ -8,6 +8,7 @@ import { switchMap } from 'rxjs/operators';
 import { Purchase } from '../models/purchase';
 import { Results } from '../models/results';
 import { StatusMessage } from '../models/status-message';
+import { AbstractStock } from '../models/abstract-stock';
 
 @Injectable({
   providedIn: 'root'
@@ -42,12 +43,12 @@ export class OperationService {
     );
   }
 
-  public getListByProduct$(id: number,fromDate: string,toDate: string): Observable<Operation[]> {
+  public getListByProduct$(id: number,fromDate: string,toDate: string): Observable<AbstractStock> {
     let url = this._url + '/get-list-by-products/'+id.toString()+'/'+fromDate+'/'+toDate;
     return this.userService.validateOptionByToken('OPE_GET_OPERATIONS_BY_PRODUCT').pipe(
       switchMap(validate => {
         if(validate){
-          return this.http.get<Operation[]>(url);
+          return this.http.get<AbstractStock>(url);
         }
       })
     );

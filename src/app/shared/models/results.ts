@@ -1,7 +1,7 @@
 import { Operation } from "./operation";
 
 export class Results {
-    public data_results: Operation[];
+    public data_results: any[];
     public number_results: number;
     public criteria: string;
 

@@ -12,7 +12,7 @@ export const environment = {
   url_ventas_storage: 'https://www.sanratsolutions.com/prd/ventas/storage/app/public/',
   url_type_service: 'https://www.sanratsolutions.com/prd/usuarios/public/type_service',
 
-  url_authentication: 'https://www.sanratsolutions.com/prd/ventas/public/authentication',
+  url_authentication_ventas: 'https://www.sanratsolutions.com/prd/ventas/public/authentication',
   url_person: 'https://www.sanratsolutions.com/prd/ventas/public/persons',
   url_enterprise: 'https://www.sanratsolutions.com/prd/ventas/public/enterprises',
   url_operation: 'https://www.sanratsolutions.com/prd/ventas/public/operations',
@@ -20,30 +20,8 @@ export const environment = {
   url_payment: 'https://www.sanratsolutions.com/prd/ventas/public/payments',
   url_expenses: 'https://www.sanratsolutions.com/prd/ventas/public/expenses',
   url_note: 'https://www.sanratsolutions.com/prd/ventas/public/notes',
-  url_position: 'http://localhost/ventasV0/public/positions',
+  url_position: 'https://www.sanratsolutions.com/prd/ventas/public/positions',
   
-  /*
-  url_user: 'http://localhost/usuariosV1/public/users',
-  url_module: 'http://localhost/usuariosV1/public/modules',
-  url_component: 'http://localhost/usuariosV1/public/components',
-  url_rol: 'http://localhost/usuariosV1/public/rols',
-  url_rol_option: 'http://localhost/usuariosV1/public/rols_options',
-  url_option: 'http://localhost/usuariosV1/public/options',
-  url_category: 'http://localhost/usuariosV1/public/categories',
-  url_parameter: 'http://localhost/usuariosV1/public/parameters',
-  url_storage: 'http://localhost/usuariosV1/storage/app/public/',
-  url_ventas_storage: 'http://localhost/ventasV1/storage/app/public/',
-
-  url_authentication: 'http://localhost/ventasV1/public/authentication',
-  url_person: 'http://localhost/ventasV1/public/persons',
-  url_enterprise: 'http://localhost/ventasV1/public/enterprises',
-  url_operation: 'http://localhost/ventasV1/public/operations',
-  url_products: 'http://localhost/ventasV1/public/products',
-  url_payment: 'http://localhost/ventasV1/public/payments',
-  url_expenses: 'http://localhost/ventasV1/public/expenses',
-  url_note: 'http://localhost/ventasV1/public/notes',
-  */
-
   clearMessageDelayMs: 5000,
   refreshInterval: 1000,
   min_products: 20,
