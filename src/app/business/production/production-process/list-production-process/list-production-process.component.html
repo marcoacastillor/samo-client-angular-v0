@@ -1,0 +1,80 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive container">
+                    <!-- primera fila, sección de buscador-->
+                    <div class="row">
+                        <div class="btn-group">
+                            <button type="button" class="btn text-ultra-small btn-sm btn-outline-primary">
+                                <fa-icon [icon]="faPlusCircle" class="text-primary mb-2 mr-1" title="Crear registro"></fa-icon>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- fin primera fila, sección de buscador-->
+                    
+                    <!-- Segunda fila: table -->
+                    <div class="row text-left">
+                        <div class="col-sm-6" *ngFor="let prdProd of productionProcessList">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="row">
+                                        <div class="col-sm-6 card-title text-left"><strong class="text-small">Período de corte: {{ prdProd.defined_period }}</strong></div>
+                                        <div class="col-sm-6 label text-right"><strong class="text-small">Estado: {{ prdProd.state }}</strong></div>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                        <p class="task-detail text-small">{{ prdProd.reference }}</p>
+                                        <p class="task-due"><strong> Inicio: </strong><strong>{{ prdProd.date_init }}</strong></p>
+                                        <p class="task-due"><strong> Fin: </strong><strong>{{ prdProd.date_end }}</strong></p>
+                                        </div>
+                                        <!-- end of col-sm-8 -->
+                                    </div>
+                                    <!-- end of row -->
+                                </div>
+                                <div class="card-footer">
+                                    <div class="row">
+                                        <div class="col-sm-6 text-left">
+                                            <div class="btn-group btn-group-sm">
+                                                <button class="btn btn-outline-primary btn-sm" type="button">
+                                                    <fa-icon [icon]="faStopWatch" class="text-outline-primary mb-2 mr-1"></fa-icon>
+                                                </button>
+                                                <button type="button" class="btn btn-sm btn-outline-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <span class="sr-only">Toggle Dropdown</span>
+                                                </button>
+                                                <div class="dropdown-menu dropdown-menu-lg-right text-small">
+                                                    <button class="dropdown-item" type="button"><fa-icon [icon]="faStopWatch" class="text-outline-primary mb-2 mr-1"></fa-icon>Cerrar proceso</button>
+                                                </div>
+                                            </div>
+                                            <!-- end of pull-right class -->
+                                        </div>
+
+                                        <div class="col-sm-6 text-right">
+                                            <div class="btn-group btn-group-sm">
+                                                <button class="btn btn-outline-secondary btn-sm" type="button">
+                                                    <fa-icon [icon]="faAlignJustify" class="text-outline-secondary mb-2 mr-1"></fa-icon>
+                                                </button>
+                                                <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <span class="sr-only">Toggle Dropdown</span>
+                                                </button>
+                                                <div class="dropdown-menu dropdown-menu-lg-right text-small">
+                                                    <button (click)="selectElement(prdProd)" class="dropdown-item" type="button"><fa-icon [icon]="faStopWatch" class="text-outline-secondary mb-2 mr-1"></fa-icon>Ver detalle</button>
+                                                </div>
+                                            </div>
+                                            <!-- end of pull-right class -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- end of card-footer -->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Fin segunda fila -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>    

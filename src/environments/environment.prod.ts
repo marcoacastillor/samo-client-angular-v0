@@ -21,6 +21,10 @@ export const environment = {
   url_expenses: 'https://www.sanratsolutions.com/prd/ventas/public/expenses',
   url_note: 'https://www.sanratsolutions.com/prd/ventas/public/notes',
   url_position: 'https://www.sanratsolutions.com/prd/ventas/public/positions',
+  url_production_process: 'https://www.sanratsolutions.com/prd/ventas/public/production_process',
+  url_cutting_period: 'https://www.sanratsolutions.com/prd/ventas/public/cutting_period',
+  url_cutting_period_product: 'https://www.sanratsolutions.com/prd/ventas/public/cutting_period_product',
+  url_detail_product_input: 'https://www.sanratsolutions.com/prd/ventas/public/detail_product_input',
   
   clearMessageDelayMs: 5000,
   refreshInterval: 1000,
@@ -69,4 +73,6 @@ export const environment = {
   mode_service: 'MODE_SERVICE',
   type_service: 'TYPE_SERVICE',
   size_enterprise: 'SIZE_ENTERPRISE',
+  type_product_internal_prd: 'PRODUCCION_INTERNA',
+  type_product_input: 'INSUMO',
 };

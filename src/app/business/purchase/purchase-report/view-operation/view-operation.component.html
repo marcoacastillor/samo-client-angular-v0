@@ -47,6 +47,7 @@
                                 <th>Código</th>
                                 <th>Nombre</th>
                                 <th>Cant</th>
+                                <th>Preentación</th>
                                 <th>Valor unitario</th>
                                 <th>Impuesto</th>
                                 <th>Total</th>
@@ -57,15 +58,16 @@
                                 <td>{{ i+1 }}</td>    
                                 <td>{{ prd.code }}</td>  
                                 <td>{{ prd.name }}</td>  
-                                <td *ngIf="prd.number_package >= 1">{{ prd.number_package | number }}</td>
-                                <td *ngIf="prd.number_package >= 1">{{ prd.price_package | number }}</td>
-                                <td *ngIf="prd.number_units >= 1">{{ prd.number_units | number }}</td>
-                                <td *ngIf="prd.number_units >= 1">{{ prd.price_unit | number }}</td>
+                                <td *ngIf="prd.presentation != 'PAQUETE'">{{ prd.number_units | number }}</td>
+                                <td *ngIf="prd.presentation === 'PAQUETE'">{{ prd.number_package | number }}</td>
+                                <td>{{ prd.presentation }}</td>
+                                <td *ngIf="prd.presentation != 'PAQUETE'">{{ prd.price_unit | number }}</td>
+                                <td *ngIf="prd.presentation === 'PAQUETE'">{{ prd.price_package | number }}</td>
                                 <td>({{ prd.tax }}%) {{ prd.value_tax | number }}</td>
                                 <td>{{ prd.total_product | number }}</td>
                             </tr>
                             <tr class="text-big">
-                                <th rowspan="6" colspan="5"></th>
+                                <th rowspan="6" colspan="6"></th>
                                 <th>Subtotal</th>
                                 <td><span class="text-right">{{ operation.subtotal_operation | number }}</span></td>
                             </tr>

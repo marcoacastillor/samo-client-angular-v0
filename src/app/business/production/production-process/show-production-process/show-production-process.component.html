@@ -1,0 +1,39 @@
+<!-- card para información sobre proceso productivo-->
+<div class="card">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-sm-12 card-title"><strong class="text-small">Información detallada</strong></div>
+        </div>
+    </div>
+    <pre>{{ dataProduct | json }}</pre>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="row">
+                    <app-main-info
+                    [productionProcess]="productionProcess"
+                    ></app-main-info> 
+                </div>
+                <div class="row">
+                    <app-periods-info
+                    [cuttingPeriodList]="cuttingPeriodList"
+                    (getData)="onGetData($event)"
+                    ></app-periods-info>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="row">
+                    <app-periods-product-info
+                    [productLst]="dataProduct.products"
+                    ></app-periods-product-info>
+                </div>
+                <div class="row">
+                    <app-periods-input-info
+                    [inputsProductLst]="dataProduct.inputs"
+                    ></app-periods-input-info>
+                </div>
+            </div>
+        </div>
+        <!-- end of row -->
+    </div>
+</div>

@@ -57,8 +57,8 @@ export class AdminPurchaseReportComponent implements OnInit {
     .subscribe(); 
   }
 
-  private loadOperation = (operation: Operation): void => {
-    this.operation = operation[0];
+  private loadOperation = (operation: any): void => {
+    this.operation = operation;
   }
 
   private loadProvider = (enterprise: Enterprise): void => {

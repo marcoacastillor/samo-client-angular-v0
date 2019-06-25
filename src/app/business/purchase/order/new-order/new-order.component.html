@@ -35,6 +35,7 @@
                             <th scope="col">Código</th>
                             <th scope="col">Nombre</th>
                             <th scope="col">Cant</th>
+                            <th scope="col">Presentación</th>
                             <th scope="col">Valor unitario</th>
                             <th scope="col">Impuesto</th>
                             <th scope="col">Valor total</th>
@@ -55,8 +56,8 @@
                                 </div>
                             </td>
                             <td>{{ prd.name_product }}</td>
-                            <td *ngIf="prd.package_product >= '1'">{{ prd.package_product }} :Pqts</td>
-                            <td *ngIf="prd.units_product >= '1'">{{ prd.units_product }} :Unds</td>
+                            <td>{{ prd.units_product }}</td>
+                            <td>{{ prd.presentation }}</td>
                             <td>{{ prd.value_product | number }}</td>
                             <td>({{ prd.tax_product }}%) {{ prd.value_tax | number }}</td>
                             <td>{{ prd.value_total_product | number }}</td>
@@ -103,12 +104,8 @@
                                         <label for="name_product">Nombre</label>
                                         <input type="text" readonly class="form-control form-control-sm text-small" placeholder="nombre" formControlName="name_product">
                                     </div> 
-                                    <div class="col-sm-2" *ngIf="product.presentation == 'PAQUETE'">
-                                        <label for="package_product">Paquetes</label>
-                                        <input type="number" class="form-control form-control-sm text-small" placeholder="paquetes" formControlName="package_product">
-                                    </div>
-                                    <div class="col-sm-2" *ngIf="product.presentation == 'INDIVIDUAL'">
-                                        <label for="units_product">Unidades</label>
+                                    <div class="col-sm-2">
+                                        <label for="units_product">{{ product.presentation }}</label>
                                         <input type="number" class="form-control form-control-sm text-small" placeholder="unidades" formControlName="units_product">
                                     </div>
                                     <div class="col-sm-2">

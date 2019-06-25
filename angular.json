@@ -49,6 +49,7 @@
             "styles": [
               "./node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css",
+              "src/assets/animation.css",
               "./node_modules/ng-pick-datetime/assets/style/picker.min.css"
             ],
             "scripts": [

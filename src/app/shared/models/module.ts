@@ -6,6 +6,7 @@ export class Module {
   public description: string;
   public url_image: string;
   public url_angular_module: string;
+  public icon_name: string;
 
   /**
    * Listado de componentes

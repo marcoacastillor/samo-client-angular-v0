@@ -1,0 +1,56 @@
+<!-- card para información sobre proceso productivo-->
+<div class="card">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-sm-12 card-title"><strong class="text-small">Periodos asociados al proceso productivo</strong></div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm-12 table-responsive">
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th colspan="2">Periodo</th>
+                            <th>Fecha inicial</th>
+                            <th>Fecha final</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let cuttPeriod of cuttingPeriodList">
+                            <td>
+                                <button (click)="getDataByCuttingPeriod(cuttPeriod.pk_id_cutting_period)" class="btn btn-outline-primary btn-sm" type="button">
+                                    <fa-icon [icon]="facArchive" class="text-outline-primary mb-2 mr-1"></fa-icon>
+                                </button>
+                            </td>
+                            <td>{{ cuttPeriod.period }}</td>
+                            <td>{{ cuttPeriod.date_init }}</td>
+                            <td>{{ cuttPeriod.date_end }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- end of col-sm-8 -->
+        </div>
+        <!-- end of row -->
+    </div>
+    <div class="card-footer">
+        <div class="row">
+            <div class="col-sm-12 text-right">
+                <div class="btn-group btn-group-sm">
+                    <button class="btn btn-outline-secondary btn-sm" type="button">
+                        <fa-icon [icon]="faAlignJustify" class="text-outline-secondary mb-2 mr-1"></fa-icon>
+                    </button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-lg-right text-small">
+                        <button class="dropdown-item" type="button"><fa-icon [icon]="faStopWatch" class="text-outline-secondary mb-2 mr-1"></fa-icon>Editar</button>
+                    </div>
+                </div>
+                <!-- end of pull-right class -->
+            </div>
+        </div>
+    </div>
+    <!-- end of card-footer -->
+</div>

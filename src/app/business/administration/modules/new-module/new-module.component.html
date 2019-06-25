@@ -4,7 +4,7 @@
         <h5 *ngIf="!module.pk_id_module">Creación de registro</h5>
         <form [formGroup]="moduleForm">
             <div class="row">
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                     <div class="form-group">
                         <label for="name">Nombre</label>
                         <input type="text" class="form-control text-small" placeholder="Nombre" formControlName="name" required>
@@ -13,12 +13,21 @@
                         </small>
                     </div>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                     <div class="form-group">
                         <label for="url_angular_module">Módulo angular</label>
                         <input type="text" class="form-control text-small" placeholder="Modulo angular" formControlName="url_angular_module" required>
                         <small *ngIf="mustShowError('url_angular_module')" class="form-text alert-danger">
                         Componente Angular es obligatorio
+                        </small>
+                    </div>
+                </div> 
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="icon_name">Ícono de módulo</label>
+                        <input type="text" class="form-control text-small" placeholder="Nombre del ícono" formControlName="icon_name" required>
+                        <small *ngIf="mustShowError('icon_name')" class="form-text alert-danger">
+                        Nombre de icon es obligatorio
                         </small>
                     </div>
                 </div> 

@@ -1,0 +1,19 @@
+<div class="row margin-top">
+    <div [ngClass]="getClassShow()">
+        <app-show-production-process
+        [productionProcess]="productionProcess"
+        [cuttingPeriodList]="cuttingPeriodList"
+        [dataProduct]="dataProduct"
+        (getData)="onGetData($event)"
+        >
+        </app-show-production-process>
+    </div>
+    <div [ngClass]="getClassList()">
+        <app-list-production-process
+        [productionProcessList]="productionProcessList"
+        (select)="onSelect($event)"
+        >
+        </app-list-production-process>
+    </div>
+</div>
+        

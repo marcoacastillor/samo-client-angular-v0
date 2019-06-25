@@ -79,6 +79,7 @@ export class NewOrderComponent implements OnInit, OnChanges {
       tax_product: '19',
       value_tax: '0',
       value_total_product: '0',
+      presentation: this.product.presentation
     });
   }
 
@@ -112,6 +113,7 @@ export class NewOrderComponent implements OnInit, OnChanges {
         tax_product:['19',Validators.required],
         value_tax: '0',
         value_total_product: ['0'],
+        presentation: ['']
       })
     });
   }
@@ -127,18 +129,13 @@ export class NewOrderComponent implements OnInit, OnChanges {
     let totalTaxPurchase  = this.purchaseForm.value.total_taxes;
 
     let tax_product       = this.purchaseForm.get('product_new').value.tax_product;
-    let packages          = this.purchaseForm.get('product_new').value.package_product;
     let units             = this.purchaseForm.get('product_new').value.units_product;
     let value             = this.purchaseForm.get('product_new').value.value_product;
+    let presentation      = this.product.presentation;
     
-    if(units > 0)
-    {
-      totalProduct      = units * value;
-    }
-    else{
-      totalProduct      = packages * value;
-    }
-
+    //Calcular el valor de compra
+    totalProduct      = units * value;
+    
     //Calcular impuesto para producto
     let value_tax_product = Math.round(totalProduct - (totalProduct / (1+(tax_product/100))));
     
@@ -150,7 +147,8 @@ export class NewOrderComponent implements OnInit, OnChanges {
     //Actualizar datos para producto seleccionado
     this.purchaseForm.get('product_new').patchValue({
       value_tax: value_tax_product,
-      value_total_product: totalProduct
+      value_total_product: totalProduct,
+      presentation: presentation
     });
     
     this.purchaseForm.patchValue({

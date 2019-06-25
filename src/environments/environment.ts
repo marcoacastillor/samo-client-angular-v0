@@ -26,6 +26,10 @@ export const environment = {
   url_expenses: 'http://localhost/ventasV0/public/expenses',
   url_note: 'http://localhost/ventasV0/public/notes',
   url_position: 'http://localhost/ventasV0/public/positions',
+  url_production_process: 'http://localhost/ventasV0/public/production_process',
+  url_cutting_period: 'http://localhost/ventasV0/public/cutting_period',
+  url_cutting_period_product: 'http://localhost/ventasV0/public/cutting_period_product',
+  url_detail_product_input: 'http://localhost/ventasV0/public/detail_product_input',
 
 
   clearMessageDelayMs: 5000,
@@ -75,6 +79,9 @@ export const environment = {
   mode_service: 'MODE_SERVICE',
   type_service: 'TYPE_SERVICE',
   size_enterprise: 'SIZE_ENTERPRISE',
+  type_product_internal_prd: 'Producción interna',
+  type_product_input: 'Insumo',
+
 };
 
 /*

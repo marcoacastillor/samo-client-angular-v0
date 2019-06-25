@@ -91,6 +91,7 @@ export class NewModuleComponent implements OnInit, OnChanges {
     url_image: [this.module.url_image, Validators.required],
     file_image: [null],
     url_angular_module: [this.module.url_angular_module, Validators.required],
+    icon_name: [this.module.icon_name, Validators.required]
     });
   }
 

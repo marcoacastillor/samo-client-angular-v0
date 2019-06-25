@@ -1,0 +1,57 @@
+<!-- card para información sobre proceso productivo-->
+<div class="card">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-sm-12 card-title"><strong class="text-small">Detalle de proceso productivo</strong></div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm-12 table-responsive">
+                <table class="table table-sm">
+                    <tr>
+                        <th>Período definido</th>
+                        <td>{{ productionProcess.defined_period}}</td>
+                    </tr>
+                    <tr>
+                        <th>Referencia</th>
+                        <td>{{ productionProcess.reference}}</td>
+                    </tr>
+                    <tr>
+                        <th>Fecha de inicio</th>
+                        <td>{{ productionProcess.date_init}}</td>
+                    </tr>
+                    <tr>
+                        <th>Fecha de finalización</th>
+                        <td>{{ productionProcess.date_end}}</td>
+                    </tr>
+                    <tr>
+                        <th>Estado</th>
+                        <td>{{ productionProcess.state}}</td>
+                    </tr>
+                </table>
+            </div>
+            <!-- end of col-sm-8 -->
+        </div>
+        <!-- end of row -->
+    </div>
+    <div class="card-footer">
+        <div class="row">
+            <div class="col-sm-12 text-right">
+                <div class="btn-group btn-group-sm">
+                    <button class="btn btn-outline-secondary btn-sm" type="button">
+                        <fa-icon [icon]="faAlignJustify" class="text-outline-secondary mb-2 mr-1"></fa-icon>
+                    </button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-lg-right text-small">
+                        <button class="dropdown-item" type="button"><fa-icon [icon]="faStopWatch" class="text-outline-secondary mb-2 mr-1"></fa-icon>Editar</button>
+                    </div>
+                </div>
+                <!-- end of pull-right class -->
+            </div>
+        </div>
+    </div>
+    <!-- end of card-footer -->
+</div>

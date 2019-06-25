@@ -47,6 +47,10 @@ const routes: Routes = [
       {
         path: 'enterprises',
         loadChildren: './enterprises/enterprises.module#EnterprisesModule'
+      },
+      {
+        path: 'production-process',
+        loadChildren: './production/production.module#ProductionModule'
       }
     ]
   },
