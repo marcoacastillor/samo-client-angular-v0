@@ -67,6 +67,7 @@ export const environment = {
   rol_employee: 'Employee',
   state_rol_person_active: 'Activo',
   salary_type: 'SALARY_TYPE',
+  cutting_period_production: 'CUTTING_PERIOD_PRODUCTION',
 
   state_initial_purchase: 'CREADA',
   state_payment_purchase: 'PAGADA',
@@ -81,7 +82,7 @@ export const environment = {
   size_enterprise: 'SIZE_ENTERPRISE',
   type_product_internal_prd: 'Producción interna',
   type_product_input: 'Insumo',
-
+  type_product_intermediaty: 'Producto Intermedio',
 };
 
 /*

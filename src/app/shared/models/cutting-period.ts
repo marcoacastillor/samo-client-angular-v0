@@ -4,4 +4,6 @@ export class CuttingPeriod {
     public period: string;
     public date_init: Date;
     public date_end: Date;
+
+    public defined_period: string;
 }

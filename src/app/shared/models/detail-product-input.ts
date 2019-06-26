@@ -4,4 +4,6 @@ export class DetailProductInput {
     public fk_id_product: number;
     public amount_use_product: number;
     public name: string;
+    public category: string;
+    public presentation: string;
 }

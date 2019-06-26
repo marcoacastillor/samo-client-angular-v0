@@ -5,27 +5,37 @@
             <div class="col-sm-12 card-title"><strong class="text-small">Información detallada</strong></div>
         </div>
     </div>
-    <pre>{{ dataProduct | json }}</pre>
     <div class="card-body">
         <div class="row">
-            <div class="col-sm-6">
+            <div class="col-sm-4">
                 <div class="row">
                     <app-main-info
                     [productionProcess]="productionProcess"
+                    (onUpdate)="update($event)"
                     ></app-main-info> 
                 </div>
+            </div>
+            <div class="col-sm-4">
                 <div class="row">
                     <app-periods-info
+                    [productionProcess]="productionProcess"
                     [cuttingPeriodList]="cuttingPeriodList"
                     (getData)="onGetData($event)"
+                    (onCreatePeriod)="onCreatePeriod($event)"
+                    (onDeletePeriod)="onDeletePeriod($event)"
                     ></app-periods-info>
                 </div>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-4">
                 <div class="row">
                     <app-periods-product-info
                     [productLst]="dataProduct.products"
                     ></app-periods-product-info>
+                </div>
+                <div class="row">
+                    <app-periods-intermediaty-info
+                    [productLst]="dataProduct.intermediaty"
+                    ></app-periods-intermediaty-info>
                 </div>
                 <div class="row">
                     <app-periods-input-info

@@ -5,6 +5,9 @@
         [cuttingPeriodList]="cuttingPeriodList"
         [dataProduct]="dataProduct"
         (getData)="onGetData($event)"
+        (onUpdate)="update($event)"
+        (createPeriod)="onCreatePeriod($event)"
+        (deletePeriod)="onDeletePeriod($event)"
         >
         </app-show-production-process>
     </div>

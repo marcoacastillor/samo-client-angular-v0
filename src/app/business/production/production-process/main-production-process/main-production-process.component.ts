@@ -63,12 +63,51 @@ export class MainProductionProcessComponent implements OnInit {
     )
   }
 
+  update(productionProcess: ProductionProcess){
+    this.productionProcessService.update$(productionProcess).subscribe(
+      productionProcess => {
+        this.productionProcess = productionProcess;
+        this.setMessage('Operación exitosa');
+      },
+      this.onError
+    )
+  }
+
+  onCreatePeriod(cuttingPeriod: CuttingPeriod){
+    this.cuttingPeriodService.store$(cuttingPeriod).subscribe(
+      () => this.loadCuttingPeriod(cuttingPeriod.fk_id_production_process)
+    )
+  }
+
+  onDeletePeriod(id:number){
+    this.cuttingPeriodService.delete$(id).subscribe(
+      cuttingPeriod => {
+        this.loadCuttingPeriod(cuttingPeriod.fk_id_production_process);
+      }
+    )
+  }
+
+  /*
+  * ------------------------------------------
+  * Funciones validación de resultado
+  * ------------------------------------------
+  */
+  private setMessage(message: string){
+    this.globalStoreService.dispatchUserMessage('200', message);
+  }
+  
+
+  private onError = (error: any) => {
+    this.globalStoreService.dispatchUserMessage(error.status, error.statusText + ' : ' + error.error.error);
+  }
+
 
   /*
   * ------------------------------------------
   * Funciones visualización
   * ------------------------------------------
   */
+
 
   public getClassList() {
     return this.utilService.getClassList(this.showPrdProcess);

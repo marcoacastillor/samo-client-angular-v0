@@ -1,1 +1,24 @@
-{{ inputsProductLst | json }}
+<h5 class="card-title">Listado de insumos utilizados en el período seleccionado</h5>
+<div class="row">
+    <div class="col-sm-12 table-responsive">
+        <table class="table table-sm">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Categoría</th>
+                    <th>Presentación</th>
+                    <th>Cantidad de producto</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let prd of inputsProductLst">
+                    <td>{{ prd.name }}</td>
+                    <td>{{ prd.category }}</td>
+                    <td>{{ prd.presentation }}</td>
+                    <td>{{ prd.amount_use_product | json }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- end of col-sm-8 -->
+</div>        

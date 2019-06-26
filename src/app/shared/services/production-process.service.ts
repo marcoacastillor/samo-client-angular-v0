@@ -27,4 +27,15 @@ export class ProductionProcessService {
       })
     );
   }
+
+  public update$(productionProcess: ProductionProcess): Observable<ProductionProcess> {
+    return this.userService.validateOptionByToken('PRD_PRCSS_UPD').pipe(
+      switchMap(validate => {
+        if (validate) {
+          return this.http.put<ProductionProcess>(this._url,productionProcess);
+        }
+      })
+    );
+  }
+
 }

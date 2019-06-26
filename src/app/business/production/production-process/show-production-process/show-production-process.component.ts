@@ -14,7 +14,10 @@ export class ShowProductionProcessComponent implements OnInit {
   @Input() public dataProduct: DataProductCuttingPeriod[];
     
   @Output() public getData = new EventEmitter<Number>();
-  
+  @Output() public onUpdate = new EventEmitter<ProductionProcess>();
+  @Output() public createPeriod = new EventEmitter<CuttingPeriod>();
+  @Output() public deletePeriod = new EventEmitter<Number>();
+    
   constructor(
   ) { }
 
@@ -24,4 +27,16 @@ export class ShowProductionProcessComponent implements OnInit {
   onGetData(id_cutting_period: number){
     this.getData.emit(id_cutting_period);
   }  
+
+  update(productionProcess: ProductionProcess){
+    this.onUpdate.emit(productionProcess);
+  }
+
+  onCreatePeriod(cuttingPeriod: CuttingPeriod){
+    this.createPeriod.emit(cuttingPeriod);
+  }
+
+  onDeletePeriod(id: number){
+    this.deletePeriod.emit(id);
+  }
 }

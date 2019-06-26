@@ -16,6 +16,13 @@ import { PeriodsProductInfoComponent } from './production-process/show-productio
 import { PeriodsInputInfoComponent } from './production-process/show-production-process/periods-input-info/periods-input-info.component';
 import { CuttingPeriodService } from 'src/app/shared/services/cutting-period.service';
 import { DetailProductInputService } from 'src/app/shared/services/detail-product-input.service';
+import { PeriodsIntermediatyInfoComponent } from './production-process/show-production-process/periods-intermediaty-info/periods-intermediaty-info.component';
+import { MainInfoModalComponent } from './production-process/show-production-process/main-info/main-info-modal/main-info-modal.component';
+import { PeriodInputInfoModalComponent } from './production-process/show-production-process/periods-input-info/period-input-info-modal/period-input-info-modal.component';
+import { PeriodIntermediatyInfoModalComponent } from './production-process/show-production-process/periods-intermediaty-info/period-intermediaty-info-modal/period-intermediaty-info-modal.component';
+import { PeriodProductInfoModalComponent } from './production-process/show-production-process/periods-product-info/period-product-info-modal/period-product-info-modal.component';
+import { FormToolsService } from 'src/app/shared/services/form-tools.service';
+import { ParameterService } from 'src/app/shared/services/parameter.service';
 
 @NgModule({
   imports: [
@@ -26,7 +33,7 @@ import { DetailProductInputService } from 'src/app/shared/services/detail-produc
     OwlDateTimeModule, 
     OwlNativeDateTimeModule,
   ],
-  providers: [ProductionProcessService, UtilsService, CuttingPeriodService, DetailProductInputService],
-  declarations: [ListProductionProcessComponent, MainProductionProcessComponent, ShowProductionProcessComponent, MainInfoComponent, PeriodsInfoComponent, PeriodsProductInfoComponent, PeriodsInputInfoComponent]
+  providers: [ProductionProcessService, UtilsService, CuttingPeriodService, DetailProductInputService, FormToolsService, ParameterService],
+  declarations: [ListProductionProcessComponent, MainProductionProcessComponent, ShowProductionProcessComponent, MainInfoComponent, PeriodsInfoComponent, PeriodsProductInfoComponent, PeriodsInputInfoComponent, PeriodsIntermediatyInfoComponent, MainInfoModalComponent, PeriodInputInfoModalComponent, PeriodIntermediatyInfoModalComponent, PeriodProductInfoModalComponent]
 })
 export class ProductionModule { }

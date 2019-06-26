@@ -27,4 +27,26 @@ export class CuttingPeriodService {
       })
     );
   }
+
+  public store$(cuttingPeriod: CuttingPeriod): Observable<CuttingPeriod> {
+    return this.userService.validateOptionByToken('CUTT_PERIOD_CRT').pipe(
+      switchMap(validate => {
+        if (validate) {
+          return this.http.post<CuttingPeriod>(this._url,cuttingPeriod);
+        }
+      })
+    );
+  }
+
+  public delete$(id: number): Observable<CuttingPeriod> {
+    let url = this._url + '/' + id.toString();
+    return this.userService.validateOptionByToken('CUTT_PERIOD_DEL').pipe(
+      switchMap(validate => {
+        if (validate) {
+          return this.http.delete<CuttingPeriod>(url);
+        }
+      })
+    );
+  }
+  
 }
