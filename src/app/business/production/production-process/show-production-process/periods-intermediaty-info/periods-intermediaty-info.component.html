@@ -5,7 +5,7 @@
             <table class="table table-sm table-striped">
                 <thead class="bg-secondary text-white">
                     <tr>
-                        <th>Nombre</th>
+                        <th colspan="2">Nombre</th>
                         <th>Categoría</th>
                         <th>Presentación</th>
                         <th>Cantidad de producto</th>
@@ -13,6 +13,11 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let prd of productLst">
+                        <td>
+                            <button type="button" (click)="selectDetailProductInput(prd)" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#deleteDetailProductInputInter">
+                                <fa-icon [icon]="faTrash" class="text-outline-danger mb-2 mr-1"></fa-icon>
+                            </button>
+                        </td>
                         <td>{{ prd.name }}</td>
                         <td>{{ prd.category }}</td>
                         <td>{{ prd.presentation }}</td>
@@ -20,6 +25,30 @@
                     </tr>
                 </tbody>
             </table>    
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="deleteDetailProductInputInter" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Confirmación de mensaje</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="alert alert-danger" role="alert">
+                Se va a eliminar un registro, desea confirmar la operación?.
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="button" (click)="deleteDetailProduct()" data-dismiss="modal" class="btn btn-danger">Eliminar</button>
+        </div>
         </div>
     </div>
 </div>

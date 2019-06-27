@@ -39,5 +39,16 @@ export class DetailProductInputService {
     );
   }
 
+  public delete$(id: number): Observable<DetailProductInput> {
+    let url = this._url + '/' + id.toString();
+    return this.userService.validateOptionByToken('DETAIL_PRD_INPUT_DEL').pipe(
+      switchMap(validate => {
+        if (validate) {
+          return this.http.delete<DetailProductInput>(url);
+        }
+      })
+    );
+  }
+
   
 }

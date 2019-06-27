@@ -22,6 +22,7 @@ export class ShowProductionProcessComponent implements OnInit {
   @Output() public onUpdate = new EventEmitter<ProductionProcess>();
   @Output() public createPeriod = new EventEmitter<CuttingPeriod>();
   @Output() public deletePeriod = new EventEmitter<Number>();
+  @Output() public deletailDetPrd = new EventEmitter<Number>();
 
   @Output() public onView = new EventEmitter<Boolean>();
   
@@ -49,6 +50,10 @@ export class ShowProductionProcessComponent implements OnInit {
 
   viewList(){
     this.onView.emit(false);
+  }
+
+  onDeleteDetail(id:number){
+    this.deletailDetPrd.emit(id);
   }
   
 }

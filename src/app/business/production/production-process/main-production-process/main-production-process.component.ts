@@ -89,6 +89,16 @@ export class MainProductionProcessComponent implements OnInit {
     )
   }
 
+  onDeletailDetPrd(id:number){
+    this.detailProductInputService.delete$(id).subscribe(
+      detailPrdInput => {
+        this.onGetData(detailPrdInput.fk_id_cutting_period);
+        this.setMessage('Se eliminó registro exitosamente');
+      }
+    )
+  }
+
+
   onView(showView: boolean){
     this.showPrdProcess = showView;
   }

@@ -15,6 +15,7 @@ import { ProductService } from 'src/app/shared/services/product.service';
 export class ProductFormModalComponent implements OnInit, OnChanges {
   detailProductForm: FormGroup;
   productLst: Product[] = [];
+  units_available: number = 0;
 
   final_product: string = environment.type_product_internal_prd;
   intermediaty_product: string = environment.type_product_intermediaty;
@@ -53,8 +54,24 @@ export class ProductFormModalComponent implements OnInit, OnChanges {
     )
   }
 
+  validateUnitsAvailable(product: Product){
+    if(product.type_product === environment.type_product_input)
+    {
+      this.units_available = product.units_available;
+    }
+    else
+    {
+      this.units_available = 0;
+    }
+  }
+
   create(){
     this.onCreateDetailProduct.emit(this.detailProductForm.value);
+    this.units_available = 0;
+    this.detailProductForm.patchValue({
+      fk_id_product: null,
+      amount_use_product: 0,
+    })
   }
 
   /*

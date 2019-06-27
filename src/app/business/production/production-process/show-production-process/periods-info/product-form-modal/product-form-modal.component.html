@@ -29,7 +29,7 @@
                                     <label for="fk_id_product">Producto</label>
                                     <select class="form-control form-control-sm text-small" formControlName="fk_id_product" required>
                                         <option value="" selected>Seleccione producto:::</option>
-                                        <option value="{{product.pk_id_product}}" *ngFor="let product of productLst">{{product.name}}</option>
+                                        <option (click)="validateUnitsAvailable(product)" value="{{product.pk_id_product}}" *ngFor="let product of productLst">{{product.name}}</option>
                                     </select>
                                     <small *ngIf="mustShowError('fk_id_product')" class="form-text alert-danger">
                                         Producto, es obligatorio
@@ -43,6 +43,13 @@
                                     <small *ngIf="mustShowError('amount_use_product')" class="form-text alert-danger">
                                         Cantidad de producto, es obligatorio
                                     </small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row margin-top-2rem" *ngIf="units_available > 0">
+                            <div class="col-sm-12 ">
+                                <div class="alert alert-info" role="alert">
+                                    El máximo de unidades disponibles para éste producto es: <h1>{{ units_available }}</h1>
                                 </div>
                             </div>
                         </div>
