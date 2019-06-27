@@ -16,7 +16,9 @@
     <div [ngClass]="getClassList()">
         <app-list-production-process
         [productionProcessList]="productionProcessList"
+        [fk_id_enterprise]="fk_id_enterprise"
         (select)="onSelect($event)"
+        (create)="onCreate($event)"
         >
         </app-list-production-process>
     </div>

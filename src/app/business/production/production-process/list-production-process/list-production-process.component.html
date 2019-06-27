@@ -6,8 +6,8 @@
             </div>
             <div class="col-sm-4 text-right">
                 <div class="btn-group btn-group-sm">
-                    <button type="button" class="btn text-ultra-small btn-sm btn-outline-primary">
-                        <fa-icon [icon]="faPlusCircle" class="text-primary mb-2 mr-1" title="Crear registro"></fa-icon>
+                    <button (click)="getParametersData()" type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target=".bd-modal-process-new-lg">
+                        <fa-icon [icon]="faPlusCircle" class="text-outline-primary mb-2 mr-1">Crear</fa-icon>
                     </button>
                 </div>
             </div>
@@ -43,3 +43,9 @@
         </div>
     </div>
 </div>
+
+<app-process-form-modal
+[definedPeriodList]="definedPeriodList"
+[fk_id_enterprise]="fk_id_enterprise"
+(onCreate)="onCreate($event)"
+></app-process-form-modal>

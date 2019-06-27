@@ -28,6 +28,16 @@ export class ProductionProcessService {
     );
   }
 
+  public store$(productionProcess: ProductionProcess): Observable<ProductionProcess> {
+    return this.userService.validateOptionByToken('PRD_PRCSS_CRT').pipe(
+      switchMap(validate => {
+        if (validate) {
+          return this.http.post<ProductionProcess>(this._url,productionProcess);
+        }
+      })
+    );
+  }
+
   public update$(productionProcess: ProductionProcess): Observable<ProductionProcess> {
     return this.userService.validateOptionByToken('PRD_PRCSS_UPD').pipe(
       switchMap(validate => {

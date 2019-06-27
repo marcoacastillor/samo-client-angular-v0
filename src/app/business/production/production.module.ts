@@ -22,6 +22,7 @@ import { FormToolsService } from 'src/app/shared/services/form-tools.service';
 import { ParameterService } from 'src/app/shared/services/parameter.service';
 import { ProductFormModalComponent } from './production-process/show-production-process/periods-info/product-form-modal/product-form-modal.component';
 import { ProductService } from 'src/app/shared/services/product.service';
+import { ProcessFormModalComponent } from './production-process/list-production-process/process-form-modal/process-form-modal.component';
 
 @NgModule({
   imports: [
@@ -33,6 +34,6 @@ import { ProductService } from 'src/app/shared/services/product.service';
     OwlNativeDateTimeModule,
   ],
   providers: [ProductionProcessService, UtilsService, CuttingPeriodService, DetailProductInputService, FormToolsService, ParameterService, ProductService],
-  declarations: [ListProductionProcessComponent, MainProductionProcessComponent, ShowProductionProcessComponent, MainInfoComponent, PeriodsInfoComponent, PeriodsProductInfoComponent, PeriodsInputInfoComponent, PeriodsIntermediatyInfoComponent, MainInfoModalComponent, ProductFormModalComponent]
+  declarations: [ListProductionProcessComponent, MainProductionProcessComponent, ShowProductionProcessComponent, MainInfoComponent, PeriodsInfoComponent, PeriodsProductInfoComponent, PeriodsInputInfoComponent, PeriodsIntermediatyInfoComponent, MainInfoModalComponent, ProductFormModalComponent, ProcessFormModalComponent]
 })
 export class ProductionModule { }

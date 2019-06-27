@@ -62,12 +62,24 @@ export class NewProviderComponent implements OnInit, OnChanges {
    */
   public createRegistry(){
     this.store.emit(this.enterpriseForm.value);
-    this.enterpriseForm.reset();
+    this.enterpriseForm.patchValue({
+      nit: '',
+      name: '',
+      address: '',
+      phone: '',
+      ubication_city: '',
+    });
   }
 
   public updateRegistry(){
     this.update.emit(this.enterpriseForm.value);
-    this.enterpriseForm.reset();
+    this.enterpriseForm.patchValue({
+      nit: '',
+      name: '',
+      address: '',
+      phone: '',
+      ubication_city: '',
+    });
   }
 
   /**

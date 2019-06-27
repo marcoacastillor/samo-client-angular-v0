@@ -6,10 +6,8 @@ import { GlobalStoreService } from 'src/app/core/services/global-store.service';
 import { UtilsService } from 'src/app/shared/services/utils.service';
 import { CuttingPeriodService } from 'src/app/shared/services/cutting-period.service';
 import { CuttingPeriod } from 'src/app/shared/models/cutting-period';
-import { environment } from 'src/environments/environment';
 import { DataProductCuttingPeriod } from 'src/app/shared/models/data-product-cutting-period';
 import { DetailProductInputService } from 'src/app/shared/services/detail-product-input.service';
-import { DetailProductInput } from 'src/app/shared/models/detail-product-input';
 
 @Component({
   selector: 'app-main-production-process',
@@ -19,6 +17,7 @@ import { DetailProductInput } from 'src/app/shared/models/detail-product-input';
 export class MainProductionProcessComponent implements OnInit {
   activeUser: User = new User;
   showPrdProcess: boolean = false;
+  fk_id_enterprise: number = 0;
 
   productionProcess: ProductionProcess = new ProductionProcess;
 
@@ -36,11 +35,12 @@ export class MainProductionProcessComponent implements OnInit {
 
   ngOnInit() {
     this.activeUser = this.globalStoreService.getUser();
-    this.getProductionProcessByEnterprise(this.activeUser.fk_id_enterprise);
+    this.fk_id_enterprise = this.activeUser.fk_id_enterprise;
+    this.getProductionProcessByEnterprise();
   }
 
-  private getProductionProcessByEnterprise(id_enterprise: number){
-    this.productionProcessService.getAllByEnterprise$(id_enterprise).subscribe(
+  private getProductionProcessByEnterprise(){
+    this.productionProcessService.getAllByEnterprise$(this.activeUser.fk_id_enterprise).subscribe(
       lstProductionProcess => this.productionProcessList = lstProductionProcess
     )
   }
@@ -71,6 +71,15 @@ export class MainProductionProcessComponent implements OnInit {
         this.setMessage('Operación exitosa');
       },
       this.onError
+    )
+  }
+  onCreate(prodProcess: ProductionProcess){
+    this.productionProcessService.store$(prodProcess).subscribe(
+      prodProcess => {
+        this.productionProcess = prodProcess;
+        this.getProductionProcessByEnterprise();
+        this.setMessage('Se creó registro exitosamente');
+      }
     )
   }
 

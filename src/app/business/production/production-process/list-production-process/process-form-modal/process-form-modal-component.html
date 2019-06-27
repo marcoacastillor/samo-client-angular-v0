@@ -1,0 +1,64 @@
+<!-- Large modal -->
+<div class="modal fade bd-modal-process-new-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalScrollableTitle">Crear proceso productivo</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <pre>
+                        {{ productionProcessForm.value | json }}
+                    </pre>
+                    <form [formGroup]="productionProcessForm">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="defined_period">Período definido</label>
+                                            <select class="form-control form-control-sm text-small" formControlName="defined_period" required>
+                                                <option value="{{param.value}}" *ngFor="let param of definedPeriodList">{{param.name}}</option>
+                                            </select>
+                                            <small *ngIf="mustShowError('defined_period')" class="form-text alert-danger">
+                                                Período definido, es obligatorio
+                                            </small>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="reference">Referencia</label>
+                                            <input type="text" class="form-control text-small" placeholder="Referencia" formControlName="reference" required>
+                                            <small *ngIf="mustShowError('reference')" class="form-text alert-danger">
+                                                Referencia, es obligatorio
+                                            </small>
+                                        </div>
+                                    </div>
+                    
+                                    <div class="col-sm-6">
+                                        <label for="date_init">Fecha inicial</label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="btn text-small btn-sm btn-outline-primary" [owlDateTimeTrigger]="date_init"><fa-icon [icon]="faCalendar" class="text-primary"></fa-icon></span>
+                                            </div>
+                                            <input type="text" class="form-control text-small" placeholder="Fecha inicial" formControlName="date_init" [owlDateTime]="date_init">
+                                            <owl-date-time [pickerType]="'calendar'" #date_init></owl-date-time>
+                                            <small *ngIf="mustShowError('date_init')" class="form-text alert-danger">
+                                                Fecha inicial, es obligatorio
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                <button [disabled]="productionProcessForm.invalid" data-dismiss="modal" (click)="create()" type="button" class="btn btn-primary">Guardar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
