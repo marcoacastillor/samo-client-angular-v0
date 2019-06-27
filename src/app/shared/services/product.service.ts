@@ -103,4 +103,15 @@ export class ProductService {
       })
     );
   }
+
+  public getByType$(type: string): Observable<Product[]> {
+    let url = this._url + '/get-by-type/' + type;
+    return this.userService.validateOptionByToken('PRD_GET_BY_TYPE').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.get<Product[]>(url);
+        }
+      })
+    );
+  }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ProductionProcess } from 'src/app/shared/models/production-process';
-import { faPlusCircle, faAlignJustify, faStopwatch } from '@fortawesome/free-solid-svg-icons';
+import { faPlusCircle, faAlignJustify, faStopwatch, faEye } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-list-production-process',
@@ -9,8 +9,7 @@ import { faPlusCircle, faAlignJustify, faStopwatch } from '@fortawesome/free-sol
 })
 export class ListProductionProcessComponent implements OnInit {
   faPlusCircle = faPlusCircle;
-  faAlignJustify = faAlignJustify;
-  faStopWatch = faStopwatch;
+  faEye = faEye;
 
   @Input() public productionProcessList: ProductionProcess[];
   @Output() public select = new EventEmitter<ProductionProcess>();
@@ -22,8 +21,6 @@ export class ListProductionProcessComponent implements OnInit {
   }
 
   selectElement(prdProd: ProductionProcess){
-    console.log(prdProd);
-    
     this.select.emit(prdProd);
   }
 

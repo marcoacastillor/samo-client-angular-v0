@@ -1,47 +1,52 @@
-<div class="row">
-    <div class="col-sm-8 text-left">
-        <h5 class="card-title">Períodos del proceso de producción</h5>
-    </div>
-    <div class="col-sm-4 text-right">
-        <div class="btn-group btn-group-sm">
-            <button (click)="createPeriod()" type="button" class="btn btn-outline-primary btn-sm">
-                <fa-icon [icon]="faPlusCircle" class="text-outline-primary mb-2 mr-1">Crear</fa-icon>
-            </button>
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm-8 text-left">
+                <h5 class="card-title">Períodos del proceso de producción</h5>
+            </div>
+            <div class="col-sm-4 text-right">
+                <div class="btn-group btn-group-sm">
+                    <button (click)="createPeriod()" type="button" class="btn btn-outline-primary btn-sm">
+                        <fa-icon [icon]="faPlusCircle" class="text-outline-primary mb-2 mr-1">Crear</fa-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <table class="table table-sm">
+                <thead>
+                    <tr>
+                        <th colspan="2">Periodo</th>
+                        <th>Fecha inicial</th>
+                        <th>Fecha final</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let cuttPeriod of cuttingPeriodList" id="{{cuttPeriod.pk_id_cutting_period}}">
+                        <td>
+                            <button type="button" (click)="selectPeriod(cuttPeriod)" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#deletePeriod">
+                                <fa-icon [icon]="faTrash" class="text-outline-danger mb-2 mr-1"></fa-icon>
+                            </button>    
+                            <button (click)="getDataByCuttingPeriod(cuttPeriod.pk_id_cutting_period);selectPeriod(cuttPeriod)" class="btn btn-outline-primary btn-sm" type="button">
+                                <fa-icon [icon]="faArrowCircleRight" class="text-outline-primary mb-2 mr-1"></fa-icon>
+                            </button>
+                            <button type="button" (click)="selectPeriod(cuttPeriod)" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target=".bd-modal-lg">
+                                <fa-icon [icon]="faFolderPlus" class="text-outline-primary mb-2 mr-1"></fa-icon>
+                            </button>
+                        </td>
+                        <td>{{ cuttPeriod.period }}</td>
+                        <td>{{ cuttPeriod.date_init }}</td>
+                        <td>{{ cuttPeriod.date_end }}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
-<div class="row">
-    <div class="col-sm-12 table-responsive">
-        <table class="table table-sm">
-            <thead>
-                <tr>
-                    <th colspan="2">Periodo</th>
-                    <th>Fecha inicial</th>
-                    <th>Fecha final</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let cuttPeriod of cuttingPeriodList">
-                    <td>
-                        <button type="button" (click)="selectPeriod(cuttPeriod)" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#exampleModal">
-                            <fa-icon [icon]="faTrash" class="text-outline-danger mb-2 mr-1"></fa-icon>
-                        </button>    
-                        <button (click)="getDataByCuttingPeriod(cuttPeriod.pk_id_cutting_period)" class="btn btn-outline-primary btn-sm" type="button">
-                            <fa-icon [icon]="facArchive" class="text-outline-primary mb-2 mr-1"></fa-icon>
-                        </button>
-                    </td>
-                    <td>{{ cuttPeriod.period }}</td>
-                    <td>{{ cuttPeriod.date_init }}</td>
-                    <td>{{ cuttPeriod.date_end }}</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <!-- end of col-sm-8 -->
-</div>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="deletePeriod" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
         <div class="modal-header">
@@ -62,3 +67,9 @@
         </div>
     </div>
 </div>
+
+<app-product-form-modal
+    [cuttingPeriod]="cuttingPeriod"
+    [detailProductInput]="detailProductInput"
+    (onCreateDetailProduct)="onCreateDetailProduct($event)"
+></app-product-form-modal>

@@ -2,6 +2,9 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ProductionProcess } from 'src/app/shared/models/production-process';
 import { CuttingPeriod } from 'src/app/shared/models/cutting-period';
 import { DataProductCuttingPeriod } from 'src/app/shared/models/data-product-cutting-period';
+import { DetailProductInput } from 'src/app/shared/models/detail-product-input';
+import { faThList } from '@fortawesome/free-solid-svg-icons';
+import { BookType } from 'xlsx/types';
 
 @Component({
   selector: 'app-show-production-process',
@@ -9,6 +12,8 @@ import { DataProductCuttingPeriod } from 'src/app/shared/models/data-product-cut
   styles: []
 })
 export class ShowProductionProcessComponent implements OnInit {
+  faThList = faThList;
+
   @Input() public productionProcess: ProductionProcess;
   @Input() public cuttingPeriodList: CuttingPeriod[];
   @Input() public dataProduct: DataProductCuttingPeriod[];
@@ -17,7 +22,9 @@ export class ShowProductionProcessComponent implements OnInit {
   @Output() public onUpdate = new EventEmitter<ProductionProcess>();
   @Output() public createPeriod = new EventEmitter<CuttingPeriod>();
   @Output() public deletePeriod = new EventEmitter<Number>();
-    
+
+  @Output() public onView = new EventEmitter<Boolean>();
+  
   constructor(
   ) { }
 
@@ -39,4 +46,9 @@ export class ShowProductionProcessComponent implements OnInit {
   onDeletePeriod(id: number){
     this.deletePeriod.emit(id);
   }
+
+  viewList(){
+    this.onView.emit(false);
+  }
+  
 }

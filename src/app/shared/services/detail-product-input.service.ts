@@ -28,4 +28,16 @@ export class DetailProductInputService {
       })
     );
   }
+
+  public store$(detailProductInput: DetailProductInput): Observable<DetailProductInput> {
+    return this.userService.validateOptionByToken('DETAIL_PRD_INPUT_CRT').pipe(
+      switchMap(validate => {
+        if (validate) {
+          return this.http.post<DetailProductInput>(this._url, detailProductInput);
+        }
+      })
+    );
+  }
+
+  
 }

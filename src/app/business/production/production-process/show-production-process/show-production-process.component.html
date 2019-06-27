@@ -2,45 +2,59 @@
 <div class="card">
     <div class="card-header">
         <div class="row">
-            <div class="col-sm-12 card-title"><strong class="text-small">Información detallada</strong></div>
+            <div class="col-sm-8 card-title">
+                <h5>Información detallada</h5>
+            </div>
+            <div class="col-sm-4 text-right">
+                <div class="btn-group btn-group-sm">
+                    <button (click)="viewList()" type="button" class="btn btn-outline-primary btn-sm">
+                        <fa-icon [icon]="faThList" class="text-outline-primary mb-2 mr-1"></fa-icon>
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
     <div class="card-body">
         <div class="row">
             <div class="col-sm-4">
                 <div class="row">
-                    <app-main-info
-                    [productionProcess]="productionProcess"
-                    (onUpdate)="update($event)"
-                    ></app-main-info> 
+                    <div class="col-sm-12">
+                        <app-main-info
+                        [productionProcess]="productionProcess"
+                        (onUpdate)="update($event)"
+                        ></app-main-info> 
+                    </div>
+                </div>
+                <div class="row margin-top-1rem">
+                    <div class="col-sm-12">
+                        <app-periods-info
+                        [productionProcess]="productionProcess"
+                        [cuttingPeriodList]="cuttingPeriodList"
+                        (getData)="onGetData($event)"
+                        (onCreatePeriod)="onCreatePeriod($event)"
+                        (onDeletePeriod)="onDeletePeriod($event)"
+                        ></app-periods-info>
+                    </div>
                 </div>
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-8">
                 <div class="row">
-                    <app-periods-info
-                    [productionProcess]="productionProcess"
-                    [cuttingPeriodList]="cuttingPeriodList"
-                    (getData)="onGetData($event)"
-                    (onCreatePeriod)="onCreatePeriod($event)"
-                    (onDeletePeriod)="onDeletePeriod($event)"
-                    ></app-periods-info>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="row">
-                    <app-periods-product-info
-                    [productLst]="dataProduct.products"
-                    ></app-periods-product-info>
-                </div>
-                <div class="row">
-                    <app-periods-intermediaty-info
-                    [productLst]="dataProduct.intermediaty"
-                    ></app-periods-intermediaty-info>
-                </div>
-                <div class="row">
-                    <app-periods-input-info
-                    [inputsProductLst]="dataProduct.inputs"
-                    ></app-periods-input-info>
+                    <div class="col-sm-12">
+                        <app-periods-product-info
+                        [productLst]="dataProduct.products"
+                        ></app-periods-product-info>
+                    </div>
+                    <div class="col-sm-12 margin-top-1rem">
+                        <app-periods-intermediaty-info
+                        [productLst]="dataProduct.intermediaty"
+                        ></app-periods-intermediaty-info>
+                    </div>
+                    <div class="col-sm-12 margin-top-1rem">
+                        <app-periods-input-info
+                        [inputsProductLst]="dataProduct.inputs"
+                        ></app-periods-input-info>
+                    </div>      
+                
                 </div>
             </div>
         </div>

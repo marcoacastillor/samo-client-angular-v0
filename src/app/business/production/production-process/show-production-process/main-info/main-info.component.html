@@ -1,42 +1,59 @@
-<div class="row">
-    <div class="col-sm-8 text-left">
-        <h5 class="card-title">Proceso de producción</h5>
-    </div>
-    <div class="col-sm-4 text-right">
-        <div class="btn-group btn-group-sm">
-            <button (click)="getParametersData()" type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target=".bd-example-modal-lg">
-                <fa-icon [icon]="faEdit" class="text-outline-primary mb-2 mr-1">Editar</fa-icon>
-            </button>
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm-8 text-left">
+                <h5 class="card-title">Proceso de producción</h5>
+            </div>
+            <div class="col-sm-4 text-right">
+                <div class="btn-group btn-group-sm">
+                    <button (click)="getParametersData()" type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target=".bd-example-modal-lg">
+                        <fa-icon [icon]="faEdit" class="text-outline-primary mb-2 mr-1">Editar</fa-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <strong>Referencia</strong>
+            </div>
+            <div class="col-sm-8">
+                {{ productionProcess.reference}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <strong>Período definido</strong>
+            </div>
+            <div class="col-sm-8">
+                {{ productionProcess.defined_period}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <strong>Fecha inicial</strong>
+            </div>
+            <div class="col-sm-8">
+                {{ productionProcess.date_init}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <strong>Fecha final</strong>
+            </div>
+            <div class="col-sm-8">
+                {{ productionProcess.date_end}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <strong>Estado</strong>
+            </div>
+            <div class="col-sm-8">
+                {{ productionProcess.state}}
+            </div>
         </div>
     </div>
 </div>
-<div class="row">
-    <div class="col-sm-12 table-responsive">
-        <table class="table table-sm">
-            <tr>
-                <th>Período definido</th>
-                <td>{{ productionProcess.defined_period}}</td>
-            </tr>
-            <tr>
-                <th>Referencia</th>
-                <td>{{ productionProcess.reference}}</td>
-            </tr>
-            <tr>
-                <th>Fecha de inicio</th>
-                <td>{{ productionProcess.date_init}}</td>
-            </tr>
-            <tr>
-                <th>Fecha de finalización</th>
-                <td>{{ productionProcess.date_end}}</td>
-            </tr>
-            <tr>
-                <th>Estado</th>
-                <td>{{ productionProcess.state}}</td>
-            </tr>
-        </table>
-    </div>
-    <!-- end of col-sm-8 -->
-</div>   
 
 <app-main-info-modal
 [definedPeriodList]="definedPeriodList"

@@ -9,6 +9,7 @@ import { CuttingPeriod } from 'src/app/shared/models/cutting-period';
 import { environment } from 'src/environments/environment';
 import { DataProductCuttingPeriod } from 'src/app/shared/models/data-product-cutting-period';
 import { DetailProductInputService } from 'src/app/shared/services/detail-product-input.service';
+import { DetailProductInput } from 'src/app/shared/models/detail-product-input';
 
 @Component({
   selector: 'app-main-production-process',
@@ -83,8 +84,13 @@ export class MainProductionProcessComponent implements OnInit {
     this.cuttingPeriodService.delete$(id).subscribe(
       cuttingPeriod => {
         this.loadCuttingPeriod(cuttingPeriod.fk_id_production_process);
+        this.setMessage('Se eliminó registro exitosamente');
       }
     )
+  }
+
+  onView(showView: boolean){
+    this.showPrdProcess = showView;
   }
 
   /*

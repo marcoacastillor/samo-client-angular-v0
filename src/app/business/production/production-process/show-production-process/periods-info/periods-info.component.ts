@@ -1,7 +1,10 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { CuttingPeriod } from 'src/app/shared/models/cutting-period';
-import { faAlignJustify, faArchive, faPlusCircle, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faAlignJustify, faArchive, faPlusCircle, faTrash, faArrowCircleRight, faFolderPlus } from '@fortawesome/free-solid-svg-icons';
 import { ProductionProcess } from 'src/app/shared/models/production-process';
+import { DetailProductInput } from 'src/app/shared/models/detail-product-input';
+import { DetailProductInputService } from 'src/app/shared/services/detail-product-input.service';
+import { UtilsService } from 'src/app/shared/services/utils.service';
 
 @Component({
   selector: 'app-periods-info',
@@ -10,11 +13,13 @@ import { ProductionProcess } from 'src/app/shared/models/production-process';
 })
 export class PeriodsInfoComponent implements OnInit {
   faAlignJustify = faAlignJustify;
-  facArchive = faArchive;
+  faArrowCircleRight = faArrowCircleRight;
   faPlusCircle =  faPlusCircle;
   faTrash = faTrash;
+  faFolderPlus = faFolderPlus;
 
   cuttingPeriod: CuttingPeriod = new CuttingPeriod;
+  detailProductInput: DetailProductInput = new DetailProductInput;
 
   @Input() public cuttingPeriodList: CuttingPeriod[];
   @Input() public productionProcess: ProductionProcess;
@@ -23,13 +28,32 @@ export class PeriodsInfoComponent implements OnInit {
   @Output() public onCreatePeriod = new EventEmitter<CuttingPeriod>();
   @Output() public onDeletePeriod = new EventEmitter<Number>();
   
-  constructor() { }
+  constructor(
+    private detailProductInputService: DetailProductInputService,
+    private UtilService: UtilsService,
+  ) { }
 
   ngOnInit() {
   }
 
   getDataByCuttingPeriod(id_cutting_period: number){
     this.getData.emit(id_cutting_period);
+
+    if(this.cuttingPeriod.pk_id_cutting_period)
+    {
+      const nameInputSelected = document.getElementById(this.cuttingPeriod.pk_id_cutting_period.toString()) as HTMLInputElement;
+      if(nameInputSelected)
+        nameInputSelected.className = 'node';
+
+      const nameInputNew = document.getElementById(id_cutting_period.toString()) as HTMLInputElement;
+      nameInputNew.className = 'bg-light';
+    }
+    else
+    {
+      const nameInputNew = document.getElementById(id_cutting_period.toString()) as HTMLInputElement;
+      nameInputNew.className = 'bg-light';
+    }
+    
   }
 
   createPeriod(){
@@ -48,5 +72,20 @@ export class PeriodsInfoComponent implements OnInit {
     this.onDeletePeriod.emit(this.cuttingPeriod.pk_id_cutting_period)
   }
 
+  onCreateDetailProduct(detailProduct: DetailProductInput){
+    this.detailProductInputService.store$(detailProduct).subscribe(
+      detailPrdInput => {
+        this.getDataByCuttingPeriod(detailPrdInput.fk_id_cutting_period)
+      }
+    )    
+  }
 
+  /*
+  * ------------------------------------------
+  * Funciones visualización
+  * ------------------------------------------
+  */
+  getClassSelected(row: number, selected: number){
+    return this.UtilService.getClassBySelectedObject(row, selected);
+  }
 }

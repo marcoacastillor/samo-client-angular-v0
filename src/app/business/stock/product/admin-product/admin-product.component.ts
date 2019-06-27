@@ -199,7 +199,6 @@ export class AdminProductComponent implements OnInit {
     }
 
     private onError = (error: any) => {
-      console.log(error);
       this.globalStoreService.dispatchUserMessage(error.status, error.statusText + ' : ' + error.error.error);
     }
 }

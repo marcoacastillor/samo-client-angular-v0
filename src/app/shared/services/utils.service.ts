@@ -72,6 +72,17 @@ export class UtilsService {
     }
   }
 
+  public getClassBySelectedObject(id_row:number, id_select: number)
+  {
+    if(id_row == id_select)
+    {
+      return 'bg-light text-white';
+    }
+    else{
+      return 'bg-info text-white';
+    }
+  }
+
   public getClassHeaderTable(condition: string){
     if(condition == '0'){
       return 'myWidth font-weight-bold';
