@@ -1,6 +1,6 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { Product } from 'src/app/shared/models/product';
-import { faTasks, faCalendar } from '@fortawesome/free-solid-svg-icons';
+import { faTasks, faCalendar, faThList } from '@fortawesome/free-solid-svg-icons';
 import { OperationService } from 'src/app/shared/services/operation.service';
 import * as moment from 'moment';
 import { FormGroup, FormBuilder } from '@angular/forms';
@@ -16,11 +16,13 @@ export class ShowProductComponent implements OnInit, OnChanges {
   public reportForm: FormGroup;
 
   @Input() public product: Product;
+  @Output() public onView = new EventEmitter<Boolean>();
   
   operationsList: AbstractStock = new AbstractStock;
 
   faTask = faTasks;
   faCalendar = faCalendar;
+  faThList = faThList;
 
   public dateInit: string;
   public dateEnd: string;
@@ -46,6 +48,10 @@ export class ShowProductComponent implements OnInit, OnChanges {
     this.operationService.getListByProduct$(id_product,fromDate,toDate).subscribe(
       operations => this.operationsList = operations
     )
+  }
+
+  viewList(){
+    this.onView.emit(false);
   }
 
   ngOnChanges(changes: SimpleChanges)

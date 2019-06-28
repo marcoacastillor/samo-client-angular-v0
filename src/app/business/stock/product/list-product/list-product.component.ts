@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { Results } from 'src/app/shared/models/results';
-import { faPlusCircle, faEye, faEdit, faChartArea, faGreaterThanEqual, faLessThanEqual, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faPlusCircle, faEye, faEdit, faChartArea, faGreaterThanEqual, faLessThanEqual, faSearch, faFlag } from '@fortawesome/free-solid-svg-icons';
 import { UtilsService } from 'src/app/shared/services/utils.service';
 import { environment } from 'src/environments/environment';
 import { Product } from 'src/app/shared/models/product';
@@ -18,9 +18,7 @@ export class ListProductComponent implements OnInit, OnChanges {
   faEdit = faEdit;
   faEye = faEye;
   faChartArea = faChartArea;
-  faGreater = faGreaterThanEqual;
-  faLess = faLessThanEqual;
-  faSearch = faSearch;
+  faFlag = faFlag;
   
   @Input() public productList: Results;
   @Input() public actualPg: number;
@@ -32,9 +30,6 @@ export class ListProductComponent implements OnInit, OnChanges {
   @Output() public viewReport = new EventEmitter<boolean>();
   
   
-  public totalPgs: number = 0;
-  public maxPerPg: number = 0;
-
   public valMin: number = environment.min_products;
   public valMedium: number = environment.medium_products;
 
@@ -44,7 +39,6 @@ export class ListProductComponent implements OnInit, OnChanges {
   ) { }
 
   ngOnInit() {
-    this.calculateRegs();
     this.initUpdForm();
   }
 
@@ -56,10 +50,6 @@ export class ListProductComponent implements OnInit, OnChanges {
      });
    }
 
-  private calculateRegs(){
-    this.maxPerPg = (Number(this.actualPg) * Number(this.regPerPg)+ Number(this.regPerPg));
-  }
-  
   ngOnChanges(changes: SimpleChanges)
   {
     if(changes.productList)
@@ -67,26 +57,8 @@ export class ListProductComponent implements OnInit, OnChanges {
       if(changes.productList.currentValue)
       {
         this.productList = changes.productList.currentValue;
-        this.totalPgs = Math.ceil(this.productList.number_results / this.regPerPg);
-        this.actualPg = 0;
       }
     }
-  }
-
-  public addActualPg(){
-    this.actualPg = this.actualPg + 1;
-    this.calculateRegs();
-  }
-
-  public delActualPg(){
-    this.actualPg = this.actualPg - 1;
-    this.calculateRegs();
-  }
-
-  public setRegPerPg(value: any){
-    this.regPerPg = value;
-    this.totalPgs = Math.ceil(this.productList.number_results / this.regPerPg);
-    this.calculateRegs();
   }
 
   public searchProduct(){
@@ -122,7 +94,7 @@ export class ListProductComponent implements OnInit, OnChanges {
   * Funciones visualización
   * ------------------------------------------
   */
- public getClassByUnits(units: number) {
+public getClassByUnits(units: number) {
   return this.utilService.getClassByUnits(units);
 }
 

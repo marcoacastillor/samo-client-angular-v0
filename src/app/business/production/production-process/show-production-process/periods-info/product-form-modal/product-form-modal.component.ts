@@ -70,7 +70,7 @@ export class ProductFormModalComponent implements OnInit, OnChanges {
     this.units_available = 0;
     this.detailProductForm.patchValue({
       fk_id_product: null,
-      amount_use_product: 0,
+      amount_use_product: '',
     })
   }
 

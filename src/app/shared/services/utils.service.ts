@@ -35,22 +35,29 @@ export class UtilsService {
     }
   }
 
+  public getClassReport(showFlag: boolean): string {
+    if ( showFlag) {
+      return 'visible col-sm-12';
+    } else {
+      return 'hidden';
+    }
+  }
+
   public getClassByUnits(units: number){
     let valMin = environment.min_products;
     let valMedium = environment.medium_products;
 
     if(units < valMin){
-      return 'row text-ultra-small alert alert-danger';
+      return 'text-danger mb-2 mr-1';
     }
 
     if(units >= valMin && units <= valMedium){
-      return 'row text-ultra-small alert alert-warning';
+      return 'text-warning mb-2 mr-1';
     }
 
     if(units > valMedium){
-      return 'row text-ultra-small alert alert-success';
+      return 'text-success mb-2 mr-1';
     }
-
   }
 
 

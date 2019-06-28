@@ -1,271 +1,222 @@
-<app-card caption="Detalle de producto {{product.name}}">
-    <main>
+<!-- card para información sobre proceso productivo-->
+<div class="card">
+    <div class="card-header">
         <div class="row">
-            <!-- Inicio información proveedor-->
-            <div class="col-sm-12 text-ultra-small ">
-                <div class="row border-bottom-2 bg-gray style-header-table">
-                    <div class="col-sm-12">
-                        Información básica
-                    </div>
-                </div>
-                <div class="row border-bottom-2 style-header-table">
-                    <div class="col-sm-6 text-ultra-small">
-                        <div class="row border-bottom-2 bg-gray style-header-table">
-                            <div class="col-sm-12">
-                                Producto
-                            </div>
-                        </div>
-                        <div class="row border-bottom-1">
-                            <div class="col-sm-6 text-small">
-                                Código: 
-                            </div>
-                            <div class="col-sm-6 card-title-custom bg-gray">
-                                {{ product.code }}
-                            </div>
-                        </div>
-                        <div class="row border-bottom-1">
-                            <div class="col-sm-6 text-small">
-                                Nombre: 
-                            </div>
-                            <div class="col-sm-6 card-title-custom bg-gray">
-                                {{ product.name }}
-                            </div>
-                        </div>
-                        <div class="row border-bottom-1">
-                            <div class="col-sm-6 text-small">
-                                Unidades por paquete: 
-                            </div>
-                            <div class="col-sm-6 card-title-custom bg-gray">
-                                {{ product.units_package | number }}
-                            </div>
-                        </div>
-                        <div class="row border-bottom-1">
-                            <div class="col-sm-6 text-small">
-                                Precio venta por unidad: 
-                            </div>
-                            <div class="col-sm-6 card-title-custom bg-gray">
-                                {{ product.sale_price_unit | number }}
-                            </div>
-                        </div>
-                        <div class="row border-bottom-1">
-                            <div class="col-sm-6 text-small">
-                                Precio venta por paquete: 
-                            </div>
-                            <div class="col-sm-6 card-title-custom bg-gray">
-                                {{ product.sale_price_package | number }}
-                            </div>
-                        </div>
-                        <div class="row border-bottom-1">
-                            <div class="col-sm-6 text-small">
-                                Unidades disponibles: 
-                            </div>
-                            <div class="col-sm-6 card-title-custom bg-gray">
-                                {{ product.units_available | number }}
-                            </div>
-                        </div>
-                        <div class="row border-bottom-1">
-                            <div class="col-sm-6 text-small">
-                                Precio de costo unidad: 
-                            </div>
-                            <div class="col-sm-6 card-title-custom bg-gray">
-                                {{ product.cost_price | number }}
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6 text-ultra-small">
-                        <div class="row border-bottom-2 bg-gray style-header-table">
-                            <div class="col-sm-12">
-                                Datos adicionales
-                            </div>
-                        </div>
-                        <div class="row border-bottom-1">
-                            <div class="col-sm-4 text-small">
-                                Tipo de producto: 
-                            </div>
-                            <div class="col-sm-8 card-title-custom bg-gray">
-                                {{ product.type_product }}
-                            </div>
-                        </div>
-                        <div class="row border-bottom-1">
-                            <div class="col-sm-4 text-small">
-                                Referencia: 
-                            </div>
-                            <div class="col-sm-8 card-title-custom bg-gray">
-                                {{ product.reference }}
-                            </div>
-                        </div>
-                        <div class="row border-bottom-1">
-                            <div class="col-sm-4 text-small">
-                                Categoría: 
-                            </div>
-                            <div class="col-sm-8 card-title-custom bg-gray">
-                                {{ product.category }}
-                            </div>
-                        </div>
-                        <div class="row border-bottom-1">
-                            <div class="col-sm-4 text-small">
-                                Presentación
-                            </div>
-                            <div class="col-sm-8 card-title-custom bg-gray">
-                                {{ product.presentation }}
-                            </div>
-                        </div>
-                        <div class="row border-bottom-1">
-                            <div class="col-sm-4 text-small">
-                                Talla
-                            </div>
-                            <div class="col-sm-8 card-title-custom bg-gray">
-                                {{ product.size }}
-                            </div>
-                        </div>
-                        <div class="row border-bottom-1">
-                            <div class="col-sm-4 text-small">
-                                Color
-                            </div>
-                            <div class="col-sm-8 card-title-custom bg-gray">
-                                {{ product.color }}
-                            </div>
-                        </div>
-                        <div class="row border-bottom-1">
-                            <div class="col-sm-4 text-small">
-                                Marca
-                            </div>
-                            <div class="col-sm-8 card-title-custom bg-gray">
-                                {{ product.trademark }}
-                            </div>
-                        </div>
-                    </div>
+            <div class="col-sm-8 card-title">
+                <h5>Información detallada</h5>
+            </div>
+            <div class="col-sm-4 text-right">
+                <div class="btn-group btn-group-sm">
+                    <button (click)="viewList()" type="button" class="btn btn-outline-primary btn-sm">
+                        <fa-icon [icon]="faThList" class="text-outline-primary mb-2 mr-1"></fa-icon>Ver todos
+                    </button>
                 </div>
             </div>
         </div>
-        
-
-        <form [formGroup]="reportForm">
-            <div class="row margin-top">
-                <div class="col-sm-12 alert alert-info" role="alert">
-                    Muestra los movimientos y compras realizadas para el producto seleccionado, desde hace <strong>{{ days_sold }}</strong> días.
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-4">
-                    <label for="from_date">Fecha inicial</label>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="btn text-small btn-sm btn-outline-primary" [owlDateTimeTrigger]="from_date"><fa-icon [icon]="faCalendar" class="text-primary"></fa-icon></span>
-                        </div>
-                        <input type="text" class="form-control text-small" placeholder="Desde" formControlName="from_date" [owlDateTime]="from_date">
-                        <owl-date-time [pickerType]="'calendar'" #from_date></owl-date-time>
-                        <div class="col-sm-12">
-                            <small class="form-text alert-primary">
-                                Fecha inicial rango de venta.
-                            </small>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <label for="to_date">Fecha final</label>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="btn text-small btn-sm btn-outline-primary" [owlDateTimeTrigger]="to_date"><fa-icon [icon]="faCalendar" class="text-primary"></fa-icon></span>
-                        </div>
-                        <input type="text" class="form-control text-small" placeholder="Hasta" formControlName="to_date" [owlDateTime]="to_date">
-                        <owl-date-time [pickerType]="'calendar'" #to_date></owl-date-time>
-                        <div class="col-sm-12">
-                            <small class="form-text alert-primary">
-                                Fecha final de rango de venta.
-                            </small>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4 row align-items-center">            
-                    <button type="submit" class="btn btn-outline-primary btn-sm mb-2 mr-1" (click)="getDetails(product.pk_id_product)">Buscar</button>
-                </div>
-            </div>
-        </form>
-        
-        <div class="row" *ngIf="operationsList">
-            <div class="col-sm-6 text-ultra-small">
-                <div class="row border-bottom-2 bg-gray style-header-table">
-                    <div class="col-sm-12">
-                        Compras
-                    </div>
-                </div>
-                <div class="row border-bottom-2 bg-gray text-ultra-small">
-                    <div class="col-sm-6">
-                        Factura
-                    </div>
-                    <div class="col-sm-3">
-                        Fecha
-                    </div>
-                    <div class="col-sm-3">
-                        Cantidad
-                    </div>
-                </div>
-                <div class="row border-bottom-1" *ngFor="let opr of operationsList.purchase">
-                    <div class="col-sm-6 text-small">
-                        {{ opr.number_invoice }}
-                    </div>
-                    <div class="col-sm-3 text-small">
-                        {{ opr.date_operation }}
-                    </div>
-                    <div class="col-sm-3 card-title-custom bg-gray">
-                        {{ opr.number_units + (opr.number_package * product.units_package) }} : 
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 text-ultra-small">
-                <div class="row border-bottom-2 bg-gray style-header-table">
-                    <div class="col-sm-12">
-                        Ventas
-                    </div>
-                </div>
-                <div class="row border-bottom-2 bg-gray text-ultra-small">
-                    <div class="col-sm-6">
-                        Factura
-                    </div>
-                    <div class="col-sm-3">
-                        Fecha
-                    </div>
-                    <div class="col-sm-3">
-                        Cantidad
-                    </div>
-                </div>
-                
-                <div class="row border-bottom-1" *ngFor="let opr of operationsList.sales">
-                    <div class="col-sm-6 text-small">
-                        {{ opr.number_invoice }}
-                    </div>
-                    <div class="col-sm-3 text-small">
-                        {{ opr.date_operation }}
-                    </div>
-                    <div class="col-sm-3 card-title-custom bg-gray">
-                        {{ opr.number_units + (opr.number_package * product.units_package) }} 
-                    </div>
-                </div>
-            </div>
-        </div>
+    </div>
+    <div class="card-body">
         <div class="row">
-            <div class="col-sm-6 text-ultra-small" *ngIf="operationsList.purchase">
-                <div class="row border-bottom-2 bg-gray style-header-table">
-                    <div class="col-sm-9 align-self-end">
-                        Total compras
-                    </div>
-                    <div class="col-sm-3 align-self-end">
-                        {{ operationsList.purchase.number_units + (operationsList.purchase.number_package * product.units_package) | number}}
+            <div class="col-sm-4">
+                <!-- Tarjeta de información básica-->
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-12 text-left">
+                                <h5 class="card-title">Detalle de producto</h5>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <table class="table table-sm table-striped">
+                                <tr>
+                                    <th>Nombre</th>
+                                    <td>{{ product.name}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Categoría</th>
+                                    <td>{{ product.category}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Presentación</th>
+                                    <td>{{ product.presentation}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Tipo de producto</th>
+                                    <td>{{ product.type_product}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Unidades disponibles</th>
+                                    <td>{{ product.units_available}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Referencia</th>
+                                    <td>{{ product.reference}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Unidades por paquete</th>
+                                    <td>{{ product.units_package }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Precio de venta por unidad</th>
+                                    <td>{{ product.sale_price_unit }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Precio de venta por paquete</th>
+                                    <td>{{ product.sale_price_package}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Precio de costo</th>
+                                    <td>{{ product.cost_price | number}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Tamaño</th>
+                                    <td>{{ product.size}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Color</th>
+                                    <td>{{ product.color}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Marca</th>
+                                    <td>{{ product.tradermark}}</td>
+                                </tr>
+                            </table>
+                        </div>                  
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6 text-ultra-small" *ngIf="operationsList.sales">
-                <div class="row border-bottom-2 bg-gray style-header-table">
-                    <div class="col-sm-9 align-self-end">
-                        Total ventas
-                    </div>
-                    <div class="col-sm-3 align-self-end">
-                        {{ operationsList.sales.number_units + (operationsList.sales.number_packages * product.units_package) | number}}
+            <div class="col-sm-8">
+                <!-- Tarjeta de información básica-->
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-12 text-left">
+                                <h5 class="card-title">Información de compras y ventas de producto</h5>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <form [formGroup]="reportForm">
+                                    <div class="row margin-top">
+                                        <div class="col-sm-12 alert alert-info" role="alert">
+                                            Muestra los movimientos y compras realizadas para el producto seleccionado, desde hace <strong>{{ days_sold }}</strong> días.
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label for="from_date">Fecha inicial</label>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="btn text-small btn-sm btn-outline-primary" [owlDateTimeTrigger]="from_date"><fa-icon [icon]="faCalendar" class="text-primary"></fa-icon></span>
+                                                </div>
+                                                <input type="text" class="form-control text-small" placeholder="Desde" formControlName="from_date" [owlDateTime]="from_date">
+                                                <owl-date-time [pickerType]="'calendar'" #from_date></owl-date-time>
+                                                <div class="col-sm-12">
+                                                    <small class="form-text alert-primary">
+                                                        Fecha inicial rango de venta.
+                                                    </small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <label for="to_date">Fecha final</label>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="btn text-small btn-sm btn-outline-primary" [owlDateTimeTrigger]="to_date"><fa-icon [icon]="faCalendar" class="text-primary"></fa-icon></span>
+                                                </div>
+                                                <input type="text" class="form-control text-small" placeholder="Hasta" formControlName="to_date" [owlDateTime]="to_date">
+                                                <owl-date-time [pickerType]="'calendar'" #to_date></owl-date-time>
+                                                <div class="col-sm-12">
+                                                    <small class="form-text alert-primary">
+                                                        Fecha final de rango de venta.
+                                                    </small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 row align-items-center">            
+                                            <button type="submit" class="btn btn-outline-primary btn-sm mb-2 mr-1" (click)="getDetails(product.pk_id_product)">Buscar</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div> 
+                        <div class="row" *ngIf="operationsList">
+                            <div class="col-sm-6">
+                                <!-- Tarjeta de información básica-->
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-sm-12 text-left">
+                                                <h5 class="card-title">Compras</h5>
+                                            </div>
+                                        </div>
+                                        <div class="row" *ngIf="operationsList.purchase">
+                                            <table class="table table-sm table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Factura</th>
+                                                        <th>Fecha</th>
+                                                        <th>Cantidad</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let opr of operationsList.purchase">
+                                                        <td>{{ opr.number_invoice }}</td>
+                                                        <td>{{ opr.date_operation }}</td>
+                                                        <td>{{ opr.number_units + (opr.number_package * product.units_package) }}</td>
+                                                    </tr>
+                                                </tbody>
+                                                <tfoot>
+                                                    <tr>
+                                                        <th colspan="2">Total de compras</th>
+                                                        <td>{{ operationsList.total_purchase[0].units + (operationsList.total_purchase[0].packages * product.units_package) | number}}</td>
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
+                                        </div>                  
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <!-- Tarjeta de información básica-->
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-sm-12 text-left">
+                                                <h5 class="card-title">Ventas</h5>
+                                            </div>
+                                        </div>
+                                        <div class="row" *ngIf="operationsList.sales">
+                                            <table class="table table-sm table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Factura</th>
+                                                        <th>Fecha</th>
+                                                        <th>Cantidad</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let opr of operationsList.sales">
+                                                        <td>{{ opr.number_invoice }}</td>
+                                                        <td>{{ opr.date_operation }}</td>
+                                                        <td>{{ opr.number_units + (opr.number_package * product.units_package) }}</td>
+                                                    </tr>
+                                                </tbody>
+                                                <tfoot>
+                                                    <tr>
+                                                        <th colspan="2">Total de ventas</th>
+                                                        <td>{{ operationsList.total_sales[0].units + (operationsList.total_sales[0].packages * product.units_package) | number}}</td>
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
+                                        </div>                  
+                                    </div>
+                                </div>
+                            </div>
+                         </div>                      
                     </div>
                 </div>
             </div>
         </div>
-    </main>
-</app-card>
+        <!-- end of row -->
+    </div>
+</div>

@@ -2,15 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { Results } from 'src/app/shared/models/results';
 import { GlobalStoreService } from 'src/app/core/services/global-store.service';
 import { ProductService } from 'src/app/shared/services/product.service';
-import { tap, switchMap, timeout } from 'rxjs/operators';
 import * as moment from 'moment';
 import { environment } from 'src/environments/environment';
 import { Product } from 'src/app/shared/models/product';
 import { Enterprise } from 'src/app/shared/models/enterprise';
 import { EnterpriseService } from 'src/app/shared/services/enterprise.service';
-import { Observable } from 'rxjs';
 import { Parameter } from 'src/app/shared/models/parameter';
 import { ParameterService } from 'src/app/shared/services/parameter.service';
+import { tap } from 'rxjs/operators';
+import { UtilsService } from 'src/app/shared/services/utils.service';
 
 @Component({
   selector: 'app-admin-product',
@@ -20,11 +20,9 @@ import { ParameterService } from 'src/app/shared/services/parameter.service';
 export class AdminProductComponent implements OnInit {
   public url_storage: string = environment.url_ventas_storage;
   public showProduct: boolean = false;
-  public showReports: boolean = true;
+  public showReports: boolean = false;
   public showNewProduct: boolean = false;
-
-  public actualPg: number = 0;
-  public regPerPg: number = 5;
+  
   public days_sold: number = environment.days_sold;
   public consolidate_day: number = environment.consolidate_day;
 
@@ -48,7 +46,8 @@ export class AdminProductComponent implements OnInit {
     private globalStoreService: GlobalStoreService,
     private productService: ProductService,
     private enterpriseService: EnterpriseService,
-    private parameterService: ParameterService
+    private parameterService: ParameterService,
+    private utilService: UtilsService
   ) { }
 
   ngOnInit() {
@@ -86,12 +85,7 @@ export class AdminProductComponent implements OnInit {
     )
   }
 
-  public onViewReport(showReport: boolean)
-  {
-    this.showReports = showReport;
-    this.showProduct = false;
-    this.showNewProduct = false;
-  }
+  
 
   public loadProviders(){
     this.enterpriseService.getAllByType$(environment.enterprise_provider).subscribe(
@@ -137,24 +131,35 @@ export class AdminProductComponent implements OnInit {
   }
 
   /*
-  public onGetPDFOnCode(code:string){
-    this.productService.getPDFCode$(code).subscribe(
-      image => {
-        let configuracion_ventana = "menubar=yes,width=500,height=80,location=yes,resizable=yes,scrollbars=yes,status=yes";
-        let w = window.open('',"_blank", configuracion_ventana);
-        w.document.write(image);
-        w.document.close();
-        w.focus();
-        w.print();
-        w.close();
-      }
-    )
-  }*/
-
-  /*
   * Funciones invocadas desde LIST
   */
-  public onShow(id: number){
+
+ //Muestra listado 
+ public onView(flag: boolean){
+  this.showReports = flag;
+  this.showProduct = false;
+  this.showNewProduct = false;
+}
+
+//Muestra reporte
+public onViewReport(showReport: boolean)
+{
+  this.showReports = showReport;
+  this.showProduct = false;
+  this.showNewProduct = false;
+}
+
+//Muestra new
+public onSelect(product: Product){
+  this.product = product;
+
+  this.showProduct = false;
+  this.showReports = false;
+  this.showNewProduct = true;
+ }
+
+ //Muestra show 
+ public onShow(id: number){
     this.showProduct = true;
     this.showReports = false;
     this.showNewProduct = false;
@@ -163,14 +168,6 @@ export class AdminProductComponent implements OnInit {
       tap(this.loadProdct),
     )
     .subscribe(this.onSuccess, this.onError);
-  }
-
-  public onSelect(product: Product){
-    this.showProduct = false;
-    this.showReports = false;
-    this.showNewProduct = true;
-
-    this.product = product;
   }
 
   private loadProdct = (product: Product): void => {
@@ -196,9 +193,31 @@ export class AdminProductComponent implements OnInit {
   */
   private onSuccess = () => {
     this.globalStoreService.dispatchUserMessage('200', ' Se ejecutó exitosamente, la operación ');
-    }
+  }
 
-    private onError = (error: any) => {
-      this.globalStoreService.dispatchUserMessage(error.status, error.statusText + ' : ' + error.error.error);
-    }
+  private onError = (error: any) => {
+    this.globalStoreService.dispatchUserMessage(error.status, error.statusText + ' : ' + error.error.error);
+  }
+
+  /*
+  * ------------------------------------------
+  * Funciones visualización
+  * ------------------------------------------
+  */
+
+ public getClassReport(){
+  return this.utilService.getClassReport(this.showReports)
+}
+
+ public getClassNew() {
+  return this.utilService.getClassNew((this.showNewProduct || this.showProduct) || this.showReports);
+}
+
+  public getClassList() {
+    return this.utilService.getClassList(this.showProduct);
+  }
+
+  public getClassShow() {
+    return this.utilService.getClassShow(this.showProduct);
+  }
 }
