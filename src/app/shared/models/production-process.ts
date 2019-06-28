@@ -3,7 +3,7 @@ export class ProductionProcess {
     public fk_id_enterprise: number;
     public defined_period: string;
     public reference: string;
-    public date_init: Date;
-    public date_end: DataCue;
+    public date_init: String;
+    public date_end: String;
     public state: string;
 }

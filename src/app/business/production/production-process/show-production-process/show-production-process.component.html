@@ -42,18 +42,21 @@
                     <div class="col-sm-12">
                         <app-periods-product-info
                         [productLst]="dataProduct.products"
+                        [stateProduction]="productionProcess.state"
                         (onDeleteDetail)="onDeleteDetail($event)"
                         ></app-periods-product-info>
                     </div>
                     <div class="col-sm-12 margin-top-1rem">
                         <app-periods-intermediaty-info
                         [productLst]="dataProduct.intermediaty"
+                        [stateProduction]="productionProcess.state"
                         (onDeleteDetail)="onDeleteDetail($event)"
                         ></app-periods-intermediaty-info>
                     </div>
                     <div class="col-sm-12 margin-top-1rem">
                         <app-periods-input-info
                         [inputsProductLst]="dataProduct.inputs"
+                        [stateProduction]="productionProcess.state"
                         (onDeleteDetail)="onDeleteDetail($event)"
                         ></app-periods-input-info>
                     </div>      

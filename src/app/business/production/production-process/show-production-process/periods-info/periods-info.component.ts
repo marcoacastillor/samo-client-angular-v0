@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { CuttingPeriod } from 'src/app/shared/models/cutting-period';
 import { faAlignJustify, faArchive, faPlusCircle, faTrash, faArrowCircleRight, faFolderPlus } from '@fortawesome/free-solid-svg-icons';
 import { ProductionProcess } from 'src/app/shared/models/production-process';

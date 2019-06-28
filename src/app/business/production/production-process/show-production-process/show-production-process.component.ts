@@ -1,10 +1,8 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges, OnChanges } from '@angular/core';
 import { ProductionProcess } from 'src/app/shared/models/production-process';
 import { CuttingPeriod } from 'src/app/shared/models/cutting-period';
 import { DataProductCuttingPeriod } from 'src/app/shared/models/data-product-cutting-period';
-import { DetailProductInput } from 'src/app/shared/models/detail-product-input';
 import { faThList } from '@fortawesome/free-solid-svg-icons';
-import { BookType } from 'xlsx/types';
 
 @Component({
   selector: 'app-show-production-process',

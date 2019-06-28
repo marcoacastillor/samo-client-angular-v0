@@ -4,9 +4,12 @@
             <div class="col-sm-8 text-left">
                 <h5 class="card-title">Proceso de producción</h5>
             </div>
-            <div class="col-sm-4 text-right">
+            <div class="col-sm-4 text-right" *ngIf="productionProcess.state === 'Activo'">
                 <div class="btn-group btn-group-sm">
-                    <button (click)="getParametersData()" type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target=".bd-example-modal-lg">
+                    <button (click)="closePeriod()" type="button" class="btn btn-outline-primary btn-sm text-ultra-small">
+                        <fa-icon [icon]="faStopwatch" class="text-outline-primary mb-2 mr-1"></fa-icon>Cerrar
+                    </button>
+                    <button (click)="getParametersData()" type="button" class="btn btn-outline-primary btn-sm text-ultra-small" data-toggle="modal" data-target=".bd-example-modal-lg">
                         <fa-icon [icon]="faEdit" class="text-outline-primary mb-2 mr-1"></fa-icon>Editar
                     </button>
                 </div>

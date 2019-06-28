@@ -12,6 +12,8 @@ export class PeriodsInputInfoComponent implements OnInit {
   detailProductInput: DetailProductInput = new DetailProductInput();
 
   @Input() public inputsProductLst: DetailProductInput[];
+  @Input() public stateProduction: string;
+  
   @Output() public onDeleteDetail = new EventEmitter<Number>();
   
   constructor() { }

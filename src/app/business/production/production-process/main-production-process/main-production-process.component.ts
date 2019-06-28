@@ -50,6 +50,8 @@ export class MainProductionProcessComponent implements OnInit {
     this.showPrdProcess = true;
     this.productionProcess = prdProcess;
     this.loadCuttingPeriod(prdProcess.pk_id_production_process);
+    this.dataProduct = new DataProductCuttingPeriod;
+    
   }
 
   loadCuttingPeriod(id_production_process: number){
