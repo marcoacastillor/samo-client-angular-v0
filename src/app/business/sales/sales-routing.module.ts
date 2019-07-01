@@ -5,11 +5,11 @@ import { AdminSaleReportComponent } from './sale-report/admin-sale-report/admin-
 
 const routes: Routes = [
   {
-    path:'invoice',
+    path: 'invoice',
     component: AdminInvoiceComponent
   },
   {
-    path:'sales-report',
+    path: 'sales-report',
     component: AdminSaleReportComponent
   }
 ];

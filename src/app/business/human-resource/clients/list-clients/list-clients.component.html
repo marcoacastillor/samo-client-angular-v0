@@ -17,11 +17,11 @@
                                     <form [formGroup]="searchForm">
                                         <div class="row alert alert-secondary" role="alert">
                                             <div class="col-sm-12  alert alert-info" role="alert">
-                                               El buscador permite buscar por Id, nombres y apellidos. 
+                                               El buscador permite buscar por Cedula, nombres y apellidos. 
                                             </div>
                                             <div class="col-sm-12">
                                                 <div class="input-group mb-3">
-                                                    <input type="text" class="form-control text-ultra-small" placeholder="filtros" formControlName="filter">
+                                                    <input type="text" class="form-control text-ultra-small" placeholder="Filtros" formControlName="filter">
                                                     <div class="input-group-prepend">
                                                         <button [disabled]="searchForm.invalid" type="button" class="btn text-ultra-small btn-sm btn-outline-secondary"  (click)="searchPerson()">
                                                             <fa-icon [icon]="faSearch" class="text-secondary mb-2 mr-1" title="Buscar registro"></fa-icon>
@@ -67,7 +67,7 @@
                                     </td>
                                     <td>
                                         <div class="row">
-                                            <div class="col-sm-12"><b>Id: {{ client.external_reference.split(":")[3] }}</b></div>
+                                            <div class="col-sm-12"><b>Identificacion: {{ client.external_reference.split(":")[3] }}</b></div>
                                             <div class="col-sm-12"><b>Nombres: {{ client.external_reference.split(":")[2] }}</b></div>
                                         </div>
                                     </td>

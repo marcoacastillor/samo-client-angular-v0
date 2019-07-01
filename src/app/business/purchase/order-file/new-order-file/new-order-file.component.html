@@ -6,7 +6,7 @@
                 <div class="col-sm-12">
                     <div class="form-group">
                         <label for="file_ref_purchase">Archivo de compra</label>
-                        <input type="file" (change)="onFileSelected($event)" class="form-control text-small" placeholder="archivo de compra" formControlName="file_ref_purchase" required />
+                        <input type="file" (change)="onFileSelected($event)" class="form-control text-small" placeholder="Archivo de compra" formControlName="file_ref_purchase" required />
                         <small *ngIf="mustShowError('file_ref_purchase')" class="form-text alert-danger">
                         Imágen es obligatorio
                         </small>

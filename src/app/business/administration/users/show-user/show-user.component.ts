@@ -9,7 +9,7 @@ import { User } from 'src/app/shared/models/user';
 export class ShowUserComponent implements OnInit {
   @Input() public user: User;
   @Output() public cancel = new EventEmitter<boolean>();
-  
+
   constructor() { }
 
   ngOnInit() {

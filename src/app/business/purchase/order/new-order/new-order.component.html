@@ -22,7 +22,7 @@
                 </div>
                 <div class="form-group col-sm-3">
                     <label for="number_invoice">Número de factura</label>
-                    <input type="text" class="form-control form-control-sm text-small" placeholder="número de factura" formControlName="number_invoice" required>
+                    <input type="text" class="form-control form-control-sm text-small" placeholder="Número de factura" formControlName="number_invoice" required>
                     <small *ngIf="mustShowError('number_invoice')" class="form-text alert-danger">
                         Número de factura es obligatorio
                     </small>
@@ -34,7 +34,7 @@
                         <tr>
                             <th scope="col">Código</th>
                             <th scope="col">Nombre</th>
-                            <th scope="col">Cant</th>
+                            <th scope="col">Cantidad</th>
                             <th scope="col">Presentación</th>
                             <th scope="col">Valor unitario</th>
                             <th scope="col">Impuesto</th>
@@ -102,11 +102,11 @@
                                     </div>
                                     <div class="col-sm-2">
                                         <label for="name_product">Nombre</label>
-                                        <input type="text" readonly class="form-control form-control-sm text-small" placeholder="nombre" formControlName="name_product">
+                                        <input type="text" readonly class="form-control form-control-sm text-small" placeholder="Nombre" formControlName="name_product">
                                     </div> 
                                     <div class="col-sm-2">
                                         <label for="units_product">{{ product.presentation }}</label>
-                                        <input type="number" class="form-control form-control-sm text-small" placeholder="unidades" formControlName="units_product">
+                                        <input type="number" class="form-control form-control-sm text-small" placeholder="Unidades" formControlName="units_product">
                                     </div>
                                     <div class="col-sm-2">
                                         <label for="tax_product">IVA</label>
@@ -121,7 +121,7 @@
                                     </div>
                                     <div class="col-sm-2">
                                         <label for="value_total_product">Valor unitario</label>
-                                        <input type="number" class="form-control form-control-sm text-small" placeholder="valor x paquete" (keyup.enter)="addProduct()" formControlName="value_product">
+                                        <input type="number" class="form-control form-control-sm text-small" placeholder="Valor x paquete" (keyup.enter)="addProduct()" formControlName="value_product">
                                     </div>
                                 </div>
                             </td>

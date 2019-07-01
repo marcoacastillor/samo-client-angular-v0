@@ -1,5 +1,6 @@
 export const environment = {
   production: true,
+
   url_user: 'https://www.sanratsolutions.com/prd/usuarios/public/users',
   url_module: 'https://www.sanratsolutions.com/prd/usuarios/public/modules',
   url_component: 'https://www.sanratsolutions.com/prd/usuarios/public/components',
@@ -25,7 +26,7 @@ export const environment = {
   url_cutting_period: 'https://www.sanratsolutions.com/prd/ventas/public/cutting_period',
   url_cutting_period_product: 'https://www.sanratsolutions.com/prd/ventas/public/cutting_period_product',
   url_detail_product_input: 'https://www.sanratsolutions.com/prd/ventas/public/detail_product_input',
-  
+
   clearMessageDelayMs: 5000,
   refreshInterval: 1000,
   min_products: 20,

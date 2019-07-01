@@ -11,7 +11,7 @@
                             <option value="{{param.value}}" *ngFor="let param of typesIdList">{{param.name}}</option>
                         </select>
                         <small *ngIf="mustShowError('type_id')" class="form-text alert-danger">
-                            Tipo de id, es obligatorio
+                            Tipo de identificacion, es obligatorio
                         </small>
                     </div>
                 </div>
@@ -20,7 +20,7 @@
                         <label for="number_id">Número de identificación</label>
                         <input type="text" class="form-control text-small" placeholder="Número de identificación" formControlName="number_id" required>
                         <small *ngIf="mustShowError('number_id')" class="form-text alert-danger">
-                            Número de id, es obligatorio
+                            Número de identificacion, es obligatorio
                         </small>
                     </div>
                 </div>
@@ -89,7 +89,7 @@
                 </div>
                 <div class="col-sm-3">
                     <div class="form-group">
-                        <label for="state">Estado vinculación laboral</label>
+                        <label for="state">Estado de vinculación laboral</label>
                         <select class="form-control form-control-sm text-small" formControlName="state" required>
                             <option value="{{ state.value }}" *ngFor="let state of laboralStateList">{{state.name}}</option>
                         </select>

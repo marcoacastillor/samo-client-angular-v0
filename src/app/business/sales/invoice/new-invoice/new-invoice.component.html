@@ -12,7 +12,7 @@
                             </button>
                         </div>
                         <div class="col-sm-10">
-                            <strong>El modo Manual</strong>: permite seleccionar número de unidades que se desean comprar, para poder agregarlo se debe presionar la tecla enter.
+                            <strong>El modo Manual</strong>: Permite seleccionar el número de unidades que se desean comprar, para poder agregarlo se debe presionar la tecla enter.
                         </div>
                     </div>
                 </div>
@@ -24,7 +24,7 @@
                             </button>
                         </div>
                         <div class="col-sm-10">
-                            <strong>El modo Automático</strong>: permite agregar productos de una manera más rápida a la factura. Sin embargo siempre agrega de una unidad por productos.
+                            <strong>El modo Automático</strong>: Permite agregar productos de una manera más rápida a la factura. Sin embargo siempre agrega de una unidad por productos.
                         </div>
                     </div>
                 </div>
@@ -35,7 +35,7 @@
                         <tr>
                             <th scope="col">Código</th>
                             <th scope="col">Nombre</th>
-                            <th scope="col">Cant</th>
+                            <th scope="col">Cantidad</th>
                             <th scope="col">Valor unitario</th>
                             <th scope="col">Impuesto</th>
                             <th scope="col">Valor total</th>
@@ -141,7 +141,7 @@
                                     </div>
                                     <div class="col-sm-2">
                                         <label for="package_product">Paquetes</label>
-                                        <input type="number" class="form-control form-control-sm text-small" placeholder="unidades" formControlName="package_product" (keyup.enter)="addProduct()">
+                                        <input type="number" class="form-control form-control-sm text-small" placeholder="Unidades" formControlName="package_product" (keyup.enter)="addProduct()">
                                         <!-- inicio marco -->
                                         
                                         <div class="form-text alert-info text-ultra-small">
@@ -174,12 +174,12 @@
                                                     <fa-icon [icon]="faSearch" class="text-primary mb-2 mr-1" title="Crear registro"></fa-icon>
                                                 </button> 
                                             </div>
-                                            <input class="form-control form-control-sm text-small" placeholder="código" #code_product (keyup.enter)="loadProductByCode($event.target.value)" formControlName="code_product">
+                                            <input class="form-control form-control-sm text-small" placeholder="Código" #code_product (keyup.enter)="loadProductByCode($event.target.value)" formControlName="code_product">
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
                                         <label for="name_product">Nombre</label>
-                                        <input type="text" readonly class="form-control form-control-sm text-small" placeholder="nombre" formControlName="name_product">
+                                        <input type="text" readonly class="form-control form-control-sm text-small" placeholder="Nombre" formControlName="name_product">
                                     </div>
                                     <div class="col-sm-2">
                                         <label for="tax_product">IVA</label>
@@ -254,7 +254,7 @@
                 </div>
                 <div class="form-group col-sm-3">
                     <label for="total_discounts">Valor total de descuento</label>
-                    <input type="number" class="form-control form-control-sm text-small" required placeholder="valor de descuento" (change)="updateTotalDiscount()" formControlName="total_discounts">           
+                    <input type="number" class="form-control form-control-sm text-small" required placeholder="Valor de descuento" (change)="updateTotalDiscount()" formControlName="total_discounts">           
                 </div>
             </div>
             <div formGroupName="client" class="row info-left spacing-margin" *ngIf="operationForm.value.type_payment != efecty_payment"> 
@@ -268,15 +268,15 @@
                         </div>
                         <div class="form-group col-sm-3">
                             <label for="number_id">Número de identificación</label>
-                            <input class="form-control form-control-sm text-small" (blur)="loadClient()" placeholder="número id" formControlName="number_id">
+                            <input class="form-control form-control-sm text-small" (blur)="loadClient()" placeholder="Número id" formControlName="number_id">
                         </div>
                         <div class="form-group col-sm-3">
                             <label for="names">Nombres</label>
-                            <input class="form-control form-control-sm text-small" placeholder="nombres" formControlName="names">
+                            <input class="form-control form-control-sm text-small" placeholder="Nombres" formControlName="names">
                         </div>
                         <div class="form-group col-sm-3">
                             <label for="last_names">Apellidos</label>
-                            <input class="form-control form-control-sm text-small" placeholder="apellidos" formControlName="last_names">
+                            <input class="form-control form-control-sm text-small" placeholder="Apellidos" formControlName="last_names">
                         </div>
                     </div>
                 </div>
@@ -284,11 +284,11 @@
                     <div class="row">
                         <div class="form-group col-sm-3">
                             <label for="value_discount">Dirección</label>
-                            <input class="form-control form-control-sm text-small" placeholder="dirección" formControlName="address">
+                            <input class="form-control form-control-sm text-small" placeholder="Dirección" formControlName="address">
                         </div>
                         <div class="form-group col-sm-3">
                             <label for="value_discount">Teléfono</label>
-                            <input class="form-control form-control-sm text-small" placeholder="teléfono" formControlName="phone">
+                            <input class="form-control form-control-sm text-small" placeholder="Teléfono" formControlName="phone">
                         </div>
                     </div>
                 </div>
