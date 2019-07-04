@@ -7,10 +7,11 @@
             [typeProductList]="typeProductList"
             (update)="onUpdate($event)"
             (create)="onCreate($event)"
+            (onView)="onView($event)"
         >
         </app-new-product>
     </div>
-    <div *ngIf="showReports" class="col-sm-8">
+    <div [ngClass]="getClassReport()">
         <app-reports-product
         [dataSets]="dataSets"
         [dateEnd]="dateEnd"
@@ -35,6 +36,7 @@
             [regPerPg]="regPerPg"
             (search)="onSearch($event)"
             (show)="onShow($event)"
+            (delete)="onDelete($event)"
             (select)="onSelect($event)"
             (viewReport)="onViewReport($event)"
         >

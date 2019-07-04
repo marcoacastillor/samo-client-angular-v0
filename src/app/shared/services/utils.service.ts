@@ -21,9 +21,9 @@ export class UtilsService {
 
   public getClassList(listFlag: boolean): string {
     if ( listFlag) {
-      return 'hidden';
-    } else {
       return 'visible col-sm-12';
+    } else {
+      return 'hidden';
     }
   }
 

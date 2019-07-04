@@ -1,0 +1,63 @@
+<!-- card para información sobre proceso productivo-->
+<div class="card">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-sm-12 card-title">
+                <h5 *ngIf="!product.pk_id_product">Crear producto {{ productCategory }}</h5>
+                <h5 *ngIf="product.pk_id_product">Actualizar producto</h5>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <form [formGroup]="chemicalInputForm">
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label for="name">Nombre</label>
+                        <input type="text" class="form-control text-small" placeholder="Nombre" formControlName="name" required>
+                        <small *ngIf="mustShowError('name')" class="form-text alert-danger">
+                        Nombre es obligatorio
+                        </small>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label for="code">Código de barras</label>
+                        <input type="text" class="form-control text-small" placeholder="Código de barras" formControlName="code" required>
+                        <small *ngIf="mustShowError('code')" class="form-text alert-danger">
+                        Código es obligatorio
+                        </small>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label for="presentation">Presentación</label>
+                        <select (change)="setInfoByPresentation()" class="form-control form-control-sm text-small" formControlName="presentation" required>
+                            <option value="{{presentation.value}}" *ngFor="let presentation of presentationList">{{presentation.name}}</option>
+                        </select>
+                        <small *ngIf="mustShowError('presentation')" class="form-text alert-danger">
+                        Presentación de producto, es obligatorio
+                        </small>
+                    </div>
+                </div> 
+                <div class="col-sm-3" *ngIf="showPackageInfo">
+                    <div class="form-group">
+                        <label for="units_package">Unidades por paquete</label>
+                        <input type="number" class="form-control text-small" placeholder="Unidades por paquete" formControlName="units_package">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <small class="form-text alert-primary">
+                                    El campo debe ser numérico
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+        </form>
+    </div>
+    <div class="card-footer">
+        <button *ngIf="!product.pk_id_product" type="submit" class="btn btn-outline-success btn-sm mb-2 mr-1" [disabled]="chemicalInputForm.invalid" (click)="createProduct()">Guardar</button>
+        <button *ngIf="product.pk_id_product" type="submit" class="btn btn-outline-primary btn-sm mb-2 mr-1" [disabled]="chemicalInputForm.invalid" (click)="updateProduct()">Actualizar</button>
+    </div>
+</div>

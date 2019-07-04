@@ -51,7 +51,7 @@ export class ShowProductComponent implements OnInit, OnChanges {
   }
 
   viewList(){
-    this.onView.emit(false);
+    this.onView.emit(true);
   }
 
   ngOnChanges(changes: SimpleChanges)

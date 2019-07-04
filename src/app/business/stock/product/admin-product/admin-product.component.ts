@@ -22,6 +22,7 @@ export class AdminProductComponent implements OnInit {
   public showProduct: boolean = false;
   public showReports: boolean = false;
   public showNewProduct: boolean = false;
+  public listProduct: boolean = true;
   
   public days_sold: number = environment.days_sold;
   public consolidate_day: number = environment.consolidate_day;
@@ -83,9 +84,7 @@ export class AdminProductComponent implements OnInit {
     this.productService.getValueStock$().subscribe(
       value_stock => this.valueStock = value_stock
     )
-  }
-
-  
+  }  
 
   public loadProviders(){
     this.enterpriseService.getAllByType$(environment.enterprise_provider).subscribe(
@@ -101,25 +100,15 @@ export class AdminProductComponent implements OnInit {
 
   private loadReportTopSold(dateInit, dateEnd)
   {
-    this.productService.getTopSoldProducts$(dateInit, dateEnd).pipe(
-      tap(this.loadDataSet)
+    this.productService.getTopSoldProducts$(dateInit, dateEnd).subscribe(
+      dataSet => this.dataSets = dataSet
     )
-    .subscribe(this.onSuccess,this.onError)
   }
-
-  private loadDataSet = (dataSet: any): void => {
-    this.dataSets = dataSet;
-  } 
 
   private loadProducts(){
-    this.productService.getAll$().pipe(
-      tap(this.resultProduct)
+    this.productService.getAll$().subscribe(
+      result => this.productList = result
     )
-    .subscribe(this.onSuccess,this.onError)
-  }
-
-  private resultProduct = (result: Results): void => {
-    this.productList = result;
   }
 
   public onSearch(product: Product){
@@ -136,7 +125,8 @@ export class AdminProductComponent implements OnInit {
 
  //Muestra listado 
  public onView(flag: boolean){
-  this.showReports = flag;
+  this.listProduct = flag;
+  this.showReports = false;
   this.showProduct = false;
   this.showNewProduct = false;
 }
@@ -147,6 +137,7 @@ public onViewReport(showReport: boolean)
   this.showReports = showReport;
   this.showProduct = false;
   this.showNewProduct = false;
+  this.listProduct = false;
 }
 
 //Muestra new
@@ -156,6 +147,7 @@ public onSelect(product: Product){
   this.showProduct = false;
   this.showReports = false;
   this.showNewProduct = true;
+  this.listProduct = false;
  }
 
  //Muestra show 
@@ -163,11 +155,12 @@ public onSelect(product: Product){
     this.showProduct = true;
     this.showReports = false;
     this.showNewProduct = false;
+    this.listProduct = false;
 
     this.productService.show$(id).pipe(
       tap(this.loadProdct),
     )
-    .subscribe(this.onSuccess, this.onError);
+    .subscribe();
   }
 
   private loadProdct = (product: Product): void => {
@@ -176,13 +169,28 @@ public onSelect(product: Product){
 
   public onUpdate(product: Product){
     this.productService.update$(product).subscribe(
-      () => this.loadProducts()
+      prd => {
+        this.onSetMessageOperation('Se actualizó el registro exitosamente.');
+        this.loadProducts();
+      }
     )
   }
 
   public onCreate(product: Product){
     this.productService.store$(product).subscribe(
-      () => this.loadProducts()
+      prd => {
+        this.onSetMessageOperation('Se creó registro exitosamente.');
+        this.loadProducts();
+      }
+    )
+  }
+
+  public onDelete(id: number){
+    this.productService.delete$(id).subscribe(
+      () => {
+        this.onSetMessageOperation('Se eliminó registro satisafactoriamente. ');
+        this.loadProducts();
+      }
     )
   }
 
@@ -191,13 +199,9 @@ public onSelect(product: Product){
   * Funciones validación de resultado
   * ------------------------------------------
   */
-  private onSuccess = () => {
-    this.globalStoreService.dispatchUserMessage('200', ' Se ejecutó exitosamente, la operación ');
-  }
-
-  private onError = (error: any) => {
-    this.globalStoreService.dispatchUserMessage(error.status, error.statusText + ' : ' + error.error.error);
-  }
+private onSetMessageOperation (message: string) {
+  this.globalStoreService.dispatchUserMessage('200', message);
+}
 
   /*
   * ------------------------------------------
@@ -210,11 +214,11 @@ public onSelect(product: Product){
 }
 
  public getClassNew() {
-  return this.utilService.getClassNew((this.showNewProduct || this.showProduct) || this.showReports);
+  return this.utilService.getClassNew(this.showNewProduct);
 }
 
   public getClassList() {
-    return this.utilService.getClassList(this.showProduct);
+    return this.utilService.getClassList(this.listProduct);
   }
 
   public getClassShow() {

@@ -49,6 +49,7 @@ export const environment = {
   clothes: 'VESTUARIO',
   medicines: 'MEDICAMENTO',
   foods: 'ALIMENTO',
+  chemicalInput: 'INSUMO QUIMICO',
   package: 'PAQUETE',
   individual: 'INDIVIDUAL',
   tax_purchase: 'TAX_PURCHASE',
@@ -71,10 +72,11 @@ export const environment = {
   sales: 'SALE',
   purchase: 'PURCHASE',
 
-  type_product_purchase: 'COMPRA_PROVEEDORES',
   mode_service: 'MODE_SERVICE',
   type_service: 'TYPE_SERVICE',
   size_enterprise: 'SIZE_ENTERPRISE',
+  
+  type_product_purchase: 'Compra a proveedores',
   type_product_internal_prd: 'Producción Interna',
   type_product_input: 'Insumo',
   type_product_intermediaty: 'Producto Intermedio',

@@ -60,6 +60,17 @@ export class ProductService {
     );
   }
 
+  public delete$(id: number): Observable<Product> {
+    let url = this._url + '/' + id;
+    return this.userService.validateOptionByToken('PRD_DEL').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.delete<Product>(url);
+        }
+      })
+    );
+  }
+
   public getTopSoldProducts$(from_date: string, to_date: string): Observable<any> {
     let url = this._url + '/get-top-sold-products/'+from_date+'/'+to_date;
     return this.userService.validateOptionByToken('PRD_REPORT_TOP_SOLD_PRODUCTS').pipe(

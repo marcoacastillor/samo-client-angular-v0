@@ -14,9 +14,11 @@ import { UtilsService } from 'src/app/shared/services/utils.service';
 import { ReportsProductComponent } from './product/reports-product/reports-product.component';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { EnterpriseService } from 'src/app/shared/services/enterprise.service';
-import { UserService } from 'src/app/shared/services/user.service';
 import { OperationService } from 'src/app/shared/services/operation.service';
 import { ParameterService } from 'src/app/shared/services/parameter.service';
+import { ClothesFormComponent } from './product/new-product/clothes-form/clothes-form.component';
+import { FoodFormComponent } from './product/new-product/food-form/food-form.component';
+import { ChemicalInputFormComponent } from './product/new-product/chemical-input-form/chemical-input-form.component';
 
 @NgModule({
   imports: [
@@ -28,6 +30,6 @@ import { ParameterService } from 'src/app/shared/services/parameter.service';
     OwlNativeDateTimeModule,
   ],
   providers: [GlobalStoreService, ProductService, UtilsService, EnterpriseService, OperationService, ParameterService],
-  declarations: [AdminProductComponent, ListProductComponent, NewProductComponent, ShowProductComponent, ReportsProductComponent]
+  declarations: [AdminProductComponent, ListProductComponent, NewProductComponent, ShowProductComponent, ReportsProductComponent, ClothesFormComponent, FoodFormComponent, ChemicalInputFormComponent]
 })
 export class StockModule { }

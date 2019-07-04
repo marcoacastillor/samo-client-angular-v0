@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { Results } from 'src/app/shared/models/results';
-import { faPlusCircle, faEye, faEdit, faChartArea, faGreaterThanEqual, faLessThanEqual, faSearch, faFlag } from '@fortawesome/free-solid-svg-icons';
+import { faPlusCircle, faEye, faEdit, faChartArea, faGreaterThanEqual, faLessThanEqual, faSearch, faFlag, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { UtilsService } from 'src/app/shared/services/utils.service';
 import { environment } from 'src/environments/environment';
 import { Product } from 'src/app/shared/models/product';
@@ -19,6 +19,9 @@ export class ListProductComponent implements OnInit, OnChanges {
   faEye = faEye;
   faChartArea = faChartArea;
   faFlag = faFlag;
+  faTrash = faTrash;
+
+  selectedProduct: Product = new Product();
   
   @Input() public productList: Results;
   @Input() public actualPg: number;
@@ -28,6 +31,7 @@ export class ListProductComponent implements OnInit, OnChanges {
   @Output() public show = new EventEmitter<number>();
   @Output() public select = new EventEmitter<Product>();
   @Output() public viewReport = new EventEmitter<boolean>();
+  @Output() public delete = new EventEmitter<Number>();
   
   
   public valMin: number = environment.min_products;
@@ -86,6 +90,14 @@ export class ListProductComponent implements OnInit, OnChanges {
 
   public showReport(){
     this.viewReport.emit(true);
+  }
+
+  public deleteProduct(){
+    this.delete.emit(this.selectedProduct.pk_id_product);
+  }
+
+  public selectProduct(product: Product){
+    this.selectedProduct = product;
   }
 
 

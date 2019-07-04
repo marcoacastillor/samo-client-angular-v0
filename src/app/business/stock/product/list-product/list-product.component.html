@@ -7,11 +7,10 @@
             <div class="col-sm-4 text-right">
                 <div class="btn-group btn-group-sm">
                     <button type="button" (click)="crtProduct()" class="btn btn-sm btn-outline-primary">
-                        <fa-icon [icon]="faPlusCircle" class="text-primary mb-2 mr-1" title="Crear registro"></fa-icon>
+                        <fa-icon [icon]="faPlusCircle" class="text-primary mb-2 mr-1" title="Crear registro"></fa-icon>Crear producto
                     </button>
                 </div>
             </div>
-
         </div>
     </div>
     <div class="card-body">
@@ -37,6 +36,9 @@
                                 <button type="button" class="btn text-ultra-small btn-sm btn-outline-primary" (click)="updProduct(prd)">
                                     <fa-icon [icon]="faEdit" class="text-primary mb-2 mr-1" title="Actualizar registro"></fa-icon>Editar
                                 </button>
+                                <button type="button" (click)="selectProduct(prd)" class="text-ultra-small btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#deleteProduct">
+                                    <fa-icon [icon]="faTrash" class="text-outline-danger mb-2 mr-1"></fa-icon>Eliminar
+                                </button> 
                             </div>
                         </td>
                         <td>{{ prd.name }}</td>
@@ -55,6 +57,30 @@
                     </tr>
                 </tfoot>
             </table>    
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="deleteProduct" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Confirmación de mensaje</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="alert alert-danger" role="alert">
+                Se va a eliminar un registro, desea confirmar la operación?.
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="button" (click)="deleteProduct()" data-dismiss="modal" class="btn btn-danger">Eliminar</button>
+        </div>
         </div>
     </div>
 </div>

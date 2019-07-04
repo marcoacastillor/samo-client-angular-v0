@@ -17,6 +17,7 @@ import { DetailProductInputService } from 'src/app/shared/services/detail-produc
 export class MainProductionProcessComponent implements OnInit {
   activeUser: User = new User;
   showPrdProcess: boolean = false;
+  
   fk_id_enterprise: number = 0;
 
   productionProcess: ProductionProcess = new ProductionProcess;
@@ -137,7 +138,7 @@ export class MainProductionProcessComponent implements OnInit {
 
 
   public getClassList() {
-    return this.utilService.getClassList(this.showPrdProcess);
+    return this.utilService.getClassList(!this.showPrdProcess);
   }
 
   public getClassShow() {
