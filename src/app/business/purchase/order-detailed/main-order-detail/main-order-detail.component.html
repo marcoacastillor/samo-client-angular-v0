@@ -1,0 +1,23 @@
+<div class="row margin-top">
+    <div [ngClass]="getClassList()">
+        <app-list-order-detail
+        [lstOrders]="lstOrders"
+        (onSelectOrder)="onSelectOrder($event)"
+        >
+        </app-list-order-detail>
+    </div>
+    <div [ngClass]="getClassNew()">
+        <app-new-order-detail
+        [operation]="operation"
+        (onViewList)="onViewList($event)"
+        >
+        </app-new-order-detail>
+    </div>
+    <div [ngClass]="getClassShow()">
+        <app-show-order-detail
+        [operation]="operation"
+        (onViewList)="onViewList($event)"
+        >
+        </app-show-order-detail>
+    </div>
+</div>

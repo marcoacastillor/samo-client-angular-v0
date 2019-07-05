@@ -27,6 +27,10 @@ import { ModalNewPaymentComponent } from './sale-report/modal-new-payment/modal-
 import { NewPaymentComponent } from './sale-report/new-payment/new-payment.component';
 import { ModalSearchComponent } from './invoice/new-invoice/modal-search/modal-search.component';
 import { SearchComponent } from './invoice/new-invoice/search/search.component';
+import { MainSaleDetailComponent } from './sale-detailed/main-sale-detail/main-sale-detail.component';
+import { ListSaleDetailComponent } from './sale-detailed/list-sale-detail/list-sale-detail.component';
+import { ShowSaleDetailComponent } from './sale-detailed/show-sale-detail/show-sale-detail.component';
+import { NewSaleDetailComponent } from './sale-detailed/new-sale-detail/new-sale-detail.component';
 
 @NgModule({
   imports: [
@@ -40,6 +44,6 @@ import { SearchComponent } from './invoice/new-invoice/search/search.component';
   providers: [
     GlobalStoreService, OperationService, ParameterService, ProductService, PersonService, PaymentService
   ],
-  declarations: [AdminInvoiceComponent, ListInvoiceComponent, NewInvoiceComponent, ShowInvoiceComponent, ModalPaymentComponent, EfectyPaymentComponent, NewSalePaymentComponent, ModalSalePaymentComponent, AdminSaleReportComponent, ConsolidatedComponent, ModalShowOperationComponent, ShowOperationComponent, ModalNewPaymentComponent, NewPaymentComponent, ModalSearchComponent, SearchComponent]
+  declarations: [AdminInvoiceComponent, ListInvoiceComponent, NewInvoiceComponent, ShowInvoiceComponent, ModalPaymentComponent, EfectyPaymentComponent, NewSalePaymentComponent, ModalSalePaymentComponent, AdminSaleReportComponent, ConsolidatedComponent, ModalShowOperationComponent, ShowOperationComponent, ModalNewPaymentComponent, NewPaymentComponent, ModalSearchComponent, SearchComponent, MainSaleDetailComponent, ListSaleDetailComponent, ShowSaleDetailComponent, NewSaleDetailComponent]
 })
 export class SalesModule { }

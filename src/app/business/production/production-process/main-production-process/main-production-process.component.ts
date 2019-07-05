@@ -135,8 +135,6 @@ export class MainProductionProcessComponent implements OnInit {
   * Funciones visualización
   * ------------------------------------------
   */
-
-
   public getClassList() {
     return this.utilService.getClassList(!this.showPrdProcess);
   }

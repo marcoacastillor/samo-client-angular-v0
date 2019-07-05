@@ -32,6 +32,17 @@ export class OperationService {
     );
   }
 
+  public getAllByTypeAndEnterprise$(type: string, id_enterprise: number): Observable<Operation[]> {
+    let url = this._url + '/get-by-type-and-enterprise/' + type + '/' + id_enterprise;
+    return this.userService.validateOptionByToken('OPE_LIST_BY_TYPE_AND_ENTERPRISE').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.get<Operation[]>(url);
+        }
+      })
+    );
+  }
+
   public getConsolidateByDates$(fromDate: string, toDate: string, type_operation: string): Observable<Operation[]> {
     let url = this._url + '/get-consolidate-operations-by-dates/'+fromDate+'/'+toDate+'/'+type_operation;
     return this.userService.validateOptionByToken('OPE_GET_CONSOLIDATE_BY_DATES').pipe(

@@ -168,6 +168,7 @@ public onSelect(product: Product){
   }
 
   public onUpdate(product: Product){
+    console.log(product);
     this.productService.update$(product).subscribe(
       prd => {
         this.onSetMessageOperation('Se actualizó el registro exitosamente.');

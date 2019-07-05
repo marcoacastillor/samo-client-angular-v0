@@ -1,6 +1,4 @@
-import { Product } from "./product";
 import { ProductOperation } from "./product-operation";
-import { AbstractOperation } from "./abstract-operation";
 
 export class Operation {
     public pk_id_operation: number;

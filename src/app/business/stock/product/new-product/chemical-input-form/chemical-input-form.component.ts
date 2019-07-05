@@ -39,6 +39,7 @@ export class ChemicalInputFormComponent implements OnInit {
       {
         this.product = changes.product.currentValue;
         this.createFormChemicalInput();
+        this.setInfoByPresentation();
       }
     }
   }
