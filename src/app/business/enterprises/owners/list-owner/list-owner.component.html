@@ -16,7 +16,7 @@
                                     <form [formGroup]="searchForm">
                                         <div class="row alert alert-secondary" role="alert">
                                             <div class="col-sm-12  alert alert-info" role="alert">
-                                                Se puede buscar por nombre y/o nit
+                                                Se puede buscar por nombre y/o Nit
                                             </div>
                                             <div class="col-sm-12">
                                                 <div class="input-group mb-3">
@@ -38,7 +38,7 @@
                     <!-- Sección de paginación de resultados -->
                     <div class="row border-type-2 align-items-end">
                         <div class="col-sm-4 text-ultra-small">
-                            items por página: 
+                            Items por página: 
                             <select class="custom-select" #regPerPag (change)="setRegPerPg(regPerPag.value)">
                                 <option value="5">5</option>
                                 <option value="10">10</option>
@@ -46,7 +46,7 @@
                             </select>
                         </div>
                         <div class="col-sm-6 text-ultra-small font-weight-bold">
-                            registros : {{ (actualPg*regPerPg)+1 }}  a {{ maxPerPg }} de {{ (registryList.number_results) }} <br /> pagina actual: {{ actualPg }} de {{ (totalPgs-1) }}
+                            Registros : {{ (actualPg*regPerPg)+1 }}  a {{ maxPerPg }} de {{ (registryList.number_results) }} <br /> pagina actual: {{ actualPg }} de {{ (totalPgs-1) }}
                         </div>
                         <div class="col-sm-2">
                             <button *ngIf="(actualPg+1) <= (totalPgs-1)" type="button" class="btn btn-sm btn-outline-success" (click)="addActualPg()">

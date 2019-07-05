@@ -6,7 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 /**
  * importas propios
 */
-import { MaterialModule } from './material.module';
+
 import { CoreModule } from './core/core.module';
 import { RouterModule } from '@angular/router';
 import { NotFoundModule } from './not-found/not-found.module';

@@ -21,10 +21,10 @@ import { Payment } from 'src/app/shared/models/payment';
   styles: []
 })
 export class AdminInvoiceComponent implements OnInit {
-  public showInvoice: boolean = false;
+  public showInvoice = false;
 
-  public actualPg: number = 0;
-  public regPerPg: number = 5;
+  public actualPg = 0;
+  public regPerPg = 5;
   
   public operation: Operation = new Operation;
   public orderList: Results = new Results();
