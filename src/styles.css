@@ -87,6 +87,29 @@
   font-size: 1.2rem;
 }
 
+.order-purchase-title
+{
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+.back-colo-f6
+{
+  background-color: #f6f6f6;
+}
+
+.back-color-ff
+{
+  background-color: #fff;
+}
+
+.purchase-card
+{
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #fff;
+}
+
 .text-big-report
 {
   font-size: 1.2rem;

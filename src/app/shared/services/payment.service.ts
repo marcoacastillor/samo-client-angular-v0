@@ -26,4 +26,15 @@ export class PaymentService {
       })
     );
   }
+
+  public getPaymentsByOperation$(id_operation: number): Observable<Payment[]> {
+    let url = this._url + '/get-by-operation/' + id_operation.toString();
+    return this.userService.validateOptionByToken('PAY_GET_BY_OPERATION').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.get<Payment[]>(url);
+        }
+      })
+    );
+  }
 }

@@ -1,6 +1,11 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { faPlusCircle, faEye } from '@fortawesome/free-solid-svg-icons';
 import { Operation } from 'src/app/shared/models/operation';
+import { User } from 'src/app/shared/models/user';
+import { OperationService } from 'src/app/shared/services/operation.service';
+import { UtilsService } from 'src/app/shared/services/utils.service';
+import { GlobalStoreService } from 'src/app/core/services/global-store.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-list-order-detail',
@@ -11,22 +16,22 @@ export class ListOrderDetailComponent implements OnInit {
   faPlusCircle = faPlusCircle;
   faEye = faEye;
 
-  @Input() public lstOrders: Operation[];
-  @Input() public fk_id_enterprise: number;
+  lstOrders: Operation[] = [];
+  activeUser: User = new User();
 
-  @Output() public onSelectOrder = new EventEmitter<Operation>();
-
-  constructor() { }
+  constructor(
+    private operationService: OperationService,
+    private globalStoreService: GlobalStoreService
+  ) { }
 
   ngOnInit() {
+    this.activeUser = this.globalStoreService.getUser();
+    this.getOrdersByEnterprise(this.activeUser.fk_id_enterprise);
   }
 
-  createOrder(){
-    this.onSelectOrder.emit(new Operation);
+  private getOrdersByEnterprise(id_enterprise: number){
+    this.operationService.getAllByTypeAndEnterprise$(environment.purchase, id_enterprise).subscribe(
+      lstOrders => this.lstOrders = lstOrders
+    )
   }
-
-  selectElement(operation: Operation){
-    this.onSelectOrder.emit(operation);
-  }
-
 }

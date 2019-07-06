@@ -6,9 +6,9 @@
             </div>
             <div class="col-sm-4 text-right">
                 <div class="btn-group btn-group-sm">
-                    <button (click)="createOrder()" type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal">
+                    <a routerLink='../purchase-detailed-new' type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal">
                         <fa-icon [icon]="faPlusCircle" class="text-outline-primary mb-2 mr-1"></fa-icon>Crear
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -29,9 +29,9 @@
                 <tbody>
                     <tr *ngFor="let order of lstOrders">
                         <td>
-                            <button (click)="selectElement(order)" class="btn text-ultra-small btn-sm btn-outline-primary" type="button">
+                            <a routerLink='../purchase-detailed-show/{{order.pk_id_operation}}' class="btn text-ultra-small btn-sm btn-outline-primary" type="button">
                                 <fa-icon [icon]="faEye" class="text-outline-secondary mb-2 mr-1"></fa-icon>Ver detalle
-                            </button>
+                            </a>
                         </td>
                         <td>{{ order.number_invoice }}</td>
                         <td>{{ order.external_reference.split(":")[3] }} : {{ order.external_reference.split(":")[2]  }}</td>

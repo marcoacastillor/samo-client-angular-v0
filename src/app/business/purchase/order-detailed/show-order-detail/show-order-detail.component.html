@@ -7,17 +7,222 @@
             </div>
             <div class="col-sm-4 text-right">
                 <div class="btn-group btn-group-sm">
-                    <button (click)="viewList()" type="button" class="btn btn-outline-primary btn-sm">
-                        <fa-icon [icon]="faThList" class="text-outline-primary mb-2 mr-1"></fa-icon>Ver todos
-                    </button>
+                    <a routerLink='../../purchase-detailed' class="btn text-ultra-small btn-sm btn-outline-primary" type="button">
+                        <fa-icon [icon]="faThList" class="text-outline-secondary mb-2 mr-1"></fa-icon>Ver todos
+                    </a>
                 </div>
             </div>
         </div>
     </div>
-    <div class="card-body">
-        <div class="row">
-            {{ operation | json }}
+    <div class="card-body back-gray">
+        <div class="container purchase-card">
+            <!-- start main info-->
+            <div class="row">
+                <!-- start provider info-->
+                <div class="col-sm-3 back-colo-f6">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th colspan="2"><h6>Proveedor</h6></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <td>{{ enterprise.name }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>NIT</th>
+                                        <td>{{ enterprise.nit }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Dirección</th>
+                                        <td>{{ enterprise.address }}, {{ enterprise.ubication_city }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Teléfono</th>
+                                        <td>{{ enterprise.phone }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="row margin-top-2rem">
+                        <div class="col-sm-12">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th colspan="2"><h6>Pagos</h6></th>
+                                    </tr>
+                                    <tr>
+                                        <th>Fecha</th>
+                                        <th>Valor</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let pay of lstPayments">
+                                        <td>{{ pay.date_payment }}</td>
+                                        <td>{{ pay.value_payment | number }}</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>Total</th>
+                                        <th>{{ operation.total_pays | number }}</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- start provider info-->
+                
+                <!-- start purchase info-->
+                <div class="col-sm-9 back-color-ff">
+                    <!-- start información básica-->
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <div class="row justify-content-start">
+                                <div class="col-sm-6">
+                                    <table class="table table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th colspan="2"><h6>Orden de compra #{{ operation.number_invoice }}</h6></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th>Fecha</th>
+                                                <td>{{ operation.date_operation }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Estado</th>
+                                                <td>{{ operation.state_operation }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Tipo de pago</th>
+                                                <td>{{ operation.payment_type }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <div class="row justify-content-end">
+                                <div class="col-sm-12">
+                                    <table class="table table-sm">
+                                        <tbody class="text-success order-purchase-title">
+                                            <tr>
+                                                <th>Valor total</th>
+                                                <td>{{ operation.total_operation | number }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Abonos</th>
+                                                <td>{{ operation.total_pays | number }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Saldo</th>
+                                                <td>{{ operation.total_operation - (operation.total_discounts + operation.total_pays) | number }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end información básica-->
+
+                    <!-- start productos-->
+                    <div class="row margin-top-2rem justify-content-end">
+                        <div class="col-sm-12">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Producto</th>
+                                        <th>Presentación</th>
+                                        <th>Cantidad</th>
+                                        <th>Valor unitario</th>
+                                        <th>Impuesto</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let prd of lstProducts">
+                                        <td>{{ prd.name }}<br/><span class="text-muted">[{{ prd.code }}]</span></td>
+                                        <td>{{ prd.presentation }}</td>
+                                        <td>{{ prd.number_units | number }}</td>
+                                        <td>{{ prd.price_unit | number }}</td>
+                                        <td>({{ prd.tax }}%) {{ prd.value_tax | number }}</td>
+                                        <td>{{ prd.total_product | number}}</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th rowspan="5" colspan="4"></th>
+                                        <th>Subtotal</th>
+                                        <th>{{ operation.subtotal_operation | number }}</th>
+                                    </tr>
+                                    <tr>
+                                        <th>Total impuestos</th>
+                                        <th>{{ operation.total_tax | number }}</th>
+                                    </tr>
+                                    <tr class="text-primary">
+                                        <th>Total</th>
+                                        <th>{{ (operation.subtotal_operation + operation.total_tax) | number }}</th>
+                                    </tr>
+                                    <tr class="text-danger">
+                                        <th>Descuentos</th>
+                                        <th>{{ operation.total_discounts | number }}</th>
+                                    </tr>
+                                    <tr class="text-success">
+                                        <th>Valor neto</th>
+                                        <th>{{ operation.total_operation | number }}</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- end productos-->
+
+                    <!-- start notes-->
+                    <div class="row margin-top-2rem justify-content-end">
+                        <div class="col-sm-12">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <td colspan="5"><h6>NOTAS ASOCIADAS A LA FACTURA</h6></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Tipo</th>
+                                        <th>Fecha</th>
+                                        <th>Descripción</th>
+                                        <th>Valor original</th>
+                                        <th>Valor modificado</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let note of lstNotes">
+                                        <td>{{ note.type_note }}</td>
+                                        <td>{{ note.date_note }}</td>
+                                        <td>{{ note.description }}</td>
+                                        <td>{{ note.previous_value }}</td>
+                                        <td>{{ note.actual_value }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- end productos-->
+                    
+                </div>
+                <!-- end purchase info-->
+            </div>
+            <!-- end main info-->
         </div>
-        <!-- end of row -->
     </div>
 </div>

@@ -30,6 +30,8 @@ export const environment = {
   url_cutting_period: 'http://localhost/ventasV0/public/cutting_period',
   url_cutting_period_product: 'http://localhost/ventasV0/public/cutting_period_product',
   url_detail_product_input: 'http://localhost/ventasV0/public/detail_product_input',
+  url_operation_product: 'http://localhost/ventasV0/public/operation_product',
+  url_notes: 'http://localhost/ventasV0/public/notes',
 
 
   clearMessageDelayMs: 5000,

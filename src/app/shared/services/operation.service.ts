@@ -119,4 +119,15 @@ export class OperationService {
       })
     );
   }
+
+  public getDetailOperation$(id_operation: number): Observable<Operation> {
+    const url = this._url + '/get-detail/' + id_operation;
+    return this.userService.validateOptionByToken('OPE_OPERATION_GET_DETAIL').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.get<Operation>(url);
+        }
+      })
+    );
+  }
 }
