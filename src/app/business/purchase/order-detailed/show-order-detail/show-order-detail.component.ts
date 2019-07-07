@@ -3,7 +3,6 @@ import { faThList } from '@fortawesome/free-solid-svg-icons';
 import { Operation } from 'src/app/shared/models/operation';
 import { ActivatedRoute } from '@angular/router';
 import { OperationService } from 'src/app/shared/services/operation.service';
-import { switchMap, tap } from 'rxjs/operators';
 import { EnterpriseService } from 'src/app/shared/services/enterprise.service';
 import { Enterprise } from 'src/app/shared/models/enterprise';
 import { OperationProductService } from 'src/app/shared/services/operation-product.service';
@@ -12,6 +11,7 @@ import { Payment } from 'src/app/shared/models/payment';
 import { PaymentService } from 'src/app/shared/services/payment.service';
 import { Notes } from 'src/app/shared/models/notes';
 import { NotesService } from 'src/app/shared/services/notes.service';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-show-order-detail',

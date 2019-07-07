@@ -40,6 +40,18 @@ export class EnterpriseService {
     );
   }
 
+  public getByNameFilter$(filter: string, type: string): Observable<Enterprise[]> {
+    const url = this._url + '/get-list-by-name-filter-and-type/' + filter + '/' + type;
+    return this.userService.validateOptionByToken('ENT_GET_BY_NAMEFILTER_AND_TYPE').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.get<Enterprise[]>(url);
+        }
+      })
+    );
+  }
+
+
   public showByExternalReference$(externalReference: string): Observable<Enterprise> {
     const url = this._url + '/show-external-reference/' + externalReference;
     return this.userService.validateOptionByToken('ENT_SHOW_EXTERNAL_REFERENCE').pipe(

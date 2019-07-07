@@ -105,6 +105,17 @@ export class ProductService {
     );
   }
 
+  public getByNameFilter$(nameProduct: string): Observable<Product[]> {
+    let url = this._url + '/get-by-name-filter/' + nameProduct;
+    return this.userService.validateOptionByToken('PRD_GET_BY_NAMEFILTER').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.get<Product[]>(url);
+        }
+      })
+    );
+  }
+
   public store$(product: Product): Observable<Product> {
     return this.userService.validateOptionByToken('PRD_CRT').pipe(
       switchMap(validate => {

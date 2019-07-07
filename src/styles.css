@@ -110,6 +110,20 @@
   background-color: #fff;
 }
 
+.display-result
+{
+  padding: 0.2rem;
+  z-index: 1080;
+}
+
+.scrollbar
+{
+	float: left;
+	height: 150px;
+	width: 250px;
+	overflow-y: scroll;
+}
+
 .text-big-report
 {
   font-size: 1.2rem;

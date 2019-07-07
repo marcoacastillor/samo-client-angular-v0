@@ -50,7 +50,7 @@
                         </div>
                     </div>
 
-                    <div class="row margin-top-2rem">
+                    <div class="row margin-top-2rem" *ngIf="lstPayments">
                         <div class="col-sm-12">
                             <table class="table table-sm">
                                 <thead>
@@ -190,7 +190,7 @@
                     <!-- end productos-->
 
                     <!-- start notes-->
-                    <div class="row margin-top-2rem justify-content-end">
+                    <div class="row margin-top-2rem justify-content-end" *ngIf="lstNotes">
                         <div class="col-sm-12">
                             <table class="table table-sm">
                                 <thead>
