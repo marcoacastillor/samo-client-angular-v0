@@ -38,6 +38,17 @@ export class ParameterService {
       })
     );
   }
+
+  public getByMultipleCodeCategory$(codes: any): Observable<any[]> {
+    const url = this._url + '/get-param-by-multiple-categ';
+    return this.userService.validateOptionByToken('PARAM_GET_PARAM_BY_MULTIPLE_CATEG').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.post<any[]>(url,codes);
+        }
+      })
+    );
+  }
   
   public update$(cmp: Parameter): Observable<Parameter> {
     return this.userService.validateOptionByToken('PARAM_UPD').pipe(

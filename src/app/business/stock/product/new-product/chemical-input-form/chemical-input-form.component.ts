@@ -83,7 +83,7 @@ export class ChemicalInputFormComponent implements OnInit {
       units_package: 0,
       sale_price_unit: 0,
       sale_price_package: 0,
-      type_product: environment.type_product_input, 
+      type_product: '', 
       units_available: 0,
       size: '', 
       color: '', 

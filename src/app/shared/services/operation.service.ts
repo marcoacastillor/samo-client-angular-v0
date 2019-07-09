@@ -76,6 +76,17 @@ export class OperationService {
     );
   }
 
+  public storeOperationPurchase$(operation: Operation): Observable<Operation> {
+    let url = this._url + '/create-operation-purchase';
+    return this.userService.validateOptionByToken('OPE_OPERATION_PURCHASE_CRT').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.post<Operation>(url, operation);
+        }
+      })
+    );
+  }
+
   public store_purchase$(purchase: Purchase): Observable<Purchase> {
     let url = this._url + '/create-purchase';
     return this.userService.validateOptionByToken('OPE_PURCHASE_CRT').pipe(

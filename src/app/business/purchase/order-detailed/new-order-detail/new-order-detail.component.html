@@ -15,7 +15,7 @@
         </div>
     </div>
     <div class="card-body back-gray">
-        <div class="purchase-card">
+        <div class="container purchase-card">
             <!-- start main info-->
             <div class="row">
                 <!-- start provider info-->
@@ -80,56 +80,75 @@
                 </div>
                 <!-- start provider info-->
                 
-                <form [formGroup]="operationForm" (ngSubmit)="onSubmit()">
-                    <!-- start purchase info-->
-                    <div class="col-sm-9 back-color-ff">
+                <!-- start purchase info-->
+                <div class="col-sm-9 back-color-ff">
+                    <form [formGroup]="operationForm" (ngSubmit)="onSubmit()">
                         <!-- start información básica-->
-                        <div class="row">
-                            <div class="col-sm-8">
-                                <div class="row justify-content-start">
+                        <div class="row justify-content-between">
+                            <div class="col-sm-4">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <h6>Orden de compra # {{ operationForm.value.number_invoice }}</h6>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <label for="nit_provider">Proveedor</label>
+                                    </div>
                                     <div class="col-sm-8">
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <h6>Orden de compra # {{ operationForm.value.number_invoice }}</h6>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <button type="button" (click)="loadAllProviders()" class="btn text-small btn-sm btn-outline-primary" data-toggle="modal" data-target="#lstProvidersModal">
+                                                    <fa-icon [icon]="faSearch" class="text-primary mb-2 mr-1" title="Crear registro"></fa-icon>
+                                                </button>
                                             </div>
-                                        </div>
-                                        <div class="row form-group">
-                                            <div class="col-sm-4">
-                                                <label for="fk_id_provider">Proveedor</label>
-                                            </div>
-                                            <div class="col-sm-8">
-                                                <input type="text" id="filterProvider" (keydown)="onFindProvider($event)" class="form-control form-control-sm" aria-describedby="providerHelp" formControlName="fk_id_provider">
-                                                <small id="providerHelp" class="form-text text-muted">Busque el proveedor de los productos.</small>
-                                                <div class="container back-colo-f6 display-result scrollbar" *ngIf="lstProviders.length > 0">
-                                                    <div class="row">
-                                                        <div class="col-sm-12" *ngFor="let provider of lstProviders">
-                                                            <button class="text-outline-info mb-2 mr-1" type="button" (click)="selectProvider(provider)">{{ provider.nit }} - {{ provider.name }}</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row form-group">
-                                            <div class="col-sm-4">
-                                                <label for="number_invoice">Factura #</label>
-                                            </div>
-                                            <div class="col-sm-8">
-                                                <input type="text" class="form-control form-control-sm" aria-describedby="ninvoiceHelp" formControlName="number_invoice">
-                                                <small id="ninvoiceHelp" class="form-text text-muted">Ingresar número de factura.</small>
-                                            </div>
+                                            <input type="text" id="filterProvider" (keypress)="onFindProvider($event)" class="form-control form-control-sm" aria-describedby="providerHelp" formControlName="nit_provider">
+                                            <small id="providerHelp" class="form-text text-muted">Digite el nit del proveedor, o utilice el buscador.</small>
                                         </div>
                                     </div>
                                 </div>
+                                
+                                <div class="row form-group">
+                                    <div class="col-sm-4">
+                                        <label for="number_invoice">Factura #</label>
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control form-control-sm" aria-describedby="ninvoiceHelp" formControlName="number_invoice">
+                                        <small id="ninvoiceHelp" class="form-text text-muted">Ingresar número de factura.</small>
+                                    </div>
+                                </div> 
                             </div>
 
+                            <!-- start information provider list -->
                             <div class="col-sm-4">
-                                <div class="row justify-content-end">
+                                <div class="container back-colo-f6 display-result scrollbar" *ngIf="lstProviders.length > 0">
+                                    <table class="table table-sm table-striped">
+                                        <tbody>
+                                            <tr *ngFor="let enterprise of lstProviders">
+                                                <td>
+                                                    <div class="btn-group btn-group-sm">
+                                                        <button type="button" (click)="selectProvider(enterprise)" class="btn btn-outline-primary btn-sm" data-dismiss="modal">
+                                                            <fa-icon [icon]="faCheckCircle" class="text-outline-primary mb-2 mr-1"></fa-icon>
+                                                        </button>
+                                                    </div>
+                                                    {{ enterprise.nit }}
+                                                </td>
+                                                <td>{{ enterprise.name }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- end information provider list -->
+                        
+                            <div class="col-sm-4">
+                                <div class="row">
                                     <div class="col-sm-12">
                                         <table class="table table-sm">
                                             <tbody class="text-success order-purchase-title">
                                                 <tr>
-                                                    <th>Valor total</th>
-                                                    <td>{{ operationForm.value.total_operation | number }}</td>
+                                                    <th>Valor a pagar</th>
+                                                    <td>{{ (operationForm.value.total_operation - operationForm.value.total_discount) | number }}</td>
                                                 </tr>
                                                 <tr>
                                                     <th>Abonos</th>
@@ -137,7 +156,7 @@
                                                 </tr>
                                                 <tr>
                                                     <th>Saldo</th>
-                                                    <td>{{ (operationForm.value.total_operation - operationForm.total_pays) | number }}</td>
+                                                    <td>{{ (operationForm.value.total_operation - operationForm.value.total_pays) | number }}</td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -145,49 +164,63 @@
                                 </div>
                             </div>
                         </div>
-                        
                         <!-- end información básica-->
-                        <div class="row margin-top-2rem justify-content-end" formArrayName="product">
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <label for="code_product">Código de barras</label>
-                                    <input type="text" id="filterProduct" (keydown)="onFindProduct($event)" class="form-control form-control-sm" aria-describedby="codeHelp" formControlName="code_product">
-                                    <small id="codeHelp" class="form-text text-muted">Introduzca el cóidigo de barras del producto.</small>
+
+                        <!-- start information selected product -->
+                        <div class="row" formArrayName="product">
+                            <div class="col-sm-4">
+                                <label for="number_selected">Código de barras</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <button type="button" class="btn text-small btn-sm btn-outline-primary" data-toggle="modal" data-target="#lstProductsModal">
+                                            <fa-icon [icon]="faSearch" class="text-primary mb-2 mr-1" title="Crear registro"></fa-icon>
+                                        </button>
+                                    </div>
+                                    <input type="text" id="filterProduct" (keypress)="onFindProduct($event)" #code_product class="form-control form-control-sm" formControlName="code_product">
                                     <div class="container back-colo-f6 display-result scrollbar" *ngIf="lstProducts.length > 0">
-                                        <div class="row">
-                                            <div class="col-sm-12" *ngFor="let product of lstProducts">
-                                                <button class="text-outline-info mb-2 mr-1" type="button" (click)="selectProduct(product)">{{ product.code }} - {{ product.name }}</button>
-                                            </div>
-                                        </div>
+                                        <table class="table table-sm table-striped">
+                                            <tbody>
+                                                <tr *ngFor="let product of lstProducts">
+                                                    <td>
+                                                        <div class="btn-group btn-group-sm">
+                                                            <button type="button" (click)="selectProduct(product)" class="btn btn-outline-primary btn-sm" data-dismiss="modal">
+                                                                <fa-icon [icon]="faCheckCircle" class="text-outline-primary mb-2 mr-1"></fa-icon>
+                                                            </button>
+                                                        </div>
+                                                        {{ product.code }}
+                                                    </td>
+                                                    <td>{{ product.name }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <label for="number_selected">Unidades seleccionadas</label>
-                                    <input type="number" class="form-control form-control-sm" aria-describedby="unidadesHelp" formControlName="number_selected">
-                                    <small id="unidadesHelp" class="form-text text-muted">Unidades a comprar del producto seleccionado.</small>
-                                </div>
+                            <div class="form-group col-sm-2">
+                                <label for="number_selected">Unidades</label>
+                                <input type="number" class="form-control form-control-sm" aria-describedby="unidadesHelp" formControlName="number_selected">
                             </div>
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <label for="value_unit">Valor unitario</label>
-                                    <input type="number" class="form-control form-control-sm" formControlName="value_unit">
-                                </div>
+                            <div class="form-group col-sm-2">
+                                <label for="value_unit">Valor unitario</label>
+                                <input type="number" class="form-control form-control-sm" formControlName="value_unit">
                             </div>
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <label for="tax_product">Impuestos</label>
-                                    <input type="number" class="form-control form-control-sm" formControlName="tax_product">
-                                </div>
+                            <div class="form-group col-sm-2">
+                                <label for="tax_product">Impuestos</label>
+                                <select class="form-control form-control-sm" formControlName="tax_product">
+                                    <option value="" selected>Seleccione...</option>
+                                    <option *ngFor="let param of lstParams[taxes]" value="{{param.value}}">{{ param.name }}</option>
+                                </select>
                             </div>
-                            <div class="col-auto my-1">
-                                <button type="button" class="btn btn-primary">Add</button>
+                            <div class="col-sm-2 align-self-center text-rigth">
+                                <button type="submit" (click)="addProduct()" class="btn btn-sm btn-outline-primary" type="button">
+                                    <fa-icon [icon]="faPlusCircle" class="text-outline-secondary mb-2 mr-1"></fa-icon>Agregar
+                                </button>
                             </div>
                         </div>
-
+                        <!-- end information selected product -->
+                    
                         <!-- start productos-->
-                        <div class="row margin-top-2rem justify-content-end">
+                        <div class="row justify-content-end">
                             <div class="col-sm-12">
                                 <table class="table table-sm">
                                     <thead>
@@ -202,47 +235,100 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr *ngFor="let prd of selected_products.controls; let i=index">
-                                            <td>[]</td>
-                                            <td>[]</td>
-                                            <td>[]</td>
-                                            <td>[]</td>
-                                            <td>[]</td>
-                                            <td>[]</td>
+                                        <tr *ngFor="let prd of operationForm.value.selected_products; let i=index">
+                                            <td>
+                                                <div class="btn-group" role="group" aria-label="Basic example">
+                                                    <button (click)="delProduct(prd,i)" class="btn text-ultra-small btn-sm btn-outline-danger" type="button">
+                                                        <fa-icon [icon]="faTrashAlt" class="text-outline-danger mb-2 mr-1"></fa-icon>
+                                                    </button>
+                                                </div>
+                                                {{prd.code_product}}
+                                            </td>
+                                            <td>{{prd.name_product}}</td>
+                                            <td>{{prd.presentation}}</td>
+                                            <td>{{prd.number_selected | number}}</td>
+                                            <td>{{prd.value_unit | number}}</td>
+                                            <td>({{ prd.tax_product }})% - {{prd.value_tax | number}}</td>
+                                            <td>{{prd.value_total_product | number}}</td>
                                         </tr>
                                     </tbody>
                                     <tfoot>
                                         <tr>
                                             <th rowspan="5" colspan="5"></th>
                                             <th>Subtotal</th>
-                                            <th>--subtotal</th>
+                                            <th>{{ operationForm.value.subtotal_operation | number }}</th>
                                         </tr>
                                         <tr>
                                             <th>Total impuestos</th>
-                                            <th>--impuestos</th>
+                                            <th>{{ operationForm.value.total_tax | number }}</th>
                                         </tr>
                                         <tr class="text-primary">
                                             <th>Total</th>
-                                            <th>--total</th>
+                                            <th>{{ operationForm.value.total_operation | number }}</th>
                                         </tr>
                                         <tr class="text-danger">
                                             <th>Descuentos</th>
-                                            <th>[]</th>
+                                            <th>{{ operationForm.value.total_discount | number }}</th>
                                         </tr>
                                         <tr class="text-success">
-                                            <th>Valor neto</th>
-                                            <th>--neto</th>
+                                            <th>Valor a pagar</th>
+                                            <th>{{ (operationForm.value.total_operation - operationForm.value.total_discount) | number }}</th>
                                         </tr>
                                     </tfoot>
                                 </table>
                             </div>
                         </div>
                         <!-- end productos-->
-                    </div>
-                    <!-- end purchase info-->
-                </form>
+
+                        <!-- start payment information -->
+                        <div class="row margin-top-2rem">
+                            <div class="form-group col-sm-3">
+                                <label for="payment_type">Tipo de pago</label>
+                                <select class="form-control form-control-sm" formControlName="payment_type">
+                                    <option value="" selected>Seleccione...</option>
+                                    <option *ngFor="let param of lstParams[type_payment]" value="{{param.value}}">{{ param.name }}</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label for="total_discount">Valor descuento</label>
+                                <input type="number" class="form-control form-control-sm" aria-describedby="unidadesHelp" formControlName="total_discount">
+                            </div>
+                            <div class="form-group col-sm-3" *ngIf="operationForm.value.payment_type === credit_payment">
+                                <label for="total_pays">Abono</label>
+                                <input type="number" class="form-control form-control-sm" formControlName="total_pays">
+                            </div>
+                        </div>
+                        <!-- end payment information -->
+
+                        <div class="row justify-content-end" style="background-color: #fdfdfd">
+                            <div class="col-sm-4 text-right align-self-end">
+                                <button type="submit" (click)="saveProduct()" [disabled]="operationForm.invalid" class="btn btn-sm btn-outline-primary" type="button">
+                                    <fa-icon [icon]="faSave" class="text-outline-secondary mb-2 mr-1"></fa-icon>Guardar
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- end purchase info-->
             </div>
             <!-- end main info-->
         </div>
     </div>
 </div>
+
+<!-- start modal list products-->
+<app-list-products-modal
+[lstProducts]="lstProductsModal"
+(selectProduct)="selectProduct($event)"
+>
+</app-list-products-modal>
+<!-- end modal list products-->
+
+
+<!-- start modal list providers-->
+<app-list-provider-modal
+[lstProviders]="lstProvidersModal"
+(selectProvider)="selectProvider($event)"
+>
+</app-list-provider-modal>
+<!-- end modal list providers-->

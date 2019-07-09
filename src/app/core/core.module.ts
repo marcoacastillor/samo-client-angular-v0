@@ -9,6 +9,7 @@ import { MaterialModule } from '../material.module';
 import { InfoSystemComponent } from './navigator/info-system/info-system.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
+import { AuthenticationService } from '../shared/services/authentication.service';
 
 @NgModule({
   imports: [
@@ -24,7 +25,8 @@ import { AuthInterceptorService } from './services/auth-interceptor.service';
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptorService,
       multi: true
-    }
+    },
+    AuthenticationService
   ]
 })
 export class CoreModule { }

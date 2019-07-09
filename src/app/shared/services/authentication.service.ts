@@ -13,4 +13,14 @@ export class AuthenticationService {
   public store$(auth: Authentication): Observable<Authentication> {
     return this.http.post<Authentication>(this._url,auth);
   }
+
+  public refreshSales(): Observable<string>{
+    let url = environment.url_refresh_sales;
+    return this.http.get<string>(url)
+  }
+
+  public refreshUsers(): Observable<string>{
+    let url = environment.url_refresh_users;
+    return this.http.get<string>(url)
+  }
 }

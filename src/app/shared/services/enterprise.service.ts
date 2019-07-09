@@ -51,6 +51,18 @@ export class EnterpriseService {
     );
   }
 
+  public getByCodeFilter$(filter: string, type: string): Observable<Enterprise[]> {
+    const url = this._url + '/get-list-by-code-filter-and-type/' + filter + '/' + type;
+    return this.userService.validateOptionByToken('ENT_GET_BY_CODEFILTER_AND_TYPE').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.get<Enterprise[]>(url);
+        }
+      })
+    );
+  }
+
+
 
   public showByExternalReference$(externalReference: string): Observable<Enterprise> {
     const url = this._url + '/show-external-reference/' + externalReference;

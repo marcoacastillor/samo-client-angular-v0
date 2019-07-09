@@ -40,6 +40,8 @@ import { ShowOrderDetailComponent } from './order-detailed/show-order-detail/sho
 import { NewOrderDetailComponent } from './order-detailed/new-order-detail/new-order-detail.component';
 import { OperationProductService } from 'src/app/shared/services/operation-product.service';
 import { NotesService } from 'src/app/shared/services/notes.service';
+import { ListProviderModalComponent } from './order-detailed/list-provider-modal/list-provider-modal.component';
+import { ListProductsModalComponent } from './order-detailed/list-products-modal/list-products-modal.component';
 
 @NgModule({
   imports: [
@@ -51,6 +53,6 @@ import { NotesService } from 'src/app/shared/services/notes.service';
     OwlNativeDateTimeModule
   ],
   providers: [ EnterpriseService, ParameterService, UserService, UtilsService, GlobalStoreService, OperationService, ProductService, PaymentService, OperationProductService, NotesService],
-  declarations: [AdminOrderComponent, ListOrderComponent, NewOrderComponent, ShowOrderComponent, ModalEnterpriseComponent, NewEnterpriseComponent, ModalPaymentComponent, NewPaymentComponent, ModalProductComponent, NewProductComponent, AdminPurchaseReportComponent, ConsolidatedComponent, PendingReceiveComponent, ModelPaymentComponent, ModelViewOperationComponent, ViewOperationComponent, PaymentComponent, ModalSearchComponent, SearchComponent, NewOrderFileComponent, ShowOrderFileComponent, ModalShowOrderFileComponent, ListOrderDetailComponent, ShowOrderDetailComponent, NewOrderDetailComponent]
+  declarations: [AdminOrderComponent, ListOrderComponent, NewOrderComponent, ShowOrderComponent, ModalEnterpriseComponent, NewEnterpriseComponent, ModalPaymentComponent, NewPaymentComponent, ModalProductComponent, NewProductComponent, AdminPurchaseReportComponent, ConsolidatedComponent, PendingReceiveComponent, ModelPaymentComponent, ModelViewOperationComponent, ViewOperationComponent, PaymentComponent, ModalSearchComponent, SearchComponent, NewOrderFileComponent, ShowOrderFileComponent, ModalShowOrderFileComponent, ListOrderDetailComponent, ShowOrderDetailComponent, NewOrderDetailComponent, ListProviderModalComponent, ListProductsModalComponent]
 })
 export class PurchaseModule { }

@@ -29,6 +29,10 @@
                                 <a class="nav-link dropdown-item" href="#">Salir</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="nav-link dropdown-item" [routerLink]="['./sales-admin/modules']">Menú principal</a> 
+                                <div class="dropdown-divider"></div>
+                                <a class="nav-link dropdown-item" (click)="refreshRoutesSales()">*** Refrescar ventas : {{ refreshMsgSales }}</a> 
+                                <div class="dropdown-divider"></div>
+                                <a class="nav-link dropdown-item" (click)="refreshRoutesUsers()">*** Refrescar usuarios : {{ refreshMsgUsers }}</a> 
                             </div>
                         </div>
                     </div>    

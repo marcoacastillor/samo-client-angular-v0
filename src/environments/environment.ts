@@ -16,7 +16,9 @@ export const environment = {
   url_storage: 'http://localhost/usuariosV0/storage/app/public/',
   url_ventas_storage: 'http://localhost/ventasV0/storage/app/public/',
   url_type_service: 'http://localhost/usuariosV0/public/type-service',
+  url_refresh_users: 'http://localhost/usuariosV0/public/clear',
 
+  url_refresh_sales: 'http://localhost/ventasV0/public/clear',
   url_authentication_ventas: 'http://localhost/ventasV0/public/authentication',
   url_person: 'http://localhost/ventasV0/public/persons',
   url_enterprise: 'http://localhost/ventasV0/public/enterprises',

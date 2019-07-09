@@ -1,0 +1,61 @@
+<div class="modal fade" id="lstProvidersModal" tabindex="-1" role="dialog" aria-labelledby="lstProvidersModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Proveedores</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h5 class="card-title">Listado de proveedores</h5>
+                        </div>
+                        <div class="col-sm-6 text-right">
+                            <span class="card-title">Total de proveedores: {{ lstProviders.length }}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-12 alert-info" role="alert">
+                            <p>Para seleccionar un proveedor, haga clic en el ícono : <fa-icon [icon]="faCheckCircle" class="text-outline-primary mb-2 mr-1"></fa-icon></p>
+                        </div>
+                    </div>
+                    <div class="row margin-top-2rem">
+                        <div class="col-sm-12">
+                            <table class="table table-sm table-striped">
+                                <thead class="bg-secondary text-white">
+                                    <tr>
+                                        <th>Nit</th>
+                                        <th>Nombre</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let enterprise of lstProviders">
+                                        <td>
+                                            <div class="btn-group btn-group-sm">
+                                                <button type="button" (click)="onSelectProvider(enterprise)" class="btn btn-outline-primary btn-sm" data-dismiss="modal">
+                                                    <fa-icon [icon]="faCheckCircle" class="text-outline-primary mb-2 mr-1"></fa-icon>
+                                                </button>
+                                            </div>
+                                            {{ enterprise.nit }}
+                                        </td>
+                                        <td>{{ enterprise.name }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        </div>
+        </div>
+    </div>
+</div>
