@@ -42,6 +42,9 @@ import { OperationProductService } from 'src/app/shared/services/operation-produ
 import { NotesService } from 'src/app/shared/services/notes.service';
 import { ListProviderModalComponent } from './order-detailed/list-provider-modal/list-provider-modal.component';
 import { ListProductsModalComponent } from './order-detailed/list-products-modal/list-products-modal.component';
+import { FormOperationModalComponent } from './order-detailed/show-order-detail/form-operation-modal/form-operation-modal.component';
+import { FormProductModalComponent } from './order-detailed/show-order-detail/form-product-modal/form-product-modal.component';
+import { FormPaymentModalComponent } from './order-detailed/show-order-detail/form-payment-modal/form-payment-modal.component';
 
 @NgModule({
   imports: [
@@ -53,6 +56,6 @@ import { ListProductsModalComponent } from './order-detailed/list-products-modal
     OwlNativeDateTimeModule
   ],
   providers: [ EnterpriseService, ParameterService, UserService, UtilsService, GlobalStoreService, OperationService, ProductService, PaymentService, OperationProductService, NotesService],
-  declarations: [AdminOrderComponent, ListOrderComponent, NewOrderComponent, ShowOrderComponent, ModalEnterpriseComponent, NewEnterpriseComponent, ModalPaymentComponent, NewPaymentComponent, ModalProductComponent, NewProductComponent, AdminPurchaseReportComponent, ConsolidatedComponent, PendingReceiveComponent, ModelPaymentComponent, ModelViewOperationComponent, ViewOperationComponent, PaymentComponent, ModalSearchComponent, SearchComponent, NewOrderFileComponent, ShowOrderFileComponent, ModalShowOrderFileComponent, ListOrderDetailComponent, ShowOrderDetailComponent, NewOrderDetailComponent, ListProviderModalComponent, ListProductsModalComponent]
+  declarations: [AdminOrderComponent, ListOrderComponent, NewOrderComponent, ShowOrderComponent, ModalEnterpriseComponent, NewEnterpriseComponent, ModalPaymentComponent, NewPaymentComponent, ModalProductComponent, NewProductComponent, AdminPurchaseReportComponent, ConsolidatedComponent, PendingReceiveComponent, ModelPaymentComponent, ModelViewOperationComponent, ViewOperationComponent, PaymentComponent, ModalSearchComponent, SearchComponent, NewOrderFileComponent, ShowOrderFileComponent, ModalShowOrderFileComponent, ListOrderDetailComponent, ShowOrderDetailComponent, NewOrderDetailComponent, ListProviderModalComponent, ListProductsModalComponent, FormOperationModalComponent, FormProductModalComponent, FormPaymentModalComponent]
 })
 export class PurchaseModule { }

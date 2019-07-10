@@ -7,6 +7,7 @@ export class ProductOperation {
     public number_units: number;
     public number_package: number;
     public price_package: number;
+    public price_unit: number;
     public sale_price_unit: number;
     public cost_price: number;
     public type_product: string;

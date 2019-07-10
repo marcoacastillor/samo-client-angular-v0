@@ -70,6 +70,7 @@ export const environment = {
   state_initial_purchase: 'CREADA',
   state_payment_purchase: 'PAGADA',
   state_opened_purchase: 'ABIERTA',
+  state_block: 'BLOQUEADA',
 
   sales: 'SALE',
   purchase: 'PURCHASE',

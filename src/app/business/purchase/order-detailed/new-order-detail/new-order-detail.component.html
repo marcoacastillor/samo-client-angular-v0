@@ -15,7 +15,20 @@
         </div>
     </div>
     <div class="card-body back-gray">
-        <div class="container purchase-card">
+        <div class="purchase-card">
+            <!-- start info options-->
+            <div class="row" *ngIf="success">
+                <div class="col-sm-12">
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>Éxito</strong> {{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- end info options-->
+            
             <!-- start main info-->
             <div class="row">
                 <!-- start provider info-->
@@ -148,7 +161,7 @@
                                             <tbody class="text-success order-purchase-title">
                                                 <tr>
                                                     <th>Valor a pagar</th>
-                                                    <td>{{ (operationForm.value.total_operation - operationForm.value.total_discount) | number }}</td>
+                                                    <td>{{ (operationForm.value.total_operation - operationForm.value.total_discounts) | number }}</td>
                                                 </tr>
                                                 <tr>
                                                     <th>Abonos</th>
@@ -173,7 +186,7 @@
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <button type="button" class="btn text-small btn-sm btn-outline-primary" data-toggle="modal" data-target="#lstProductsModal">
-                                            <fa-icon [icon]="faSearch" class="text-primary mb-2 mr-1" title="Crear registro"></fa-icon>
+                                            <fa-icon [icon]="faSearch" class="text-primary mb-2 mr-1" title="buscar registro"></fa-icon>
                                         </button>
                                     </div>
                                     <input type="text" id="filterProduct" (keypress)="onFindProduct($event)" #code_product class="form-control form-control-sm" formControlName="code_product">
@@ -268,11 +281,11 @@
                                         </tr>
                                         <tr class="text-danger">
                                             <th>Descuentos</th>
-                                            <th>{{ operationForm.value.total_discount | number }}</th>
+                                            <th>{{ operationForm.value.total_discounts | number }}</th>
                                         </tr>
                                         <tr class="text-success">
                                             <th>Valor a pagar</th>
-                                            <th>{{ (operationForm.value.total_operation - operationForm.value.total_discount) | number }}</th>
+                                            <th>{{ (operationForm.value.total_operation - operationForm.value.total_discounts) | number }}</th>
                                         </tr>
                                     </tfoot>
                                 </table>
@@ -290,8 +303,8 @@
                                 </select>
                             </div>
                             <div class="form-group col-sm-3">
-                                <label for="total_discount">Valor descuento</label>
-                                <input type="number" class="form-control form-control-sm" aria-describedby="unidadesHelp" formControlName="total_discount">
+                                <label for="total_discounts">Valor descuento</label>
+                                <input type="number" class="form-control form-control-sm" aria-describedby="unidadesHelp" formControlName="total_discounts">
                             </div>
                             <div class="form-group col-sm-3" *ngIf="operationForm.value.payment_type === credit_payment">
                                 <label for="total_pays">Abono</label>
@@ -300,7 +313,7 @@
                         </div>
                         <!-- end payment information -->
 
-                        <div class="row justify-content-end" style="background-color: #fdfdfd">
+                        <div class="row justify-content-end">
                             <div class="col-sm-4 text-right align-self-end">
                                 <button type="submit" (click)="saveProduct()" [disabled]="operationForm.invalid" class="btn btn-sm btn-outline-primary" type="button">
                                     <fa-icon [icon]="faSave" class="text-outline-secondary mb-2 mr-1"></fa-icon>Guardar

@@ -35,9 +35,13 @@ export class FoodFormComponent implements OnInit, OnChanges {
   {
     if(changes.product)
     {
-      if(changes.product.currentValue)
+      if(changes.product.currentValue != changes.product.previousValue)
       {
         this.product = changes.product.currentValue;
+        if(this.product.presentation == environment.package)
+        {
+          this.showPackageInfo = true;
+        }
         this.createFormFood();
       }
     }

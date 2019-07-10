@@ -52,8 +52,8 @@ export class NewProviderComponent implements OnInit, OnChanges {
     name: [this.registry.name,Validators.required],
     address: [this.registry.address,Validators.required],
     phone: [this.registry.phone,Validators.required],
-    external_reference: [this.registry.external_reference,Validators.required],
-    ubication_city: [this.registry.ubication_city,Validators.required],
+    external_reference: [this.registry.external_reference],
+    ubication_city: [this.registry.ubication_city],
    });
  }
 

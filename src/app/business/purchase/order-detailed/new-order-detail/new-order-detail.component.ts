@@ -48,7 +48,9 @@ export class NewOrderDetailComponent implements OnInit {
 
   @ViewChild('code_product') nameField: ElementRef;
   lastkeydown1 = 0;
-  
+  success = false;
+  message = '';
+
   constructor(
     private operationService: OperationService,
     private fb: FormBuilder,
@@ -65,7 +67,6 @@ export class NewOrderDetailComponent implements OnInit {
   }
 
   private getMultipleParams(){
-    
     this.parameterService.getByMultipleCodeCategory$(this.categories).subscribe(
       lstParams => this.lstParams = lstParams
     )
@@ -85,7 +86,7 @@ export class NewOrderDetailComponent implements OnInit {
       subtotal_operation: [0],
       total_operation: [0],
       total_tax: [0],
-      total_discount: [0],
+      total_discounts: [0],
       type_discount: [''],
       total_pays: [0],
       product: this.fb.group({
@@ -231,7 +232,9 @@ export class NewOrderDetailComponent implements OnInit {
     this.operationService.storeOperationPurchase$(this.operationForm.value).subscribe(
       () => {
         this.initForm();
-        this.setMessage('Se creó la órden de compra exitosamente.');
+        this.enterprise = new Enterprise();
+        this.success = true;
+        this.message = 'Se realizó la creación de la factura con éxito.';
       }
     )
   }
@@ -253,13 +256,4 @@ export class NewOrderDetailComponent implements OnInit {
 
     this.selected_products.removeAt(idx);
   }
-
-  /*
-  * ------------------------------------------
-  * Funciones validación de resultado
-  * ------------------------------------------
-  */
- private setMessage(message: string){
-  this.globalStore.dispatchUserMessage('200', message);
-}
 }

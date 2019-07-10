@@ -87,6 +87,27 @@ export class OperationService {
     );
   }
 
+  updateOperation$(operation: Operation): Observable<Operation> {
+    return this.userService.validateOptionByToken('OPE_OPERATION_UPD').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.put<Operation>(this._url, operation);
+        }
+      })
+    );
+  }
+
+  changeState$(id: number, state: string): Observable<Operation> {
+    let url = this._url + '/change-state/' + id.toString() + '/' + state;
+    return this.userService.validateOptionByToken('OPE_CHANGE_STATE').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.get<Operation>(url);
+        }
+      })
+    );
+  }
+
   public store_purchase$(purchase: Purchase): Observable<Purchase> {
     let url = this._url + '/create-purchase';
     return this.userService.validateOptionByToken('OPE_PURCHASE_CRT').pipe(

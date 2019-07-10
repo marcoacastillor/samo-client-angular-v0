@@ -27,6 +27,17 @@ export class PaymentService {
     );
   }
 
+  public delete$(id: number): Observable<Payment> {
+    let url = this._url + '/' + id.toString();
+    return this.userService.validateOptionByToken('PAY_DEL').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.delete<Payment>(url);
+        }
+      })
+    );
+  }
+
   public getPaymentsByOperation$(id_operation: number): Observable<Payment[]> {
     let url = this._url + '/get-by-operation/' + id_operation.toString();
     return this.userService.validateOptionByToken('PAY_GET_BY_OPERATION').pipe(

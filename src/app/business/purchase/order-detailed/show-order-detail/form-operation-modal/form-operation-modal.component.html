@@ -1,0 +1,66 @@
+<div class="modal fade" id="operationModal" tabindex="-1" role="dialog" aria-labelledby="operationModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Editar información básica</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row justify-content-end">
+                        <div class="col-sm-4 order-purchase-title">
+                            <h6>Valor total</h6>
+                            {{ operationForm.value.total_operation | number }}
+                        </div>
+                        <div class="col-sm-4 order-purchase-title">
+                            <h6>Total Abonos</h6>
+                            {{ operationForm.value.total_pays | number }}
+                        </div>
+                        <div class="col-sm-4 order-purchase-title">
+                            <h6>Saldo</h6>
+                            {{ operationForm.value.total_operation - (operationForm.value.total_discounts + operationForm.value.total_pays) | number }}
+                        </div>
+                    </div>
+                    <form [formGroup]="operationForm" (ngSubmit)="onSubmit()">
+                        <div class="row">
+                            <div class="form-group col-sm-3">
+                                <label for="number_invoice">Factura #</label>
+                                <input type="text" class="form-control form-control-sm" aria-describedby="ninvoiceHelp" formControlName="number_invoice">
+                                <small id="ninvoiceHelp" class="form-text text-muted">Ingresar número de factura.</small>
+                            </div>
+                            <div class="form-group col-sm-3" *ngIf="operationForm.value.payment_type != efecty_payment">
+                                <label for="payment_type">Tipo de pago</label>
+                                <select class="form-control form-control-sm" formControlName="payment_type">
+                                    <option value="" selected>Seleccione...</option>
+                                    <option *ngFor="let param of lstParams[type_payment]" value="{{param.value}}">{{ param.name }}</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label for="total_discounts">Valor descuento</label>
+                                <input type="number" class="form-control form-control-sm" aria-describedby="unidadesHelp" formControlName="total_discounts">
+                            </div>
+                            <div class="form-group col-sm-3" *ngIf="operationForm.value.payment_type != efecty_payment">
+                                <label for="total_pays">Abono</label>
+                                <input type="number" class="form-control form-control-sm" formControlName="total_pays">
+                            </div>
+                        </div> 
+                        <div class="row justify-content-end">
+                            <div class="col-sm-4 text-right align-self-end">
+                                <button type="submit" (click)="updateOperation()" [disabled]="operationForm.invalid" class="btn btn-sm btn-outline-primary" type="button" data-dismiss="modal">
+                                    <fa-icon [icon]="faSave" class="text-outline-secondary mb-2 mr-1"></fa-icon>Actualizar
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        </div>
+        </div>
+    </div>
+</div>

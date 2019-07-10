@@ -1,0 +1,121 @@
+<div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-labelledby="productModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Productos</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="card">
+                <div class="card-body">
+                    <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+                        <!-- start information selected product -->
+                        <div class="row">
+                            <div class="form-group col-sm-6">
+                                <label for="code_product">Código de barras</label>
+                                <input type="text" id="filterProductCode" (keypress)="onFindProductCode($event)" class="form-control form-control-sm" aria-describedby="codeHelp" formControlName="code_product">
+                                <small id="codeHelp" class="form-text text-muted">Digite el codigo o parte del códido de barras del producto.</small>
+                                <div class="container back-colo-f6 display-result scrollbar" *ngIf="lstProductsCodes.length > 0">
+                                    <table class="table table-sm table-striped">
+                                        <tbody>
+                                            <tr *ngFor="let product of lstProductsCodes">
+                                                <td>
+                                                    <div class="btn-group btn-group-sm">
+                                                        <button type="button" (click)="selectProduct(product)" class="btn btn-outline-primary btn-sm" data-dismiss="modal">
+                                                            <fa-icon [icon]="faCheckCircle" class="text-outline-primary mb-2 mr-1"></fa-icon>
+                                                        </button>
+                                                    </div>
+                                                    {{ product.code }}
+                                                </td>
+                                                <td>{{ product.name }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <label for="name_product">Nombre del producto</label>
+                                <input type="text" id="filterProductName" (keypress)="onFindProductName($event)" class="form-control form-control-sm" aria-describedby="codeHelp" formControlName="name_product">
+                                <small id="codeHelp" class="form-text text-muted">Digite el nombre o parte del del nombre de barras del producto.</small>
+                                <div class="container back-colo-f6 display-result scrollbar" *ngIf="lstProductsNames.length > 0">
+                                    <table class="table table-sm table-striped">
+                                        <tbody>
+                                            <tr *ngFor="let product of lstProductsNames">
+                                                <td>
+                                                    <div class="btn-group btn-group-sm">
+                                                        <button type="button" (click)="selectProduct(product)" class="btn btn-outline-primary btn-sm" data-dismiss="modal">
+                                                            <fa-icon [icon]="faCheckCircle" class="text-outline-primary mb-2 mr-1"></fa-icon>
+                                                        </button>
+                                                    </div>
+                                                    {{ product.code }}
+                                                </td>
+                                                <td>{{ product.name }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- start información de producto seleccionado-->
+                        <div class="row margin-top-2rem" *ngIf="product.pk_id_product">
+                            <div class="col-sm-6">
+                                <table class="table table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th colspan="2"><h6>Producto seleccionado</h6></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th>Código</th>
+                                            <td>{{ product.code }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Nombre</th>
+                                            <td>{{ product.name }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Presentación</th>
+                                            <td>{{ product.presentation }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="form-group col-sm-12">
+                                        <label for="number_selected">Unidades</label>
+                                        <input type="number" class="form-control form-control-sm" #units_product aria-describedby="unidadesHelp" formControlName="number_selected">
+                                    </div>
+                                    <div class="form-group col-sm-12">
+                                        <label for="value_unit">Valor unitario</label>
+                                        <input type="number" class="form-control form-control-sm" formControlName="value_unit">
+                                    </div>
+                                    <div class="form-group col-sm-12">
+                                        <label for="tax_product">Impuestos</label>
+                                        <select class="form-control form-control-sm" formControlName="tax_product">
+                                            <option value="" selected>Seleccione...</option>
+                                            <option *ngFor="let param of lstParams[taxes]" value="{{param.value}}">{{ param.name }}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-12 align-self-center text-rigth">
+                                        <button type="submit" (click)="add()" class="btn btn-sm btn-outline-primary" type="button" data-dismiss="modal">
+                                            <fa-icon [icon]="faPlusCircle" class="text-outline-secondary mb-2 mr-1"></fa-icon>Agregar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end información de producto seleccionado-->
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        </div>
+        </div>
+    </div>
+</div>
