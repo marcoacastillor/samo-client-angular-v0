@@ -1,0 +1,36 @@
+<div class="row" *ngIf="user">
+    <div class="col-sm-12">
+        <div class="accordion" id="accordionMenu">
+            <div class="list-group text-left" *ngFor="let module of user.modules">
+                <div class="list-group">
+                    <a type="button" data-toggle="collapse" [attr.data-target]="'#tap_' + module.pk_id_module" aria-expanded="true" [attr.data-controls]="'tap_' + module.pk_id_module">
+                        {{ module.name }}
+                    </a>
+                </div>
+                <div id="tap_{{module.pk_id_module}}" class="collapse" aria-labelledby="headingOne" data-parent="#accordionMenu">
+                    <div class="list-group">
+                        <a [routerLink]="['./sales-admin/',module.url_angular_module,component.url_angular_component]" class="list-group-item list-group-item-action" *ngFor="let component of module.components">{{ component.name }}</a>
+                    </div>
+                </div>
+            </div>
+            <!-- 
+            <div class="card" *ngFor="let module of user.modules">
+                <div class="card-header" id="headingOne">
+                    <h2 class="mb-0">
+                        <button class="btn btn-link" type="button" data-toggle="collapse" [attr.data-target]="'#tap_' + module.pk_id_module" aria-expanded="true" [attr.data-controls]="'tap_' + module.pk_id_module">
+                        {{ module.name }}
+                        </button>
+                    </h2>
+                </div>
+                <div id="tap_{{module.pk_id_module}}" class="collapse" aria-labelledby="headingOne" data-parent="#accordionMenu">
+                    <div class="card-body">
+                        <div class="list-group">
+                            <a [routerLink]="['./sales-admin/',module.url_angular_module,component.url_angular_component]" class="list-group-item list-group-item-action" *ngFor="let component of module.components">{{ component.name }}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            -->
+        </div>
+    </div>
+</div>

@@ -278,41 +278,41 @@
                         </div>
                     </div>
                     <!-- end productos-->
-
-                    <!-- start notes-->
-                    <div class="row margin-top-2rem justify-content-end" *ngIf="lstNotes">
-                        <div class="col-sm-12">
-                            <table class="table table-sm">
-                                <thead>
-                                    <tr>
-                                        <td colspan="5"><h6>NOTAS ASOCIADAS A LA FACTURA</h6></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Tipo</th>
-                                        <th>Fecha</th>
-                                        <th>Descripción</th>
-                                        <th>Valor original</th>
-                                        <th>Valor modificado</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr *ngFor="let note of lstNotes">
-                                        <td><pre>{{ note.type_note }}</pre></td>
-                                        <td><pre>{{ note.date_note }}</pre></td>
-                                        <td><pre>{{ note.description }}</pre></td>
-                                        <td><pre [innerHTML]="note.previous_value"></pre></td>
-                                        <td><pre [innerHTML]="note.actual_value"></pre></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <!-- end productos-->
-                    
                 </div>
                 <!-- end purchase info-->
             </div>
             <!-- end main info-->
+
+            <!-- start notes-->
+            <div class="row margin-top-2rem justify-content-end" *ngIf="lstNotes">
+                <div class="col-sm-12">
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <td colspan="5"><h6>NOTAS ASOCIADAS A LA FACTURA</h6></td>
+                            </tr>
+                            <tr>
+                                <th>Tipo</th>
+                                <th>Fecha</th>
+                                <th>Descripción</th>
+                                <th>Valor original</th>
+                                <th>Valor modificado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let note of lstNotes">
+                                <td><pre>{{ note.type_note }}</pre></td>
+                                <td><pre>{{ note.date_note }}</pre></td>
+                                <td><pre>{{ note.description }}</pre></td>
+                                <td><pre [innerHTML]="note.previous_value"></pre></td>
+                                <td><pre [innerHTML]="note.actual_value"></pre></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- end productos-->
+            
         </div>
     </div>
 </div>

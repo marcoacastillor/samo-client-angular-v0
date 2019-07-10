@@ -3,17 +3,7 @@ import { GlobalStoreService } from '../../core/services/global-store.service';
 
 @Component({
   selector: 'app-navigator',
-  template: `
-  <div class="container-fluid">
-    <app-header [user]="user$ | async" [message]="userMessage$ | async"></app-header>
-  </div>
-  <div class="container-fluid margin-top-body text-small">
-    <app-main></app-main>
-    <hr>
-    <app-footer></app-footer>
-    <hr>
-  </div>
-  `,
+  templateUrl: 'navigator.component.html',
   styles: []
 })
 export class NavigatorComponent implements OnInit {

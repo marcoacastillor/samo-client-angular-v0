@@ -1,45 +1,25 @@
-<nav class="border-header bg-white navbar navbar-expand-lg fixed-top justify-content-center">
-    <div class="container-fluid">
-        <div class="d-flex flex-column align-items-start">
-            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <a class="navbar-brand ml-lg-2 ml-3" href="#">
-                <i class="fa fa-thermometer-empty fa-lg" aria-hidden="true"></i>
-                Sales System</a>
-            <div class="collapse navbar-collapse ml-lg-0 ml-3" id="navbarCollapse">
-                <div class="row" *ngIf="user">
-                    <div class="nav-item dropdown" *ngFor="let module of user.modules">
-                        <a class="nav-link dropdown-toggle" href="#" id="module.name" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            {{ module.name }} 
-                        </a>
-                        <div class="dropdown-menu text-small" aria-labelledby="module.name">
-                            <div class="col-sm-12 text-small" *ngFor="let component of module.components">
-                                <a class="dropdown-item" [routerLink]="['./sales-admin/',module.url_angular_module,component.url_angular_component]">{{ component.name }}</a>
-                                <div class="dropdown-divider"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="userDropdwon" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            {{ user.person.names }} {{ user.person.last_names }}
-                        </a>
-                        <div class="dropdown-menu text-small" aria-labelledby="userDropdwon">
-                            <div class="col-sm-12 text-small">
-                                <a class="nav-link dropdown-item" href="#">Salir</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="nav-link dropdown-item" [routerLink]="['./sales-admin/modules']">Menú principal</a> 
-                                <div class="dropdown-divider"></div>
-                                <a class="nav-link dropdown-item" (click)="refreshRoutesSales()">*** Refrescar ventas : {{ refreshMsgSales }}</a> 
-                                <div class="dropdown-divider"></div>
-                                <a class="nav-link dropdown-item" (click)="refreshRoutesUsers()">*** Refrescar usuarios : {{ refreshMsgUsers }}</a> 
-                            </div>
-                        </div>
-                    </div>    
-                </div>
-            </div>
+<nav class="border-header bg-white navbar fixed-top navbar-light bg-light">
+    <a class="navbar-brand">Sales System</a>
+    <div class="form-inline">
+        <div class="nav-item dropdown">
             <app-info-system [message]="message"></app-info-system>
         </div>
+        <div class="nav-item dropdown" *ngIf="user">
+            <a class="nav-link dropdown-toggle" href="#" id="userDropdwon" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{ user.person.names }} {{ user.person.last_names }}
+            </a>
+            <div class="dropdown-menu text-small" aria-labelledby="userDropdwon">
+                <div class="col-sm-12 text-small">
+                    <a class="nav-link dropdown-item" href="#">Salir</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="nav-link dropdown-item" [routerLink]="['./sales-admin/modules']">Menú principal</a> 
+                    <div class="dropdown-divider"></div>
+                    <a class="nav-link dropdown-item" (click)="refreshRoutesSales()">*** Refrescar ventas : {{ refreshMsgSales }}</a> 
+                    <div class="dropdown-divider"></div>
+                    <a class="nav-link dropdown-item" (click)="refreshRoutesUsers()">*** Refrescar usuarios : {{ refreshMsgUsers }}</a> 
+                </div>
+            </div>
+        </div>    
     </div>
 </nav>
 

@@ -10,6 +10,7 @@ import { InfoSystemComponent } from './navigator/info-system/info-system.compone
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
 import { AuthenticationService } from '../shared/services/authentication.service';
+import { MenuLeftComponent } from './navigator/menu-lef/menu-left.component';
 
 @NgModule({
   imports: [
@@ -18,7 +19,7 @@ import { AuthenticationService } from '../shared/services/authentication.service
     RouterModule,
     MaterialModule
   ],
-  declarations: [NavigatorComponent, HeaderComponent, MainComponent, FooterComponent, InfoSystemComponent],
+  declarations: [NavigatorComponent, HeaderComponent, MainComponent, FooterComponent, InfoSystemComponent, MenuLeftComponent],
   exports: [NavigatorComponent],
   providers: [
     {
