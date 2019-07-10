@@ -158,7 +158,7 @@ export class ShowOrderDetailComponent implements OnInit {
       operation => {
         this.getOperationDetail(operation.pk_id_operation.toString());
         this.success = true;
-        this.message = 'Se eliminó un pago correctamente.';
+        this.message = 'Se bloquea la factura.';
       }
     )
   }
