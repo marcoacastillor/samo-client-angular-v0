@@ -49,8 +49,12 @@
             "styles": [
               "./node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css",
+              "src/assets/sidebar.css",
               "src/assets/animation.css",
-              "./node_modules/ng-pick-datetime/assets/style/picker.min.css"
+              "./node_modules/ng-pick-datetime/assets/style/picker.min.css",
+              "./node_modules/@fortawesome/fontawesome-free/css/all.min.css",
+              "./node_modules/@icon/themify-icons/themify-icons.css"
+              
             ],
             "scripts": [
               "./node_modules/popper.js/dist/umd/popper.min.js",

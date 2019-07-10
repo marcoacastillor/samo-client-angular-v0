@@ -1,20 +1,9 @@
 <div class="container-fluid">
-    <div class="row">
-        <app-header [user]="user$ | async" [message]="userMessage$ | async"></app-header>
-    </div>
-    <div class="row margin-top-body">
-        <div class="col-sm-2">
-            <app-menu-lef
-                [user]="user$ | async"
-            ></app-menu-lef>
+    <div class="wrapper">
+        <div class="row">
+            <div class="col-sm-12">
+                <app-menu-lef [user]="user$ | async" [message]="userMessage$ | async"></app-menu-lef>
+            </div>
         </div>
-        <div class="col-sm-10">
-            <app-main></app-main>
-        </div>
-    </div>
-</div>
-<div class="container-fluid">
-    <div class="row">
-        <app-footer></app-footer>
     </div>
 </div>

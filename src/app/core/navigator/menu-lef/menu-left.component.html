@@ -1,36 +1,68 @@
-<div class="row" *ngIf="user">
-    <div class="col-sm-12">
-        <div class="accordion" id="accordionMenu">
-            <div class="list-group text-left" *ngFor="let module of user.modules">
-                <div class="list-group">
-                    <a type="button" data-toggle="collapse" [attr.data-target]="'#tap_' + module.pk_id_module" aria-expanded="true" [attr.data-controls]="'tap_' + module.pk_id_module">
-                        {{ module.name }}
-                    </a>
-                </div>
-                <div id="tap_{{module.pk_id_module}}" class="collapse" aria-labelledby="headingOne" data-parent="#accordionMenu">
-                    <div class="list-group">
-                        <a [routerLink]="['./sales-admin/',module.url_angular_module,component.url_angular_component]" class="list-group-item list-group-item-action" *ngFor="let component of module.components">{{ component.name }}</a>
-                    </div>
-                </div>
-            </div>
-            <!-- 
-            <div class="card" *ngFor="let module of user.modules">
-                <div class="card-header" id="headingOne">
-                    <h2 class="mb-0">
-                        <button class="btn btn-link" type="button" data-toggle="collapse" [attr.data-target]="'#tap_' + module.pk_id_module" aria-expanded="true" [attr.data-controls]="'tap_' + module.pk_id_module">
-                        {{ module.name }}
-                        </button>
-                    </h2>
-                </div>
-                <div id="tap_{{module.pk_id_module}}" class="collapse" aria-labelledby="headingOne" data-parent="#accordionMenu">
-                    <div class="card-body">
-                        <div class="list-group">
-                            <a [routerLink]="['./sales-admin/',module.url_angular_module,component.url_angular_component]" class="list-group-item list-group-item-action" *ngFor="let component of module.components">{{ component.name }}</a>
+<div class="wrapper">
+    <!-- Sidebar  -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h3>Sales System</h3>
+            <strong>SS</strong>
+        </div>
+
+        <ul class="list-unstyled components" *ngIf="user">
+            <li class="active" *ngFor="let module of user.modules">
+                <a href="#m{{module.pk_id_module}}"  data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                    <i class="{{ module.icon_name }}"></i>
+                    {{ module.name }}
+                </a>
+                <ul class="collapse list-unstyled" id="m{{module.pk_id_module}}">
+                    <li *ngFor="let component of module.components">
+                        <a class="dropdown-item" [routerLink]="['./sales-admin/',module.url_angular_module,component.url_angular_component]">{{ component.name }}</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+
+        <ul class="list-unstyled CTAs">
+            <li>
+                <a href="#" class="download">Tutoriales</a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Page Content  -->
+    <div id="content">
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <button (click)="troggleSideBar()"  type="button" id="sidebarCollapse" class="btn btn-info">
+                    <i class="fas fa-align-left"></i>
+                </button>
+                <button (click)="troggleSideBar()" class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fas fa-align-justify"></i>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent" *ngIf="user">
+                    
+                    <div class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdwon" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{ user.person.names }} {{ user.person.last_names }}
+                        </a>
+                        <div class="dropdown-menu text-small" aria-labelledby="userDropdwon">
+                            <div class="col-sm-12 text-small">
+                                <a class="nav-link dropdown-item" href="#">Logout</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="nav-link dropdown-item" [routerLink]="['./sales-admin/modules']">Menú principal</a> 
+                            </div>
                         </div>
                     </div>
+                    
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"></a>
+                        </li>
+                    </ul>
                 </div>
             </div>
-            -->
-        </div>
+        </nav>
+        <app-main></app-main>
+        <app-footer></app-footer>
     </div>
 </div>

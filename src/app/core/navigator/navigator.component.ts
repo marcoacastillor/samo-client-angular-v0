@@ -1,14 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { GlobalStoreService } from '../../core/services/global-store.service';
+import { faHome } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-navigator',
   templateUrl: 'navigator.component.html',
-  styles: []
 })
 export class NavigatorComponent implements OnInit {
+  faHome = faHome;
   public userMessage$;
   public user$;
+
   constructor(private globalStorageService: GlobalStoreService) { }
 
   ngOnInit() {
@@ -23,5 +25,4 @@ export class NavigatorComponent implements OnInit {
   private getUser(){
     this.user$ = this.globalStorageService.getUser$();
   }
-
 }
