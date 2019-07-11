@@ -1,83 +1,104 @@
-<app-card caption="Detalle de usuario">
-    <main>
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="card-title card-header">Información de usuario</div>
-                        <div class="card-text">
-                            <div class="row">
-                                <div class="col-sm-3 font-weight-bold text-small">Nombre de usuario</div>
-                                <div class="col-sm-9">{{ user.username }}</div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-3 font-weight-bold text-small">Correo electronico</div>
-                                <div class="col-sm-9">{{ user.email }}</div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-3 font-weight-bold text-small">Estado</div>
-                                <div class="col-sm-9">{{ user.state_user }}</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>    
+<section>
+    <!-- start menu main-->
+    <div class="row bg-gray">
+        <div class="col-sm-6 text-left">
+            Detalle de un usuario
+        </div>
+        <div class="col-sm-6 text-right">
+            <div class="btn-group btn-group-sm">
+                <button type="button" (click)="cancelUser()" class="btn btn-outline-primary btn-sm">
+                    <fa-icon [icon]="faThList" class="text-primary mb-2 mr-1" title="Crear registro"></fa-icon>Ver todos
+                </button>
             </div>
-            <div class="col-sm-12" *ngIf="user.person">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="card-title card-header">Persona asociada al usuario</div>
-                        <div class="card-text">
-                            <div class="row">
-                                <div class="col-sm-3 font-weight-bold text-small">Tipo identificacion</div>
-                                <div class="col-sm-9">{{ user.person.type_id }}</div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-3 font-weight-bold text-small">Número de identificacion</div>
-                                <div class="col-sm-9">{{ user.person.number_id }}</div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-3 font-weight-bold text-small">Nombres</div>
-                                <div class="col-sm-9">{{ user.person.names }}</div>
-                            </div> 
-                            <div class="row">
-                                <div class="col-sm-3 font-weight-bold text-small">Apellidos</div>
-                                <div class="col-sm-9">{{ user.person.last_names }}</div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-3 font-weight-bold text-small">Dirección</div>
-                                <div class="col-sm-9">{{ user.person.address }}</div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-3 font-weight-bold text-small">Teléfono</div>
-                                <div class="col-sm-9">{{ user.person.phone }}</div>
-                            </div>  
+        </div>
+    </div>
+    <!-- end menu main-->
+    
+
+    <!-- start content -->
+    <div class="row margin-top-1rem">
+        <div class="col-sm-6">
+            <!--start información básica -->
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title card-header">Información de usuario</div>
+                    <div class="card-text">
+                        <div class="row">
+                            <div class="col-sm-6 font-weight-bold text-small">Nombre de usuario</div>
+                            <div class="col-sm-6">{{ user.username }}</div>
                         </div>
-                    </div>
-                </div>    
-            </div>
-            <div class="col-sm-12" *ngIf="user.rol">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="card-title card-header">Información de rol y permisos de usuario</div>
-                        <div class="card-text">
-                            <div class="row">
-                                <div class="col-sm-3 font-weight-bold text-small">Rol</div>
-                                <div class="col-sm-9">{{ user.rol.name }}</div>
-                            </div> 
-                            <div class="row">
-                                <div class="col-sm-3 font-weight-bold text-small">Opciones para el rol</div>
-                                <div class="col-sm-9">
-                                    <li *ngFor="let option of user.rol.options">{{ option.code }} : {{ option.description }}</li>
-                                </div>
-                            </div> 
+                        <div class="row">
+                            <div class="col-sm-6 font-weight-bold text-small">Correo electronico</div>
+                            <div class="col-sm-6">{{ user.email }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6 font-weight-bold text-small">Estado</div>
+                            <div class="col-sm-6">{{ user.state_user }}</div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>   
-    </main>
-    <footer>
-        <button type="button" class="btn btn-outline-success btn-sm mb-2 mr-1"
-        (click)="cancelUser()">Cancelar</button>
-    </footer>
-</app-card>      
+            <!-- end información básica -->
+        </div>
+        <div class="col-sm-6">
+            <!-- start información persona -->
+            <div class="card" *ngIf="user.person">
+                <div class="card-body">
+                    <div class="card-title card-header">Persona asociada al usuario</div>
+                    <div class="card-text">
+                        <div class="row">
+                            <div class="col-sm-6 font-weight-bold text-small">Tipo identificacion</div>
+                            <div class="col-sm-6">{{ user.person.type_id }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6 font-weight-bold text-small">Número de identificacion</div>
+                            <div class="col-sm-6">{{ user.person.number_id }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6 font-weight-bold text-small">Nombres</div>
+                            <div class="col-sm-6">{{ user.person.names }}</div>
+                        </div> 
+                        <div class="row">
+                            <div class="col-sm-6 font-weight-bold text-small">Apellidos</div>
+                            <div class="col-sm-6">{{ user.person.last_names }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6 font-weight-bold text-small">Dirección</div>
+                            <div class="col-sm-6">{{ user.person.address }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6 font-weight-bold text-small">Teléfono</div>
+                            <div class="col-sm-6">{{ user.person.phone }}</div>
+                        </div>  
+                    </div>
+                </div>
+            </div>
+            <!-- end información persona -->
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <!-- start information rol -->
+            <div class="card" *ngIf="user.rol">
+                <div class="card-body">
+                    <div class="card-title card-header">Información de rol y permisos de usuario</div>
+                    <div class="card-text">
+                        <div class="row">
+                            <div class="col-sm-6 font-weight-bold text-small">Rol</div>
+                            <div class="col-sm-6">{{ user.rol.name }}</div>
+                        </div> 
+                        <div class="row">
+                            <div class="col-sm-6 font-weight-bold text-small">Opciones para el rol</div>
+                            <div class="col-sm-6">
+                                <li *ngFor="let option of user.rol.options">{{ option.code }} : {{ option.description }}</li>
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+            <!-- end information rol -->
+        </div>
+    </div>
+    <!-- end content -->
+</section>

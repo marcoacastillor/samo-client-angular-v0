@@ -1,6 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { User } from 'src/app/shared/models/user';
 import { StatusMessage } from 'src/app/shared/models/status-message';
+import { faSignOutAlt, faTasks, faFileInvoiceDollar } from '@fortawesome/free-solid-svg-icons';
+import { GlobalStoreService } from '../../services/global-store.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-menu-lef',
@@ -10,8 +13,15 @@ import { StatusMessage } from 'src/app/shared/models/status-message';
 export class MenuLeftComponent implements OnInit {
   @Input() public user: User;
   @Input() public message: StatusMessage;
+
+  faSignOutAlt = faSignOutAlt;
+  faTasks = faTasks;
+  faFileInvoiceDollar = faFileInvoiceDollar;
   
-  constructor() { }
+  constructor(
+    private globalStore: GlobalStoreService,
+    private router: Router,
+  ) { }
 
   ngOnInit() {
   }
@@ -23,5 +33,10 @@ export class MenuLeftComponent implements OnInit {
     }else{
       nameInput.className = 'active';
     }
+  }
+
+  logout(){
+    this.globalStore.clearSession();
+    this.router.navigateByUrl('/');
   }
 }

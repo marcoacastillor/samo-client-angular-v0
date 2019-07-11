@@ -37,6 +37,7 @@ export class MainUserComponent implements OnInit {
 
   public newUser = false;
   public showUser = false;
+  public listUser = true;
   
   public rol: Rol = new Rol;
   public user: User = new User;
@@ -170,6 +171,7 @@ export class MainUserComponent implements OnInit {
   public onShow(id:number) {
     this.showUser = true;
     this.newUser = false;
+    this.listUser = false;
 
     this.usuarioService.show$(id).pipe(
       tap(this.loadUser),
@@ -189,6 +191,7 @@ export class MainUserComponent implements OnInit {
   public onNew(user: User) {
     this.newUser = true;
     this.showUser = false;
+    this.listUser = false;
     let activeUser = this.globalStoreService.getUser();
 
     if(user.pk_id_user)
@@ -217,11 +220,15 @@ export class MainUserComponent implements OnInit {
   }
 
   public onCancel(event: boolean) {
-    this.newUser = event;
+    this.listUser = event;
+    this.newUser  = false;
+    this.showUser = false;
   }
 
   public onCancelShow(event: boolean) {
-    this.showUser = event;
+    this.listUser = event;
+    this.newUser  = false;
+    this.showUser = false;
   }
 
   /*
@@ -248,7 +255,7 @@ export class MainUserComponent implements OnInit {
   }
 
   public getClassList() {
-    return this.UtilService.getClassList(this.newUser || this.showUser);
+    return this.UtilService.getClassList(this.listUser);
   }
 
   public getClassShow() {

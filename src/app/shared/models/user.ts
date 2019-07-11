@@ -1,6 +1,7 @@
 import { Rol } from "./rol";
 import { Person } from "./person";
 import { Module } from "./module";
+import { Enterprise } from "./enterprise";
 
 export class User {
   public pk_id_user: number;
@@ -15,6 +16,7 @@ export class User {
   public state_user: string;
   public rol: Rol;
   public person: Person;
+  public enterprise: Enterprise;
 
   public modules: Module[];
 }

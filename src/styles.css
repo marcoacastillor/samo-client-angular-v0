@@ -40,7 +40,7 @@
 
 .bg-gray
 {
-  background-color: #ddd;
+  background-color: #f7f7f7;
 }
 
 .margin-top-body
@@ -269,4 +269,18 @@
 .box-350
 {
   width: 350px;
+}
+
+.nav-custom
+{
+  margin-bottom: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 1rem;
+}
+
+.card-header-custom
+{
+  padding: 0.5rem;
+  font-size: 1.2rem;
+  font-weight: bold;
 }

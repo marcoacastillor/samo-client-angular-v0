@@ -10,6 +10,7 @@ import { AuthenticationService } from '../shared/services/authentication.service
 
 import { HttpClientModule } from '@angular/common/http';
 import { PersonService } from '../shared/services/person.service';
+import { EnterpriseService } from '../shared/services/enterprise.service';
 
 @NgModule({
   imports: [
@@ -21,6 +22,6 @@ import { PersonService } from '../shared/services/person.service';
   ],
   declarations: [LoginComponent],
   exports: [ LoginComponent ],
-  providers: [ UserService, AuthenticationService, PersonService ]
+  providers: [ UserService, AuthenticationService, PersonService, EnterpriseService ]
 })
 export class CredentialsModule { }

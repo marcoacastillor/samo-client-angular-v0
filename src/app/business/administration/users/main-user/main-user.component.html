@@ -1,40 +1,46 @@
-<div class="row margin-top">
-    <div class="col-sm-6" [ngClass]="getClassNew()"  *ngIf="!showUser">
-        <app-new-user 
-        [rolList]="rolList" 
-        [personList]="personList" 
-        [statesUser]="statesUser"
-        [typesIdList]="typesIdList"
-        [enterpriseList]="enterpriseList"
-        [laboralStateList]="laboralStateList"
-        [sizesList]="sizesList"
-        [salaryTypeList]="salaryTypeList"
-        [rol]="rol"
-        [user]="user"
-        (cancel)="onCancel($event)"
-        (getRol)="onGetRol($event)"
-        (update)="onUpdate($event)"
-        (create)="onCreate($event)"
-        (onCreatePerson)="onCreatePerson($event)"
-        (onCreateEnterprise)="onCreateEnterprise($event)"
-        (getEmployees)="onLoadEmployees($event)"
-        >
-        </app-new-user>
-    </div>
-    <div class="col-sm-6" *ngIf="showUser" [ngClass]="getClassShow()">
-        <app-show-user 
-        [user]="user" 
-        (cancel)="onCancelShow($event)">
-        </app-show-user>
-    </div>
-    <div class="col-sm-6" [ngClass]="getClassList()">
-        <app-list-user
-        [userList]="userList"
-        (delUser)=onDelete($event)
-        (inactiveUser)=onInactive($event)
-        (newUser)=onNew($event)
-        (showUser)=onShow($event)>
-        </app-list-user>
-    </div>
-</div>
-      
+<app-pages title="Usuarios">  
+    <main>
+        <section>
+            <div class="row container-fluid">    
+                <div [ngClass]="getClassNew()">
+                    <app-new-user 
+                    [rolList]="rolList" 
+                    [personList]="personList" 
+                    [statesUser]="statesUser"
+                    [typesIdList]="typesIdList"
+                    [enterpriseList]="enterpriseList"
+                    [laboralStateList]="laboralStateList"
+                    [sizesList]="sizesList"
+                    [salaryTypeList]="salaryTypeList"
+                    [rol]="rol"
+                    [user]="user"
+                    (cancel)="onCancel($event)"
+                    (getRol)="onGetRol($event)"
+                    (update)="onUpdate($event)"
+                    (create)="onCreate($event)"
+                    (onCreatePerson)="onCreatePerson($event)"
+                    (onCreateEnterprise)="onCreateEnterprise($event)"
+                    (getEmployees)="onLoadEmployees($event)"
+                    >
+                    </app-new-user>
+                </div>   
+
+                <div [ngClass]="getClassShow()">
+                    <app-show-user 
+                    [user]="user" 
+                    (cancel)="onCancelShow($event)">
+                    </app-show-user>
+                </div>
+                <div [ngClass]="getClassList()">
+                    <app-list-user
+                    [userList]="userList"
+                    (delUser)=onDelete($event)
+                    (inactiveUser)=onInactive($event)
+                    (newUser)=onNew($event)
+                    (showUser)=onShow($event)>
+                    </app-list-user>
+                </div>
+            </div>
+        </section>
+    </main>
+</app-pages>

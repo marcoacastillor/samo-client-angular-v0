@@ -5,7 +5,7 @@ import { Person } from 'src/app/shared/models/person';
 import { FormToolsService } from 'src/app/shared/services/form-tools.service';
 import { User } from 'src/app/shared/models/user';
 import { Parameter } from 'src/app/shared/models/parameter';
-import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
+import { faPlusCircle, faThList } from '@fortawesome/free-solid-svg-icons';
 import { Enterprise } from 'src/app/shared/models/enterprise';
 import { PositionService } from 'src/app/shared/services/position.service';
 import { Position } from 'src/app/shared/models/position';
@@ -18,6 +18,7 @@ import { Position } from 'src/app/shared/models/position';
 export class NewUserComponent implements OnInit, OnChanges {
   userForm: FormGroup;
   faPlusCircle = faPlusCircle;
+  faThList = faThList;
 
   @Input() public rolList: Rol[];
   @Input() public personList: Person[];
@@ -112,7 +113,7 @@ export class NewUserComponent implements OnInit, OnChanges {
   }
 
   public cancelUser() {
-    this.cancel.emit(false);
+    this.cancel.emit(true);
   }
 
   public createPerson(person: Person){

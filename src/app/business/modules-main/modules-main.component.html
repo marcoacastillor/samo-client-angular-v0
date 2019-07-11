@@ -1,34 +1,26 @@
-<app-card caption="Listado de módulos del sistema">
+<app-pages title="Módulos del sistema">  
     <main>
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="alert alert-info" role="alert">
+        <section>
+            <article>
+                <p class="text-justify">
                     A continuación se muestran todos los módulos con los que cuenta el sistema. <br />
-                    Dependiendo del rol del usuario se puede acceder a uno o a varios módulos. Si desea tener acceso a un módulo en particular, comuníquese con el administrador del sistema.
-                </div>
-            </div>
-        </div>                
-        <div class="row">
-            <div class="col-sm-4 margin-top" *ngFor="let module of modules">
-                <div class="card height-350 d-inline-block">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <img class="align-self-start mr-3" src="{{ url_storage + module.url_image }}" alt="{{ module.description }}" width="80">
-                                    </div>
-                                    <div class="col-sm-9">
-                                        <div class="card-title-custom">{{ module.name }}</div>
-                                        <pre>{{ module.url_angular_module}}</pre>
-                                        <div class="text-ultra-small">{{ module.description}}</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>         
-        </div>
+                    Dependiendo del rol del usuario se puede acceder a uno o a varios módulos. Si desea tener acceso a un módulo en particular, comuníquese con el administrador del sistema.   
+                </p>
+            </article>
+        </section>
+        <section>
+            <table class="table">
+                <tr *ngFor="let module of modules">
+                    <td>
+                        <img class="align-self-start mr-3" src="{{ url_storage + module.url_image }}" alt="{{ module.description }}" width="80">
+                    </td>
+                    <td>
+                        <h6>{{ module.name }}</h6>
+                        <pre>{{ module.url_angular_module}}</pre>
+                        <p>{{ module.description}}</p>
+                    </td>
+                </tr>
+            </table>
+        </section>
     </main>
-</app-card>      
+</app-pages>

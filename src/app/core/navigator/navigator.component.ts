@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { GlobalStoreService } from '../../core/services/global-store.service';
 import { faHome } from '@fortawesome/free-solid-svg-icons';
+import { User } from 'src/app/shared/models/user';
 
 @Component({
   selector: 'app-navigator',

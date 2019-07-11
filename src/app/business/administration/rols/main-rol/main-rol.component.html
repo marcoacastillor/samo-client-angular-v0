@@ -1,27 +1,33 @@
-<div class="row margin-top">
-    <div *ngIf="!showRol" [ngClass]="getClassNew()">
-        <app-new-rol
-        [rol]="rol"
-        [moduleList]="moduleList"
-        (update)="onUpdate($event)"
-        (cancel)="onCancel($event)"
-        (create)="onCreate($event)">
-        </app-new-rol>
-    </div>
-    <div *ngIf="showRol" [ngClass]="getClassShow()">
-        <app-show-rol
-        [rol]="rol"
-        [moduleList]="moduleList"
-        (cancel)="onCancelShow($event)">
-        </app-show-rol>
-    </div>
-    <div [ngClass]="getClassList()">
-        <app-list-rol
-        [rolList]="rolList"
-        (delRol)=onDelete($event)
-        (newRol)=onNew($event)
-        (showRol)=onShow($event)>
-        </app-list-rol>
-    </div>
-</div>
-        
+<app-pages title="Roles">  
+    <main>
+        <section>
+            <div class="row container-fluid">    
+                <div [ngClass]="getClassNew()">
+                    <app-new-rol
+                    [rol]="rol"
+                    [moduleList]="moduleList"
+                    (update)="onUpdate($event)"
+                    (cancel)="onCancel($event)"
+                    (create)="onCreate($event)">
+                    </app-new-rol>
+                </div>   
+
+                <div [ngClass]="getClassShow()">
+                    <app-show-rol
+                    [rol]="rol"
+                    [moduleList]="moduleList"
+                    (cancel)="onCancelShow($event)">
+                    </app-show-rol>   
+                </div>
+                <div [ngClass]="getClassList()">
+                    <app-list-rol
+                    [rolList]="rolList"
+                    (delRol)=onDelete($event)
+                    (newRol)=onNew($event)
+                    (showRol)=onShow($event)>
+                    </app-list-rol>
+                </div>
+            </div>
+        </section>
+    </main>
+</app-pages>

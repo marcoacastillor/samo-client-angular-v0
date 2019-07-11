@@ -2,18 +2,19 @@
     DEMO STYLE
 */
 
-@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+/*@import "https://fonts.googleapis.com/css?family=:300,400,500,600,700";*/
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+
 body {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif;
     background: #fafafa;
 }
 
 p {
-    font-family: 'Poppins', sans-serif;
-    font-size: 1.1em;
-    font-weight: 300;
-    line-height: 1.7em;
-    color: #999;
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.9em;
+    font-weight: 250;
+    line-height: 1.3em;
 }
 
 a,
@@ -69,8 +70,8 @@ span {
 }
 
 #sidebar.active {
-    min-width: 80px;
-    max-width: 80px;
+    min-width: 120px;
+    max-width: 120px;
     text-align: center;
 }
 
@@ -90,13 +91,13 @@ span {
 #sidebar.active ul li a {
     padding: 20px 10px;
     text-align: center;
-    font-size: 0.85em;
+    font-size: 0.75em;
 }
 
 #sidebar.active ul li a i {
     margin-right: 0;
     display: block;
-    font-size: 1.8em;
+    font-size: 1.4em;
     margin-bottom: 5px;
 }
 
@@ -120,7 +121,7 @@ span {
 
 #sidebar .sidebar-header strong {
     display: none;
-    font-size: 1.8em;
+    font-size: 1.4em;
 }
 
 #sidebar ul.components {
@@ -130,7 +131,7 @@ span {
 
 #sidebar ul li a {
     padding: 10px;
-    font-size: 1.1em;
+    font-size: 0.9em;
     display: block;
 }
 
@@ -196,7 +197,6 @@ a.article:hover {
 
 #content {
     width: 100%;
-    padding: 20px;
     min-height: 100vh;
     transition: all 0.3s;
 }
@@ -244,7 +244,7 @@ a.article:hover {
         padding: 10px !important;
     }
     #sidebar ul li a i {
-        font-size: 1.3em;
+        font-size: 1em;
     }
     #sidebar {
         margin-left: 0;
@@ -252,4 +252,13 @@ a.article:hover {
     #sidebarCollapse span {
         display: none;
     }
+}
+
+/***************************************/
+/******** clases de Marco **************/
+/***************************************/
+.container-site {
+    display: block;
+    min-width: 100%;
+    clear: both;
 }

@@ -7,12 +7,12 @@ import { UserService } from '../../shared/services/user.service';
 import { User } from '../../shared/models/user';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
-import { OptionRolService } from 'src/app/shared/services/option-rol.service';
 import { AuthenticationService } from 'src/app/shared/services/authentication.service';
 import { Authentication } from 'src/app/shared/models/authentication';
-import { tap, switchMap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { PersonService } from 'src/app/shared/services/person.service';
 import { Person } from 'src/app/shared/models/person';
+import { EnterpriseService } from 'src/app/shared/services/enterprise.service';
 
 @Component({
   selector: 'app-login',
@@ -34,7 +34,8 @@ export class LoginComponent implements OnInit {
     private globalStoreService: GlobalStoreService,
     private router: Router,
     private personService: PersonService,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private enterPriseService: EnterpriseService
      ) {
     }
 
@@ -50,35 +51,36 @@ export class LoginComponent implements OnInit {
   * Funciones propias del controlador
   * ------------------------------------------
   */
-  public onLogin() {
-    this.userService.sendCredential$(this.authenticationForm.value).pipe(
-      tap(this.loadUser),
-      tap(this.setAuthenticationVentas),
-      switchMap((user: User): Observable<Person> => this.personService.showLogin$(user.fk_id_person)),
-      tap(this.setUserSession)
-    )
-    .subscribe(this.onSuccess, this.onError);
-  }
+ public onLogin() {
+  this.userService.sendCredential$(this.authenticationForm.value).pipe(
+    tap((user: User) => {
+      this.userLogin = user
+    }),
+    tap((user:User) => {
+      let auth = new Authentication;
+      auth.api_token = user.api_token;
+      auth.username = user.username;
+
+      this.authenticationService.store$(auth).subscribe();
+    }),
+    tap((user:User) => {
+      this.personService.showLogin$(user.fk_id_person).subscribe(
+        person => {
+          this.userLogin.person = person;
+        }
+      )
+    }),
+    tap((user:User) => {
+      this.enterPriseService.showLogin$(user.fk_id_enterprise).subscribe(
+        enterprise => {
+          this.userLogin.enterprise = enterprise;
+        }
+      )
+    }),
+  )
+  .subscribe(this.loadUser, this.onError);
+}
   
-  private setAuthenticationVentas = (user: User) : void => {
-    // inicio: envío info a sistema de Ventas
-    let auth = new Authentication;
-    auth.api_token = user.api_token;
-    auth.username = user.username;
-
-    this.authenticationService.store$(auth).subscribe();
-    // fin: envío info a sistema de Ventas
-  }
-
-  private loadUser = (user: User): void => {
-    this.userLogin = user;
-  }
-
-  private setUserSession = (person: Person): void => {
-    this.userLogin.person = person;
-    this.globalStoreService.setUser(this.userLogin);
-  }
-
   public getErrors(controlName: string): any {
     return this.formToolService.getErrors(this.authenticationForm, controlName);
   }
@@ -96,8 +98,8 @@ export class LoginComponent implements OnInit {
   * Funciones validación de resultado
   * ------------------------------------------
   */
-  private onSuccess = () => {
-    this.globalStoreService.dispatchUserMessage('200', 'Login exitoso... Cargando módulos para el usuario. ');
+  private loadUser = () => {
+    this.globalStoreService.setUser(this.userLogin);
     this.router.navigateByUrl('/sales-admin/modules');
   }
 

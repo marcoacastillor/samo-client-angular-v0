@@ -12,7 +12,7 @@ export class GlobalStoreService {
   private readonly clearMessageDelayMs = environment.clearMessageDelayMs;
   private state: StatusMessage = { code: null, desc: null, serverDesc: 'Exitoso' };
   private userMessage$ = new BehaviorSubject<StatusMessage>(this.state);
-  private user$ = new BehaviorSubject(null);
+  private user$ = new BehaviorSubject(new User());
 
   constructor(private cache: CacheService) {}
 
@@ -22,6 +22,11 @@ export class GlobalStoreService {
   public setUser = (user: User) => {
     this.cache.set('user', user);
     this.user$.next(user);
+  }
+
+  public clearSession = () => {
+    this.cache.clear();
+    this.user$.next(new User);
   }
 
   public getUser = (): User => this.cache.get('user');

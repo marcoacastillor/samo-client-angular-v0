@@ -90,12 +90,13 @@ export class NewRolComponent implements OnInit, OnChanges {
     return this.rolForm.get('options') as FormArray;
   }
 
-  public addOption(option: Option, idx: number,id_view:string){
+  public addOption(option: Option, parent: string,id_view:string){
     option.viewRef = id_view;
+    option.parent = parent;
+
     let opt = this.fb.group(option);
     this.optFormArray.push(opt);
-    //lstOptions.splice(idx,1);
-
+    
     const nameInput = document.getElementById(id_view) as HTMLInputElement;
     nameInput.style.display = 'none';
   }
@@ -126,7 +127,7 @@ export class NewRolComponent implements OnInit, OnChanges {
   }
 
   public cancelRol() {
-    this.cancel.emit(false);
+    this.cancel.emit(true);
   }
 
   /**

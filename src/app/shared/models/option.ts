@@ -5,4 +5,6 @@ export class Option {
   public description: string;
   public check: string = 'false';
   public viewRef: string;
+
+  public parent: string;
 }

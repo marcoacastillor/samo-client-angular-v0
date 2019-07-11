@@ -15,7 +15,9 @@ export class MainRolComponent implements OnInit {
   public rolList: Rol[] = [];
   public moduleList: any;
   public showRol = false;
-  public new = false;
+  public newRol = false;
+  public listRol = true;
+
   public rol: Rol = new Rol;
   
   constructor(
@@ -101,15 +103,20 @@ export class MainRolComponent implements OnInit {
       this.loadAllModulesByRol(null);
     }
     this.showRol = false;
-    this.new = true;
+    this.listRol = false;
+    this.newRol = true;
   }
 
   public onCancel(event: boolean) {
-    this.new = event;
+    this.showRol = false;
+    this.newRol = false;
+    this.listRol = event;
   }
 
   public onCancelShow(event: boolean) {
-    this.showRol = event;
+    this.showRol = false;
+    this.listRol = event;
+    this.newRol = false;
   }
 
   
@@ -134,11 +141,11 @@ export class MainRolComponent implements OnInit {
   * ------------------------------------------
   */
   public getClassNew() {
-    return this.UtilService.getClassNew(this.new);
+    return this.UtilService.getClassNew(this.newRol);
   }
 
   public getClassList() {
-    return this.UtilService.getClassList(this.new || this.showRol);
+    return this.UtilService.getClassList(this.listRol);
   }
 
   public getClassShow() {
