@@ -1,39 +1,55 @@
-<app-card caption="Gestión de información de opción">
-    <main>
-        <h5 *ngIf="option.pk_id_option">Actualización de información</h5>
-        <h5 *ngIf="!option.pk_id_option">Creación de registro</h5>
-        <form [formGroup]="optionForm">
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="form-group">
-                        <label for="code">Code</label>
-                        <input type="text" class="form-control text-small" placeholder="Código" formControlName="code" required>
-                        <small *ngIf="mustShowError('code')" class="form-text alert-danger">
-                        Código es obligatorio
-                        </small>
-                    </div>
-                </div>
+<section>
+    <!-- start menu main-->
+    <div class="row bg-gray">
+        <div class="col-sm-6 text-left">
+            Agregar o actualizar información
+        </div>
+        <div class="col-sm-6 text-right">
+            <div class="btn-group btn-group-sm">
+                <button type="button" (click)="cancel()" class="btn btn-outline-primary btn-sm">
+                    <fa-icon [icon]="faThList" class="text-primary mb-2 mr-1" title="Crear registro"></fa-icon>Ver todos
+                </button>
             </div>
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="form-group">
-                        <label for="description">Descripción</label>
-                        <textarea rows="3" class="form-control text-small" formControlName="description"></textarea>
-                        <small *ngIf="mustShowError('description')" class="form-text alert-danger">
-                        Descripción es obligatorio
-                        </small>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </main>
-    <footer>
-        <button *ngIf="option.pk_id_option" type="submit" data-dismiss="modal" data-dismiss="modal" class="btn btn-outline-success btn-sm mb-2 mr-1"
-        [disabled]="optionForm.invalid"
-        (click)="updateOption()">Actualizar</button>
+        </div>
+    </div>
+    <!-- end menu main-->
+    
 
-        <button *ngIf="!option.pk_id_option" type="submit" data-dismiss="modal" class="btn btn-outline-primary btn-sm mb-2 mr-1"
-        [disabled]="optionForm.invalid"
-        (click)="createOption()">Guardar</button>
-    </footer>
-</app-card>      
+    <!-- start content -->
+    <div class="row margin-top-1rem">
+        <div class="col-sm-12">
+            <form [formGroup]="optionForm">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="code">Code</label>
+                            <input type="text" class="form-control text-small" placeholder="Código" formControlName="code" required>
+                            <small *ngIf="mustShowError('code')" class="form-text alert-danger">
+                            Código es obligatorio
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="description">Descripción</label>
+                            <textarea rows="3" class="form-control text-small" formControlName="description"></textarea>
+                            <small *ngIf="mustShowError('description')" class="form-text alert-danger">
+                            Descripción es obligatorio
+                            </small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row justify-content-end">
+                    <div class="col-sm-4 text-right align-self-end">
+                        <button *ngIf="option.pk_id_option" type="submit" class="btn btn-outline-success btn-sm mb-2 mr-1" [disabled]="optionForm.invalid" (click)="updateOption()">Actualizar</button>
+                        <button *ngIf="!option.pk_id_option" type="submit" class="btn btn-outline-primary btn-sm mb-2 mr-1" [disabled]="optionForm.invalid" (click)="createOption()">Guardar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- end content -->
+</section>

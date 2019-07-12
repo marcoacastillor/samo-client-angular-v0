@@ -1,1 +1,336 @@
-show detallado...
+<app-pages title="Órdenes de venta">  
+        <main>       
+            <section>
+                <!-- start menu main-->
+                <div class="row bg-gray">
+                    <div class="col-sm-6 text-left">
+                        Detalle de una órden de venta
+                    </div>
+                    <div class="col-sm-6 text-right">
+                        <div class="btn-group btn-group-sm">
+                            <a routerLink='../../sales-detailed' class="btn text-ultra-small btn-sm btn-outline-primary" type="button">
+                                <fa-icon [icon]="faThList" class="text-outline-secondary mb-2 mr-1"></fa-icon>Ver todos
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- end menu main-->
+    
+                <!-- start content -->
+                <div class="row margin-top-1rem">
+                    <div class="col-sm-12">
+                        
+                        <!-- start info options-->
+                        <div class="row back-colo-f6">
+                            <div class="col-sm-12 text-right align-self-end">
+                                <div class="btn-group btn-group-sm">
+                                    <div class="dropdown">
+                                        <button class="btn text-ultra-small btn-sm dropdown-toggle" type="button" id="operation" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <fa-icon [icon]="faFileInvoiceDollar" class="text-outline-secondary mb-2 mr-1"></fa-icon>Factura
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="operation">
+                                            <button *ngIf="operation.state_operation != block" (click)="getMultipleParams()" class="dropdown-item text-small text-secondary"  type="button" data-toggle="modal" data-target="#operationModal">
+                                                <fa-icon [icon]="faEdit" class="text-outline-secondary mb-2 mr-1"></fa-icon>Editar información
+                                            </button>
+                                            <div class="dropdown-divider"></div>
+                                            <button *ngIf="operation.state_operation != block && (operation.total_operation - (operation.total_discounts + operation.total_pays)) == 0" (click)="blockInvoice()" class="dropdown-item text-small text-secondary" type="button">
+                                                <fa-icon [icon]="faLock" class="text-outline-secondary mb-2 mr-1"></fa-icon>Bloquear factura
+                                            </button>
+                                            <div class="dropdown-divider"></div>
+                                            <button class="dropdown-item text-small text-secondary" type="button">
+                                                <fa-icon [icon]="faPrint" class="text-outline-secondary mb-2 mr-1"></fa-icon>Imprimir factura
+                                            </button>
+                                            <div class="dropdown-divider"></div>
+                                            <button *ngIf="operation.state_operation != block" class="dropdown-item text-small text-secondary" type="button">
+                                                <fa-icon [icon]="faUndo" class="text-outline-secondary mb-2 mr-1"></fa-icon>Anular factura
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="dropdown" *ngIf="operation.state_operation != block">
+                                        <button class="btn text-ultra-small btn-sm dropdown-toggle" type="button" id="products" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <fa-icon [icon]="faCartArrowDown" class="text-outline-secondary mb-2 mr-1"></fa-icon>Productos
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="products">
+                                            <button (click)="getMultipleParams()" class="dropdown-item text-small text-secondary" type="button" data-toggle="modal" data-target="#productModal">
+                                                <fa-icon [icon]="faPlus" class="text-outline-secondary mb-2 mr-1"></fa-icon>Agregar producto
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="dropdown" *ngIf="operation.state_operation != block && (operation.total_operation - (operation.total_discounts + operation.total_pays)) > 0">
+                                        <button class="btn text-ultra-small btn-sm dropdown-toggle" type="button" id="payments" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <fa-icon [icon]="faDonate" class="text-outline-secondary mb-2 mr-1"></fa-icon>Pagos
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="payments">
+                                            <button class="dropdown-item text-small text-secondary" type="button" data-toggle="modal" data-target="#paymentModal">
+                                                <fa-icon [icon]="faDollarSign" class="text-outline-secondary mb-2 mr-1"></fa-icon>Agregar pago
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end info options-->
+    
+                        <!-- start main info-->
+                        <div class="row margin-top-1rem">
+                            <!-- start provider info-->
+                            <div class="col-sm-4 back-colo-f6">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <table class="table table-sm">
+                                            <thead>
+                                                <tr>
+                                                    <th colspan="2"><h6>Cliente</h6></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th>Identificación</th>
+                                                    <td>{{ person.type_id }} - {{ person.number_id }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Nombre</th>
+                                                    <td>{{ person.names }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Apellidos</th>
+                                                    <td>{{ person.last_names }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Dirección</th>
+                                                    <td>{{ person.address }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Teléfono</th>
+                                                    <td>{{ person.phone }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+            
+                                <div class="row margin-top-2rem" *ngIf="lstPayments">
+                                    <div class="col-sm-12">
+                                        <table class="table table-sm">
+                                            <thead>
+                                                <tr>
+                                                    <th colspan="3"><h6>Pagos</h6></th>
+                                                </tr>
+                                                <tr>
+                                                    <th>Fecha</th>
+                                                    <th>Tipo</th>
+                                                    <th>Valor</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let pay of lstPayments">
+                                                    <td>
+                                                        <div class="row">
+                                                            <div class="col-sm-2">
+                                                                <button *ngIf="operation.state_operation != block" (click)="delPayment(pay.pk_id_payment)" class="btn text-ultra-small btn-sm" type="button">
+                                                                    <fa-icon [icon]="faTrashAlt" class="text-outline-danger mb-2 mr-1"></fa-icon>
+                                                                </button>
+                                                            </div>
+                                                            <div class="col">
+                                                                {{ pay.date_payment }}
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>{{ pay.type_payment }}</td>
+                                                    <td>{{ pay.value_payment | number }}</td>
+                                                </tr>
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <th colspan="2">Total</th>
+                                                    <th>{{ operation.total_pays | number }}</th>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- start provider info-->
+                            
+                            <!-- start purchase info-->
+                            <div class="col-sm-8 back-color-ff">
+                                <!-- start información básica-->
+                                <div class="row">
+                                    <div class="col-sm-7">
+                                        <div class="row justify-content-start">
+                                            <div class="col-sm-6">
+                                                <table class="table table-sm">
+                                                    <thead>
+                                                        <tr>
+                                                            <th colspan="2"><h6>Orden de compra #{{ operation.number_invoice }}</h6></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <th>Fecha</th>
+                                                            <td>{{ operation.date_operation }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Estado</th>
+                                                            <td>{{ operation.state_operation }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Tipo de pago</th>
+                                                            <td>{{ operation.payment_type }}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+            
+                                    <div class="col-sm-5">
+                                        <div class="row justify-content-end">
+                                            <div class="col-sm-12">
+                                                <table class="table table-sm">
+                                                    <tbody class="text-success order-purchase-title">
+                                                        <tr>
+                                                            <th>Valor total</th>
+                                                            <td>{{ (operation.total_operation - operation.total_discounts) | number }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Abonos</th>
+                                                            <td>{{ operation.total_pays | number }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Saldo</th>
+                                                            <td>{{ operation.total_operation - (operation.total_discounts + operation.total_pays) | number }}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- end información básica-->
+            
+                                <!-- start productos-->
+                                <div class="row margin-top-2rem justify-content-end">
+                                    <div class="col-sm-12">
+                                        <table class="table table-sm">
+                                            <thead>
+                                                <tr>
+                                                    <th>Producto</th>
+                                                    <th>Presentación</th>
+                                                    <th>Cantidad</th>
+                                                    <th>Valor unitario</th>
+                                                    <th>Impuesto</th>
+                                                    <th>Total</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let prd of lstProducts">
+                                                    <td>
+                                                        <div class="row">
+                                                            <div class="col-sm-2">
+                                                                <button *ngIf="operation.state_operation != block" (click)="delProduct(prd.pk_id_operation_product)" class="btn text-ultra-small btn-sm" type="button">
+                                                                    <fa-icon [icon]="faTrashAlt" class="text-outline-danger mb-2 mr-1"></fa-icon>
+                                                                </button>
+                                                            </div>
+                                                            <div class="col-sm-10">
+                                                                {{ prd.name }}<br/><span class="text-muted">[{{ prd.code }}]</span>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>{{ prd.presentation }}</td>
+                                                    <td *ngIf="prd.presentation === individual">{{ prd.number_units | number }}</td>
+                                                    <td *ngIf="prd.presentation === individual">{{ prd.price_unit | number }}</td>
+                                                    <td *ngIf="prd.presentation != individual">{{ prd.number_package | number }}</td>
+                                                    <td *ngIf="prd.presentation != individual">{{ prd.price_package | number }}</td>
+                                                    <td>({{ prd.tax }}%) {{ prd.value_tax | number }}</td>
+                                                    <td>{{ prd.total_product | number}}</td>
+                                                </tr>
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <th rowspan="5" colspan="4"></th>
+                                                    <th>Subtotal</th>
+                                                    <th>{{ operation.subtotal_operation | number }}</th>
+                                                </tr>
+                                                <tr>
+                                                    <th>Total impuestos</th>
+                                                    <th>{{ operation.total_tax | number }}</th>
+                                                </tr>
+                                                <tr class="text-primary">
+                                                    <th>Total</th>
+                                                    <th>{{ operation.total_operation | number }}</th>
+                                                </tr>
+                                                <tr class="text-danger">
+                                                    <th>Descuentos</th>
+                                                    <th>{{ operation.total_discounts | number }}</th>
+                                                </tr>
+                                                <tr class="text-success">
+                                                    <th>Valor neto</th>
+                                                    <th>{{ (operation.total_operation - operation.total_discounts) | number }}</th>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                                <!-- end productos-->
+                            </div>
+                            <!-- end purchase info-->
+                        </div>
+                        <!-- end main info-->
+    
+                        <!-- start notes-->
+                        <div class="row margin-top-2rem justify-content-end" *ngIf="lstNotes.length > 0">
+                            <div class="col-sm-12">
+                                <table class="table table-sm">
+                                    <thead>
+                                        <tr>
+                                            <td colspan="5"><h6>NOTAS ASOCIADAS A LA FACTURA</h6></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Tipo</th>
+                                            <th>Fecha</th>
+                                            <th>Descripción</th>
+                                            <th>Valor original</th>
+                                            <th>Valor modificado</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let note of lstNotes">
+                                            <td><pre>{{ note.type_note }}</pre></td>
+                                            <td><pre>{{ note.date_note }}</pre></td>
+                                            <td><pre>{{ note.description }}</pre></td>
+                                            <td><pre [innerHTML]="note.previous_value"></pre></td>
+                                            <td><pre [innerHTML]="note.actual_value"></pre></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- end notes-->
+                    </div>
+                </div>
+                <!-- end content -->
+            </section>
+        </main>
+    </app-pages>  
+    
+    
+    <!-- information product -->
+    <app-form-product-modal
+    [operation]="operation"
+    [lstParams]="lstParams"
+    (addProduct)="onAddProduct($event)"
+    ></app-form-product-modal>
+    
+    <!-- information product -->
+    <app-form-payment-modal
+    [operation]="operation"
+    (addPayment)="onAddPayment($event)"
+    ></app-form-payment-modal>
+    
+    <!-- information product -->
+    <app-form-operation-modal
+    [operation]="operation"
+    [lstParams]="lstParams"
+    (update)="onUpdateOperation($event)"
+    ></app-form-operation-modal>

@@ -1,32 +1,40 @@
-<div class="row margin-top">
-    <div *ngIf="!showParam" class="col-sm-6">
-        <app-new-param
-        [category]="category"
-        (create)="onCreate($event)"
-        (update)="onUpdate($event)"
-        (cancel)="onCancel($event)"
-        >
-        </app-new-param>
-    </div>
-    <div *ngIf="showParam" class="col-sm-6">
-        <app-show-param
-        [category]="category"
-        [parameter]="parameter"
-        (create)="onCreateParam($event)"
-        (update)="onUpdateParam($event)"
-        (cancel)="onCancelParam($event)"
-        (delete)="onDeleteParam($event)"
-        (select)="onSelect($event)"
-        >
-        </app-show-param>
-    </div>
-    <div class="col-sm-6">
-        <app-list-param
-        [categoryList]="categoryList"
-        (viewCategory)="onView($event)"
-        (updateCategory)="onUdp($event)"
-        (deleteCategory)="onDelete($event)"
-        >
-        </app-list-param>
-    </div>
-</div>
+<app-pages title="Parámetros de configuración">  
+    <main>
+        <section>
+            <div class="row container-fluid">    
+                <div [ngClass]="getClassNew()">
+                    <app-new-param
+                    [category]="category"
+                    (create)="onCreate($event)"
+                    (update)="onUpdate($event)"
+                    (cancel)="onCancel($event)"
+                    >
+                    </app-new-param>
+                </div>   
+
+                <div [ngClass]="getClassShow()">
+                    <app-show-param
+                    [category]="category"
+                    [parameter]="parameter"
+                    (create)="onCreateParam($event)"
+                    (update)="onUpdateParam($event)"
+                    (cancel)="onCancelParam($event)"
+                    (delete)="onDeleteParam($event)"
+                    (select)="onSelect($event)"
+                    >
+                    </app-show-param>  
+                </div>
+
+                <div [ngClass]="getClassList()">
+                    <app-list-param
+                    [categoryList]="categoryList"
+                    (viewCategory)="onView($event)"
+                    (updateCategory)="onUdp($event)"
+                    (deleteCategory)="onDelete($event)"
+                    >
+                    </app-list-param>
+                </div>
+            </div>
+        </section>
+    </main>
+</app-pages>

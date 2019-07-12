@@ -1,39 +1,90 @@
-<app-card caption="Carga de archivo de compra" [lstMessages]="lstMessages">
-    <main>
-        <h5>Cargar información de compras por archivo</h5>
-        <form [formGroup]="purchaseFileForm">
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="form-group">
-                        <label for="file_ref_purchase">Archivo de compra</label>
-                        <input type="file" (change)="onFileSelected($event)" class="form-control text-small" placeholder="Archivo de compra" formControlName="file_ref_purchase" required />
-                        <small *ngIf="mustShowError('file_ref_purchase')" class="form-text alert-danger">
-                        Imágen es obligatorio
-                        </small>
-                    </div>
-                </div> 
+<app-pages title="Cargar archivo de órden de compra">  
+    <main>            
+        <section>
+            <!-- start menu main-->
+            <div class="row bg-gray">
+                <div class="col-sm-6 text-left">
+                    Cargar archivo
+                </div>
             </div>
-        </form>
+            <!-- end menu main-->
+            
+            <!-- start content -->
+            <div class="row margin-top-1rem">
+                <div class="col-sm-12">
 
-        <table class="table table-sm table-bordered table-striped" *ngIf="data">
-            <tr *ngFor="let row of data; let i = index">
-                <td [ngClass]="getClassHeaderTable(i)"  *ngFor="let val of row; let j = index">
-                    <span *ngIf="i === 0">{{ val }}</span>
-                    <span *ngIf="j === 13 && i > 0">{{ val | number}}</span>
-                    <span *ngIf="i > 0 && j != 13">{{ val }}</span>
-                </td>
-            </tr>
-        </table>
+                    <!-- start info options-->
+                    <div class="row" *ngIf="success">
+                        <div class="col-sm-12">
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>Éxito : </strong> {{ message }}<br/>
+                                <a routerLink='../purchase-detailed/{{pk_id_operation}}' class="btn text-ultra-small btn-sm btn-outline-primary" type="button">
+                                    <fa-icon [icon]="faEye" class="text-outline-secondary mb-2 mr-1"></fa-icon>Ver detalle
+                                </a>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end info options-->
+    
 
-        <app-modal-show-order-file
-            [data]="data"
-            [operation]="operation"
-            [lstParams]="lstParams"
-            (create)="onCreate($event)"
-        ></app-modal-show-order-file>
+                    <!-- start main info-->
+                    <div class="row">
+                        <form [formGroup]="purchaseFileForm">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="file_ref_purchase">Archivo de compra</label>
+                                        <input type="file" (change)="onFileSelected($event)" class="form-control text-small" placeholder="Archivo de compra" formControlName="file_ref_purchase" required />
+                                        <small *ngIf="mustShowError('file_ref_purchase')" class="form-text alert-danger">
+                                        Archivo es obligatorio
+                                        </small>
+                                    </div>
+                                </div> 
+                            </div>
+                        </form>
+                    </div>
+                    <!-- end main info-->
 
+                    <!-- start table info-->
+                    <div class="row margin-top-1rem">
+                        <div class="col-sm-12">
+                            <table class="table table-sm table-bordered table-striped" *ngIf="data">
+                                <tr *ngFor="let row of data; let i = index">
+                                    <td [ngClass]="getClassHeaderTable(i)"  *ngFor="let val of row; let j = index">
+                                        <span *ngIf="i === 0">{{ val }}</span>
+                                        <span *ngIf="j === 13 && i > 0">{{ val | number}}</span>
+                                        <span *ngIf="i > 0 && j != 13">{{ val }}</span>
+                                    </td>
+                                </tr>
+                            </table>  
+                        </div>
+                    </div>
+                    <!-- end table info-->
+                    
+                    <!--start buttons form-->
+                    <div class="row justify-content-start">
+                        <div class="col-sm-4 text-left align-self-start">
+                            <button type="submit" data-toggle="modal" data-target="#showOrderFileModal" class="btn btn-outline-primary btn-sm mb-2 mr-1" [disabled]="purchaseFileForm.invalid">
+                                <fa-icon [icon]="faEyeDropper" class="text-outline-secondary mb-2 mr-1"></fa-icon>Ver factura
+                            </button>
+                        </div>
+                    </div>
+                    <!--end buttons form-->
+                </div>
+            </div>
+            <!-- end content -->
+        </section>
     </main>
-    <footer>
-        <button type="submit" data-toggle="modal" data-target="#showOrderFileModal" class="btn btn-outline-primary btn-sm mb-2 mr-1" [disabled]="purchaseFileForm.invalid">Mostrar factura</button>
-    </footer>
-</app-card>      
+</app-pages>
+
+<!-- start show invoice modal-->
+<app-modal-show-order-file
+    [data]="data"
+    [operation]="operation"
+    [lstParams]="lstParams"
+    (create)="onCreate($event)"
+></app-modal-show-order-file>
+<!-- end show invoice modal-->

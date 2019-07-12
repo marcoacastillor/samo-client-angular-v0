@@ -1,21 +1,29 @@
-<div class="row margin-top">
-    <div *ngIf="!showTypeService" class="col-sm-6">
-        <app-new-type-service
-        [typeService]="typeService"
-        [modeServiceList]="modeServiceList"
-        [typesServiceList]="typesServiceList"
-        [sizesEnterpriseList]="sizesEnterpriseList"
-        (create)="onCreate($event)"
-        (update)="onUpdate($event)"
-        >
-        </app-new-type-service>
-    </div>
-    <div class="col-sm-6">
-        <app-list-type-service
-        [typeServiceList]="typeServiceList"
-        (delete)="onDelete($event)"
-        (load)="onLoad($event)"
-        >
-        </app-list-type-service>
-    </div>
-</div>
+<app-pages title="Servicios empresariales">  
+    <main>
+        <section>
+            <div class="row container-fluid">    
+                <div [ngClass]="getClassNew()">
+                    <app-new-type-service
+                    [typeService]="typeService"
+                    [modeServiceList]="modeServiceList"
+                    [typesServiceList]="typesServiceList"
+                    [sizesEnterpriseList]="sizesEnterpriseList"
+                    (create)="onCreate($event)"
+                    (update)="onUpdate($event)"
+                    (cancel)="onCancel($event)"
+                    >
+                    </app-new-type-service>
+                </div>   
+
+                <div [ngClass]="getClassList()">
+                    <app-list-type-service
+                    [typeServiceList]="typeServiceList"
+                    (delete)="onDelete($event)"
+                    (load)="onLoad($event)"
+                    >
+                    </app-list-type-service>
+                </div>
+            </div>
+        </section>
+    </main>
+</app-pages>

@@ -76,9 +76,9 @@ export class OperationService {
     );
   }
 
-  public storeOperationPurchase$(operation: Operation): Observable<Operation> {
-    let url = this._url + '/create-operation-purchase';
-    return this.userService.validateOptionByToken('OPE_OPERATION_PURCHASE_CRT').pipe(
+  public storeOperation$(operation: Operation): Observable<Operation> {
+    let url = this._url + '/create-operation';
+    return this.userService.validateOptionByToken('OPE_OPERATION_CRT').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.post<Operation>(url, operation);
@@ -87,7 +87,7 @@ export class OperationService {
     );
   }
 
-  updateOperation$(operation: Operation): Observable<Operation> {
+  public updateOperation$(operation: Operation): Observable<Operation> {
     return this.userService.validateOptionByToken('OPE_OPERATION_UPD').pipe(
       switchMap(validate => {
         if(validate){
@@ -97,7 +97,7 @@ export class OperationService {
     );
   }
 
-  changeState$(id: number, state: string): Observable<Operation> {
+  public changeState$(id: number, state: string): Observable<Operation> {
     let url = this._url + '/change-state/' + id.toString() + '/' + state;
     return this.userService.validateOptionByToken('OPE_CHANGE_STATE').pipe(
       switchMap(validate => {
@@ -108,6 +108,11 @@ export class OperationService {
     );
   }
 
+
+
+
+
+  
   public store_purchase$(purchase: Purchase): Observable<Purchase> {
     let url = this._url + '/create-purchase';
     return this.userService.validateOptionByToken('OPE_PURCHASE_CRT').pipe(

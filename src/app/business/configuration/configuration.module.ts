@@ -16,6 +16,7 @@ import { AdminTypeServiceComponent } from './type-service/admin-type-service/adm
 import { ListTypeServiceComponent } from './type-service/list-type-service/list-type-service.component';
 import { NewTypeServiceComponent } from './type-service/new-type-service/new-type-service.component';
 import { TypeServiceService } from 'src/app/shared/services/type-service.service';
+import { UtilsService } from 'src/app/shared/services/utils.service';
 
 @NgModule({
   imports: [
@@ -24,7 +25,7 @@ import { TypeServiceService } from 'src/app/shared/services/type-service.service
     FontAwesomeModule,
     SharedModule
   ],
-  providers: [ CategoryService, ParameterService, TypeServiceService],
+  providers: [ CategoryService, ParameterService, TypeServiceService, UtilsService],
   declarations: [AdminParamComponent, ListParamComponent, ShowParamComponent, NewParamComponent, ModalParameterComponent, NewParameterComponent, AdminTypeServiceComponent, ListTypeServiceComponent, NewTypeServiceComponent]
 })
 export class ConfigurationModule { }

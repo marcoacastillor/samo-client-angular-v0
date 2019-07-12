@@ -7,6 +7,7 @@ import { MComponent } from 'src/app/shared/models/m-component';
 import { ComponentService } from 'src/app/shared/services/component.service';
 import { Option } from 'src/app/shared/models/option';
 import { OptionService } from 'src/app/shared/services/option.service';
+import { UtilsService } from 'src/app/shared/services/utils.service';
 
 @Component({
   selector: 'app-main-module',
@@ -15,15 +16,19 @@ import { OptionService } from 'src/app/shared/services/option.service';
 })
 export class MainModuleComponent implements OnInit {
   public moduleList: Module[] = [];
-  public showModule = false;
+  
   public module: Module = new Module;
   public cmp: MComponent = new MComponent;
+
+  public showModule = false;
+  public newModule = false;
+  public listModule = true;
   
   constructor(
     private globalStoreService: GlobalStoreService,
     private moduleService: ModuleService,
     private compService: ComponentService,
-    private optService: OptionService
+    private utilService: UtilsService
   ){}
 
   ngOnInit() { 
@@ -86,6 +91,12 @@ export class MainModuleComponent implements OnInit {
     )
   }
 
+  public onCancel(event: boolean){
+    this.newModule = false;
+    this.listModule = event;
+    this.showModule = false;
+  }
+
   /*
   * Funciones para Modulos
   */
@@ -101,6 +112,8 @@ export class MainModuleComponent implements OnInit {
       tap(this.loadModule),
     ).subscribe(this.onSuccess, this.onError);
     this.showModule = true;
+    this.newModule = false;
+    this.listModule = false;
   }
 
   private loadModule = (module: Module): void => {
@@ -127,6 +140,8 @@ export class MainModuleComponent implements OnInit {
       this.module = module;
     }
     this.showModule = false;
+    this.listModule = false;
+    this.newModule = true;
   }
 
   public onDelete(id: number) {
@@ -148,4 +163,22 @@ export class MainModuleComponent implements OnInit {
   private onError = (error: any) => {
     this.globalStoreService.dispatchUserMessage(error.status, error.statusText + ' : ' + error.error.error);
   }
+
+  /*
+  * ------------------------------------------
+  * Funciones visualización
+  * ------------------------------------------
+  */
+ public getClassNew() {
+  return this.utilService.getClassNew(this.newModule);
+  }
+
+  public getClassList() {
+    return this.utilService.getClassList(this.listModule);
+  }
+
+  public getClassShow() {
+    return this.utilService.getClassShow(this.showModule);
+  }
+
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { Operation } from 'src/app/shared/models/operation';
 import { Parameter } from 'src/app/shared/models/parameter';
 

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Category } from 'src/app/shared/models/category';
-import { faTrashAlt, faEdit, faPlusCircle, faEye } from '@fortawesome/free-solid-svg-icons';
+import { faTrashAlt, faEdit, faPlusCircle, faEye, faThList } from '@fortawesome/free-solid-svg-icons';
 import { Parameter } from 'src/app/shared/models/parameter';
 import { environment } from 'src/environments/environment';
 
@@ -16,6 +16,7 @@ export class ShowParamComponent implements OnInit {
   faTrashAlt = faTrashAlt;
   faEdit = faEdit;
   faPlusCircle = faPlusCircle;
+  faThList = faThList;
   
   @Input() public category: Category;
   @Input() public parameter: Parameter;

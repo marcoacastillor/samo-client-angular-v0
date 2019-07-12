@@ -173,4 +173,26 @@ export class PersonService {
       })
     );
   }
+
+  public getPersonsByIdFilter$(id_client: string): Observable<Person[]> {
+    const url = this._url + '/get-persons-by-id-filter/' + id_client.toString();
+    return this.userService.validateOptionByToken('PRS_GET_BY_ID_FILTER').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.get<Person[]>(url);
+        }
+      })
+    );
+  }
+
+  public getPersonsByNamesFilter$(names_client: string): Observable<Person[]> {
+    const url = this._url + '/get-persons-by-names-filter/' + names_client.toString();
+    return this.userService.validateOptionByToken('PRS_GET_BY_NAMES_FILTER').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.get<Person[]>(url);
+        }
+      })
+    );
+  }
 }

@@ -1,63 +1,86 @@
-<app-card caption="Información Tipo de Servicio">
-    <main>
-        <h5 *ngIf="typeService.pk_id_type_service">Actualización de información</h5>
-        <h5 *ngIf="!typeService.pk_id_type_service">Creación de registro</h5>
-        <form [formGroup]="typeServiceForm">
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label for="type_enterprise">Tipo de empresa</label>
-                        <select class="form-control text-small" formControlName="type_enterprise">
-                            <option value="{{param.value}}" *ngFor="let param of sizesEnterpriseList">{{param.name}}</option>
-                        </select>
-                        <small *ngIf="mustShowError('type_enterprise')" class="form-text alert-danger">
-                        Tipo de empresa, es requerido.
-                        </small>
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label for="mode_service">Modo de servicio</label>
-                        <select class="form-control text-small" formControlName="mode_service">
-                            <option value="{{param.value}}" *ngFor="let param of modeServiceList">{{param.name}}</option>
-                        </select>
-                        <small *ngIf="mustShowError('mode_service')" class="form-text alert-danger">
-                        Modo de servicio, es requerido.
-                        </small>
-                    </div>
-                </div> 
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label for="type_service">Modalidad del servicio</label>
-                        <select class="form-control text-small" formControlName="type_service">
-                            <option value="{{param.value}}" *ngFor="let param of typesServiceList">{{param.name}}</option>
-                        </select>
-                        <small *ngIf="mustShowError('type_service')" class="form-text alert-danger">
-                        Tipo de servicio, es requerido.
-                        </small>
-                    </div>
-                </div> 
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label for="value_service">Valor de servicio</label>
-                        <input type="number" class="form-control text-small" placeholder="Valor del servicio" formControlName="value_service" required>
-                        <small *ngIf="mustShowError('value_service')" class="form-text alert-danger">
-                        Valor del servicio es requerido.
-                        </small>
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label for="description">Descripción</label>
-                        <input type="text" class="form-control text-small" placeholder="Descripción" formControlName="description">
-                    </div>
-                </div>
+<section>
+    <!-- start menu main-->
+    <div class="row bg-gray">
+        <div class="col-sm-6 text-left">
+            Agregar o actualizar información
+        </div>
+        <div class="col-sm-6 text-right">
+            <div class="btn-group btn-group-sm">
+                <button type="button" (click)="cancelNew()" class="btn btn-outline-primary btn-sm">
+                    <fa-icon [icon]="faThList" class="text-primary mb-2 mr-1" title="Crear registro"></fa-icon>Ver todos
+                </button>
             </div>
-        </form>
-    </main>
-    <footer>
-        <button *ngIf="typeService.pk_id_type_service" type="submit" class="btn btn-outline-success btn-sm mb-2 mr-1" [disabled]="typeServiceForm.invalid" (click)="updateTypeService()">Actualizar</button>
-        <button *ngIf="!typeService.pk_id_type_service" type="submit" class="btn btn-outline-primary btn-sm mb-2 mr-1" [disabled]="typeServiceForm.invalid" (click)="createTypeService()">Guardar</button>
-        <button type="button" class="btn btn-outline-danger btn-sm mb-2 mr-1" (click)="clear()">Cancelar</button>
-    </footer>
-</app-card>
+        </div>
+    </div>
+    <!-- end menu main-->
+    
+
+    <!-- start content -->
+    <div class="row margin-top-1rem">
+        <div class="col-sm-12">
+            <form [formGroup]="typeServiceForm">
+                
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="type_enterprise">Tipo de empresa</label>
+                            <select class="form-control text-small" formControlName="type_enterprise">
+                                <option value="{{param.value}}" *ngFor="let param of sizesEnterpriseList">{{param.name}}</option>
+                            </select>
+                            <small *ngIf="mustShowError('type_enterprise')" class="form-text alert-danger">
+                            Tipo de empresa, es requerido.
+                            </small>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="mode_service">Modo de servicio</label>
+                            <select class="form-control text-small" formControlName="mode_service">
+                                <option value="{{param.value}}" *ngFor="let param of modeServiceList">{{param.name}}</option>
+                            </select>
+                            <small *ngIf="mustShowError('mode_service')" class="form-text alert-danger">
+                            Modo de servicio, es requerido.
+                            </small>
+                        </div>
+                    </div> 
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="type_service">Modalidad del servicio</label>
+                            <select class="form-control text-small" formControlName="type_service">
+                                <option value="{{param.value}}" *ngFor="let param of typesServiceList">{{param.name}}</option>
+                            </select>
+                            <small *ngIf="mustShowError('type_service')" class="form-text alert-danger">
+                            Tipo de servicio, es requerido.
+                            </small>
+                        </div>
+                    </div> 
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="value_service">Valor de servicio</label>
+                            <input type="number" class="form-control text-small" placeholder="Valor del servicio" formControlName="value_service" required>
+                            <small *ngIf="mustShowError('value_service')" class="form-text alert-danger">
+                            Valor del servicio es requerido.
+                            </small>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="description">Descripción</label>
+                            <input type="text" class="form-control text-small" placeholder="Descripción" formControlName="description">
+                        </div>
+                    </div>
+                </div>
+                
+                <!--start buttons form-->
+                <div class="row justify-content-end">
+                    <div class="col-sm-4 text-right align-self-end">
+                        <button *ngIf="typeService.pk_id_type_service" type="submit" class="btn btn-outline-success btn-sm mb-2 mr-1" [disabled]="typeServiceForm.invalid" (click)="updateTypeService()">Actualizar</button>
+                        <button *ngIf="!typeService.pk_id_type_service" type="submit" class="btn btn-outline-primary btn-sm mb-2 mr-1" [disabled]="typeServiceForm.invalid" (click)="createTypeService()">Guardar</button>
+                    </div>
+                </div>
+                <!--end buttons form-->
+            </form>
+        </div>
+    </div>
+    <!-- end content -->
+</section>

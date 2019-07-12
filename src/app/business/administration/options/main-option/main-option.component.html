@@ -1,20 +1,27 @@
-<div class="row margin-top">
-    <div class="col-sm-6">
-        <app-new-option
-        [option]="option"
-        (create)="onCreate($event)"
-        (update)="onUpdate($event)"
-        >
-        </app-new-option>
-    </div>
-    <div class="col-sm-6">
-        <app-list-option
-            [optionList]="optionList"
-            [actualPg]="actualPg"
-            [regPerPg]="regPerPg"
-            (new)="onNew($event)"
-            (del)="onDelete($event)"
-        >
-        </app-list-option>
-    </div>
-</div>
+<app-pages title="Opciones del sistema">  
+    <main>
+        <section>
+            <div class="row container-fluid">    
+                <div [ngClass]="getClassNew()">
+                    <app-new-option
+                    [option]="option"
+                    (create)="onCreate($event)"
+                    (update)="onUpdate($event)"
+                    (cancelNew)="onCancelNew($event)"
+                    >
+                    </app-new-option>
+                </div>   
+                <div [ngClass]="getClassList()">
+                    <app-list-option
+                    [optionList]="optionList"
+                    [actualPg]="actualPg"
+                    [regPerPg]="regPerPg"
+                    (new)="onNew($event)"
+                    (del)="onDelete($event)"
+                    >
+                    </app-list-option> 
+                </div>
+            </div>
+        </section>
+    </main>
+</app-pages>

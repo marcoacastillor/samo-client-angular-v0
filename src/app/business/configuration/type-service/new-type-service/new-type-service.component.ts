@@ -3,6 +3,7 @@ import { TypeService } from 'src/app/shared/models/type-service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FormToolsService } from 'src/app/shared/services/form-tools.service';
 import { Parameter } from 'src/app/shared/models/parameter';
+import { faThList } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-new-type-service',
@@ -10,6 +11,8 @@ import { Parameter } from 'src/app/shared/models/parameter';
   styles: []
 })
 export class NewTypeServiceComponent implements OnInit {
+  faThList = faThList;
+  
   typeServiceForm: FormGroup;
   
   @Input() public typeService: TypeService;
@@ -19,7 +22,8 @@ export class NewTypeServiceComponent implements OnInit {
   
   @Output() public create = new EventEmitter<TypeService>();
   @Output() public update = new EventEmitter<TypeService>();
-  
+  @Output() public cancel = new EventEmitter<Boolean>();
+
   constructor(
     private fb: FormBuilder,
     private formToolService: FormToolsService,
@@ -53,6 +57,10 @@ export class NewTypeServiceComponent implements OnInit {
 
   clear(){
     this.typeServiceForm.reset();
+  }
+
+  cancelNew(){
+    this.cancel.emit(true);
   }
 
   /*

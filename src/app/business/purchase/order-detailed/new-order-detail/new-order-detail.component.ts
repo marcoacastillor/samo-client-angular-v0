@@ -50,6 +50,8 @@ export class NewOrderDetailComponent implements OnInit {
   lastkeydown1 = 0;
   success = false;
   message = '';
+  emptyProv = false;
+  emptyPrd = false;
 
   constructor(
     private operationService: OperationService,
@@ -74,38 +76,45 @@ export class NewOrderDetailComponent implements OnInit {
 
   private initForm(){
     this.operationForm = this.fb.group({
-      fk_id_vendedor: [this.activeUser.fk_id_person],
-      fk_id_provider: ['',Validators.required],
-      nit_provider: [''],
-      name_provider:[''],
+      fk_id_person: [this.activeUser.fk_id_person],
       operation_type: [environment.purchase],
-      payment_type: ['',Validators.required],
       state_operation: [environment.state_initial_purchase],
-      number_invoice: ['',Validators.required],
-      date_operation: [moment().format('YYYY-MM-DD')],
-      subtotal_operation: [0],
       total_operation: [0],
       total_tax: [0],
       total_discounts: [0],
-      type_discount: [''],
-      total_pays: [0],
+      external_reference: ['',Validators.required],
+      number_invoice: ['',Validators.required],
+      subtotal_operation: [0],
+      value_payment: [0],
+      payment_type: ['',Validators.required],
+      date_operation: [moment().format('YYYY-MM-DD')],
+      
       product: this.fb.group({
-        code_product: [''],
-        name_product: [''],
+        code: [''],
+        name: [''],
+        reference: [''],
+        number_units:['0'],
+        cost_price: ['0'],
+        tax_product: ['0'],
+        sale_price_unit: [0],
+        category: [''],
         presentation: [''],
-        number_selected:['0'],
-        value_unit: ['0'],
-        type_tax: [''],
-        tax_product:['0',Validators.required],
-        value_tax: '0',
-        value_total_product: ['0']
+        trademark: [''],
+        color: [''],
+        size: [''],
+        tax: [''],
+        type_product: [''],
+        value_tax: [0],
+        discount: [0],
+        subtotal: [0],
+        total_product: [0],        
       }),
-      selected_products: this.fb.array([])
+      products_list: this.fb.array([])
     })
   }
 
-  get selected_products() {
-    return this.operationForm.get('selected_products') as FormArray;
+  get products_list() {
+    return this.operationForm.get('products_list') as FormArray;
   }
 
   onSubmit(){
@@ -119,7 +128,8 @@ export class NewOrderDetailComponent implements OnInit {
     if (codeProvider.length > 0) {
       if (filter.timeStamp - this.lastkeydown1 > 200) {
         this.enterpriseService.getByCodeFilter$(codeProvider, environment.enterprise_provider).subscribe(
-          lstProviders => this.lstProviders = lstProviders
+          lstProviders => this.lstProviders = lstProviders,
+          () => this.emptyProv = true
         )
       }
     }
@@ -129,9 +139,7 @@ export class NewOrderDetailComponent implements OnInit {
     this.enterprise = provider;
     this.lstProviders = [];
     this.operationForm.patchValue({
-      fk_id_provider: provider.pk_id_enterprise,
-      nit_provider: provider.nit,
-      name_provider: provider.name
+      external_reference: provider.nit
     })
   }
 
@@ -143,7 +151,8 @@ export class NewOrderDetailComponent implements OnInit {
     if (codeProduct.length > 0) {
       if (filter.timeStamp - this.lastkeydown1 > 200) {
         this.productService.getByCodeFilterAndType$(codeProduct,environment.type_product_purchase).subscribe(
-            lstProducts => this.lstProducts = lstProducts
+            lstProducts => this.lstProducts = lstProducts,
+            () => this.emptyPrd = true
         )
       }
     }
@@ -153,7 +162,7 @@ export class NewOrderDetailComponent implements OnInit {
     this.product = product;
     this.lstProducts = [];
     this.operationForm.get('product').patchValue({
-      code_product: product.code
+      code: product.code
     });
 
     //pone el focus sobre el input de código.
@@ -173,8 +182,8 @@ export class NewOrderDetailComponent implements OnInit {
     let totalTaxOperation  = this.operationForm.value.total_tax;
 
     let tax_product       = this.operationForm.get('product').value.tax_product;
-    let units             = this.operationForm.get('product').value.number_selected;
-    let value             = this.operationForm.get('product').value.value_unit;
+    let units             = this.operationForm.get('product').value.number_units;
+    let value             = this.operationForm.get('product').value.cost_price;
     let presentation      = this.product.presentation;
     let name              = this.product.name;
     
@@ -182,18 +191,18 @@ export class NewOrderDetailComponent implements OnInit {
     totalProduct      = units * value;
     
     //Calcular impuesto para producto
-    let value_tax_product = Math.round(totalProduct - (totalProduct / (1+(tax_product/100))));
+    let value_tax_product = (totalProduct - (totalProduct / (1+(tax_product/100))));
     
     //Calculo del valor de la factura
     subTotalOperation       = Math.round(subTotalOperation + (totalProduct-value_tax_product));
-    totalTaxOperation     = Math.round(totalTaxOperation + value_tax_product);
-    totalOperation         = Math.round(subTotalOperation + totalTaxOperation);
+    totalTaxOperation       = Math.round(totalTaxOperation + value_tax_product);
+    totalOperation          = Math.round(subTotalOperation + totalTaxOperation);
      
     //Actualizar datos para producto seleccionado
     this.operationForm.get('product').patchValue({
       value_tax: value_tax_product,
-      name_product: name,
-      value_total_product: totalProduct,
+      name: name,
+      total_product: totalProduct,
       presentation: presentation
     });
     
@@ -201,24 +210,25 @@ export class NewOrderDetailComponent implements OnInit {
       subtotal_operation: subTotalOperation,
       total_operation: totalOperation,
       total_tax: totalTaxOperation,
+      value_payment: Math.round(totalOperation - this.operationForm.value.total_discounts)
     });
 
     //Sacar producto para agregarlo
     let prd = this.fb.group(this.operationForm.get('product').value);
     
     //Agregar producto a listado
-    this.selected_products.push(prd);
+    this.products_list.push(prd);
     
     //resetear los valores del producto.
     this.operationForm.get('product').patchValue({
-      code_product: '',
-      name_product: '',
+      code: '',
+      name: '',
       presentation: '',
-      number_selected: '0',
-      value_unit: '0',
-      value_tax: '0',
-      tax_product: 0,
-      value_total_product: '0'
+      number_units: 0,
+      cost_price: 0,
+      value_tax: 0,
+      tax_product: '0',
+      total_product: 0
     });
 
     //resetear producto seleccionado con código de barras.
@@ -229,7 +239,7 @@ export class NewOrderDetailComponent implements OnInit {
   }
 
   saveProduct(){
-    this.operationService.storeOperationPurchase$(this.operationForm.value).subscribe(
+    this.operationService.storeOperation$(this.operationForm.value).subscribe(
       () => {
         this.initForm();
         this.enterprise = new Enterprise();
@@ -254,6 +264,6 @@ export class NewOrderDetailComponent implements OnInit {
       total_operation: (subtotal_operation + total_tax),
     });
 
-    this.selected_products.removeAt(idx);
+    this.products_list.removeAt(idx);
   }
 }

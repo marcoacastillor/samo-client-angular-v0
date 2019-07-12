@@ -27,10 +27,16 @@ import { ModalNewPaymentComponent } from './sale-report/modal-new-payment/modal-
 import { NewPaymentComponent } from './sale-report/new-payment/new-payment.component';
 import { ModalSearchComponent } from './invoice/new-invoice/modal-search/modal-search.component';
 import { SearchComponent } from './invoice/new-invoice/search/search.component';
-import { MainSaleDetailComponent } from './sale-detailed/main-sale-detail/main-sale-detail.component';
 import { ListSaleDetailComponent } from './sale-detailed/list-sale-detail/list-sale-detail.component';
 import { ShowSaleDetailComponent } from './sale-detailed/show-sale-detail/show-sale-detail.component';
 import { NewSaleDetailComponent } from './sale-detailed/new-sale-detail/new-sale-detail.component';
+import { ListProductModalComponent } from './sale-detailed/new-sale-detail/list-product-modal/list-product-modal.component';
+import { ListClientModalComponent } from './sale-detailed/new-sale-detail/list-client-modal/list-client-modal.component';
+import { NotesService } from 'src/app/shared/services/notes.service';
+import { OperationProductService } from 'src/app/shared/services/operation-product.service';
+import { FormOperationModalComponent } from './sale-detailed/show-sale-detail/form-operation-modal/form-operation-modal.component';
+import { FormProductModalComponent } from './sale-detailed/show-sale-detail/form-product-modal/form-product-modal.component';
+import { FormPaymentModalComponent } from './sale-detailed/show-sale-detail/form-payment-modal/form-payment-modal.component';
 
 @NgModule({
   imports: [
@@ -42,8 +48,8 @@ import { NewSaleDetailComponent } from './sale-detailed/new-sale-detail/new-sale
     OwlNativeDateTimeModule,
   ],
   providers: [
-    GlobalStoreService, OperationService, ParameterService, ProductService, PersonService, PaymentService
+    GlobalStoreService, OperationService, ParameterService, ProductService, PersonService, PaymentService, NotesService, OperationProductService
   ],
-  declarations: [AdminInvoiceComponent, ListInvoiceComponent, NewInvoiceComponent, ShowInvoiceComponent, ModalPaymentComponent, EfectyPaymentComponent, NewSalePaymentComponent, ModalSalePaymentComponent, AdminSaleReportComponent, ConsolidatedComponent, ModalShowOperationComponent, ShowOperationComponent, ModalNewPaymentComponent, NewPaymentComponent, ModalSearchComponent, SearchComponent, MainSaleDetailComponent, ListSaleDetailComponent, ShowSaleDetailComponent, NewSaleDetailComponent]
+  declarations: [AdminInvoiceComponent, ListInvoiceComponent, NewInvoiceComponent, ShowInvoiceComponent, ModalPaymentComponent, EfectyPaymentComponent, NewSalePaymentComponent, ModalSalePaymentComponent, AdminSaleReportComponent, ConsolidatedComponent, ModalShowOperationComponent, ShowOperationComponent, ModalNewPaymentComponent, NewPaymentComponent, ModalSearchComponent, SearchComponent, ListSaleDetailComponent, ShowSaleDetailComponent, NewSaleDetailComponent, ListProductModalComponent, ListClientModalComponent, FormOperationModalComponent, FormProductModalComponent, FormPaymentModalComponent]
 })
 export class SalesModule { }

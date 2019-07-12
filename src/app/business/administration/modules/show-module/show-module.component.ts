@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { Module } from 'src/app/shared/models/module';
 import { MComponent } from 'src/app/shared/models/m-component';
-import { faTrashAlt, faEdit, faPlusCircle, faAirFreshener } from '@fortawesome/free-solid-svg-icons';
+import { faTrashAlt, faEdit, faPlusCircle, faAirFreshener, faThList } from '@fortawesome/free-solid-svg-icons';
 import { Option } from 'src/app/shared/models/option';
 import { environment } from 'src/environments/environment';
 import { UtilsService } from 'src/app/shared/services/utils.service';
@@ -17,6 +17,7 @@ export class ShowModuleComponent implements OnInit, OnChanges {
   faEdit = faEdit;
   faPlusCircle = faPlusCircle;
   faAirFreshener = faAirFreshener;
+  faThList = faThList;
 
   @Input() public module: Module;
   @Input() public cmp: MComponent = new MComponent;
@@ -27,6 +28,8 @@ export class ShowModuleComponent implements OnInit, OnChanges {
   @Output() public onUpdateComp = new EventEmitter<MComponent>();
   @Output() public onDeleteComp = new EventEmitter<MComponent>();
   @Output() public onNewComp = new EventEmitter<MComponent>();
+
+  @Output() public cancel = new EventEmitter<boolean>();
 
   public opt: Option = new Option;
 
@@ -60,6 +63,10 @@ export class ShowModuleComponent implements OnInit, OnChanges {
   public deleteCmp(cmp: MComponent) {
     this.onDeleteComp.emit(cmp);
   }
+
+  public cancelModule(){
+    this.cancel.emit(true);
+  }  
 
   /*
   Actualizar y crear componentes

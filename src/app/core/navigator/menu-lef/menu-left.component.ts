@@ -1,9 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { User } from 'src/app/shared/models/user';
 import { StatusMessage } from 'src/app/shared/models/status-message';
-import { faSignOutAlt, faTasks, faFileInvoiceDollar } from '@fortawesome/free-solid-svg-icons';
+import { faSignOutAlt, faTasks, faFileInvoiceDollar, faSync } from '@fortawesome/free-solid-svg-icons';
 import { GlobalStoreService } from '../../services/global-store.service';
 import { Router } from '@angular/router';
+import { AuthenticationService } from 'src/app/shared/services/authentication.service';
 
 @Component({
   selector: 'app-menu-lef',
@@ -17,10 +18,15 @@ export class MenuLeftComponent implements OnInit {
   faSignOutAlt = faSignOutAlt;
   faTasks = faTasks;
   faFileInvoiceDollar = faFileInvoiceDollar;
+  faSync = faSync;
+
+  statusSales = '';
+  statusUsers = '';
   
   constructor(
     private globalStore: GlobalStoreService,
     private router: Router,
+    private authService: AuthenticationService
   ) { }
 
   ngOnInit() {
@@ -39,4 +45,19 @@ export class MenuLeftComponent implements OnInit {
     this.globalStore.clearSession();
     this.router.navigateByUrl('/');
   }
+
+  //Ruta que actualiza sistema de usuarios
+  updateAppsUser(){
+    this.authService.refreshUsers().subscribe(
+      () => this.statusUsers = 'actualizado'
+    );
+
+  }
+  //Ruta que actualiza sistema de ventas
+  updateAppsSales(){
+    this.authService.refreshSales().subscribe(
+      () => this.statusSales = 'actualizado'
+    );
+  }
+
 }

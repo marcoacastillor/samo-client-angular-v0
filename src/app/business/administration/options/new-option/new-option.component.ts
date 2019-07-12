@@ -2,6 +2,7 @@ import { Component, OnInit, Input, ChangeDetectorRef, OnChanges, SimpleChanges, 
 import { Option } from 'src/app/shared/models/option';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormToolsService } from 'src/app/shared/services/form-tools.service';
+import { faThList } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-new-option',
@@ -9,12 +10,14 @@ import { FormToolsService } from 'src/app/shared/services/form-tools.service';
   styles: []
 })
 export class NewOptionComponent implements OnInit, OnChanges {
+  faThList = faThList;
   optionForm: FormGroup;
 
   @Input() public option: Option;
 
   @Output() public create = new EventEmitter<Option>();
   @Output() public update = new EventEmitter<Option>();
+  @Output() public cancelNew = new EventEmitter<Boolean>();
   
   constructor(
     private fb: FormBuilder,
@@ -52,6 +55,10 @@ export class NewOptionComponent implements OnInit, OnChanges {
     opt = this.optionForm.value;
     this.update.emit(opt);
     this.optionForm.reset();
+  }
+
+  public cancel(){
+    this.cancelNew.emit(true);
   }
 
 

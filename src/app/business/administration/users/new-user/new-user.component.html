@@ -126,12 +126,14 @@
                     </div>
                 </div>
 
+                <!--start buttons form-->
                 <div class="row justify-content-end">
                     <div class="col-sm-4 text-right align-self-end">
                         <button *ngIf="user.pk_id_user" type="submit" class="btn btn-outline-success btn-sm mb-2 mr-1" [disabled]="userForm.invalid" (click)="updateUser()">Actualizar</button>
                         <button *ngIf="!user.pk_id_user" type="submit" class="btn btn-outline-primary btn-sm mb-2 mr-1" [disabled]="userForm.invalid" (click)="createUser()">Guardar</button>
                     </div>
                 </div>
+                <!--end buttons form-->
             </form>
         </div>
     </div>

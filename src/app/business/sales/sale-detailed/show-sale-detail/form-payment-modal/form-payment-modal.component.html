@@ -1,0 +1,49 @@
+<div class="modal fade" id="paymentModal" tabindex="-1" role="dialog" aria-labelledby="paymentModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Pagos</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row justify-content-end">
+                        <div class="col-sm-4 order-purchase-title">
+                            <h6>Valor total</h6>
+                            {{ operation.total_operation | number }}
+                        </div>
+                        <div class="col-sm-4 order-purchase-title">
+                            <h6>Total Abonos</h6>
+                            {{ operation.total_pays | number }}
+                        </div>
+                        <div class="col-sm-4 order-purchase-title">
+                            <h6>Saldo</h6>
+                            {{ operation.total_operation - (operation.total_discounts + operation.total_pays) | number }}
+                        </div>
+                    </div>
+                    <form [formGroup]="paymentForm" (ngSubmit)="onSubmit()">
+                        <div class="row">
+                            <div class="form-group col-sm-6">
+                                <label for="value_payment">Valor del pago</label>
+                                <input type="text" class="form-control form-control-sm" aria-describedby="paymentHelp" formControlName="value_payment">
+                                <small id="paymentHelp" class="form-text text-muted">Ingresar valor del pago a realizar.</small>
+                            </div>
+                            <div class="col-sm-6 text-left align-self-center">
+                                <button type="submit" (click)="add()" [disabled]="paymentForm.invalid" class="btn btn-sm btn-outline-primary" type="button" data-dismiss="modal">
+                                    <fa-icon [icon]="faSave" class="text-outline-secondary mb-2 mr-1"></fa-icon>Guardar
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>   
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        </div>
+        </div>
+    </div>
+</div>

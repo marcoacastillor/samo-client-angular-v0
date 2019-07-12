@@ -22,16 +22,16 @@ const routes: Routes = [
   },
   {
     path: 'purchase-detailed',
-    component: ListOrderDetailComponent
+    component: ListOrderDetailComponent,
   },
   {
     path: 'purchase-detailed-new',
-    component: NewOrderDetailComponent
+    component: NewOrderDetailComponent,
   },
   {
     path: 'purchase-detailed-show/:id',
-    component: ShowOrderDetailComponent
-  }
+    component: ShowOrderDetailComponent,
+  },
 ];
 
 @NgModule({

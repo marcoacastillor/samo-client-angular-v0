@@ -1,57 +1,65 @@
-<app-card caption="Ventas, consolidado por fechas">
-    <main>  
-        <div class="row">
-            <div class="col-sm-12 alert alert-info" role="alert">
-                Reporte que muestra datos consolidados de compras por rango de fechas. Por defecto se muestra la información de <strong>{{ consolidate_day * 2 }}</strong> días.
+<app-pages title="Reportes de ventas">  
+    <main>            
+        <section>
+            <!-- start menu main-->
+            <div class="row bg-gray">
+                <div class="col-sm-6 text-left">
+                    Reporte de ventas por fecha
+                </div>
             </div>
-        </div>
-        <form [formGroup]="reportForm">
+            <!-- end menu main-->
+
+            <!-- start content -->
+            <div class="row margin-top-1rem">
+                <div class="col-sm-12">
+                    <form [formGroup]="reportForm">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="input-group input-group-sm mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroup-sizing-sm">Fecha inicial</span>
+                                    </div>
+                                    <div class="input-group-prepend">
+                                        <span class="btn text-small btn-sm btn-outline-primary" [owlDateTimeTrigger]="from_date"><fa-icon [icon]="faCalendar" class="text-primary"></fa-icon></span>
+                                    </div>
+                                    <input type="text" class="form-control text-small" placeholder="Desde" formControlName="from_date" [owlDateTime]="from_date">
+                                    <owl-date-time [pickerType]="'calendar'" #from_date></owl-date-time>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="input-group input-group-sm mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroup-sizing-sm">Fecha final</span>
+                                    </div>
+                                    <div class="input-group-prepend">
+                                        <span class="btn text-small btn-sm btn-outline-primary" [owlDateTimeTrigger]="to_date"><fa-icon [icon]="faCalendar" class="text-primary"></fa-icon></span>
+                                    </div>
+                                    <input type="text" class="form-control text-small" placeholder="Hasta" formControlName="to_date" [owlDateTime]="to_date">
+                                    <owl-date-time [pickerType]="'calendar'" #to_date></owl-date-time>
+                                    <div class="input-group-append">
+                                        <button type="submit" class="btn btn-outline-success btn-sm mb-2 mr-1" (click)="loadDataFromForm()">Buscar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- end content -->
+
+            <!-- start visualization -->
             <div class="row">
-                <div class="col-sm-4">
-                    <label for="from_date">Fecha inicial</label>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="btn text-small btn-sm btn-outline-primary" [owlDateTimeTrigger]="from_date"><fa-icon [icon]="faCalendar" class="text-primary"></fa-icon></span>
-                        </div>
-                        <input type="text" class="form-control text-small" placeholder="Desde" formControlName="from_date" [owlDateTime]="from_date">
-                        <owl-date-time [pickerType]="'calendar'" #from_date></owl-date-time>
-                        <div class="col-sm-12">
-                            <small class="form-text alert-primary">
-                                Fecha inicial rango de compra.
-                            </small>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <label for="to_date">Fecha final</label>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="btn text-small btn-sm btn-outline-primary" [owlDateTimeTrigger]="to_date"><fa-icon [icon]="faCalendar" class="text-primary"></fa-icon></span>
-                        </div>
-                        <input type="text" class="form-control text-small" placeholder="Hasta" formControlName="to_date" [owlDateTime]="to_date">
-                        <owl-date-time [pickerType]="'calendar'" #to_date></owl-date-time>
-                        <div class="col-sm-12">
-                            <small class="form-text alert-primary">
-                                Fecha final de rango de compra.
-                            </small>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-2 row align-items-center">            
-                    <button type="submit" class="btn btn-outline-primary btn-sm mb-2 mr-1" (click)="loadDataFromForm()">Buscar</button>
+                <div class="col-sm-12">
+                <app-consolidated
+                    [consolidateData]="consolidateData"
+                    [person]="person"
+                    [operation]="operation"
+                    (onGetOperation)="onViewOperation($event)"
+                    (create)="onCreatePayment($event)"
+                ></app-consolidated>
                 </div>
             </div>
-        </form>
-        <div class="row">
-            <div class="col-sm-12">
-            <app-consolidated
-                [consolidateData]="consolidateData"
-                [person]="person"
-                [operation]="operation"
-                (onGetOperation)="onViewOperation($event)"
-                (create)="onCreatePayment($event)"
-            ></app-consolidated>
-            </div>
-        </div>
+            <!-- end visualization -->
+        </section>
     </main>
-</app-card>
+</app-pages>

@@ -1,47 +1,54 @@
-<div class="card">
-    <div class="card-header">
-        <div class="row">
-            <div class="col-sm-8 card-title">
-                <h5>Listado de órdenes de compra</h5>
-            </div>
-            <div class="col-sm-4 text-right">
-                <div class="btn-group btn-group-sm">
-                    <a routerLink='../purchase-detailed-new' type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal">
-                        <fa-icon [icon]="faPlusCircle" class="text-outline-primary mb-2 mr-1"></fa-icon>Crear
-                    </a>
+<app-pages title="Órdenes de compra">  
+    <main>            
+        <section>
+            <!-- start menu main-->
+            <div class="row bg-gray">
+                <div class="col-sm-6 text-left">
+                    Listado de todas las compras
+                </div>
+                <div class="col-sm-6 text-right">
+                    <div class="btn-group btn-group-sm">
+                        <a routerLink='../purchase-detailed-new' type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal">
+                            <fa-icon [icon]="faPlusCircle" class="text-outline-primary mb-2 mr-1"></fa-icon>Crear
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="card-body">
-        <div class="row">
-            <table class="table table-sm table-striped">
-                <thead class="bg-secondary text-white">
-                    <tr>
-                        <th colspan="2">Número</th>
-                        <th>Proveedor</th>
-                        <th>Fecha compra</th>
-                        <th>Tipo de pago</th>
-                        <th>Valor</th>
-                        <th>Estado</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let order of lstOrders">
-                        <td>
-                            <a routerLink='../purchase-detailed-show/{{order.pk_id_operation}}' class="btn text-ultra-small btn-sm btn-outline-primary" type="button">
-                                <fa-icon [icon]="faEye" class="text-outline-secondary mb-2 mr-1"></fa-icon>Ver detalle
-                            </a>
-                        </td>
-                        <td>{{ order.number_invoice }}</td>
-                        <td>{{ order.external_reference.split(":")[3] }} : {{ order.external_reference.split(":")[2]  }}</td>
-                        <td>{{ order.date_operation }}</td>
-                        <td>{{ order.payment_type }}</td>
-                        <td>{{ order.total_operation | number }}</td>
-                        <td>{{ order.state_operation }}</td>
-                    </tr>
-                </tbody>
-            </table>    
-        </div>
-    </div>
-</div>
+            <!-- end menu main-->
+
+            <!-- start content -->
+            <div class="row margin-top-1rem">
+                <div class="col-sm-12">
+                    <table class="table table-sm table-striped">
+                        <thead class="bg-secondary text-white">
+                            <tr>
+                                <th colspan="2">Número</th>
+                                <th>Proveedor</th>
+                                <th>Fecha compra</th>
+                                <th>Tipo de pago</th>
+                                <th>Valor</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let order of lstOrders">
+                                <td>
+                                    <a routerLink='../purchase-detailed-show/{{order.pk_id_operation}}' class="btn text-ultra-small btn-sm btn-outline-primary" type="button">
+                                        <fa-icon [icon]="faEye" class="text-outline-secondary mb-2 mr-1"></fa-icon>Ver detalle
+                                    </a>
+                                </td>
+                                <td>{{ order.number_invoice }}</td>
+                                <td>{{ order.external_reference.split(":")[3] }} : {{ order.external_reference.split(":")[2]  }}</td>
+                                <td>{{ order.date_operation }}</td>
+                                <td>{{ order.payment_type }}</td>
+                                <td>{{ order.total_operation | number }}</td>
+                                <td>{{ order.state_operation }}</td>
+                            </tr>
+                        </tbody>
+                    </table>  
+                </div>
+            </div>
+            <!-- end content -->
+        </section>
+    </main>
+</app-pages>

@@ -1,67 +1,86 @@
-<app-card caption="Gestión de información de usuario">
-    <main>
-        <h5 *ngIf="module.pk_id_module">Actualización de información</h5>
-        <h5 *ngIf="!module.pk_id_module">Creación de registro</h5>
-        <form [formGroup]="moduleForm">
-            <div class="row">
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <label for="name">Nombre</label>
-                        <input type="text" class="form-control text-small" placeholder="Nombre" formControlName="name" required>
-                        <small *ngIf="mustShowError('name')" class="form-text alert-danger">
-                        Nombre de usuario es obligatorio
-                        </small>
+<section>
+    <!-- start menu main-->
+    <div class="row bg-gray">
+        <div class="col-sm-6 text-left">
+            Agregar o actualizar información
+        </div>
+        <div class="col-sm-6 text-right">
+            <div class="btn-group btn-group-sm">
+                <button type="button" (click)="cancelModule()" class="btn btn-outline-primary btn-sm">
+                    <fa-icon [icon]="faThList" class="text-primary mb-2 mr-1" title="Crear registro"></fa-icon>Ver todos
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- end menu main-->
+    
+
+    <!-- start content -->
+    <div class="row margin-top-1rem">
+        <div class="col-sm-12">
+            <form [formGroup]="moduleForm">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="name">Nombre</label>
+                            <input type="text" class="form-control text-small" placeholder="Nombre" formControlName="name" required>
+                            <small *ngIf="mustShowError('name')" class="form-text alert-danger">
+                            Nombre de usuario es obligatorio
+                            </small>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="url_angular_module">Módulo angular</label>
+                            <input type="text" class="form-control text-small" placeholder="Modulo angular" formControlName="url_angular_module" required>
+                            <small *ngIf="mustShowError('url_angular_module')" class="form-text alert-danger">
+                            Componente Angular es obligatorio
+                            </small>
+                        </div>
+                    </div> 
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="icon_name">Ícono de módulo</label>
+                            <input type="text" class="form-control text-small" placeholder="Nombre del ícono" formControlName="icon_name" required>
+                            <small *ngIf="mustShowError('icon_name')" class="form-text alert-danger">
+                            Nombre de icon es obligatorio
+                            </small>
+                        </div>
+                    </div> 
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="description">Descripción</label>
+                            <textarea class="form-control text-small" placeholder="Descripcion" formControlName="description" required rows="3"></textarea>
+                            <small *ngIf="mustShowError('description')" class="form-text alert-danger">
+                                Descripción es obligatorio
+                            </small>
+                        </div>
                     </div>
                 </div>
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <label for="url_angular_module">Módulo angular</label>
-                        <input type="text" class="form-control text-small" placeholder="Modulo angular" formControlName="url_angular_module" required>
-                        <small *ngIf="mustShowError('url_angular_module')" class="form-text alert-danger">
-                        Componente Angular es obligatorio
-                        </small>
-                    </div>
-                </div> 
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <label for="icon_name">Ícono de módulo</label>
-                        <input type="text" class="form-control text-small" placeholder="Nombre del ícono" formControlName="icon_name" required>
-                        <small *ngIf="mustShowError('icon_name')" class="form-text alert-danger">
-                        Nombre de icon es obligatorio
-                        </small>
-                    </div>
-                </div> 
-            </div>
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="form-group">
-                        <label for="description">Descripción</label>
-                        <textarea class="form-control text-small" placeholder="Descripcion" formControlName="description" required rows="3"></textarea>
-                        <small *ngIf="mustShowError('description')" class="form-text alert-danger">
-                            Descripción es obligatorio
-                        </small>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="url_image">imagen</label>
+                            <input type="file" (change)="onFileSelected($event)" class="form-control text-small" placeholder="Imagen" formControlName="url_image" required />
+                            <small *ngIf="mustShowError('url_image')" class="form-text alert-danger">
+                            Imágen es obligatorio
+                            </small>
+                        </div>
+                    </div> 
+                </div>
+
+                <!--start buttons forms-->
+                <div class="row justify-content-end">
+                    <div class="col-sm-4 text-right align-self-end">
+                        <button *ngIf="module.pk_id_module" type="submit" class="btn btn-outline-success btn-sm mb-2 mr-1" [disabled]="moduleForm.invalid" (click)="updateModule()">Actualizar</button>
+                        <button *ngIf="!module.pk_id_module" type="submit" class="btn btn-outline-primary btn-sm mb-2 mr-1" [disabled]="moduleForm.invalid" (click)="createModule()">Guardar</button>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="form-group">
-                        <label for="url_image">imagen</label>
-                        <input type="file" (change)="onFileSelected($event)" class="form-control text-small" placeholder="Imagen" formControlName="url_image" required />
-                        <small *ngIf="mustShowError('url_image')" class="form-text alert-danger">
-                        Imágen es obligatorio
-                        </small>
-                    </div>
-                </div> 
-            </div>
-        </form>
-    </main>
-    <footer>
-        <button *ngIf="module.pk_id_module" type="submit" class="btn btn-outline-success btn-sm mb-2 mr-1"
-        [disabled]="moduleForm.invalid"
-        (click)="updateModule()">Actualizar</button>
-        <button *ngIf="!module.pk_id_module" type="submit" class="btn btn-outline-primary btn-sm mb-2 mr-1"
-        [disabled]="moduleForm.invalid"
-        (click)="createModule()">Guardar</button>
-    </footer>
-</app-card>      
+                <!--end buttons forms-->
+            </form>
+        </div>
+    </div>
+    <!-- end content -->
+</section>

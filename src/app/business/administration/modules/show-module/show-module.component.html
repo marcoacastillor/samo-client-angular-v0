@@ -1,5 +1,22 @@
-<app-card caption="Detalle de Módulo ">
-    <main>
+<section>
+    <!-- start menu main-->
+    <div class="row bg-gray">
+        <div class="col-sm-6 text-left">
+            Detalle de un módulo
+        </div>
+        <div class="col-sm-6 text-right">
+            <div class="btn-group btn-group-sm">
+                <button type="button" (click)="cancelModule()" class="btn btn-outline-primary btn-sm">
+                    <fa-icon [icon]="faThList" class="text-primary mb-2 mr-1" title="Crear registro"></fa-icon>Ver todos
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- end menu main-->
+    
+
+    <!-- start content -->
+    <div class="row margin-top-1rem">
         <div class="card">
             <div class="card-body">
                 <div class="row ">
@@ -99,25 +116,22 @@
                 </div>
                 <!--fin sección de componentes -->
             </div>
-        </div>
-        <!-- Fin sección de componentes-->
-                
-        <!-- Modal -->
-        <app-modal-component
-            [cmp]="cmp"
-            (createCmp)="createCmp($event)"
-            (updateCmp)="updateCmp($event)"
-        >
-        </app-modal-component>
+        </div>        
+    </div>
+    <!-- end content -->
+</section>
 
-        <app-modal-asign-option
-            [cmp]="cmp"
-            (asignOption)="onAsignOption($event)"
-        >
-        </app-modal-asign-option>
-    </main>
-    <footer>
-        <button type="button" class="btn btn-outline-success btn-sm mb-2 mr-1"
-        >Cancelar</button>
-    </footer>
-</app-card>      
+
+<!-- Modal -->
+<app-modal-component
+[cmp]="cmp"
+(createCmp)="createCmp($event)"
+(updateCmp)="updateCmp($event)"
+>
+</app-modal-component>
+
+<app-modal-asign-option
+[cmp]="cmp"
+(asignOption)="onAsignOption($event)"
+>
+</app-modal-asign-option>

@@ -1,33 +1,55 @@
-<app-card caption="Gestión de información de parámetros">
-    <main>
-        <h5 *ngIf="category.pk_id_category">Actualización de información</h5>
-        <h5 *ngIf="!category.pk_id_category">Creación de registro</h5>
-        <form [formGroup]="categoryForm">
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label for="code">Código</label>
-                        <input type="text" class="form-control text-small" placeholder="Código" formControlName="code" required>
-                        <small *ngIf="mustShowError('code')" class="form-text alert-danger">
-                        Código es obligatorio
-                        </small>
+<section>
+    <!-- start menu main-->
+    <div class="row bg-gray">
+        <div class="col-sm-6 text-left">
+            Agregar o actualizar información
+        </div>
+        <div class="col-sm-6 text-right">
+            <div class="btn-group btn-group-sm">
+                <button type="button" (click)="cancelModule()" class="btn btn-outline-primary btn-sm">
+                    <fa-icon [icon]="faThList" class="text-primary mb-2 mr-1" title="Crear registro"></fa-icon>Ver todos
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- end menu main-->
+    
+
+    <!-- start content -->
+    <div class="row margin-top-1rem">
+        <div class="col-sm-12">
+            <form [formGroup]="categoryForm">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="code">Código</label>
+                            <input type="text" class="form-control text-small" placeholder="Código" formControlName="code" required>
+                            <small *ngIf="mustShowError('code')" class="form-text alert-danger">
+                            Código es obligatorio
+                            </small>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="name">Nombre</label>
+                            <input type="text" class="form-control text-small" placeholder="Nombre de categoría" formControlName="name" required>
+                            <small *ngIf="mustShowError('name')" class="form-text alert-danger">
+                            Nombre de categoría es obligatorio
+                            </small>
+                        </div>
                     </div>
                 </div>
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label for="name">Nombre</label>
-                        <input type="text" class="form-control text-small" placeholder="Nombre de categoría" formControlName="name" required>
-                        <small *ngIf="mustShowError('name')" class="form-text alert-danger">
-                        Nombre de categoría es obligatorio
-                        </small>
+                
+                <!--start buttons form-->
+                <div class="row justify-content-end">
+                    <div class="col-sm-4 text-right align-self-end">
+                        <button *ngIf="category.pk_id_category" type="submit" class="btn btn-outline-success btn-sm mb-2 mr-1" [disabled]="categoryForm.invalid" (click)="updateModule()">Actualizar</button>
+                        <button *ngIf="!category.pk_id_category" type="submit" class="btn btn-outline-primary btn-sm mb-2 mr-1" [disabled]="categoryForm.invalid" (click)="createModule()">Guardar</button>
                     </div>
-                </div> 
-            </div>
-        </form>
-    </main>
-    <footer>
-        <button *ngIf="category.pk_id_category" type="submit" class="btn btn-outline-success btn-sm mb-2 mr-1" [disabled]="categoryForm.invalid" (click)="updateModule()">Actualizar</button>
-        <button *ngIf="!category.pk_id_category" type="submit" class="btn btn-outline-primary btn-sm mb-2 mr-1" [disabled]="categoryForm.invalid" (click)="createModule()">Guardar</button>
-        <button type="button" class="btn btn-outline-danger btn-sm mb-2 mr-1" (click)="cancelModule()">Cancelar</button>
-    </footer>
-</app-card>      
+                </div>
+                <!--end buttons form-->
+            </form>
+        </div>
+    </div>
+    <!-- end content -->
+</section>

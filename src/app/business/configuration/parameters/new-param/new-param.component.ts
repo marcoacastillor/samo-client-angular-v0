@@ -2,6 +2,7 @@ import { Component, OnInit, ChangeDetectorRef, SimpleChanges, Input, OnChanges, 
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FormToolsService } from 'src/app/shared/services/form-tools.service';
 import { Category } from 'src/app/shared/models/category';
+import { faThList } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-new-param',
@@ -9,6 +10,8 @@ import { Category } from 'src/app/shared/models/category';
   styles: []
 })
 export class NewParamComponent implements OnInit, OnChanges{
+  faThList = faThList;
+  
   categoryForm: FormGroup;
   @Input() public category: Category;
 

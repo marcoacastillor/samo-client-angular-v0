@@ -5,6 +5,7 @@ import { CategoryService } from 'src/app/shared/services/category.service';
 import { tap } from 'rxjs/operators';
 import { Parameter } from 'src/app/shared/models/parameter';
 import { ParameterService } from 'src/app/shared/services/parameter.service';
+import { UtilsService } from 'src/app/shared/services/utils.service';
 
 @Component({
   selector: 'app-admin-param',
@@ -12,7 +13,11 @@ import { ParameterService } from 'src/app/shared/services/parameter.service';
   styles: []
 })
 export class AdminParamComponent implements OnInit {
-  public showParam: boolean = false;
+  showParam = false;
+  listParam = true;
+  newParam  = false;
+
+
   public categoryList: Category[] = [];
   public category: Category = new Category;
   public parameter: Parameter = new Parameter;
@@ -20,7 +25,8 @@ export class AdminParamComponent implements OnInit {
   constructor(
     private globalStoreService: GlobalStoreService,
     private categoryService: CategoryService,
-    private parameterService: ParameterService
+    private parameterService: ParameterService,
+    private utilService: UtilsService
   ) { }
 
   ngOnInit() {
@@ -42,6 +48,10 @@ export class AdminParamComponent implements OnInit {
   }
 
   public onCancel(cancel:boolean){
+    this.listParam = cancel;
+    this.newParam = false;
+    this.showParam = false;
+    
     if(cancel)
     {
       this.category = new Category;
@@ -85,6 +95,10 @@ export class AdminParamComponent implements OnInit {
   }
 
   public onCancelParam(cancel:boolean){
+    this.showParam = false;
+    this.listParam = true;
+    this.newParam = false;
+
     if(cancel)
     {
       this.parameter = new Parameter;
@@ -95,6 +109,9 @@ export class AdminParamComponent implements OnInit {
   */
   public onView(pk_id_category: number){
     this.showParam = true;
+    this.listParam = false;
+    this.newParam = false;
+
     this.categoryService.show$(pk_id_category).pipe(
       tap(this.loadCategory),
     ).subscribe(this.onSuccess, this.onError);
@@ -106,6 +123,8 @@ export class AdminParamComponent implements OnInit {
 
   public onUdp(category: Category){
     this.showParam = false;
+    this.newParam = true;
+    this.listParam = false;
     this.category = category;
   }
 
@@ -121,5 +140,22 @@ export class AdminParamComponent implements OnInit {
 
   private onError = (error: any) => {
     this.globalStoreService.dispatchUserMessage(error.status, error.statusText + ' : ' + error.error.error);
+  }
+
+  /*
+  * ------------------------------------------
+  * Funciones visualización
+  * ------------------------------------------
+  */
+ public getClassNew() {
+  return this.utilService.getClassNew(this.newParam);
+  }
+
+  public getClassList() {
+    return this.utilService.getClassList(this.listParam);
+  }
+
+  public getClassShow() {
+    return this.utilService.getClassShow(this.showParam);
   }
 }

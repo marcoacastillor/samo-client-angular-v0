@@ -27,11 +27,6 @@ export class ListOptionComponent implements OnInit, OnChanges {
   constructor() { }
 
   ngOnInit() {
-    this.calculateRegs();
-  }
-
-  private calculateRegs(){
-    this.maxPerPg = (Number(this.actualPg) * Number(this.regPerPg)+ Number(this.regPerPg));
   }
   
   ngOnChanges(changes: SimpleChanges)
@@ -41,26 +36,8 @@ export class ListOptionComponent implements OnInit, OnChanges {
       if(changes.optionList.currentValue)
       {
         this.optionList = changes.optionList.currentValue;
-        this.totalPgs = Math.ceil(this.optionList.number_results / this.regPerPg);
-        this.actualPg = 0;
       }
     }
-  }
-
-  public addActualPg(){
-    this.actualPg = this.actualPg + 1;
-    this.calculateRegs();
-  }
-
-  public delActualPg(){
-    this.actualPg = this.actualPg - 1;
-    this.calculateRegs();
-  }
-
-  public setRegPerPg(value: any){
-    this.regPerPg = value;
-    this.totalPgs = Math.ceil(this.optionList.number_results / this.regPerPg);
-    this.calculateRegs();
   }
 
   public newOption() {

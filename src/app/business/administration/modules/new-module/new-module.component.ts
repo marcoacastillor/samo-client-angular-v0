@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef, Simp
 import { Module } from 'src/app/shared/models/module';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormToolsService } from 'src/app/shared/services/form-tools.service';
+import { faThList } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-new-module',
@@ -9,6 +10,8 @@ import { FormToolsService } from 'src/app/shared/services/form-tools.service';
   styles: []
 })
 export class NewModuleComponent implements OnInit, OnChanges {
+  faThList = faThList;
+
   moduleForm: FormGroup;
 
   @Input() public module: Module;
@@ -53,11 +56,10 @@ export class NewModuleComponent implements OnInit, OnChanges {
     let module = new Module;
     module = this.moduleForm.value;
     this.update.emit(module);
-    // this.moduleForm.reset();
   }
 
-  public cancelUser() {
-    this.cancel.emit(false);
+  public cancelModule() {
+    this.cancel.emit(true);
   }
 
   public onFileSelected(event) {

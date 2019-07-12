@@ -4,6 +4,7 @@ import { OptionService } from 'src/app/shared/services/option.service';
 import { Results } from 'src/app/shared/models/results';
 import { GlobalStoreService } from 'src/app/core/services/global-store.service';
 import { tap } from 'rxjs/operators';
+import { UtilsService } from 'src/app/shared/services/utils.service';
 
 @Component({
   selector: 'app-main-option',
@@ -17,9 +18,13 @@ export class MainOptionComponent implements OnInit {
   public option: Option = new Option;
   public optionList: Results = new Results;
 
+  listOption = true;
+  newOption =  false;
+
   constructor(
     private optionService: OptionService,
-    private globalStoreService: GlobalStoreService
+    private globalStoreService: GlobalStoreService,
+    private utilService: UtilsService
   ) { }
 
   ngOnInit() {
@@ -57,7 +62,14 @@ export class MainOptionComponent implements OnInit {
   }
 
   public onNew(option: Option){
+    this.newOption = true;
+    this.listOption = false;
     this.option = option;
+  }
+
+  public onCancelNew(event: boolean){
+    this.newOption = false;
+    this.listOption = event;
   }
   
 
@@ -72,5 +84,18 @@ export class MainOptionComponent implements OnInit {
 
   private onError = (error: any) => {
     this.globalStoreService.dispatchUserMessage(error.status, error.statusText + ' : ' + error.error.error);
+  }
+
+  /*
+  * ------------------------------------------
+  * Funciones visualización
+  * ------------------------------------------
+  */
+ public getClassNew() {
+  return this.utilService.getClassNew(this.newOption);
+  }
+
+  public getClassList() {
+    return this.utilService.getClassList(this.listOption);
   }
 }

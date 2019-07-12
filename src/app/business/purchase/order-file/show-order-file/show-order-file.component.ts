@@ -35,7 +35,7 @@ export class ShowOrderFileComponent implements OnInit, OnChanges {
   {
     if(changes.data)
     {
-      if(changes.data.currentValue)
+      if(changes.data.currentValue != changes.data.previousValue)
       {
         this.readInvoice(changes.data.currentValue);   
         this.initUpdForm(); 
@@ -44,63 +44,68 @@ export class ShowOrderFileComponent implements OnInit, OnChanges {
   }
 
   private readInvoice(data: any){
-    this.operation.external_reference =  data[1][0];
-    this.operation.number_invoice     =  data[1][1];
-    
-    let descuento         = 0;
-    let subtotal          = 0;
-    let totalTax          = 0;
-    let totalPurchase     = 0;
-
-    
-
-    for(let i = 1; i < data.length; i++)
+    if(data != [])
     {
-      let product: ProductOperation = new ProductOperation;
-      product.code            = data[i][4];    
-      product.name            = data[i][3];    
-      product.reference       = data[i][2];   
-      product.number_units    = data[i][9];   
-      product.cost_price      = data[i][10];
-      product.tax_product     = data[i][11];
-      product.sale_price_unit = data[i][13];
-      product.category        = environment.clothes;
-      product.presentation    = environment.individual;
-      product.trademark       = data[i][8]
-      product.color           = data[i][7];
-      product.size            = data[i][5];
-      product.tax             = data[i][11];
-      product.type_product    = environment.type_product_purchase;
+      this.operation.external_reference =  data[1][0];
+      this.operation.number_invoice     =  data[1][1];
       
-      //Calcuar valores
-      let totalProduct        = product.number_units * product.cost_price;
-      let discountProduct     = (data[i][12] * totalProduct) / 100; 
-      let taxProduct         = Math.round(totalProduct - (totalProduct / (1+(product.tax/100))));
+      let descuento         = 0;
+      let subtotal          = 0;
+      let totalTax          = 0;
       
-      product.value_tax       = taxProduct;
-      product.discount        = discountProduct;
-      product.total_product   = totalProduct - discountProduct;
-      product.subtotal        = totalProduct - taxProduct;
-      
-      //Calculo del valor de la factura
-      totalTax                = Math.round(totalTax + product.value_tax);
-      subtotal                = Math.round(subtotal + product.subtotal);
-      
-      this.operation.products_list.push(product);
-      descuento = descuento + discountProduct;
-    }
+      for(let i = 1; i < data.length; i++)
+      {
+        if(data[i][0] != '' && data[i][1])
+        {
+          let product: ProductOperation = new ProductOperation;
+          product.code            = data[i][4];    
+          product.name            = data[i][3];    
+          product.reference       = data[i][2];   
+          product.number_units    = data[i][9];   
+          product.cost_price      = data[i][10];
+          product.tax_product     = data[i][11];
+          product.sale_price_unit = data[i][13];
+          product.category        = environment.clothes;
+          product.presentation    = environment.individual;
+          product.trademark       = data[i][8]
+          product.color           = data[i][7];
+          product.size            = data[i][5];
+          product.tax             = data[i][11];
+          product.type_product    = environment.type_product_purchase;
+          
+          //Calcuar valores
+          let totalProduct        = product.number_units * product.cost_price;
+          let discountProduct     = ((data[i][12] * totalProduct) / 100); 
+          let value_tax_product   = (totalProduct - (totalProduct / (1+(product.tax/100))));
+          
+          product.value_tax       = value_tax_product;
+          product.discount        = discountProduct;
+          product.subtotal        = (totalProduct - value_tax_product);
+          product.total_product   = (totalProduct - discountProduct);
+          
+          //Calculo del valor de la factura
+          totalTax                = (totalTax + product.value_tax);
+          subtotal                = (subtotal + product.subtotal);
+          
+          this.operation.products_list.push(product);
+          descuento = descuento + discountProduct;
+        }
+      }
 
-    this.operation.total_discounts    = descuento;
-    this.operation.subtotal_operation = subtotal;
-    this.operation.total_tax          = totalTax;
-    this.operation.total_operation    = subtotal + totalTax;
+      this.operation.total_discounts    = Math.round(descuento);
+      this.operation.subtotal_operation = Math.round(subtotal);
+      this.operation.total_tax          = Math.round(totalTax);
+      this.operation.total_operation    = Math.round(subtotal + totalTax);
+    }
   }
 
   private initUpdForm() {
+    let net_value = (this.operation.total_operation - this.operation.total_discounts);
+    
     this.orderFileForm = this.fb.group({
       type_payment: [environment.efecty_payment, Validators.required],
-      total_purchase: [this.operation.total_operation - this.operation.total_discounts ],
-      value_payment: [0,Validators.max(this.operation.total_operation - this.operation.total_discounts)],
+      total_purchase: [net_value],
+      value_payment: [net_value,Validators.max(net_value)],
     });
   }
 
@@ -118,7 +123,6 @@ export class ShowOrderFileComponent implements OnInit, OnChanges {
   public createPurchaseFile(){
     this.operation.value_payment = this.orderFileForm.value.value_payment;
     this.operation.payment_type  = this.orderFileForm.value.type_payment;
-
     this.create.emit(this.operation);
   }
 

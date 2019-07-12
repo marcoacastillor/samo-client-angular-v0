@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FormToolsService } from 'src/app/shared/services/form-tools.service';
 import * as XLSX from 'xlsx';
@@ -9,7 +9,8 @@ import { GlobalStoreService } from 'src/app/core/services/global-store.service';
 import { Parameter } from 'src/app/shared/models/parameter';
 import { ParameterService } from 'src/app/shared/services/parameter.service';
 import { OperationService } from 'src/app/shared/services/operation.service';
-import { StatusMessage } from 'src/app/shared/models/status-message';
+import { faEyeDropper, faEye } from '@fortawesome/free-solid-svg-icons';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-new-order-file',
@@ -17,10 +18,16 @@ import { StatusMessage } from 'src/app/shared/models/status-message';
   styles: []
 })
 export class NewOrderFileComponent implements OnInit {
+  faEyeDropper = faEyeDropper;
+  faEye = faEye;
+
   public purchaseFileForm: FormGroup;
   public data: any;
   public lstParams: Parameter[] = [];
-  public lstMessages: StatusMessage[] = [];
+  
+  success = false;
+  message = '';
+  pk_id_operation: number;
 
   public operation: Operation = new Operation;
   
@@ -47,10 +54,11 @@ export class NewOrderFileComponent implements OnInit {
   }
 
   public onCreate(operation: Operation){
-    this.operationService.store_purchase_file$(operation).subscribe(
-      responseMsg => {
-        this.lstMessages = responseMsg;
-        this.data        = [];
+    this.operationService.storeOperation$(this.operation).subscribe(
+      operation => {
+        this.pk_id_operation = operation.pk_id_operation;
+        this.success = true;
+        this.message = 'Se realizó la creación de la factura con éxito.';
       }
     )
   }
@@ -64,6 +72,8 @@ export class NewOrderFileComponent implements OnInit {
     this.operation.total_tax       = 0;
     this.operation.total_discounts = 0;
     this.operation.total_discounts = 0;
+    this.operation.date_operation  = moment().format('YYYY-MM-DD');
+    this.operation.total_pays      = 0;
   }
 
   private initUpdForm() {
@@ -74,12 +84,10 @@ export class NewOrderFileComponent implements OnInit {
   }
 
   public onFileSelected(event){
-    let reader = new FileReader();
-
     if(event.target.files && event.target.files.length){
       /* wire up file reader */
       const target: DataTransfer = <DataTransfer>(event.target);
-      if (target.files.length !== 1) throw new Error('Cannot use multiple files');
+      if (target.files.length !== 1) throw new Error('No puede usar multiples archivos');
       const reader: FileReader = new FileReader();
       reader.onload = (e: any) => {
         /* read workbook */

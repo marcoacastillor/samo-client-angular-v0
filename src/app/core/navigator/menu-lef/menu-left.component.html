@@ -22,7 +22,7 @@
 
         <ul class="list-unstyled CTAs">
             <li>
-                <a href="#" class="download">Tutoriales</a>
+                <a  href="#" class="downloads">Tutoriales</a>
             </li>
         </ul>
     </nav>
@@ -31,7 +31,7 @@
     <div id="content">
         <div class="container-fluid">
             <div class="row nav-custom bg-white">
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                     <div class="row">
                         <div class="col-sm-2">
                             <button (click)="troggleSideBar()"  type="button" id="sidebarCollapse" class="btn btn-sm">
@@ -45,17 +45,30 @@
                     </div>
                 </div>
                 
-                <div class="col-sm-6 text-right col align-self-start" *ngIf="user.person">
+                <div class="col-sm-8 text-right col align-self-start" *ngIf="user.person">
                     <ul class="nav justify-content-end">
+                        <!-- start botones temporales-->
                         <li class="nav-item">
-                            <a [routerLink]="['./sales-admin/modules']" class="dropdown-item text-small text-secondary" type="button">
-                                <fa-icon [icon]="faTasks" class="text-outline-secondary mb-2 mr-1"></fa-icon>Menú principal
-                            </a>
+                            <button (click)="updateAppsSales()" class="dropdown-item text-small text-secondary" type="button">
+                                <fa-icon [icon]="faSync" class="text-outline-secondary mb-2 mr-1"></fa-icon>Ventas: {{ statusSales }}
+                            </button>
                         </li>
                         <li class="nav-item">
-                            <a (click)="logout()" class="dropdown-item text-small text-secondary"  type="button">
+                            <button  (click)="updateAppsUser()" class="dropdown-item text-small text-secondary" type="button">
+                                <fa-icon [icon]="faSync" class="text-outline-secondary mb-2 mr-1"></fa-icon>Usuarios: {{ statusUsers }}
+                            </button>
+                        </li>    
+                        <!-- end botones temporales-->
+
+                        <li class="nav-item">
+                            <button [routerLink]="['./sales-admin/modules']" class="dropdown-item text-small text-secondary" type="button">
+                                <fa-icon [icon]="faTasks" class="text-outline-secondary mb-2 mr-1"></fa-icon>Menú principal
+                            </button>
+                        </li>
+                        <li class="nav-item">
+                            <button (click)="logout()" class="dropdown-item text-small text-secondary"  type="button">
                                 <fa-icon [icon]="faSignOutAlt" class="text-outline-secondary mb-2 mr-1"></fa-icon>Logout
-                            </a>
+                            </button>
                         </li>
                     </ul>
                 </div>

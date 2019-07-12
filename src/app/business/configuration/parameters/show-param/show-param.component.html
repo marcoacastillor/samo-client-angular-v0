@@ -1,71 +1,80 @@
-<app-card caption="Detalle de Módulo ">
-    <main>
-        <div class="card">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-sm-3">
-                        <img class="align-self-start mr-3" src="{{url_storage + 'configuration/category.png' }}" alt="{{ category.name }}" width="130" height="100">
-                    </div>
-                    <div class="col-sm-9">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="card-title-custom">{{ category.code }}</div>
-                                <div class="text-small">{{ category.name}}</div>
-                                <button type="button" class="btn text-small btn-sm btn-outline-primary" data-toggle="modal" (click)="newParameter()" data-target="#parameterModal">
-                                    <fa-icon [icon]="faPlusCircle" class="text-primary mb-2 mr-1" title="Crear registro"></fa-icon>Nuevo ítem
-                                </button>
-                            </div>
-                        </div>
-                        <div class="row margin-top">
-                            <table class="table table-sm">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Nombre</th>
-                                        <th scope="col">Valor</th>
-                                        <th scope="col">Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr *ngFor="let param of category.parameters; let j = index">
-                                        <th scope="row">{{ j + 1  }}</th>
-                                        <td>{{ param.name }}</td>
-                                        <td>{{ param.value }}</td>
-                                        <td>
-                                            <div class="btn-group">
-                                                <button class="btn btn-sm btn-outline-danger dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <fa-icon [icon]="faTrashAlt" class="text-danger mb-2 mr-1" title="Eliminar registro"></fa-icon>  
-                                                </button>
-                                                <button type="button" class="btn btn-sm btn-outline-success" data-toggle="modal" (click)="updParameter(param)" data-target="#parameterModal">
-                                                    <fa-icon [icon]="faEdit" class="text-success mb-2 mr-1" title="Actualizar registro"></fa-icon>
-                                                </button>
-                                                <div class="dropdown-menu">
-                                                    <button type="button" class="btn btn-sm btn-outline-danger text-small" (click)="delParameter(param.pk_id_parameter)">Confirmar</button>   
-                                                    <button type="button" class="btn btn-sm btn-outline-primary text-small">Cancelar</button>   
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>    
-                        </div>
-                    </div>
-                </div>
+<section>
+    <!-- start menu main-->
+    <div class="row bg-gray">
+        <div class="col-sm-6 text-left">
+            Detalle de un parámetro
+        </div>
+        <div class="col-sm-6 text-right">
+            <div class="btn-group btn-group-sm">
+                <button type="button" (click)="onCancel()" class="btn btn-outline-primary btn-sm">
+                    <fa-icon [icon]="faThList" class="text-primary mb-2 mr-1" title="Crear registro"></fa-icon>Ver todos
+                </button>
             </div>
         </div>
+    </div>
+    <!-- end menu main-->
+    
 
-        <!-- crear nuevo parámetro-->
-        <app-modal-parameter
-            [parameter]="parameter"
-            (create)="onCreate($event)"
-            (update)="onUpdate($event)"
-            (cancel)="onCancel($event)"
-        >
-        </app-modal-parameter>
-    </main>
-    <footer>
-        <button type="button" class="btn btn-outline-success btn-sm mb-2 mr-1"
-        >Cancelar</button>
-    </footer>
-</app-card>      
+    <!-- start content -->
+    <div class="row margin-top-1rem">
+        <div class="col-sm-3">
+            <img class="align-self-start mr-3" src="{{url_storage + 'configuration/category.png' }}" alt="{{ category.name }}" width="130" height="100">
+        </div>
+        <div class="col-sm-9">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card-title-custom">{{ category.code }}</div>
+                    <div class="text-small">{{ category.name}}</div>
+                    <button type="button" class="btn text-small btn-sm btn-outline-primary" data-toggle="modal" (click)="newParameter()" data-target="#parameterModal">
+                        <fa-icon [icon]="faPlusCircle" class="text-primary mb-2 mr-1" title="Crear registro"></fa-icon>Nuevo ítem
+                    </button>
+                </div>
+            </div>
+            <div class="row margin-top">
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Valor</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let param of category.parameters; let j = index">
+                            <th scope="row">{{ j + 1  }}</th>
+                            <td>{{ param.name }}</td>
+                            <td>{{ param.value }}</td>
+                            <td>
+                                <div class="btn-group">
+                                    <button class="btn btn-sm btn-outline-danger dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <fa-icon [icon]="faTrashAlt" class="text-danger mb-2 mr-1" title="Eliminar registro"></fa-icon>  
+                                    </button>
+                                    <button type="button" class="btn btn-sm btn-outline-success" data-toggle="modal" (click)="updParameter(param)" data-target="#parameterModal">
+                                        <fa-icon [icon]="faEdit" class="text-success mb-2 mr-1" title="Actualizar registro"></fa-icon>
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <button type="button" class="btn btn-sm btn-outline-danger text-small" (click)="delParameter(param.pk_id_parameter)">Confirmar</button>   
+                                        <button type="button" class="btn btn-sm btn-outline-primary text-small">Cancelar</button>   
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>    
+            </div>
+        </div>
+    </div>
+    <!-- end content -->
+</section>
 
+
+<!-- crear nuevo parámetro-->
+<app-modal-parameter
+    [parameter]="parameter"
+    (create)="onCreate($event)"
+    (update)="onUpdate($event)"
+    (cancel)="onCancel($event)"
+>
+</app-modal-parameter>
+<!-- crear nuevo parámetro-->

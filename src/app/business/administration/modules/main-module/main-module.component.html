@@ -1,32 +1,40 @@
-<div class="row margin-top">
-    <div *ngIf="!showModule" class="col-sm-8">
-        <app-new-module
-        [module]="module"
-        (create)="onCreate($event)"        
-        (update)="onUpdate($event)" 
-        >
-        </app-new-module>
-    </div>
-    <div *ngIf="showModule" class="col-sm-8">
-        <app-show-module
-        [module]="module"
-        [cmp]="cmp"
-        (onCreateComp)="onCreateComp($event)"
-        (onUpdateComp)="onUpdateComp($event)"
-        (onDeleteComp)="onDeleteComp($event)"
-        (onGetComponent)="onGetComponent($event)"
-        (asignOption)="onAsignOption($event)"
-        >
-        </app-show-module>
-    </div>
-    <div class="col-sm-4">
-        <app-list-module
-        [moduleList]="moduleList"
-        (delModule)=onDelete($event)
-        (newModule)=onNew($event)
-        (showModule)=onShow($event)
-        >
-        </app-list-module>
-    </div>
-</div>
-        
+<app-pages title="Módulos">  
+    <main>
+        <section>
+            <div class="row container-fluid">    
+                <div [ngClass]="getClassNew()">
+                    <app-new-module
+                    [module]="module"
+                    (create)="onCreate($event)"        
+                    (update)="onUpdate($event)" 
+                    (cancel)="onCancel($event)"
+                    >
+                    </app-new-module>
+                </div>   
+
+                <div [ngClass]="getClassShow()">
+                    <app-show-module
+                    [module]="module"
+                    [cmp]="cmp"
+                    (onCreateComp)="onCreateComp($event)"
+                    (onUpdateComp)="onUpdateComp($event)"
+                    (onDeleteComp)="onDeleteComp($event)"
+                    (onGetComponent)="onGetComponent($event)"
+                    (asignOption)="onAsignOption($event)"
+                    (cancel)="onCancel($event)"
+                    >
+                    </app-show-module> 
+                </div>
+                <div [ngClass]="getClassList()">
+                    <app-list-module
+                    [moduleList]="moduleList"
+                    (delModule)=onDelete($event)
+                    (newModule)=onNew($event)
+                    (showModule)=onShow($event)
+                    >
+                    </app-list-module> 
+                </div>
+            </div>
+        </section>
+    </main>
+</app-pages>
