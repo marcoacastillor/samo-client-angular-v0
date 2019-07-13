@@ -16,8 +16,9 @@ export const environment = {
   url_storage: 'http://localhost/usuariosV0/storage/app/public/',
   url_ventas_storage: 'http://localhost/ventasV0/storage/app/public/',
   url_type_service: 'http://localhost/usuariosV0/public/type-service',
+  url_parameter_config: 'http://localhost/usuariosV0/public/parameter_config',
   url_refresh_users: 'http://localhost/usuariosV0/public/clear',
-
+  
   url_refresh_sales: 'http://localhost/ventasV0/public/clear',
   url_authentication_ventas: 'http://localhost/ventasV0/public/authentication',
   url_person: 'http://localhost/ventasV0/public/persons',
@@ -63,7 +64,7 @@ export const environment = {
   individual: 'INDIVIDUAL',
   tax_purchase: 'TAX_PURCHASE',
   positions_person: 'POSITION_PERSON',
-  enterprise_owner: 'OWNER',
+  enterprise_owner: 'PROPERTY_SYSTEM',
   enterprise_provider: 'PROVIDER',
   laboral_state: 'LABORAL_STATE',
   product_type: 'PRODUCT_TYPE',
@@ -73,6 +74,16 @@ export const environment = {
   state_rol_person_active: 'Activo',
   salary_type: 'SALARY_TYPE',
   cutting_period_production: 'CUTTING_PERIOD_PRODUCTION',
+  parameters_enterprises: 'PARAMETERS_ENTERPRISES',
+
+  url_web_service: 'URL_WEB_SERVICE',
+  enterprise_fact: 'ENTERPRISE_FACT',
+  prefix_sale: 'PREFIX_SALE',
+  current_invoice: 'CURRENT_INVOICE',
+  current_sale: 'CURRENT_SALE',
+  invoice_init: 'INVOICE_INIT',
+  invoice_end: 'INVOICE_END',
+  prefix_invoice: 'PREFIX_INVOICE',
 
   state_initial_purchase: 'CREADA',
   state_payment_purchase: 'PAGADA',

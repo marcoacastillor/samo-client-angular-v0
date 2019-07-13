@@ -1,29 +1,37 @@
-<div class="row margin-top">
-    <div *ngIf="!showRegistry" class="col-sm-8">
-        <app-new-owner
-        [registry]="registry"
-        [sizesList]="sizesList"
-        (store)="onStore($event)"
-        (update)="onUpdate($event)"
-        >
-        </app-new-owner>
-    </div>
-    <div *ngIf="showRegistry" class="col-sm-8">
-        <app-show-owner
-        [registry]="registry"
-        [positionsList]="positionsList"
-        >
-        </app-show-owner>
-    </div>
-    <div class="col-sm-4">
-        <app-list-owner
-        [registryList]="registryList"
-        [actualPg]="actualPg"
-        [regPerPg]="regPerPg"
-        (create)="onCreate($event)"
-        (select)="onSelect($event)"
-        (update)="onSelectUpd($event)"
-        >
-        </app-list-owner>
-    </div>
-</div>
+<app-pages title="Empresas propietarias del sistema">  
+    <main>
+        <section>
+            <div class="row container-fluid">    
+                <div [ngClass]="getClassNew()">
+                    <app-new-owner
+                    [registry]="registry"
+                    [sizesList]="sizesList"
+                    (store)="onStore($event)"
+                    (update)="onUpdate($event)"
+                    (cancel)="onCancel($event)"
+                    >
+                    </app-new-owner>
+                </div>   
+                
+                <div [ngClass]="getClassShow()" *ngIf="registry.pk_id_enterprise">
+                    <app-show-owner
+                    [registry]="registry"
+                    (cancel)="onCancel($event)"
+                    (update)="onSelectUpd($event)"
+                    >
+                    </app-show-owner>
+                </div>
+                
+                <div [ngClass]="getClassList()">
+                    <app-list-owner
+                    [registryList]="registryList"
+                    (create)="onCreate($event)"
+                    (select)="onSelect($event)"
+                    (update)="onSelectUpd($event)"
+                    >
+                    </app-list-owner>
+                </div>
+            </div>
+        </section>
+    </main>
+</app-pages>

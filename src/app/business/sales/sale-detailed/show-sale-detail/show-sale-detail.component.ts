@@ -15,6 +15,8 @@ import { ParameterService } from 'src/app/shared/services/parameter.service';
 import { tap } from 'rxjs/operators';
 import { PersonService } from 'src/app/shared/services/person.service';
 import { Person } from 'src/app/shared/models/person';
+import { EnterpriseService } from 'src/app/shared/services/enterprise.service';
+import { Enterprise } from 'src/app/shared/models/enterprise';
 
 @Component({
   selector: 'app-show-sale-detail',
@@ -41,6 +43,7 @@ export class ShowSaleDetailComponent implements OnInit {
   lstPayments: Payment[] = [];
   operation: Operation = new Operation();
   person: Person = new Person();
+  enterprise: Enterprise = new Enterprise();
 
   lstParams: Parameter[] = [];
   individual      = environment.individual;
@@ -59,7 +62,8 @@ export class ShowSaleDetailComponent implements OnInit {
     private operationProductService: OperationProductService,
     private paymentService: PaymentService,
     private noteService: NotesService,
-    private parameterService: ParameterService
+    private parameterService: ParameterService,
+    private enterpriseService: EnterpriseService
   ) { }
 
   ngOnInit() {
@@ -75,6 +79,11 @@ export class ShowSaleDetailComponent implements OnInit {
       tap((operation: Operation) => { 
         this.personService.showByExternalReference$(operation.external_reference).subscribe(
           person => this.person = person
+        )
+      }),
+      tap((operation: Operation) => { 
+        this.enterpriseService.show$(operation.fk_id_enterprise).subscribe(
+          enterprise => this.enterprise = enterprise
         )
       }),
       tap((operation: Operation) => { 

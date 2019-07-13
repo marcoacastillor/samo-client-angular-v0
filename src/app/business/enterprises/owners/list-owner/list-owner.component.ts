@@ -20,7 +20,7 @@ export class ListOwnerComponent implements OnInit {
   faEdit = faEdit;
   faSearch = faSearch;
 
-  @Input() public registryList: Results;
+  @Input() public registryList: Enterprise[];
   @Input() public actualPg: number;
   @Input() public regPerPg: number;
 
@@ -39,7 +39,6 @@ export class ListOwnerComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.calculateRegs();
     this.initUpdForm();
   }
 
@@ -56,8 +55,6 @@ export class ListOwnerComponent implements OnInit {
       if(changes.registryList.currentValue)
       {
         this.registryList = changes.registryList.currentValue;
-        this.totalPgs = Math.ceil(this.registryList.number_results / this.regPerPg);
-        this.actualPg = 0;
       }
     }
   }
@@ -68,8 +65,8 @@ export class ListOwnerComponent implements OnInit {
     ).subscribe();
   }
 
-  private loadRegistries = (options: Results): void => {
-    this.registryList = options;
+  private loadRegistries = (enterprises: Enterprise[]): void => {
+    this.registryList = enterprises;
   }
 
   public selectRegistry(id:number){
@@ -78,26 +75,6 @@ export class ListOwnerComponent implements OnInit {
 
   public updateRegistry(registry: Enterprise){
     this.update.emit(registry);
-  }
-
-  public addActualPg(){
-    this.actualPg = this.actualPg + 1;
-    this.calculateRegs();
-  }
-
-  public delActualPg(){
-    this.actualPg = this.actualPg - 1;
-    this.calculateRegs();
-  }
-
-  public setRegPerPg(value: any){
-    this.regPerPg = value;
-    this.totalPgs = Math.ceil(this.registryList.number_results / this.regPerPg);
-    this.calculateRegs();
-  }
-
-  private calculateRegs(){
-    this.maxPerPg = (Number(this.actualPg) * Number(this.regPerPg)+ Number(this.regPerPg));
   }
 
   public crtRegistry(){

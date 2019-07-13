@@ -12,6 +12,7 @@ export const environment = {
   url_storage: 'https://www.sanratsolutions.com/prd/usuarios/storage/app/public/',
   url_ventas_storage: 'https://www.sanratsolutions.com/prd/ventas/storage/app/public/',
   url_type_service: 'https://www.sanratsolutions.com/prd/usuarios/public/type_service',
+  url_parameter_config: 'https://www.sanratsolutions.com/prd/usuarios/public/parameter_config',
 
   url_authentication_ventas: 'https://www.sanratsolutions.com/prd/ventas/public/authentication',
   url_person: 'https://www.sanratsolutions.com/prd/ventas/public/persons',
@@ -56,7 +57,7 @@ export const environment = {
   individual: 'INDIVIDUAL',
   tax_purchase: 'TAX_PURCHASE',
   positions_person: 'POSITION_PERSON',
-  enterprise_owner: 'OWNER',
+  enterprise_owner: 'PROPERTY_SYSTEM',
   enterprise_provider: 'PROVIDER',
   laboral_state: 'LABORAL_STATE',
   product_type: 'PRODUCT_TYPE',
@@ -66,6 +67,16 @@ export const environment = {
   state_rol_person_active: 'Activo',
   salary_type: 'SALARY_TYPE',
   cutting_period_production: 'CUTTING_PERIOD_PRODUCTION',
+  parameters_enterprises: 'PARAMETERS_ENTERPRISES',
+
+  url_web_service: 'URL_WEB_SERVICE',
+  enterprise_fact: 'ENTERPRISE_FACT',
+  prefix_sale: 'PREFIX_SALE',
+  current_invoice: 'CURRENT_INVOICE',
+  current_sale: 'CURRENT_SALE',
+  invoice_init: 'INVOICE_INIT',
+  invoice_end: 'INVOICE_END',
+  prefix_invoice: 'PREFIX_INVOICE',
 
   state_initial_purchase: 'CREADA',
   state_payment_purchase: 'PAGADA',

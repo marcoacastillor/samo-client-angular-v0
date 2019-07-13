@@ -154,17 +154,24 @@
                             
                             <!-- start purchase info-->
                             <div class="col-sm-8 back-color-ff">
+                                
+                                <!-- start información vendedor-->
+                                <div class="row justify-content-end">
+                                    <div class="col-sm-12 text-right">
+                                        <h4>{{ enterprise.name }}</h4>
+                                    </div>
+                                    <div class="col-sm-12 text-right">
+                                        <h4 class="text-danger">Factua de venta # {{ operation.number_invoice }}</h4>
+                                    </div>
+                                </div>
+                                <!-- end información vendedor-->
+
                                 <!-- start información básica-->
-                                <div class="row">
+                                <div class="row margin-top-2rem">
                                     <div class="col-sm-7">
                                         <div class="row justify-content-start">
-                                            <div class="col-sm-6">
+                                            <div class="col-sm-6 tezt-left">
                                                 <table class="table table-sm">
-                                                    <thead>
-                                                        <tr>
-                                                            <th colspan="2"><h6>Orden de compra #{{ operation.number_invoice }}</h6></th>
-                                                        </tr>
-                                                    </thead>
                                                     <tbody>
                                                         <tr>
                                                             <th>Fecha</th>
@@ -186,7 +193,7 @@
             
                                     <div class="col-sm-5">
                                         <div class="row justify-content-end">
-                                            <div class="col-sm-12">
+                                            <div class="col-sm-12 text-right">
                                                 <table class="table table-sm">
                                                     <tbody class="text-success order-purchase-title">
                                                         <tr>
@@ -273,6 +280,18 @@
                                     </div>
                                 </div>
                                 <!-- end productos-->
+
+                                <!-- start información vendedor-->
+                                <div class="row justify-content-end text-small margin-top-2rem">
+                                    <div class="col-sm-12 text-right">
+                                        {{ enterprise.DIAN_billing_resolution }}
+                                    </div>
+                                    <div class="col-sm-12 text-right">
+                                        {{ enterprise.footer_billing }}
+                                    </div>
+                                </div>
+                                <!-- end información vendedor-->
+                                
                             </div>
                             <!-- end purchase info-->
                         </div>

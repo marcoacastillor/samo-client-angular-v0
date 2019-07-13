@@ -37,6 +37,8 @@ import { OperationProductService } from 'src/app/shared/services/operation-produ
 import { FormOperationModalComponent } from './sale-detailed/show-sale-detail/form-operation-modal/form-operation-modal.component';
 import { FormProductModalComponent } from './sale-detailed/show-sale-detail/form-product-modal/form-product-modal.component';
 import { FormPaymentModalComponent } from './sale-detailed/show-sale-detail/form-payment-modal/form-payment-modal.component';
+import { EnterpriseService } from 'src/app/shared/services/enterprise.service';
+import { ParameterConfigService } from 'src/app/shared/services/parameter-config.service';
 
 @NgModule({
   imports: [
@@ -48,8 +50,7 @@ import { FormPaymentModalComponent } from './sale-detailed/show-sale-detail/form
     OwlNativeDateTimeModule,
   ],
   providers: [
-    GlobalStoreService, OperationService, ParameterService, ProductService, PersonService, PaymentService, NotesService, OperationProductService
-  ],
+    GlobalStoreService, OperationService, ParameterService, ProductService, PersonService, PaymentService, NotesService, OperationProductService, EnterpriseService, ParameterConfigService],
   declarations: [AdminInvoiceComponent, ListInvoiceComponent, NewInvoiceComponent, ShowInvoiceComponent, ModalPaymentComponent, EfectyPaymentComponent, NewSalePaymentComponent, ModalSalePaymentComponent, AdminSaleReportComponent, ConsolidatedComponent, ModalShowOperationComponent, ShowOperationComponent, ModalNewPaymentComponent, NewPaymentComponent, ModalSearchComponent, SearchComponent, ListSaleDetailComponent, ShowSaleDetailComponent, NewSaleDetailComponent, ListProductModalComponent, ListClientModalComponent, FormOperationModalComponent, FormProductModalComponent, FormPaymentModalComponent]
 })
 export class SalesModule { }

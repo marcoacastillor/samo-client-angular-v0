@@ -1,103 +1,126 @@
-<app-card caption="Gestión de información de empresa">
-    <main>
-        <h5>Creación de empresa propietaria</h5>
-        <div class="alert alert-info" role="alert">En éste formulario solo se permite crear empresas dueñas del sistema</div>
-        <form [formGroup]="enterpriseForm">
-            <div class="row">
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <label for="nit">Nit</label>
-                        <input type="text" class="form-control text-small" placeholder="Nit" formControlName="nit" required>
-                        <small *ngIf="mustShowError('nit')" class="form-text alert-danger">
-                        El Nit es obligatorio
-                        </small>
-                    </div>
-                </div> 
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <label for="name">Nombre</label>
-                        <input type="text" class="form-control text-small" placeholder="Nombre" formControlName="name" required>
-                        <small *ngIf="mustShowError('name')" class="form-text alert-danger">
-                        El nombre es obligatorio
-                        </small>
-                    </div>
-                </div> 
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <label for="address">Dirección</label>
-                        <input type="text" class="form-control text-small" placeholder="Dirección" formControlName="address" required>
-                        <small *ngIf="mustShowError('address')" class="form-text alert-danger">
-                        La dirección es obligatoria
-                        </small>
-                    </div>
-                </div> 
+<section>
+    <!-- start menu main-->
+    <div class="row bg-gray">
+        <div class="col-sm-6 text-left">
+            Agregar o actualizar información
+        </div>
+        <div class="col-sm-6 text-right">
+            <div class="btn-group btn-group-sm">
+                <button type="button" (click)="cancelRegistry()" class="btn btn-outline-primary btn-sm">
+                    <fa-icon [icon]="faThList" class="text-primary mb-2 mr-1" title="Crear registro"></fa-icon>Ver todos
+                </button>
             </div>
-            <div class="row">
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <label for="phone">Teléfono</label>
-                        <input type="text" class="form-control text-small" placeholder="Teléfono" formControlName="phone" required>
-                        <small *ngIf="mustShowError('phone')" class="form-text alert-danger">
-                       El teléfono es obligatorio
-                        </small>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <label for="ubication_city">Ubicación - Ciudad</label>
-                        <input type="text" class="form-control text-small" placeholder="Ubicación" formControlName="ubication_city" required>
-                        <small *ngIf="mustShowError('ubication_city')" class="form-text alert-danger">
-                            Ubicación de la empresa
-                        </small>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <label for="size">Tamaño empresa</label>
-                        <select class="form-control form-control-sm text-small" formControlName="size" required>
-                            <option value="{{ param.name }}" *ngFor="let param of sizesList">{{ param.name }}</option>
-                        </select>
-                        <small *ngIf="mustShowError('size')" class="form-text alert-danger">
-                        El tamaño de empresa es obligatorio
-                        </small>
-                    </div>
-                </div> 
-            </div>
+        </div>
+    </div>
+    <!-- end menu main-->
+    
 
-            <div class="row">
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <label for="regimen">Régimen</label>
-                        <input type="text" class="form-control text-small" placeholder="Regimen" formControlName="regimen" required>
-                        <small *ngIf="mustShowError('regimen')" class="form-text alert-danger">
-                            El régimen es obligatorio
-                        </small>
+    <!-- start content -->
+    <div class="row margin-top-1rem">
+        <div class="col-sm-12">
+            <form [formGroup]="enterpriseForm">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="nit">Nit</label>
+                            <input type="text" class="form-control text-small" placeholder="Nit" formControlName="nit" required>
+                            <small *ngIf="mustShowError('nit')" class="form-text alert-danger">
+                            El Nit es obligatorio
+                            </small>
+                        </div>
+                    </div> 
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="name">Nombre</label>
+                            <input type="text" class="form-control text-small" placeholder="Nombre" formControlName="name" required>
+                            <small *ngIf="mustShowError('name')" class="form-text alert-danger">
+                            El nombre es obligatorio
+                            </small>
+                        </div>
+                    </div> 
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="address">Dirección</label>
+                            <input type="text" class="form-control text-small" placeholder="Dirección" formControlName="address" required>
+                            <small *ngIf="mustShowError('address')" class="form-text alert-danger">
+                            La dirección es obligatoria
+                            </small>
+                        </div>
+                    </div> 
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="phone">Teléfono</label>
+                            <input type="text" class="form-control text-small" placeholder="Teléfono" formControlName="phone" required>
+                            <small *ngIf="mustShowError('phone')" class="form-text alert-danger">
+                            El teléfono es obligatorio
+                            </small>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="ubication_city">Ubicación - Ciudad</label>
+                            <input type="text" class="form-control text-small" placeholder="Ubicación" formControlName="ubication_city" required>
+                            <small *ngIf="mustShowError('ubication_city')" class="form-text alert-danger">
+                                Ubicación de la empresa
+                            </small>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="size">Tamaño empresa</label>
+                            <select class="form-control form-control-sm text-small" formControlName="size" required>
+                                <option value="{{ param.name }}" *ngFor="let param of sizesList">{{ param.name }}</option>
+                            </select>
+                            <small *ngIf="mustShowError('size')" class="form-text alert-danger">
+                            El tamaño de empresa es obligatorio
+                            </small>
+                        </div>
+                    </div> 
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="regimen">Régimen</label>
+                            <input type="text" class="form-control text-small" placeholder="Regimen" formControlName="regimen" required>
+                            <small *ngIf="mustShowError('regimen')" class="form-text alert-danger">
+                                El régimen es obligatorio
+                            </small>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="DIAN_billing_resolution">Resolución de facturación de la DIAN</label>
+                            <input type="text" class="form-control text-small" placeholder="Resolución facturación de la DIAN" formControlName="DIAN_billing_resolution" required>
+                            <small *ngIf="mustShowError('DIAN_billing_resolution')" class="form-text alert-danger">
+                                Ubicación de la empresa
+                            </small>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="footer_billing">footer_billing</label>
+                            <input type="text" class="form-control text-small" placeholder="Pie de factura" formControlName="footer_billing" required>
+                            <small *ngIf="mustShowError('footer_billing')" class="form-text alert-danger">
+                            El tamaño de empresa es obligatorio
+                            </small>
+                        </div>
+                    </div> 
+                </div>
+
+                <!--start buttons form-->
+                <div class="row justify-content-end">
+                    <div class="col-sm-4 text-right align-self-end">
+                        <button *ngIf="!enterpriseForm.value.pk_id_enterprise" type="submit" class="btn btn-outline-primary btn-sm mb-2 mr-1" [disabled]="enterpriseForm.invalid" (click)="createRegistry()">Guardar</button>
+                        <button *ngIf="enterpriseForm.value.pk_id_enterprise" type="submit" class="btn btn-outline-success btn-sm mb-2 mr-1" [disabled]="enterpriseForm.invalid" (click)="updateRegistry()">Actualizar</button>
                     </div>
                 </div>
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <label for="DIAN_billing_resolution">Resolución de facturación de la DIAN</label>
-                        <input type="text" class="form-control text-small" placeholder="Resolución facturación de la DIAN" formControlName="DIAN_billing_resolution" required>
-                        <small *ngIf="mustShowError('DIAN_billing_resolution')" class="form-text alert-danger">
-                            Ubicación de la empresa
-                        </small>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <label for="footer_billing">footer_billing</label>
-                        <input type="text" class="form-control text-small" placeholder="Pie de factura" formControlName="footer_billing" required>
-                        <small *ngIf="mustShowError('footer_billing')" class="form-text alert-danger">
-                        El tamaño de empresa es obligatorio
-                        </small>
-                    </div>
-                </div> 
-            </div>
-            
-        </form>
-    </main>
-    <footer>
-        <button *ngIf="!enterpriseForm.value.pk_id_enterprise" type="submit" class="btn btn-outline-primary btn-sm mb-2 mr-1" [disabled]="enterpriseForm.invalid" (click)="createRegistry()">Guardar</button>
-        <button *ngIf="enterpriseForm.value.pk_id_enterprise" type="submit" class="btn btn-outline-success btn-sm mb-2 mr-1" [disabled]="enterpriseForm.invalid" (click)="updateRegistry()">Actualizar</button>
-    </footer>
-</app-card>      
+                <!--end buttons form-->
+            </form>
+        </div>
+    </div>
+    <!-- end content -->
+</section>

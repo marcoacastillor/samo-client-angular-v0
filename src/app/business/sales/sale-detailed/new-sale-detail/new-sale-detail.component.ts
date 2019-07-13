@@ -1,5 +1,5 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
-import { faThList, faSearch, faCheckCircle, faSave, faPlusCircle, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { faThList, faSearch, faCheckCircle, faSave, faPlusCircle, faTrashAlt, faEye, faClone, faDonate } from '@fortawesome/free-solid-svg-icons';
 import { User } from 'src/app/shared/models/user';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Product } from 'src/app/shared/models/product';
@@ -12,6 +12,12 @@ import { ParameterService } from 'src/app/shared/services/parameter.service';
 import * as moment from 'moment';
 import { Person } from 'src/app/shared/models/person';
 import { PersonService } from 'src/app/shared/services/person.service';
+import { tap } from 'rxjs/operators';
+import { Enterprise } from 'src/app/shared/models/enterprise';
+import { ParameterConfig } from 'src/app/shared/models/parameter-config';
+import { EnterpriseService } from 'src/app/shared/services/enterprise.service';
+import { ParameterConfigService } from 'src/app/shared/services/parameter-config.service';
+import { Operation } from 'src/app/shared/models/operation';
 
 @Component({
   selector: 'app-new-sale-detail',
@@ -19,12 +25,16 @@ import { PersonService } from 'src/app/shared/services/person.service';
   styles: []
 })
 export class NewSaleDetailComponent implements OnInit {
+  pk_id_operation = 0;
   faThList = faThList;
   faSearch = faSearch;
   faCheckCircle = faCheckCircle;
   faSave = faSave;
   faPlusCircle = faPlusCircle;
   faTrashAlt = faTrashAlt;
+  faEye = faEye;
+  faClone = faClone;
+  faDonate = faDonate;
 
   activeUser: User = new User();
   
@@ -32,6 +42,8 @@ export class NewSaleDetailComponent implements OnInit {
 
   person: Person = new Person();
   product: Product = new Product();
+  enterprise: Enterprise = new Enterprise();
+  lstParameters: ParameterConfig[] = [];
 
   lstClients: Person[] = [];
   lstClientsModal: Person[] = [];
@@ -44,6 +56,11 @@ export class NewSaleDetailComponent implements OnInit {
   taxes           = environment.tax_purchase;
   type_id         = environment.type_ids;
   credit_payment  = environment.credit_payment;
+
+  //Valores para actualizar los valores de facturación activas.
+  code_paramSelected    = '';
+  value_paramSelected   = '';
+
   categories      = {'categories' : [this.type_payment,this.taxes,this.type_id]};
 
   @ViewChild('code_product') nameField: ElementRef;
@@ -59,7 +76,9 @@ export class NewSaleDetailComponent implements OnInit {
     private globalStore: GlobalStoreService,
     private personService: PersonService,
     private productService: ProductService,
-    private parameterService: ParameterService
+    private parameterService: ParameterService,
+    private enterpriseService: EnterpriseService,
+    private parameterConfigService: ParameterConfigService
   ) { }
 
   ngOnInit() {
@@ -68,9 +87,129 @@ export class NewSaleDetailComponent implements OnInit {
     this.initForm();
   }
 
+  public selectNumberSale(){
+    let number_sale = '';
+    let prefix_sale = this.getParameters(environment.prefix_sale);
+    let current_sale = this.getParameters(environment.current_sale);
+      
+    if(prefix_sale){
+      if(current_sale){
+        number_sale = prefix_sale + (Number(current_sale) + 1);
+      }
+      else{
+        number_sale = prefix_sale +'1';
+      }
+    }
+    else{
+      if(current_sale){
+        number_sale = (Number(current_sale) + 1).toString();
+      }
+      else{
+        number_sale = '1';
+      }
+    }
+    
+    //Actualizar datos sobre numeración de facturas
+    this.code_paramSelected    = environment.current_sale;
+    this.value_paramSelected   = (Number(current_sale) + 1).toString();
+
+    this.operationForm.patchValue({
+      number_invoice: number_sale,
+      current_invoice: (Number(current_sale) + 1)
+    });
+  }
+
+  public selectNumberInvoice(){
+    let next_number = 0;
+    let number_invoice = '';
+    let enterprise_fact = this.getParameters(environment.enterprise_fact);
+    let prefix_invoice = this.getParameters(environment.prefix_invoice);
+    let current_invoice = this.getParameters(environment.current_invoice);
+    let invoice_init = this.getParameters(environment.invoice_init);
+    let invoice_end = this.getParameters(environment.invoice_end);
+
+    if(enterprise_fact == 'true')
+    {
+      if(prefix_invoice){
+        if(current_invoice){
+          next_number = Number(current_invoice) + 1;
+          if(next_number > Number(invoice_end)){
+            number_invoice = '';
+          }
+          else{
+            number_invoice = prefix_invoice + (next_number) 
+          }
+        }
+        else{
+          number_invoice = (Number(invoice_init)).toString();
+        }
+      }
+      else{
+        if(current_invoice){
+          next_number = Number(current_invoice) + 1;
+          if(next_number > Number(invoice_end)){
+            number_invoice = '';
+          }
+          else{
+            number_invoice = (next_number).toString(); 
+          }
+        }
+        else
+        {
+          if(invoice_init)
+          {
+            number_invoice = (Number(invoice_init)).toString();
+          }
+          else{
+            number_invoice = '';
+          }
+        }
+      }
+    }
+    else
+    {
+      number_invoice = ''; 
+    }
+
+    //Actualizar datos sobre numeración de facturas
+    this.code_paramSelected    = environment.current_invoice;
+    this.value_paramSelected   = (Number(current_invoice) + 1).toString();
+
+    this.operationForm.patchValue({
+      number_invoice: number_invoice,
+      current_invoice: (Number(current_invoice) + 1)
+    });
+  }
+
+  private getParameters(code: string)
+  {
+    const resultado = this.lstParameters.filter( parameter => parameter.code === code );
+    if(resultado[0].value != code)
+      return resultado[0].value;
+    else
+      return null;
+  }
+
   private getMultipleParams(){
-    this.parameterService.getByMultipleCodeCategory$(this.categories).subscribe(
-      lstParams => this.lstParams = lstParams
+    this.parameterService.getByMultipleCodeCategory$(this.categories).pipe(
+      tap((params:Parameter[]) => this.lstParams = params),
+      tap(() => {
+        this.enterpriseService.show$(this.activeUser.fk_id_enterprise).subscribe(
+          enterprise =>this.enterprise = enterprise
+        )
+      }),
+      tap(() => {
+        this.getParametersByEnterprise();
+      }),
+    ).subscribe()
+  }
+
+  private getParametersByEnterprise(){
+    this.parameterConfigService.getByEnterprise$(this.activeUser.fk_id_enterprise).subscribe(
+      lstParameters => {
+        this.lstParameters = lstParameters;
+        this.selectNumberSale();
+      }
     )
   }
 
@@ -87,6 +226,7 @@ export class NewSaleDetailComponent implements OnInit {
       subtotal_operation: [0],
       value_payment: [0],
       payment_type: ['',Validators.required],
+      current_invoice: [0],
       date_operation: [moment().format('YYYY-MM-DD')],
       product: this.fb.group({
         code: [''],
@@ -270,14 +410,22 @@ export class NewSaleDetailComponent implements OnInit {
   }
 
   saveProduct(){
-    this.operationService.storeOperation$(this.operationForm.value).subscribe(
-      () => {
+    this.operationService.storeOperation$(this.operationForm.value)
+    .pipe(
+      tap((operation:Operation) => {
         this.initForm();
+        this.pk_id_operation = operation.pk_id_operation;
         this.person = new Person();
         this.success = true;
         this.message = 'Se realizó la creación de la factura con éxito.';
-      }
+      }),
+      tap(() => {
+        this.parameterConfigService.updateByEnterpriseAndCodeAndValue$(this.activeUser.fk_id_enterprise,this.code_paramSelected,this.value_paramSelected).subscribe(
+          param => { this.getParametersByEnterprise(); console.log(param) }
+        )
+      })
     )
+    .subscribe()
   }
 
   public delProduct(prd: any, idx: number){

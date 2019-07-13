@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FormToolsService } from 'src/app/shared/services/form-tools.service';
 import { environment } from 'src/environments/environment';
 import { Parameter } from 'src/app/shared/models/parameter';
+import { faThList } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-new-owner',
@@ -11,6 +12,8 @@ import { Parameter } from 'src/app/shared/models/parameter';
   styles: []
 })
 export class NewOwnerComponent implements OnInit {
+  faThList = faThList;
+  
   @Input() public registry: Enterprise;
   @Input() public lstTypes: any;
   @Input() public sizesList: Parameter[];
@@ -19,6 +22,7 @@ export class NewOwnerComponent implements OnInit {
   
   @Output() public store = new EventEmitter<Enterprise>();
   @Output() public update = new EventEmitter<Enterprise>();
+  @Output() public cancel = new EventEmitter<Boolean>();
 
   constructor(
     private fb: FormBuilder,
@@ -73,6 +77,10 @@ export class NewOwnerComponent implements OnInit {
   public updateRegistry(){
     this.update.emit(this.enterpriseForm.value);
     this.enterpriseForm.reset();
+  }
+
+  public cancelRegistry(){
+    this.cancel.emit(true);
   }
 
   /**

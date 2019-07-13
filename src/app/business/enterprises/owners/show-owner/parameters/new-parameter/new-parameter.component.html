@@ -1,0 +1,68 @@
+<div class="modal fade" id="parameterModal" tabindex="-1" role="dialog" aria-labelledby="parameterModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Información sobre parámetro</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="card">
+                <div class="card-body">
+                    <form [formGroup]="parameterForm">
+                        
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="code">Código</label>
+                                    <input readonly type="text" class="form-control text-small" placeholder="Código" formControlName="code" required>
+                                    <small *ngIf="mustShowError('code')" class="form-text alert-danger">
+                                    Código, es requerido.
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="value">Valor</label>
+                                    <input type="text" class="form-control text-small" placeholder="Nombre" formControlName="value" required>
+                                    <small *ngIf="mustShowError('value')" class="form-text alert-danger">
+                                        Valor, es requerido.
+                                    </small>
+                                </div>
+                            </div> 
+                        </div> 
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="description">Descripción</label>
+                                    <input readonly type="text" class="form-control text-small" placeholder="Nombre" formControlName="description" required>
+                                    <small *ngIf="mustShowError('description')" class="form-text alert-danger">
+                                        Descripción, es requerido.
+                                    </small>
+                                </div>
+                            </div> 
+                        </div>
+
+                        <!-- start buttons form-->
+                        <div class="row justify-content-end">
+                            <div class="col-sm-4 text-right align-self-end">
+                                <button *ngIf="parameter.pk_id_parameter_config" type="submit" class="btn btn-outline-success btn-sm mb-2 mr-1" [disabled]="parameterForm.invalid" (click)="updateParameter()" data-dismiss="modal">
+                                    <fa-icon [icon]="faSave" class="text-outline-secondary mb-2 mr-1"></fa-icon>Actualizar
+                                </button>
+                                <button *ngIf="!parameter.pk_id_parameter_config" type="submit" class="btn btn-outline-success btn-sm mb-2 mr-1" [disabled]="parameterForm.invalid" (click)="createParameter()" data-dismiss="modal">
+                                    <fa-icon [icon]="faSave" class="text-outline-secondary mb-2 mr-1"></fa-icon>Guardar
+                                </button>
+                            </div>
+                        </div>
+                        <!-- end buttons form-->
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        </div>
+        </div>
+    </div>
+</div>

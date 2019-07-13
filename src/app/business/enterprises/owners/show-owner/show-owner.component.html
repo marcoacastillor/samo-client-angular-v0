@@ -1,128 +1,178 @@
-<app-card caption="Detalle de empresa">
-    <main>
-        <div class="row">
-            <!-- Inicio información proveedor-->
-            <div class="col-sm-12 text-ultra-small ">
-                <div class="row border-bottom-2 bg-gray style-header-table">
-                    <div class="col-sm-12">
-                        Información básica
+<section>
+    <!-- start menu main-->
+    <div class="row bg-gray">
+        <div class="col-sm-6 text-left">
+            Detalle de empresa
+        </div>
+        <div class="col-sm-6 text-right">
+            <div class="btn-group btn-group-sm">
+                <button type="button" (click)="cancelOwner()" class="btn btn-outline-primary btn-sm">
+                    <fa-icon [icon]="faThList" class="text-primary mb-2 mr-1" title="Crear registro"></fa-icon>Ver todos
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- end menu main-->
+    
+    <!-- start info options-->
+    <div class="row back-colo-f6 margin-top-1rem">
+        <div class="col-sm-12 text-right align-self-end">
+            <div class="btn-group btn-group-sm">
+                <div class="dropdown">
+                    <button class="btn text-ultra-small btn-sm dropdown-toggle" type="button" id="operation" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <fa-icon [icon]="faArchway" class="text-outline-secondary mb-2 mr-1"></fa-icon>Empresa
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="operation">
+                        <button (click)="updateRegistry(registry)"class="dropdown-item text-small text-secondary"  type="button" data-toggle="modal" data-target="#operationModal">
+                            <fa-icon [icon]="faEdit" class="text-outline-secondary mb-2 mr-1"></fa-icon>Editar información
+                        </button>
                     </div>
                 </div>
-                <div class="row border-bottom-2 style-header-table">
-                    <div class="col-sm-6 text-ultra-small">
-                        <div class="row border-bottom-2 bg-gray style-header-table">
-                            <div class="col-sm-12">
-                                Empresa
-                            </div>
-                        </div>
-                        <div class="row border-bottom-1">
-                            <div class="col-sm-6 text-small">
-                                NIT: 
-                            </div>
-                            <div class="col-sm-6 card-title-custom bg-gray">
-                                {{ registry.nit }}
-                            </div>
-                        </div>
-                        <div class="row border-bottom-1">
-                            <div class="col-sm-6 text-small">
-                                Nombre: 
-                            </div>
-                            <div class="col-sm-6 card-title-custom bg-gray">
-                                {{ registry.name }}
-                            </div>
-                        </div>
-                        <div class="row border-bottom-1">
-                            <div class="col-sm-6 text-small">
-                               Dirección: 
-                            </div>
-                            <div class="col-sm-6 card-title-custom bg-gray">
-                                {{ registry.address }}
-                            </div>
-                        </div>
-                        <div class="row border-bottom-1">
-                            <div class="col-sm-6 text-small">
-                                Teléfono: 
-                            </div>
-                            <div class="col-sm-6 card-title-custom bg-gray">
-                                {{ registry.phone }}
-                            </div>
-                        </div>
-                        <div class="row border-bottom-1">
-                            <div class="col-sm-6 text-small">
-                                Ubicación: 
-                            </div>
-                            <div class="col-sm-6 card-title-custom bg-gray">
-                                {{ registry.ubication_city }}
-                            </div>
-                        </div>
+                <div class="dropdown">
+                    <button class="btn text-ultra-small btn-sm dropdown-toggle" type="button" id="positions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <fa-icon [icon]="faDiagnoses" class="text-outline-secondary mb-2 mr-1"></fa-icon>Cargos
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="products">
+                        <button class="dropdown-item text-small text-secondary" type="button" data-toggle="modal" data-target="#positionModal">
+                            <fa-icon [icon]="faPlus" class="text-outline-secondary mb-2 mr-1"></fa-icon>Agregar cargo
+                        </button>
                     </div>
+                </div>
+                <div class="dropdown">
+                    <button class="btn text-ultra-small btn-sm dropdown-toggle" type="button" id="parameters" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <fa-icon [icon]="faCogs" class="text-outline-secondary mb-2 mr-1"></fa-icon>Parámetros
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="payments">
+                        <button class="dropdown-item text-small text-secondary" (click)="generateParameters()" type="button">
+                            <fa-icon [icon]="faPlus" class="text-outline-secondary mb-2 mr-1"></fa-icon>Agregar parámetro
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end info options-->
 
-                    <div class="col-sm-6 text-ultra-small">
-                        <div class="row border-bottom-2 bg-gray style-header-table">
-                            <div class="col-sm-12">
-                                Datos adicionales
-                            </div>
-                        </div>
-                        <div class="row border-bottom-1">
-                            <div class="col-sm-4 text-small">
-                                Tipo de empresa: 
-                            </div>
-                            <div class="col-sm-8 card-title-custom bg-gray">
-                                {{ registry.type }}
-                            </div>
-                        </div>
-                        <div class="row border-bottom-1">
-                            <div class="col-sm-4 text-small">
-                                Régimen: 
-                            </div>
-                            <div class="col-sm-8 card-title-custom bg-gray">
-                                {{ registry.regimen }}
-                            </div>
-                        </div>
-                        <div class="row border-bottom-1">
-                            <div class="col-sm-4 text-small">
-                                Tamaño: 
-                            </div>
-                            <div class="col-sm-8 card-title-custom bg-gray">
-                                {{ registry.size }}
-                            </div>
-                        </div>
-                        <div class="row border-bottom-1">
-                            <div class="col-sm-4 text-small">
-                                Resolución de facturación de la DIAN: 
-                            </div>
-                            <div class="col-sm-8 card-title-custom bg-gray">
-                                {{ registry.DIAN_billing_resolution }}
-                            </div>
-                        </div>
-                        <div class="row border-bottom-1">
-                            <div class="col-sm-4 text-small">
-                                Pie de página factura: 
-                            </div>
-                            <div class="col-sm-8 card-title-custom bg-gray">
-                                {{ registry.footer_billing }}
-                            </div>
-                        </div>
-                    </div>
+    <!-- start content -->
+    <div class="row margin-top-1rem">
+        
+        <!-- start basic information -->
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-header">
+                    <h6>Datos básicos</h6>
+                </div>
+                <div class="card-body">
+                    <table class="table table-sm">
+                        <tbody>
+                            <tr>
+                                <th>Nit</th>
+                                <td>{{ registry.nit }}</td>
+                            </tr>
+                            <tr>
+                                <th>Nombre</th>
+                                <td>{{ registry.name }}</td>
+                            </tr>
+                            <tr>
+                                <th>Dirección</th>
+                                <td>{{ registry.address }}, {{ registry.ubication-city }} </td>
+                            </tr>
+                            <tr>
+                                <th>Teléfono</th>
+                                <td>{{ registry.phone }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-sm-6">
-                <app-new-position
-                    [position]="position"
-                    [fk_id_enterprise]="registry.pk_id_enterprise"
-                    (create)="onCreate($event)"
-                    (update)="onUpdate($event)"
-                ></app-new-position>
-            </div>
-            <div class="col-sm-6">
-                <app-list-position
-                    [positionsList]="positionsList"
-                    (delete)="onDelete($event)"
-                    (select)="onSelect($event)"
-                ></app-list-position>
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-header">
+                    <h6>Datos adicionales</h6>
+                </div>
+                <div class="card-body">
+                    <table class="table table-sm">
+                        <tbody>
+                            <tr>
+                                <th>Tamaño</th>
+                                <td>{{ registry.size }}</td>
+                            </tr>
+                            <tr>
+                                <th>Regímen</th>
+                                <td>{{ registry.regimen }}</td>
+                            </tr>
+                            <tr>
+                                <th>Resolución de facturación DIAN</th>
+                                <td>{{ registry.DIAN_billing_resolution }}</td>
+                            </tr>
+                            <tr>
+                                <th>Pie de página de facturación</th>
+                                <th>{{ registry.footer_billing }}</th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-    </main>
-</app-card>
+        <!-- end basic information -->
+    </div>
+    <!-- end content -->
+
+    <!-- start parameters and positions -->
+    <div class="row margin-top-1rem">
+        <!-- start positions information -->    
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-header">
+                    <h6>Cargos</h6>
+                </div>
+                <div class="card-body">
+                    <app-list-position
+                    [positionsList]="positionsList"
+                    (delete)="onDeletePosition($event)"
+                    (select)="onSelectPosition($event)"
+                    ></app-list-position>          
+                </div>
+            </div>
+        </div>
+        <!-- start positions information -->
+
+        <!-- start parameters information -->
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-header">
+                    <h6>Parámetros de la empresa</h6>
+                </div>
+                <div class="card-body">
+                    <app-list-parameter
+                    [parametersList]="parametersList"
+                    (delete)="onDeleteParameter($event)"
+                    (select)="onSelectParameter($event)"
+                    ></app-list-parameter>        
+                </div>
+            </div>
+        </div>
+        <!-- end parameters information -->        
+    </div>
+    <!-- end parameters and positions -->
+</section>
+
+<!-- start position new information -->
+<app-new-position
+[position]="position"
+[fk_id_enterprise]="registry.pk_id_enterprise"
+(create)="onCreatePosition($event)"
+(update)="onUpdatePosition($event)"
+></app-new-position> 
+<!-- end position new information -->
+
+<!-- start parameter new information -->
+<app-new-parameter
+[parameter]="parameter"
+[fk_id_enterprise]="registry.pk_id_enterprise"
+(create)="onCreateParameter($event)"
+(update)="onUpdateParameter($event)"
+></app-new-parameter> 
+<!-- end parameter new information -->
+

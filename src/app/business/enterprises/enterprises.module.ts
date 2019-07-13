@@ -24,6 +24,10 @@ import { ParametersComponent } from './my-enterprise/parameters/parameters.compo
 import { EmployeeComponent } from './my-enterprise/employee/employee.component';
 import { PersonService } from 'src/app/shared/services/person.service';
 import { ParameterService } from 'src/app/shared/services/parameter.service';
+import { UtilsService } from 'src/app/shared/services/utils.service';
+import { ListParameterComponent } from './owners/show-owner/parameters/list-parameter/list-parameter.component';
+import { NewParameterComponent } from './owners/show-owner/parameters/new-parameter/new-parameter.component';
+import { ParameterConfigService } from 'src/app/shared/services/parameter-config.service';
 
 
 @NgModule({
@@ -33,7 +37,7 @@ import { ParameterService } from 'src/app/shared/services/parameter.service';
     SharedModule,
     FontAwesomeModule,
   ],
-  providers: [EnterpriseService, GlobalStoreService, PositionService, PersonService, ParameterService],
-  declarations: [AdminProviderComponent, AdminOwnerComponent, ShowProviderComponent, ListProviderComponent, NewProviderComponent, ListOwnerComponent, ShowOwnerComponent, NewOwnerComponent, NewPositionComponent, ListPositionComponent, ShowInfoComponent, MainInfoComponent, PositionsComponent, ParametersComponent, EmployeeComponent]
+  providers: [EnterpriseService, GlobalStoreService, PositionService, PersonService, ParameterService, UtilsService, ParameterConfigService],
+  declarations: [AdminProviderComponent, AdminOwnerComponent, ShowProviderComponent, ListProviderComponent, NewProviderComponent, ListOwnerComponent, ShowOwnerComponent, NewOwnerComponent, NewPositionComponent, ListPositionComponent, ShowInfoComponent, MainInfoComponent, PositionsComponent, ParametersComponent, EmployeeComponent, ListParameterComponent, NewParameterComponent]
 })
 export class EnterprisesModule { }

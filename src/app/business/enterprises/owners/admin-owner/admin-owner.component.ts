@@ -8,6 +8,7 @@ import { tap } from 'rxjs/operators';
 import { Position } from 'src/app/shared/models/position';
 import { ParameterService } from 'src/app/shared/services/parameter.service';
 import { Parameter } from 'src/app/shared/models/parameter';
+import { UtilsService } from 'src/app/shared/services/utils.service';
 
 @Component({
   selector: 'app-admin-owner',
@@ -16,20 +17,18 @@ import { Parameter } from 'src/app/shared/models/parameter';
 })
 export class AdminOwnerComponent implements OnInit {
   public showRegistry: boolean = false;
-  
-  public actualPg: number = 0;
-  public regPerPg: number = 5;
+  public newRegistry: boolean = false;
+  public listRegistry: boolean = true;
   
   public registry: Enterprise = new Enterprise();
-  public registryList: Results = new Results();
+  public registryList: Enterprise[] = [];
   public sizesList: Parameter[] = [];
 
-  positionsList: Position[] = [];
-  
   constructor(
     private enterpriseService: EnterpriseService,
     private globalStoreService: GlobalStoreService,
-    private parameterService: ParameterService
+    private parameterService: ParameterService,
+    private utilService: UtilsService
   ) { }
 
   ngOnInit() {
@@ -45,7 +44,7 @@ export class AdminOwnerComponent implements OnInit {
   }
 
   private loadDataByUser(){
-    let user = this.globalStoreService.getUser();
+    //let user = this.globalStoreService.getUser();
     this.registry.type                = environment.enterprise_owner;
   }
 
@@ -65,6 +64,12 @@ export class AdminOwnerComponent implements OnInit {
     );
   }
 
+  public onCancel(show: boolean){
+    this.listRegistry = show;
+    this.newRegistry = false;
+    this.showRegistry = false;
+  }
+
   public onUpdate(registry: Enterprise){
     this.enterpriseService.update$(registry).subscribe(
       () => this.loadAllRegistries()
@@ -73,11 +78,17 @@ export class AdminOwnerComponent implements OnInit {
 
   public onCreate(registry: Enterprise){
     this.showRegistry = false;
+    this.newRegistry = true;
+    this.listRegistry = false;
+
     this.registry = registry;
   }
 
   public onSelect(id:number){
     this.showRegistry = true;
+    this.newRegistry = false;
+    this.listRegistry = false;
+
     this.enterpriseService.show$(id).pipe(
      tap(this.loadRegistry) 
     ).subscribe(this.onSuccess,this.onError)
@@ -85,6 +96,9 @@ export class AdminOwnerComponent implements OnInit {
 
   public onSelectUpd(registry: Enterprise){
     this.showRegistry = false;
+    this.newRegistry = true;
+    this.listRegistry = false;
+
     this.registry = registry;
   }
 
@@ -104,5 +118,22 @@ export class AdminOwnerComponent implements OnInit {
   private onError = (error: any) => {
     this.globalStoreService.dispatchUserMessage(error.status, error.statusText + ' : ' + error.error);
   }
+
+  /*
+  * ------------------------------------------
+  * Funciones visualización
+  * ------------------------------------------
+  */
+ public getClassNew() {
+  return this.utilService.getClassNew(this.newRegistry);
+}
+
+public getClassList() {
+  return this.utilService.getClassList(this.listRegistry);
+}
+
+public getClassShow() {
+  return this.utilService.getClassShow(this.showRegistry);
+}
 
 }

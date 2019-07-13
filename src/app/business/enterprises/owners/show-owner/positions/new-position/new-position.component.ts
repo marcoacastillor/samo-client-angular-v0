@@ -2,6 +2,7 @@ import { Component, OnInit, ChangeDetectorRef, SimpleChanges, Output, EventEmitt
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FormToolsService } from 'src/app/shared/services/form-tools.service';
 import { Position } from 'src/app/shared/models/position';
+import { faSave } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-new-position',
@@ -9,6 +10,8 @@ import { Position } from 'src/app/shared/models/position';
   styles: []
 })
 export class NewPositionComponent implements OnInit {
+  faSave = faSave;
+   
   positionForm: FormGroup;
   
   @Input() public position: Position;
