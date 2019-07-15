@@ -143,14 +143,24 @@
                                                 </div>
                                                 <div class="col-sm-7">
                                                     <div class="input-group mb-3">
+                                                        <input type="text" id="filterClient" (keypress)="onFindClient($event)" class="form-control form-control-sm" aria-describedby="providerHelp" formControlName="external_reference">
                                                         <div class="input-group-prepend">
                                                             <button type="button" class="btn text-small btn-sm btn-outline-primary" data-toggle="modal" data-target="#lstClientsModal">
                                                                 <fa-icon [icon]="faSearch" class="text-primary mb-2 mr-1" title="Crear registro"></fa-icon>
                                                             </button>
                                                         </div>
-                                                        <input type="text" id="filterClient" (keypress)="onFindClient($event)" class="form-control form-control-sm" aria-describedby="providerHelp" formControlName="external_reference">
+                                                        <!-- start autocomplete-->
+                                                        <div class="autocomplete container-fluid">
+                                                            <div id="autocomplete-list" class="autocomplete-items text-ultra-small">
+                                                                <div class="items row" *ngFor="let person of lstClients">
+                                                                    <div class="col-sm-12" (click)="selectClient(person)">
+                                                                        {{ person.type_id }} - {{ person.number_id }} {{ person.names }} {{ person.last_names }}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- start autocomplete-->
                                                         <small id="clientHelp" class="form-text text-muted">Digite el id del cliente, o utilice el buscador.</small>
-                                                        <small id="resultHelp" class="form-text text-danger" *ngIf="emptyCli">*** No se encuentra ningún cliente con los criterios ingresados.</small>
                                                     </div>
                                                 </div>
                                             </div>
@@ -175,28 +185,6 @@
                                             </div> 
                                         </div>
     
-                                        <!-- start information client list -->
-                                        <div class="col-sm-3">
-                                            <div class="container back-colo-f6 display-result scrollbar" *ngIf="lstClients.length > 0">
-                                                <table class="table table-sm table-striped">
-                                                    <tbody>
-                                                        <tr *ngFor="let person of lstClients">
-                                                            <td>
-                                                                <div class="btn-group btn-group-sm">
-                                                                    <button type="button" (click)="selectClient(person)" class="btn btn-outline-primary btn-sm" data-dismiss="modal">
-                                                                        <fa-icon [icon]="faCheckCircle" class="text-outline-primary mb-2 mr-1"></fa-icon>
-                                                                    </button>
-                                                                </div>
-                                                                {{ person.type_id }} - {{ person.number_id }}
-                                                            </td>
-                                                            <td>{{ person.names }} {{ person.last_names }}</td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                        <!-- end information client list -->
-                                    
                                         <div class="col-sm-4">
                                             <div class="row">
                                                 <div class="col-sm-12">
@@ -288,33 +276,27 @@
                                         <div class="col-sm-4">
                                             <label for="number_selected">Código de barras</label>
                                             <div class="input-group mb-3">
-                                                <div class="input-group-prepend">
+                                                    <input type="text" id="filterProduct" (keypress)="onFindProduct($event)" #code_product class="form-control form-control-sm" formControlName="code">
+                                                    <div class="input-group-prepend">
                                                     <button type="button" class="btn text-small btn-sm btn-outline-primary" data-toggle="modal" data-target="#lstProductsModal">
                                                         <fa-icon [icon]="faSearch" class="text-primary mb-2 mr-1" title="buscar registro"></fa-icon>
                                                     </button>
                                                 </div>
-                                                <input type="text" id="filterProduct" (keypress)="onFindProduct($event)" #code_product class="form-control form-control-sm" formControlName="code">
-                                                <div class="container back-colo-f6 display-result scrollbar" *ngIf="lstProducts.length > 0">
-                                                    <table class="table table-sm table-striped">
-                                                        <tbody>
-                                                            <tr *ngFor="let product of lstProducts">
-                                                                <td>
-                                                                    <div class="btn-group btn-group-sm">
-                                                                        <button type="button" (click)="selectProduct(product)" class="btn btn-outline-primary btn-sm" data-dismiss="modal">
-                                                                            <fa-icon [icon]="faCheckCircle" class="text-outline-primary mb-2 mr-1"></fa-icon>
-                                                                        </button>
-                                                                    </div>
-                                                                    {{ product.code }}
-                                                                </td>
-                                                                <td>{{ product.name }}</td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
+                                                <!-- start autocomplete-->
+                                                <div class="autocomplete container-fluid">
+                                                    <div id="autocomplete-list" class="autocomplete-items text-ultra-small">
+                                                        <div class="items row" *ngFor="let product of lstProducts">
+                                                            <div class="col-sm-12" (click)="selectProduct(product)">
+                                                                {{ product.code }} - {{ product.name }}
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
+                                                <!-- start autocomplete-->
                                             </div>
                                         </div>
                                         <div class="form-group col-sm-2">
-                                            <label for="number_units">Unidades</label>
+                                            <label for="number_units">Unidades {{ product.presentation }}</label>
                                             <input type="number" class="form-control form-control-sm" aria-describedby="unidadesHelp" formControlName="number_units">
                                         </div>
                                         <div class="form-group col-sm-2">
@@ -329,7 +311,7 @@
                                             </select>
                                         </div>
                                         <div class="col-sm-2 align-self-center text-rigth">
-                                            <button type="submit" (click)="addProduct()" class="btn btn-sm btn-outline-primary" type="button">
+                                            <button type="submit" (click)="addProduct()" [disabled]="operationForm.get('product').value.number_units == 0 || operationForm.get('product').value.number_units > product.units_available" class="btn btn-sm btn-outline-primary" type="button">
                                                 <fa-icon [icon]="faPlusCircle" class="text-outline-secondary mb-2 mr-1"></fa-icon>Agregar
                                             </button>
                                         </div>
@@ -349,7 +331,7 @@
                                             <label for="total_discounts">Valor descuento</label>
                                             <input type="number" class="form-control form-control-sm" aria-describedby="unidadesHelp" formControlName="total_discounts">
                                         </div>
-                                        <div class="form-group col-sm-3" *ngIf="operationForm.value.payment_type === credit_payment">
+                                        <div class="form-group col-sm-3" *ngIf="operationForm.value.payment_type === credit_payment || operationForm.value.payment_type === separated_payment">
                                             <label for="value_payment">Abono</label>
                                             <input type="number" class="form-control form-control-sm" formControlName="value_payment">
                                         </div>
@@ -398,7 +380,7 @@
                                     <!--start buttons form-->
                                     <div class="row justify-content-end margin-top-2rem">
                                         <div class="col-sm-4 text-right align-self-end">
-                                            <button type="submit" (click)="saveProduct()" [disabled]="operationForm.invalid" class="btn btn-sm btn-outline-primary" type="button">
+                                            <button type="submit" (click)="saveProduct()" [disabled]="operationForm.invalid || (operationForm.value.products_list).length == 0" class="btn btn-sm btn-outline-primary" type="button">
                                                 <fa-icon [icon]="faSave" class="text-outline-secondary mb-2 mr-1"></fa-icon>Guardar
                                             </button>
                                         </div>

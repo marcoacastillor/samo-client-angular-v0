@@ -12,14 +12,7 @@ import { OperationService } from 'src/app/shared/services/operation.service';
 import { ParameterService } from 'src/app/shared/services/parameter.service';
 import { ProductService } from 'src/app/shared/services/product.service';
 import { PaymentService } from 'src/app/shared/services/payment.service';
-import { AdminPurchaseReportComponent } from './purchase-report/admin-purchase-report/admin-purchase-report.component';
-import { ConsolidatedComponent } from './purchase-report/consolidated/consolidated.component';
-import { PendingReceiveComponent } from './purchase-report/pending-receive/pending-receive.component';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
-import { ModelPaymentComponent } from './purchase-report/model-payment/model-payment.component';
-import { ModelViewOperationComponent } from './purchase-report/model-view-operation/model-view-operation.component';
-import { ViewOperationComponent } from './purchase-report/view-operation/view-operation.component';
-import { PaymentComponent } from './purchase-report/payment/payment.component';
 import { NewOrderFileComponent } from './order-file/new-order-file/new-order-file.component';
 import { ShowOrderFileComponent } from './order-file/show-order-file/show-order-file.component';
 import { ModalShowOrderFileComponent } from './order-file/modal-show-order-file/modal-show-order-file.component';
@@ -44,6 +37,6 @@ import { FormPaymentModalComponent } from './order-detailed/show-order-detail/fo
     OwlNativeDateTimeModule
   ],
   providers: [ EnterpriseService, ParameterService, UserService, UtilsService, GlobalStoreService, OperationService, ProductService, PaymentService, OperationProductService, NotesService],
-  declarations: [AdminPurchaseReportComponent, ConsolidatedComponent, PendingReceiveComponent, ModelPaymentComponent, ModelViewOperationComponent, ViewOperationComponent, PaymentComponent, NewOrderFileComponent, ShowOrderFileComponent, ModalShowOrderFileComponent, ListOrderDetailComponent, ShowOrderDetailComponent, NewOrderDetailComponent, ListProviderModalComponent, ListProductsModalComponent, FormOperationModalComponent, FormProductModalComponent, FormPaymentModalComponent]
+  declarations: [NewOrderFileComponent, ShowOrderFileComponent, ModalShowOrderFileComponent, ListOrderDetailComponent, ShowOrderDetailComponent, NewOrderDetailComponent, ListProviderModalComponent, ListProductsModalComponent, FormOperationModalComponent, FormProductModalComponent, FormPaymentModalComponent]
 })
 export class PurchaseModule { }

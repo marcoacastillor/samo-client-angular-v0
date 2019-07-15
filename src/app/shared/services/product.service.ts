@@ -105,8 +105,30 @@ export class ProductService {
     );
   }
 
-  public getByCodeFilterAndType$(nameProduct: string, type_product: string): Observable<Product[]> {
-    let url = this._url + '/get-by-code-filter-and-type/' + nameProduct + '/' + type_product;
+  public getSalesProductsByCodeFilter$(codeProduct: string): Observable<Product[]> {
+    let url = this._url + '/get-sales-products-by-code-filter/' + codeProduct;
+    return this.userService.validateOptionByToken('PRD_GET_SALES_PRODUCTS_BY_CODEFILTER').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.get<Product[]>(url);
+        }
+      })
+    );
+  }
+
+  public getSalesProductsByNameFilter$(nameProduct: string): Observable<Product[]> {
+    let url = this._url + '/get-sales-products-by-name-filter/' + nameProduct;
+    return this.userService.validateOptionByToken('PRD_GET_SALES_PRODUCTS_BY_NAMEFILTER').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.get<Product[]>(url);
+        }
+      })
+    );
+  }
+
+  public getByCodeFilterAndType$(codeProduct: string, type_product: string): Observable<Product[]> {
+    let url = this._url + '/get-by-code-filter-and-type/' + codeProduct + '/' + type_product;
     return this.userService.validateOptionByToken('PRD_GET_BY_CODEFILTER_AND_TYPE').pipe(
       switchMap(validate => {
         if(validate){

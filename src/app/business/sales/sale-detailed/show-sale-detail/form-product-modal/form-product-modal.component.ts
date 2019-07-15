@@ -6,6 +6,7 @@ import { Operation } from 'src/app/shared/models/operation';
 import { Parameter } from 'src/app/shared/models/parameter';
 import { Product } from 'src/app/shared/models/product';
 import { ProductService } from 'src/app/shared/services/product.service';
+import { FormToolsService } from 'src/app/shared/services/form-tools.service';
 
 
 @Component({
@@ -26,7 +27,9 @@ export class FormProductModalComponent implements OnInit {
   @Input() public lstParams: Parameter[];
 
   @Output() public addProduct = new EventEmitter<Operation>();
+
   @ViewChild('units_product') nameField: ElementRef;
+  
   
   lstProductsCodes: Product[] = [];
   lstProductsNames: Product[] = [];
@@ -36,7 +39,8 @@ export class FormProductModalComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private productService: ProductService
+    private productService: ProductService,
+    private formToolService: FormToolsService
   ) { }
 
   ngOnInit() {
@@ -61,7 +65,7 @@ export class FormProductModalComponent implements OnInit {
       code_product: [this.product.code],
       name_product: [this.product.name],
       fk_id_operation: [this.operation.pk_id_operation],
-      number_selected:['0'],
+      number_selected:['0',[Validators.required,Validators.max(this.product.units_available)]],
       value_unit: ['0'],
       tax_product:['0',Validators.required]
     })
@@ -73,7 +77,7 @@ export class FormProductModalComponent implements OnInit {
 
     if (nameProduct.length > 0) {
       if (filter.timeStamp - this.lastkeydown1 > 200) {
-        this.productService.getByNameFilterAndType$(nameProduct,environment.type_product_purchase).subscribe(
+        this.productService.getSalesProductsByNameFilter$(nameProduct).subscribe(
             lstProducts => this.lstProductsNames = lstProducts
         )
       }
@@ -86,7 +90,7 @@ export class FormProductModalComponent implements OnInit {
 
     if (codeProduct.length > 0) {
       if (filter.timeStamp - this.lastkeydown1 > 200) {
-        this.productService.getByCodeFilterAndType$(codeProduct,environment.type_product_purchase).subscribe(
+        this.productService.getSalesProductsByCodeFilter$(codeProduct).subscribe(
             lstProducts => this.lstProductsCodes = lstProducts
         )
       }
@@ -96,6 +100,7 @@ export class FormProductModalComponent implements OnInit {
   selectProduct(product: Product){
     let value_unit = 0;
     this.product = product;
+    this.initForm();
     this.lstProductsCodes = [];
     this.lstProductsNames = [];
 
@@ -107,6 +112,8 @@ export class FormProductModalComponent implements OnInit {
     {
       value_unit = this.product.sale_price_package;
     }
+
+    //Setear valores del producto seleccionado.
     this.productForm.patchValue({
       fk_id_product: product.pk_id_product,
       code_product: product.code,
@@ -115,12 +122,29 @@ export class FormProductModalComponent implements OnInit {
     });
 
     //resetear producto seleccionado con código de barras.
-    this.nameField.nativeElement.focus();
+    if(this.nameField)
+      this.nameField.nativeElement.focus();
   }
 
   add(){
     this.addProduct.emit(this.productForm.value);
     this.initForm();
+  }
+
+  /**
+   * Funciones para verificar si los formularios son obligatorios o no.
+   */
+
+  public getErrors(controlName: string): any {
+    return this.formToolService.getErrors(this.productForm, controlName);
+  }
+
+  public mustShowError(controlName: string) {
+    return this.formToolService.mustShowError(this.productForm, controlName);
+  }
+
+  public hasError(controlName: string, errorCode: string): any {
+    return this.formToolService.hasError(this.productForm, controlName, errorCode);
   }
 
 }

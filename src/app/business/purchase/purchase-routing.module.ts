@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AdminPurchaseReportComponent } from './purchase-report/admin-purchase-report/admin-purchase-report.component';
 import { NewOrderFileComponent } from './order-file/new-order-file/new-order-file.component';
 import { ListOrderDetailComponent } from './order-detailed/list-order-detail/list-order-detail.component';
 import { NewOrderDetailComponent } from './order-detailed/new-order-detail/new-order-detail.component';
@@ -8,12 +7,17 @@ import { ShowOrderDetailComponent } from './order-detailed/show-order-detail/sho
 
 const routes: Routes = [
   {
-    path:'purchase-file',
-    component: NewOrderFileComponent
+    path:'',
+    children: [
+      {
+        path: "consolidated",
+        loadChildren: './consolidated/consolidated.module#ConsolidatedModule'
+      }
+    ]
   },
   {
-    path:'purchase-report',
-    component: AdminPurchaseReportComponent
+    path:'purchase-file',
+    component: NewOrderFileComponent
   },
   {
     path: 'purchase-detailed',
@@ -27,6 +31,7 @@ const routes: Routes = [
     path: 'purchase-detailed-show/:id',
     component: ShowOrderDetailComponent,
   },
+  
 ];
 
 @NgModule({

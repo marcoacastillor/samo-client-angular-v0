@@ -6,17 +6,14 @@ const routes: Routes = [
   {
     path: "",
     loadChildren: './home/home.module#HomeModule'
-    //loadChildren: () => HomeModule
   },
   {
     path: "about",
     loadChildren: './about/about.module#AboutModule'
-    //loadChildren: () => AboutModule
   },
   {
     path: "sales-admin",
     loadChildren: './business/business.module#BusinessModule'
-    //loadChildren: () => BusinessModule
   },
   {
     path: 'not-found',

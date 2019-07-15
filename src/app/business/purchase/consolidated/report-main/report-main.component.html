@@ -1,0 +1,131 @@
+<app-pages title="Órdenes de compra">  
+    <main>            
+        <section>
+            <!-- start menu main-->
+            <div class="row bg-gray">
+                <div class="col-sm-6 text-left">
+                    Reporte de compras por período
+                </div>
+            </div>
+            <!-- end menu main-->
+
+            <!-- start dates form-->
+            <div class="row margin-top-1rem">
+                <div class="col-sm-8">
+                    <form [formGroup]="reportForm">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="input-group input-group-sm mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroup-sizing-sm">Fecha inicial</span>
+                                    </div>
+                                    <div class="input-group-prepend">
+                                        <span class="btn text-small btn-sm btn-outline-primary" [owlDateTimeTrigger]="from_date"><fa-icon [icon]="faCalendar" class="text-primary"></fa-icon></span>
+                                    </div>
+                                    <input type="text" class="form-control text-small" placeholder="Desde" formControlName="from_date" [owlDateTime]="from_date">
+                                    <owl-date-time [pickerType]="'calendar'" #from_date></owl-date-time>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="input-group input-group-sm mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroup-sizing-sm">Fecha final</span>
+                                    </div>
+                                    <div class="input-group-prepend">
+                                        <span class="btn text-small btn-sm btn-outline-primary" [owlDateTimeTrigger]="to_date"><fa-icon [icon]="faCalendar" class="text-primary"></fa-icon></span>
+                                    </div>
+                                    <input type="text" class="form-control text-small" placeholder="Hasta" formControlName="to_date" [owlDateTime]="to_date">
+                                    <owl-date-time [pickerType]="'calendar'" #to_date></owl-date-time>
+                                    <div class="input-group-append">
+                                        <button type="submit" class="btn btn-outline-success btn-sm mb-2 mr-1" (click)="loadData()">Buscar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- end dates form-->
+
+            <!-- start content -->
+            <div class="row margin-top-1rem" *ngIf="consolidates">
+                <div class="col-sm-4 col-xl-4">
+                    <div class="card bg-primary">
+                        <div class="card-body text-white">
+                            <h6 class="m-b-20">Compras totales</h6>
+                            <div class="row container-fluid">
+                                <div class="col-sm-2 col-xl-4 text-left">
+                                    <h1><i class="fas fa-dollar-sign "></i></h1>
+                                </div>
+                                <div class="col-sm-10 col-xl-8 text-right">
+                                    <h3><span>${{ consolidates.operations_values.total_operation | number }}</span></h3>
+                                </div>
+                            </div>
+                            <div class="row container-fluid">
+                                <div class="col-sm-6 col-xl-6 text-left">
+                                    <h6>Total</h6>
+                                </div>
+                                <div class="col-sm-6 col-xl-6 text-right">
+                                    <h6><span>{{ consolidates.operations_totals.total_operation | number }}</span></h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-xl-4">
+                    <div class="card bg-info">
+                        <div class="card-body text-white">
+                            <h6 class="m-b-20">Compras en efectivo</h6>
+                            <div class="row container-fluid">
+                                <div class="col-sm-2 col-xl-4 text-left">
+                                    <h1><i class="fas fa-dollar-sign "></i></h1>
+                                </div>
+                                <div class="col-sm-10 col-xl-8 text-right">
+                                    <h3><span>${{ consolidates.operations_values.efecty_operation | number }}</span></h3>
+                                </div>
+                            </div>
+                            <div class="row container-fluid">
+                                <div class="col-sm-6 col-xl-6 text-left">
+                                    <h6>Total</h6>
+                                </div>
+                                <div class="col-sm-6 col-xl-6 text-right">
+                                    <h6><span>{{ consolidates.operations_totals.efecty_operation | number }}</span></h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-xl-4">
+                    <div class="card bg-warning">
+                        <div class="card-body text-white">
+                            <h6 class="m-b-20">Compras a crédito</h6>
+                            <div class="row container-fluid">
+                                <div class="col-sm-2 col-xl-4 text-left">
+                                    <h1><i class="fas fa-dollar-sign"></i></h1>
+                                </div>
+                                <div class="col-sm-10 col-xl-8 text-right">
+                                    <h3><span>{{ consolidates.operations_values.credit_operation | number }}</span></h3>
+                                </div>
+                            </div>
+                            <div class="row container-fluid">
+                                <div class="col-sm-6 col-xl-6 text-left">
+                                    <h6>Total</h6>
+                                </div>
+                                <div class="col-sm-6 col-xl-6 text-right">
+                                    <h6><span>{{ consolidates.operations_totals.credit_operation | number }}</span></h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end content -->
+
+            <!-- start detailed -->
+            <div class="row margin-top-1rem">
+
+            </div>
+            <!-- end detailed -->
+        </section>
+    </main>
+</app-pages>

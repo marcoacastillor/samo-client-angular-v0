@@ -34,7 +34,7 @@ export class ListProductModalComponent implements OnInit {
 
     if (nameProduct.length > 0) {
       if (filter.timeStamp - this.lastkeydown1 > 200) {
-        this.productService.getByNameFilterAndType$(nameProduct,environment.type_product_purchase).subscribe(
+        this.productService.getSalesProductsByNameFilter$(nameProduct).subscribe(
             lstProducts => {
               this.lstProducts = lstProducts;
               this.empty = false

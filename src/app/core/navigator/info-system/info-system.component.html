@@ -1,8 +1,0 @@
-<div class="row" *ngIf="message.code != null">
-    <div class="alert alert-success text-small" *ngIf="message.code === '200'">
-      {{ message.code }} : {{ message.desc }}
-    </div>
-    <div class="alert alert-danger text-small" *ngIf="message.code != '200'">
-      {{ message.code }} : {{ message.desc }}
-    </div>
-</div>

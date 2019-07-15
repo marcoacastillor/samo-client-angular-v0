@@ -9,6 +9,7 @@ import { Purchase } from '../models/purchase';
 import { Results } from '../models/results';
 import { StatusMessage } from '../models/status-message';
 import { AbstractStock } from '../models/abstract-stock';
+import { ConsolidateOperation } from '../models/consolidate-operation';
 
 @Injectable({
   providedIn: 'root'
@@ -43,12 +44,12 @@ export class OperationService {
     );
   }
 
-  public getConsolidateByDates$(fromDate: string, toDate: string, type_operation: string): Observable<Operation[]> {
+  public getConsolidateByDates$(fromDate: string, toDate: string, type_operation: string): Observable<ConsolidateOperation> {
     let url = this._url + '/get-consolidate-operations-by-dates/'+fromDate+'/'+toDate+'/'+type_operation;
     return this.userService.validateOptionByToken('OPE_GET_CONSOLIDATE_BY_DATES').pipe(
       switchMap(validate => {
         if(validate){
-          return this.http.get<Operation[]>(url);
+          return this.http.get<ConsolidateOperation>(url);
         }
       })
     );

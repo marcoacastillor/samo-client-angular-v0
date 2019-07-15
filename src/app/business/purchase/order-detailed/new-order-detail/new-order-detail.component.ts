@@ -147,8 +147,10 @@ export class NewOrderDetailComponent implements OnInit {
   onFindProduct(filter: any){
     let codeProduct = (<HTMLInputElement>document.getElementById('filterProduct')).value;
     this.lstProducts = [];
-
+    
     if (codeProduct.length > 0) {
+      this.emptyPrd =false;
+      
       if (filter.timeStamp - this.lastkeydown1 > 200) {
         this.productService.getByCodeFilterAndType$(codeProduct,environment.type_product_purchase).subscribe(
             lstProducts => this.lstProducts = lstProducts,

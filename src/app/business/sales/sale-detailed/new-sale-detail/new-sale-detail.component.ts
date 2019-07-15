@@ -56,6 +56,7 @@ export class NewSaleDetailComponent implements OnInit {
   taxes           = environment.tax_purchase;
   type_id         = environment.type_ids;
   credit_payment  = environment.credit_payment;
+  separated_payment = environment.separated_payment;
 
   //Valores para actualizar los valores de facturación activas.
   code_paramSelected    = '';
@@ -307,7 +308,7 @@ export class NewSaleDetailComponent implements OnInit {
 
     if (codeProduct.length > 0) {
       if (filter.timeStamp - this.lastkeydown1 > 200) {
-        this.productService.getByCodeFilterAndType$(codeProduct,environment.type_product_purchase).subscribe(
+        this.productService.getSalesProductsByCodeFilter$(codeProduct).subscribe(
             lstProducts => {
               this.lstProducts = lstProducts;
               this.emptyPrd = false;
@@ -339,7 +340,8 @@ export class NewSaleDetailComponent implements OnInit {
 
     this.operationForm.get('product').patchValue({
       code: product.code,
-      cost_price: cost_price
+      cost_price: cost_price,
+      number_units: 1
     });
 
     //pone el focus sobre el input de código.

@@ -1,8 +1,9 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { faSave } from '@fortawesome/free-solid-svg-icons';
 import { Operation } from 'src/app/shared/models/operation';
 import { Payment } from 'src/app/shared/models/payment';
+import { FormToolsService } from 'src/app/shared/services/form-tools.service';
 
 @Component({
   selector: 'app-form-payment-modal',
@@ -18,6 +19,7 @@ export class FormPaymentModalComponent implements OnInit, OnChanges {
   
   constructor(
     private fb: FormBuilder,
+    private formToolService: FormToolsService
   ) { }
 
   ngOnInit() {
@@ -38,13 +40,29 @@ export class FormPaymentModalComponent implements OnInit, OnChanges {
   private initForm(){
     this.paymentForm = this.fb.group({
       fk_id_operation: [this.operation.pk_id_operation],
-      value_payment: [0],
+      value_payment: [0,[Validators.required,Validators.max(this.operation.total_operation - (this.operation.total_discounts + this.operation.total_pays))]],
     })
   }
 
   add(){
     this.addPayment.emit(this.paymentForm.value);
     this.initForm();
+  }
+
+  /**
+   * Funciones para verificar si los formularios son obligatorios o no.
+   */
+
+  public getErrors(controlName: string): any {
+    return this.formToolService.getErrors(this.paymentForm, controlName);
+  }
+
+  public mustShowError(controlName: string) {
+    return this.formToolService.mustShowError(this.paymentForm, controlName);
+  }
+
+  public hasError(controlName: string, errorCode: string): any {
+    return this.formToolService.hasError(this.paymentForm, controlName, errorCode);
   }
 
 }

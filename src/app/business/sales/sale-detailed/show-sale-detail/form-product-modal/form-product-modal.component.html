@@ -23,7 +23,7 @@
                                             <tr *ngFor="let product of lstProductsCodes">
                                                 <td>
                                                     <div class="btn-group btn-group-sm">
-                                                        <button type="button" (click)="selectProduct(product)" class="btn btn-outline-primary btn-sm" data-dismiss="modal">
+                                                        <button type="button" (click)="selectProduct(product)" class="btn btn-outline-primary btn-sm">
                                                             <fa-icon [icon]="faCheckCircle" class="text-outline-primary mb-2 mr-1"></fa-icon>
                                                         </button>
                                                     </div>
@@ -45,7 +45,7 @@
                                             <tr *ngFor="let product of lstProductsNames">
                                                 <td>
                                                     <div class="btn-group btn-group-sm">
-                                                        <button type="button" (click)="selectProduct(product)" class="btn btn-outline-primary btn-sm" data-dismiss="modal">
+                                                        <button type="button" (click)="selectProduct(product)" class="btn btn-outline-primary btn-sm">
                                                             <fa-icon [icon]="faCheckCircle" class="text-outline-primary mb-2 mr-1"></fa-icon>
                                                         </button>
                                                     </div>
@@ -99,7 +99,13 @@
                                 <div class="row">
                                     <div class="form-group col-sm-12">
                                         <label for="number_selected">Unidades {{ this.product.presentation }}</label>
-                                        <input type="number" class="form-control form-control-sm" #units_product aria-describedby="unidadesHelp" formControlName="number_selected">
+                                        <input type="number" class="form-control form-control-sm" #units_product aria-describedby="unidadesHelp" formControlName="number_selected" required>
+                                        <small class="text-danger" *ngIf="hasError('number_selected','required')">
+                                            El campo es obligatorio
+                                        </small>
+                                        <small class="text-danger" *ngIf="hasError('number_selected','max')">
+                                            Valor no puede ser mayor a <strong>{{ this.getErrors('number_selected').max.max | number }}</strong>
+                                        </small>
                                     </div>
                                     <div class="form-group col-sm-12">
                                         <label for="value_unit">Precio venta</label>
@@ -113,7 +119,7 @@
                                         </select>
                                     </div>
                                     <div class="col-sm-12 align-self-center text-rigth">
-                                        <button type="submit" (click)="add()" class="btn btn-sm btn-outline-primary" type="button" data-dismiss="modal">
+                                        <button [disabled]="productForm.invalid" type="submit" (click)="add()" class="btn btn-sm btn-outline-primary" type="button" data-dismiss="modal">
                                             <fa-icon [icon]="faPlusCircle" class="text-outline-secondary mb-2 mr-1"></fa-icon>Agregar
                                         </button>
                                     </div>

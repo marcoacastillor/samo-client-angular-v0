@@ -47,6 +47,7 @@ export const environment = {
   type_ids: 'TYPE_ID',
   efecty_payment: 'Efectivo',
   credit_payment: 'Crédito',
+  separated_payment: 'Separado',
   category_product: 'CATEGORY_PRODUCT',
   presentation_product: 'PRODUCT_PRESENTATION',
   clothes: 'VESTUARIO',

@@ -5,7 +5,6 @@ import { MainComponent } from './navigator/main/main.component';
 import { FooterComponent } from './navigator/footer/footer.component';
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from '../material.module';
-import { InfoSystemComponent } from './navigator/info-system/info-system.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
 import { AuthenticationService } from '../shared/services/authentication.service';
@@ -20,7 +19,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     FontAwesomeModule,
     MaterialModule
   ],
-  declarations: [NavigatorComponent, MainComponent, FooterComponent, InfoSystemComponent, MenuLeftComponent],
+  declarations: [NavigatorComponent, MainComponent, FooterComponent, MenuLeftComponent],
   exports: [NavigatorComponent],
   providers: [
     {
