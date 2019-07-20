@@ -76,12 +76,15 @@ export class ShowOrderFileComponent implements OnInit, OnChanges {
           //Calcuar valores
           let totalProduct        = product.number_units * product.cost_price;
           let discountProduct     = ((data[i][12] * totalProduct) / 100); 
-          let value_tax_product   = (totalProduct - (totalProduct / (1+(product.tax/100))));
+          //let value_tax_product   = (totalProduct - (totalProduct / (1+(product.tax/100))));
+          let value_tax_product   = (totalProduct * product.tax/100);
+          
           
           product.value_tax       = value_tax_product;
           product.discount        = discountProduct;
-          product.subtotal        = (totalProduct - value_tax_product);
-          product.total_product   = (totalProduct - discountProduct);
+          product.subtotal        = (totalProduct);
+          //product.total_product   = (totalProduct - discountProduct);
+          product.total_product   = ((totalProduct + value_tax_product) - discountProduct);
           
           //Calculo del valor de la factura
           totalTax                = (totalTax + product.value_tax);

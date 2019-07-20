@@ -46,7 +46,7 @@ export class OperationService {
 
   public getConsolidateByDates$(fromDate: string, toDate: string, type_operation: string): Observable<ConsolidateOperation> {
     let url = this._url + '/get-consolidate-operations-by-dates/'+fromDate+'/'+toDate+'/'+type_operation;
-    return this.userService.validateOptionByToken('OPE_GET_CONSOLIDATE_BY_DATES').pipe(
+    return this.userService.validateOptionByToken('OPE_GET_OPERATIONS_BY_DATES').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<ConsolidateOperation>(url);

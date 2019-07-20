@@ -66,6 +66,16 @@ export class ShowProductComponent implements OnInit, OnChanges {
     }
   }
 
+  public getPDFCode(html_code: string){
+    let configuracion_ventana = "menubar=yes,width=800,height=300,location=yes,resizable=yes,scrollbars=yes,status=yes";
+      let w = window.open('',"_blank", configuracion_ventana);
+      w.document.write(html_code);
+      w.document.close();
+      w.focus();
+      w.print();
+      w.close();
+  }
+
   /*
   * ------------------------------------------
   * Funciones propias del controlador

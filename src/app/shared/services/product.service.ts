@@ -127,6 +127,17 @@ export class ProductService {
     );
   }
 
+  public getNotSalesProductsByNameFilter$(nameProduct: string): Observable<Product[]> {
+    let url = this._url + '/get-not-sales-products-by-name-filter/' + nameProduct;
+    return this.userService.validateOptionByToken('PRD_GET_NOT_SALES_PRODUCTS_BY_NAMEFILTER').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.get<Product[]>(url);
+        }
+      })
+    );
+  }
+
   public getByCodeFilterAndType$(codeProduct: string, type_product: string): Observable<Product[]> {
     let url = this._url + '/get-by-code-filter-and-type/' + codeProduct + '/' + type_product;
     return this.userService.validateOptionByToken('PRD_GET_BY_CODEFILTER_AND_TYPE').pipe(

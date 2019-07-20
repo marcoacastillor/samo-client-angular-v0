@@ -32,8 +32,6 @@
     <div [ngClass]="getClassList()">
         <app-list-product
             [productList]="productList"
-            [actualPg]="actualPg"
-            [regPerPg]="regPerPg"
             (search)="onSearch($event)"
             (show)="onShow($event)"
             (delete)="onDelete($event)"

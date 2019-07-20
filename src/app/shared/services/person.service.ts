@@ -6,6 +6,7 @@ import { Person } from '../models/person';
 import { switchMap } from 'rxjs/operators';
 import { UserService } from './user.service';
 import { Results } from '../models/results';
+import { EnterprisePerson } from '../models/enterprise-person';
 
 @Injectable()
 export class PersonService {
@@ -130,12 +131,12 @@ export class PersonService {
     );
   }
 
-  public getClientsByEnterprise$(id_enterprise: number): Observable<Results> {
+  public getClientsByEnterprise$(id_enterprise: number): Observable<Person[]> {
     const url = this._url+ '/get-clients-by-enterprise/'+id_enterprise.toString();
     return this.userService.validateOptionByToken('PRS_CLIENTS_BY_ENTERPRISE').pipe(
       switchMap(validate => {
         if(validate){
-          return this.http.get<Results>(url);
+          return this.http.get<Person[]>(url);
         }
       })
     );
@@ -191,6 +192,28 @@ export class PersonService {
       switchMap(validate => {
         if(validate){
           return this.http.get<Person[]>(url);
+        }
+      })
+    );
+  }
+
+  public getLaboralInfoByPerson$(id_person: number): Observable<Person> {
+    const url = this._url + '/get-laboral-info-by-person/' + id_person.toString();
+    return this.userService.validateOptionByToken('PRS_GET_LABORAL_INFO_BY_PERSON').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.get<Person>(url);
+        }
+      })
+    );
+  }
+
+  public deleteLaboralInfo$(id:number): Observable<EnterprisePerson> {
+    const url = this._url + '/delete-laboral-info-of-person/' + id.toString();
+    return this.userService.validateOptionByToken('PRS_DEL_LABORAL_INFO_OF_PERSON').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.delete<EnterprisePerson>(url);
         }
       })
     );

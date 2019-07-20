@@ -1,0 +1,53 @@
+<app-pages title="Clientes">  
+    <main>            
+        <section>
+            <!-- start menu main-->
+            <div class="row bg-gray">
+                <div class="col-sm-6 text-left">
+                    Listado de los clientes
+                </div>
+                <div class="col-sm-6 text-right">
+                    <div class="btn-group btn-group-sm">
+                        <a routerLink='../client/new' type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal">
+                            <fa-icon [icon]="faPlusCircle" class="text-outline-primary mb-2 mr-1"></fa-icon>Crear
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- end menu main-->
+
+            <!-- start content -->
+            <div class="row margin-top-1rem">
+                <div class="col-sm-12">
+                    <table class="table table-sm table-striped">
+                        <thead class="bg-secondary text-white">
+                            <tr>
+                                <th>Acciones</th>
+                                <th>Identificación</th>
+                                <th>Nombres</th>
+                                <th>Apellidos</th>
+                                <th>Dirección</th>
+                                <th>Telefono</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let client of lstClients">
+                                <td>
+                                    <a routerLink='../show/{{client.pk_id_person}}' class="btn text-ultra-small btn-sm btn-outline-primary" type="button">
+                                        <fa-icon [icon]="faEye" class="text-outline-secondary mb-2 mr-1"></fa-icon>Ver detalle
+                                    </a>
+                                </td>
+                                <td>{{ client.type_id }} {{ client.number_id }}</td>
+                                <td>{{ client.names }}</td>
+                                <td>{{ client.last_names }}</td>
+                                <td>{{ client.address }}</td>
+                                <td>{{ client.phone }}</td>
+                            </tr>
+                        </tbody>
+                    </table>  
+                </div>
+            </div>
+            <!-- end content -->
+        </section>
+    </main>
+</app-pages>

@@ -1,6 +1,3 @@
-import { EnterprisePerson } from "./enterprise-person";
-import { Enterprise } from "./enterprise";
-
 export class Person {
     public pk_id_person: number;
     public type_id: string;
@@ -9,7 +6,4 @@ export class Person {
     public last_names:string;
     public address: string;
     public phone: string;
-
-    public enterprise: Enterprise;
-    public enterprise_person: EnterprisePerson;
 }

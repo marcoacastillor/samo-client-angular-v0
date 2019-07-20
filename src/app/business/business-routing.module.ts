@@ -12,41 +12,30 @@ const routes: Routes = [
       {
         path: 'administration',
         loadChildren: './administration/administration.module#AdministrationModule'
-        //loadChildren: () => AdministrationModule,
       },
       {
         path: 'configuration',
         loadChildren: './configuration/configuration.module#ConfigurationModule'
-        //loadChildren: () => ConfigurationModule,
       },
       {
         path: 'purchases',
         loadChildren: './purchase/purchase.module#PurchaseModule'
-        //loadChildren: () => PurchaseModule
       },
       {
         path: 'sales',
         loadChildren: './sales/sales.module#SalesModule'
-        //loadChildren: () => SalesModule
       },
       {
         path: 'stocks',
         loadChildren: './stock/stock.module#StockModule'
-        //loadChildren: () => StockModule
       },
       {
         path: 'human-resource',
-        loadChildren: './human-resource/human-resource.module#HumanResourceModule'
-        //loadChildren: () => HumanResourceModule
+        loadChildren: './human-resources/human-resources.module#HumanResourcesModule'
       },
       {
         path: 'expenses',
         loadChildren: './expenses/expenses.module#ExpensesModule'
-        //loadChildren: () => HumanResourceModule
-      },
-      {
-        path: 'enterprises',
-        loadChildren: './enterprises/enterprises.module#EnterprisesModule'
       },
       {
         path: 'production-process',

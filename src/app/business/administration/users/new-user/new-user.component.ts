@@ -23,27 +23,16 @@ export class NewUserComponent implements OnInit, OnChanges {
   @Input() public rolList: Rol[];
   @Input() public personList: Person[];
   @Input() public statesUser: Parameter[];
-  @Input() public sizesList: Parameter[];
+  @Input() public enterpriseList: Enterprise[];
 
   @Input() public rol: Rol;
   @Input() public user: User;
-
-  // Datos para crear usuario
-  @Input() public typesIdList: Parameter[];
-  @Input() public enterpriseList: Enterprise[];
-  @Input() public laboralStateList: Parameter[];
-  @Input() public salaryTypeList : Position[];
 
   @Output() public create = new EventEmitter<User>();
   @Output() public update = new EventEmitter<User>();
   @Output() public cancel = new EventEmitter<boolean>();
   @Output() public getRol = new EventEmitter<number>();
-
-  @Output() public onCreatePerson = new EventEmitter<Person>();
-  @Output() public onCreateEnterprise = new EventEmitter<Enterprise>();
   @Output() public getEmployees = new EventEmitter<number>();
-
-  positionList: Position[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -70,12 +59,6 @@ export class NewUserComponent implements OnInit, OnChanges {
     this.getEmployees.emit(this.userForm.value.fk_id_enterprise);
   }
 
-  public getPositionByEnterprise(){
-    this.positionService.getByEnterpsie$(this.userForm.value.fk_id_enterprise).subscribe(
-      positions => this.positionList = positions
-    )
-  }
-
   /*
   * ------------------------------------------
   * Funciones propias del controlador
@@ -84,13 +67,13 @@ export class NewUserComponent implements OnInit, OnChanges {
   private initUpdForm() {
     this.userForm = this.fb.group({
       pk_id_user: [this.user.pk_id_user],
+      fk_id_enterprise: [this.user.fk_id_enterprise],
       username: [this.user.username, Validators.required],
       email: [this.user.email, Validators.email],
       password: ['', [Validators.required, Validators.minLength(3)]],
       state_user: [this.user.state_user, Validators.required],
       fk_id_rol: [this.user.fk_id_rol, Validators.required],
       fk_id_person: [this.user.fk_id_person],
-      fk_id_enterprise: ['']
     });
   }
 
@@ -114,14 +97,6 @@ export class NewUserComponent implements OnInit, OnChanges {
 
   public cancelUser() {
     this.cancel.emit(true);
-  }
-
-  public createPerson(person: Person){
-    this.onCreatePerson.emit(person);
-  }
-
-  public createEnterprise(enterprise: Enterprise){
-    this.onCreateEnterprise.emit(enterprise);
   }
 
   public getErrors(controlName: string): any {

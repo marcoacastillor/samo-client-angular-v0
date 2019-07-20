@@ -9,7 +9,7 @@ import { AuthenticationService } from 'src/app/shared/services/authentication.se
 @Component({
   selector: 'app-menu-lef',
   templateUrl: 'menu-left.component.html',
-  styles: []
+  styleUrls: ['menu-left.component.css']
 })
 export class MenuLeftComponent implements OnInit {
   @Input() public user: User;

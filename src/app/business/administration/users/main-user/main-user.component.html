@@ -7,20 +7,13 @@
                     [rolList]="rolList" 
                     [personList]="personList" 
                     [statesUser]="statesUser"
-                    [typesIdList]="typesIdList"
                     [enterpriseList]="enterpriseList"
-                    [laboralStateList]="laboralStateList"
-                    [sizesList]="sizesList"
-                    [salaryTypeList]="salaryTypeList"
                     [rol]="rol"
                     [user]="user"
                     (cancel)="onCancel($event)"
-                    (getRol)="onGetRol($event)"
                     (update)="onUpdate($event)"
                     (create)="onCreate($event)"
-                    (onCreatePerson)="onCreatePerson($event)"
-                    (onCreateEnterprise)="onCreateEnterprise($event)"
-                    (getEmployees)="onLoadEmployees($event)"
+                    (getEmployees)="onGetEmployees($event)"
                     >
                     </app-new-user>
                 </div>   

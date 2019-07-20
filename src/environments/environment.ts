@@ -74,8 +74,10 @@ export const environment = {
   rol_employee: 'Employee',
   state_rol_person_active: 'Activo',
   salary_type: 'SALARY_TYPE',
+  contract_type: 'TYPE_CONTRACT',
   cutting_period_production: 'CUTTING_PERIOD_PRODUCTION',
   parameters_enterprises: 'PARAMETERS_ENTERPRISES',
+  regimen: 'REGIMEN_ENTERPRISE',
 
   url_web_service: 'URL_WEB_SERVICE',
   enterprise_fact: 'ENTERPRISE_FACT',

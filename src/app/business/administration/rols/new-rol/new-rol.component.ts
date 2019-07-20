@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@ang
 import { Rol } from 'src/app/shared/models/rol';
 import { FormToolsService } from 'src/app/shared/services/form-tools.service';
 import { Option } from 'src/app/shared/models/option';
-import { faPlusCircle, faMinusCircle, faAngleDoubleRight, faAngleDoubleLeft } from '@fortawesome/free-solid-svg-icons';
+import { faPlusCircle, faMinusCircle, faAngleDoubleRight, faAngleDoubleLeft, faThList } from '@fortawesome/free-solid-svg-icons';
 import { Module } from 'src/app/shared/models/module';
 import { MComponent } from 'src/app/shared/models/m-component';
 import { UtilsService } from 'src/app/shared/services/utils.service';
@@ -14,6 +14,8 @@ import { UtilsService } from 'src/app/shared/services/utils.service';
   styles: []
 })
 export class NewRolComponent implements OnInit, OnChanges {
+  faThList = faThList;
+  
   rolForm: FormGroup;
   public activeComponent:MComponent = new MComponent;
   

@@ -83,6 +83,19 @@
                                     <th>Marca</th>
                                     <td>{{ product.trademark}}</td>
                                 </tr>
+                                <tr>
+                                    <th>Código de barras</th>
+                                    <td>
+                                        <p>
+                                            <button (click)="getPDFCode(product.html_barcode)" class="badge badge-success text-ultra-small">
+                                                Imprimir código de barra
+                                            </button>
+                                        </p>
+                                        <p>
+                                            <img src="data:image/png;base64,{{ product.url_barcode }}" alt="barcode" />
+                                        </p>
+                                    </td>
+                                </tr>
                             </table>
                         </div>                  
                     </div>

@@ -13,7 +13,9 @@ export const environment = {
   url_ventas_storage: 'https://www.sanratsolutions.com/prd/ventas/storage/app/public/',
   url_type_service: 'https://www.sanratsolutions.com/prd/usuarios/public/type_service',
   url_parameter_config: 'https://www.sanratsolutions.com/prd/usuarios/public/parameter_config',
-
+  url_refresh_users: 'https://www.sanratsolutions.com/prd/usuarios/public/clear',
+  
+  url_refresh_sales: 'https://www.sanratsolutions.com/prd/ventas/public/clear',
   url_authentication_ventas: 'https://www.sanratsolutions.com/prd/ventas/public/authentication',
   url_person: 'https://www.sanratsolutions.com/prd/ventas/public/persons',
   url_enterprise: 'https://www.sanratsolutions.com/prd/ventas/public/enterprises',
@@ -67,8 +69,10 @@ export const environment = {
   rol_employee: 'Employee',
   state_rol_person_active: 'Activo',
   salary_type: 'SALARY_TYPE',
+  contract_type: 'TYPE_CONTRACT',
   cutting_period_production: 'CUTTING_PERIOD_PRODUCTION',
   parameters_enterprises: 'PARAMETERS_ENTERPRISES',
+  regimen: 'REGIMEN_ENTERPRISE',
 
   url_web_service: 'URL_WEB_SERVICE',
   enterprise_fact: 'ENTERPRISE_FACT',

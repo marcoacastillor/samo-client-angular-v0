@@ -1,0 +1,253 @@
+<app-pages title="Gestión de empleado">  
+    <main>            
+        <section>
+            <!-- start menu main-->
+            <div class="row bg-gray">
+                <div class="col-sm-6 text-left">
+                    Registro de empleado
+                </div>
+                <div class="col-sm-6 text-right">
+                    <div class="btn-group btn-group-sm">
+                        <a routerLink='../../list' class="btn text-ultra-small btn-sm btn-outline-primary" type="button">
+                            <fa-icon [icon]="faThList" class="text-outline-secondary mb-2 mr-1"></fa-icon>Ver todos
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- end menu main-->
+
+            <!-- start content -->
+            <div class="row margin-top-1rem">
+                <div class="col-sm-12">
+
+                    <!-- start info options-->
+                    <div class="row" *ngIf="success">
+                        <div class="col-sm-12">
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>Éxito</strong> {{ message }}
+                                <p>
+                                    <a routerLink='../../show/{{pk_id_person}}' class="btn text-ultra-small btn-sm btn-outline-primary" type="button">
+                                        <fa-icon [icon]="faEye" class="text-outline-secondary mb-2 mr-1"></fa-icon>Ver detalle
+                                    </a>
+                                </p>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end info options-->
+
+                    <!-- start main info-->
+                    <form [formGroup]="employeeForm">
+                        <div class="row">
+                            <!--start información sobre persona-->
+                            <div class="col-sm-6" formArrayName="person">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h6>Información personal</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="form-group col-sm-6">
+                                                <label for="type_id">Tipo Id</label>
+                                                <select class="form-control form-control-sm" formControlName="type_id" required>
+                                                    <option value="" selected>Seleccione...</option>
+                                                    <option *ngFor="let param of parametersList[type_id]" value="{{param.value}}">{{ param.name }}</option>
+                                                </select>
+                                                <small *ngIf="mustShowError('person','type_id')" class="form-text alert-danger">
+                                                    Tipo de id, es obligatorio
+                                                </small>
+                                            </div>
+                                            <div class="form-group col-sm-6">
+                                                <label for="number_id">Número Id</label>
+                                                <input type="text" id="filterClient" (keypress)="onFindClient($event)" class="form-control form-control-sm"  formControlName="number_id" required>
+                                                <!-- start autocomplete-->
+                                                <div class="autocomplete container-fluid">
+                                                    <div id="autocomplete-list" class="autocomplete-items text-ultra-small">
+                                                        <div class="items row" *ngFor="let person of lstClients">
+                                                            <div class="col-sm-12" (click)="selectClient(person)">
+                                                                {{ person.type_id }} - {{ person.number_id }} {{ person.names }} {{ person.last_names }}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- start autocomplete-->
+                                                <small *ngIf="mustShowError('person','number_id')" class="form-text alert-danger">
+                                                    Número de id, es obligatorio
+                                                </small>
+                                            </div>
+                                            <div class="form-group col-sm-6">
+                                                <label for="names">Nombres</label>
+                                                <input type="text" class="form-control form-control-sm"  formControlName="names" required> 
+                                                <small *ngIf="mustShowError('person','names')" class="form-text alert-danger">
+                                                    Nombres, es obligatorio
+                                                </small>
+                                            </div>
+                                            <div class="form-group col-sm-6">
+                                                <label for="last_names">Apellidos</label>
+                                                <input type="text" class="form-control form-control-sm"  formControlName="last_names" required>
+                                                <small *ngIf="mustShowError('person','last_names')" class="form-text alert-danger">
+                                                    Apellidos, es obligatorio
+                                                </small>
+                                            </div>
+                                            <div class="form-group col-sm-6">
+                                                <label for="address">Dirección</label>
+                                                <input type="text" class="form-control form-control-sm"  formControlName="address" required>
+                                                <small *ngIf="mustShowError('person','address')" class="form-text alert-danger">
+                                                    Dirección, es obligatorio
+                                                </small>
+                                            </div>
+                                            <div class="form-group col-sm-6">
+                                                <label for="phone">Teléfono</label>
+                                                <input type="text" class="form-control form-control-sm"  formControlName="phone" required>
+                                                <small *ngIf="mustShowError('person','phone')" class="form-text alert-danger">
+                                                    Teléfono, es obligatorio
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> 
+                            </div>
+                            <!--end información sobre persona-->
+
+                            <!--start información laboral-->
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <!--start information condiciones laborales-->
+                                    <div class="col-sm-12">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h6>Información laboral</h6>
+                                            </div>
+                                            <div class="card-body">
+                                                <div formArrayName="enterprise_person">
+                                                    <div class="row">
+                                                        <div class="form-group col-sm-6">
+                                                            <label for="fk_id_position">Cargo</label>
+                                                            <select class="form-control form-control-sm" formControlName="fk_id_position" required>
+                                                                <option value="" selected>Seleccione...</option>
+                                                                <option *ngFor="let position of positionsList" value="{{position.pk_id_position}}">{{ position.name }}</option>
+                                                            </select>
+                                                            <small *ngIf="mustShowError('enterprise_person','fk_id_position')" class="form-text alert-danger">
+                                                                Cargo, es obligatorio
+                                                            </small>
+                                                        </div>
+                                                        <div class="form-group col-sm-6">
+                                                            <label for="date_register">Fecha de ingreso</label>
+                                                            <div class="input-group mb-3">
+                                                                <div class="input-group-prepend">
+                                                                    <span class="btn text-small btn-sm btn-outline-primary" [owlDateTimeTrigger]="date_register"><fa-icon [icon]="faCalendar" class="text-primary"></fa-icon></span>
+                                                                </div>
+                                                                <input type="text" class="form-control form-control-sm"  formControlName="date_register" [owlDateTime]="date_register">
+                                                                <owl-date-time [pickerType]="'calendar'" #date_register></owl-date-time>
+                                                                <small *ngIf="mustShowError('enterprise_person','date_register')" class="form-text alert-danger">
+                                                                    Fecha de registro, es obligatoria
+                                                                </small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+    
+                                                <div formArrayName="laboral_conditions">
+                                                    <div class="row">
+                                                        <div class="form-group col-sm-6">
+                                                            <label for="contract_type">Tipo de contrato</label>
+                                                            <select class="form-control form-control-sm" formControlName="contract_type" required>
+                                                                <option value="" selected>Seleccione...</option>
+                                                                <option *ngFor="let param of parametersList[type_contract]" value="{{param.value}}">{{ param.name }}</option>
+                                                            </select>
+                                                            <small *ngIf="mustShowError('laboral_conditions','contract_type')" class="form-text alert-danger">
+                                                                Tipo de contrato, es obligatorio
+                                                            </small>
+                                                        </div>
+                                                        <div class="form-group col-sm-6">
+                                                            <label for="salary_type">Tipo de salario</label>
+                                                            <select class="form-control form-control-sm" formControlName="salary_type" required>
+                                                                <option value="" selected>Seleccione...</option>
+                                                                <option *ngFor="let param of parametersList[type_salary]" value="{{param.value}}">{{ param.name }}</option>
+                                                            </select>
+                                                            <small *ngIf="mustShowError('laboral_conditions','salary_type')" class="form-text alert-danger">
+                                                                Tipo de salario, es obligatorio
+                                                            </small>
+                                                        </div>
+                                                        <div class="form-group col-sm-6" *ngIf="employeeForm.get('laboral_conditions').value.salary_type == 'FIJO'">
+                                                            <label for="salary">Salario</label>
+                                                            <input type="number" class="form-control form-control-sm"  formControlName="salary">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row" *ngIf="employeeForm.get('laboral_conditions').value.salary_type != 'FIJO'">
+                                                        <div class="form-group col-sm-6">
+                                                            <label for="production_unit">Unidad de producto</label>
+                                                            <input  type="text" id="filterProduct" (keypress)="onFindProduct($event)" class="form-control form-control-sm"  formControlName="production_unit">
+                                                            <!-- start autocomplete-->
+                                                            <div class="autocomplete container-fluid">
+                                                                <div id="autocomplete-list" class="autocomplete-items text-ultra-small">
+                                                                    <div class="items row" *ngFor="let product of lstProducts">
+                                                                        <div class="col-sm-12" (click)="selectProduct(product)">
+                                                                            {{ product.code }} - {{ product.name }}
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!-- start autocomplete-->
+                                                        </div>
+                                                        <div class="form-group col-sm-6">
+                                                            <label for="value_product_unit">Valor unidad de producto</label>
+                                                            <input type="number" class="form-control form-control-sm"  formControlName="value_product_unit">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="form-group col-sm-4">
+                                                            <div class="form-check">
+                                                                <input type="checkbox" class="form-check-input"  formControlName="benefit_health">
+                                                                <label for="benefit_health">Aporta a salud?</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group col-sm-4">
+                                                            <div class="form-check">
+                                                                <input type="checkbox" class="form-check-input"  formControlName="benefit_pension">
+                                                                <label for="benefit_pension">Aporta a pensión?</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group col-sm-4">
+                                                            <div class="form-check">
+                                                                <input type="checkbox" class="form-check-input"  formControlName="benefit_arl">
+                                                                <label for="benefit_arl">Aporta a arl?</label> 
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group col-sm-4">
+                                                            <div class="form-check">
+                                                                <input type="checkbox" class="form-check-input"  formControlName="benefit_compensation_box">
+                                                                <label for="benefit_compensation_box">Aporta a caja de compensación?</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--end information condiciones laborales-->
+                                </div>
+                            </div>
+                            <!--end información laboral-->
+                        </div>
+
+                        <!--start buttons form-->
+                        <div class="row justify-content-end margin-top-2rem">
+                            <div class="col-sm-4 text-right align-self-end">
+                                <button type="submit" (click)="saveEmployee()" [disabled]="employeeForm.invalid" class="btn btn-sm btn-outline-primary" type="button">
+                                    <fa-icon [icon]="faSave" class="text-outline-secondary mb-2 mr-1"></fa-icon>Guardar
+                                </button>
+                            </div>
+                        </div>
+                        <!--end buttons form-->
+
+                    </form>
+                    <!-- end main info-->
+                </div>
+            </div>
+            <!-- end content -->
+        </section>
+    </main>
+</app-pages>

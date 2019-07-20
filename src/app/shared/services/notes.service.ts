@@ -19,7 +19,7 @@ export class NotesService {
 
   public getNotesByOperation$(id_operation: number): Observable<Notes[]> {
     let url = this._url + '/get-by-operation/' + id_operation.toString();
-    return this.userService.validateOptionByToken('NOTE_GET_BY_PURCHAE').pipe(
+    return this.userService.validateOptionByToken('NOTE_GET_BY_OPERATION').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<Notes[]>(url);

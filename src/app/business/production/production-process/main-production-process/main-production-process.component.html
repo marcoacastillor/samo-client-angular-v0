@@ -3,7 +3,9 @@
         <app-show-production-process
         [productionProcess]="productionProcess"
         [cuttingPeriodList]="cuttingPeriodList"
-        [dataProduct]="dataProduct"
+        [dataProductInputs]="dataProductInputs"
+        [dataProductProducts]="dataProductProducts"
+        [dataProductIntermediaty]="dataProductIntermediaty"
         (getData)="onGetData($event)"
         (onUpdate)="update($event)"
         (createPeriod)="onCreatePeriod($event)"

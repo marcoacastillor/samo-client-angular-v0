@@ -28,13 +28,8 @@ export class MainUserComponent implements OnInit {
   public statesUser: Parameter[] = [];
 
   //datos para crear pesona
-  public typesIdList: Parameter[] = [];
   public enterpriseList: Enterprise[] = [];
-  public postitionList: Position[] = [];
-  public laboralStateList: Parameter[] = [];
-  public sizesList: Parameter[] = [];
-  public salaryTypeList: Parameter[] = [];
-
+  
   public newUser = false;
   public showUser = false;
   public listUser = true;
@@ -55,34 +50,15 @@ export class MainUserComponent implements OnInit {
 
   ngOnInit() { 
     this.activeUser = this.globalStoreService.getUser();
-    this.onLoadEmployees(this.activeUser.fk_id_enterprise);
     this.loadDataCreation();
     
     this.user.rol = new Rol;
     this.user.person = new Person;
   }
 
-  private loadDataCreation(){
+  private loadDataCreation(){ 
     this.loadUsers();
     this.loadRols();
-    this.loadStates();
-    this.loadEnterprisesOwners();
-    this.loadTypeIds();
-    this.loadLaboralState();
-    this.loadSizesEnterprises();
-    this.loadSalaryTypeList();
-  }
-
-  private loadSalaryTypeList(){
-    this.parameterService.getByCodeCategory$(environment.salary_type).subscribe(
-      salaryTypes => this.salaryTypeList = salaryTypes
-    )
-  }
-
-  private loadLaboralState(){
-    this.parameterService.getByCodeCategory$(environment.laboral_state).subscribe(
-      laboralState => this.laboralStateList = laboralState
-    )
   }
 
   private loadUsers() {
@@ -97,7 +73,7 @@ export class MainUserComponent implements OnInit {
     );
   }
 
-  public onLoadEmployees(id_enterprise: number) {
+  public onGetEmployees(id_enterprise: number) {
     this.personService.getEmployeesByEnterprise$(id_enterprise).subscribe(
       persons => this.personList = persons
     );
@@ -106,18 +82,6 @@ export class MainUserComponent implements OnInit {
   private loadStates(){
     this.parameterService.getByCodeCategory$(environment.state_user).subscribe(
       states => this.statesUser = states
-    );
-  }
-
-  private loadTypeIds(){
-    this.parameterService.getByCodeCategory$(environment.type_ids).subscribe(
-      ids => this.typesIdList = ids
-    );
-  }
-
-  private loadSizesEnterprises(){
-    this.parameterService.getByCodeCategory$(environment.size_enterprise).subscribe(
-      sizes => this.sizesList = sizes
     );
   }
 
@@ -133,39 +97,21 @@ export class MainUserComponent implements OnInit {
     );
   }
 
-  public onCreatePerson(person: Person){
-    this.personService.createEmployee$(person).pipe(
-      switchMap((person: Person): Observable<Person[]> => this.personService.getEmployeesByEnterprise$(person.enterprise_person.fk_id_enterprise)),
-      tap(this.loadEmployees),
-    ).subscribe(this.onSuccess, this.onError);
-  }
-
-  private loadEmployees = (persons: Person[]): void => {
-    this.personList = persons;
-  }
-  
-
-  public onCreateEnterprise(enterprise: Enterprise){
-    this.enterpriseService.store$(enterprise).subscribe(this.onSuccess, this.onError);
-    this.loadDataCreation();
-  }
-  
-
   public onCreate(user: User) {
-    this.usuarioService.store$(user).subscribe(this.onSuccess, this.onError);
+    this.usuarioService.store$(user).subscribe(this.onSuccess);
     this.rol = new Rol();
     this.user = new User();
     this.personList = [];
   }
 
   public onUpdate(user: User) {
-    this.usuarioService.update$(user).subscribe(this.onSuccess, this.onError);
+    this.usuarioService.update$(user).subscribe(this.onSuccess);
     this.rol = new Rol();
     this.user = new User();
   }
 
   public onDelete(id: number) {
-    this.usuarioService.delete$(id).subscribe(this.onSuccess, this.onError);
+    this.usuarioService.delete$(id).subscribe(this.onSuccess);
   }
 
   public onShow(id:number) {
@@ -177,7 +123,7 @@ export class MainUserComponent implements OnInit {
       tap(this.loadUser),
       switchMap((user: User): Observable<Person> => this.personService.show$(user.fk_id_person)),
       tap(this.loadPerson),
-    ).subscribe(this.onSuccess, this.onError);
+    ).subscribe(this.onSuccess);
   }
 
   private loadUser = (user: User): void => {
@@ -205,8 +151,8 @@ export class MainUserComponent implements OnInit {
       this.user.rol = new Rol;
       this.user.person = new Person;
     }
-    this.onLoadEmployees(activeUser.fk_id_enterprise);
-    this.loadDataCreation();
+    this.loadStates();
+    this.loadEnterprisesOwners();
   }
 
   public onInactive(user: User) {
@@ -216,7 +162,7 @@ export class MainUserComponent implements OnInit {
     else
       usernew.state_user = 'Activo';
 
-    this.usuarioService.update$(usernew).subscribe(this.onSuccess, this.onError);
+    this.usuarioService.update$(usernew).subscribe(this.onSuccess);
   }
 
   public onCancel(event: boolean) {
@@ -239,10 +185,6 @@ export class MainUserComponent implements OnInit {
   private onSuccess = () => {
   this.globalStoreService.dispatchUserMessage('200', ' Se ejecutó exitosamente, la operación ');
   this.loadUsers();
-  }
-
-  private onError = (error: any) => {
-    this.globalStoreService.dispatchUserMessage(error.status, error.statusText + ' : ' + error.error.error);
   }
 
   /*

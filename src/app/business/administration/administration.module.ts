@@ -27,12 +27,8 @@ import { ModalComponentComponent } from './modules/show-module/modal-component/m
 import { ComponentService } from 'src/app/shared/services/component.service';
 import { OptionService } from 'src/app/shared/services/option.service';
 import { ParameterService } from 'src/app/shared/services/parameter.service';
-import { ModalPersonComponent } from './users/new-user/modal-person/modal-person.component';
-import { NewPersonComponent } from './users/new-user/new-person/new-person.component';
 import { EnterpriseService } from 'src/app/shared/services/enterprise.service';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
-import { ModalEnterpriseComponent } from './users/new-user/modal-enterprise/modal-enterprise.component';
-import { NewEnterpriseComponent } from './users/new-user/new-enterprise/new-enterprise.component';
 import { MainOptionComponent } from './options/main-option/main-option.component';
 import { ListOptionComponent } from './options/list-option/list-option.component';
 import { NewOptionComponent } from './options/new-option/new-option.component';
@@ -57,7 +53,7 @@ import { ListServiceManageComponent } from './service-manage/list-service-manage
   declarations: [
     MainUserComponent, ShowUserComponent, ListUserComponent, NewUserComponent, 
     MainRolComponent, ShowRolComponent, ListRolComponent, NewRolComponent, 
-    MainModuleComponent, ListModuleComponent, NewModuleComponent, ShowModuleComponent, NewComponentComponent, NewOptionComponent, ModalComponentComponent, ModalPersonComponent, NewPersonComponent, ModalEnterpriseComponent, NewEnterpriseComponent, MainOptionComponent, ListOptionComponent, ModalAsignOptionComponent, AsignOptionComponent, ShowServiceManageComponent, NewServiceManageComponent, ListServiceManageComponent
+    MainModuleComponent, ListModuleComponent, NewModuleComponent, ShowModuleComponent, NewComponentComponent, NewOptionComponent, ModalComponentComponent, MainOptionComponent, ListOptionComponent, ModalAsignOptionComponent, AsignOptionComponent, ShowServiceManageComponent, NewServiceManageComponent, ListServiceManageComponent
   ],
   providers: [ EnterpriseService, UserService, RolService, UtilsService, PersonService, ModuleService, ParameterService, ComponentService, OptionService, ServiceEnterpriseService, PositionService ]
 })

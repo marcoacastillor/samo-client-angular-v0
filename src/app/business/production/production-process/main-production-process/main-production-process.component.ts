@@ -8,6 +8,7 @@ import { CuttingPeriodService } from 'src/app/shared/services/cutting-period.ser
 import { CuttingPeriod } from 'src/app/shared/models/cutting-period';
 import { DataProductCuttingPeriod } from 'src/app/shared/models/data-product-cutting-period';
 import { DetailProductInputService } from 'src/app/shared/services/detail-product-input.service';
+import { DetailProductInput } from 'src/app/shared/models/detail-product-input';
 
 @Component({
   selector: 'app-main-production-process',
@@ -24,7 +25,10 @@ export class MainProductionProcessComponent implements OnInit {
 
   productionProcessList: ProductionProcess[];
   cuttingPeriodList: CuttingPeriod[];
-  dataProduct: DataProductCuttingPeriod = new DataProductCuttingPeriod;
+  
+  dataProductProducts:  DetailProductInput[] = [];
+  dataProductInputs: DetailProductInput[] = [];
+  dataProductIntermediaty: DetailProductInput[] = [];
 
   constructor(
     private productionProcessService: ProductionProcessService,
@@ -51,8 +55,9 @@ export class MainProductionProcessComponent implements OnInit {
     this.showPrdProcess = true;
     this.productionProcess = prdProcess;
     this.loadCuttingPeriod(prdProcess.pk_id_production_process);
-    this.dataProduct = new DataProductCuttingPeriod;
-    
+    this.dataProductInputs = [];
+    this.dataProductProducts = [];
+    this.dataProductIntermediaty = [];
   }
 
   loadCuttingPeriod(id_production_process: number){
@@ -63,7 +68,11 @@ export class MainProductionProcessComponent implements OnInit {
 
   onGetData(id_cutting_period: number){
     this.detailProductInputService.getAllByCuttingPeriodAndTypeProduct$(id_cutting_period).subscribe(
-      dataProduct => this.dataProduct = dataProduct
+      dataProduct => {
+        this.dataProductInputs = dataProduct.inputs;
+        this.dataProductProducts = dataProduct.products;
+        this.dataProductIntermediaty = dataProduct.intermediaty;
+      }
     )
   }
 

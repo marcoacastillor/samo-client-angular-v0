@@ -3,6 +3,7 @@ import { ProductionProcess } from 'src/app/shared/models/production-process';
 import { CuttingPeriod } from 'src/app/shared/models/cutting-period';
 import { DataProductCuttingPeriod } from 'src/app/shared/models/data-product-cutting-period';
 import { faThList } from '@fortawesome/free-solid-svg-icons';
+import { DetailProductInput } from 'src/app/shared/models/detail-product-input';
 
 @Component({
   selector: 'app-show-production-process',
@@ -14,7 +15,13 @@ export class ShowProductionProcessComponent implements OnInit {
 
   @Input() public productionProcess: ProductionProcess;
   @Input() public cuttingPeriodList: CuttingPeriod[];
-  @Input() public dataProduct: DataProductCuttingPeriod[];
+  
+  //@Input() public dataProduct: DataProductCuttingPeriod[];
+  
+  @Input() public dataProductInputs:DetailProductInput[] = [];
+  @Input() public dataProductProducts: DetailProductInput[] = [];
+  @Input() public dataProductIntermediaty: DetailProductInput[] = [];
+  
     
   @Output() public getData = new EventEmitter<Number>();
   @Output() public onUpdate = new EventEmitter<ProductionProcess>();

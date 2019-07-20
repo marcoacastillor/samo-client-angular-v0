@@ -24,7 +24,7 @@
                             {{ operationForm.value.total_operation - (operationForm.value.total_discounts + operationForm.value.total_pays) | number }}
                         </div>
                     </div>
-                    <form [formGroup]="operationForm" (ngSubmit)="onSubmit()">
+                    <form [formGroup]="operationForm">
                         <div class="row">
                             <div class="form-group col-sm-3">
                                 <label for="number_invoice">Factura #</label>

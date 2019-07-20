@@ -1,0 +1,17 @@
+.message {
+    /*the container must be positioned relative:*/
+    position: absolute;
+    display: inline-block;
+  }
+  
+  .message-items {
+    position: absolute;
+    
+    border-bottom: none;
+    border-top: none;
+    z-index: 1990;
+    /*position the autocomplete items to be the same width as the container:*/
+    top: 100%;
+    left: auto;
+    right: auto;
+  }
