@@ -31,6 +31,10 @@ export const environment = {
   url_detail_product_input: 'https://www.sanratsolutions.com/prd/ventas/public/detail_product_input',
   url_operation_product: 'https://www.sanratsolutions.com/prd/ventas/public/operation_product',
   url_notes: 'https://www.sanratsolutions.com/prd/ventas/public/notes',
+  url_enterprise_person: 'https://www.sanratsolutions.com/prd/ventas/public/enterprise_person',
+  url_laboral_condition: 'https://www.sanratsolutions.com/prd/ventas/public/laboral_condition',
+  url_worker_news: 'https://www.sanratsolutions.com/prd/ventas/public/worker_news',
+  url_payment_employee: 'https://www.sanratsolutions.com/prd/ventas/public/paying_employee',
 
   clearMessageDelayMs: 5000,
   refreshInterval: 1000,
@@ -73,6 +77,7 @@ export const environment = {
   cutting_period_production: 'CUTTING_PERIOD_PRODUCTION',
   parameters_enterprises: 'PARAMETERS_ENTERPRISES',
   regimen: 'REGIMEN_ENTERPRISE',
+  type_worker_new: 'TYPE_WORKER_NEW',
 
   url_web_service: 'URL_WEB_SERVICE',
   enterprise_fact: 'ENTERPRISE_FACT',
@@ -99,4 +104,7 @@ export const environment = {
   type_product_internal_prd: 'Producción Interna',
   type_product_input: 'Insumo',
   type_product_intermediaty: 'Producto Intermedio',
+
+  laboral_state_active: 'Activo',
+  laboral_state_inactive: 'Inactivo',
 };

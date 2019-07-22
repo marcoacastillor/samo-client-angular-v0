@@ -14,6 +14,9 @@ export class ClothesFormComponent implements OnInit {
   clothesForm: FormGroup;
   showPackageInfo: boolean = false;
 
+  success = false;
+  message = '';
+
   @Input() public product: Product;
   @Input() public presentationList: Parameter[];
   @Input() public typeProductList: Parameter[];
@@ -84,11 +87,14 @@ export class ClothesFormComponent implements OnInit {
   createProduct(){
     this.onCreate.emit(this.clothesForm.value);
     this.resetManualform();
+    this.success = true;
+    this.message = 'Se crea el registro satisfactoriamente.';
   }
 
   updateProduct(){
     this.onUpdate.emit(this.clothesForm.value);
-    this.resetManualform();
+    this.success = true;
+    this.message = 'Se actualiza el registro satisfactoriamente.';
   }
 
   /**

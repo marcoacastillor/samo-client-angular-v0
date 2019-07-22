@@ -168,7 +168,6 @@ public onSelect(product: Product){
   }
 
   public onUpdate(product: Product){
-    console.log(product);
     this.productService.update$(product).subscribe(
       prd => {
         this.onSetMessageOperation('Se actualizó el registro exitosamente.');
@@ -204,17 +203,17 @@ private onSetMessageOperation (message: string) {
   this.globalStoreService.dispatchUserMessage('200', message);
 }
 
-  /*
-  * ------------------------------------------
-  * Funciones visualización
-  * ------------------------------------------
-  */
+/*
+* ------------------------------------------
+* Funciones visualización
+* ------------------------------------------
+*/
 
- public getClassReport(){
+public getClassReport(){
   return this.utilService.getClassReport(this.showReports)
 }
 
- public getClassNew() {
+public getClassNew() {
   return this.utilService.getClassNew(this.showNewProduct);
 }
 

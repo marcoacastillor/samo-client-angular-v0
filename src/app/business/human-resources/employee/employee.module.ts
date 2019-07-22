@@ -13,6 +13,14 @@ import { ParameterService } from 'src/app/shared/services/parameter.service';
 import { FormToolsService } from 'src/app/shared/services/form-tools.service';
 import { PositionService } from 'src/app/shared/services/position.service';
 import { ProductService } from 'src/app/shared/services/product.service';
+import { EnterprisePersonService } from 'src/app/shared/services/enterprise-person.service';
+import { WorkerNewService } from 'src/app/shared/services/worker-new.service';
+import { PayingEmployeeService } from 'src/app/shared/services/paying-employee.service';
+import { LaboralConditionService } from 'src/app/shared/services/laboral-condition.service';
+import { ModalContractFormComponent } from './modal-contract-form/modal-contract-form.component';
+import { ModalLaboralConditionFormComponent } from './modal-laboral-condition-form/modal-laboral-condition-form.component';
+import { ModalPersonalFormComponent } from './modal-personal-form/modal-personal-form.component';
+import { ModalWorkerNewFormComponent } from './modal-worker-new-form/modal-worker-new-form.component';
 
 @NgModule({
   imports: [
@@ -24,8 +32,8 @@ import { ProductService } from 'src/app/shared/services/product.service';
     OwlNativeDateTimeModule,
   ],
   providers: [
-    PersonService, ParameterService, FormToolsService, PositionService, ProductService
+    PersonService, ParameterService, FormToolsService, PositionService, ProductService, EnterprisePersonService, LaboralConditionService, PayingEmployeeService, WorkerNewService
   ],
-  declarations: [EmployeeListComponent, EmployeeFormComponent, EmployeeShowComponent]
+  declarations: [EmployeeListComponent, EmployeeFormComponent, EmployeeShowComponent, ModalContractFormComponent, ModalLaboralConditionFormComponent, ModalPersonalFormComponent, ModalWorkerNewFormComponent]
 })
 export class EmployeeModule { }

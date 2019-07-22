@@ -14,6 +14,9 @@ export class FoodFormComponent implements OnInit, OnChanges {
   foodsForm: FormGroup;
   showPackageInfo: boolean = false;
 
+  success = false;
+  message = '';
+
   @Input() public product: Product;
   @Input() public presentationList: Parameter[];
   @Input() public typeProductList: Parameter[];
@@ -35,10 +38,11 @@ export class FoodFormComponent implements OnInit, OnChanges {
   {
     if(changes.product)
     {
+      this.success = false;
       if(changes.product.currentValue != changes.product.previousValue)
       {
         this.product = changes.product.currentValue;
-        if(this.product.presentation == environment.package)
+        if(this.product.presentation == environment.package && this.product.type_product == environment.type_product_purchase)
         {
           this.showPackageInfo = true;
         }
@@ -109,14 +113,19 @@ export class FoodFormComponent implements OnInit, OnChanges {
     })
   }
 
+  
+
   createProduct(){
     this.onCreate.emit(this.foodsForm.value);
+    this.success = true;
     this.resetManualform();
+    this.message = 'Se crea el registro satisfactoriamente.';
   }
 
   updateProduct(){
     this.onUpdate.emit(this.foodsForm.value);
-    this.resetManualform();
+    this.success = true;
+    this.message = 'Se actualiza el registro satisfactoriamente.';
   }
 
   /**

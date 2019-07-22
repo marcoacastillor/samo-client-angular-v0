@@ -1,10 +1,8 @@
 <div class="card">
     <div class="card-body">
+        <!-- start opciones sobre proceso productivo -->
         <div class="row">
-            <div class="col-sm-8 text-left">
-                <h5 class="card-title">Proceso de producción</h5>
-            </div>
-            <div class="col-sm-4 text-right" *ngIf="productionProcess.state === 'Activo'">
+            <div class="col-sm-12 text-right" *ngIf="productionProcess.state === 'Activo'">
                 <div class="btn-group btn-group-sm">
                     <button (click)="closePeriod()" type="button" class="btn btn-outline-primary btn-sm text-ultra-small">
                         <fa-icon [icon]="faStopwatch" class="text-outline-primary mb-2 mr-1"></fa-icon>Cerrar
@@ -13,6 +11,13 @@
                         <fa-icon [icon]="faEdit" class="text-outline-primary mb-2 mr-1"></fa-icon>Editar
                     </button>
                 </div>
+            </div>
+        </div>
+        <!-- end opciones sobre proceso productivo -->
+            
+        <div class="row">
+            <div class="col-sm-8 text-left">
+                <h5 class="card-title">Proceso de producción</h5>
             </div>
         </div>
         <div class="row">

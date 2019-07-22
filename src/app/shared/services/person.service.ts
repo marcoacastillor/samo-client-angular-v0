@@ -218,4 +218,15 @@ export class PersonService {
       })
     );
   }
+
+  public update$(person:Person): Observable<Person> {
+    return this.userService.validateOptionByToken('PRS_UPD_INFO').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.put<Person>(this._url,person);
+        }
+      })
+    );
+  }
+
 }

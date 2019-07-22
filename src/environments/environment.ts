@@ -35,6 +35,11 @@ export const environment = {
   url_detail_product_input: 'http://localhost/ventasV0/public/detail_product_input',
   url_operation_product: 'http://localhost/ventasV0/public/operation_product',
   url_notes: 'http://localhost/ventasV0/public/notes',
+  url_enterprise_person: 'http://localhost/ventasV0/public/enterprise_person',
+  url_laboral_condition: 'http://localhost/ventasV0/public/laboral_condition',
+  url_worker_news: 'http://localhost/ventasV0/public/worker_news',
+  url_payment_employee: 'http://localhost/ventasV0/public/paying_employee',
+  
 
 
   clearMessageDelayMs: 5000,
@@ -78,6 +83,7 @@ export const environment = {
   cutting_period_production: 'CUTTING_PERIOD_PRODUCTION',
   parameters_enterprises: 'PARAMETERS_ENTERPRISES',
   regimen: 'REGIMEN_ENTERPRISE',
+  type_worker_new: 'TYPE_WORKER_NEW',
 
   url_web_service: 'URL_WEB_SERVICE',
   enterprise_fact: 'ENTERPRISE_FACT',
@@ -104,6 +110,9 @@ export const environment = {
   type_product_internal_prd: 'Producción interna',
   type_product_input: 'Insumo',
   type_product_intermediaty: 'Producto Intermedio',
+
+  laboral_state_active: 'Activo',
+  laboral_state_inactive: 'Inactivo',
 };
 
 /*

@@ -5,9 +5,10 @@ export class LaboralCondition {
     public salary_type: string;
     public salary: number;
     public production_unit: number;
+    public pk_product_unit: number;
     public value_product_unit: number;
-    public benefit_health: number;
-    public benefit_pension: number;
-    public benefit_arl: number;
-    public benefit_compensation_box: number;
+    public benefit_health: string;
+    public benefit_pension: string;
+    public benefit_arl: string;
+    public benefit_compensation_box: string;
 }

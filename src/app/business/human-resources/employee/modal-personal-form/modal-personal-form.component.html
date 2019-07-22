@@ -1,0 +1,78 @@
+<div class="modal fade" id="personalModal" tabindex="-1" role="dialog" aria-labelledby="personalModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Información personal</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="card">
+                <div class="card-body">
+                    <form [formGroup]="personalForm">
+                        <div class="row">
+                            <div class="form-group col-sm-6">
+                                <label for="type_id">Tipo Id</label>
+                                <select class="form-control form-control-sm" formControlName="type_id" required>
+                                    <option value="" selected>Seleccione...</option>
+                                    <option *ngFor="let param of personalParametersList" value="{{param.value}}">{{ param.name }}</option>
+                                </select>
+                                <small *ngIf="mustShowError('type_id')" class="form-text alert-danger">
+                                    Tipo de id, es obligatorio
+                                </small>
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <label for="number_id">Número Id</label>
+                                <input type="text" class="form-control form-control-sm"  formControlName="number_id" required>
+                                <small *ngIf="mustShowError('number_id')" class="form-text alert-danger">
+                                    Número de id, es obligatorio
+                                </small>
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <label for="names">Nombres</label>
+                                <input type="text" class="form-control form-control-sm"  formControlName="names" required> 
+                                <small *ngIf="mustShowError('names')" class="form-text alert-danger">
+                                    Nombres, es obligatorio
+                                </small>
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <label for="last_names">Apellidos</label>
+                                <input type="text" class="form-control form-control-sm"  formControlName="last_names" required>
+                                <small *ngIf="mustShowError('last_names')" class="form-text alert-danger">
+                                    Apellidos, es obligatorio
+                                </small>
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <label for="address">Dirección</label>
+                                <input type="text" class="form-control form-control-sm"  formControlName="address" required>
+                                <small *ngIf="mustShowError('address')" class="form-text alert-danger">
+                                    Dirección, es obligatorio
+                                </small>
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <label for="phone">Teléfono</label>
+                                <input type="text" class="form-control form-control-sm"  formControlName="phone" required>
+                                <small *ngIf="mustShowError('phone')" class="form-text alert-danger">
+                                    Teléfono, es obligatorio
+                                </small>
+                            </div>
+                        </div>
+
+                        <div class="row justify-content-end">
+                            <div class="col-sm-4 text-right align-self-end">
+                                <button type="submit" (click)="updatePerson()" [disabled]="personalForm.invalid" class="btn btn-sm btn-outline-primary" type="button" data-dismiss="modal">
+                                    <fa-icon [icon]="faSave" class="text-outline-secondary mb-2 mr-1"></fa-icon>Actualizar
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        </div>
+        </div>
+    </div>
+</div>

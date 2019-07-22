@@ -1,1 +1,329 @@
-show
+<app-pages title="Detalle de trabajador">  
+    <main>       
+        <section>
+            <!-- start menu main-->
+            <div class="row bg-gray">
+                <div class="col-sm-6 text-left">
+                    Información detallada
+                </div>
+                <div class="col-sm-6 text-right">
+                    <div class="btn-group btn-group-sm">
+                        <a routerLink='../../list' class="btn  btn-sm btn-outline-primary" type="button">
+                            <fa-icon [icon]="faThList" class="text-outline-secondary mb-2 mr-1"></fa-icon>Ver todos
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- end menu main-->
+
+            <!-- start content -->
+            <div class="row margin-top-1rem">
+                <div class="col-sm-12">
+
+                    <!-- start info options-->
+                    <div class="row" *ngIf="success">
+                        <div class="col-sm-12">
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>Éxito : </strong> {{ message }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end info options-->
+                    
+                    <!-- start info options-->
+                    <div class="row back-colo-f6">
+                        <div class="col-sm-4 text-left align-self-start" *ngIf="allEnterprisePerson.length > 0">
+                            <div class="btn-group btn-group-sm">
+                                <div class="dropdown">
+                                    <button class="btn  btn-sm dropdown-toggle" type="button" id="laboral" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <fa-icon [icon]="faAddressCard" class="text-outline-secondary mb-2 mr-1"></fa-icon>Histórico contratación
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="laboral">
+                                        <button (click)="getLaboralDetailByContract(contract.pk_id_enterprise_person)" class="dropdown-item text-small text-secondary"  type="button" *ngFor="let contract of allEnterprisePerson">
+                                            <fa-icon [icon]="faUserCheck" class="text-outline-secondary mb-2 mr-1"></fa-icon>
+                                            {{ contract.position }} - {{ contract.state }}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-8 text-right align-self-end" *ngIf="enterprisePerson.state == 'Activo'">
+                            <div class="btn-group btn-group-sm">
+                                <div class="dropdown">
+                                    <button class="btn  btn-sm dropdown-toggle" type="button" id="laboral" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <fa-icon [icon]="faAddressCard" class="text-outline-secondary mb-2 mr-1"></fa-icon>Laboral
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="laboral">
+                                        <button class="dropdown-item text-small text-secondary" (click)="loadPersonalParameters()"  type="button" data-toggle="modal" data-target="#personalModal">
+                                            <fa-icon [icon]="faUserCheck" class="text-outline-secondary mb-2 mr-1"></fa-icon>Editar información personal
+                                        </button>
+                                        <div class="dropdown-divider"></div>
+                                        <button class="dropdown-item text-small text-secondary"  (click)="loadContractParameters()" type="button" data-toggle="modal" data-target="#enterprisePersonModal">
+                                            <fa-icon [icon]="faServer" class="text-outline-secondary mb-2 mr-1"></fa-icon>Editar contrato
+                                        </button>
+                                        <div class="dropdown-divider"></div>
+                                        <button class="dropdown-item text-small text-secondary" (click)="loadLaboralConditionParameters()"  type="button" data-toggle="modal" data-target="#laboralConditionModal">
+                                            <fa-icon [icon]="faFileSignature" class="text-outline-secondary mb-2 mr-1"></fa-icon>Editar condiciones laborales
+                                        </button>
+                                        <div class="dropdown-divider"></div>
+                                        <button class="dropdown-item text-small text-secondary" (click)="inactiveContract(enterprisePerson.pk_id_enterprise_person)"  type="button">
+                                            <fa-icon [icon]="faFilePrescription" class="text-outline-secondary mb-2 mr-1"></fa-icon>Inactivar contrato
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="dropdown">
+                                    <button class="btn  btn-sm dropdown-toggle" type="button" id="newsWorker" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <fa-icon [icon]="faFolderOpen" class="text-outline-secondary mb-2 mr-1"></fa-icon>Novedades
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="newsWorker">
+                                        <button class="dropdown-item text-small text-secondary" (click)="loadWorkerNewsParameter()" type="button" data-toggle="modal" data-target="#workerNewModal">
+                                            <fa-icon [icon]="faFolderPlus" class="text-outline-secondary mb-2 mr-1"></fa-icon>Agregar novedad
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end info options-->
+
+                    <!-- start main info-->
+                    <div class="row margin-top-1rem">
+                        
+                        <!-- start provider info-->
+                        <div class="col-sm-4 back-colo-f6">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table class="table table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th colspan="2"><h4>Datos personales</h4></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th>Identificación</th>
+                                                <td>{{ person.type_id }} {{ person.number_id }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Nombre</th>
+                                                <td>{{ person.names }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Apellidos</th>
+                                                <td>{{ person.last_names }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Dirección</th>
+                                                <td>{{ person.address }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Teléfono</th>
+                                                <td>{{ person.phone }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end peson info-->
+                        
+                        <!-- start laboral info-->
+                        <div class="col-sm-8 back-color-ff">
+                            <!-- start laboral condition-->
+                            <div class="row margin-top-2rem">
+                                <div class="col-sm-6">
+                                    <div class="row justify-content-start">
+                                        <div class="col-sm-12 tezt-left">
+                                            <table class="table table-sm">
+                                                <tbody>
+                                                    <tr>
+                                                        <th>Cargo</th>
+                                                        <td>{{ enterprisePerson.position }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Fecha inicio contrato</th>
+                                                        <td>{{ enterprisePerson.date_register }}</td>
+                                                    </tr>
+                                                    <tr *ngIf="enterprisePerson.state != 'Activo'">
+                                                        <th>Fecha terminación de contrato</th>
+                                                        <td>{{ enterprisePerson.date_unregister }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Estado</th>
+                                                        <td>{{ enterprisePerson.state }}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="row justify-content-end">
+                                        <div class="col-sm-12 text-right">
+                                            <table class="table table-sm">
+                                                <tbody class="text-success">
+                                                    <tr>
+                                                        <th>Tipo de contrato</th>
+                                                        <td>{{ laboralCondition.contract_type }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Tipo de salario</th>
+                                                        <td>{{ laboralCondition.salary_type }}</td>
+                                                    </tr>
+                                                    <tr *ngIf="laboralCondition.salary_type == 'FIJO'">
+                                                        <th>Salario</th>
+                                                        <td>$ {{ laboralCondition.salary | json }}</td>
+                                                    </tr>
+                                                    <tr *ngIf="laboralCondition.salary_type != 'FIJO'">
+                                                        <th>Unidad productiva</th>
+                                                        <td>{{ laboralCondition.production_unit }}</td>
+                                                    </tr>
+                                                    <tr *ngIf="laboralCondition.salary_type != 'FIJO'">
+                                                        <th>Valor pagado por unidad productiva</th>
+                                                        <td>$ {{ laboralCondition.value_product_unit | number }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Aporte a salud?</th>
+                                                        <td *ngIf="laboralCondition.benefit_health == '1'">SI</td>
+                                                        <td *ngIf="laboralCondition.benefit_health != '1'">NO</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Aporte a pensión?</th>
+                                                        <td *ngIf="laboralCondition.benefit_pension == '1'">SI</td>
+                                                        <td *ngIf="laboralCondition.benefit_pension != '1'">NO</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Aporte a arl?</th>
+                                                        <td *ngIf="laboralCondition.benefit_arl == '1'">SI</td>
+                                                        <td *ngIf="laboralCondition.benefit_arl != '1'">NO</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Aporte a caja de compensación?</th>
+                                                        <td *ngIf="laboralCondition.benefit_compensation_box == '1'">SI</td>
+                                                        <td *ngIf="laboralCondition.benefit_compensation_box != '1'">NO</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end información laboral-->
+                        </div>
+                        <!-- end purchase info-->
+                    </div>
+                    <!-- end main info-->
+
+                    <!-- start novedades-->
+                    <div class="row margin-top-2rem justify-content-end" *ngIf="workerNews.length > 0">
+                        <div class="col-sm-12">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <td colspan="4"><h4>Novedades por trabajador</h4></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Tipo</th>
+                                        <th>Descripción</th>
+                                        <th>Fecha de novedad</th>
+                                        <th>Valor</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let news of workerNews">
+                                        <td>{{ news.type_new }}</td>
+                                        <td>{{ news.description_new }}</td>
+                                        <td>{{ news.date_new }}</td>
+                                        <td>{{ news.value_new | number }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- end novedades-->
+
+                    <!-- start novedades-->
+                    <div class="row margin-top-2rem justify-content-end" *ngIf="paymentsEmployee.length > 0">
+                        <div class="col-sm-12">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <td colspan="11"><h4>Pagos realizados</h4></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Fecha inicial de período</th>
+                                        <th>Fecha final de período</th>
+                                        <th>IBC</th>
+                                        <th>Salud</th>
+                                        <th>Pensión</th>
+                                        <th>Arl</th>
+                                        <th>Caja de compensación</th>
+                                        <th>Total descuentos</th>
+                                        <th>Otros ingresos</th>
+                                        <th>Valor neto a pagar</th>
+                                        <th>Estado del pago</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let payment of paymentsEmployee">
+                                        <td>{{ payment.date_init_period }}</td>
+                                        <td>{{ payment.date_end_period }}</td>
+                                        <td>$ {{ payment.value_payment | number }}</td>
+                                        <td>$ {{ payment.ibc_value | number }}</td>
+                                        <td>$ {{ payment.health_value | number }}</td>
+                                        <td>$ {{ payment.pension_value | number }}</td>
+                                        <td>$ {{ payment.arl_value | number }}</td>
+                                        <td>$ {{ payment.compensation_value | number }}</td>
+                                        <td>$ {{ payment.total_discounts_value | number }}</td>
+                                        <td>$ {{ payment.other_income_value | number }}</td>
+                                        <td>{{ payment.state_paying }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- end novedades-->
+                </div>
+            </div>
+            <!-- end content -->
+        </section>
+    </main>
+</app-pages>  
+
+<!--start formulario de información personal-->
+<app-modal-personal-form
+[person]="person"
+[personalParametersList]="personalParametersList"
+(update)="updatePersonal($event)"
+>
+</app-modal-personal-form>
+<!--end formulario de información personal-->
+
+<!--start formulario de información de contrato-->
+<app-modal-contract-form
+[enterprisePerson]="enterprisePerson"
+[positionsList]="positionsList"
+(update)="updateEnterprisePerson($event)"
+></app-modal-contract-form>
+<!--end formulario de información de contrato-->
+
+<!--start formulario de información sobre condiciones laborales-->
+<app-modal-laboral-condition-form
+[laboralCondition]="laboralCondition"
+[laboralConditionParametersList]="laboralConditionParametersList"
+(update)="updateLaboralCondition($event)"
+>
+</app-modal-laboral-condition-form>
+<!--end formulario de información sobre condiciones laborales-->
+
+<!--start formulario novedad laboral-->
+<app-modal-worker-new-form
+[workerNewsParameterList]="workerNewsParameterList"
+[fk_id_enterprise_person]="enterprisePerson.pk_id_enterprise_person"
+(create)="createWorkerNews($event)"
+>
+</app-modal-worker-new-form>
+<!--end formulario novedad laboral-->
