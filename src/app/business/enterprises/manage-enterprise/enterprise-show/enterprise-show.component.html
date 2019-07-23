@@ -32,6 +32,16 @@
                             <div class="btn-group btn-group-sm">
                                 <div class="dropdown">
                                     <button class="btn  btn-sm dropdown-toggle" type="button" id="position" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <fa-icon [icon]="faIndustry" class="text-outline-secondary mb-2 mr-1"></fa-icon>Empresa
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="position">
+                                        <button class="dropdown-item text-small text-secondary" type="button" data-toggle="modal" data-target="#enterpriseModal">
+                                            <fa-icon [icon]="faEdit" class="text-outline-secondary mb-2 mr-1"></fa-icon>Editar información
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="dropdown">
+                                    <button class="btn  btn-sm dropdown-toggle" type="button" id="position" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <fa-icon [icon]="faUserTag" class="text-outline-secondary mb-2 mr-1"></fa-icon>Cargos
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="position">
@@ -120,15 +130,25 @@
                                     <table class="table table-sm">
                                         <thead>
                                             <tr>
-                                                <th colspan="2"><h4>Cargos</h4></th>
+                                                <th colspan="3"><h4>Cargos</h4></th>
                                             </tr>
                                             <tr>
-                                                <th>Código</th>
+                                                <th colspan="2">Código</th>
                                                 <th>Nombre</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr *ngFor="let position of lstPositions">
+                                                <td>
+                                                    <div class="btn-group btn-group-sm">
+                                                        <button class="btn text-small btn-sm btn-outline-danger" type="button" data-toggle="modal" data-target="#deleteParamterModal">
+                                                            <fa-icon [icon]="faTrash" class="text-outline-danger mb-2 mr-1"></fa-icon>Eliminar
+                                                        </button>
+                                                        <button class="btn text-small btn-sm btn-outline-primary" type="button">
+                                                            <fa-icon [icon]="faEdit" class="text-outline-primary mb-2 mr-1"></fa-icon>Editar
+                                                        </button>
+                                                    </div>
+                                                </td>
                                                 <td>{{ position.code }}</td>
                                                 <td>{{ position.name }}</td>
                                             </tr>
@@ -151,13 +171,23 @@
                                         <th colspan="4"><h4>Parámetros de la empresa</h4></th>
                                     </tr>
                                     <tr>
-                                        <th>Código</th>
+                                        <th colspan="2">Código</th>
                                         <th>Decripción</th>
                                         <th>Valor</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let parameter of lstParametersConfig">
+                                        <td>
+                                            <div class="btn-group btn-group-sm">
+                                                <button disabled class="btn text-small btn-sm btn-outline-secondary" type="button" *ngIf="parameter.fixed == 1">
+                                                    <fa-icon [icon]="faEdit" class="text-outline-secondary mb-2 mr-1"></fa-icon>Editar
+                                                </button>
+                                                <button class="btn text-small btn-sm btn-outline-primary" type="button" *ngIf="parameter.fixed != 1">
+                                                    <fa-icon [icon]="faEdit" class="text-outline-primary mb-2 mr-1"></fa-icon>Editar
+                                                </button>
+                                            </div>
+                                        </td>
                                         <td>{{ parameter.code }}</td>
                                         <td>{{ parameter.description }}</td>
                                         <td>{{ parameter.value }}</td>
@@ -173,7 +203,7 @@
                             <table class="table table-sm">
                                 <thead>
                                     <tr>
-                                        <th colspan="4"><h4>Trabajadores</h4></th>
+                                        <th colspan="6"><h4>Trabajadores</h4></th>
                                     </tr>
                                     <tr>
                                         <th>ID</th>
@@ -210,3 +240,43 @@
         </section>
     </main>
 </app-pages>  
+
+<!-- inicia información empresa-->
+<app-modal-enterprise-form>
+</app-modal-enterprise-form>
+<!-- fin información empresa-->
+
+<!-- inicia información parametros-->
+<app-modal-parameter-form>
+</app-modal-parameter-form>
+<!-- fin información parametros-->
+
+<!-- inicia información cargos-->
+<app-modal-position-form>
+</app-modal-position-form>
+<!-- fin información cargos-->
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="deleteParamterModal" tabindex="-1" role="dialog" aria-labelledby="deleteParamterModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Confirmación de mensaje</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="alert alert-danger" role="alert">
+                Se va a eliminar un registro, desea confirmar la operación?.
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="button" (click)="deleteParameter()" data-dismiss="modal" class="btn btn-danger">Eliminar</button>
+        </div>
+        </div>
+    </div>
+</div>

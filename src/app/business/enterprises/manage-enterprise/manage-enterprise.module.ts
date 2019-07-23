@@ -9,6 +9,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PersonService } from 'src/app/shared/services/person.service';
 import { ParameterConfigService } from 'src/app/shared/services/parameter-config.service';
 import { PositionService } from 'src/app/shared/services/position.service';
+import { ModalPositionFormComponent } from './modal-position-form/modal-position-form.component';
+import { ModalParameterFormComponent } from './modal-parameter-form/modal-parameter-form.component';
+import { ModalEnterpriseFormComponent } from './modal-enterprise-form/modal-enterprise-form.component';
 
 @NgModule({
   imports: [
@@ -20,6 +23,6 @@ import { PositionService } from 'src/app/shared/services/position.service';
   providers: [
     EnterpriseService, PersonService, ParameterConfigService, PositionService
   ],
-  declarations: [EnterpriseShowComponent]
+  declarations: [EnterpriseShowComponent, ModalPositionFormComponent, ModalParameterFormComponent, ModalEnterpriseFormComponent]
 })
 export class ManageEnterpriseModule { }

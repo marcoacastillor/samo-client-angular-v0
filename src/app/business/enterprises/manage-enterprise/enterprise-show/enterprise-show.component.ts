@@ -10,7 +10,7 @@ import { ParameterConfig } from 'src/app/shared/models/parameter-config';
 import { ParameterConfigService } from 'src/app/shared/services/parameter-config.service';
 import { PositionService } from 'src/app/shared/services/position.service';
 import { Position } from 'src/app/shared/models/position';
-import { faUserTag, faUserCheck, faCogs, faWrench, faEye } from '@fortawesome/free-solid-svg-icons';
+import { faUserTag, faUserCheck, faCogs, faWrench, faEye, faEdit, faTrash, faIndustry } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-enterprise-show',
@@ -19,10 +19,13 @@ import { faUserTag, faUserCheck, faCogs, faWrench, faEye } from '@fortawesome/fr
 })
 export class EnterpriseShowComponent implements OnInit {
   faEye = faEye;
+  faTrash= faTrash;
   faUserTag = faUserTag;
   faUserCheck = faUserCheck;
   faCogs = faCogs;
   faWrench = faWrench;
+  faEdit = faEdit;
+  faIndustry = faIndustry;
 
   user: User = new User;
   enterprise: Enterprise = new Enterprise;

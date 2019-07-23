@@ -51,7 +51,7 @@ export class ReportMainComponent implements OnInit {
   }
 
   public loadData(){
-    this.operationService.getConsolidateByDates$(this.reportForm.value.from_date, this.reportForm.value.to_date,environment.purchase).subscribe(
+    this.operationService.getConsolidateByDates$(moment(this.reportForm.value.from_date).format('YYYY-MM-DD'), moment(this.reportForm.value.to_date).format('YYYY-MM-DD'),environment.purchase).subscribe(
       data => this.consolidates = data
     );
   }
