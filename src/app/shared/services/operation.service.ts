@@ -168,4 +168,15 @@ export class OperationService {
       })
     );
   }
+
+  public getOperationByProvider$(id_enterprise: number): Observable<Operation[]> {
+    const url = this._url + '/get-operation-by-provider/' + id_enterprise;
+    return this.userService.validateOptionByToken('OPE_OPERATION_GET_BY_PROVIDER').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.get<Operation[]>(url);
+        }
+      })
+    );
+  }
 }

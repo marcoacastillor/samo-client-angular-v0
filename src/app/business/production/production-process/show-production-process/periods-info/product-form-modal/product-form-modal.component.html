@@ -40,12 +40,13 @@
                                 <div class="form-group">
                                     <label for="amount_use_product">Cantidad del producto</label>
                                     <input type="number" class="form-control text-small" placeholder="Cantidad" formControlName="amount_use_product" required>
-                                    <small *ngIf="mustShowError('amount_use_product')" class="form-text alert-danger">
-                                        Cantidad del producto, es obligatorio
-                                    </small>
+                                    <div *ngIf="mustShowError('amount_use_product')" class="form-text alert-danger">
+                                        Cantidad, es obligatorio.
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        <pre>{{ units_available }}</pre>
                         <div class="row margin-top-2rem" *ngIf="units_available > 0">
                             <div class="col-sm-12 ">
                                 <div class="alert alert-info" role="alert">

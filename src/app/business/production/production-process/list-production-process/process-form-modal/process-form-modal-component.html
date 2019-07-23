@@ -17,6 +17,7 @@
                                         <div class="form-group">
                                             <label for="defined_period">Período definido</label>
                                             <select class="form-control form-control-sm text-small" formControlName="defined_period" required>
+                                                <option selected value="">Seleccione...</option>
                                                 <option value="{{param.value}}" *ngFor="let param of definedPeriodList">{{param.name}}</option>
                                             </select>
                                             <small *ngIf="mustShowError('defined_period')" class="form-text alert-danger">

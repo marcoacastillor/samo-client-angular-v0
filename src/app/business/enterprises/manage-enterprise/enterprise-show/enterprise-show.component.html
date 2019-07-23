@@ -1,0 +1,212 @@
+<app-pages title="Detalle de empresa">  
+    <main>       
+        <section>
+            <!-- start menu main-->
+            <div class="row bg-gray">
+                <div class="col-sm-6 text-left">
+                    Información de mi empresa
+                </div>
+            </div>
+            <!-- end menu main-->
+
+            <!-- start content -->
+            <div class="row margin-top-1rem">
+                <div class="col-sm-12">
+
+                    <!-- start info options-->
+                    <div class="row" *ngIf="success">
+                        <div class="col-sm-12">
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>Éxito : </strong> {{ message }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end info options-->
+
+                    <!-- start info options-->
+                    <div class="row back-colo-f6">
+                        <div class="col-sm-12 text-right align-self-end">
+                            <div class="btn-group btn-group-sm">
+                                <div class="dropdown">
+                                    <button class="btn  btn-sm dropdown-toggle" type="button" id="position" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <fa-icon [icon]="faUserTag" class="text-outline-secondary mb-2 mr-1"></fa-icon>Cargos
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="position">
+                                        <button class="dropdown-item text-small text-secondary" type="button" data-toggle="modal" data-target="#positionModal">
+                                            <fa-icon [icon]="faUserCheck" class="text-outline-secondary mb-2 mr-1"></fa-icon>Agregar cargo
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="dropdown">
+                                    <button class="btn  btn-sm dropdown-toggle" type="button" id="parameter" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <fa-icon [icon]="faCogs" class="text-outline-secondary mb-2 mr-1"></fa-icon>Parámetros
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="parameter">
+                                        <button class="dropdown-item text-small text-secondary" type="button" data-toggle="modal" data-target="#parameterModal">
+                                            <fa-icon [icon]="faWrench" class="text-outline-secondary mb-2 mr-1"></fa-icon>Crear parámetros
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end info options-->
+                    
+                    <!-- start main info-->
+                    <div class="row margin-top-1rem">
+                        
+                        <!-- start provider info-->
+                        <div class="col-sm-6 back-colo-f6">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table class="table table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th colspan="2"><h4>Datos</h4></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th>NIT</th>
+                                                <td>{{ enterprise.nit }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Nombre</th>
+                                                <td>{{ enterprise.name }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Dirección</th>
+                                                <td>{{ enterprise.address }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Teléfono</th>
+                                                <td>{{ enterprise.phone }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Ubicación</th>
+                                                <td>{{ enterprise.ubication_city }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Régimen</th>
+                                                <td>{{ enterprise.regimen }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Resolución de facturación DIAN</th>
+                                                <td>{{ enterprise.DIAN_billing_resolution }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Información adicional</th>
+                                                <td>{{ enterprise.footer_billing }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Tamaño de la empresa</th>
+                                                <td>{{ enterprise.size }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end peson info-->
+                        
+                        <!-- start laboral info-->
+                        <div class="col-sm-6 back-color-ff">
+                            <!-- start laboral condition-->
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table class="table table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th colspan="2"><h4>Cargos</h4></th>
+                                            </tr>
+                                            <tr>
+                                                <th>Código</th>
+                                                <th>Nombre</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let position of lstPositions">
+                                                <td>{{ position.code }}</td>
+                                                <td>{{ position.name }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- end información laboral-->
+                            
+                        </div>
+                        <!-- end purchase info-->
+                    </div>
+                    <!-- end main info-->
+
+                    <div class="row margin-top-1rem">
+                        <div class="col-sm-12">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th colspan="4"><h4>Parámetros de la empresa</h4></th>
+                                    </tr>
+                                    <tr>
+                                        <th>Código</th>
+                                        <th>Decripción</th>
+                                        <th>Valor</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let parameter of lstParametersConfig">
+                                        <td>{{ parameter.code }}</td>
+                                        <td>{{ parameter.description }}</td>
+                                        <td>{{ parameter.value }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- start laboral condition-->
+                    <div class="row margin-top-1rem">
+                        <div class="col-sm-12">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th colspan="4"><h4>Trabajadores</h4></th>
+                                    </tr>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Nombres</th>
+                                        <th>Apellidos</th>
+                                        <th>Cargo</th>
+                                        <th>Estado</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let employee of lstEmployee">
+                                        <td>
+                                            <div class="btn-group btn-group-sm">
+                                                <a routerLink='../../../human-resource/employee/show/{{employee.pk_id_person}}' class="btn text-small btn-sm btn-outline-primary" type="button">
+                                                    <fa-icon [icon]="faEye" class="text-outline-secondary mb-2 mr-1"></fa-icon>Ver detalle
+                                                </a>
+                                            </div>
+                                        </td>
+                                        <td>{{ employee.type_id }} - {{ employee.number_id }}</td>
+                                        <td>{{ employee.names }}</td>
+                                        <td>{{ employee.last_names }}</td>
+                                        <td>{{ employee.name }}</td>
+                                        <td>{{ employee.state }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- end información laboral-->
+
+                </div>
+            </div>
+            <!-- end content -->
+        </section>
+    </main>
+</app-pages>  

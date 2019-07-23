@@ -31,17 +31,6 @@ export class ProcessFormModalComponent implements OnInit {
     this.initUpdForm();
   }
 
-  ngOnChanges(changes: SimpleChanges)
-  {
-    if(changes.fk_id_enterprise)
-    {
-      if(changes.fk_id_enterprise.currentValue)
-      {
-        this.initUpdForm();
-      }
-    }
-  }
-
   create(){
     this.onCreate.emit(this.productionProcessForm.value);
   }
@@ -53,7 +42,7 @@ export class ProcessFormModalComponent implements OnInit {
   */
  private initUpdForm() {
     this.productionProcessForm = this.fb.group({
-      fk_id_enterprise: [this.fk_id_enterprise, Validators.required],
+      fk_id_enterprise: [this.fk_id_enterprise],
       defined_period: ['', Validators.required], 
       reference: ['', Validators.required], 
       date_init: ['', Validators.required], 

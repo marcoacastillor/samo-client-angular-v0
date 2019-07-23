@@ -50,6 +50,10 @@ export class ChemicalInputFormComponent implements OnInit {
   public setInfoByPresentation(){
     if(this.chemicalInputForm.value.presentation == environment.individual){
       this.showPackageInfo = false;
+      this.chemicalInputForm.patchValue({
+        units_package: 0, 
+        sale_price_package: 0, 
+      })
     }
     else{
       this.showPackageInfo = true;

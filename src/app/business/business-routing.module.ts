@@ -34,6 +34,10 @@ const routes: Routes = [
         loadChildren: './human-resources/human-resources.module#HumanResourcesModule'
       },
       {
+        path: 'enterprises',
+        loadChildren: './enterprises/enterprises.module#EnterprisesModule'
+      },
+      {
         path: 'expenses',
         loadChildren: './expenses/expenses.module#ExpensesModule'
       },

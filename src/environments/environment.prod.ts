@@ -102,7 +102,7 @@ export const environment = {
   
   type_product_purchase: 'Compra a proveedores',
   type_product_internal_prd: 'Producción Interna',
-  type_product_input: 'Insumo',
+  type_product_input: 'INSUMO QUIMICO',
   type_product_intermediaty: 'Producto Intermedio',
 
   laboral_state_active: 'Activo',

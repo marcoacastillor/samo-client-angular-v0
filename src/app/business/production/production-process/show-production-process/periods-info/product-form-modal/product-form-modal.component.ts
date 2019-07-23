@@ -55,7 +55,7 @@ export class ProductFormModalComponent implements OnInit, OnChanges {
   }
 
   validateUnitsAvailable(product: Product){
-    if(product.type_product === environment.type_product_input)
+    if(product.category === environment.type_product_input)
     {
       this.units_available = product.units_available;
     }
@@ -84,7 +84,7 @@ export class ProductFormModalComponent implements OnInit, OnChanges {
       pk_id_detail_product_input: [this.detailProductInput.pk_id_detail_product_input], 
       fk_id_cutting_period: [this.cuttingPeriod.pk_id_cutting_period, Validators.required], 
       fk_id_product: [this.detailProductInput.fk_id_product, Validators.required],
-      amount_use_product: [this.detailProductInput.amount_use_product, Validators.required],
+      amount_use_product: [this.detailProductInput.amount_use_product,Validators.required],
     });
   }
 

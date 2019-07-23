@@ -138,8 +138,8 @@ export class ProductService {
     );
   }
 
-  public getByCodeFilterAndType$(codeProduct: string, type_product: string): Observable<Product[]> {
-    let url = this._url + '/get-by-code-filter-and-type/' + codeProduct + '/' + type_product;
+  public getByCodeFilterAndType$(codeProduct: string): Observable<Product[]> {
+    let url = this._url + '/get-by-code-filter-and-type/' + codeProduct;
     return this.userService.validateOptionByToken('PRD_GET_BY_CODEFILTER_AND_TYPE').pipe(
       switchMap(validate => {
         if(validate){
@@ -149,8 +149,8 @@ export class ProductService {
     );
   }
 
-  public getByNameFilterAndType$(nameProduct: string, type_product: string): Observable<Product[]> {
-    let url = this._url + '/get-by-name-filter-and-type/' + nameProduct + '/' + type_product;
+  public getByNameFilterAndType$(nameProduct: string): Observable<Product[]> {
+    let url = this._url + '/get-by-name-filter-and-type/' + nameProduct;
     return this.userService.validateOptionByToken('PRD_GET_BY_NAMEFILTER_AND_TYPE').pipe(
       switchMap(validate => {
         if(validate){

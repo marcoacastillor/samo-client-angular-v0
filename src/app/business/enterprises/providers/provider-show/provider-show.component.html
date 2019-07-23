@@ -1,0 +1,123 @@
+<app-pages title="Detalle de empresa">  
+    <main>       
+        <section>
+            <!-- start menu main-->
+            <div class="row bg-gray">
+                <div class="col-sm-6 text-left">
+                    Información detallada
+                </div>
+                <div class="col-sm-6 text-right">
+                    <div class="btn-group btn-group-sm">
+                        <a routerLink='../../list' class="btn  btn-sm btn-outline-primary" type="button">
+                            <fa-icon [icon]="faThList" class="text-outline-secondary mb-2 mr-1"></fa-icon>Ver todos
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- end menu main-->
+
+            <!-- start content -->
+            <div class="row margin-top-1rem">
+                <div class="col-sm-12">
+
+                    <!-- start info options-->
+                    <div class="row" *ngIf="success">
+                        <div class="col-sm-12">
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>Éxito : </strong> {{ message }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end info options-->
+                    
+                    <!-- start main info-->
+                    <div class="row margin-top-1rem">
+                        
+                        <!-- start provider info-->
+                        <div class="col-sm-4 back-colo-f6">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table class="table table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th colspan="2"><h4>Datos</h4></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th>NIT</th>
+                                                <td>{{ enterprise.nit }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Nombre</th>
+                                                <td>{{ enterprise.name }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Dirección</th>
+                                                <td>{{ enterprise.address }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Teléfono</th>
+                                                <td>{{ enterprise.phone }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Ubicación</th>
+                                                <td>{{ enterprise.ubication_city }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end peson info-->
+                        
+                        <!-- start laboral info-->
+                        <div class="col-sm-8 back-color-ff">
+                            <!-- start laboral condition-->
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table class="table table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th colspan="4"><h4>Compras asociadas al proveedor</h4></th>
+                                            </tr>
+                                            <tr>
+                                                <th colspan="2">Factura</th>
+                                                <th>Tipo de compra</th>
+                                                <th>Fecha</th>
+                                                <th>Valor de factura</th>
+                                                <th>Estado</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let operation of lstOperations">
+                                                <div class="btn-group btn-group-sm">
+                                                    <a routerLink='../../../../purchases/purchase-detailed-show/{{operation.pk_id_operation}}' class="btn text-small btn-sm btn-outline-primary" type="button">
+                                                        <fa-icon [icon]="faEye" class="text-outline-secondary mb-2 mr-1"></fa-icon>Ver detalle
+                                                    </a>
+                                                </div>
+                                                <td>{{ operation.number_invoice }}</td>
+                                                <td>{{ operation.payment_type }}</td>
+                                                <td>{{ operation.date_operation }}</td>
+                                                <td>{{ operation.total_operation | number}}</td>
+                                                <td>{{ operation.state_operation }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- end información laboral-->
+                        </div>
+                        <!-- end purchase info-->
+                    </div>
+                    <!-- end main info-->
+
+                </div>
+            </div>
+            <!-- end content -->
+        </section>
+    </main>
+</app-pages>  

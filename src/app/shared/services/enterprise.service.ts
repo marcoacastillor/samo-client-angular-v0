@@ -134,4 +134,16 @@ export class EnterpriseService {
       })
     );
   }
+
+  public delete$(id:number): Observable<Enterprise> {
+    let url = this._url + '/' + id.toString()
+    return this.userService.validateOptionByToken('ENT_DEL').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.delete<Enterprise>(url);
+        }
+      })
+    );
+  }
+
 }

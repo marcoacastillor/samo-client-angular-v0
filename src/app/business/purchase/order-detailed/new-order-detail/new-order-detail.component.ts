@@ -152,7 +152,7 @@ export class NewOrderDetailComponent implements OnInit {
       this.emptyPrd =false;
       
       if (filter.timeStamp - this.lastkeydown1 > 200) {
-        this.productService.getByCodeFilterAndType$(codeProduct,environment.type_product_purchase).subscribe(
+        this.productService.getByCodeFilterAndType$(codeProduct).subscribe(
             lstProducts => this.lstProducts = lstProducts,
             () => this.emptyPrd = true
         )

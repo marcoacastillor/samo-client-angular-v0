@@ -38,6 +38,18 @@ export class PersonService {
     );
   }
 
+  public getActiveEmployeesByEnterprise$(id_enterprise: number): Observable<Person[]> {
+    const url = this._url + '/get-active-employee-by-enterprise/'+id_enterprise;
+    return this.userService.validateOptionByToken('PRS_GET_EMPLOYEE_BY_ENTERPRISE').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.get<Person[]>(url);
+        }
+      })
+    );
+  }
+
+
   public showByExternalReference$(externalReference: string): Observable<Person> {
     const url = this._url + '/show-external-reference/' + externalReference;
     return this.userService.validateOptionByToken('PRS_SHOW_EXTERNAL_REFERENCE').pipe(

@@ -1,0 +1,75 @@
+<div class="modal fade" id="enterpriseModal" tabindex="-1" role="dialog" aria-labelledby="enterpriseModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Empresa</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="card">
+                <div class="card-body">
+                    <form [formGroup]="enterpriseForm">
+                        <div class="row">
+                            <div class="form-group col-sm-4">
+                                <label for="nit">NIT</label>
+                                <input type="text" class="form-control form-control-sm"  formControlName="nit" required>
+                                <small *ngIf="mustShowError('nit')" class="form-text alert-danger">
+                                    Nit de id, es obligatorio
+                                </small>
+                            </div>
+                            <div class="form-group col-sm-4">
+                                <label for="name">Nombre</label>
+                                <input type="text" class="form-control form-control-sm"  formControlName="name" required>
+                                <small *ngIf="mustShowError('name')" class="form-text alert-danger">
+                                    Nombre, es obligatorio
+                                </small>
+                            </div>
+                            <div class="form-group col-sm-4">
+                                <label for="address">Dirección</label>
+                                <input type="text" class="form-control form-control-sm"  formControlName="address" required>
+                                <small *ngIf="mustShowError('address')" class="form-text alert-danger">
+                                    Dirección, es obligatorio
+                                </small>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-sm-4">
+                                <label for="phone">Teléfono</label>
+                                <input type="text" class="form-control form-control-sm"  formControlName="phone" required>
+                                <small *ngIf="mustShowError('phone')" class="form-text alert-danger">
+                                    Teléfono, es obligatorio
+                                </small>
+                            </div>
+                            <div class="form-group col-sm-4">
+                                <label for="ubication_city">Ubicación</label>
+                                <input type="text" class="form-control form-control-sm"  formControlName="ubication_city" required>
+                                <small *ngIf="mustShowError('ubication_city')" class="form-text alert-danger">
+                                    Ubicación, es obligatorio
+                                </small>
+                            </div>
+                        </div>
+
+                        <!-- botones -->
+                        <div class="row justify-content-end">
+                            <div class="col-sm-4 text-right align-self-end">
+                                <button *ngIf="!enterprise.pk_id_enterprise" type="submit" (click)="createEnterprise()" [disabled]="enterpriseForm.invalid" class="btn btn-sm btn-outline-primary" type="button" data-dismiss="modal">
+                                    <fa-icon [icon]="faSave" class="text-outline-secondary mb-2 mr-1"></fa-icon>Crear
+                                </button>
+                                <button *ngIf="enterprise.pk_id_enterprise" type="submit" (click)="updateEnterprise()" [disabled]="enterpriseForm.invalid" class="btn btn-sm btn-outline-primary" type="button" data-dismiss="modal">
+                                    <fa-icon [icon]="faSave" class="text-outline-secondary mb-2 mr-1"></fa-icon>Actualizar
+                                </button>
+                            </div>
+                        </div>
+                        <!-- botones -->
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        </div>
+        </div>
+    </div>
+</div>
