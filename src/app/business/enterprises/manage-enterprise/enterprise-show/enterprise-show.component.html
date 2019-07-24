@@ -35,7 +35,7 @@
                                         <fa-icon [icon]="faIndustry" class="text-outline-secondary mb-2 mr-1"></fa-icon>Empresa
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="position">
-                                        <button class="dropdown-item text-small text-secondary" type="button" data-toggle="modal" data-target="#enterpriseModal">
+                                        <button class="dropdown-item text-small text-secondary" (click)="loadParametersEnterprise()" type="button" data-toggle="modal" data-target="#enterpriseModal">
                                             <fa-icon [icon]="faEdit" class="text-outline-secondary mb-2 mr-1"></fa-icon>Editar información
                                         </button>
                                     </div>
@@ -45,7 +45,7 @@
                                         <fa-icon [icon]="faUserTag" class="text-outline-secondary mb-2 mr-1"></fa-icon>Cargos
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="position">
-                                        <button class="dropdown-item text-small text-secondary" type="button" data-toggle="modal" data-target="#positionModal">
+                                        <button class="dropdown-item text-small text-secondary" (click)="newPosition()" type="button" data-toggle="modal" data-target="#positionModal">
                                             <fa-icon [icon]="faUserCheck" class="text-outline-secondary mb-2 mr-1"></fa-icon>Agregar cargo
                                         </button>
                                     </div>
@@ -55,7 +55,7 @@
                                         <fa-icon [icon]="faCogs" class="text-outline-secondary mb-2 mr-1"></fa-icon>Parámetros
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="parameter">
-                                        <button class="dropdown-item text-small text-secondary" type="button" data-toggle="modal" data-target="#parameterModal">
+                                        <button class="dropdown-item text-small text-secondary" (click)="createParametersConfig()" type="button">
                                             <fa-icon [icon]="faWrench" class="text-outline-secondary mb-2 mr-1"></fa-icon>Crear parámetros
                                         </button>
                                     </div>
@@ -141,10 +141,10 @@
                                             <tr *ngFor="let position of lstPositions">
                                                 <td>
                                                     <div class="btn-group btn-group-sm">
-                                                        <button class="btn text-small btn-sm btn-outline-danger" type="button" data-toggle="modal" data-target="#deleteParamterModal">
+                                                        <button class="btn text-small btn-sm btn-outline-danger" (click)="selectPosition(position)" type="button" data-toggle="modal" data-target="#deleteParamterModal">
                                                             <fa-icon [icon]="faTrash" class="text-outline-danger mb-2 mr-1"></fa-icon>Eliminar
                                                         </button>
-                                                        <button class="btn text-small btn-sm btn-outline-primary" type="button">
+                                                        <button class="btn text-small btn-sm btn-outline-primary" (click)="selectPosition(position)" type="button" data-toggle="modal" data-target="#positionModal">
                                                             <fa-icon [icon]="faEdit" class="text-outline-primary mb-2 mr-1"></fa-icon>Editar
                                                         </button>
                                                     </div>
@@ -183,7 +183,7 @@
                                                 <button disabled class="btn text-small btn-sm btn-outline-secondary" type="button" *ngIf="parameter.fixed == 1">
                                                     <fa-icon [icon]="faEdit" class="text-outline-secondary mb-2 mr-1"></fa-icon>Editar
                                                 </button>
-                                                <button class="btn text-small btn-sm btn-outline-primary" type="button" *ngIf="parameter.fixed != 1">
+                                                <button class="btn text-small btn-sm btn-outline-primary" (click)="selectParameter(parameter)" type="button" *ngIf="parameter.fixed != 1" data-toggle="modal" data-target="#parameterModal">
                                                     <fa-icon [icon]="faEdit" class="text-outline-primary mb-2 mr-1"></fa-icon>Editar
                                                 </button>
                                             </div>
@@ -242,17 +242,31 @@
 </app-pages>  
 
 <!-- inicia información empresa-->
-<app-modal-enterprise-form>
+<app-modal-enterprise-form
+[enterprise]="enterprise"
+[fk_id_enterprise]="enterprise.pk_id_enterprise"
+[lstParametersEnterprise]="lstParametersEnterprise"
+(update)="updateEnterprise($event)"
+>
 </app-modal-enterprise-form>
 <!-- fin información empresa-->
 
 <!-- inicia información parametros-->
-<app-modal-parameter-form>
+<app-modal-parameter-form
+[parameterConfig]="parameterConfig"
+[fk_id_enterprise]="enterprise.pk_id_enterprise"
+(update)="updateParameterConfig($event)"
+>
 </app-modal-parameter-form>
 <!-- fin información parametros-->
 
 <!-- inicia información cargos-->
-<app-modal-position-form>
+<app-modal-position-form
+[position]="position"
+[fk_id_enterprise]="enterprise.pk_id_enterprise"
+(update)="updatePosition($event)"
+(create)="createPosition($event)"
+>
 </app-modal-position-form>
 <!-- fin información cargos-->
 
@@ -275,7 +289,7 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-            <button type="button" (click)="deleteParameter()" data-dismiss="modal" class="btn btn-danger">Eliminar</button>
+            <button type="button" (click)="deletePosition()" data-dismiss="modal" class="btn btn-danger">Eliminar</button>
         </div>
         </div>
     </div>

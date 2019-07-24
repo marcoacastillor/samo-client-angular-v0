@@ -10,7 +10,84 @@
         <div class="modal-body">
             <div class="card">
                 <div class="card-body">
-                    modal enterprise
+                    <form [formGroup]="enterpriseForm">
+                        <div class="row">
+                            <div class="form-group col-sm-4">
+                                <label for="nit">NIT</label>
+                                <input type="text" class="form-control form-control-sm"  formControlName="nit" required>
+                                <small *ngIf="mustShowError('nit')" class="form-text alert-danger">
+                                    Nit de id, es obligatorio
+                                </small>
+                            </div>
+                            <div class="form-group col-sm-4">
+                                <label for="name">Nombre</label>
+                                <input type="text" class="form-control form-control-sm"  formControlName="name" required>
+                                <small *ngIf="mustShowError('name')" class="form-text alert-danger">
+                                    Nombre, es obligatorio
+                                </small>
+                            </div>
+                            <div class="form-group col-sm-4">
+                                <label for="address">Dirección</label>
+                                <input type="text" class="form-control form-control-sm"  formControlName="address" required>
+                                <small *ngIf="mustShowError('address')" class="form-text alert-danger">
+                                    Dirección, es obligatorio
+                                </small>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-sm-4">
+                                <label for="phone">Teléfono</label>
+                                <input type="text" class="form-control form-control-sm"  formControlName="phone" required>
+                                <small *ngIf="mustShowError('phone')" class="form-text alert-danger">
+                                    Teléfono, es obligatorio
+                                </small>
+                            </div>
+                            <div class="form-group col-sm-4">
+                                <label for="ubication_city">Ubicación</label>
+                                <input type="text" class="form-control form-control-sm"  formControlName="ubication_city" required>
+                                <small *ngIf="mustShowError('ubication_city')" class="form-text alert-danger">
+                                    Ubicación, es obligatorio
+                                </small>
+                            </div>
+                            <div class="form-group col-sm-4">
+                                <label for="size">Tamaño</label>
+                                <select class="form-control form-control-sm" formControlName="size">
+                                    <option value="" selected>Seleccione...</option>
+                                    <option *ngFor="let param of lstParametersEnterprise[size]" value="{{param.value}}">{{ param.name }}</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-sm-4">
+                                <label for="regimen">Régimen</label>
+                                <select class="form-control form-control-sm" formControlName="regimen">
+                                    <option value="" selected>Seleccione...</option>
+                                    <option *ngFor="let param of lstParametersEnterprise[regimen]" value="{{param.value}}">{{ param.name }}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-sm-12">
+                                <label for="DIAN_billing_resolution">Resolución facturación DIAN</label>
+                                <input type="text" class="form-control form-control-sm"  formControlName="DIAN_billing_resolution">
+                            </div>
+                            <div class="form-group col-sm-12">
+                                <label for="footer_billing">Pie de página factura</label>
+                                <input type="text" class="form-control form-control-sm"  formControlName="footer_billing">
+                            </div>
+                        </div>
+
+                        <!-- botones -->
+                        <div class="row justify-content-end">
+                            <div class="col-sm-4 text-right align-self-end">
+                                <button *ngIf="enterprise.pk_id_enterprise" type="submit" (click)="updateEnterprise()" [disabled]="enterpriseForm.invalid" class="btn btn-sm btn-outline-primary" type="button" data-dismiss="modal">
+                                    <fa-icon [icon]="faSave" class="text-outline-secondary mb-2 mr-1"></fa-icon>Actualizar
+                                </button>
+                            </div>
+                        </div>
+                        <!-- botones -->
+                    </form>
                 </div>
             </div>
         </div>

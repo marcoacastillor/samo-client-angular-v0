@@ -10,7 +10,41 @@
         <div class="modal-body">
             <div class="card">
                 <div class="card-body">
-                    modal parameters
+                    <form [formGroup]="parameterForm">
+                        <div class="row">
+                            <div class="form-group col-sm-4">
+                                <label for="code">Código</label>
+                                <input readonly type="text" class="form-control form-control-sm"  formControlName="code" required>
+                                <small *ngIf="mustShowError('code')" class="form-text alert-danger">
+                                    Código, es obligatorio
+                                </small>
+                            </div>
+                            <div class="form-group col-sm-4">
+                                <label for="description">Descripción</label>
+                                <input readonly type="text" class="form-control form-control-sm"  formControlName="description" required>
+                                <small *ngIf="mustShowError('description')" class="form-text alert-danger">
+                                    Descripción, es obligatorio
+                                </small>
+                            </div>
+                            <div class="form-group col-sm-4">
+                                <label for="value">Valor</label>
+                                <input type="text" class="form-control form-control-sm"  formControlName="value" required>
+                                <small *ngIf="mustShowError('value')" class="form-text alert-danger">
+                                    Valor, es obligatorio
+                                </small>
+                            </div>
+                        </div>
+                        
+                        <!-- botones -->
+                        <div class="row justify-content-end">
+                            <div class="col-sm-4 text-right align-self-end">
+                                <button type="submit" (click)="updateParameter()" [disabled]="parameterForm.invalid" class="btn btn-sm btn-outline-primary" type="button" data-dismiss="modal">
+                                    <fa-icon [icon]="faSave" class="text-outline-secondary mb-2 mr-1"></fa-icon>Actualizar
+                                </button>
+                            </div>
+                        </div>
+                        <!-- botones -->
+                    </form>
                 </div>
             </div>
         </div>

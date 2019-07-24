@@ -12,6 +12,7 @@ import { PositionService } from 'src/app/shared/services/position.service';
 import { ModalPositionFormComponent } from './modal-position-form/modal-position-form.component';
 import { ModalParameterFormComponent } from './modal-parameter-form/modal-parameter-form.component';
 import { ModalEnterpriseFormComponent } from './modal-enterprise-form/modal-enterprise-form.component';
+import { ParameterService } from 'src/app/shared/services/parameter.service';
 
 @NgModule({
   imports: [
@@ -21,7 +22,7 @@ import { ModalEnterpriseFormComponent } from './modal-enterprise-form/modal-ente
     FontAwesomeModule,
   ],
   providers: [
-    EnterpriseService, PersonService, ParameterConfigService, PositionService
+    EnterpriseService, PersonService, ParameterConfigService, PositionService, ParameterService
   ],
   declarations: [EnterpriseShowComponent, ModalPositionFormComponent, ModalParameterFormComponent, ModalEnterpriseFormComponent]
 })

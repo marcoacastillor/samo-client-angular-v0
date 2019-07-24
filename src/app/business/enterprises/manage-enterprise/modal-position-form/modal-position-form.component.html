@@ -10,7 +10,37 @@
         <div class="modal-body">
             <div class="card">
                 <div class="card-body">
-                    modal cargos
+                    <form [formGroup]="positionForm">
+                        <div class="row">
+                            <div class="form-group col-sm-6">
+                                <label for="code">Código</label>
+                                <input type="text" class="form-control form-control-sm"  formControlName="code" required>
+                                <small *ngIf="mustShowError('code')" class="form-text alert-danger">
+                                    Código, es obligatorio
+                                </small>
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <label for="name">Nombre</label>
+                                <input type="text" class="form-control form-control-sm"  formControlName="name" required>
+                                <small *ngIf="mustShowError('name')" class="form-text alert-danger">
+                                    Nombre, es obligatorio
+                                </small>
+                            </div>
+                        </div>
+                        
+                        <!-- botones -->
+                        <div class="row justify-content-end">
+                            <div class="col-sm-4 text-right align-self-end">
+                                <button *ngIf="position.pk_id_position" type="submit" (click)="updatePosition()" [disabled]="positionForm.invalid" class="btn btn-sm btn-outline-primary" type="button" data-dismiss="modal">
+                                    <fa-icon [icon]="faSave" class="text-outline-secondary mb-2 mr-1"></fa-icon>Actualizar
+                                </button>
+                                <button *ngIf="!position.pk_id_position" type="submit" (click)="createPosition()" [disabled]="positionForm.invalid" class="btn btn-sm btn-outline-primary" type="button" data-dismiss="modal">
+                                    <fa-icon [icon]="faSave" class="text-outline-secondary mb-2 mr-1"></fa-icon>Crear
+                                </button>
+                            </div>
+                        </div>
+                        <!-- botones -->
+                    </form>
                 </div>
             </div>
         </div>

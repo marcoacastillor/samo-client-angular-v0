@@ -5,10 +5,10 @@ import { EnterpriseShowComponent } from './enterprise-show/enterprise-show.compo
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'show'
+    redirectTo: 'show/owner'
   },
   {
-    path: 'show',
+    path: 'show/:id',
     component: EnterpriseShowComponent
   },
 ];

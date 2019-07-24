@@ -140,6 +140,9 @@ export class MainUserComponent implements OnInit {
     this.listUser = false;
     let activeUser = this.globalStoreService.getUser();
 
+    this.loadStates();
+    this.loadEnterprisesOwners();
+    
     if(user.pk_id_user)
     {
       this.user = user;
@@ -151,8 +154,6 @@ export class MainUserComponent implements OnInit {
       this.user.rol = new Rol;
       this.user.person = new Person;
     }
-    this.loadStates();
-    this.loadEnterprisesOwners();
   }
 
   public onInactive(user: User) {

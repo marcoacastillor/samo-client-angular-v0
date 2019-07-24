@@ -11,6 +11,10 @@ import { ParameterConfigService } from 'src/app/shared/services/parameter-config
 import { PositionService } from 'src/app/shared/services/position.service';
 import { Position } from 'src/app/shared/models/position';
 import { faUserTag, faUserCheck, faCogs, faWrench, faEye, faEdit, faTrash, faIndustry } from '@fortawesome/free-solid-svg-icons';
+import { Parameter } from 'src/app/shared/models/parameter';
+import { ParameterService } from 'src/app/shared/services/parameter.service';
+import { environment } from 'src/environments/environment';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-enterprise-show',
@@ -29,27 +33,49 @@ export class EnterpriseShowComponent implements OnInit {
 
   user: User = new User;
   enterprise: Enterprise = new Enterprise;
+  position: Position = new Position;
+  parameterConfig: ParameterConfig = new ParameterConfig;
 
   lstEmployee: Person[] = [];
   lstParametersConfig: ParameterConfig[] = [];
   lstPositions: Position[] = [];
 
+  lstParametersEnterprise: Parameter[] = [];
+
+  //parametros para empresas
+  regimen    = environment.regimen;
+  size       = environment.size_enterprise;
+  
+  categories      = {'categories' : [this.regimen,this.size]};
+
+  success = false;
+  message = '';
+
   constructor(
+    private activateRoute: ActivatedRoute,
     private globalStoreService: GlobalStoreService,
     private enterpriseService: EnterpriseService,
     private personService: PersonService,
     private parameterConfigService: ParameterConfigService,
-    private positionService: PositionService
+    private positionService: PositionService,
+    private parameterService: ParameterService
     ) { }
 
   ngOnInit() {
-    this.user = this.globalStoreService.getUser();
-    this.loadInfoByEnterprise(this.user.fk_id_enterprise);
+    if(this.activateRoute.snapshot.params['id'] == 'owner'){
+      this.user = this.globalStoreService.getUser();
+      this.loadInfoByEnterprise(this.user.fk_id_enterprise);
+    }
+    else{
+      this.loadInfoByEnterprise(this.activateRoute.snapshot.params['id']);
+    }
   }
 
   private loadInfoByEnterprise(id_enterprise: number){
     this.enterpriseService.show$(id_enterprise).pipe(
-      tap((enterprise: Enterprise) => { this.enterprise = enterprise}),
+      tap((enterprise: Enterprise) => { 
+        this.enterprise = enterprise; 
+      }),
       tap((enterprise: Enterprise) => {
         this.personService.getActiveEmployeesByEnterprise$(enterprise.pk_id_enterprise).subscribe(
           persons => this.lstEmployee = persons
@@ -67,4 +93,112 @@ export class EnterpriseShowComponent implements OnInit {
       })
     ).subscribe()
   }
+
+  /**
+   * funciones para empresa
+   */
+  public loadParametersEnterprise(){
+    this.success = false;
+    this.parameterService.getByMultipleCodeCategory$(this.categories).subscribe(
+      parameters => this.lstParametersEnterprise = parameters
+    )
+  }
+
+  public updateEnterprise(enterprise: Enterprise){
+    this.enterpriseService.update$(enterprise).subscribe(
+      enterprise => {
+        this.enterprise = enterprise;
+        this.success = true;
+        this.message = 'Se actualizó información de emrpresa, satisfactoriamente.';
+      }
+    )
+  }
+
+  /**
+   * funciones para empresa
+   */
+  public newPosition(){
+    this.position = new Position;
+  }
+
+  public selectPosition(position:Position){
+    this.position = position
+  }
+
+  public updatePosition(position:Position){
+    this.positionService.update$(position).subscribe(
+      () => {
+        this.positionService.getByEnterpsie$(this.enterprise.pk_id_enterprise).subscribe(
+          positions => {
+            this.success = true;
+            this.lstPositions = positions;
+            this.message = 'Se actualiza un cargo, satisfactoriamente.';
+          }
+        )
+      }
+    )
+  }
+
+  public createPosition(position:Position){
+    this.positionService.store$(position).subscribe(
+      () => {
+        this.positionService.getByEnterpsie$(this.enterprise.pk_id_enterprise).subscribe(
+          positions => {
+            this.success = true;
+            this.lstPositions = positions;
+            this.message = 'Se crea un cargo, satisfactoriamente.';
+          }
+        )
+      }
+    )
+  }
+
+  public deletePosition(){
+    this.positionService.delete$(this.position.pk_id_position).subscribe(
+      () => {
+        this.positionService.getByEnterpsie$(this.enterprise.pk_id_enterprise).subscribe(
+          positions => {
+            this.success = true;
+            this.lstPositions = positions;
+            this.message = 'Se elimina un cargo, satisfactoriamente.';
+          }
+        )
+      }
+    )
+  }
+
+  /**
+   * Funciones parámetros de empresa
+   */
+  public selectParameter(parameter: ParameterConfig){
+    this.parameterConfig = parameter
+  }
+
+  public createParametersConfig(){
+    this.parameterConfigService.createAllsParamsBytype$(environment.parameters_enterprises, this.enterprise.pk_id_enterprise).subscribe(
+      () => {
+        this.parameterConfigService.getByEnterprise$(this.enterprise.pk_id_enterprise).subscribe(
+          parameters => {
+            this.lstParametersConfig = parameters;
+            this.success = true;
+            this.message = 'Se crean parámetros, satisfactoriamente.';
+          })
+      }
+    )
+  }
+
+  public updateParameterConfig(parameter: ParameterConfig){
+    this.parameterConfigService.update$(parameter).subscribe(
+      () => {
+        this.parameterConfigService.getByEnterprise$(this.enterprise.pk_id_enterprise).subscribe(
+        parameters => {
+          this.lstParametersConfig = parameters;
+          this.success = true;
+          this.message = 'Se actualiza valor del parámetro, satisfactoriamente.';
+        })
+      }
+    )
+  }
+
+
 }
