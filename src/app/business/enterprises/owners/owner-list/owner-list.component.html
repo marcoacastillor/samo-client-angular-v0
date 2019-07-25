@@ -8,7 +8,7 @@
                 </div>
                 <div class="col-sm-6 text-right">
                     <div class="btn-group btn-group-sm">
-                        <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#enterpriseModal">
+                        <button type="button" class="btn btn-outline-primary btn-sm" (click)="newEnterprise()" data-toggle="modal" data-target="#enterpriseModal">
                             <fa-icon [icon]="faPlusCircle" class="text-outline-primary mb-2 mr-1"></fa-icon>Crear
                         </button>
                     </div>
@@ -19,38 +19,58 @@
             <!-- start content -->
             <div class="row margin-top-1rem">
                 <div class="col-sm-12">
-                    <table class="table table-sm table-striped">
-                        <thead class="bg-secondary text-white">
-                            <tr>
-                                <th>Acciones</th>
-                                <th>Nit</th>
-                                <th>Nombres</th>
-                                <th>Dirección</th>
-                                <th>Telefono</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let provider of lstOwners">
-                                <td>
-                                    <div class="btn-group btn-group-sm">
-                                        <button (click)="selectEnterprise(provider)" class="btn text-small btn-sm btn-outline-danger"  type="button" data-toggle="modal" data-target="#deleteProduct">
-                                            <fa-icon [icon]="faTrash" class="text-outline-danger mb-2 mr-1"></fa-icon>Eliminar
-                                        </button>
-                                        <button (click)="selectEnterprise(provider)" class="btn text-small btn-sm btn-outline-secondary"  type="button" data-toggle="modal" data-target="#enterpriseModal">
-                                            <fa-icon [icon]="faEdit" class="text-outline-secondary mb-2 mr-1"></fa-icon>Actualizar
-                                        </button>
-                                        <a routerLink='../../../enterprises/manage-enterprise/show/{{provider.pk_id_enterprise}}' class="btn text-small btn-sm btn-outline-primary" type="button">
-                                            <fa-icon [icon]="faEye" class="text-outline-secondary mb-2 mr-1"></fa-icon>Ver detalle
-                                        </a>
-                                    </div>
-                                </td>
-                                <td>{{ provider.nit }}</td>
-                                <td>{{ provider.name }}</td>
-                                <td>{{ provider.address }}</td>
-                                <td>{{ provider.phone }}</td>
-                            </tr>
-                        </tbody>
-                    </table>  
+
+                    <!-- start info options-->
+                    <div class="row" *ngIf="success">
+                        <div class="col-sm-12">
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>Éxito : </strong> {{ message }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end info options-->
+                    
+                    
+                    <!-- start main info-->
+                    <div class="row margin-top-1rem">
+                        <div class="col-sm-12">
+                            <table class="table table-sm table-striped">
+                                <thead class="bg-secondary text-white">
+                                    <tr>
+                                        <th>Acciones</th>
+                                        <th>Nit</th>
+                                        <th>Nombres</th>
+                                        <th>Dirección</th>
+                                        <th>Telefono</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let provider of lstOwners">
+                                        <td>
+                                            <div class="btn-group btn-group-sm">
+                                                <button (click)="selectEnterprise(provider)" class="btn text-small btn-sm btn-outline-danger"  type="button" data-toggle="modal" data-target="#deleteEnterprise">
+                                                    <fa-icon [icon]="faTrash" class="text-outline-danger mb-2 mr-1"></fa-icon>Eliminar
+                                                </button>
+                                                <button (click)="selectEnterprise(provider)" class="btn text-small btn-sm btn-outline-secondary"  type="button" data-toggle="modal" data-target="#enterpriseModal">
+                                                    <fa-icon [icon]="faEdit" class="text-outline-secondary mb-2 mr-1"></fa-icon>Actualizar
+                                                </button>
+                                                <a routerLink='../../../enterprises/manage-enterprise/show/{{provider.pk_id_enterprise}}' class="btn text-small btn-sm btn-outline-primary" type="button">
+                                                    <fa-icon [icon]="faEye" class="text-outline-secondary mb-2 mr-1"></fa-icon>Ver detalle
+                                                </a>
+                                            </div>
+                                        </td>
+                                        <td>{{ provider.nit }}</td>
+                                        <td>{{ provider.name }}</td>
+                                        <td>{{ provider.address }}</td>
+                                        <td>{{ provider.phone }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>  
                 </div>
             </div>
             <!-- end content -->
@@ -58,8 +78,19 @@
     </main>
 </app-pages>
 
+
+<!-- inicia información de empresa-->
+<app-modal-enterprise-form
+[enterprise]="enterprise"
+(update)="updateEnterprise($event)"
+(create)="createEnterprise($event)"
+>
+</app-modal-enterprise-form>
+<!-- termina información de empresa-->
+
+
 <!-- Modal -->
-<div class="modal fade" id="deleteProduct" tabindex="-1" role="dialog" aria-labelledby="deleteProduct" aria-hidden="true">
+<div class="modal fade" id="deleteEnterprise" tabindex="-1" role="dialog" aria-labelledby="deleteProduct" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
         <div class="modal-header">

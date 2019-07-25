@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-
+  
   url_user: 'https://www.sanratsolutions.com/prd/usuarios/public/users',
   url_module: 'https://www.sanratsolutions.com/prd/usuarios/public/modules',
   url_component: 'https://www.sanratsolutions.com/prd/usuarios/public/components',
@@ -35,7 +35,7 @@ export const environment = {
   url_laboral_condition: 'https://www.sanratsolutions.com/prd/ventas/public/laboral_condition',
   url_worker_news: 'https://www.sanratsolutions.com/prd/ventas/public/worker_news',
   url_payment_employee: 'https://www.sanratsolutions.com/prd/ventas/public/paying_employee',
-
+  
   clearMessageDelayMs: 5000,
   refreshInterval: 1000,
   min_products: 20,

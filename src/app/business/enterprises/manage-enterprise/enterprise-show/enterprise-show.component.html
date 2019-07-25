@@ -31,6 +31,16 @@
                         <div class="col-sm-12 text-right align-self-end">
                             <div class="btn-group btn-group-sm">
                                 <div class="dropdown">
+                                    <button class="btn  btn-sm dropdown-toggle" type="button" id="laboral" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <fa-icon [icon]="faAddressCard" class="text-outline-secondary mb-2 mr-1"></fa-icon>Laboral
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="laboral">
+                                        <button class="dropdown-item text-small text-secondary" (click)="loadParametersEmployee()" type="button" data-toggle="modal" data-target="#laboralModal">
+                                            <fa-icon [icon]="faUserCheck" class="text-outline-secondary mb-2 mr-1"></fa-icon>Agregar trabajador
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="dropdown">
                                     <button class="btn  btn-sm dropdown-toggle" type="button" id="position" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <fa-icon [icon]="faIndustry" class="text-outline-secondary mb-2 mr-1"></fa-icon>Empresa
                                     </button>
@@ -206,7 +216,7 @@
                                         <th colspan="6"><h4>Trabajadores</h4></th>
                                     </tr>
                                     <tr>
-                                        <th>ID</th>
+                                        <th colspan="2">ID</th>
                                         <th>Nombres</th>
                                         <th>Apellidos</th>
                                         <th>Cargo</th>
@@ -217,9 +227,16 @@
                                     <tr *ngFor="let employee of lstEmployee">
                                         <td>
                                             <div class="btn-group btn-group-sm">
-                                                <a routerLink='../../../human-resource/employee/show/{{employee.pk_id_person}}' class="btn text-small btn-sm btn-outline-primary" type="button">
+                                                <a routerLink='/sales-admin/human-resource/employee/show/{{employee.pk_id_person}}' class="btn text-small btn-sm btn-outline-primary" type="button">
                                                     <fa-icon [icon]="faEye" class="text-outline-secondary mb-2 mr-1"></fa-icon>Ver detalle
                                                 </a>
+                                                <button class="btn text-small btn-sm btn-outline-danger" (click)="selectEmployee(employee)" type="button" data-toggle="modal" data-target="#deleteEmployeeModal">
+                                                    <fa-icon [icon]="faTrash" class="text-outline-danger mb-2 mr-1"></fa-icon>Eliminar
+                                                </button>
+                                                <button class="btn text-small btn-sm btn-outline-primary" (click)="selectEmployee(employee)" type="button" data-toggle="modal" data-target="#laboralModal">
+                                                    <fa-icon [icon]="faEdit" class="text-outline-primary mb-2 mr-1"></fa-icon>Editar
+                                                </button>
+                                        
                                             </div>
                                         </td>
                                         <td>{{ employee.type_id }} - {{ employee.number_id }}</td>
@@ -233,7 +250,6 @@
                         </div>
                     </div>
                     <!-- end información laboral-->
-
                 </div>
             </div>
             <!-- end content -->
@@ -270,7 +286,39 @@
 </app-modal-position-form>
 <!-- fin información cargos-->
 
+<!-- inicia información trabajador-->
+<app-modal-employee-form
+[fk_id_enterprise]="enterprise.pk_id_enterprise"
+[lstPositions]="lstPositions"
+[lstParametersEmployee]="lstParametersEmployee"
+[employee]="employee"
+(create)="saveEmployee($event)"
+(update)="updateEmployee($event)"
+></app-modal-employee-form>
+<!-- fin información trabajador-->
 
+<!-- Modal -->
+<div class="modal fade" id="deleteEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="deleteEmployeeModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Confirmación de mensaje</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="alert alert-danger" role="alert">
+                Se va a eliminar un registro, desea confirmar la operación?.
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="button" (click)="deleteEmployee()" data-dismiss="modal" class="btn btn-danger">Eliminar</button>
+        </div>
+        </div>
+    </div>
+</div>
 
 <!-- Modal -->
 <div class="modal fade" id="deleteParamterModal" tabindex="-1" role="dialog" aria-labelledby="deleteParamterModal" aria-hidden="true">

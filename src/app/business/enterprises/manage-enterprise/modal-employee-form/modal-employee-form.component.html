@@ -1,0 +1,145 @@
+<div class="modal fade" id="laboralModal" tabindex="-1" role="dialog" aria-labelledby="laboralModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Contrato</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="card">
+                <div class="card-body">
+                    <form [formGroup]="employeeForm">
+                        <div class="row">
+                            <!--start información sobre persona-->
+                            <div class="col-sm-6" formArrayName="person">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h6>Información personal</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="form-group col-sm-6">
+                                                <label for="type_id">Tipo Id</label>
+                                                <select class="form-control form-control-sm" formControlName="type_id" required>
+                                                    <option value="" selected>Seleccione...</option>
+                                                    <option *ngFor="let param of lstParametersEmployee[type_id]" value="{{param.value}}">{{ param.name }}</option>
+                                                </select>
+                                                <small *ngIf="mustShowError('person','type_id')" class="form-text alert-danger">
+                                                    Tipo de id, es obligatorio
+                                                </small>
+                                            </div>
+                                            <div class="form-group col-sm-6">
+                                                <label for="number_id">Número Id</label>
+                                                <input type="text" id="filterClient" (keypress)="onFindClient($event)" class="form-control form-control-sm"  formControlName="number_id" required>
+                                                <!-- start autocomplete-->
+                                                <div class="autocomplete container-fluid">
+                                                    <div id="autocomplete-list" class="autocomplete-items text-ultra-small">
+                                                        <div class="items row" *ngFor="let person of lstClients">
+                                                            <div class="col-sm-12" (click)="selectClient(person)">
+                                                                {{ person.type_id }} - {{ person.number_id }} {{ person.names }} {{ person.last_names }}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- start autocomplete-->
+                                                <small *ngIf="mustShowError('person','number_id')" class="form-text alert-danger">
+                                                    Número de id, es obligatorio
+                                                </small>
+                                            </div>
+                                            <div class="form-group col-sm-6">
+                                                <label for="names">Nombres</label>
+                                                <input type="text" class="form-control form-control-sm"  formControlName="names" required> 
+                                                <small *ngIf="mustShowError('person','names')" class="form-text alert-danger">
+                                                    Nombres, es obligatorio
+                                                </small>
+                                            </div>
+                                            <div class="form-group col-sm-6">
+                                                <label for="last_names">Apellidos</label>
+                                                <input type="text" class="form-control form-control-sm"  formControlName="last_names" required>
+                                                <small *ngIf="mustShowError('person','last_names')" class="form-text alert-danger">
+                                                    Apellidos, es obligatorio
+                                                </small>
+                                            </div>
+                                            <div class="form-group col-sm-6">
+                                                <label for="address">Dirección</label>
+                                                <input type="text" class="form-control form-control-sm"  formControlName="address" required>
+                                                <small *ngIf="mustShowError('person','address')" class="form-text alert-danger">
+                                                    Dirección, es obligatorio
+                                                </small>
+                                            </div>
+                                            <div class="form-group col-sm-6">
+                                                <label for="phone">Teléfono</label>
+                                                <input type="text" class="form-control form-control-sm"  formControlName="phone" required>
+                                                <small *ngIf="mustShowError('person','phone')" class="form-text alert-danger">
+                                                    Teléfono, es obligatorio
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end información sobre persona-->
+
+                            <!--start información sobre contrato-->
+                            <div class="col-sm-6" formArrayName="enterprise_person">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h6>Información vinculación</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="form-group col-sm-6">
+                                                <label for="fk_id_position">Cargo</label>
+                                                <select class="form-control form-control-sm" formControlName="fk_id_position" required>
+                                                    <option value="" selected>Seleccione...</option>
+                                                    <option *ngFor="let position of lstPositions" value="{{position.pk_id_position}}">{{ position.name }}</option>
+                                                </select>
+                                                <small *ngIf="mustShowError('enterprise_person','fk_id_position')" class="form-text alert-danger">
+                                                    Cargo, es obligatorio
+                                                </small>
+                                            </div>
+                                            <div class="form-group col-sm-6">
+                                                <label for="date_register">Fecha de ingreso</label>
+                                                <div class="input-group mb-3">
+                                                    <div class="input-group-prepend">
+                                                        <span class="btn text-small btn-sm btn-outline-primary" [owlDateTimeTrigger]="date_register"><fa-icon [icon]="faCalendar" class="text-primary"></fa-icon></span>
+                                                    </div>
+                                                    <input type="text" class="form-control form-control-sm"  formControlName="date_register" [owlDateTime]="date_register">
+                                                    <owl-date-time [pickerType]="'calendar'" #date_register></owl-date-time>
+                                                    <small *ngIf="mustShowError('enterprise_person','date_register')" class="form-text alert-danger">
+                                                        Fecha de registro, es obligatoria
+                                                    </small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end información sobre contrato-->
+                        </div> 
+
+                        <!--start buttons form-->
+                        <div class="row justify-content-end margin-top-2rem">
+                            <div class="col-sm-4 text-right align-self-end">
+                                <button *ngIf="!employee.pk_id_enterprise_person" type="submit" (click)="createEmployee()" [disabled]="employeeForm.invalid" class="btn btn-sm btn-outline-primary" type="button" data-dismiss="modal">
+                                    <fa-icon [icon]="faSave" class="text-outline-secondary mb-2 mr-1"></fa-icon>Guardar
+                                </button>
+                                <button *ngIf="employee.pk_id_enterprise_person" type="submit" (click)="updateEmployee()" [disabled]="employeeForm.invalid" class="btn btn-sm btn-outline-primary" type="button" data-dismiss="modal">
+                                    <fa-icon [icon]="faSave" class="text-outline-secondary mb-2 mr-1"></fa-icon>Actualizar
+                                </button>
+                            </div>
+                        </div>
+                        <!--end buttons form-->
+                        
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        </div>
+        </div>
+    </div>
+</div>

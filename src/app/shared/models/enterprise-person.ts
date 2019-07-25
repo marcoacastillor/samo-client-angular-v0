@@ -15,4 +15,6 @@ export class EnterprisePerson {
     public benefit_arl: number;
     public benefit_compensation_box: number;
     public contract_type: string;
+
+    public position:string;
 }

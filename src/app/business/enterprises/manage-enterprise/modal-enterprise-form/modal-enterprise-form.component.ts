@@ -49,7 +49,7 @@ export class ModalEnterpriseFormComponent implements OnInit {
   private initForm(){
     this.enterpriseForm = this.fb.group({
       pk_id_enterprise: [this.enterprise.pk_id_enterprise],
-      type: [environment.enterprise_provider],
+      type: [this.enterprise.type],
       external_reference: ['E:'+this.fk_id_enterprise],
       nit: [this.enterprise.nit,Validators.required],
       name: [this.enterprise.name,Validators.required],

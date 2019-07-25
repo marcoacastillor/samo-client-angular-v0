@@ -60,15 +60,15 @@ export class ModalPersonalFormComponent implements OnInit, OnChanges {
   * Funciones para verificar si los formularios son obligatorios o no.
   */
 
-  public getErrors(controlName: string, controlNameChild: string): any {
+  public getErrors(controlName: string): any {
     return this.formToolService.getErrors(this.personalForm, controlName);
   }
 
-  public mustShowError(controlName: string, controlNameChild: string) {
+  public mustShowError(controlName: string) {
     return this.formToolService.mustShowError(this.personalForm, controlName);
   }
 
-  public hasError(controlName: string, controlNameChild: string, errorCode: string): any {
+  public hasError(controlName: string, errorCode: string): any {
     return this.formToolService.hasError(this.personalForm, controlName, errorCode);
   }
 

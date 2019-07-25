@@ -62,15 +62,15 @@ export class ModalContractFormComponent implements OnInit {
   * Funciones para verificar si los formularios son obligatorios o no.
   */
 
-  public getErrors(controlName: string, controlNameChild: string): any {
+  public getErrors(controlName: string): any {
       return this.formToolService.getErrors(this.enterprisePersonForm, controlName);
     }
 
-    public mustShowError(controlName: string, controlNameChild: string) {
+    public mustShowError(controlName: string) {
       return this.formToolService.mustShowError(this.enterprisePersonForm, controlName);
     }
 
-    public hasError(controlName: string, controlNameChild: string, errorCode: string): any {
+    public hasError(controlName: string, errorCode: string): any {
       return this.formToolService.hasError(this.enterprisePersonForm, controlName, errorCode);
     }
 

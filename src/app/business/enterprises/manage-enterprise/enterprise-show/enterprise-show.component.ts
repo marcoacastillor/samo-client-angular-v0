@@ -10,11 +10,12 @@ import { ParameterConfig } from 'src/app/shared/models/parameter-config';
 import { ParameterConfigService } from 'src/app/shared/services/parameter-config.service';
 import { PositionService } from 'src/app/shared/services/position.service';
 import { Position } from 'src/app/shared/models/position';
-import { faUserTag, faUserCheck, faCogs, faWrench, faEye, faEdit, faTrash, faIndustry } from '@fortawesome/free-solid-svg-icons';
+import { faUserTag, faUserCheck, faCogs, faWrench, faEye, faEdit, faTrash, faIndustry, faAddressCard } from '@fortawesome/free-solid-svg-icons';
 import { Parameter } from 'src/app/shared/models/parameter';
 import { ParameterService } from 'src/app/shared/services/parameter.service';
 import { environment } from 'src/environments/environment';
 import { ActivatedRoute } from '@angular/router';
+import { Employee } from 'src/app/shared/models/employee';
 
 @Component({
   selector: 'app-enterprise-show',
@@ -30,23 +31,30 @@ export class EnterpriseShowComponent implements OnInit {
   faWrench = faWrench;
   faEdit = faEdit;
   faIndustry = faIndustry;
-
+  faAddressCard = faAddressCard;
+  
   user: User = new User;
   enterprise: Enterprise = new Enterprise;
   position: Position = new Position;
   parameterConfig: ParameterConfig = new ParameterConfig;
+  employee: any = new Person;
 
   lstEmployee: Person[] = [];
   lstParametersConfig: ParameterConfig[] = [];
   lstPositions: Position[] = [];
 
   lstParametersEnterprise: Parameter[] = [];
+  lstParametersEmployee:Parameter[] = [];
 
   //parametros para empresas
   regimen    = environment.regimen;
   size       = environment.size_enterprise;
   
   categories      = {'categories' : [this.regimen,this.size]};
+
+  //tipos para trabajador
+  type_id = environment.type_ids;
+  categories_employee      = {'categories' : [this.type_id]};
 
   success = false;
   message = '';
@@ -200,5 +208,61 @@ export class EnterpriseShowComponent implements OnInit {
     )
   }
 
+  /**
+   * Funciones parámetros de empleado
+   */
+  public loadParametersEmployee(){
+    this.employee = new Employee;
+    this.parameterService.getByMultipleCodeCategory$(this.categories_employee).pipe(
+      tap((parametersLst: Parameter[]) => {
+         this.lstParametersEmployee = parametersLst
+      }),
+    ).subscribe()
+  }
 
+  public selectEmployee(employee: any){
+    this.employee = employee;
+  }
+
+  public saveEmployee(laboralInfo: any){
+    this.personService.createEmployee$(laboralInfo).subscribe(
+      () => {
+        this.personService.getEmployeesByEnterprise$(this.enterprise.pk_id_enterprise).subscribe(
+          employees => {
+            this.lstEmployee = employees;
+            this.success = true;
+            this.message = 'Se crea correctamente el empleado';
+          }
+        )
+      }
+    )
+  }
+
+  public deleteEmployee(){
+    this.personService.deleteLaboralInfo$(this.employee.pk_id_person).subscribe(
+      () => {
+        this.personService.getEmployeesByEnterprise$(this.enterprise.pk_id_enterprise).subscribe(
+          employees => {
+            this.success = true;
+            this.lstEmployee = employees;
+            this.message = 'Se elimina un trabajador, satisfactoriamente.';
+          }
+        )
+      }
+    )
+  }
+
+  public updateEmployee(laboralInfo:any){
+    this.personService.updateEmployee$(laboralInfo).subscribe(
+      () => {
+        this.personService.getEmployeesByEnterprise$(this.enterprise.pk_id_enterprise).subscribe(
+          employees => {
+            this.success = true;
+            this.lstEmployee = employees;
+            this.message = 'Se actualiza un trabajador, satisfactoriamente.';
+          }
+        )
+      }
+    )
+  }
 }

@@ -13,6 +13,8 @@ import { ModalPositionFormComponent } from './modal-position-form/modal-position
 import { ModalParameterFormComponent } from './modal-parameter-form/modal-parameter-form.component';
 import { ModalEnterpriseFormComponent } from './modal-enterprise-form/modal-enterprise-form.component';
 import { ParameterService } from 'src/app/shared/services/parameter.service';
+import { ModalEmployeeFormComponent } from './modal-employee-form/modal-employee-form.component';
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 
 @NgModule({
   imports: [
@@ -20,10 +22,12 @@ import { ParameterService } from 'src/app/shared/services/parameter.service';
     ManageEnterpriseRoutingModule,
     SharedModule,
     FontAwesomeModule,
+    OwlDateTimeModule, 
+    OwlNativeDateTimeModule,
   ],
   providers: [
     EnterpriseService, PersonService, ParameterConfigService, PositionService, ParameterService
   ],
-  declarations: [EnterpriseShowComponent, ModalPositionFormComponent, ModalParameterFormComponent, ModalEnterpriseFormComponent]
+  declarations: [EnterpriseShowComponent, ModalPositionFormComponent, ModalParameterFormComponent, ModalEnterpriseFormComponent, ModalEmployeeFormComponent]
 })
 export class ManageEnterpriseModule { }

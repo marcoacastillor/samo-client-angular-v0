@@ -17,8 +17,10 @@ export class OwnerListComponent implements OnInit {
   faTrash = faTrash;
 
   lstOwners: Enterprise[] = [];
-  //fk_id_enterprise: number = 0;
   enterprise: Enterprise = new Enterprise;
+
+  success = false;
+  message = '';
   
   constructor(
     private enterpriseService: EnterpriseService,
@@ -27,6 +29,10 @@ export class OwnerListComponent implements OnInit {
 
   ngOnInit() {
     this.loadAllOwners();
+  }
+
+  public newEnterprise(){
+    this.enterprise = new Enterprise;
   }
 
   private loadAllOwners(){
@@ -43,8 +49,12 @@ export class OwnerListComponent implements OnInit {
     this.enterpriseService.store$(enterprise).subscribe(
       () => {
         this.enterprise = new Enterprise;
-        this.enterpriseService.getByType$(environment.enterprise_provider).subscribe(
-          list_owners => this.lstOwners = list_owners
+        this.enterpriseService.getByType$(environment.enterprise_owner).subscribe(
+          list_owners => {
+            this.lstOwners = list_owners;
+            this.success = true;
+            this.message = 'Se crea empresa satisfactoriamente.';
+          }
         )   
       }
     )
@@ -54,8 +64,12 @@ export class OwnerListComponent implements OnInit {
     this.enterpriseService.update$(enterprise).subscribe(
       () => {
         this.enterprise = new Enterprise;
-        this.enterpriseService.getByType$(environment.enterprise_provider).subscribe(
-          list_owners => this.lstOwners = list_owners
+        this.enterpriseService.getByType$(environment.enterprise_owner).subscribe(
+          list_owners => {
+            this.lstOwners = list_owners;
+            this.success = true;
+            this.message = 'Se actualiza empresa satisfactoriamente.';
+          }
         )   
       }
     )
@@ -64,11 +78,14 @@ export class OwnerListComponent implements OnInit {
   public deleteEnterprise(){
     this.enterpriseService.delete$(this.enterprise.pk_id_enterprise).subscribe(
       () => {
-        this.enterpriseService.getByType$(environment.enterprise_provider).subscribe(
-          list_owners => this.lstOwners = list_owners
+        this.enterpriseService.getByType$(environment.enterprise_owner).subscribe(
+          list_owners => {
+            this.lstOwners = list_owners;
+            this.success = true;
+            this.message = 'Se elimina empresa satisfactoriamente.';
+          }
         )   
       }
     )
   }
-
 }
