@@ -8,8 +8,14 @@
                 </div>
                 <div class="col-sm-6 text-right">
                     <div class="btn-group btn-group-sm">
-                        <button type="button" class="btn btn-outline-primary btn-sm" (click)="loadParametersExpense()" data-toggle="modal" data-target="#expenseModal">
-                            <fa-icon [icon]="faPlusCircle" class="text-outline-primary mb-2 mr-1"></fa-icon>Crear
+                        <button (click)="crtProduct('input')" type="button" class="btn btn-outline-primary btn-sm">
+                            <fa-icon [icon]="faPlusCircle" class="text-outline-primary mb-2 mr-1"></fa-icon>+Insumo producción
+                        </button>
+                        <button (click)="crtProduct('food')" type="button" class="btn btn-outline-primary btn-sm">
+                            <fa-icon [icon]="faPlusCircle" class="text-outline-primary mb-2 mr-1"></fa-icon>+Comida venta
+                        </button>
+                        <button (click)="crtProduct('clothes')" type="button" class="btn btn-outline-primary btn-sm">
+                            <fa-icon [icon]="faPlusCircle" class="text-outline-primary mb-2 mr-1"></fa-icon>+Vestuario venta
                         </button>
                     </div>
                 </div>
@@ -81,10 +87,10 @@
                                     <tr *ngFor="let product of lstProducts">
                                         <td>
                                             <div class="btn-group">
-                                                <button type="button" class="btn text-ultra-small btn-sm btn-outline-primary" (click)="showProduct(prd.pk_id_product)">
+                                                <a routerLink='../show/{{ product.pk_id_product }}'  type="button" class="btn text-ultra-small btn-sm btn-outline-primary">
                                                     <fa-icon [icon]="faEye" class="text-primary mb-2 mr-1" title="Ver registro"></fa-icon>Ver
-                                                </button>
-                                                <button type="button" class="btn text-ultra-small btn-sm btn-outline-primary" (click)="updProduct(prd)">
+                                                </a>
+                                                <button type="button" class="btn text-ultra-small btn-sm btn-outline-primary" (click)="updProduct(product.category,product.pk_id_product)">
                                                     <fa-icon [icon]="faEdit" class="text-primary mb-2 mr-1" title="Actualizar registro"></fa-icon>Editar
                                                 </button>
                                                 <button type="button" (click)="selectProduct(product)" class="text-ultra-small btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#deleteProduct">

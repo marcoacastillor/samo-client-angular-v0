@@ -1,0 +1,145 @@
+<app-pages title="Detalle de producto">  
+    <main>       
+        <section>
+            <!-- start menu main-->
+            <div class="row bg-gray">
+                <div class="col-sm-6 text-left">
+                    Detalle de producto
+                </div>
+                <div class="col-sm-6 text-right">
+                    <div class="btn-group btn-group-sm">
+                        <a routerLink='/sales-admin/products/stocks/list' class="btn text-ultra-small btn-sm btn-outline-primary" type="button">
+                            <fa-icon [icon]="faThList" class="text-outline-secondary mb-2 mr-1"></fa-icon>Ver todos
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- end menu main-->
+
+            <!-- start content -->
+            <div class="row margin-top-1rem">
+                <div class="col-sm-12">
+                    
+                    <!-- start main info-->
+                    <div class="row margin-top-1rem">
+
+                        <!-- start provider info-->
+                        <div class="col-sm-6">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table class="table table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th colspan="2"><h6>Producto</h6></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th>Nombre</th>
+                                                <td>{{ product.name }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Código de barras</th>
+                                                <td>{{ product.code }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Presentación</th>
+                                                <td>{{ product.presentation }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Tipo de producto</th>
+                                                <td>{{ product.type_product }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Referencia</th>
+                                                <td>{{ product.reference }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Categoría</th>
+                                                <td>{{ product.category }}</td>
+                                            </tr>
+                                            <tr *ngIf="product.category == 'VESTUARIO'">
+                                                <th>Talla</th>
+                                                <td>{{ product.size }}</td>
+                                            </tr>
+                                            <tr *ngIf="product.category == 'VESTUARIO'">
+                                                <th>Color</th>
+                                                <td>{{ product.color }}</td>
+                                            </tr>
+                                            <tr *ngIf="product.category == 'VESTUARIO'">
+                                                <th>Marca</th>
+                                                <td>{{ product.trademark }}</td>
+                                            </tr>
+                                            <tr *ngIf="product.presentation != 'INDIVIDUAL'">
+                                                <th>Unidades por paquete</th>
+                                                <td>{{ product.units_package | number }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Precio de venta unidad</th>
+                                                <td>{{ product.sale_price_unit | number }}</td>
+                                            </tr>
+                                            <tr *ngIf="product.presentation != 'INDIVIDUAL'">
+                                                <th>Precio de venta por paquete</th>
+                                                <td>{{ product.sale_price_package | number }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Precio de costo por unidad</th>
+                                                <td>{{ product.cost_price | number }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Unidades disponibles</th>
+                                                <td>{{ product.units_available |  number }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- start provider info-->
+
+                        <!-- start provider info-->
+                        <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <table class="table table-sm">
+                                            <thead>
+                                                <tr>
+                                                    <th colspan="2"><h6>Código de barras</h6></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th>Código de barras</th>
+                                                    <td>
+                                                        <p>
+                                                            <button (click)="getPDFCode(product.html_barcode)" class="badge badge-success text-ultra-small">
+                                                                Imprimir código de barra
+                                                            </button>
+                                                        </p>
+                                                        <p>
+                                                            <img src="data:image/png;base64,{{ product.url_barcode }}" alt="barcode" />
+                                                        </p>
+                                                    </td>
+                                                </tr> 
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- start provider info-->
+                        
+                        <!-- start purchase info-->
+                        <div class="col-sm-6 back-color-ff">
+                            
+                            
+                            
+                        </div>
+                        <!-- end purchase info-->
+                    </div>
+                    <!-- end main info-->
+                </div>
+            </div>
+            <!-- end content -->
+        </section>
+    </main>
+</app-pages>  

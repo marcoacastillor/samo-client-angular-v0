@@ -37,6 +37,9 @@ export class SettlementFormComponent implements OnInit {
 
   activeUser: User = new User;
 
+  success = false;
+  message = '';
+
   constructor(
     private globalStoreService: GlobalStoreService,
     private cuttingPeriodService: CuttingPeriodService,
@@ -57,7 +60,7 @@ export class SettlementFormComponent implements OnInit {
     )
   }
 
-  public onFindValuesByPeriod(filter: any){
+  public onFindValuesByPeriod(){
     let period = (<HTMLInputElement>document.getElementById('selectedPeriod')).value;
     if(period.length > 0)
     {
@@ -81,6 +84,8 @@ export class SettlementFormComponent implements OnInit {
           settlment => {
             this.employeeLst = settlment.employee;
             this.totals = settlment.totals;
+            this.success = true;
+            this.message = 'Se generó liquidación del período seleccionado, correctamente.';
           }
         )
       })
@@ -109,6 +114,8 @@ export class SettlementFormComponent implements OnInit {
           settlment => {
             this.employeeLst = settlment.employee;
             this.totals = settlment.totals;
+            this.success = true;
+            this.message = 'Se eliminó liquidación del período seleccionado, correctamente.';
           }
         )
       }
@@ -123,6 +130,8 @@ export class SettlementFormComponent implements OnInit {
           settlment => {
             this.employeeLst = settlment.employee;
             this.totals = settlment.totals;
+            this.success = true;
+            this.message = 'Se realizó el pago de la liquidación del período seleccionado, correctamente.';
           }
         )
       }

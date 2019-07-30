@@ -6,6 +6,7 @@ import { User } from 'src/app/shared/models/user';
 import { Product } from 'src/app/shared/models/product';
 import { UtilsService } from 'src/app/shared/services/utils.service';
 import { environment } from 'src/environments/environment';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-list',
@@ -32,7 +33,8 @@ export class ProductListComponent implements OnInit {
   constructor(
     private productService: ProductService,
     private globalStoreService: GlobalStoreService,
-    private utilService: UtilsService
+    private utilService: UtilsService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -110,10 +112,23 @@ export class ProductListComponent implements OnInit {
     )
   }
 
-
-
   public getClassByUnits(units: number) {
     return this.utilService.getClassByUnits(units);
   }
 
+  public crtProduct(type:string){
+    this.router.navigateByUrl('sales-admin/products/stocks/create/'+type+'/new');
+  }
+
+  public updProduct(category:string,id:number){
+    if(category == environment.foods){
+      this.router.navigateByUrl('sales-admin/products/stocks/create/food/'+id);
+    }
+    if(category == environment.clothes){
+      this.router.navigateByUrl('sales-admin/products/stocks/create/clothes/'+id);
+    }
+    if(category == environment.chemicalInput){
+      this.router.navigateByUrl('sales-admin/products/stocks/create/input/'+id);
+    }
+  }
 }

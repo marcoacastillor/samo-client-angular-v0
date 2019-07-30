@@ -72,7 +72,7 @@
                             <table class="table table-sm">
                                 <thead>
                                     <tr>
-                                        <th><h4>Últimas 15 compras</h4></th>
+                                        <th colspan="5"><h4>Últimas 15 compras</h4></th>
                                     </tr>
                                     <tr>
                                         <th colspan="2">Factura</th>
@@ -84,11 +84,13 @@
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let operation of lstOperations">
-                                        <div class="btn-group btn-group-sm">
-                                            <a routerLink='../../../../sales/sales-detailed-show/{{operation.pk_id_operation}}' class="btn text-small btn-sm btn-outline-primary" type="button">
-                                                <fa-icon [icon]="faEye" class="text-outline-secondary mb-2 mr-1"></fa-icon>Ver detalle
-                                            </a>
-                                        </div>
+                                        <td>
+                                            <div class="btn-group btn-group-sm">
+                                                <a routerLink='../../../../sales/sales-detailed-show/{{operation.pk_id_operation}}' class="btn text-small btn-sm btn-outline-primary" type="button">
+                                                    <fa-icon [icon]="faEye" class="text-outline-secondary mb-2 mr-1"></fa-icon>Ver detalle
+                                                </a>
+                                            </div>
+                                        </td>
                                         <td>{{ operation.number_invoice }}</td>
                                         <td>{{ operation.payment_type }}</td>
                                         <td>{{ operation.date_operation }}</td>

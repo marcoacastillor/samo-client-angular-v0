@@ -35,6 +35,9 @@ export class SettlementShowComponent implements OnInit {
   laboral_condition: LaboralCondition = new LaboralCondition;
   production_period = 0;
 
+  success = false;
+  message = '';
+
   constructor(
     private activateRoute: ActivatedRoute,
     private payingEmployeeService: PayingEmployeeService,
@@ -66,19 +69,31 @@ export class SettlementShowComponent implements OnInit {
 
   generateAllSettlement(){
     this.payingEmployeeService.generateAllSettlementAndEnterprise$(this.selectedPeriod.pk_id_cutting_period, this.activeUser.fk_id_enterprise).subscribe(
-      cutting_period => this.getSettlementInfoById(cutting_period.pk_id_cutting_period)
+      cutting_period => {
+        this.success = true;
+        this.message = 'Se generó liquidación del período seleccionado, correctamente.';
+        this.getSettlementInfoById(cutting_period.pk_id_cutting_period);
+      }
     )
   }
 
   public deleteSettlementByPeriod(){
     this.payingEmployeeService.deletePayingByContract$(Number(this.id_period)).subscribe(
-      cutting_period => this.getSettlementInfoById(cutting_period.pk_id_cutting_period)
+      cutting_period => {
+        this.success = true;
+        this.message = 'Se eliminó liquidación del período seleccionado, correctamente.';
+        this.getSettlementInfoById(cutting_period.pk_id_cutting_period);
+      }
     )
   }
 
   public paymentSettlementByPeriod(){
     this.payingEmployeeService.paymentPayingByContract$(Number(this.id_period)).subscribe(
-      cutting_period => this.getSettlementInfoById(cutting_period.pk_id_cutting_period)
+      cutting_period => {
+        this.success = true;
+        this.message = 'Se generó pago de liquidación del período seleccionado, correctamente.';
+        this.getSettlementInfoById(cutting_period.pk_id_cutting_period);
+      }
     )
   } 
   

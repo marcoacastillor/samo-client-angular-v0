@@ -1,0 +1,147 @@
+<app-pages title="Producto vestuario">  
+    <main>       
+        <section>
+            <!-- start menu main-->
+            <div class="row bg-gray">
+                <div class="col-sm-6 text-left">
+                    Información de producto vestuario
+                </div>
+                <div class="col-sm-6 text-right">
+                    <div class="btn-group btn-group-sm">
+                        <a routerLink='/sales-admin/products/stocks/list' class="btn text-ultra-small btn-sm btn-outline-primary" type="button">
+                            <fa-icon [icon]="faThList" class="text-outline-secondary mb-2 mr-1"></fa-icon>Ver todos
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- end menu main-->
+
+            <!-- start content -->
+            <div class="row margin-top-1rem">
+                <div class="col-sm-12">
+
+                    <!-- start info options-->
+                    <div class="row" *ngIf="success">
+                        <div class="col-sm-12">
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>Éxito</strong> {{ message }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end info options-->
+                    
+                    <form [formGroup]="clothesForm">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label for="name">Nombre</label>
+                                    <input type="text" class="form-control text-small" placeholder="Nombre" formControlName="name" required>
+                                    <small *ngIf="mustShowError('name')" class="form-text alert-danger">
+                                    Nombre es obligatorio
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label for="code">Código de barras</label>
+                                    <input type="text" class="form-control text-small" placeholder="Código de barras" formControlName="code" required>
+                                    <small *ngIf="mustShowError('code')" class="form-text alert-danger">
+                                    Código es obligatorio
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label for="type_product">Tipo de producto</label>
+                                    <select (change)="setInfoByPresentation()" class="form-control form-control-sm text-small" formControlName="type_product" required>
+                                        <option value="{{type.value}}" *ngFor="let type of parametersList[type_product]">{{type.name}}</option>
+                                    </select>
+                                    <small *ngIf="mustShowError('type_product')" class="form-text alert-danger">
+                                        Tipo de producto, es obligatorio
+                                    </small>
+                                </div>
+                            </div> 
+                        </div>
+                    
+                        <div class="row"> 
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label for="reference">Referencia</label>
+                                    <input type="text" class="form-control text-small" placeholder="Código de barras" formControlName="reference" required>
+                                    <small *ngIf="mustShowError('reference')" class="form-text alert-danger">
+                                    Referencia es obligatorio
+                                    </small>
+                                </div>
+                            </div>   
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label for="sale_price_unit">Precio venta por unidad</label>
+                                    <input type="number" class="form-control text-small" placeholder="Precio venta unidad" formControlName="sale_price_unit" required>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <small class="form-text alert-primary">
+                                                El campo debe ser numérico
+                                            </small>
+                                        </div>
+                                    </div>
+                                    <small *ngIf="mustShowError('sale_price_unit')" class="form-text alert-danger">
+                                        Precio venta por unidad es obligatorio
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row"> 
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label for="size">Talla</label>
+                                    <input type="text" class="form-control text-small" placeholder="Código de barras" formControlName="size" required>
+                                    <small *ngIf="mustShowError('size')" class="form-text alert-danger">
+                                    Talla es obligatorio
+                                    </small>
+                                </div>
+                            </div> 
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label for="color">Color</label>
+                                    <input type="text" class="form-control text-small" placeholder="Código de barras" formControlName="color" required>
+                                    <small *ngIf="mustShowError('color')" class="form-text alert-danger">
+                                    Color es obligatorio
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label for="trademark">Marca</label>
+                                    <input type="text" class="form-control text-small" placeholder="Código de barras" formControlName="trademark" required>
+                                    <small *ngIf="mustShowError('trademark')" class="form-text alert-danger">
+                                    Marca es obligatorio
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- botones -->
+                        <div class="row justify-content-end">
+                            <div class="col-sm-4 text-right align-self-end">
+                                <button *ngIf="!product.pk_id_product" type="submit" (click)="createProduct()" [disabled]="clothesForm.invalid" class="btn btn-sm btn-outline-primary" type="button">
+                                    <fa-icon [icon]="faSave" class="text-outline-secondary mb-2 mr-1"></fa-icon>Crear
+                                </button>
+                                <button *ngIf="product.pk_id_product" type="submit" (click)="updateProduct()" [disabled]="clothesForm.invalid" class="btn btn-sm btn-outline-primary" type="button">
+                                    <fa-icon [icon]="faSave" class="text-outline-secondary mb-2 mr-1"></fa-icon>Actualizar
+                                </button>
+                            </div>
+                        </div>
+                        <!-- botones -->
+                    </form>
+
+                </div>
+            </div>
+            <!-- end content -->
+        </section>
+    </main>
+</app-pages>  

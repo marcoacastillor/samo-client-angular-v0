@@ -226,7 +226,7 @@ export class NewSaleDetailComponent implements OnInit {
       number_invoice: ['',Validators.required],
       subtotal_operation: [0],
       value_payment: [0],
-      payment_type: ['',Validators.required],
+      payment_type: [environment.efecty_payment,Validators.required],
       current_invoice: [0],
       date_operation: [moment().format('YYYY-MM-DD')],
       product: this.fb.group({
@@ -423,7 +423,7 @@ export class NewSaleDetailComponent implements OnInit {
       }),
       tap(() => {
         this.parameterConfigService.updateByEnterpriseAndCodeAndValue$(this.activeUser.fk_id_enterprise,this.code_paramSelected,this.value_paramSelected).subscribe(
-          param => { this.getParametersByEnterprise(); console.log(param) }
+          () => { this.getParametersByEnterprise();}
         )
       })
     )

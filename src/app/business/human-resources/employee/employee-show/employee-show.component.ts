@@ -239,7 +239,6 @@ export class EmployeeShowComponent implements OnInit {
   public loadWorkerNewsParameter(){
     this.parameterService.getByMultipleCodeCategory$(this.categories_news).subscribe(
       parameter_worker_new => {
-        console.log(parameter_worker_new);
         this.workerNewsParameterList = parameter_worker_new;
       }
     )

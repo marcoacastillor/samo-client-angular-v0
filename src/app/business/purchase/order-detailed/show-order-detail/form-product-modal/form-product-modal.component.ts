@@ -40,7 +40,6 @@ export class FormProductModalComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.initForm();
-    console.log(this.nameField);
   }
 
   ngOnChanges(changes: SimpleChanges)

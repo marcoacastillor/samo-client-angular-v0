@@ -26,10 +26,6 @@ const routes: Routes = [
         loadChildren: './sales/sales.module#SalesModule'
       },
       {
-        path: 'stocks',
-        loadChildren: './stock/stock.module#StockModule'
-      },
-      {
         path: 'products',
         loadChildren: './products/products.module#ProductsModule'
       },
