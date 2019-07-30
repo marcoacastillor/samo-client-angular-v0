@@ -179,4 +179,15 @@ export class OperationService {
       })
     );
   }
+
+  public getOperationByClient$(id_person:number): Observable<Operation[]> {
+    const url = this._url + '/get-operation-by-client/' + id_person;
+    return this.userService.validateOptionByToken('OPE_OPERATION_GET_BY_CLIENT').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.get<Operation[]>(url);
+        }
+      })
+    );
+  }
 }

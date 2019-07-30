@@ -1,0 +1,166 @@
+<app-pages title="Detalle de liquidación">  
+    <main>            
+        <section>
+            <!-- start menu main-->
+            <div class="row bg-gray">
+                <div class="col-sm-6 text-left">
+                    Detalle liquidación
+                </div>
+                <div class="col-sm-6 text-right">
+                    <div class="btn-group btn-group-sm">
+                        <a routerLink='../../list' class="btn text-ultra-small btn-sm btn-outline-primary" type="button">
+                            <fa-icon [icon]="faThList" class="text-outline-secondary mb-2 mr-1"></fa-icon>Ver todos
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- end menu main-->
+
+            <!-- start content -->
+            <div class="row margin-top-1rem">
+                <div class="col-sm-12">
+
+                    <!-- start info options-->
+                    <div class="row" *ngIf="success">
+                        <div class="col-sm-12">
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>Éxito</strong> {{ message }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end info options-->
+
+                    <!-- start main info-->
+                    <div class="row margin-top-1rem">
+
+                        <!-- start purchase info-->
+                        <div class="col-sm-12">
+
+                            <!-- start info options-->
+                            <div class="row back-colo-f6" *ngIf="selectedPeriod.state != 'Pagado'">
+                                <div class="col-sm-12 text-right align-self-end">
+                                    <div class="btn-group btn-group-sm">
+                                        <div class="dropdown">
+                                            <button class="btn text-ultra-small btn-sm dropdown-toggle" type="button" id="operation" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <fa-icon [icon]="faFileInvoiceDollar" class="text-outline-secondary mb-2 mr-1"></fa-icon>Liquidación
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="settlement">
+                                                <button (click)="generateAllSettlement()" *ngIf="selectedPeriod.state === 'Abierto'" class="dropdown-item text-small text-secondary"  type="button">
+                                                    <fa-icon [icon]="faCalculator" class="text-outline-secondary mb-2 mr-1"></fa-icon>Calcular
+                                                </button>
+                                                <div class="dropdown-divider"></div>
+                                                <button (click)="paymentSettlementByPeriod()"  *ngIf="selectedPeriod.state === 'Liquidado'" class="dropdown-item text-small text-secondary"  type="button">
+                                                    <fa-icon [icon]="faMoneyBillAlt" class="text-outline-secondary mb-2 mr-1"></fa-icon>Pagar
+                                                </button>
+                                                <div class="dropdown-divider"></div>
+                                                <button (click)="deleteSettlementByPeriod()"  *ngIf="selectedPeriod.state === 'Liquidado'" class="dropdown-item text-small text-secondary"  type="button">
+                                                    <fa-icon [icon]="faFileInvoice" class="text-outline-secondary mb-2 mr-1"></fa-icon>Eliminar
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end info options-->
+                           
+                            <!-- start employees-->
+                            <div class="row justify-content-end margin-top-2rem">
+                                <div class="col-sm-12">
+                                    <table class="table table-sm text-small">
+                                        <thead>
+                                            <tr>
+                                                <th>Estado</th>
+                                                <td>{{ selectedPeriod.state }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Período</th>
+                                                <td>{{ selectedPeriod.period }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Fecha inicial</th>
+                                                <td>{{ selectedPeriod.date_init }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Fecha final</th>
+                                                <td>{{ selectedPeriod.date_end }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th colspan="2">Id</th>
+                                                <th>Nombres</th>
+                                                <th>Cargo</th>
+                                                <th>Tipo de salario</th>
+                                                <th>Valor salario</th>
+                                                <th>IBC</th>
+                                                <th>Salud</th>
+                                                <th>Pensión</th>
+                                                <th>ARL</th>
+                                                <th>Caja compensación</th>
+                                                <th>Descuentos</th>
+                                                <th>Otros ingresos</th>
+                                                <th>Neto a pagar</th>
+                                                <th>Estado</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let employee of employeeLst">
+                                                <td>
+                                                    <div class="btn-group">
+                                                        <button (click)="getWorkerNewByPeriodAndContract(selectedPeriod.pk_id_cutting_period,employee.laboralCondition.fk_id_enterprise_person)" class="btn text-ultra-small btn-sm" type="button" data-toggle="modal" data-target="#workerNewModal">
+                                                            <fa-icon [icon]="faFileInvoiceDollar" class="text-outline-primary mb-2 mr-1"></fa-icon>ver novedades
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                                <td>{{ employee.person.type_id }} - {{ employee.person.number_id }}</td>
+                                                <td>{{ employee.person.names }} {{ employee.person.last_names }}</td>
+                                                <td>{{ employee.person.name }}</td>
+                                                <td>{{ employee.laboralCondition.salary_type}}</td>
+                                                <td>$ {{ employee.payingEmployee.value_payment | number}}</td>
+                                                <td>$ {{ employee.payingEmployee.ibc_value | number }}</td>
+                                                <td>$ {{ employee.payingEmployee.health_value | number }}</td>
+                                                <td>$ {{ employee.payingEmployee.pension_value | number }}</td>
+                                                <td>$ {{ employee.payingEmployee.arl_value | number }}</td>
+                                                <td>$ {{ employee.payingEmployee.compensation_value | number }}</td>
+                                                <td>$ {{ employee.payingEmployee.total_discounts_value | number }}</td>
+                                                <td>$ {{ employee.payingEmployee.other_income_value | number }}</td>
+                                                <td>$ {{ employee.payingEmployee.net_payment_value | number }}</td>
+                                                <td>{{ employee.payingEmployee.state_paying }}</td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr class="text-primary">
+                                                <th colspan="5" class="text-center">Totales</th>
+                                                <th colspan="2">$ {{ totals.total_salary | number }}</th>
+                                                <th>$ {{ totals.total_health | number }}</th>
+                                                <th>$ {{ totals.total_pension | number }}</th>
+                                                <th>$ {{ totals.total_arl | number }}</th>
+                                                <th>$ {{ totals.total_cc | number }}</th>
+                                                <th>$ {{ totals.total_discount | number }}</th>
+                                                <th>$ {{ totals.total_income | number}}</th>
+                                                <th colspan="2">$ {{ totals.total_net_payment | number}}</th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- end employees-->                                
+                        </div>
+                        <!-- end purchase info-->
+                    </div>
+                    <!-- end main info-->
+                </div>
+            </div>
+            <!-- end content -->
+        </section>
+    </main>
+</app-pages>
+
+
+<app-modal-worker-new-show
+[workerNewsLst]="workerNewsLst"
+[laboral_condition]="laboral_condition"
+[production_period]="production_period"
+>
+</app-modal-worker-new-show>

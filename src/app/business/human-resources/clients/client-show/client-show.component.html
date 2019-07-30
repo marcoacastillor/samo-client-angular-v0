@@ -1,0 +1,109 @@
+<app-pages title="Detalle de cliente">  
+    <main>       
+        <section>
+            <!-- start menu main-->
+            <div class="row bg-gray">
+                <div class="col-sm-6 text-left">
+                    Información detallada
+                </div>
+                <div class="col-sm-6 text-right">
+                    <div class="btn-group btn-group-sm">
+                        <a routerLink='../../list' class="btn  btn-sm btn-outline-primary" type="button">
+                            <fa-icon [icon]="faThList" class="text-outline-secondary mb-2 mr-1"></fa-icon>Ver todos
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- end menu main-->
+
+            <!-- start content -->
+            <div class="row margin-top-1rem">
+                <div class="col-sm-4">
+
+                    <!-- start main info-->
+                    <div class="row margin-top-1rem">
+                        
+                        <!-- start provider info-->
+                        <div class="col-sm-12 back-colo-f6">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table class="table table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th colspan="2"><h4>Datos personales</h4></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th>Identificación</th>
+                                                <td>{{ person.type_id }} {{ person.number_id }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Nombre</th>
+                                                <td>{{ person.names }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Apellidos</th>
+                                                <td>{{ person.last_names }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Dirección</th>
+                                                <td>{{ person.address }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Teléfono</th>
+                                                <td>{{ person.phone }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end peson info-->
+                    </div>
+                    <!-- end main info-->
+                </div>
+
+                <!-- start sales info-->
+                <div class="col-sm-8 back-color-ff">
+                    <!-- start laboral condition-->
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th><h4>Últimas 15 compras</h4></th>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="2">Factura</th>
+                                        <th>Tipo de compra</th>
+                                        <th>Fecha</th>
+                                        <th>Valor de factura</th>
+                                        <th>Estado</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let operation of lstOperations">
+                                        <div class="btn-group btn-group-sm">
+                                            <a routerLink='../../../../sales/sales-detailed-show/{{operation.pk_id_operation}}' class="btn text-small btn-sm btn-outline-primary" type="button">
+                                                <fa-icon [icon]="faEye" class="text-outline-secondary mb-2 mr-1"></fa-icon>Ver detalle
+                                            </a>
+                                        </div>
+                                        <td>{{ operation.number_invoice }}</td>
+                                        <td>{{ operation.payment_type }}</td>
+                                        <td>{{ operation.date_operation }}</td>
+                                        <td>{{ operation.total_operation | number}}</td>
+                                        <td>{{ operation.state_operation }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- end sales info-->
+
+            </div>
+            <!-- end content -->
+        </section>
+    </main>
+</app-pages>  

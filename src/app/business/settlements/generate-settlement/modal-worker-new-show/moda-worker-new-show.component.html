@@ -1,0 +1,85 @@
+<div class="modal fade" id="workerNewModal" tabindex="-1" role="dialog" aria-labelledby="workerNewModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Novedades emplado</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="card">
+                <div class="card-body">
+                   <div class="row">
+                        <div class="col-sm-12">
+                            <table class="table table-sm text-small">
+                                <tbody>
+                                    <tr>
+                                        <th>Tipo de salario</th>
+                                        <td>{{ laboral_condition.salary_type }}</td>
+                                    </tr>
+                                    <tr *ngIf="laboral_condition.salary_type == 'FIJO'">
+                                        <th>Salario</th>
+                                        <td>{{ laboral_condition.salary | number }}</td>
+                                    </tr>
+                                    <tr *ngIf="laboral_condition.salary_type != 'FIJO'">
+                                        <th>Unidad de producción</th>
+                                        <td>{{ laboral_condition.production_unit }}</td>
+                                    </tr>
+                                    <tr *ngIf="laboral_condition.salary_type != 'FIJO'">
+                                        <th>Valor Unidad de producción</th>
+                                        <td>{{ laboral_condition.value_product_unit | number }}</td>
+                                    </tr>
+                                    <tr *ngIf="laboral_condition.salary_type != 'FIJO'">
+                                        <th>Cantidad producida en el período</th>
+                                        <td>{{ production_period | number }}</td>
+                                    </tr>
+                                    <tr *ngIf="laboral_condition.salary_type != 'FIJO'">
+                                        <th>Total a pagar</th>
+                                        <td>{{ production_period * laboral_condition.value_product_unit | number }}</td>
+                                    </tr>
+                                    <tr *ngIf="laboral_condition.salary_type == 'FIJO'">
+                                        <th>Total a pagar</th>
+                                        <td>{{ laboral_condition.salary | number }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row margin-top-1rem">
+                        <div class="col-sm-12">
+                            <table class="table table-sm text-small">
+                                <thead>
+                                    <tr>
+                                        <th colspan="4">Novedades del período</th>
+                                    </tr>
+                                    <tr>
+                                        <th>Tipo</th>
+                                        <th>Descripción</th>
+                                        <th>Fecha</th>
+                                        <th>Valor</th>
+                                        <th>Estado</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let worker of workerNewsLst">
+                                        <td>{{ worker.type_new }}</td>
+                                        <td>{{ worker.description_new }}</td>
+                                        <td>{{ worker.date_new }}</td>
+                                        <td>{{ worker.value_new | number }}</td>
+                                        <td>{{ worker.state_worker_new }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        </div>
+        </div>
+    </div>
+</div>

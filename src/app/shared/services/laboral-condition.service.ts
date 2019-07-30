@@ -28,6 +28,16 @@ export class LaboralConditionService {
     );
   }
 
+  public create$(laboralCondition: LaboralCondition): Observable<LaboralCondition> {
+    return this.userService.validateOptionByToken('LABORAL_CONDITION_CRT').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.post<LaboralCondition>(this._url, laboralCondition);
+        }
+      })
+    );
+  }
+
   public update$(laboralCondition: LaboralCondition): Observable<LaboralCondition> {
     return this.userService.validateOptionByToken('LABORAL_CONDITION_UPD').pipe(
       switchMap(validate => {

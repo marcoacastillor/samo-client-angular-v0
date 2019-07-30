@@ -37,6 +37,18 @@ export class WorkerNewService {
       })
     );
   }
+
+  public getByPeriodAndContract$(id_period:number, id_contract:number): Observable<WorkerNews[]> {
+    const url = this._url + '/get-by-period-and-contract/'+id_period+'/'+id_contract;
+    return this.userService.validateOptionByToken('WORKER_NEWS_GET_PERIOD_AND_CONTRACT').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.get<WorkerNews[]>(url);
+        }
+      })
+    );
+  }
+
   
   
 }

@@ -29,6 +29,17 @@ export class DetailProductInputService {
     );
   }
 
+  public getByCuttingPeriodAndProduct$(id_period:number,pk_product_unit:number): Observable<number> {
+    let url = this._url + '/get-by-period-and-product/' + id_period.toString() + '/' + pk_product_unit.toString();
+    return this.userService.validateOptionByToken('DETAIL_PRD_INPUT_GET_BY_PERIOD_AND_PRODUCT').pipe(
+      switchMap(validate => {
+        if (validate) {
+          return this.http.get<number>(url);
+        }
+      })
+    );
+  }
+
   public store$(detailProductInput: DetailProductInput): Observable<DetailProductInput> {
     return this.userService.validateOptionByToken('DETAIL_PRD_INPUT_CRT').pipe(
       switchMap(validate => {

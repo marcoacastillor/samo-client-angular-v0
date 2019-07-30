@@ -30,6 +30,10 @@ const routes: Routes = [
         loadChildren: './stock/stock.module#StockModule'
       },
       {
+        path: 'products',
+        loadChildren: './products/products.module#ProductsModule'
+      },
+      {
         path: 'human-resource',
         loadChildren: './human-resources/human-resources.module#HumanResourcesModule'
       },
@@ -44,6 +48,10 @@ const routes: Routes = [
       {
         path: 'production-process',
         loadChildren: './production/production.module#ProductionModule'
+      },
+      {
+        path: 'settlements',
+        loadChildren: './settlements/settlements.module#SettlementsModule'
       }
     ]
   },

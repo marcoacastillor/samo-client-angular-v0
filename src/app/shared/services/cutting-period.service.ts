@@ -17,9 +17,20 @@ export class CuttingPeriodService {
     ) {
   }
 
-  public getAllByProductionProcess$(id_production_process: number): Observable<CuttingPeriod[]> {
-    let url = this._url + '/' + id_production_process.toString();
+  public show$(id:number): Observable<CuttingPeriod> {
+    let url = this._url + '/' + id.toString();
     return this.userService.validateOptionByToken('CUTT_PERIOD_LIST').pipe(
+      switchMap(validate => {
+        if (validate) {
+          return this.http.get<CuttingPeriod>(url);
+        }
+      })
+    );
+  }
+
+  public getAllByProductionProcess$(id_production_process: number): Observable<CuttingPeriod[]> {
+    let url = this._url + '/get-by-period/' + id_production_process.toString();
+    return this.userService.validateOptionByToken('CUTT_PERIOD_GET_BY_PERIOD').pipe(
       switchMap(validate => {
         if (validate) {
           return this.http.get<CuttingPeriod[]>(url);
@@ -27,6 +38,29 @@ export class CuttingPeriodService {
       })
     );
   }
+
+  public getAllByEnterprise$(id_enterprise:number): Observable<CuttingPeriod[]> {
+    let url = this._url + '/get-all-by-enterprise/' + id_enterprise.toString();
+    return this.userService.validateOptionByToken('CUTT_PERIOD_GET_ALL_BY_ENTERPRISE').pipe(
+      switchMap(validate => {
+        if (validate) {
+          return this.http.get<CuttingPeriod[]>(url);
+        }
+      })
+    );
+  }
+
+  public getAllActiveSettlementByEnterprise$(id_enterprise:number): Observable<CuttingPeriod[]> {
+    let url = this._url + '/get-all-active-settlement-by-enterprise/' + id_enterprise.toString();
+    return this.userService.validateOptionByToken('CUTT_PERIOD_GET_ALL_ACTIVE_SETTLEMENT_BY_ENTERPRISE').pipe(
+      switchMap(validate => {
+        if (validate) {
+          return this.http.get<CuttingPeriod[]>(url);
+        }
+      })
+    );
+  }
+
 
   public store$(cuttingPeriod: CuttingPeriod): Observable<CuttingPeriod> {
     return this.userService.validateOptionByToken('CUTT_PERIOD_CRT').pipe(

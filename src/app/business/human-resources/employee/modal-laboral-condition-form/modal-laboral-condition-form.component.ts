@@ -17,10 +17,13 @@ export class ModalLaboralConditionFormComponent implements OnInit {
   faSave = faSave;
   laboralConditionForm: FormGroup;
 
+  
+  @Input() public fk_id_enterprise_person: number;
   @Input() public laboralCondition: LaboralCondition;
   @Input() public laboralConditionParametersList: Parameter[];
 
   @Output() public update = new EventEmitter<LaboralCondition>();
+  @Output() public create = new EventEmitter<LaboralCondition>();
 
   type_salary = environment.salary_type;
   type_contract = environment.contract_type;
@@ -41,6 +44,15 @@ export class ModalLaboralConditionFormComponent implements OnInit {
 
   ngOnChanges(changes: SimpleChanges)
   {
+    if(changes.fk_id_enterprise_person)
+    {
+      if(changes.fk_id_enterprise_person.currentValue != changes.fk_id_enterprise_person.previousValue)
+      {
+        this.fk_id_enterprise_person = changes.fk_id_enterprise_person.currentValue;
+        this.initForm();
+      }
+    }
+    
     if(changes.laboralCondition)
     {
       if(changes.laboralCondition.currentValue != changes.laboralCondition.previousValue)
@@ -52,7 +64,8 @@ export class ModalLaboralConditionFormComponent implements OnInit {
 
   private initForm(){
     this.laboralConditionForm = this.fb.group({
-      pk_id_laboral_condition: [this.laboralCondition.pk_id_laboral_condition, Validators.required],
+      pk_id_laboral_condition: [this.laboralCondition.pk_id_laboral_condition],
+      fk_id_enterprise_person: [this.fk_id_enterprise_person],
       contract_type: [this.laboralCondition.contract_type, Validators.required],
       salary_type: [this.laboralCondition.salary_type, Validators.required],
       salary: [this.laboralCondition.salary],
@@ -91,6 +104,10 @@ export class ModalLaboralConditionFormComponent implements OnInit {
 
   updateLaboralCondition(){
     this.update.emit(this.laboralConditionForm.value);
+  }
+
+  createLaboralCondition(){
+    this.create.emit(this.laboralConditionForm.value);
   }
 
   /**

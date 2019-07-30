@@ -113,6 +113,8 @@ export const environment = {
 
   laboral_state_active: 'Activo',
   laboral_state_inactive: 'Inactivo',
+
+  cutting_active_state: 'Abierto',
 };
 
 /*

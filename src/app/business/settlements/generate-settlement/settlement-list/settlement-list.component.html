@@ -1,0 +1,94 @@
+<app-pages title="Liquidaciones">  
+    <main>            
+        <section>
+            <!-- start menu main-->
+            <div class="row bg-gray">
+                <div class="col-sm-6 text-left">
+                    Listado de períodos laborales
+                </div>
+                <div class="col-sm-6 text-right">
+                    <div class="btn-group btn-group-sm">
+                        <a routerLink='../create' type="button" class="btn btn-outline-primary btn-sm">
+                            <fa-icon [icon]="faPlusCircle" class="text-outline-primary mb-2 mr-1"></fa-icon>Crear
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- end menu main-->
+
+            <!-- start content -->
+            <div class="row margin-top-1rem">
+                <div class="col-sm-12">
+
+                    <!-- start info options-->
+                    <div class="row" *ngIf="success">
+                        <div class="col-sm-12">
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>Éxito : </strong> {{ message }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end info options-->
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table class="table table-sm table-striped">
+                                <thead class="bg-secondary text-white">
+                                    <tr>
+                                        <th>Acciones</th>
+                                        <th>Período</th>
+                                        <th>Fecha inicial</th>
+                                        <th>Fecha final</th>
+                                        <th>Estado</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let period of lstPeriods">
+                                        <td>
+                                            <div class="btn-group btn-group-sm">
+                                                <a routerLink='../show/{{period.pk_id_cutting_period}}' class="btn text-small btn-sm btn-outline-primary" type="button">
+                                                    <fa-icon [icon]="faEye" class="text-outline-primary mb-2 mr-1"></fa-icon>Ver
+                                                </a>
+                                            </div>
+                                        </td>
+                                        <td>{{ period.period }}</td>
+                                        <td>{{ period.date_init }}</td>
+                                        <td>{{ period.date_end }}</td>
+                                        <td>{{ period.state }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end content -->
+        </section>
+    </main>
+</app-pages>
+
+<!-- Modal -->
+<div class="modal fade" id="deletePeriod" tabindex="-1" role="dialog" aria-labelledby="deletePeriod" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Confirmación de mensaje</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="alert alert-danger" role="alert">
+                Se va a eliminar un registro, desea confirmar la operación?.
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="button" (click)="deletePeriod()" data-dismiss="modal" class="btn btn-danger">Eliminar</button>
+        </div>
+        </div>
+    </div>
+</div>

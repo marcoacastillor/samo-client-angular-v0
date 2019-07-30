@@ -180,4 +180,51 @@ export class ProductService {
       })
     );
   }
+
+  /**
+   * Obtiene productos por empresa
+   */
+  public getAllByEnterprise$(id_enterprise: number):Observable<Product[]> {
+    let url = this._url + '/get-all-by-enterprise/' + id_enterprise.toString();
+    return this.userService.validateOptionByToken('PRD_GET_ALL_BY_ENTERPRISE').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.get<Product[]>(url);
+        }
+      })
+    );
+  }
+
+  public getByCodeFilterAndEnterprise$(code:string, id:number):Observable<Product[]> {
+    let url = this._url + '/get-all-by-codeFilter-and-enterprise/' + code + '/' + id.toString();
+    return this.userService.validateOptionByToken('PRD_GET_ALL_BY_CODEFILTER_AND_ENTERPRISE').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.get<Product[]>(url);
+        }
+      })
+    );
+  }
+
+  public getByNameFilterAndEnterprise$(code:string, id:number):Observable<Product[]> {
+    let url = this._url + '/get-all-by-nameFilter-and-enterprise/' + code + '/' + id.toString();
+    return this.userService.validateOptionByToken('PRD_GET_ALL_BY_NAMEFILTER_AND_ENTERPRISE').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.get<Product[]>(url);
+        }
+      })
+    );
+  }
+
+  public getByReferenceFilterAndEnterprise$(code:string, id:number):Observable<Product[]> {
+    let url = this._url + '/get-all-by-referenceFilter-and-enterprise/' + code + '/' + id.toString();
+    return this.userService.validateOptionByToken('PRD_GET_ALL_BY_REFERENCEFILTER_AND_ENTERPRISE').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.get<Product[]>(url);
+        }
+      })
+    );
+  }
 }

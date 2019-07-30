@@ -9,6 +9,10 @@
         </div>
         <div class="modal-body">
             <div class="card">
+
+                <pre>
+                    {{ laboralConditionForm.value | json }}
+                </pre>
                 <div class="card-body">
                     <form [formGroup]="laboralConditionForm">
                         <div class="row">
@@ -88,8 +92,11 @@
                         <!--start buttons form-->
                         <div class="row justify-content-end margin-top-2rem">
                             <div class="col-sm-4 text-right align-self-end">
-                                <button type="submit" (click)="updateLaboralCondition()" [disabled]="laboralConditionForm.invalid" class="btn btn-sm btn-outline-primary" type="button" data-dismiss="modal">
+                                <button *ngIf="laboralCondition.pk_id_laboral_condition" type="submit" (click)="updateLaboralCondition()" [disabled]="laboralConditionForm.invalid" class="btn btn-sm btn-outline-primary" type="button" data-dismiss="modal">
                                     <fa-icon [icon]="faSave" class="text-outline-secondary mb-2 mr-1"></fa-icon>Actualizar
+                                </button>
+                                <button *ngIf="!laboralCondition.pk_id_laboral_condition" type="submit" (click)="createLaboralCondition()" [disabled]="laboralConditionForm.invalid" class="btn btn-sm btn-outline-primary" type="button" data-dismiss="modal">
+                                    <fa-icon [icon]="faSave" class="text-outline-secondary mb-2 mr-1"></fa-icon>Crear
                                 </button>
                             </div>
                         </div>

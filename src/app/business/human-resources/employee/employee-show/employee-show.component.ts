@@ -203,6 +203,22 @@ export class EmployeeShowComponent implements OnInit {
     )
   }
 
+  
+  public createLaboralCondition(laboralCondition:LaboralCondition)
+  {
+    this.laboralConditionService.create$(laboralCondition).subscribe(
+      laboral_condition => {
+        this.laboralConditionService.getInfoByEnterprisePerson$(laboral_condition.fk_id_enterprise_person).subscribe(
+          laboral_condition => {
+            this.laboralCondition = laboral_condition;
+            this.success = true;
+            this.message = 'Se creó información de condiciones laborales, correctamente.';
+          }
+        );
+      }
+    )
+  }
+
   public updateLaboralCondition(laboralCondition:LaboralCondition)
   {
     this.laboralConditionService.update$(laboralCondition).subscribe(

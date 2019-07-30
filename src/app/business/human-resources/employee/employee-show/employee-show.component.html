@@ -254,8 +254,7 @@
                                         <td colspan="11"><h4>Pagos realizados</h4></td>
                                     </tr>
                                     <tr>
-                                        <th>Fecha inicial de período</th>
-                                        <th>Fecha final de período</th>
+                                        <th>Fecha de pago</th>
                                         <th>IBC</th>
                                         <th>Salud</th>
                                         <th>Pensión</th>
@@ -269,8 +268,7 @@
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let payment of paymentsEmployee">
-                                        <td>{{ payment.date_init_period }}</td>
-                                        <td>{{ payment.date_end_period }}</td>
+                                        <td>{{ payment.date_payment }}</td>
                                         <td>$ {{ payment.value_payment | number }}</td>
                                         <td>$ {{ payment.ibc_value | number }}</td>
                                         <td>$ {{ payment.health_value | number }}</td>
@@ -313,8 +311,10 @@
 <!--start formulario de información sobre condiciones laborales-->
 <app-modal-laboral-condition-form
 [laboralCondition]="laboralCondition"
+[fk_id_enterprise_person]="enterprisePerson.pk_id_enterprise_person"
 [laboralConditionParametersList]="laboralConditionParametersList"
 (update)="updateLaboralCondition($event)"
+(create)="createLaboralCondition($event)"
 >
 </app-modal-laboral-condition-form>
 <!--end formulario de información sobre condiciones laborales-->

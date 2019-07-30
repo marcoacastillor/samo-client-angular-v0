@@ -18,11 +18,11 @@ export class ExpensesService {
     ) {
   }
 
-  public getAll$(): Observable<Results> {
+  public getAll$(): Observable<Expense[]> {
     return this.userService.validateOptionByToken('EXP_LIST').pipe(
       switchMap(validate => {
         if(validate){
-          return this.http.get<Results>(this._url);
+          return this.http.get<Expense[]>(this._url);
         }
       })
     );

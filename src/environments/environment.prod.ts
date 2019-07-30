@@ -1,6 +1,7 @@
 export const environment = {
   production: true,
-  
+
+  /*
   url_user: 'https://www.sanratsolutions.com/prd/usuarios/public/users',
   url_module: 'https://www.sanratsolutions.com/prd/usuarios/public/modules',
   url_component: 'https://www.sanratsolutions.com/prd/usuarios/public/components',
@@ -35,6 +36,44 @@ export const environment = {
   url_laboral_condition: 'https://www.sanratsolutions.com/prd/ventas/public/laboral_condition',
   url_worker_news: 'https://www.sanratsolutions.com/prd/ventas/public/worker_news',
   url_payment_employee: 'https://www.sanratsolutions.com/prd/ventas/public/paying_employee',
+  */
+
+
+  url_user: 'http://localhost/usuariosV0/public/users',
+  url_module: 'http://localhost/usuariosV0/public/modules',
+  url_component: 'http://localhost/usuariosV0/public/components',
+  url_rol: 'http://localhost/usuariosV0/public/rols',
+  url_rol_option: 'http://localhost/usuariosV0/public/rols_options',
+  url_option: 'http://localhost/usuariosV0/public/options',
+  url_category: 'http://localhost/usuariosV0/public/categories',
+  url_parameter: 'http://localhost/usuariosV0/public/parameters',
+  url_storage: 'http://localhost/usuariosV0/storage/app/public/',
+  url_ventas_storage: 'http://localhost/ventasV0/storage/app/public/',
+  url_type_service: 'http://localhost/usuariosV0/public/type-service',
+  url_parameter_config: 'http://localhost/usuariosV0/public/parameter_config',
+  url_refresh_users: 'http://localhost/usuariosV0/public/clear',
+  
+  url_refresh_sales: 'http://localhost/ventasV0/public/clear',
+  url_authentication_ventas: 'http://localhost/ventasV0/public/authentication',
+  url_person: 'http://localhost/ventasV0/public/persons',
+  url_enterprise: 'http://localhost/ventasV0/public/enterprises',
+  url_operation: 'http://localhost/ventasV0/public/operations',
+  url_products: 'http://localhost/ventasV0/public/products',
+  url_payment: 'http://localhost/ventasV0/public/payments',
+  url_expenses: 'http://localhost/ventasV0/public/expenses',
+  url_note: 'http://localhost/ventasV0/public/notes',
+  url_position: 'http://localhost/ventasV0/public/positions',
+  url_production_process: 'http://localhost/ventasV0/public/production_process',
+  url_cutting_period: 'http://localhost/ventasV0/public/cutting_period',
+  url_cutting_period_product: 'http://localhost/ventasV0/public/cutting_period_product',
+  url_detail_product_input: 'http://localhost/ventasV0/public/detail_product_input',
+  url_operation_product: 'http://localhost/ventasV0/public/operation_product',
+  url_notes: 'http://localhost/ventasV0/public/notes',
+  url_enterprise_person: 'http://localhost/ventasV0/public/enterprise_person',
+  url_laboral_condition: 'http://localhost/ventasV0/public/laboral_condition',
+  url_worker_news: 'http://localhost/ventasV0/public/worker_news',
+  url_payment_employee: 'http://localhost/ventasV0/public/paying_employee',
+  
   
   clearMessageDelayMs: 5000,
   refreshInterval: 1000,
@@ -107,4 +146,6 @@ export const environment = {
 
   laboral_state_active: 'Activo',
   laboral_state_inactive: 'Inactivo',
+
+  cutting_active_state: 'Abierto',
 };
