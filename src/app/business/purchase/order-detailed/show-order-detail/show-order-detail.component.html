@@ -204,7 +204,10 @@
                                 </div>
                             </div>
                             <!-- end información básica-->
-        
+                            
+                            <pre>
+                                {{ lstProducts | json }}
+                            </pre>
                             <!-- start productos-->
                             <div class="row margin-top-2rem justify-content-end">
                                 <div class="col-sm-12">
@@ -234,10 +237,8 @@
                                                     </div>
                                                 </td>
                                                 <td>{{ prd.presentation }}</td>
-                                                <td *ngIf="prd.presentation === individual">{{ prd.number_units | number }}</td>
-                                                <td *ngIf="prd.presentation === individual">{{ prd.price_unit | number }}</td>
-                                                <td *ngIf="prd.presentation != individual">{{ prd.number_package | number }}</td>
-                                                <td *ngIf="prd.presentation != individual">{{ prd.price_package | number }}</td>
+                                                <td>{{ prd.number_units | number }}</td>
+                                                <td>{{ prd.price_unit | number }}</td>
                                                 <td>({{ prd.tax }}%) {{ prd.value_tax | number }}</td>
                                                 <td>{{ prd.total_product | number}}</td>
                                             </tr>

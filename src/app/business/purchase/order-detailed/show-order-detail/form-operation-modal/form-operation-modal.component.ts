@@ -55,7 +55,7 @@ export class FormOperationModalComponent implements OnInit, OnChanges {
       total_operation: [this.operation.total_operation],
       total_tax: [this.operation.total_tax],
       total_discounts: [this.operation.total_discounts, Validators.max(this.operation.total_operation - (this.operation.total_discounts + this.operation.total_pays))],
-      total_pays: [this.operation.total_pays, Validators.max(this.operation.total_operation - (this.operation.total_discounts + this.operation.total_pays))],
+      total_pays: [this.operation.total_pays],
     })
   }
 
