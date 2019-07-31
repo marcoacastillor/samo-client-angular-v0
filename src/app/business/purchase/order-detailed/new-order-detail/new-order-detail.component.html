@@ -90,6 +90,22 @@
                                                 <th>Presentación</th>
                                                 <td>{{ product.presentation }}</td>
                                             </tr>
+                                            <tr>
+                                                <th>Categoría</th>
+                                                <td>{{ product.category }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Tipo</th>
+                                                <td>{{ product.type_product }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Precio de venta unidad</th>
+                                                <td>{{ product.sale_price_unit | number }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Precio de venta paquete</th>
+                                                <td>{{ product.sale_price_package | number }}</td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -299,8 +315,23 @@
                                         <label for="value_payment">Abono</label>
                                         <input type="number" class="form-control form-control-sm" formControlName="value_payment">
                                     </div>
+                                    <div class="form-group col-sm-3">
+                                        <label for="value_received">Valor recibido</label>
+                                        <input type="number" class="form-control form-control-sm" formControlName="value_received">
+                                    </div>
                                 </div>
                                 <!-- end payment information -->
+
+                                <div class="row">
+                                    <div class="col-sm-12 style-header-table text-success" *ngIf="operationForm.value.payment_type === credit_payment">
+                                        <p>Cambio</p>
+                                        <p>$ {{ operationForm.value.value_received - operationForm.value.value_payment | number }}</p>
+                                    </div>
+                                    <div class="col-sm-12 style-header-table text-success" *ngIf="operationForm.value.payment_type != credit_payment">
+                                        <p>Cambio</p>
+                                        <p>$ {{ operationForm.value.value_received - (operationForm.value.total_operation - operationForm.value.total_discounts) | number }}</p>
+                                    </div>
+                                </div>
                             </form>
                         </div>
                         <!-- end purchase info-->

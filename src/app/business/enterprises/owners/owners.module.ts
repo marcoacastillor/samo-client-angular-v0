@@ -7,6 +7,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { EnterpriseService } from 'src/app/shared/services/enterprise.service';
 import { ModalEnterpriseFormComponent } from './modal-enterprise-form/modal-enterprise-form.component';
+import { ParameterService } from 'src/app/shared/services/parameter.service';
 
 @NgModule({
   imports: [
@@ -16,7 +17,7 @@ import { ModalEnterpriseFormComponent } from './modal-enterprise-form/modal-ente
     FontAwesomeModule,
   ],
   providers: [
-    EnterpriseService
+    EnterpriseService, ParameterService
   ],
   declarations: [OwnerListComponent, ModalEnterpriseFormComponent]
 })

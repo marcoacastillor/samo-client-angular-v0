@@ -73,6 +73,8 @@ export class PeriodsInfoComponent implements OnInit {
   }
 
   onCreateDetailProduct(detailProduct: DetailProductInput){
+    console.log(detailProduct);
+    
     this.detailProductInputService.store$(detailProduct).subscribe(
       detailPrdInput => {
         this.getDataByCuttingPeriod(detailPrdInput.fk_id_cutting_period)

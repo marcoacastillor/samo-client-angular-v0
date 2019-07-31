@@ -56,7 +56,7 @@
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label for="type_product">Tipo de producto</label>
-                                    <select (change)="setInfoByPresentation()" class="form-control form-control-sm text-small" formControlName="type_product" required>
+                                    <select class="form-control form-control-sm text-small" formControlName="type_product" required>
                                         <option value="{{type.value}}" *ngFor="let type of parametersList[type_product]">{{type.name}}</option>
                                     </select>
                                     <small *ngIf="mustShowError('type_product')" class="form-text alert-danger">
@@ -76,7 +76,7 @@
                                     </small>
                                 </div>
                             </div>   
-                            <div class="col-sm-3">
+                            <div class="col-sm-3" *ngIf="clothesForm.value.type_product == 'Producto Comercializable'">
                                 <div class="form-group">
                                     <label for="sale_price_unit">Precio venta por unidad</label>
                                     <input type="number" class="form-control text-small" placeholder="Precio venta unidad" formControlName="sale_price_unit" required>

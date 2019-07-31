@@ -55,6 +55,10 @@
                                                 <th>Nombre</th>
                                                 <td>{{ enterprise.name }}</td>
                                             </tr>
+                                            <tr *ngIf="enterprise.regimen == 'Unipersonal'">
+                                                <th>Apellidos</th>
+                                                <td>{{ enterprise.last_names }}</td>
+                                            </tr>
                                             <tr>
                                                 <th>Dirección</th>
                                                 <td>{{ enterprise.address }}</td>
@@ -66,6 +70,10 @@
                                             <tr>
                                                 <th>Ubicación</th>
                                                 <td>{{ enterprise.ubication_city }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Email</th>
+                                                <td>{{ enterprise.email }}</td>
                                             </tr>
                                         </tbody>
                                     </table>

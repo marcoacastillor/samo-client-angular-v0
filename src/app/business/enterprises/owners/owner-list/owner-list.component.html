@@ -8,7 +8,7 @@
                 </div>
                 <div class="col-sm-6 text-right">
                     <div class="btn-group btn-group-sm">
-                        <button type="button" class="btn btn-outline-primary btn-sm" (click)="newEnterprise()" data-toggle="modal" data-target="#enterpriseModal">
+                        <button type="button" class="btn btn-outline-primary btn-sm" (click)="newEnterprise(); loadParametersEnterprise()" data-toggle="modal" data-target="#enterpriseModal">
                             <fa-icon [icon]="faPlusCircle" class="text-outline-primary mb-2 mr-1"></fa-icon>Crear
                         </button>
                     </div>
@@ -54,7 +54,7 @@
                                                 <button (click)="selectEnterprise(provider)" class="btn text-small btn-sm btn-outline-danger"  type="button" data-toggle="modal" data-target="#deleteEnterprise">
                                                     <fa-icon [icon]="faTrash" class="text-outline-danger mb-2 mr-1"></fa-icon>Eliminar
                                                 </button>
-                                                <button (click)="selectEnterprise(provider)" class="btn text-small btn-sm btn-outline-secondary"  type="button" data-toggle="modal" data-target="#enterpriseModal">
+                                                <button (click)="selectEnterprise(provider); loadParametersEnterprise()" class="btn text-small btn-sm btn-outline-secondary"  type="button" data-toggle="modal" data-target="#enterpriseModal">
                                                     <fa-icon [icon]="faEdit" class="text-outline-secondary mb-2 mr-1"></fa-icon>Actualizar
                                                 </button>
                                                 <a routerLink='../../../enterprises/manage-enterprise/show/{{provider.pk_id_enterprise}}' class="btn text-small btn-sm btn-outline-primary" type="button">
@@ -82,6 +82,7 @@
 <!-- inicia información de empresa-->
 <app-modal-enterprise-form
 [enterprise]="enterprise"
+[parameterList]="parameterList"
 (update)="updateEnterprise($event)"
 (create)="createEnterprise($event)"
 >

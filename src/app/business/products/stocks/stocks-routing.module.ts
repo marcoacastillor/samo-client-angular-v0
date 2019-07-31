@@ -4,7 +4,6 @@ import { ProductListComponent } from './product-list/product-list.component';
 import { ProductShowComponent } from './product-show/product-show.component';
 import { ProductFormClothesComponent } from './product-form-clothes/product-form-clothes.component';
 import { ProductFormFoodComponent } from './product-form-food/product-form-food.component';
-import { ProductFormInputComponent } from './product-form-input/product-form-input.component';
 
 const routes: Routes = [
   {
@@ -26,12 +25,7 @@ const routes: Routes = [
   {
     path: 'create/food/:id',
     component: ProductFormFoodComponent
-  },
-  {
-    path: 'create/input/:id',
-    component: ProductFormInputComponent
   }
-
 ];
 
 @NgModule({

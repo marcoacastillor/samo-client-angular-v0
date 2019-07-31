@@ -22,7 +22,7 @@
                     
                     <!-- start info options-->
                     <div class="row back-colo-f6">
-                        <div class="col-sm-12 text-right align-self-end">
+                        <div class="col-sm-12 text-left align-self-start">
                             <div class="btn-group btn-group-sm">
                                 <div class="dropdown">
                                     <button class="btn text-ultra-small btn-sm dropdown-toggle" type="button" id="operation" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -204,10 +204,7 @@
                                 </div>
                             </div>
                             <!-- end información básica-->
-                            
-                            <pre>
-                                {{ lstProducts | json }}
-                            </pre>
+
                             <!-- start productos-->
                             <div class="row margin-top-2rem justify-content-end">
                                 <div class="col-sm-12">
@@ -237,8 +234,10 @@
                                                     </div>
                                                 </td>
                                                 <td>{{ prd.presentation }}</td>
-                                                <td>{{ prd.number_units | number }}</td>
-                                                <td>{{ prd.price_unit | number }}</td>
+                                                <td *ngIf="prd.presentation == 'INDIVIDUAL'">{{ prd.number_units | number }}</td>
+                                                <td *ngIf="prd.presentation == 'INDIVIDUAL'">{{ prd.price_unit | number }}</td>
+                                                <td *ngIf="prd.presentation != 'INDIVIDUAL'">{{ prd.number_package | number }}</td>
+                                                <td *ngIf="prd.presentation != 'INDIVIDUAL'">{{ prd.price_package | number }}</td>
                                                 <td>({{ prd.tax }}%) {{ prd.value_tax | number }}</td>
                                                 <td>{{ prd.total_product | number}}</td>
                                             </tr>

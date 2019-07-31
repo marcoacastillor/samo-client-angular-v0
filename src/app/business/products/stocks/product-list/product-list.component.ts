@@ -127,8 +127,5 @@ export class ProductListComponent implements OnInit {
     if(category == environment.clothes){
       this.router.navigateByUrl('sales-admin/products/stocks/create/clothes/'+id);
     }
-    if(category == environment.chemicalInput){
-      this.router.navigateByUrl('sales-admin/products/stocks/create/input/'+id);
-    }
   }
 }

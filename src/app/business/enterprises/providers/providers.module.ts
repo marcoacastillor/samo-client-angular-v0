@@ -9,6 +9,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { EnterpriseService } from 'src/app/shared/services/enterprise.service';
 import { ModalEnterpriseFormComponent } from './modal-enterprise-form/modal-enterprise-form.component';
 import { OperationService } from 'src/app/shared/services/operation.service';
+import { ParameterService } from 'src/app/shared/services/parameter.service';
 
 @NgModule({
   imports: [
@@ -18,7 +19,7 @@ import { OperationService } from 'src/app/shared/services/operation.service';
     FontAwesomeModule,
   ],
   providers: [
-    EnterpriseService, OperationService
+    EnterpriseService, OperationService, ParameterService
   ],
   declarations: [ProviderListComponent, ProviderShowComponent, ModalEnterpriseFormComponent]
 })

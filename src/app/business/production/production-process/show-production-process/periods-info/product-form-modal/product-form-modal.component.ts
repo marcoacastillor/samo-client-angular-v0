@@ -6,6 +6,7 @@ import { DetailProductInput } from 'src/app/shared/models/detail-product-input';
 import { Product } from 'src/app/shared/models/product';
 import { environment } from 'src/environments/environment';
 import { ProductService } from 'src/app/shared/services/product.service';
+import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-product-form-modal',
@@ -13,13 +14,15 @@ import { ProductService } from 'src/app/shared/services/product.service';
   styles: []
 })
 export class ProductFormModalComponent implements OnInit, OnChanges {
+  faCheckCircle = faCheckCircle;
+  
   detailProductForm: FormGroup;
-  productLst: Product[] = [];
+  lstProductsNames: Product[] = [];
+  lstProductsCodes: Product[] = [];
   units_available: number = 0;
+  product: Product = new Product;
 
-  final_product: string = environment.type_product_internal_prd;
-  intermediaty_product: string = environment.type_product_intermediaty;
-  input_product: string = environment.type_product_input;
+  lastkeydown1 = 0;
 
   @Input() public cuttingPeriod: CuttingPeriod;
   @Input() public detailProductInput: DetailProductInput;
@@ -34,7 +37,7 @@ export class ProductFormModalComponent implements OnInit, OnChanges {
   ) { }
 
   ngOnInit() {
-    this.initUpdForm();
+    this.initUpdForm(0);
   }
 
   ngOnChanges(changes: SimpleChanges)
@@ -43,35 +46,60 @@ export class ProductFormModalComponent implements OnInit, OnChanges {
     {
       if(changes.cuttingPeriod.currentValue)
       {
-        this.initUpdForm();
+        this.initUpdForm(0);
       }
     }
   }
 
-  getProductByType(type: string){
-    this.productService.getByType$(type).subscribe(
-      lstProducts => this.productLst = lstProducts
-    )
+  onFindProductName(filter: any){
+    let nameProduct = (<HTMLInputElement>document.getElementById('filterProductName')).value;
+    this.lstProductsNames = [];
+
+    if (nameProduct.length > 0) {
+      if (filter.timeStamp - this.lastkeydown1 > 200) {
+        this.productService.getByNameFilterAndType$(nameProduct).subscribe(
+            lstProducts => this.lstProductsNames = lstProducts
+        )
+      }
+    }
   }
 
-  validateUnitsAvailable(product: Product){
-    if(product.category === environment.type_product_input)
-    {
-      this.units_available = product.units_available;
+  onFindProductCode(filter: any){
+    let codeProduct = (<HTMLInputElement>document.getElementById('filterProductCode')).value;
+    this.lstProductsCodes = [];
+
+    if (codeProduct.length > 0) {
+      if (filter.timeStamp - this.lastkeydown1 > 200) {
+        this.productService.getByCodeFilterAndType$(codeProduct).subscribe(
+            lstProducts => this.lstProductsCodes = lstProducts
+        )
+      }
     }
-    else
-    {
-      this.units_available = 0;
+  }
+
+  selectProduct(product: Product){
+    this.product = product;
+    this.lstProductsCodes = [];
+    this.lstProductsNames = [];
+    this.detailProductForm.patchValue({
+      fk_id_product: product.pk_id_product,
+      code_product: product.code,
+      name_product: product.name,
+    });
+
+    if(this.product.type_product == 'Producto Insumo'){
+      this.initUpdForm(this.product.units_available);
     }
+    else{
+      this.initUpdForm(1000);
+    }
+    
   }
 
   create(){
     this.onCreateDetailProduct.emit(this.detailProductForm.value);
-    this.units_available = 0;
-    this.detailProductForm.patchValue({
-      fk_id_product: null,
-      amount_use_product: '',
-    })
+    this.product = new Product;
+    this.initUpdForm(0);
   }
 
   /*
@@ -79,12 +107,14 @@ export class ProductFormModalComponent implements OnInit, OnChanges {
   * Funciones propias del controlador
   * ------------------------------------------
   */
- private initUpdForm() {
+ private initUpdForm(units:number) {
     this.detailProductForm = this.fb.group({
       pk_id_detail_product_input: [this.detailProductInput.pk_id_detail_product_input], 
       fk_id_cutting_period: [this.cuttingPeriod.pk_id_cutting_period, Validators.required], 
-      fk_id_product: [this.detailProductInput.fk_id_product, Validators.required],
-      amount_use_product: [this.detailProductInput.amount_use_product,Validators.required],
+      fk_id_product: [this.product.pk_id_product, Validators.required],
+      code_product:[this.product.code],
+      name_product:[this.product.name],
+      amount_use_product: [0,[Validators.required, Validators.max(units)]],
     });
   }
 

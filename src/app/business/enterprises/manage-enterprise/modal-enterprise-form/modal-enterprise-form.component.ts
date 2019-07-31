@@ -53,6 +53,7 @@ export class ModalEnterpriseFormComponent implements OnInit {
       external_reference: ['E:'+this.fk_id_enterprise],
       nit: [this.enterprise.nit,Validators.required],
       name: [this.enterprise.name,Validators.required],
+      last_names: [this.enterprise.name],
       address: [this.enterprise.address],
       phone: [this.enterprise.phone],
       ubication_city: [this.enterprise.ubication_city, Validators.required],
@@ -60,6 +61,7 @@ export class ModalEnterpriseFormComponent implements OnInit {
       DIAN_billing_resolution: [this.enterprise.DIAN_billing_resolution],
       footer_billing: [this.enterprise.footer_billing],
       size: [this.enterprise.size],
+      email:[this.enterprise.email]
     })
   }
 

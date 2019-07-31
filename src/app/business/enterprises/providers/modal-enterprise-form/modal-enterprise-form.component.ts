@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Enterprise } from 'src/app/shared/models/enterprise';
 import { FormToolsService } from 'src/app/shared/services/form-tools.service';
 import { environment } from 'src/environments/environment';
+import { Parameter } from 'src/app/shared/models/parameter';
 
 @Component({
   selector: 'app-modal-enterprise-form',
@@ -16,6 +17,8 @@ export class ModalEnterpriseFormComponent implements OnInit {
 
   @Input() public enterprise: Enterprise;
   @Input() public fk_id_enterprise: Number;
+  @Input() public parameterList: Parameter[];
+  
   
   @Output() public create = new EventEmitter<Enterprise>();
   @Output() public update = new EventEmitter<Enterprise>();
@@ -48,9 +51,12 @@ export class ModalEnterpriseFormComponent implements OnInit {
       external_reference: ['E:'+this.fk_id_enterprise],
       nit: [this.enterprise.nit,Validators.required],
       name: [this.enterprise.name,Validators.required],
+      last_names: [this.enterprise.last_names],
       address: [this.enterprise.address],
       phone: [this.enterprise.phone],
       ubication_city: [this.enterprise.ubication_city, Validators.required],
+      email: [this.enterprise.email, Validators.email],
+      regimen: [this.enterprise.regimen, Validators.required]
     })
   }
 

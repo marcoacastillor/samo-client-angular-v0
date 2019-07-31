@@ -69,6 +69,9 @@ export class ProductFormFoodComponent implements OnInit {
   {
     this.product = new Product;
     this.product.category = environment.foods;  
+    this.product.units_package = 0;
+    this.product.sale_price_unit = 0;
+    this.product.sale_price_package = 0;
     this.createFormFood();
   }
 
@@ -98,30 +101,6 @@ export class ProductFormFoodComponent implements OnInit {
       color: [''], 
       trademark: [''], 
      });
-  }
-
-  public setInfoByPresentation(){
-    if(this.foodsForm.value.type_product == environment.type_product_internal_prd || this.foodsForm.value.type_product == environment.type_product_purchase){
-      if(this.foodsForm.value.presentation == environment.individual){
-        this.showPackageInfo = false;
-        this.foodsForm.patchValue({
-          units_package: 0,
-          sale_price_package: 0,
-          sale_price_unit: 0,
-        }); 
-      }
-      else{
-        this.showPackageInfo = true;
-      }
-    }
-    else{
-      this.showPackageInfo = false;
-      this.foodsForm.patchValue({
-        units_package: 0,
-        sale_price_package: 0,
-        sale_price_unit: 0,
-      });
-    }
   }
 
   public createProduct(){

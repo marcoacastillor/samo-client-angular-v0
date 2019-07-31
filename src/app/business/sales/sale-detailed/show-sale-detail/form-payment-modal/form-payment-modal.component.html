@@ -25,8 +25,8 @@
                         </div>
                     </div>
                     <form [formGroup]="paymentForm">
-                        <div class="row">
-                            <div class="form-group col-sm-6">
+                        <div class="row margin-top-2rem">
+                            <div class="form-group col-sm-4">
                                 <label for="value_payment">Valor del pago</label>
                                 <input type="text" class="form-control form-control-sm" aria-describedby="paymentHelp" formControlName="value_payment">
                                 <small id="paymentHelp" class="form-text text-muted">Ingresar valor del pago a realizar.</small>
@@ -37,10 +37,21 @@
                                     Valor no puede ser mayor a <strong>{{ this.getErrors('value_payment').max.max | number }}</strong>
                                 </small>
                             </div>
-                            <div class="col-sm-6 text-left align-self-center">
+                            <div class="form-group col-sm-4">
+                                <label for="value_received">Valor recibido</label>
+                                <input type="text" class="form-control form-control-sm" aria-describedby="paymentHelp" formControlName="value_received">
+                                <small id="paymentHelp" class="form-text text-muted">Ingresar valor recibifo.</small>
+                            </div>
+                            <div class="col-sm-4 text-left align-self-center">
                                 <button type="submit" (click)="add()" [disabled]="paymentForm.invalid" class="btn btn-sm btn-outline-primary" type="button" data-dismiss="modal">
                                     <fa-icon [icon]="faSave" class="text-outline-secondary mb-2 mr-1"></fa-icon>Guardar
                                 </button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 style-header-table text-success">
+                                <p>Cambio</p>
+                                <p>$ {{ paymentForm.value.value_received - paymentForm.value.value_payment | number }}</p>
                             </div>
                         </div>
                     </form>

@@ -15,47 +15,36 @@
                         <div class="row">
                             <div class="form-group col-sm-6">
                                 <label for="code_product">Código de barras</label>
-                                <input type="text" id="filterProductCode" (keypress)="onFindProductCode($event)" class="form-control form-control-sm" aria-describedby="codeHelp" formControlName="code_product">
                                 <small id="codeHelp" class="form-text text-muted">Digite el codigo o parte del códido de barras del producto.</small>
-                                <div class="container back-colo-f6 display-result scrollbar" *ngIf="lstProductsCodes.length > 0">
-                                    <table class="table table-sm table-striped">
-                                        <tbody>
-                                            <tr *ngFor="let product of lstProductsCodes">
-                                                <td>
-                                                    <div class="btn-group btn-group-sm">
-                                                        <button type="button" (click)="selectProduct(product)" class="btn btn-outline-primary btn-sm" data-dismiss="modal">
-                                                            <fa-icon [icon]="faCheckCircle" class="text-outline-primary mb-2 mr-1"></fa-icon>
-                                                        </button>
-                                                    </div>
-                                                    {{ product.code }}
-                                                </td>
-                                                <td>{{ product.name }}</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                <input type="text" id="filterProductCode" (keypress)="onFindProductCode($event)" class="form-control form-control-sm" aria-describedby="codeHelp" formControlName="code_product">
+                                <!-- start autocomplete-->
+                                <div class="autocomplete container-fluid">
+                                    <div id="autocomplete-list" class="autocomplete-items text-ultra-small">
+                                        <div class="items row" *ngFor="let product of lstProductsCodes">
+                                            <div class="col-sm-12" (click)="selectProduct(product)">
+                                                {{ product.code }} {{ product.name }}
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
+                                <!-- start autocomplete-->
                             </div>
+
                             <div class="form-group col-sm-6">
                                 <label for="name_product">Nombre del producto</label>
-                                <input type="text" id="filterProductName" (keypress)="onFindProductName($event)" class="form-control form-control-sm" aria-describedby="codeHelp" formControlName="name_product">
                                 <small id="codeHelp" class="form-text text-muted">Digite el nombre o parte del del nombre de barras del producto.</small>
-                                <div class="container back-colo-f6 display-result scrollbar" *ngIf="lstProductsNames.length > 0">
-                                    <table class="table table-sm table-striped">
-                                        <tbody>
-                                            <tr *ngFor="let product of lstProductsNames">
-                                                <td>
-                                                    <div class="btn-group btn-group-sm">
-                                                        <button type="button" (click)="selectProduct(product)" class="btn btn-outline-primary btn-sm" data-dismiss="modal">
-                                                            <fa-icon [icon]="faCheckCircle" class="text-outline-primary mb-2 mr-1"></fa-icon>
-                                                        </button>
-                                                    </div>
-                                                    {{ product.code }}
-                                                </td>
-                                                <td>{{ product.name }}</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                <input type="text" id="filterProductName" (keypress)="onFindProductName($event)" class="form-control form-control-sm" aria-describedby="codeHelp" formControlName="name_product">
+                                <!-- start autocomplete-->
+                                <div class="autocomplete container-fluid">
+                                    <div id="autocomplete-list" class="autocomplete-items text-ultra-small">
+                                        <div class="items row" *ngFor="let product of lstProductsNames">
+                                            <div class="col-sm-12" (click)="selectProduct(product)">
+                                                {{ product.code }} {{ product.name }}
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
+                                <!-- start autocomplete-->
                             </div>
                         </div>
                         <!-- start información de producto seleccionado-->
@@ -79,6 +68,22 @@
                                         <tr>
                                             <th>Presentación</th>
                                             <td>{{ product.presentation }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Categoría</th>
+                                            <td>{{ product.category }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Tipo</th>
+                                            <td>{{ product.type_product }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Precio de venta unidad</th>
+                                            <td>{{ product.sale_price_unit | number }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Precio de venta paquete</th>
+                                            <td>{{ product.sale_price_package | number }}</td>
                                         </tr>
                                     </tbody>
                                 </table>

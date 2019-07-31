@@ -227,6 +227,7 @@ export class NewSaleDetailComponent implements OnInit {
       subtotal_operation: [0],
       value_payment: [0],
       payment_type: [environment.efecty_payment,Validators.required],
+      value_received:[0],
       current_invoice: [0],
       date_operation: [moment().format('YYYY-MM-DD')],
       product: this.fb.group({

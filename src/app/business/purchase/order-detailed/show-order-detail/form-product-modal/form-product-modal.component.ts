@@ -25,7 +25,7 @@ export class FormProductModalComponent implements OnInit, OnChanges {
   @Input() public lstParams: Parameter[];
 
   @Output() public addProduct = new EventEmitter<Operation>();
-  @ViewChild('units_product') nameField: ElementRef;
+  //@ViewChild('units_product') nameField: ElementRef;
   
   lstProductsCodes: Product[] = [];
   lstProductsNames: Product[] = [];
@@ -102,7 +102,7 @@ export class FormProductModalComponent implements OnInit, OnChanges {
     });
 
     //resetear producto seleccionado con código de barras.
-    this.nameField.nativeElement.focus();
+    //this.nameField.nativeElement.focus();
   }
 
   add(){

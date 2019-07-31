@@ -143,6 +143,7 @@ export const environment = {
   type_product_internal_prd: 'Producción Interna',
   type_product_input: 'INSUMO',
   type_product_intermediaty: 'Producto Intermedio',
+  type_product_comercializable: 'Producto comercializable',
 
   laboral_state_active: 'Activo',
   laboral_state_inactive: 'Inactivo',

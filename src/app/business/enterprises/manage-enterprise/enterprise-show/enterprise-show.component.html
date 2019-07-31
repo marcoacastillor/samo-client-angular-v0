@@ -28,7 +28,7 @@
 
                     <!-- start info options-->
                     <div class="row back-colo-f6">
-                        <div class="col-sm-12 text-right align-self-end">
+                        <div class="col-sm-12 text-left align-self-start">
                             <div class="btn-group btn-group-sm">
                                 <div class="dropdown">
                                     <button class="btn  btn-sm dropdown-toggle" type="button" id="laboral" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -97,6 +97,10 @@
                                                 <th>Nombre</th>
                                                 <td>{{ enterprise.name }}</td>
                                             </tr>
+                                            <tr *ngIf="enterprise.regimen == 'Unipersonal'">
+                                                <th>Apellidos</th>
+                                                <td>{{ enterprise.last_names }}</td>
+                                            </tr>
                                             <tr>
                                                 <th>Dirección</th>
                                                 <td>{{ enterprise.address }}</td>
@@ -124,6 +128,10 @@
                                             <tr>
                                                 <th>Tamaño de la empresa</th>
                                                 <td>{{ enterprise.size }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Email</th>
+                                                <td>{{ enterprise.email }}</td>
                                             </tr>
                                         </tbody>
                                     </table>

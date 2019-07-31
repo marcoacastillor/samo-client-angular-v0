@@ -3,6 +3,7 @@ export class Enterprise {
     public type: string;
     public nit: string;
     public name: string;
+    public last_names: string;
     public address: string;
     public phone: string;
     public ubication_city: string;
@@ -12,4 +13,5 @@ export class Enterprise {
     public DIAN_billing_resolution: string;
     public regimen: string;
     public footer_billing: string;
+    public email: string;
 }

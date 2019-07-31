@@ -103,30 +103,6 @@ export class ProductFormClothesComponent implements OnInit {
      });
   }
 
-  public setInfoByPresentation(){
-    if(this.clothesForm.value.type_product == environment.type_product_internal_prd || this.clothesForm.value.type_product == environment.type_product_purchase){
-      if(this.clothesForm.value.presentation == environment.individual){
-        this.showPackageInfo = false;
-        this.clothesForm.patchValue({
-          units_package: 0,
-          sale_price_package: 0,
-          sale_price_unit: 0,
-        }); 
-      }
-      else{
-        this.showPackageInfo = true;
-      }
-    }
-    else{
-      this.showPackageInfo = false;
-      this.clothesForm.patchValue({
-        units_package: 0,
-        sale_price_package: 0,
-        sale_price_unit: 0,
-      });
-    }
-  }
-
   public createProduct(){
     this.productService.store$(this.clothesForm.value).subscribe(
       () => {

@@ -86,9 +86,9 @@ export class NewOrderDetailComponent implements OnInit {
       number_invoice: ['',Validators.required],
       subtotal_operation: [0],
       value_payment: [0],
-      payment_type: ['',Validators.required],
+      value_received:[0],
+      payment_type: [environment.efecty_payment,Validators.required],
       date_operation: [moment().format('YYYY-MM-DD')],
-      
       product: this.fb.group({
         code: [''],
         name: [''],

@@ -4,6 +4,8 @@ import { Enterprise } from 'src/app/shared/models/enterprise';
 import { EnterpriseService } from 'src/app/shared/services/enterprise.service';
 import { GlobalStoreService } from 'src/app/core/services/global-store.service';
 import { environment } from 'src/environments/environment';
+import { ParameterService } from 'src/app/shared/services/parameter.service';
+import { Parameter } from 'src/app/shared/models/parameter';
 
 @Component({
   selector: 'app-owner-list',
@@ -19,12 +21,15 @@ export class OwnerListComponent implements OnInit {
   lstOwners: Enterprise[] = [];
   enterprise: Enterprise = new Enterprise;
 
+  parameterList: Parameter[] = [];
+
   success = false;
   message = '';
   
   constructor(
     private enterpriseService: EnterpriseService,
-    private globalStoreService: GlobalStoreService
+    private globalStoreService: GlobalStoreService,
+    private parameterService: ParameterService
   ) { }
 
   ngOnInit() {
@@ -86,6 +91,12 @@ export class OwnerListComponent implements OnInit {
           }
         )   
       }
+    )
+  }
+
+  public loadParametersEnterprise(){
+    this.parameterService.getByCodeCategory$(environment.regimen).subscribe(
+      lst_parameters => this.parameterList = lst_parameters
     )
   }
 }

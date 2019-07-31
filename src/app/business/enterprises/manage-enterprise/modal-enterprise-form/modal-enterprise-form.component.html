@@ -26,6 +26,10 @@
                                     Nombre, es obligatorio
                                 </small>
                             </div>
+                            <div class="form-group col-sm-4" *ngIf="enterpriseForm.value.regimen ==='Unipersonal'">
+                                <label for="last_names">Apellidos</label>
+                                <input type="text" class="form-control form-control-sm"  formControlName="last_names">
+                            </div>
                             <div class="form-group col-sm-4">
                                 <label for="address">Dirección</label>
                                 <input type="text" class="form-control form-control-sm"  formControlName="address" required>
@@ -55,6 +59,15 @@
                                     <option value="" selected>Seleccione...</option>
                                     <option *ngFor="let param of lstParametersEnterprise[size]" value="{{param.value}}">{{ param.name }}</option>
                                 </select>
+                            </div>
+                            <div class="form-group col-sm-4">
+                                <label for="email">Email</label>
+                                <input type="text" class="form-control form-control-sm"  formControlName="email">
+                                <small *ngIf="mustShowError('email')" class="form-text alert-danger">
+                                    <small *ngIf="hasError('email', 'email')"  class="form-text alert-danger">
+                                        Debe ingresar un correo válido
+                                    </small>
+                                </small>
                             </div>
                         </div>
 

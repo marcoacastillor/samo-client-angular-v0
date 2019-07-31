@@ -12,44 +12,91 @@
                 <form [formGroup]="detailProductForm">
                 <div class="card">
                     <div class="card-body">
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <button type="button" (click)="getProductByType(final_product)" class="btn btn-outline-info btn-sm">Cargar Productos Finales</button>
-                            </div>
-                            <div class="col-sm-4">
-                                <button type="button" (click)="getProductByType(intermediaty_product)" class="btn btn-outline-info btn-sm">Cargar Productos Intermedios</button>
-                            </div>
-                            <div class="col-sm-4">
-                                <button type="button" (click)="getProductByType(input_product)" class="btn btn-outline-info btn-sm">Cargar Productos Insumos</button>
-                            </div>
-                        </div>
                         <div class="row margin-top-2rem">
-                            <div class="col-sm-8">
-                                <div class="form-group">
-                                    <label for="fk_id_product">Producto</label>
-                                    <select class="form-control form-control-sm text-small" formControlName="fk_id_product" required>
-                                        <option value="" selected>Seleccione producto:::</option>
-                                        <option (click)="validateUnitsAvailable(product)" value="{{product.pk_id_product}}" *ngFor="let product of productLst">{{product.name}}</option>
-                                    </select>
-                                    <small *ngIf="mustShowError('fk_id_product')" class="form-text alert-danger">
-                                        Producto, es obligatorio
-                                    </small>
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="form-group">
-                                    <label for="amount_use_product">Cantidad del producto</label>
-                                    <input type="number" class="form-control text-small" placeholder="Cantidad" formControlName="amount_use_product" required>
-                                    <div *ngIf="mustShowError('amount_use_product')" class="form-text alert-danger">
-                                        Cantidad, es obligatorio.
+                            <div class="col-sm-6 back-colo-f6">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <table class="table table-sm">
+                                            <thead>
+                                                <tr>
+                                                    <th colspan="2">Producto seleccionado</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th>Nombre</th>
+                                                    <td>{{ product.name }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Código</th>
+                                                    <td>{{ product.code }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Tipo de producto</th>
+                                                    <td>{{ product.type_product }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Presentación</th>
+                                                    <td>{{ product.presentation }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Unidades disponibles</th>
+                                                    <td>{{ product.units_available | number }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row margin-top-2rem" *ngIf="units_available > 0">
-                            <div class="col-sm-12 ">
-                                <div class="alert alert-info" role="alert">
-                                    El máximo de unidades disponibles para éste producto es: <h1>{{ units_available }}</h1>
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="fk_id_product">Códido de producto</label>
+                                            <small id="codeHelp" class="form-text text-muted">Digite el codigo o parte del códido de barras del producto.</small>
+                                            <input type="text" id="filterProductCode" (keypress)="onFindProductCode($event)" class="form-control form-control-sm" aria-describedby="codeHelp" formControlName="code_product">
+                                            <!-- start autocomplete-->
+                                            <div class="autocomplete container-fluid">
+                                                <div id="autocomplete-list" class="autocomplete-items text-ultra-small">
+                                                    <div class="items row" *ngFor="let product of lstProductsCodes">
+                                                        <div class="col-sm-12" (click)="selectProduct(product)">
+                                                            {{ product.code }} {{ product.name }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- start autocomplete-->
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <label for="name_product">Nombre del producto</label>
+                                        <small id="codeHelp" class="form-text text-muted">Digite el nombre o parte del del nombre de barras del producto.</small>
+                                        <input type="text" id="filterProductName" (keypress)="onFindProductName($event)" class="form-control form-control-sm" aria-describedby="codeHelp" formControlName="name_product">
+                                        <!-- start autocomplete-->
+                                        <div class="autocomplete container-fluid">
+                                            <div id="autocomplete-list" class="autocomplete-items text-ultra-small">
+                                                <div class="items row" *ngFor="let product of lstProductsNames">
+                                                    <div class="col-sm-12" (click)="selectProduct(product)">
+                                                        {{ product.code }} {{ product.name }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- start autocomplete-->
+                                    </div>
+
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="amount_use_product">Cantidad del producto</label>
+                                            <input type="number" class="form-control text-small" placeholder="Cantidad" formControlName="amount_use_product" required>
+                                            <small class="text-danger" *ngIf="hasError('amount_use_product','required')">
+                                                El campo es obligatorio
+                                            </small>
+                                            <small class="text-danger" *ngIf="hasError('amount_use_product','max')">
+                                                Valor no puede ser mayor a <strong>{{ this.getErrors('amount_use_product').max.max | number }}</strong>
+                                            </small>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
