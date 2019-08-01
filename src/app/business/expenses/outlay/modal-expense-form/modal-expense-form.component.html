@@ -7,6 +7,7 @@
             <span aria-hidden="true">&times;</span>
             </button>
         </div>
+
         <div class="modal-body">
             <div class="card">
                 <div class="card-body">
@@ -16,10 +17,10 @@
                                 <div class="form-group">
                                     <label for="number_voucher">Número de comprobante</label>
                                     <div class="input-group-prepend">
-                                        <button type="button" class="btn text-small btn-sm btn-outline-primary">
+                                        <button type="button" (click)="selectNumberVoucher()" class="btn text-small btn-sm btn-outline-primary">
                                             <fa-icon [icon]="faClone" class="text-primary mb-2 mr-1" title="Consecutivo"></fa-icon>
                                         </button>
-                                        <button type="button" class="btn text-small btn-sm btn-outline-primary">
+                                        <button type="button" (click)="selectNumberPurchase()" class="btn text-small btn-sm btn-outline-primary">
                                             <fa-icon [icon]="faDonate" class="text-primary mb-2 mr-1" title="Generar factura equivalente"></fa-icon>
                                         </button>
                                         <input type="text" readonly class="form-control form-control-sm" placeholder="#Comprobante" formControlName="number_voucher" required>
@@ -32,27 +33,22 @@
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="fk_id_provider">Proveedor del servicio</label>
-                                    <div class="input-group mb-3">
-                                        <input type="text" class="form-control form-control-sm" formControlName="fk_id_provider" required>
-                                        <div class="input-group-prepend">
-                                            <button type="button" class="btn text-small btn-sm btn-outline-primary">
-                                                <fa-icon [icon]="faSearch" class="text-primary mb-2 mr-1" title="buscar proveedor"></fa-icon>
-                                            </button>
-                                        </div>
-                                        <!-- start autocomplete-->
-                                        <div class="autocomplete container-fluid">
-                                            <div id="autocomplete-list" class="autocomplete-items text-ultra-small">
-                                                <div class="items row" *ngFor="let provider of lstProviders">
-                                                    <div class="col-sm-12" (click)="selectProvider(provider)">
-                                                        {{ provider.nit }} _ {{ provider.name }} {{ provider.last_names }}
-                                                    </div>
+                                    <label for="name_provider">Proveedor del servicio</label>
+                                    <input type="text" id="filterProvider" (keypress)="onFindProvider($event)" class="form-control form-control-sm" formControlName="name_provider" required>
+                                    <small class="form-text text-muted">Digite nombre del proveedor.</small>
+                                    <!-- start autocomplete-->
+                                    <div class="autocomplete container-fluid">
+                                        <div id="autocomplete-list" class="autocomplete-items text-ultra-small">
+                                            <div class="items row" *ngFor="let provider of lstProviders">
+                                                <div class="col-sm-12" (click)="selectProvider(provider)">
+                                                    {{ provider.nit }} _ {{ provider.name }} {{ provider.last_names }}
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- start autocomplete-->
                                     </div>
-                                    <small *ngIf="mustShowError('fk_id_provider')" class="form-text alert-danger">
+                                    <!-- start autocomplete-->
+                                    <small *ngIf="emptyProv" class="form-text text-danger text-muted">No se encuentra proveedor.</small>
+                                    <small *ngIf="mustShowError('name_provider')" class="form-text alert-danger">
                                         Proveedor del servicio, es obligatorio
                                     </small>
                                 </div>

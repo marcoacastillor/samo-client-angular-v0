@@ -7,6 +7,12 @@ import { GlobalStoreService } from 'src/app/core/services/global-store.service';
 import { Parameter } from 'src/app/shared/models/parameter';
 import { ParameterService } from 'src/app/shared/services/parameter.service';
 import { environment } from 'src/environments/environment';
+import { ParameterConfigService } from 'src/app/shared/services/parameter-config.service';
+import { ParameterConfig } from 'src/app/shared/models/parameter-config';
+import { Enterprise } from 'src/app/shared/models/enterprise';
+import { EnterprisesModule } from 'src/app/business/enterprises/enterprises.module';
+import { EnterpriseService } from 'src/app/shared/services/enterprise.service';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-outlay-list',
@@ -19,6 +25,7 @@ export class OutlayListComponent implements OnInit {
   faTrash = faTrash;
 
   expense: Expense = new Expense;
+  parameterEnterprise: ParameterConfig[] = [];
   parameterList: Parameter[] = [];
   lstExpenses: Expense[] = [];
   user: User = new User;
@@ -29,12 +36,26 @@ export class OutlayListComponent implements OnInit {
   constructor(
     private expenseService: ExpensesService,
     private globalStoreService: GlobalStoreService,
-    private parameterService: ParameterService
-    ) { }
+    private parameterService: ParameterService,
+    private parameterConfigService: ParameterConfigService,
+    ) {
+      this.expense.type_expense = '';
+     }
 
   ngOnInit() {
     this.user = this.globalStoreService.getUser();
-    this.loadExpenses()
+    this.loadExpenses();
+    this.loadParameterEnterprise();
+  }
+
+  private loadParameterEnterprise(){
+    this.parameterConfigService.getByEnterprise$(this.user.fk_id_enterprise).subscribe(
+      parameters => this.parameterEnterprise = parameters
+    )
+  }
+
+  public newExpense(){
+    this.expense = new Expense;
   }
 
   private loadExpenses(){
@@ -44,7 +65,9 @@ export class OutlayListComponent implements OnInit {
   }
 
   public selectExpense(expense:Expense){
-    this.expense = expense
+    this.expenseService.show$(expense.pk_id_expense).subscribe(
+      expense => this.expense = expense
+    )
   }
 
   public loadParametersExpense(){
@@ -54,17 +77,28 @@ export class OutlayListComponent implements OnInit {
   }
 
   public createExpense(expense: Expense){
-    this.expenseService.store$(expense).subscribe(
-      () => {
+    let value = expense.actual_value;
+    let code = '';
+    this.expenseService.store$(expense)
+    .pipe(
+      tap(() => {
         this.expenseService.getAll$().subscribe(
           lst_expenses => {
             this.lstExpenses = lst_expenses;
             this.success = true;
             this.message = 'Se crea un registro, satisfactoriamente.';
           }
-        )   
-      }
-    )
+        )  
+      }),
+      tap((expense:Expense) => {
+        if(expense.type_expense == 'Comprobante de egreso'){
+          code = environment.current_voucher;
+        }else{
+          code = environment.current_purchase;
+        }
+        this.parameterConfigService.updateByEnterpriseAndCodeAndValue$(expense.fk_id_enterprise,code,value.toString()).subscribe()
+      })
+    ).subscribe()
   }
 
   public updateExpense(expense: Expense){

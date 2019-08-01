@@ -9,6 +9,7 @@ import { GlobalStoreService } from 'src/app/core/services/global-store.service';
 import { ParameterService } from 'src/app/shared/services/parameter.service';
 import { FormToolsService } from 'src/app/shared/services/form-tools.service';
 import { UtilsService } from 'src/app/shared/services/utils.service';
+import { ParameterConfigService } from 'src/app/shared/services/parameter-config.service';
 
 @NgModule({
   imports: [
@@ -17,7 +18,9 @@ import { UtilsService } from 'src/app/shared/services/utils.service';
     SharedModule,
     ExpensesRoutingModule
   ],
-  providers: [GlobalStoreService, ExpensesService, ParameterService, FormToolsService, UtilsService],
+  providers: [
+    GlobalStoreService, ExpensesService, ParameterService, FormToolsService, UtilsService, ParameterConfigService
+  ],
   declarations: []
 })
 export class ExpensesModule { }

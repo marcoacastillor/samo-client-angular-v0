@@ -8,7 +8,7 @@
                 </div>
                 <div class="col-sm-6 text-right">
                     <div class="btn-group btn-group-sm">
-                        <button type="button" class="btn btn-outline-primary btn-sm" (click)="loadParametersExpense()" data-toggle="modal" data-target="#expenseModal">
+                        <button type="button" class="btn btn-outline-primary btn-sm" (click)="newExpense();loadParametersExpense()" data-toggle="modal" data-target="#expenseModal">
                             <fa-icon [icon]="faPlusCircle" class="text-outline-primary mb-2 mr-1"></fa-icon>Crear
                         </button>
                     </div>
@@ -39,8 +39,11 @@
                                 <thead class="bg-secondary text-white">
                                     <tr>
                                         <th>Acciones</th>
-                                        <th>Fecha</th>
+                                        <th>Proveedor</th>
+                                        <th>Identificador</th>
+                                        <th>Concepto</th>
                                         <th>Tipo</th>
+                                        <th>Fecha</th>
                                         <th>Descripcón</th>
                                         <th>Valor</th>
                                     </tr>
@@ -52,13 +55,16 @@
                                                 <button (click)="selectExpense(expense)" class="btn text-small btn-sm btn-outline-danger"  type="button" data-toggle="modal" data-target="#deleteExpense">
                                                     <fa-icon [icon]="faTrash" class="text-outline-danger mb-2 mr-1"></fa-icon>Eliminar
                                                 </button>
-                                                <button (click)="selectExpense(expense)" class="btn text-small btn-sm btn-outline-secondary" (click)="loadParametersExpense()"  type="button" data-toggle="modal" data-target="#expenseModal">
+                                                <button (click)="selectExpense(expense); loadParametersExpense()" class="btn text-small btn-sm btn-outline-secondary"  type="button" data-toggle="modal" data-target="#expenseModal">
                                                     <fa-icon [icon]="faEdit" class="text-outline-secondary mb-2 mr-1"></fa-icon>Actualizar
                                                 </button>
                                             </div>
                                         </td>
-                                        <td>{{ expense.date_expense }}</td>
+                                        <td>{{ expense.name_provider }}</td>
+                                        <td>{{ expense.number_voucher }}</td>
+                                        <td>{{ expense.concept_expense }}</td>
                                         <td>{{ expense.type_expense }}</td>
+                                        <td>{{ expense.date_expense }}</td>
                                         <td>{{ expense.description }}</td>
                                         <td>{{ expense.value | number }}</td>
                                     </tr>
@@ -78,6 +84,7 @@
 [expense]="expense"
 [fk_id_enterprise]="user.fk_id_enterprise"
 [parameterList]="parameterList"
+[parameterEnterprise]="parameterEnterprise"
 (update)="updateExpense($event)"
 (create)="createExpense($event)"
 >

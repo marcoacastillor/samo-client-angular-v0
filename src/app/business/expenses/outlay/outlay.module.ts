@@ -7,6 +7,7 @@ import { ExpensesService } from 'src/app/shared/services/expenses.service';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ModalExpenseFormComponent } from './modal-expense-form/modal-expense-form.component';
+import { EnterpriseService } from 'src/app/shared/services/enterprise.service';
 
 @NgModule({
   imports: [
@@ -16,7 +17,7 @@ import { ModalExpenseFormComponent } from './modal-expense-form/modal-expense-fo
     FontAwesomeModule,
   ],
   providers: [
-    ExpensesService
+    ExpensesService, EnterpriseService
   ],
   declarations: [OutlayListComponent, ModalExpenseFormComponent]
 })

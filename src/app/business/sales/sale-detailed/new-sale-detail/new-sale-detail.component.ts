@@ -374,6 +374,7 @@ export class NewSaleDetailComponent implements OnInit {
   }
 
   public addProduct(){
+    let value_payment      = 0;
     let totalProduct       = 0;
     let totalOperation     = 0;
     let subTotalOperation  = this.operationForm.value.subtotal_operation;
@@ -401,7 +402,7 @@ export class NewSaleDetailComponent implements OnInit {
       name: name,
       total_product: totalProduct
     });
-    
+
     this.operationForm.patchValue({
       subtotal_operation: subTotalOperation,
       total_operation: totalOperation,
@@ -432,6 +433,14 @@ export class NewSaleDetailComponent implements OnInit {
 
     //limpiar producto seleccionado.
     this.product = new Product();
+  }
+
+  public updateValuePayment(){
+    if(this.operationForm.value.payment_type != environment.efecty_payment){
+      this.operationForm.patchValue({
+        value_payment: 0
+      });
+    }
   }
 
   saveProduct(){

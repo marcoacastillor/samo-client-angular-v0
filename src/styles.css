@@ -289,3 +289,7 @@ table
 {
   font-size: 0.8rem;
 }
+
+.with-sm{
+  width: 100px;
+}

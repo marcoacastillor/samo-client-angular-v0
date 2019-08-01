@@ -281,7 +281,7 @@
 
                                     <!-- start information selected product -->
                                     <div class="row" formArrayName="product">
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-3">
                                             <label for="number_selected">Código de barras</label>
                                             <div class="input-group mb-3">
                                                     <input type="text" id="filterProduct" (keypress)="onFindProduct($event)" #code_product class="form-control form-control-sm" formControlName="code">
@@ -303,32 +303,30 @@
                                                 <!-- start autocomplete-->
                                             </div>
                                         </div>
-                                        <div class="form-group col-sm-2">
+                                        <div class="col-sm-3">
                                             <label for="number_units">Cant {{ selectedPresentation }}</label>
-                                            <div class="input-group mb-3">
-                                                <div class="input-group-prepend">
-                                                    <button *ngIf="product.presentation != 'INDIVIDUAL'" (click)="setPackageByProduct()" type="button" class="btn text-small btn-sm btn-outline-primary">
-                                                        <fa-icon [icon]="faArchive" class="text-primary mb-2 mr-1" title="seleccionar unidades"></fa-icon>
-                                                    </button>
-                                                    <button *ngIf="product.presentation != 'INDIVIDUAL'" (click)="setUnitsByProduct()" type="button" class="btn text-small btn-sm btn-outline-primary">
-                                                        <fa-icon [icon]="faUnderline" class="text-primary mb-2 mr-1" title="seleccionar unidades"></fa-icon>
-                                                    </button>
-                                                    <input type="number" class="form-control form-control-sm" aria-describedby="unidadesHelp" formControlName="number_units">
-                                                </div>                                            
-                                            </div>
+                                            <div class="input-group-prepend">
+                                                <a *ngIf="product.presentation != 'INDIVIDUAL'" (click)="setPackageByProduct()" type="button" class="btn btn-sm btn-outline-primary">
+                                                    <fa-icon [icon]="faArchive" class="text-primary mb-2 mr-1" title="seleccionar unidades"></fa-icon>
+                                                </a>
+                                                <a *ngIf="product.presentation != 'INDIVIDUAL'" (click)="setUnitsByProduct()" type="button" class="btn btn-sm btn-outline-primary">
+                                                    <fa-icon [icon]="faUnderline" class="text-primary mb-2 mr-1" title="seleccionar unidades"></fa-icon>
+                                                </a>
+                                                <input type="number" class="form-control form-control-sm with-sm" aria-describedby="unidadesHelp" formControlName="number_units">
+                                            </div>                                            
                                         </div>
-                                        <div class="form-group col-sm-2">
+                                        <div class="col-sm-2">
                                             <label for="cost_price">Precio venta</label>
                                             <input readonly type="number" class="form-control form-control-sm" formControlName="cost_price">
                                         </div>
-                                        <div class="form-group col-sm-2">
+                                        <div class="col-sm-2">
                                             <label for="tax_product">Impuestos</label>
                                             <select class="form-control form-control-sm" formControlName="tax_product">
                                                 <option value="" selected>Seleccione...</option>
                                                 <option *ngFor="let param of lstParams[taxes]" value="{{param.value}}">{{ param.name }}</option>
                                             </select>
                                         </div>
-                                        <div class="col-sm-2 align-self-center text-rigth">
+                                        <div class="col-sm-1 align-self-center text-rigth">
                                             <button type="submit" (click)="addProduct()" [disabled]="operationForm.get('product').value.number_units == 0 || operationForm.get('product').value.number_units > units_available" class="btn btn-sm btn-outline-primary" type="button">
                                                 <fa-icon [icon]="faPlusCircle" class="text-outline-secondary mb-2 mr-1"></fa-icon>Agregar
                                             </button>
@@ -340,7 +338,7 @@
                                     <div class="row margin-top-2rem">
                                         <div class="form-group col-sm-3">
                                             <label for="payment_type">Tipo de pago</label>
-                                            <select class="form-control form-control-sm" formControlName="payment_type">
+                                            <select class="form-control form-control-sm" (change)="updateValuePayment()" formControlName="payment_type">
                                                 <option value="" selected>Seleccione...</option>
                                                 <option *ngFor="let param of lstParams[type_payment]" value="{{param.value}}">{{ param.name }}</option>
                                             </select>

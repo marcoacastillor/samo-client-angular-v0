@@ -97,6 +97,7 @@ export const environment = {
   enterprise_purchase_fact: 'ENTERPRISE_PURCHASE',
   prefix_purchase: 'PREFIX_PURCHASE',
   current_purchase: 'CURRENT_PURCHASE',
+  current_voucher: 'CURRENT_VOUCHER',
 
   state_initial_purchase: 'CREADA',
   state_payment_purchase: 'PAGADA',
