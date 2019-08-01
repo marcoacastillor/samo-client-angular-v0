@@ -26,6 +26,7 @@ import { ListProductsModalComponent } from './order-detailed/list-products-modal
 import { FormOperationModalComponent } from './order-detailed/show-order-detail/form-operation-modal/form-operation-modal.component';
 import { FormProductModalComponent } from './order-detailed/show-order-detail/form-product-modal/form-product-modal.component';
 import { FormPaymentModalComponent } from './order-detailed/show-order-detail/form-payment-modal/form-payment-modal.component';
+import { ParameterConfigService } from 'src/app/shared/services/parameter-config.service';
 
 @NgModule({
   imports: [
@@ -36,7 +37,9 @@ import { FormPaymentModalComponent } from './order-detailed/show-order-detail/fo
     OwlDateTimeModule, 
     OwlNativeDateTimeModule
   ],
-  providers: [ EnterpriseService, ParameterService, UserService, UtilsService, GlobalStoreService, OperationService, ProductService, PaymentService, OperationProductService, NotesService],
+  providers: [ 
+    EnterpriseService, ParameterService, UserService, UtilsService, GlobalStoreService, OperationService, ProductService, PaymentService, OperationProductService, NotesService, ParameterConfigService
+  ],
   declarations: [NewOrderFileComponent, ShowOrderFileComponent, ModalShowOrderFileComponent, ListOrderDetailComponent, ShowOrderDetailComponent, NewOrderDetailComponent, ListProviderModalComponent, ListProductsModalComponent, FormOperationModalComponent, FormProductModalComponent, FormPaymentModalComponent]
 })
 export class PurchaseModule { }

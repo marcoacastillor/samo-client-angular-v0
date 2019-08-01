@@ -94,6 +94,10 @@ export const environment = {
   invoice_end: 'INVOICE_END',
   prefix_invoice: 'PREFIX_INVOICE',
 
+  enterprise_purchase_fact: 'ENTERPRISE_PURCHASE',
+  prefix_purchase: 'PREFIX_PURCHASE',
+  current_purchase: 'CURRENT_PURCHASE',
+
   state_initial_purchase: 'CREADA',
   state_payment_purchase: 'PAGADA',
   state_opened_purchase: 'ABIERTA',
@@ -116,6 +120,8 @@ export const environment = {
   laboral_state_inactive: 'Inactivo',
 
   cutting_active_state: 'Abierto',
+
+  
 };
 
 /*

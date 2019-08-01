@@ -29,7 +29,7 @@
                         <div class="row margin-top-1rem">
                             <div class="form-group col-sm-3">
                                 <label for="number_invoice">Factura #</label>
-                                <input type="text" class="form-control form-control-sm" aria-describedby="ninvoiceHelp" formControlName="number_invoice">
+                                <input readonly type="text" class="form-control form-control-sm" aria-describedby="ninvoiceHelp" formControlName="number_invoice">
                                 <small id="ninvoiceHelp" class="form-text text-muted">Ingresar número de factura.</small>
                             </div>
                             <div class="form-group col-sm-3" *ngIf="operationForm.value.payment_type != efecty_payment">

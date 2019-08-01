@@ -99,6 +99,10 @@
                                                     <th>Presentación</th>
                                                     <td>{{ product.presentation }}</td>
                                                 </tr>
+                                                <tr *ngIf="product.presentation != 'INDIVIDUAL'">
+                                                    <th>Unidades por presentación</th>
+                                                    <td>{{ product.units_package | number }}</td>
+                                                </tr>
                                                 <tr>
                                                     <th>Prcio de venta unidad</th>
                                                     <td>{{ product.sale_price_unit | number }}</td>
@@ -107,8 +111,12 @@
                                                     <th>Precio de venta {{ product.presentation }}</th>
                                                     <td>{{ product.sale_price_package | number }}</td>
                                                 </tr>
-                                                <tr>
-                                                    <th>Unidades disponibles</th>
+                                                <tr *ngIf="product.presentation != 'INDIVIDUAL'">
+                                                    <th>Unidades disponibles {{ product.presentation }}</th>
+                                                    <td>{{ product.units_available / product.units_package | number }}</td>
+                                                </tr>
+                                                <tr *ngIf="product.presentation == 'INDIVIDUAL'">
+                                                    <th>Unidades disponibles {{ product.presentation }}</th>
                                                     <td>{{ product.units_available | number }}</td>
                                                 </tr>
                                             </tbody>
@@ -296,8 +304,18 @@
                                             </div>
                                         </div>
                                         <div class="form-group col-sm-2">
-                                            <label for="number_units">Unidades {{ product.presentation }}</label>
-                                            <input type="number" class="form-control form-control-sm" aria-describedby="unidadesHelp" formControlName="number_units">
+                                            <label for="number_units">Cant {{ selectedPresentation }}</label>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <button *ngIf="product.presentation != 'INDIVIDUAL'" (click)="setPackageByProduct()" type="button" class="btn text-small btn-sm btn-outline-primary">
+                                                        <fa-icon [icon]="faArchive" class="text-primary mb-2 mr-1" title="seleccionar unidades"></fa-icon>
+                                                    </button>
+                                                    <button *ngIf="product.presentation != 'INDIVIDUAL'" (click)="setUnitsByProduct()" type="button" class="btn text-small btn-sm btn-outline-primary">
+                                                        <fa-icon [icon]="faUnderline" class="text-primary mb-2 mr-1" title="seleccionar unidades"></fa-icon>
+                                                    </button>
+                                                    <input type="number" class="form-control form-control-sm" aria-describedby="unidadesHelp" formControlName="number_units">
+                                                </div>                                            
+                                            </div>
                                         </div>
                                         <div class="form-group col-sm-2">
                                             <label for="cost_price">Precio venta</label>
@@ -311,7 +329,7 @@
                                             </select>
                                         </div>
                                         <div class="col-sm-2 align-self-center text-rigth">
-                                            <button type="submit" (click)="addProduct()" [disabled]="operationForm.get('product').value.number_units == 0 || operationForm.get('product').value.number_units > product.units_available" class="btn btn-sm btn-outline-primary" type="button">
+                                            <button type="submit" (click)="addProduct()" [disabled]="operationForm.get('product').value.number_units == 0 || operationForm.get('product').value.number_units > units_available" class="btn btn-sm btn-outline-primary" type="button">
                                                 <fa-icon [icon]="faPlusCircle" class="text-outline-secondary mb-2 mr-1"></fa-icon>Agregar
                                             </button>
                                         </div>

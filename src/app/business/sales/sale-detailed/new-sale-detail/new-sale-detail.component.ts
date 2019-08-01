@@ -1,5 +1,5 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
-import { faThList, faSearch, faCheckCircle, faSave, faPlusCircle, faTrashAlt, faEye, faClone, faDonate } from '@fortawesome/free-solid-svg-icons';
+import { faThList, faSearch, faCheckCircle, faSave, faPlusCircle, faTrashAlt, faEye, faClone, faDonate, faUnderline, faArchive } from '@fortawesome/free-solid-svg-icons';
 import { User } from 'src/app/shared/models/user';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Product } from 'src/app/shared/models/product';
@@ -35,6 +35,8 @@ export class NewSaleDetailComponent implements OnInit {
   faEye = faEye;
   faClone = faClone;
   faDonate = faDonate;
+  faUnderline = faUnderline;
+  faArchive = faArchive;
 
   activeUser: User = new User();
   
@@ -61,6 +63,8 @@ export class NewSaleDetailComponent implements OnInit {
   //Valores para actualizar los valores de facturación activas.
   code_paramSelected    = '';
   value_paramSelected   = '';
+  selectedPresentation  = '';
+  units_available = 0;
 
   categories      = {'categories' : [this.type_payment,this.taxes,this.type_id]};
 
@@ -325,18 +329,20 @@ export class NewSaleDetailComponent implements OnInit {
 
   selectProduct(product: Product){
     let cost_price = 0;
-
+    
     this.emptyPrd = false;
     this.product = product;
     this.lstProducts = [];
-
+    
     if(this.product.presentation === environment.individual)
     {
       cost_price = this.product.sale_price_unit;
+      this.setUnitsByProduct();
     }
     else
     {
       cost_price = this.product.sale_price_package;
+      this.setPackageByProduct();
     }
 
     this.operationForm.get('product').patchValue({
@@ -349,6 +355,24 @@ export class NewSaleDetailComponent implements OnInit {
     this.nameField.nativeElement.focus();
   }
 
+  public setUnitsByProduct(){
+    this.units_available = this.product.units_available;
+    this.selectedPresentation = 'INDIVIDUAL';
+    this.operationForm.get('product').patchValue({
+      cost_price: this.product.sale_price_unit,
+      presentation: 'INDIVIDUAL'
+    });
+  }
+
+  public setPackageByProduct(){
+    this.units_available = this.product.units_available / this.product.units_package;
+    this.selectedPresentation = 'PAQUETE';
+    this.operationForm.get('product').patchValue({
+      cost_price: this.product.sale_price_package,
+      presentation: 'PAQUETE'
+    });
+  }
+
   public addProduct(){
     let totalProduct       = 0;
     let totalOperation     = 0;
@@ -358,7 +382,6 @@ export class NewSaleDetailComponent implements OnInit {
     let tax_product       = this.operationForm.get('product').value.tax_product;
     let units             = this.operationForm.get('product').value.number_units;
     let value             = this.operationForm.get('product').value.cost_price;
-    let presentation      = this.product.presentation;
     let name              = this.product.name;
     
     //Calcular el valor de compra
@@ -376,8 +399,7 @@ export class NewSaleDetailComponent implements OnInit {
     this.operationForm.get('product').patchValue({
       value_tax: value_tax_product,
       name: name,
-      total_product: totalProduct,
-      presentation: presentation
+      total_product: totalProduct
     });
     
     this.operationForm.patchValue({

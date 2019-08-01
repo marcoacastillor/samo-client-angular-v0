@@ -215,7 +215,7 @@
                                     </div>
                                 </div>
                                 <!-- end información básica-->
-            
+
                                 <!-- start productos-->
                                 <div class="row margin-top-2rem justify-content-end">
                                     <div class="col-sm-12">
@@ -244,11 +244,12 @@
                                                             </div>
                                                         </div>
                                                     </td>
-                                                    <td>{{ prd.presentation }}</td>
-                                                    <td *ngIf="prd.presentation === individual">{{ prd.number_units | number }}</td>
-                                                    <td *ngIf="prd.presentation === individual">{{ prd.price_unit | number }}</td>
-                                                    <td *ngIf="prd.presentation != individual">{{ prd.number_package | number }}</td>
-                                                    <td *ngIf="prd.presentation != individual">{{ prd.price_package | number }}</td>
+                                                    <td *ngIf="prd.number_units > 0">INDIVIDUAL</td>
+                                                    <td *ngIf="prd.number_package > 0">PAQUETE</td>
+                                                    <td *ngIf="prd.number_units > 0">{{ prd.number_units | number }}</td>
+                                                    <td *ngIf="prd.number_units >0">{{ prd.price_unit | number }}</td>
+                                                    <td *ngIf="prd.number_package > 0">{{ prd.number_package | number }}</td>
+                                                    <td *ngIf="prd.number_package > 0">{{ prd.price_package | number }}</td>
                                                     <td>({{ prd.tax }}%) {{ prd.value_tax | number }}</td>
                                                     <td>{{ prd.total_product | number}}</td>
                                                 </tr>

@@ -1,5 +1,5 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
-import { faThList, faSearch, faCheckCircle, faSave, faPlusCircle, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { faThList, faSearch, faCheckCircle, faSave, faPlusCircle, faTrashAlt, faDonate, faClone } from '@fortawesome/free-solid-svg-icons';
 import { OperationService } from 'src/app/shared/services/operation.service';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { environment } from 'src/environments/environment';
@@ -13,6 +13,10 @@ import { ProductService } from 'src/app/shared/services/product.service';
 import { ProductOperation } from 'src/app/shared/models/product-operation';
 import { ParameterService } from 'src/app/shared/services/parameter.service';
 import { Parameter } from 'src/app/shared/models/parameter';
+import { tap } from 'rxjs/operators';
+import { ParameterConfigService } from 'src/app/shared/services/parameter-config.service';
+import { ParameterConfig } from 'src/app/shared/models/parameter-config';
+import { Operation } from 'src/app/shared/models/operation';
 
 @Component({
   selector: 'app-new-order-detail',
@@ -26,6 +30,9 @@ export class NewOrderDetailComponent implements OnInit {
   faSave = faSave;
   faPlusCircle = faPlusCircle;
   faTrashAlt = faTrashAlt;
+  faDonate = faDonate;
+  faClone = faClone;
+  
 
   activeUser: User = new User();
   
@@ -40,11 +47,18 @@ export class NewOrderDetailComponent implements OnInit {
   lstProducts: Product[] = [];
   lstProductsModal: Product[] = [];
   lstParams: Parameter[] = [];
+  lstParameters: ParameterConfig[] = [];
 
   type_payment    = environment.type_payment;
   taxes           = environment.tax_purchase;
   credit_payment  = environment.credit_payment;
   categories      = {'categories' : [this.type_payment,this.taxes]};
+
+  readOnly = false;
+
+  //Valores para actualizar los valores de facturación activas.
+  code_paramSelected    = '';
+  value_paramSelected   = '';
 
   @ViewChild('code_product') nameField: ElementRef;
   lastkeydown1 = 0;
@@ -59,20 +73,94 @@ export class NewOrderDetailComponent implements OnInit {
     private globalStore: GlobalStoreService,
     private enterpriseService: EnterpriseService,
     private productService: ProductService,
-    private parameterService: ParameterService
+    private parameterService: ParameterService,
+    private parameterConfigService: ParameterConfigService
   ) { }
 
   ngOnInit() {
     this.activeUser = this.globalStore.getUser();
     this.getMultipleParams();
     this.initForm();
+    this.selectNumberInvoice();
+  }
+
+  public disableNumberInvoice(){
+    this.readOnly = false;
+
+    //Actualizar datos sobre numeración de facturas
+    let current_purchase = this.getParameters(environment.current_purchase);
+
+    this.code_paramSelected    = environment.current_purchase;
+    this.value_paramSelected   = current_purchase;
+
+    this.operationForm.patchValue({
+      number_invoice: 0,
+      current_invoice: 0
+    });
+    
+  }
+
+  public selectNumberInvoice(){
+    let number_invoice = '';
+    let enterprise_purchase = this.getParameters(environment.enterprise_purchase_fact);
+    let prefix_purchase = this.getParameters(environment.prefix_purchase);
+    let current_purchase = this.getParameters(environment.current_purchase);
+      
+    if(enterprise_purchase){
+      if(prefix_purchase){
+        if(current_purchase){
+          number_invoice = prefix_purchase + (Number(current_purchase) + 1);
+        }
+        else{
+          number_invoice = prefix_purchase +'1';
+        }
+      }
+      this.readOnly = true;
+    }
+    
+    //Actualizar datos sobre numeración de facturas
+    this.code_paramSelected    = environment.current_purchase;
+    this.value_paramSelected   = (Number(current_purchase) + 1).toString();
+
+    this.operationForm.patchValue({
+      number_invoice: number_invoice,
+      current_invoice: (Number(current_purchase) + 1)
+    });
+  }
+
+  
+  private getParameters(code: string)
+  {
+    const resultado = this.lstParameters.filter( parameter => parameter.code === code );
+    if(resultado[0].value != code)
+      return resultado[0].value;
+    else
+      return null;
   }
 
   private getMultipleParams(){
-    this.parameterService.getByMultipleCodeCategory$(this.categories).subscribe(
-      lstParams => this.lstParams = lstParams
+    this.parameterService.getByMultipleCodeCategory$(this.categories).pipe(
+      tap((params:Parameter[]) => this.lstParams = params),
+      tap(() => {
+        this.enterpriseService.show$(this.activeUser.fk_id_enterprise).subscribe(
+          enterprise =>this.enterprise = enterprise
+        )
+      }),
+      tap(() => {
+        this.getParametersByEnterprise();
+      }),
+    ).subscribe()
+  }
+
+  private getParametersByEnterprise(){
+    this.parameterConfigService.getByEnterprise$(this.activeUser.fk_id_enterprise).subscribe(
+      lstParameters => {
+        this.lstParameters = lstParameters;
+      }
     )
   }
+
+
 
   private initForm(){
     this.operationForm = this.fb.group({
@@ -87,6 +175,7 @@ export class NewOrderDetailComponent implements OnInit {
       subtotal_operation: [0],
       value_payment: [0],
       value_received:[0],
+      current_invoice: [0],
       payment_type: [environment.efecty_payment,Validators.required],
       date_operation: [moment().format('YYYY-MM-DD')],
       product: this.fb.group({
@@ -241,14 +330,21 @@ export class NewOrderDetailComponent implements OnInit {
   }
 
   saveProduct(){
-    this.operationService.storeOperation$(this.operationForm.value).subscribe(
-      () => {
+    this.operationService.storeOperation$(this.operationForm.value)
+    .pipe(
+      tap(() => {
         this.initForm();
         this.enterprise = new Enterprise();
         this.success = true;
         this.message = 'Se realizó la creación de la factura con éxito.';
-      }
+      }),
+      tap(() => {
+        this.parameterConfigService.updateByEnterpriseAndCodeAndValue$(this.activeUser.fk_id_enterprise,this.code_paramSelected,this.value_paramSelected).subscribe(
+          () => { this.getParametersByEnterprise();}
+        )
+      })
     )
+    .subscribe()
   }
 
   public delProduct(prd: any, idx: number){

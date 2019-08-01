@@ -126,6 +126,10 @@ export const environment = {
   invoice_init: 'INVOICE_INIT',
   invoice_end: 'INVOICE_END',
   prefix_invoice: 'PREFIX_INVOICE',
+  
+  enterprise_purchase_fact: 'ENTERPRISE_PURCHASE',
+  prefix_purchase: 'PREFIX_PURCHASE',
+  current_purchase: 'CURRENT_PURCHASE',
 
   state_initial_purchase: 'CREADA',
   state_payment_purchase: 'PAGADA',
