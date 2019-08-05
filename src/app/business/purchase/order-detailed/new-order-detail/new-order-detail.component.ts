@@ -61,6 +61,8 @@ export class NewOrderDetailComponent implements OnInit {
   value_paramSelected   = '';
 
   @ViewChild('code_product') nameField: ElementRef;
+  @ViewChild('number_units') numberUnits: ElementRef;
+
   lastkeydown1 = 0;
   success = false;
   message = '';
@@ -131,11 +133,16 @@ export class NewOrderDetailComponent implements OnInit {
   
   private getParameters(code: string)
   {
-    const resultado = this.lstParameters.filter( parameter => parameter.code === code );
+    if(this.lstParameters.length > 0){
+      const resultado = this.lstParameters.filter( parameter => parameter.code === code );
     if(resultado[0].value != code)
       return resultado[0].value;
     else
       return null;
+    }
+    else{
+      return null;
+    }
   }
 
   private getMultipleParams(){
@@ -242,7 +249,12 @@ export class NewOrderDetailComponent implements OnInit {
       
       if (filter.timeStamp - this.lastkeydown1 > 200) {
         this.productService.getByCodeFilterAndType$(codeProduct).subscribe(
-            lstProducts => this.lstProducts = lstProducts,
+            lstProducts => {
+              this.lstProducts = lstProducts;
+              if(lstProducts.length == 1){
+                this.selectProduct(lstProducts[0]);
+              }
+            },
             () => this.emptyPrd = true
         )
       }
@@ -253,11 +265,12 @@ export class NewOrderDetailComponent implements OnInit {
     this.product = product;
     this.lstProducts = [];
     this.operationForm.get('product').patchValue({
-      code: product.code
+      code: product.code,
+      number_units: 1,
     });
 
     //pone el focus sobre el input de código.
-    this.nameField.nativeElement.focus();
+    this.numberUnits.nativeElement.focus();
   }
 
   loadAllProviders(){

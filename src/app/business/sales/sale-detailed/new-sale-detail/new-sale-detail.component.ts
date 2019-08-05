@@ -51,6 +51,7 @@ export class NewSaleDetailComponent implements OnInit {
   lstClientsModal: Person[] = [];
 
   lstProducts: Product[] = [];
+  lstProductsByName: Product[] = [];
   lstProductsModal: Product[] = [];
   lstParams: Parameter[] = [];
 
@@ -69,6 +70,8 @@ export class NewSaleDetailComponent implements OnInit {
   categories      = {'categories' : [this.type_payment,this.taxes,this.type_id]};
 
   @ViewChild('code_product') nameField: ElementRef;
+  @ViewChild('number_units') numberUnits: ElementRef;
+
   lastkeydown1 = 0;
   success = false;
   message = '';
@@ -90,6 +93,16 @@ export class NewSaleDetailComponent implements OnInit {
     this.activeUser = this.globalStore.getUser();
     this.getMultipleParams();
     this.initForm();
+    this.loadClientOther();
+  }
+
+  private loadClientOther(){
+    this.personService.getByTypeAndNumberId$('CC','999999').subscribe(
+      person => {
+        this.person = person;
+        this.selectClient(person);
+      }
+    )
   }
 
   public selectNumberSale(){
@@ -316,6 +329,9 @@ export class NewSaleDetailComponent implements OnInit {
         this.productService.getSalesProductsByCodeFilter$(codeProduct).subscribe(
             lstProducts => {
               this.lstProducts = lstProducts;
+              if(lstProducts.length == 1){
+                this.selectProduct(lstProducts[0]);
+              }
               this.emptyPrd = false;
             },
             () => {
@@ -327,12 +343,33 @@ export class NewSaleDetailComponent implements OnInit {
     }
   }
 
+  onFindProductByName(filter: any){
+    let nameProduct = (<HTMLInputElement>document.getElementById('nameProduct')).value;
+    this.lstProductsByName = [];
+
+    if (nameProduct.length > 0) {
+      if (filter.timeStamp - this.lastkeydown1 > 200) {
+        this.productService.getSalesProductsByNameFilter$(nameProduct).subscribe(
+            lstProducts => {
+              this.lstProductsByName = lstProducts;
+              if(lstProducts.length == 1){
+                this.selectProduct(lstProducts[0]);
+              }
+              this.emptyPrd = false;
+            },
+            () => this.emptyPrd = true
+        )
+      }
+    }
+  }
+
   selectProduct(product: Product){
     let cost_price = 0;
     
     this.emptyPrd = false;
     this.product = product;
     this.lstProducts = [];
+    this.lstProductsByName = [];
     
     if(this.product.presentation === environment.individual)
     {
@@ -352,7 +389,7 @@ export class NewSaleDetailComponent implements OnInit {
     });
 
     //pone el focus sobre el input de código.
-    this.nameField.nativeElement.focus();
+    this.numberUnits.nativeElement.focus();
   }
 
   public setUnitsByProduct(){

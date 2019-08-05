@@ -37,7 +37,7 @@
                                                 <fa-icon [icon]="faLock" class="text-outline-secondary mb-2 mr-1"></fa-icon>Bloquear factura
                                             </button>
                                             <div class="dropdown-divider"></div>
-                                            <button class="dropdown-item text-small text-secondary" type="button">
+                                            <button class="dropdown-item text-small text-secondary" (click)="printOperation()" type="button">
                                                 <fa-icon [icon]="faPrint" class="text-outline-secondary mb-2 mr-1"></fa-icon>Imprimir factura
                                             </button>
                                             <div class="dropdown-divider"></div>
@@ -70,7 +70,7 @@
                             </div>
                         </div>
                         <!-- end info options-->
-    
+                        
                         <!-- start main info-->
                         <div class="row margin-top-1rem">
                             <!-- start provider info-->

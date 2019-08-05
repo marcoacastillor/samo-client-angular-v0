@@ -109,10 +109,16 @@ export class OperationService {
     );
   }
 
-
-
-
-
+  public getOperationPDF$(id_operation: number): Observable<string> {
+    let url = this._url + '/get-pdf-small-operation/' + id_operation.toString();
+    return this.userService.validateOptionByToken('OPE_GET_PDF_SMALL').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.get<string>(url);
+        }
+      })
+    );
+  }
   
   public store_purchase$(purchase: Purchase): Observable<Purchase> {
     let url = this._url + '/create-purchase';

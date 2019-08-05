@@ -113,7 +113,7 @@
                             <!-- end información de producto seleccionado-->
                         </div>
                         <!-- start provider info-->
-                        
+
                         <!-- start purchase info-->
                         <div class="col-sm-9 back-color-ff">
                             <form [formGroup]="operationForm" (ngSubmit)="onSubmit()">
@@ -263,7 +263,7 @@
                                     <div class="col-sm-4">
                                         <label for="number_selected">Código de barras</label>
                                         <div class="input-group mb-3">
-                                            <input type="text" id="filterProduct" (keypress)="onFindProduct($event)" #code_product class="form-control form-control-sm" formControlName="code">
+                                            <input type="text" id="filterProduct" (keyup)="onFindProduct($event)" #code_product class="form-control form-control-sm" formControlName="code">
                                             <div class="input-group-prepend">
                                                 <button type="button" class="btn text-small btn-sm btn-outline-primary" data-toggle="modal" data-target="#lstProductsModal">
                                                     <fa-icon [icon]="faSearch" class="text-primary mb-2 mr-1" title="buscar registro"></fa-icon>
@@ -285,7 +285,7 @@
                                     </div>
                                     <div class="form-group col-sm-2">
                                         <label for="number_units">Cant {{ product.presentation }}</label>
-                                        <input type="number" class="form-control form-control-sm" aria-describedby="unidadesHelp" formControlName="number_units">
+                                        <input type="number" #number_units class="form-control form-control-sm" aria-describedby="unidadesHelp" formControlName="number_units">
                                     </div>
                                     <div class="form-group col-sm-2">
                                         <label for="cost_price">Valor unitario</label>

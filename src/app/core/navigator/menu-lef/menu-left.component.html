@@ -21,9 +21,22 @@
         </ul>
 
         <ul class="list-unstyled CTAs">
-            <li>
+            <li class="nav-item">
                 <a  href="#" class="downloads">Tutoriales</a>
             </li>
+
+            <!-- start botones temporales-->
+            <li class="nav-item">
+                <button (click)="updateAppsSales()" class="dropdown-item text-small" type="button">
+                    <fa-icon [icon]="faSync" class="downloads"></fa-icon>Ventas: {{ statusSales }}
+                </button>
+            </li>
+            <li class="nav-item">
+                <button  (click)="updateAppsUser()" class="dropdown-item text-small" type="button">
+                    <fa-icon [icon]="faSync" class="downloads"></fa-icon>Usuarios: {{ statusUsers }}
+                </button>
+            </li>    
+            <!-- end botones temporales-->
         </ul>
     </nav>
 
@@ -47,19 +60,6 @@
 
                 <div class="col-sm-8 text-right col align-self-start" *ngIf="user.person">
                     <ul class="nav justify-content-end">
-                        <!-- start botones temporales-->
-                        <li class="nav-item">
-                            <button (click)="updateAppsSales()" class="dropdown-item text-small text-secondary" type="button">
-                                <fa-icon [icon]="faSync" class="text-outline-secondary mb-2 mr-1"></fa-icon>Ventas: {{ statusSales }}
-                            </button>
-                        </li>
-                        <li class="nav-item">
-                            <button  (click)="updateAppsUser()" class="dropdown-item text-small text-secondary" type="button">
-                                <fa-icon [icon]="faSync" class="text-outline-secondary mb-2 mr-1"></fa-icon>Usuarios: {{ statusUsers }}
-                            </button>
-                        </li>    
-                        <!-- end botones temporales-->
-
                         <li class="nav-item">
                             <button [routerLink]="['./sales-admin/modules']" class="dropdown-item text-small text-secondary" type="button">
                                 <fa-icon [icon]="faTasks" class="text-outline-secondary mb-2 mr-1"></fa-icon>Menú principal

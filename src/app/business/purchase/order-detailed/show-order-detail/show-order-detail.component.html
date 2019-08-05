@@ -51,7 +51,7 @@
                                         <fa-icon [icon]="faCartArrowDown" class="text-outline-secondary mb-2 mr-1"></fa-icon>Productos
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="products">
-                                        <button (click)="getMultipleParams()" class="dropdown-item text-small text-secondary" type="button" data-toggle="modal" data-target="#productModal">
+                                        <button (click)="getMultipleParams(); newProductOperation()" class="dropdown-item text-small text-secondary" type="button" data-toggle="modal" data-target="#productModal">
                                             <fa-icon [icon]="faPlus" class="text-outline-secondary mb-2 mr-1"></fa-icon>Agregar producto
                                         </button>
                                     </div>

@@ -14,7 +14,6 @@ import { OwlNativeDateTimeModule, OwlDateTimeModule } from 'ng-pick-datetime';
 import { ListSaleDetailComponent } from './sale-detailed/list-sale-detail/list-sale-detail.component';
 import { ShowSaleDetailComponent } from './sale-detailed/show-sale-detail/show-sale-detail.component';
 import { NewSaleDetailComponent } from './sale-detailed/new-sale-detail/new-sale-detail.component';
-import { ListProductModalComponent } from './sale-detailed/new-sale-detail/list-product-modal/list-product-modal.component';
 import { ListClientModalComponent } from './sale-detailed/new-sale-detail/list-client-modal/list-client-modal.component';
 import { NotesService } from 'src/app/shared/services/notes.service';
 import { OperationProductService } from 'src/app/shared/services/operation-product.service';
@@ -35,6 +34,6 @@ import { ParameterConfigService } from 'src/app/shared/services/parameter-config
   ],
   providers: [
     GlobalStoreService, OperationService, ParameterService, ProductService, PersonService, PaymentService, NotesService, OperationProductService, EnterpriseService, ParameterConfigService],
-  declarations: [ListSaleDetailComponent, ShowSaleDetailComponent, NewSaleDetailComponent, ListProductModalComponent, ListClientModalComponent, FormOperationModalComponent, FormProductModalComponent, FormPaymentModalComponent]
+  declarations: [ListSaleDetailComponent, ShowSaleDetailComponent, NewSaleDetailComponent, ListClientModalComponent, FormOperationModalComponent, FormProductModalComponent, FormPaymentModalComponent]
 })
 export class SalesModule { }

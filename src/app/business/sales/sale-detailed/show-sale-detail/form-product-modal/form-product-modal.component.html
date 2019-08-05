@@ -15,49 +15,38 @@
                         <div class="row">
                             <div class="form-group col-sm-6">
                                 <label for="code_product">Código de barras</label>
-                                <input type="text" id="filterProductCode" (keypress)="onFindProductCode($event)" class="form-control form-control-sm" aria-describedby="codeHelp" formControlName="code_product">
+                                <input type="text" id="filterProductCode" (keyup)="onFindProductCode($event)" class="form-control form-control-sm" aria-describedby="codeHelp" formControlName="code_product">
                                 <small id="codeHelp" class="form-text text-muted">Digite el codigo o parte del códido de barras del producto.</small>
-                                <div class="container back-colo-f6 display-result scrollbar" *ngIf="lstProductsCodes.length > 0">
-                                    <table class="table table-sm table-striped">
-                                        <tbody>
-                                            <tr *ngFor="let product of lstProductsCodes">
-                                                <td>
-                                                    <div class="btn-group btn-group-sm">
-                                                        <button type="button" (click)="selectProduct(product)" class="btn btn-outline-primary btn-sm">
-                                                            <fa-icon [icon]="faCheckCircle" class="text-outline-primary mb-2 mr-1"></fa-icon>
-                                                        </button>
-                                                    </div>
-                                                    {{ product.code }}
-                                                </td>
-                                                <td>{{ product.name }}</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                <!-- start autocomplete-->
+                                <div class="autocomplete container-fluid">
+                                    <div id="autocomplete-list" class="autocomplete-items text-ultra-small">
+                                        <div class="items row" *ngFor="let product of lstProductsCodes">
+                                            <div class="col-sm-12" (click)="selectProduct(product)">
+                                                {{ product.code }} - {{ product.name }}
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
+                                <!-- start autocomplete-->
                             </div>
                             <div class="form-group col-sm-6">
                                 <label for="name_product">Nombre del producto</label>
-                                <input type="text" id="filterProductName" (keypress)="onFindProductName($event)" class="form-control form-control-sm" aria-describedby="codeHelp" formControlName="name_product">
+                                <input type="text" id="filterProductName" (keyup)="onFindProductName($event)" class="form-control form-control-sm" aria-describedby="codeHelp" formControlName="name_product">
                                 <small id="codeHelp" class="form-text text-muted">Digite el nombre o parte del del nombre de barras del producto.</small>
-                                <div class="container back-colo-f6 display-result scrollbar" *ngIf="lstProductsNames.length > 0">
-                                    <table class="table table-sm table-striped">
-                                        <tbody>
-                                            <tr *ngFor="let product of lstProductsNames">
-                                                <td>
-                                                    <div class="btn-group btn-group-sm">
-                                                        <button type="button" (click)="selectProduct(product)" class="btn btn-outline-primary btn-sm">
-                                                            <fa-icon [icon]="faCheckCircle" class="text-outline-primary mb-2 mr-1"></fa-icon>
-                                                        </button>
-                                                    </div>
-                                                    {{ product.code }}
-                                                </td>
-                                                <td>{{ product.name }}</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                <!-- start autocomplete-->
+                                <div class="autocomplete container-fluid">
+                                    <div id="autocomplete-list" class="autocomplete-items text-ultra-small">
+                                        <div class="items row" *ngFor="let product of lstProductsNames">
+                                            <div class="col-sm-12" (click)="selectProduct(product)">
+                                                {{ product.code }} - {{ product.name }}
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
+                                <!-- start autocomplete-->
                             </div>
                         </div>
+
                         <!-- start información de producto seleccionado-->
                         <div class="row margin-top-2rem" *ngIf="product.pk_id_product">
                             <div class="col-sm-6">
@@ -92,24 +81,36 @@
                                             <th>Unidades disponibles</th>
                                             <td>{{ product.units_available | number }}</td>
                                         </tr>
+                                        <tr *ngIf="product.presentation != 'INDIVIDUAL'">
+                                            <th>Unidades disponibles {{ selectedPresentation }}</th>
+                                            <td>{{ product.units_available / product.units_package }}</td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
                             <div class="col-sm-6">
                                 <div class="row">
-                                    <div class="form-group col-sm-12">
-                                        <label for="number_selected">Unidades {{ this.product.presentation }}</label>
-                                        <input type="number" class="form-control form-control-sm" #units_product aria-describedby="unidadesHelp" formControlName="number_selected" required>
-                                        <small class="text-danger" *ngIf="hasError('number_selected','required')">
-                                            El campo es obligatorio
-                                        </small>
-                                        <small class="text-danger" *ngIf="hasError('number_selected','max')">
-                                            Valor no puede ser mayor a <strong>{{ this.getErrors('number_selected').max.max | number }}</strong>
+                                    <div class="col-sm-12">
+                                        <label for="number_selected">Cant {{ selectedPresentation }}</label>
+                                        <div class="input-group-prepend">
+                                            <a *ngIf="product.presentation != 'INDIVIDUAL'" (click)="setPackageByProduct()" type="button" class="btn btn-sm btn-outline-primary">
+                                                <fa-icon [icon]="faArchive" class="text-primary mb-2 mr-1" title="seleccionar unidades"></fa-icon>
+                                            </a>
+                                            <a *ngIf="product.presentation != 'INDIVIDUAL'" (click)="setUnitsByProduct()" type="button" class="btn btn-sm btn-outline-primary">
+                                                <fa-icon [icon]="faUnderline" class="text-primary mb-2 mr-1" title="seleccionar unidades"></fa-icon>
+                                            </a>
+                                            <input type="number" #number_units class="form-control form-control-sm with-sm" aria-describedby="unidadesHelp" formControlName="number_selected">
+                                            <small class="text-danger" *ngIf="hasError('number_selected','required')">
+                                                El campo es obligatorio
+                                            </small>
+                                        </div>                                            
+                                        <small class="text-info">
+                                            El máximo valor es {{ units_available }} {{ selectedPresentation }}
                                         </small>
                                     </div>
                                     <div class="form-group col-sm-12">
-                                        <label for="value_unit">Precio venta</label>
-                                        <input readonly type="number" class="form-control form-control-sm" formControlName="value_unit">
+                                        <label for="cost_price">Precio venta</label>
+                                        <input readonly type="number" class="form-control form-control-sm" formControlName="cost_price">
                                     </div>
                                     <div class="form-group col-sm-12">
                                         <label for="tax_product">Impuestos</label>
@@ -119,7 +120,7 @@
                                         </select>
                                     </div>
                                     <div class="col-sm-12 align-self-center text-rigth">
-                                        <button [disabled]="productForm.invalid" type="submit" (click)="add()" class="btn btn-sm btn-outline-primary" type="button" data-dismiss="modal">
+                                        <button [disabled]="productForm.invalid || (productForm.value.number_selected == 0 || productForm.value.number_selected > units_available)" type="submit" (click)="add()" class="btn btn-sm btn-outline-primary" type="button" data-dismiss="modal">
                                             <fa-icon [icon]="faPlusCircle" class="text-outline-secondary mb-2 mr-1"></fa-icon>Agregar
                                         </button>
                                     </div>

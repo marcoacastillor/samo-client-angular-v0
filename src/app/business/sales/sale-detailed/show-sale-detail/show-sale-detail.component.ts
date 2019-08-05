@@ -55,6 +55,9 @@ export class ShowSaleDetailComponent implements OnInit {
   success = false;
   message = '';
 
+  url_storage: string = environment.url_sales_storage;
+  path = '';
+
   constructor(
     private activateRoute: ActivatedRoute,
     private operationService: OperationService,
@@ -104,13 +107,13 @@ export class ShowSaleDetailComponent implements OnInit {
     ).subscribe()
   }
 
-  getMultipleParams(){
+  public getMultipleParams(){
     this.parameterService.getByMultipleCodeCategory$(this.categories).subscribe(
       lstParams => this.lstParams = lstParams
     )
   }
 
-  onUpdateOperation(operation:Operation){
+  public onUpdateOperation(operation:Operation){
     this.operationService.updateOperation$(operation).subscribe(
       operation => { 
         this.getOperationDetail(operation.pk_id_operation.toString());
@@ -120,7 +123,7 @@ export class ShowSaleDetailComponent implements OnInit {
     )
   }
 
-  onAddProduct(product: any){
+  public onAddProduct(product: any){
     this.operationProductService.store$(product).subscribe(
       operationProduct => {
         this.getOperationDetail(operationProduct.fk_id_operation.toString());
@@ -130,7 +133,7 @@ export class ShowSaleDetailComponent implements OnInit {
     )
   }
 
-  delProduct(id: number){
+  public delProduct(id: number){
     this.operationProductService.delete$(id).subscribe(
       operationProduct => {
         this.getOperationDetail(operationProduct.fk_id_operation.toString());
@@ -140,7 +143,7 @@ export class ShowSaleDetailComponent implements OnInit {
     )
   }
 
-  onAddPayment(payment:Payment){
+  public onAddPayment(payment:Payment){
     this.paymentService.store$(payment).subscribe(
       payment => {
         this.getOperationDetail(payment.fk_id_operation.toString());
@@ -150,7 +153,7 @@ export class ShowSaleDetailComponent implements OnInit {
     )
   }
 
-  delPayment(id:number){
+  public delPayment(id:number){
     this.paymentService.delete$(id).subscribe(
       payment => {
         this.getOperationDetail(payment.fk_id_operation.toString());
@@ -160,7 +163,7 @@ export class ShowSaleDetailComponent implements OnInit {
     )
   }
 
-  blockInvoice()
+  public blockInvoice()
   {
     this.operationService.changeState$(this.operation.pk_id_operation,environment.state_block).subscribe(
       operation => {
@@ -169,5 +172,17 @@ export class ShowSaleDetailComponent implements OnInit {
         this.message = 'Se bloquea la factura.';
       }
     )
+  }
+
+  public printOperation(){
+    this.operationService.getOperationPDF$(this.operation.pk_id_operation).pipe(
+      tap((path:string) => {
+        let configuracion_ventana = "menubar=no,width=800,height=1200,location=yes,resizable=yes,scrollbars=yes,status=yes";
+        let w = window.open(this.url_storage + path,"_blank", configuracion_ventana);
+        //w.focus();
+        //w.print();
+        //w.close();     
+      }),
+    ).subscribe()
   }
 }

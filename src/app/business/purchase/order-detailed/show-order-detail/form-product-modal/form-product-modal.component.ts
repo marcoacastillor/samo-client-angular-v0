@@ -48,6 +48,7 @@ export class FormProductModalComponent implements OnInit, OnChanges {
     {
       if(changes.operation.currentValue != changes.operation.previousValue)
       {
+        this.product = new Product;
         this.initForm();
       }
     }
@@ -60,7 +61,8 @@ export class FormProductModalComponent implements OnInit, OnChanges {
       name_product: [this.product.name],
       fk_id_operation: [this.operation.pk_id_operation],
       number_selected:['0'],
-      value_unit: ['0'],
+      cost_price: ['0'],
+      presentation: [''],
       tax_product:['0',Validators.required]
     })
   }
@@ -99,6 +101,7 @@ export class FormProductModalComponent implements OnInit, OnChanges {
       fk_id_product: product.pk_id_product,
       code_product: product.code,
       name_product: product.name,
+      presentation: product.presentation
     });
 
     //resetear producto seleccionado con código de barras.
