@@ -9,6 +9,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { PersonService } from 'src/app/shared/services/person.service';
 import { OperationService } from 'src/app/shared/services/operation.service';
+import { ClientFormComponent } from './client-form/client-form.component';
+import { ParameterService } from 'src/app/shared/services/parameter.service';
+import { PreferenceClientService } from 'src/app/shared/services/preference-client.service';
 
 @NgModule({
   imports: [
@@ -20,8 +23,8 @@ import { OperationService } from 'src/app/shared/services/operation.service';
     OwlNativeDateTimeModule,
   ],
   providers: [
-    PersonService, OperationService
+    PersonService, OperationService, ParameterService, PreferenceClientService
   ],
-  declarations: [ClientListComponent, ClientShowComponent]
+  declarations: [ClientListComponent, ClientShowComponent, ClientFormComponent]
 })
 export class ClientsModule { }

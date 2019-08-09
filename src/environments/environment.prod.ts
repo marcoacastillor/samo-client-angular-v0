@@ -73,6 +73,7 @@ export const environment = {
   url_laboral_condition: 'http://localhost/ventasV0/public/laboral_condition',
   url_worker_news: 'http://localhost/ventasV0/public/worker_news',
   url_payment_employee: 'http://localhost/ventasV0/public/paying_employee',
+  url_preference_client: 'http://localhost/ventasV0/public/preference_client',
   url_sales_storage: 'http://localhost/ventasV0/storage/app/public/',
   
   

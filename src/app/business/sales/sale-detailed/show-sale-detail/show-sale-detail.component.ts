@@ -5,7 +5,7 @@ import { Notes } from 'src/app/shared/models/notes';
 import { Payment } from 'src/app/shared/models/payment';
 import { Operation } from 'src/app/shared/models/operation';
 import { Parameter } from 'src/app/shared/models/parameter';
-import { environment } from 'src/environments/environment.prod';
+import { environment } from 'src/environments/environment';
 import { ActivatedRoute } from '@angular/router';
 import { OperationService } from 'src/app/shared/services/operation.service';
 import { PaymentService } from 'src/app/shared/services/payment.service';

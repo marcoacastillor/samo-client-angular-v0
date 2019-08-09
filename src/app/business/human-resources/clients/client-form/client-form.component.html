@@ -1,0 +1,157 @@
+<app-pages title="Gestión de empleado">  
+    <main>            
+        <section>
+            <!-- start menu main-->
+            <div class="row bg-gray">
+                <div class="col-sm-6 text-left">
+                    Registro de empleado
+                </div>
+                <div class="col-sm-6 text-right">
+                    <div class="btn-group btn-group-sm">
+                        <a routerLink='../../list' class="btn text-ultra-small btn-sm btn-outline-primary" type="button">
+                            <fa-icon [icon]="faThList" class="text-outline-secondary mb-2 mr-1"></fa-icon>Ver todos
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- end menu main-->
+
+            <!-- start content -->
+            <div class="row margin-top-1rem">
+                <div class="col-sm-12">
+
+                    <!-- start info options-->
+                    <div class="row" *ngIf="success">
+                        <div class="col-sm-12">
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>Éxito</strong> {{ message }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end info options-->
+
+                    <!-- start main info-->
+                    <form [formGroup]="clientForm">
+                        <div class="row">
+                            <!--start información sobre persona-->
+                            <div class="col-sm-6">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h6>Información personal</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="form-group col-sm-6">
+                                                <label for="type_id">Tipo Id</label>
+                                                <select class="form-control form-control-sm" formControlName="type_id" required>
+                                                    <option value="" selected>Seleccione...</option>
+                                                    <option *ngFor="let param of parametersList[type_id]" value="{{param.value}}">{{ param.name }}</option>
+                                                </select>
+                                                <small *ngIf="mustShowError('type_id')" class="form-text alert-danger">
+                                                    Tipo de id, es obligatorio
+                                                </small>
+                                            </div>
+                                            <div class="form-group col-sm-6">
+                                                <label for="number_id">Número Id</label>
+                                                <input type="text" id="filterClient" class="form-control form-control-sm"  formControlName="number_id" required>
+                                                <small *ngIf="mustShowError('number_id')" class="form-text alert-danger">
+                                                    Número de id, es obligatorio
+                                                </small>
+                                            </div>
+                                            <div class="form-group col-sm-6">
+                                                <label for="names">Nombres</label>
+                                                <input type="text" class="form-control form-control-sm"  formControlName="names" required> 
+                                                <small *ngIf="mustShowError('names')" class="form-text alert-danger">
+                                                    Nombres, es obligatorio
+                                                </small>
+                                            </div>
+                                            <div class="form-group col-sm-6">
+                                                <label for="last_names">Apellidos</label>
+                                                <input type="text" class="form-control form-control-sm"  formControlName="last_names" required>
+                                                <small *ngIf="mustShowError('last_names')" class="form-text alert-danger">
+                                                    Apellidos, es obligatorio
+                                                </small>
+                                            </div>
+                                            <div class="form-group col-sm-6">
+                                                <label for="address">Dirección</label>
+                                                <input type="text" class="form-control form-control-sm"  formControlName="address" required>
+                                                <small *ngIf="mustShowError('address')" class="form-text alert-danger">
+                                                    Dirección, es obligatorio
+                                                </small>
+                                            </div>
+                                            <div class="form-group col-sm-6">
+                                                <label for="phone">Teléfono</label>
+                                                <input type="text" class="form-control form-control-sm"  formControlName="phone" required>
+                                                <small *ngIf="mustShowError('phone')" class="form-text alert-danger">
+                                                    Teléfono, es obligatorio
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> 
+                            </div>
+                            <!--end información sobre persona-->
+
+                            <!--start información laboral-->
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <!--start information condiciones laborales-->
+                                    <div class="col-sm-12">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h6>Información comercial</h6>
+                                            </div>
+                                            <div class="card-body">
+                                                <div formArrayName="preference_client">
+                                                    <div class="row">
+                                                        <div class="form-group col-sm-6">
+                                                            <label for="score">Score</label>
+                                                            <input type="number" class="form-control form-control-sm"  formControlName="score">
+                                                            <small *ngIf="mustShowErrorChild('preference_client','score')" class="form-text alert-danger">
+                                                                Score, es obligatorio
+                                                            </small>
+                                                        </div>
+                                                        <div class="form-group col-sm-6">
+                                                            <label for="max_discount">Máximo % de descuento</label>
+                                                            <div class="input-group mb-3">
+                                                                <input type="number" class="form-control form-control-sm"  formControlName="max_discount">
+                                                                <small *ngIf="mustShowErrorChild('preference_client','max_discount')" class="form-text alert-danger">
+                                                                    Valor de descuento, es obligatoria
+                                                                </small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--end information condiciones laborales-->
+                                </div>
+                            </div>
+                            <!--end información laboral-->
+                        </div>
+
+                        <!--start buttons form-->
+                        <div class="row justify-content-end margin-top-2rem">
+                            <div class="col-sm-4 text-right align-self-end">
+                                <button *ngIf="!person.pk_id_person"  type="submit" (click)="saveClient()" [disabled]="clientForm.invalid" class="btn btn-sm btn-outline-primary" type="button">
+                                    <fa-icon [icon]="faSave" class="text-outline-secondary mb-2 mr-1"></fa-icon>Guardar
+                                </button>
+                                <button *ngIf="person.pk_id_person"  type="submit" (click)="updateClient()" [disabled]="clientForm.invalid" class="btn btn-sm btn-outline-primary" type="button">
+                                    <fa-icon [icon]="faSave" class="text-outline-secondary mb-2 mr-1"></fa-icon>Actualizar
+                                </button>
+                            </div>
+                        </div>
+                        <!--end buttons form-->
+
+                    </form>
+                    <!-- end main info-->
+                </div>
+            </div>
+            <!-- end content -->
+        </section>
+    </main>
+</app-pages>

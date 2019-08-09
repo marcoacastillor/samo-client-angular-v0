@@ -8,13 +8,26 @@
                 </div>
                 <div class="col-sm-6 text-right">
                     <div class="btn-group btn-group-sm">
-                        <a routerLink='../client/new' type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal">
+                        <a routerLink='../create/new' type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal">
                             <fa-icon [icon]="faPlusCircle" class="text-outline-primary mb-2 mr-1"></fa-icon>Crear
                         </a>
                     </div>
                 </div>
             </div>
             <!-- end menu main-->
+
+            <!-- start info options-->
+            <div class="row" *ngIf="success">
+                <div class="col-sm-12">
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>Éxito</strong> {{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- end info options-->
 
             <!-- start content -->
             <div class="row margin-top-1rem">
@@ -36,6 +49,12 @@
                                     <a routerLink='../show/{{client.pk_id_person}}' class="btn text-ultra-small btn-sm btn-outline-primary" type="button">
                                         <fa-icon [icon]="faEye" class="text-outline-secondary mb-2 mr-1"></fa-icon>Ver detalle
                                     </a>
+                                    <a routerLink='../create/{{client.pk_id_person}}' class="btn text-ultra-small btn-sm btn-outline-primary" type="button">
+                                        <fa-icon [icon]="faEdit" class="text-outline-secondary mb-2 mr-1"></fa-icon>Editar
+                                    </a>
+                                    <button  (click)="selectPerson(client)" class="btn text-ultra-small btn btn-sm btn-outline-danger" type="button" data-toggle="modal" data-target="#deleteClient">
+                                        <fa-icon [icon]="faTrash" class="text-outline-danger mb-2 mr-1"></fa-icon>Eliminar
+                                    </button> 
                                 </td>
                                 <td>{{ client.type_id }} {{ client.number_id }}</td>
                                 <td>{{ client.names }}</td>
@@ -51,3 +70,26 @@
         </section>
     </main>
 </app-pages>
+
+<!-- Modal -->
+<div class="modal fade" id="deleteClient" tabindex="-1" role="dialog" aria-labelledby="deleteClient" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Confirmación de mensaje</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="alert alert-danger" role="alert">
+                Se va a eliminar un registro, desea confirmar la operación?.
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="button" (click)="deleteClient()" data-dismiss="modal" class="btn btn-danger">Eliminar</button>
+        </div>
+        </div>
+    </div>
+</div>

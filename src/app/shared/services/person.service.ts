@@ -231,6 +231,17 @@ export class PersonService {
     );
   }
 
+  public deleteClient$(id:number): Observable<Person> {
+    const url = this._url + '/delete-client/' + id.toString();
+    return this.userService.validateOptionByToken('PRS_DEL_CLIENT').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.delete<Person>(url);
+        }
+      })
+    );
+  }
+
   public update$(person:Person): Observable<Person> {
     return this.userService.validateOptionByToken('PRS_UPD_INFO').pipe(
       switchMap(validate => {

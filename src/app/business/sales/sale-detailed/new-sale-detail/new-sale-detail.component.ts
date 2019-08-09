@@ -78,6 +78,8 @@ export class NewSaleDetailComponent implements OnInit {
   emptyCli = false;
   emptyPrd = false;
 
+  url_storage: string = environment.url_sales_storage;
+
   constructor(
     private operationService: OperationService,
     private fb: FormBuilder,
@@ -478,6 +480,36 @@ export class NewSaleDetailComponent implements OnInit {
         value_payment: 0
       });
     }
+  }
+
+  saveProductAndPrint(){
+    this.operationService.storeOperation$(this.operationForm.value)
+    .pipe(
+      tap((operation:Operation) => {
+        this.initForm();
+        this.pk_id_operation = operation.pk_id_operation;
+        this.person = new Person();
+        this.success = true;
+        this.message = 'Se realizó la creación de la factura con éxito.';
+      }),
+      tap(() => {
+        this.parameterConfigService.updateByEnterpriseAndCodeAndValue$(this.activeUser.fk_id_enterprise,this.code_paramSelected,this.value_paramSelected).subscribe(
+          () => { this.getParametersByEnterprise();}
+        )
+      }),
+      tap((operation:Operation) => {
+        this.operationService.getOperationPDF$(operation.pk_id_operation).subscribe(
+          (path:string) => {
+            let configuracion_ventana = "menubar=no,width=800,height=1200,location=yes,resizable=yes,scrollbars=yes,status=yes";
+            let w = window.open(this.url_storage + path,"_blank", configuracion_ventana);
+            //w.focus();
+            //w.print();
+            //w.close();         
+          }
+        )
+      })
+    )
+    .subscribe()
   }
 
   saveProduct(){

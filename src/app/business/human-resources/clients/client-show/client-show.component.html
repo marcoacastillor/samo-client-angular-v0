@@ -54,6 +54,14 @@
                                                 <th>Teléfono</th>
                                                 <td>{{ person.phone }}</td>
                                             </tr>
+                                            <tr>
+                                                <th>Puntaje de cliente</th>
+                                                <td>{{ preferenceClient.score | number }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Máximo descuento permitido</th>
+                                                <td>{{ preferenceClient.max_discount | number }}</td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>

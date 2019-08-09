@@ -432,6 +432,9 @@
                                             <button type="submit" (click)="saveProduct()" [disabled]="operationForm.invalid || (operationForm.value.products_list).length == 0" class="btn btn-sm btn-outline-primary" type="button">
                                                 <fa-icon [icon]="faSave" class="text-outline-secondary mb-2 mr-1"></fa-icon>Guardar
                                             </button>
+                                            <button type="submit" (click)="saveProductAndPrint()" [disabled]="operationForm.invalid || (operationForm.value.products_list).length == 0" class="btn btn-sm btn-outline-primary" type="button">
+                                                <fa-icon [icon]="faSave" class="text-outline-secondary mb-2 mr-1"></fa-icon>Guardar e imprimir
+                                            </button>
                                         </div>
                                     </div>
                                     <!--end buttons form-->
