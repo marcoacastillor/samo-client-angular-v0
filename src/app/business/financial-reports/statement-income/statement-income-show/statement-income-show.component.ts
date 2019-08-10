@@ -41,7 +41,7 @@ export class StatementIncomeShowComponent implements OnInit {
     this.dateEnd = moment().add(+this.consolidate_day,'days').format('YYYY-MM-DD');
     this.dateInit = moment().add().format('YYYY-MM-DD');
     
-    this.initUpdForm(this.dateEnd, this.dateInit);
+    this.initUpdForm(this.dateInit,this.dateEnd);
     this.activeUser = this.globalStoreService.getUser();
     this.loadParameters();
   }
