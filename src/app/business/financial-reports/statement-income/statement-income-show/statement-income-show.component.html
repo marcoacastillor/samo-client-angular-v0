@@ -1,0 +1,105 @@
+<app-pages title="Ingresos y egresos">  
+    <main>            
+        <section>
+            <!-- start menu main-->
+            <div class="row bg-gray">
+                <div class="col-sm-6 text-left">
+                    Estado de ingresos y egresos
+                </div>
+            </div>
+            <!-- end menu main-->
+
+            <!-- start dates form-->
+            <div class="row margin-top-1rem">
+                <!--inicia sección selector de periodo-->
+                <div class="form-group col-sm-4">
+                    <form [formGroup]="reportForm">
+                        <div class="col-sm-12">
+                            <div class="input-group input-group-sm mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-sm">Fecha inicial</span>
+                                </div>
+                                <div class="input-group-prepend">
+                                    <span class="btn text-small btn-sm btn-outline-primary" [owlDateTimeTrigger]="from_date"><fa-icon [icon]="faCalendar" class="text-primary"></fa-icon></span>
+                                </div>
+                                <input type="text" class="form-control text-small" placeholder="Desde" formControlName="from_date" [owlDateTime]="from_date">
+                                <owl-date-time [pickerType]="'calendar'" #from_date></owl-date-time>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="input-group input-group-sm mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-sm">Fecha  final</span>
+                                </div>
+                                <div class="input-group-prepend">
+                                    <span class="btn text-small btn-sm btn-outline-primary" [owlDateTimeTrigger]="to_date"><fa-icon [icon]="faCalendar" class="text-primary"></fa-icon></span>
+                                </div>
+                                <input type="text" class="form-control text-small" placeholder="Hasta" formControlName="to_date" [owlDateTime]="to_date">
+                                <owl-date-time [pickerType]="'calendar'" #to_date></owl-date-time>
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-outline-success btn-sm mb-2 mr-1" (click)="getDataByPeriod()">Buscar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!--fin sección selector de periodo-->
+
+                <!--inicia sección datos-->
+                <div class="col-sm-8">
+                    <table class="table table-sm table-striped text-big-report">
+                        <thead class="bg-secondary text-white">
+                            <tr>
+                                <td colspan="7"><h6>Ingresos y egresos para el periodo entre {{ reportForm.value.from_date }} a {{ reportForm.value.to_date }}</h6></td>
+                            </tr>
+                            <tr>
+                                <th>Cuenta</th>
+                                <th>Valor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Ventas</td>
+                                <td>{{ report.sales | number }}</td>
+                            </tr>
+                            <tr>
+                                <td>Costo de venta</td>
+                                <td>{{ report.cost | number }}</td>
+                            </tr>
+                            <tr>
+                                <td>Márgen de contribución</td>
+                                <td>{{ (report.sales - report.cost) | number }}</td>
+                            </tr>
+                            <tr>
+                                <td>Gastos de operación</td>
+                                <td>{{ (report.operational_expenses) | number }}</td>
+                            </tr>
+                            <tr>
+                                <td>Utilidad del ejercicio</td>
+                                <td>{{ (report.sales - report.cost) -report.operational_expenses | number }}</td>
+                            </tr>
+                            <tr>
+                                <td>Gastos financieros</td>
+                                <td>{{ report.financial_expenses | number }}</td>
+                            </tr>
+                            <tr>
+                                <td>Utilidad antes de impuestos</td>
+                                <td>{{ (report.sales - report.cost) - (report.operational_expenses + report.financial_expenses) | number }}</td>
+                            </tr>
+                            <tr>
+                                <td>Impuestos</td>
+                                <td>{{ report.total_tax | number }}</td>
+                            </tr>
+                            <tr>
+                                <td>Utilidad</td>
+                                <td>{{ (report.sales - report.cost) - (report.operational_expenses + report.financial_expenses + report.total_tax) | number }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!--fin sección datos-->
+            </div>
+            <!-- end dates form-->
+        </section>
+    </main>
+</app-pages>

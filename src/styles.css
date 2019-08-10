@@ -127,12 +127,17 @@
 .text-big-report
 {
   font-size: 1rem;
-  font-weight: bold;
 }
 
 .text-ultra-small
 {
   font-size: 0.7rem;
+}
+
+.text-ultra-big p
+{
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 
 .card-title-custom
@@ -287,7 +292,7 @@
 
 table 
 {
-  font-size: 0.8rem;
+  font-size: 0.9rem;
 }
 
 .with-sm{

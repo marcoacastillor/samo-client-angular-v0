@@ -25,7 +25,7 @@
                         <div class="col-sm-12 text-left align-self-start">
                             <div class="btn-group btn-group-sm">
                                 <div class="dropdown">
-                                    <button class="btn text-ultra-small btn-sm dropdown-toggle" type="button" id="operation" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <button class="btn btn-sm dropdown-toggle" type="button" id="operation" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <fa-icon [icon]="faFileInvoiceDollar" class="text-outline-secondary mb-2 mr-1"></fa-icon>Factura
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="operation">
@@ -47,7 +47,7 @@
                                     </div>
                                 </div>
                                 <div class="dropdown" *ngIf="operation.state_operation != block">
-                                    <button class="btn text-ultra-small btn-sm dropdown-toggle" type="button" id="products" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <button class="btn btn-sm dropdown-toggle" type="button" id="products" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <fa-icon [icon]="faCartArrowDown" class="text-outline-secondary mb-2 mr-1"></fa-icon>Productos
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="products">
@@ -57,7 +57,7 @@
                                     </div>
                                 </div>
                                 <div class="dropdown" *ngIf="operation.state_operation != block && (operation.total_operation - (operation.total_discounts + operation.total_pays)) > 0">
-                                    <button class="btn text-ultra-small btn-sm dropdown-toggle" type="button" id="payments" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <button class="btn btn-sm dropdown-toggle" type="button" id="payments" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <fa-icon [icon]="faDonate" class="text-outline-secondary mb-2 mr-1"></fa-icon>Pagos
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="payments">

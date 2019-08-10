@@ -1,20 +1,20 @@
-<app-pages title="Órdenes de compra">  
+<app-pages title="Órdenes de venta">  
     <main>            
         <section>
             <!-- start menu main-->
             <div class="row bg-gray">
                 <div class="col-sm-6 text-left">
-                    Reporte de compras por período
+                    Reporte de ventas por período
                 </div>
             </div>
             <!-- end menu main-->
 
             <!-- start dates form-->
             <div class="row margin-top-1rem">
-                <div class="col-sm-8">
-                    <form [formGroup]="reportForm">
-                        <div class="row">
-                            <div class="col-sm-6">
+                <div class="col-sm-4">
+                    <div class="row">
+                        <form [formGroup]="reportForm">
+                            <div class="col-sm-12">
                                 <div class="input-group input-group-sm mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="inputGroup-sizing-sm">Fecha inicial</span>
@@ -26,10 +26,10 @@
                                     <owl-date-time [pickerType]="'calendar'" #from_date></owl-date-time>
                                 </div>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-12">
                                 <div class="input-group input-group-sm mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="inputGroup-sizing-sm">Fecha final</span>
+                                        <span class="input-group-text" id="inputGroup-sizing-sm">Fecha  final</span>
                                     </div>
                                     <div class="input-group-prepend">
                                         <span class="btn text-small btn-sm btn-outline-primary" [owlDateTimeTrigger]="to_date"><fa-icon [icon]="faCalendar" class="text-primary"></fa-icon></span>
@@ -41,91 +41,156 @@
                                     </div>
                                 </div>
                             </div>
+                        </form>
+                    </div>
+                    <div class="row" *ngIf="consolidates">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h6 class="m-b-20">Ventas totales</h6>
+                                    <div class="row container-fluid text-primary">
+                                        <div class="col-sm-2 col-xl-4 text-left">
+                                            <h1><i class="fas fa-dollar-sign "></i></h1>
+                                        </div>
+                                        <div class="col-sm-10 col-xl-8 text-right">
+                                            <h3><span>${{ consolidates.operations_values.total_operation | number }}</span></h3>
+                                        </div>
+                                    </div>
+                                    <div class="row container-fluid">
+                                        <div class="col-sm-6 col-xl-6 text-left">
+                                            <h6>Total</h6>
+                                        </div>
+                                        <div class="col-sm-6 col-xl-6 text-right">
+                                            <h6><span>{{ consolidates.operations_totals.total_operation | number }}</span></h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </form>
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h6 class="m-b-20">Ventas de contado</h6>
+                                    <div class="row container-fluid text-success">
+                                        <div class="col-sm-2 col-xl-4 text-left">
+                                            <h1><i class="fas fa-dollar-sign "></i></h1>
+                                        </div>
+                                        <div class="col-sm-10 col-xl-8 text-right">
+                                            <h3><span>${{ consolidates.operations_values.efecty_operation | number }}</span></h3>
+                                        </div>
+                                    </div>
+                                    <div class="row container-fluid">
+                                        <div class="col-sm-6 col-xl-6 text-left">
+                                            <h6>Total</h6>
+                                        </div>
+                                        <div class="col-sm-6 col-xl-6 text-right">
+                                            <h6>
+                                                <span>{{ consolidates.operations_totals.efecty_operation | number }}</span>
+                                                <button type="button" class="badge badge-success" *ngIf="consolidates.operations_totals.efecty_operation > 0" (click)="findOperationByTypePayment(efecty)">
+                                                    <fa-icon [icon]="faEye" class="mb-2 mr-1"></fa-icon>
+                                                </button>                                    
+                                            </h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h6 class="m-b-20">Ventas a crédito</h6>
+                                    <div class="row container-fluid text-danger">
+                                        <div class="col-sm-2 col-xl-4 text-left">
+                                            <h1><i class="fas fa-dollar-sign"></i></h1>
+                                        </div>
+                                        <div class="col-sm-10 col-xl-8 text-right">
+                                            <h3><span>{{ consolidates.operations_values.credit_operation | number }}</span></h3>
+                                        </div>
+                                    </div>
+                                    <div class="row container-fluid">
+                                        <div class="col-sm-6 col-xl-6 text-left">
+                                            <h6>Total</h6>
+                                        </div>
+                                        <div class="col-sm-6 col-xl-6 text-right">
+                                            <h6>
+                                                <span>{{ consolidates.operations_totals.credit_operation | number }}</span>
+                                                <button type="button" class="badge badge-danger" *ngIf="consolidates.operations_totals.credit_operation > 0" (click)="findOperationByTypePayment(credit)">
+                                                    <fa-icon [icon]="faEye" class="mb-2 mr-1"></fa-icon>
+                                                </button>
+                                            </h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h6 class="m-b-20">Ventas con descuento</h6>
+                                    <div class="row container-fluid text-secondary">
+                                        <div class="col-sm-2 col-xl-4 text-left">
+                                            <h1><i class="fas fa-dollar-sign"></i></h1>
+                                        </div>
+                                        <div class="col-sm-10 col-xl-8 text-right">
+                                            <h3><span>{{ consolidates.operations_values.discount_operation | number }}</span></h3>
+                                        </div>
+                                    </div>
+                                    <div class="row container-fluid">
+                                        <div class="col-sm-6 col-xl-6 text-left">
+                                            <h6>Total</h6>
+                                        </div>
+                                        <div class="col-sm-6 col-xl-6 text-right">
+                                            <h6>
+                                                <span>{{ consolidates.operations_totals.discount_operation | number }}</span>
+                                                <button type="button" class="badge badge-secondary" *ngIf="consolidates.operations_totals.discount_operation > 0" (click)="findOperationByTypePayment(discount)">
+                                                    <fa-icon [icon]="faEye" class="mb-2 mr-1"></fa-icon>
+                                                </button>
+                                            </h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
+                <!--inicia información de operaciones-->
+                <div class="col-sm-8">
+                    <table class="table table-sm table-striped">
+                        <thead class="bg-secondary text-white">
+                            <tr>
+                                <td colspan="7"><h6>Listado de operaciones por tipo de pago</h6></td>
+                            </tr>
+                            <tr>
+                                <th colspan="2">Número</th>
+                                <th>Cliente</th>
+                                <th>Fecha venta</th>
+                                <th>Tipo de pago</th>
+                                <th>Valor</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let order of lstOperations">
+                                <td>
+                                    <a routerLink='/sales-admin/sales/sales-detailed-show/{{order.pk_id_operation}}' class="btn text-ultra-small btn-sm btn-outline-primary" type="button">
+                                        <fa-icon [icon]="faEye" class="text-outline-secondary mb-2 mr-1"></fa-icon>Ver detalle
+                                    </a>
+                                </td>
+                                <td>{{ order.number_invoice }}</td>
+                                <td>{{ order.external_reference.split(":")[3] }} : {{ order.external_reference.split(":")[2]  }}</td>
+                                <td>{{ order.date_operation }}</td>
+                                <td>{{ order.payment_type }}</td>
+                                <td>{{ order.total_operation | number }}</td>
+                                <td>{{ order.state_operation }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!--fin información de operaciones-->
+                
             </div>
             <!-- end dates form-->
-
-            <!-- start content -->
-            <div class="row margin-top-1rem" *ngIf="consolidates">
-                <div class="col-sm-4 col-xl-4">
-                    <div class="card bg-primary">
-                        <div class="card-body text-white">
-                            <h6 class="m-b-20">Ventas totales</h6>
-                            <div class="row container-fluid">
-                                <div class="col-sm-2 col-xl-4 text-left">
-                                    <h1><i class="fas fa-dollar-sign "></i></h1>
-                                </div>
-                                <div class="col-sm-10 col-xl-8 text-right">
-                                    <h3><span>${{ consolidates.operations_values.total_operation | number }}</span></h3>
-                                </div>
-                            </div>
-                            <div class="row container-fluid">
-                                <div class="col-sm-6 col-xl-6 text-left">
-                                    <h6>Total</h6>
-                                </div>
-                                <div class="col-sm-6 col-xl-6 text-right">
-                                    <h6><span>{{ consolidates.operations_totals.total_operation | number }}</span></h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4 col-xl-4">
-                    <div class="card bg-info">
-                        <div class="card-body text-white">
-                            <h6 class="m-b-20">Ventas en efectivo</h6>
-                            <div class="row container-fluid">
-                                <div class="col-sm-2 col-xl-4 text-left">
-                                    <h1><i class="fas fa-dollar-sign "></i></h1>
-                                </div>
-                                <div class="col-sm-10 col-xl-8 text-right">
-                                    <h3><span>${{ consolidates.operations_values.efecty_operation | number }}</span></h3>
-                                </div>
-                            </div>
-                            <div class="row container-fluid">
-                                <div class="col-sm-6 col-xl-6 text-left">
-                                    <h6>Total</h6>
-                                </div>
-                                <div class="col-sm-6 col-xl-6 text-right">
-                                    <h6><span>{{ consolidates.operations_totals.efecty_operation | number }}</span></h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4 col-xl-4">
-                    <div class="card bg-warning">
-                        <div class="card-body text-white">
-                            <h6 class="m-b-20">Ventas a crédito</h6>
-                            <div class="row container-fluid">
-                                <div class="col-sm-2 col-xl-4 text-left">
-                                    <h1><i class="fas fa-dollar-sign"></i></h1>
-                                </div>
-                                <div class="col-sm-10 col-xl-8 text-right">
-                                    <h3><span>{{ consolidates.operations_values.credit_operation | number }}</span></h3>
-                                </div>
-                            </div>
-                            <div class="row container-fluid">
-                                <div class="col-sm-6 col-xl-6 text-left">
-                                    <h6>Total</h6>
-                                </div>
-                                <div class="col-sm-6 col-xl-6 text-right">
-                                    <h6><span>{{ consolidates.operations_totals.credit_operation | number }}</span></h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- end content -->
-
-            <!-- start detailed -->
-            <div class="row margin-top-1rem">
-
-            </div>
-            <!-- end detailed -->
         </section>
     </main>
 </app-pages>

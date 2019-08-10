@@ -377,11 +377,11 @@
                                     <!-- end payment information -->
 
                                     <div class="row">
-                                        <div class="col-sm-12 style-header-table text-success" *ngIf="operationForm.value.payment_type === credit_payment">
+                                        <div class="col-sm-12 text-ultra-big text-primary" *ngIf="operationForm.value.payment_type === credit_payment">
                                             <p>Cambio</p>
                                             <p>$ {{ operationForm.value.value_received - operationForm.value.value_payment | number }}</p>
                                         </div>
-                                        <div class="col-sm-12 style-header-table text-success" *ngIf="operationForm.value.payment_type != credit_payment">
+                                        <div class="col-sm-12 text-ultra-big text-primary" *ngIf="operationForm.value.payment_type != credit_payment">
                                             <p>Cambio</p>
                                             <p>$ {{ operationForm.value.value_received - (operationForm.value.total_operation - operationForm.value.total_discounts) | number }}</p>
                                         </div>

@@ -119,7 +119,7 @@ export class OperationService {
       })
     );
   }
-  
+
   public store_purchase$(purchase: Purchase): Observable<Purchase> {
     let url = this._url + '/create-purchase';
     return this.userService.validateOptionByToken('OPE_PURCHASE_CRT').pipe(
@@ -192,6 +192,23 @@ export class OperationService {
       switchMap(validate => {
         if(validate){
           return this.http.get<Operation[]>(url);
+        }
+      })
+    );
+  }
+
+  public getByPaymentTypeAndDatesAndType$(paymentType: string, fromDate: string, toDate: string, type_operation: string): Observable<Operation[]> {
+    let params = {
+      'payment_type': paymentType,
+      'from_date': fromDate,
+      'to_date': toDate,
+      'type_operation': type_operation
+    };
+    let url = this._url + '/get-by-payment-type-and-dates-and-type';
+    return this.userService.validateOptionByToken('OPE_GET_BY_PAYMENTTYPE_AND_DATES_AND_TYPE').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.post<Operation[]>(url,params);
         }
       })
     );

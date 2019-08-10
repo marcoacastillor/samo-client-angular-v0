@@ -41,6 +41,7 @@ export const environment = {
   url_payment_employee: 'http://localhost/ventasV0/public/paying_employee',
   url_preference_client: 'http://localhost/ventasV0/public/preference_client',
   url_sales_storage: 'http://localhost/ventasV0/storage/app/public/',
+  url_financial_report: 'http://localhost/ventasV0/public/financial_report',
 
   clearMessageDelayMs: 5000,
   refreshInterval: 1000,
@@ -84,6 +85,7 @@ export const environment = {
   parameters_enterprises: 'PARAMETERS_ENTERPRISES',
   regimen: 'REGIMEN_ENTERPRISE',
   type_worker_new: 'TYPE_WORKER_NEW',
+  period_report: 'PERIOD_REPORT',
 
   url_web_service: 'URL_WEB_SERVICE',
   enterprise_fact: 'ENTERPRISE_FACT',

@@ -48,6 +48,10 @@ const routes: Routes = [
       {
         path: 'settlements',
         loadChildren: './settlements/settlements.module#SettlementsModule'
+      },
+      {
+        path: 'financial-reports',
+        loadChildren: './financial-reports/financial-reports.module#FinancialReportsModule'
       }
     ]
   },

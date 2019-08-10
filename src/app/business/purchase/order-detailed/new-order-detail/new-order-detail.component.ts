@@ -363,7 +363,7 @@ export class NewOrderDetailComponent implements OnInit {
   public delProduct(prd: any, idx: number){
     let total_tax             = this.operationForm.value.total_tax; 
     let subtotal_operation    = this.operationForm.value.subtotal_operation;
-    let total_product         = prd.value_total_product;
+    let total_product         = prd.total_product;
     let value_tax             = prd.value_tax;
     
     subtotal_operation       = subtotal_operation - (total_product - value_tax);

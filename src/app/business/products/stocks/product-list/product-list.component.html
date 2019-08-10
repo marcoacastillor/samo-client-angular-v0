@@ -78,6 +78,7 @@
                                         <th>Referencia</th>
                                         <th>Presentación</th>
                                         <th>Unidades disponibles</th>
+                                        <th>Paquetes disponibles</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -102,6 +103,12 @@
                                         <td>
                                             {{ product.units_available | number }}
                                             <fa-icon [icon]="faFlag" [ngClass]="getClassByUnits(product.units_available)"></fa-icon>
+                                        </td>
+                                        <td *ngIf="product.presentation != 'INDIVIDUAL'">
+                                            {{ product.units_available / product.units_package | number }}
+                                        </td>
+                                        <td *ngIf="product.presentation == 'INDIVIDUAL'">
+                                            0
                                         </td>
                                     </tr>
                                 </tbody>
