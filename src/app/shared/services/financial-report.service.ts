@@ -16,9 +16,31 @@ export class FinancialReportService {
     private userService: UserService
     ) {}
 
-  public getInfoByPeriodAndEnterprise$(from_date:string, to_date:string,id_enterprise:number): Observable<any> {
+  public getResultsByPeriodAndEnterprise$(from_date:string, to_date:string,id_enterprise:number): Observable<any> {
     let url = this._url + '/statement-income-by-period-and-enterprise/' + from_date + '/' + to_date + '/'+ id_enterprise.toString();
     return this.userService.validateOptionByToken('GET_STATEMENT_INCOME_REPORT').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.get<any>(url);
+        }
+      })
+    );
+  }
+
+  public getBalanceByPeriodAndEnterprise$(from_date:string, to_date:string,id_enterprise:number): Observable<any> {
+    let url = this._url + '/balance-by-period-and-enterprise/' + from_date + '/' + to_date + '/'+ id_enterprise.toString();
+    return this.userService.validateOptionByToken('GET_BALANCE_REPORT').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.get<any>(url);
+        }
+      })
+    );
+  }
+
+  public getCashFlowByDateAndEnterprise$(actual_date:string, id_enterprise:number): Observable<any> {
+    let url = this._url + '/cashflow-by-date-and-enterprise/' + actual_date + '/'+ id_enterprise.toString();
+    return this.userService.validateOptionByToken('GET_CASH_FLOW_BY_DATES_AND_ENTERPRISE_REPORT').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<any>(url);

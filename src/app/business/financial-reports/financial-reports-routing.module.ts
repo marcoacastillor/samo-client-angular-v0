@@ -13,6 +13,10 @@ const routes: Routes = [
         path: 'balance',
         loadChildren: './balance/balance.module#BalanceModule'
       },
+      {
+        path: 'cash-register',
+        loadChildren: './cash-register/cash-register.module#CashRegisterModule'
+      },
     ]
   }
 ];

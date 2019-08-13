@@ -36,6 +36,11 @@ export const environment = {
   url_laboral_condition: 'https://www.sanratsolutions.com/prd/ventas/public/laboral_condition',
   url_worker_news: 'https://www.sanratsolutions.com/prd/ventas/public/worker_news',
   url_payment_employee: 'https://www.sanratsolutions.com/prd/ventas/public/paying_employee',
+
+  url_payment_employee: 'https://www.sanratsolutions.com/prd/ventas/public/paying_employee',
+  url_preference_client: 'https://www.sanratsolutions.com/prd/ventas/public/preference_client',
+  url_sales_storage: 'https://www.sanratsolutions.com/prd/ventas/public/public/',
+  url_financial_report: 'https://www.sanratsolutions.com/prd/ventas/public/financial_report',
   */
 
 
@@ -75,6 +80,7 @@ export const environment = {
   url_payment_employee: 'http://localhost/ventasV0/public/paying_employee',
   url_preference_client: 'http://localhost/ventasV0/public/preference_client',
   url_sales_storage: 'http://localhost/ventasV0/storage/app/public/',
+  url_financial_report: 'http://localhost/ventasV0/public/financial_report',
   
   
   clearMessageDelayMs: 5000,

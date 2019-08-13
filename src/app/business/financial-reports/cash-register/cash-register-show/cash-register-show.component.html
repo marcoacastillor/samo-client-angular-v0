@@ -1,0 +1,112 @@
+<app-pages title="Arqueo de caja">  
+    <main>            
+        <section>
+            <!-- start menu main-->
+            <div class="row bg-gray">
+                <div class="col-sm-6 text-left">
+                    Ingresos y egresos de efectivo por día
+                </div>
+            </div>
+            <!-- end menu main-->
+
+            <div class="row margin-top-1rem">
+                <div class="col-sm-2 btn btn-sm" *ngFor="let date_report of lstDates" (click)="getDataByDateAndEnterprise(date_report,activeUser.fk_id_enterprise)">
+                    <div [ngClass]="getClassSelected(date_report)">
+                        <div class="card-body">
+                            <h6 class="card-title">{{ date_report }}</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- start dates form-->
+            <div class="row margin-top-1rem">
+                <!--inicia sección datos-->
+                <div class="col-sm-6" *ngIf="report">
+                    <table class="table table-sm table-striped text-big-report">
+                        <thead class="bg-secondary text-white">
+                            <tr>
+                                <td colspan="7"><h6>Ingresos de efectivo</h6></td>
+                            </tr>
+                            <tr>
+                                <th>Cuenta</th>
+                                <th>Valor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Ventas de contado</td>
+                                <td>{{ report.incomes.cash | number }}</td>
+                            </tr>
+                            <tr>
+                                <td>Pagos de cuentas a crédito</td>
+                                <td>{{ report.incomes.payment_clients | number }}</td>
+                            </tr>
+                            <tr>
+                                <td>Otras ingresos</td>
+                                <th>{{ report.incomes.other | number }}</th>
+                            </tr>
+                        </tbody>
+                        <thead>
+                            <tr>
+                                <th>Total</th>
+                                <th>{{ (report.incomes.cash + report.incomes.payment_clients + report.incomes.other) | number }}</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <!--fin sección datos-->
+
+                <div class="col-sm-6" *ngIf="report">
+                    <table class="table table-sm table-striped text-big-report">
+                        <thead class="bg-secondary text-white">
+                            <tr>
+                                <td colspan="7"><h6>Salidas de efectivo</h6></td>
+                            </tr>
+                            <tr>
+                                <th>Cuenta</th>
+                                <th>Valor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Compras a proveedores de contado</td>
+                                <td>{{ report.expenses.credit | number }}</td>
+                            </tr>
+                            <tr>
+                                <td>Pago a proveedores</td>
+                                <td>{{ report.expenses.payment_providers | number }}</td>
+                            </tr>
+                            <tr>
+                                <td>Otros gastos</td>
+                                <td>{{ report.expenses.other | number }}</td>
+                            </tr>
+                            <tr>
+                                <td>Pagos e empleados</td>
+                                <td>{{ report.expenses.employee | number }}</td>
+                            </tr>
+                        </tbody>
+                        <thead>
+                            <tr>
+                                <th>Total</th>
+                                <th>{{ (report.expenses.credit + report.expenses.payment_providers + report.expenses.other + report.expenses.employee) | number }}</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <!--fin sección datos-->
+            </div>
+            <!-- end dates form-->
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card border bg-primary text-white" >
+                        <div class="card-body text-center">
+                            <h4 class="card-title">Efectivo en caja : {{ (report.incomes.cash + report.incomes.payment_clients + report.incomes.other) - (report.expenses.credit + report.expenses.payment_providers + report.expenses.other + report.expenses.employee) | number  }}</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</app-pages>

@@ -1,1 +1,89 @@
-Balance de resultados...
+<app-pages title="Situación general">  
+    <main>            
+        <section>
+            <!-- start menu main-->
+            <div class="row bg-gray">
+                <div class="col-sm-6 text-left">
+                    Balance general
+                </div>
+                <div class="col-sm-6 text-right">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#formReport">
+                        <fa-icon [icon]="faSearch" class="text-outline-secondary mb-2 mr-1"></fa-icon>Parámetros de búsqueda..
+                    </button>
+                </div>
+            </div>
+            <!-- end menu main-->
+
+            <!-- start dates form-->
+            <div class="row margin-top-1rem">
+                <!--inicia sección datos-->
+                <div class="col-sm-6" *ngIf="report">
+                    <table class="table table-sm table-striped text-big-report">
+                        <thead class="bg-secondary text-white">
+                            <tr>
+                                <td colspan="7"><h6>Activos de la empresa entre {{ from_date | date }} a {{ to_date | date }}</h6></td>
+                            </tr>
+                            <tr>
+                                <th>Cuenta</th>
+                                <th>Valor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Cajas y bancos</td>
+                                <td>{{ report.assets.cash | number }}</td>
+                            </tr>
+                            <tr>
+                                <td>Clientes</td>
+                                <td>{{ report.assets.clients | number }}</td>
+                            </tr>
+                            <tr>
+                                <td>Otras cuentas por cobrar</td>
+                                <th>{{ report.assets.other | number }}</th>
+                            </tr>
+                            <tr>
+                                <td>Inventarios</td>
+                                <td>{{ (report.assets.stocks) | number }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!--fin sección datos-->
+
+                <div class="col-sm-6" *ngIf="report">
+                    <table class="table table-sm table-striped text-big-report">
+                        <thead class="bg-secondary text-white">
+                            <tr>
+                                <td colspan="7"><h6>Activos de la empresa entre {{ from_date | date }} a {{ to_date | date }}</h6></td>
+                            </tr>
+                            <tr>
+                                <th>Cuenta</th>
+                                <th>Valor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Proveedores</td>
+                                <td>{{ report.pasives.providers | number }}</td>
+                            </tr>
+                            <tr>
+                                <td>Bancos</td>
+                                <td>{{ report.pasives.banks | number }}</td>
+                            </tr>
+                            <tr>
+                                <td>Empleados</td>
+                                <th>{{ report.pasives.employees | number }}</th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!--fin sección datos-->
+            </div>
+            <!-- end dates form-->
+        </section>
+    </main>
+</app-pages>
+
+<app-report-form
+(findData)="getDataByPeriod($event)">
+</app-report-form>
