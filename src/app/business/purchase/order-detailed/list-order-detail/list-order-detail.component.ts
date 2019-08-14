@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
-import { faPlusCircle, faEye } from '@fortawesome/free-solid-svg-icons';
+import { faPlusCircle, faEye, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { Operation } from 'src/app/shared/models/operation';
 import { User } from 'src/app/shared/models/user';
 import { OperationService } from 'src/app/shared/services/operation.service';
@@ -13,6 +13,7 @@ import { environment } from 'src/environments/environment';
   styles: []
 })
 export class ListOrderDetailComponent implements OnInit {
+  faSearch = faSearch;
   faPlusCircle = faPlusCircle;
   faEye = faEye;
 

@@ -27,6 +27,7 @@ export class ModalLaboralConditionFormComponent implements OnInit {
 
   type_salary = environment.salary_type;
   type_contract = environment.contract_type;
+  laboral_period = environment.laboral_period;
 
   lstProducts = [];
   lastkeydown1 = 0;
@@ -69,6 +70,7 @@ export class ModalLaboralConditionFormComponent implements OnInit {
       contract_type: [this.laboralCondition.contract_type, Validators.required],
       salary_type: [this.laboralCondition.salary_type, Validators.required],
       salary: [this.laboralCondition.salary],
+      period: [this.laboralCondition.period],
       production_unit: [this.laboralCondition.production_unit],
       pk_product_unit: [this.laboralCondition.pk_product_unit],
       value_product_unit: [this.laboralCondition.value_product_unit],

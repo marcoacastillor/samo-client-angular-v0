@@ -86,6 +86,7 @@ export const environment = {
   regimen: 'REGIMEN_ENTERPRISE',
   type_worker_new: 'TYPE_WORKER_NEW',
   period_report: 'PERIOD_REPORT',
+  laboral_period: 'LABORAL_PERIOD',
 
   url_web_service: 'URL_WEB_SERVICE',
   enterprise_fact: 'ENTERPRISE_FACT',

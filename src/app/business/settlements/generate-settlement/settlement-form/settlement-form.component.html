@@ -38,6 +38,7 @@
 
                         <!-- start purchase info-->
                         <div class="col-sm-12">
+                            {{ selectedPeriod | json }}
 
                             <!-- start info options-->
                             <div class="row back-colo-f6" *ngIf="selectedPeriod">
@@ -48,7 +49,7 @@
                                                 <fa-icon [icon]="faFileInvoiceDollar" class="text-outline-secondary mb-2 mr-1"></fa-icon>Liquidación
                                             </button>
                                             <div class="dropdown-menu" aria-labelledby="settlement">
-                                                <button *ngIf="selectedPeriod.state === 'Abierto'" (click)="generateAllSettlement()" class="dropdown-item text-small text-secondary"  type="button">
+                                                <button *ngIf="selectedPeriod.state != 'Liquidado'" (click)="generateAllSettlement()" class="dropdown-item text-small text-secondary"  type="button">
                                                     <fa-icon [icon]="faCalculator" class="text-outline-secondary mb-2 mr-1"></fa-icon>Calcular
                                                 </button>
                                                 <div class="dropdown-divider"></div>

@@ -106,6 +106,10 @@
                                                 <th>Precio de venta paquete</th>
                                                 <td>{{ product.sale_price_package | number }}</td>
                                             </tr>
+                                            <tr>
+                                                <th>Precio de compra por unidad</th>
+                                                <td>{{ product.cost_price | number }}</td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -345,10 +349,7 @@
                         <!-- end purchase info-->
                     </div>
                     <!-- end main info-->
-                    <pre>
-                        {{ operationForm.value | json  }}
-                    </pre>
-                    
+                   
                     <!--start buttons form-->
                     <div class="row justify-content-end">
                         <div class="col-sm-4 text-right align-self-end">

@@ -38,9 +38,8 @@
 
                         <!-- start purchase info-->
                         <div class="col-sm-12">
-
                             <!-- start info options-->
-                            <div class="row back-colo-f6" *ngIf="selectedPeriod.state != 'Pagado'">
+                            <div class="row back-colo-f6">
                                 <div class="col-sm-12 text-left align-self-start">
                                     <div class="btn-group btn-group-sm">
                                         <div class="dropdown">
@@ -48,7 +47,7 @@
                                                 <fa-icon [icon]="faFileInvoiceDollar" class="text-outline-secondary mb-2 mr-1"></fa-icon>Liquidación
                                             </button>
                                             <div class="dropdown-menu" aria-labelledby="settlement">
-                                                <button (click)="generateAllSettlement()" *ngIf="selectedPeriod.state === 'Abierto'" class="dropdown-item text-small text-secondary"  type="button">
+                                                <button (click)="generateAllSettlement()" *ngIf="selectedPeriod.state != 'Pagado'" class="dropdown-item text-small text-secondary"  type="button">
                                                     <fa-icon [icon]="faCalculator" class="text-outline-secondary mb-2 mr-1"></fa-icon>Calcular
                                                 </button>
                                                 <div class="dropdown-divider"></div>

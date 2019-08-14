@@ -86,17 +86,25 @@
                                     </div>
 
                                     <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <label for="amount_use_product">Cantidad del producto</label>
-                                            <input type="number" class="form-control text-small" placeholder="Cantidad" formControlName="amount_use_product" required>
+                                        <label for="amount_use_product">Cant {{ selectedPresentation }}</label>
+                                        <div class="input-group-prepend">
+                                            <a *ngIf="product.presentation != 'INDIVIDUAL'" (click)="setPackageByProduct()" type="button" class="btn btn-sm btn-outline-primary">
+                                                <fa-icon [icon]="faArchive" class="text-primary mb-2 mr-1" title="seleccionar unidades"></fa-icon>
+                                            </a>
+                                            <a *ngIf="product.presentation != 'INDIVIDUAL'" (click)="setUnitsByProduct()" type="button" class="btn btn-sm btn-outline-primary">
+                                                <fa-icon [icon]="faUnderline" class="text-primary mb-2 mr-1" title="seleccionar unidades"></fa-icon>
+                                            </a>
+                                            <input type="number" #amount_use_product class="form-control form-control-sm with-sm" aria-describedby="unidadesHelp" formControlName="amount_use_product">
                                             <small class="text-danger" *ngIf="hasError('amount_use_product','required')">
                                                 El campo es obligatorio
                                             </small>
                                             <small class="text-danger" *ngIf="hasError('amount_use_product','max')">
                                                 Valor no puede ser mayor a <strong>{{ this.getErrors('amount_use_product').max.max | number }}</strong>
                                             </small>
-                                        </div>
+                                        </div>                                            
                                     </div>
+                                    
+
                                 </div>
                             </div>
                         </div>

@@ -328,7 +328,7 @@
                                                         <a *ngIf="product.presentation != 'INDIVIDUAL'" (click)="setUnitsByProduct()" type="button" class="btn btn-sm btn-outline-primary">
                                                             <fa-icon [icon]="faUnderline" class="text-primary mb-2 mr-1" title="seleccionar unidades"></fa-icon>
                                                         </a>
-                                                        <input type="number" #number_units class="form-control form-control-sm" aria-describedby="unidadesHelp" formControlName="number_units">
+                                                        <input type="number" #number_units class="form-control form-control-sm with-sm" aria-describedby="unidadesHelp" formControlName="number_units">
                                                     </div>                                            
                                                 </div>
                                                 <div class="col-sm-3">
@@ -433,7 +433,7 @@
                                                 <fa-icon [icon]="faSave" class="text-outline-secondary mb-2 mr-1"></fa-icon>Guardar
                                             </button>
                                             <button type="submit" (click)="saveProductAndPrint()" [disabled]="operationForm.invalid || (operationForm.value.products_list).length == 0" class="btn btn-sm btn-outline-primary" type="button">
-                                                <fa-icon [icon]="faSave" class="text-outline-secondary mb-2 mr-1"></fa-icon>Guardar e imprimir
+                                                <fa-icon [icon]="faSave" class="text-outline-secondary mb-2 mr-1"></fa-icon>Imprimir
                                             </button>
                                         </div>
                                     </div>

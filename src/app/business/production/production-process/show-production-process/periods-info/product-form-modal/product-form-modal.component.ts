@@ -6,7 +6,7 @@ import { DetailProductInput } from 'src/app/shared/models/detail-product-input';
 import { Product } from 'src/app/shared/models/product';
 import { environment } from 'src/environments/environment';
 import { ProductService } from 'src/app/shared/services/product.service';
-import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import { faCheckCircle, faArchive, faUnderline } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-product-form-modal',
@@ -15,6 +15,10 @@ import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 })
 export class ProductFormModalComponent implements OnInit, OnChanges {
   faCheckCircle = faCheckCircle;
+  faArchive = faArchive;
+  faUnderline = faUnderline;
+
+  selectedPresentation = '';
   
   detailProductForm: FormGroup;
   lstProductsNames: Product[] = [];
@@ -85,15 +89,45 @@ export class ProductFormModalComponent implements OnInit, OnChanges {
       fk_id_product: product.pk_id_product,
       code_product: product.code,
       name_product: product.name,
+      presentation: product.presentation
     });
 
     if(this.product.type_product == 'Producto Insumo'){
-      this.initUpdForm(this.product.units_available);
+      if(this.selectedPresentation == 'INDIVIDUAL'){
+        this.initUpdForm(this.product.units_available);
+      }else{
+        this.initUpdForm(this.product.units_available/this.product.units_package);
+      }
     }
     else{
       this.initUpdForm(1000);
     }
-    
+  }
+
+  public setUnitsByProduct(){
+    this.selectedPresentation = 'INDIVIDUAL';
+    if(this.product.type_product == 'Producto Insumo'){
+      this.initUpdForm(this.product.units_available);
+    }
+
+    this.detailProductForm.patchValue({
+      code_product: this.product.code,
+      name_product: this.product.name,
+      presentation: 'INDIVIDUAL'
+    });
+  }
+
+  public setPackageByProduct(){
+    this.selectedPresentation = 'PAQUETE';
+    if(this.product.type_product == 'Producto Insumo'){
+      this.initUpdForm(this.product.units_available/this.product.units_package);
+    }
+
+    this.detailProductForm.patchValue({
+      code_product: this.product.code,
+      name_product: this.product.name,
+      presentation: 'PAQUETE',
+    });
   }
 
   create(){
@@ -114,6 +148,7 @@ export class ProductFormModalComponent implements OnInit, OnChanges {
       fk_id_product: [this.product.pk_id_product, Validators.required],
       code_product:[this.product.code],
       name_product:[this.product.name],
+      presentation: [this.product.presentation],
       amount_use_product: [0,[Validators.required, Validators.max(units)]],
     });
   }

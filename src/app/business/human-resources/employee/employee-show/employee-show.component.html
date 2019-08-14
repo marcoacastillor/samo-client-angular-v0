@@ -175,7 +175,11 @@
                                                     </tr>
                                                     <tr *ngIf="laboralCondition.salary_type == 'FIJO'">
                                                         <th>Salario</th>
-                                                        <td>$ {{ laboralCondition.salary | json }}</td>
+                                                        <td>$ {{ laboralCondition.salary | number }}</td>
+                                                    </tr>
+                                                    <tr *ngIf="laboralCondition.salary_type == 'FIJO'">
+                                                        <th>Período de corte</th>
+                                                        <td>{{ laboralCondition.payment_period  }} Días</td>
                                                     </tr>
                                                     <tr *ngIf="laboralCondition.salary_type != 'FIJO'">
                                                         <th>Unidad productiva</th>

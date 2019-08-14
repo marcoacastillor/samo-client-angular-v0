@@ -4,7 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { User } from 'src/app/shared/models/user';
 import { GlobalStoreService } from 'src/app/core/services/global-store.service';
 import { ParameterService } from 'src/app/shared/services/parameter.service';
-import { environment } from 'src/environments/environment.prod';
+import { environment } from 'src/environments/environment';
 import { Parameter } from 'src/app/shared/models/parameter';
 import { FormToolsService } from 'src/app/shared/services/form-tools.service';
 import { Position } from 'src/app/shared/models/position';
@@ -34,8 +34,9 @@ export class EmployeeFormComponent implements OnInit {
   type_id = environment.type_ids;
   type_salary = environment.salary_type;
   type_contract = environment.contract_type;
+  laboral_period = environment.laboral_period;
 
-  categories      = {'categories' : [this.type_id,this.type_salary,this.type_contract]};
+  categories      = {'categories' : [this.type_id,this.type_salary,this.type_contract,this.laboral_period]};
   
   activeUser: User = new User;
   parametersList: Parameter[] = [];
@@ -98,6 +99,7 @@ export class EmployeeFormComponent implements OnInit {
         contract_type: ['', Validators.required],
         salary_type: ['', Validators.required],
         salary: [''],
+        period: [''],
         production_unit: [''],
         pk_product_unit: [''],
         value_product_unit: [''],

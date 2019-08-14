@@ -4,6 +4,7 @@ export class LaboralCondition {
     public contract_type: string;
     public salary_type: string;
     public salary: number;
+    public period: number;
     public production_unit: number;
     public pk_product_unit: number;
     public value_product_unit: number;

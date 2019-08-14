@@ -48,8 +48,9 @@ export class EmployeeShowComponent implements OnInit {
   type_salary       = environment.salary_type;
   type_contract     = environment.contract_type;
   type_worker_new   = environment.type_worker_new;
+  laboral_period    = environment.laboral_period;
 
-  categories      = {'categories' : [this.type_salary,this.type_contract]};
+  categories      = {'categories' : [this.type_salary,this.type_contract,this.laboral_period]};
   categories_news = {'categories' : [this.type_worker_new]};
 
   positionsList: Position[] = [];

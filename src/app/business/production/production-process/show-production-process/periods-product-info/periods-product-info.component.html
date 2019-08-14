@@ -14,7 +14,7 @@
                 <tbody>
                     <tr *ngFor="let prd of productLst">
                         <td>
-                            <button *ngIf="stateProduction === 'Activo'" type="button" (click)="selectDetailProductInput(prd)" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#deleteDetailProductInputPrd">
+                            <button *ngIf="prd.state === 'Abierto'" type="button" (click)="selectDetailProductInput(prd)" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#deleteDetailProductInputPrd">
                                 <fa-icon [icon]="faTrash" class="text-outline-danger mb-2 mr-1"></fa-icon>
                             </button>
                         </td>
