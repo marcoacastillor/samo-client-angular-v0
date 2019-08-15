@@ -29,6 +29,7 @@ export class MainProductionProcessComponent implements OnInit {
   dataProductProducts:  DetailProductInput[] = [];
   dataProductInputs: DetailProductInput[] = [];
   dataProductIntermediaty: DetailProductInput[] = [];
+  state = '';
 
   constructor(
     private productionProcessService: ProductionProcessService,
@@ -72,6 +73,7 @@ export class MainProductionProcessComponent implements OnInit {
         this.dataProductInputs = dataProduct.inputs;
         this.dataProductProducts = dataProduct.products;
         this.dataProductIntermediaty = dataProduct.intermediaty;
+        this.state  = dataProduct.state;
       }
     )
   }

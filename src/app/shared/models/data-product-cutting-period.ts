@@ -4,4 +4,5 @@ export class DataProductCuttingPeriod {
     public products: DetailProductInput[];
     public inputs: DetailProductInput[];
     public intermediaty: DetailProductInput[];
+    public state: string;
 }

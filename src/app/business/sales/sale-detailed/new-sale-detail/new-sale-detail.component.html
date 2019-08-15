@@ -356,7 +356,7 @@
                                     <div class="row margin-top-2rem">
                                         <div class="form-group col-sm-3">
                                             <label for="payment_type">Tipo de pago</label>
-                                            <select class="form-control form-control-sm" (change)="updateValuePayment()" formControlName="payment_type">
+                                            <select class="form-control form-control-sm" (change)="updatePaymentValue()" formControlName="payment_type">
                                                 <option value="" selected>Seleccione...</option>
                                                 <option *ngFor="let param of lstParams[type_payment]" value="{{param.value}}">{{ param.name }}</option>
                                             </select>

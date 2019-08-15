@@ -15,7 +15,7 @@ export class ShowProductionProcessComponent implements OnInit {
   @Input() public productionProcess: ProductionProcess;
   @Input() public cuttingPeriodList: CuttingPeriod[];
   
-  //@Input() public dataProduct: DataProductCuttingPeriod[];
+  @Input() public state: string;
   
   @Input() public dataProductInputs:DetailProductInput[] = [];
   @Input() public dataProductProducts: DetailProductInput[] = [];

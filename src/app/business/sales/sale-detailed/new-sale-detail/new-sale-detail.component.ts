@@ -474,10 +474,15 @@ export class NewSaleDetailComponent implements OnInit {
     this.product = new Product();
   }
 
-  public updateValuePayment(){
+  updatePaymentValue(){
     if(this.operationForm.value.payment_type != environment.efecty_payment){
       this.operationForm.patchValue({
         value_payment: 0
+      });
+    }
+    else{
+      this.operationForm.patchValue({
+        value_payment: Math.round(this.operationForm.value.total_operation - this.operationForm.value.total_discounts)
       });
     }
   }

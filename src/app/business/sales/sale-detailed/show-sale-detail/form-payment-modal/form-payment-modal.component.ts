@@ -40,7 +40,7 @@ export class FormPaymentModalComponent implements OnInit {
   private initForm(){
     this.paymentForm = this.fb.group({
       fk_id_operation: [this.operation.pk_id_operation],
-      value_payment: [this.operation.total_operation - (this.operation.total_discounts + this.operation.total_pays),[Validators.required,Validators.max(this.operation.total_operation - (this.operation.total_discounts + this.operation.total_pays))]],
+      value_payment: [0,[Validators.required,Validators.max(this.operation.total_operation - (this.operation.total_discounts + this.operation.total_pays))]],
       value_received: [0]
     })
   }

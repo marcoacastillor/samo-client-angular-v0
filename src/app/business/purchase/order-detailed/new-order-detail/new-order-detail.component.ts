@@ -343,6 +343,19 @@ export class NewOrderDetailComponent implements OnInit {
     this.product = new Product();
   }
 
+  updatePaymentValue(){
+    if(this.operationForm.value.payment_type != 'Efectivo'){
+      this.operationForm.patchValue({
+        value_payment: 0
+      });
+    }
+    else{
+      this.operationForm.patchValue({
+        value_payment: Math.round(this.operationForm.value.total_operation - this.operationForm.value.total_discounts)
+      });
+    }
+  }
+
   saveProduct(){
     this.operationService.storeOperation$(this.operationForm.value)
     .pipe(
