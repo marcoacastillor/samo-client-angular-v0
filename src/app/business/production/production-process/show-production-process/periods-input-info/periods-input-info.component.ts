@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
 import { DetailProductInput } from 'src/app/shared/models/detail-product-input';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
@@ -13,12 +13,32 @@ export class PeriodsInputInfoComponent implements OnInit {
 
   @Input() public inputsProductLst: DetailProductInput[];
   @Input() public stateProduction: string;
+  @Input() public stateProcess: string;
   
   @Output() public onDeleteDetail = new EventEmitter<Number>();
   
   constructor() { }
 
   ngOnInit() {
+  }
+
+  ngOnChanges(changes: SimpleChanges)
+  {
+    if(changes.stateProduction)
+    {
+      if(changes.stateProduction.currentValue != changes.stateProduction.previousValue)
+      {
+        this.stateProduction = changes.stateProduction.currentValue;
+      }
+    }
+
+    if(changes.stateProcess)
+    {
+      if(changes.stateProcess.currentValue != changes.stateProcess.previousValue)
+      {
+        this.stateProcess = changes.stateProcess.currentValue;
+      }
+    }
   }
 
   selectDetailProductInput(detailProductInput: DetailProductInput){

@@ -20,7 +20,7 @@
                                 <label for="regimen">Régimen contable</label>
                                 <select class="form-control form-control-sm" formControlName="regimen" required>
                                     <option value="" selected>Seleccione...</option>
-                                    <option *ngFor="let param of parameterList" value="{{param.value}}">{{ param.name }}</option>
+                                    <option *ngFor="let param of parameterList[regimen]" value="{{param.value}}">{{ param.name }}</option>
                                 </select>
                                 <small *ngIf="mustShowError('regimen')" class="form-text alert-danger">
                                     Régimen, es obligatorio
@@ -49,6 +49,16 @@
                                 <input type="text" class="form-control form-control-sm"  formControlName="address" required>
                                 <small *ngIf="mustShowError('address')" class="form-text alert-danger">
                                     Dirección, es obligatorio
+                                </small>
+                            </div>
+                            <div class="form-group col-sm-4">
+                                <label for="size">Tamaño empresa</label>
+                                <select class="form-control form-control-sm" formControlName="size" required>
+                                    <option value="" selected>Seleccione...</option>
+                                    <option *ngFor="let param of parameterList[sizes]" value="{{param.value}}">{{ param.name }}</option>
+                                </select>
+                                <small *ngIf="mustShowError('size')" class="form-text alert-danger">
+                                    Régimen, es obligatorio
                                 </small>
                             </div>
                         </div>

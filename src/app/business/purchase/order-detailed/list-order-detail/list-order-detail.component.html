@@ -18,47 +18,50 @@
 
             <!--inicio buscador de productos -->
             <div class="row margin-top-1rem">
-                    <div class="col-sm-12 text-ultra-small">
-                        <div class="accordion" id="accordionExample">
-                            <div class="card">
-                                <div class="row" id="headingOne">
-                                    <div class="col-sm-8">
-                                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                            <fa-icon [icon]="faSearch" class="text-outline-primary mb-2 mr-1"></fa-icon>Buscador de facturas
-                                        </button>
-                                    </div>                
-                                    <div class="col-sm-4 text-right">
-                                        <button class="btn btn-link" (click)=loadAllProductsByEnterprise(user.fk_id_enterprise) type="button" data-toggle="collapse" aria-expanded="true" aria-controls="collapseOne">
-                                            <fa-icon [icon]="faSearch" class="text-outline-primary mb-2 mr-1"></fa-icon>Cargar por defecto
-                                        </button>
-                                    </div>                
-                                </div>
-                                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-sm-4">
-                                                <input id="codeProduct" (keypress)="onFindProductByCode($event)" class="form-control form-control-sm" type="text" placeholder="Digite Código de barras">
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <input id="nameProduct" (keypress)="onFindProductByName($event)" class="form-control form-control-sm" type="text" placeholder="Digite Nombre de producto">
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <input id="referenceProduct" (keypress)="onFindProductByReference($event)" class="form-control form-control-sm" type="text" placeholder="Digite Referencia de producto">
-                                            </div>
+                <div class="col-sm-12 text-ultra-small">
+                    <div class="accordion" id="accordionExample">
+                        <div class="card">
+                            <div class="row" id="headingOne">
+                                <div class="col-sm-8">
+                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        <fa-icon [icon]="faSearch" class="text-outline-primary mb-2 mr-1"></fa-icon>Buscador de facturas
+                                    </button>
+                                </div>                
+                                <div class="col-sm-4 text-right">
+                                    <button class="btn btn-link" (click)=getOrdersByEnterprise(activeUser.fk_id_enterprise) type="button" data-toggle="collapse" aria-expanded="true" aria-controls="collapseOne">
+                                        <fa-icon [icon]="faSearch" class="text-outline-primary mb-2 mr-1"></fa-icon>Cargar por defecto
+                                    </button>
+                                </div>                
+                            </div>
+                            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <input id="numberInvoice" (keypress)="onFindOderByNumberInvoice($event)" class="form-control form-control-sm" type="text" placeholder="Número de factura">
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <input id="nameProvider" (keypress)="onFindOderByProvider($event)" class="form-control form-control-sm" type="text" placeholder="Nombre de proveedor">
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <input id="dateOperation" (keypress)="onFindOrderByDate($event)" class="form-control form-control-sm" type="text" placeholder="Digite fecha de compra">
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <input id="paymentType" (keypress)="onFindOrderByPaymentType($event)" class="form-control form-control-sm" type="text" placeholder="Tipo de pago">
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-    
-                    <div class="col-sm-12 text-ultra-small">
-                        <p class="alert alert-info">
-                            Se muestra un listado de los 20 últimos registros. Para obtener otros productos, utilice el buscador.
-                        </p>
-                    </div>
                 </div>
-                <!--fin buscador de productos -->
+
+                <div class="col-sm-12 text-ultra-small">
+                    <p class="alert alert-info">
+                        Se muestra un listado de los 20 últimos registros. Para obtener otros productos, utilice el buscador.
+                    </p>
+                </div>
+            </div>
+            <!--fin buscador de productos -->
 
 
             <!-- start content -->

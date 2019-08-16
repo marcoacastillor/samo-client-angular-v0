@@ -77,6 +77,54 @@ export class OperationService {
     );
   }
 
+  public getByNameProviderAndTypeAndEnterprise$(nameProvider:string,type:string,id_enterprise:number): Observable<Operation[]> {
+    let url = this._url + '/get-by-providername-and-type-and-enterprise/' + nameProvider + '/' + type + '/' + id_enterprise.toString() ;
+    return this.userService.validateOptionByToken('OPE_GET_PROVIDERNAME_AND_TYPE_AND_ENTERPRISE').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.get<Operation[]>(url);
+        }
+      })
+    );
+  }
+
+  public getByDateOperationAndTypeAndEnterprise$(date_operation:string,type:string,id_enterprise:number): Observable<Operation[]> {
+    let url = this._url + '/get-by-date-and-type-and-enterprise/' + date_operation + '/' + type + '/' + id_enterprise.toString() ;
+    return this.userService.validateOptionByToken('OPE_GET_DATEOPERATION_AND_TYPE_AND_ENTERPRISE').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.get<Operation[]>(url);
+        }
+      })
+    );
+  }
+
+  public getByPaymentTypeAndTypeAndEnterprise$(payment_type:string,type:string,id_enterprise:number): Observable<Operation[]> {
+    let url = this._url + '/get-by-paymenttype-and-type-and-enterprise/' + payment_type + '/' + type + '/' + id_enterprise.toString() ;
+    return this.userService.validateOptionByToken('OPE_GET_PAYMENTTYPE_AND_TYPE_AND_ENTERPRISE').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.get<Operation[]>(url);
+        }
+      })
+    );
+  }
+
+  public getByNumberInvoiceTypeAndTypeAndEnterprise$(number_invoice:string,type:string,id_enterprise:number): Observable<Operation[]> {
+    let url = this._url + '/get-by-numberinvoice-and-type-and-enterprise/' + number_invoice + '/' + type + '/' + id_enterprise.toString() ;
+    return this.userService.validateOptionByToken('OPE_GET_NUMBERINVOICE_AND_TYPE_AND_ENTERPRISE').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.get<Operation[]>(url);
+        }
+      })
+    );
+  }
+
+
+
+  
+
   public storeOperation$(operation: Operation): Observable<Operation> {
     let url = this._url + '/create-operation';
     return this.userService.validateOptionByToken('OPE_OPERATION_CRT').pipe(

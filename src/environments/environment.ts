@@ -16,6 +16,7 @@ export const environment = {
   url_storage: 'http://localhost/usuariosV0/storage/app/public/',
   url_ventas_storage: 'http://localhost/ventasV0/storage/app/public/',
   url_type_service: 'http://localhost/usuariosV0/public/type-service',
+  url_service_enterprise: 'http://localhost/usuariosV0/public/service-enterprise',
   url_parameter_config: 'http://localhost/usuariosV0/public/parameter_config',
   url_refresh_users: 'http://localhost/usuariosV0/public/clear',
   
@@ -124,6 +125,7 @@ export const environment = {
   laboral_state_inactive: 'Inactivo',
 
   cutting_active_state: 'Abierto',
+  state_service: 'STATE_SERVICE',
 
   
 };

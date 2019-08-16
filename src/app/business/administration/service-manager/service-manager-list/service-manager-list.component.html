@@ -1,0 +1,55 @@
+<app-pages title="Gestión de clientes del servicio">  
+    <main>            
+        <section>
+            <!-- start menu main-->
+            <div class="row bg-gray">
+                <div class="col-sm-6 text-left">
+                    Empresas clientes
+                </div>
+                <div class="col-sm-6 text-right">
+                    <div class="btn-group btn-group-sm">
+                        <a routerLink='../create/new' type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal">
+                            <fa-icon [icon]="faPlusCircle" class="text-outline-primary mb-2 mr-1"></fa-icon>Crear
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- end menu main-->
+
+            <!-- start content -->
+            <div class="row margin-top-1rem">
+                <div class="col-sm-12">
+                    <table class="table table-sm table-striped">
+                        <thead class="bg-secondary text-white">
+                            <tr>
+                                <th>Acciones</th>
+                                <th>Empresa</th>
+                                <th>Servicio</th>
+                                <th>Fecha de inicio</th>
+                                <th>Fecha de fin</th>
+                                <th>Días contratados</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let client of lstClients">
+                                <td>
+                                    <a routerLink='../show/{{client.pk_id_service_enterprise}}' class="btn text-ultra-small btn-sm btn-outline-primary" type="button">
+                                        <fa-icon [icon]="faEye" class="text-outline-secondary mb-2 mr-1"></fa-icon>Ver detalle
+                                    </a>
+                                </td>
+                                <td>{{ client.reference_enterprise }}</td>
+                                <td>{{ client.code_service }}</td>
+                                <td>{{ client.date_init_service | date }}</td>
+                                <td>{{ client.date_end_service | date }}</td>
+                                <td>{{ client.days_service | number }}</td>
+                                <td>{{ client.state_service }}</td>
+                            </tr>
+                        </tbody>
+                    </table>  
+                </div>
+            </div>
+            <!-- end content -->
+        </section>
+    </main>
+</app-pages>

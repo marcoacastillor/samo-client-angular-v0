@@ -146,6 +146,7 @@ export class MainUserComponent implements OnInit {
     if(user.pk_id_user)
     {
       this.user = user;
+      this.onGetEmployees(user.fk_id_enterprise);
     }
     else
     {  

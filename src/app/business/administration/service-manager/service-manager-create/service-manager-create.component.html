@@ -1,0 +1,176 @@
+<app-pages title="Gestión de clientes">  
+    <main>            
+        <section>
+            <!-- start menu main-->
+            <div class="row bg-gray">
+                <div class="col-sm-6 text-left">
+                    Cliente empresarial
+                </div>
+                <div class="col-sm-6 text-right">
+                    <div class="btn-group btn-group-sm">
+                        <a routerLink='../../list' class="btn text-ultra-small btn-sm btn-outline-primary" type="button">
+                            <fa-icon [icon]="faThList" class="text-outline-secondary mb-2 mr-1"></fa-icon>Ver todos
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- end menu main-->
+
+            <!-- start content -->
+            <div class="row margin-top-1rem">
+                <div class="col-sm-12">
+
+                    <!-- start info options-->
+                    <div class="row" *ngIf="success">
+                        <div class="col-sm-12">
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>Éxito</strong> {{ message }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end info options-->
+
+                    <!-- start main info-->
+                    <form [formGroup]="serviceEnterpriseForm">
+                        <div class="row">
+                            <!--end información de servicio-->
+                            <div class="col-sm-8">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h6>Servicio a contratar</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="form-group col-sm-6">
+                                                <label for="reference_enterprise">Empresa</label>
+                                                <select (change)="loadServiceByEnterprise()" id="enterpriseSelected" class="form-control form-control-sm" formControlName="reference_enterprise" required>
+                                                    <option value="" selected>Seleccione...</option>
+                                                    <option *ngFor="let enterprise of enterpriseList" value="{{enterprise.pk_id_enterprise}}:{{ enterprise.name }} {{ enterprise.last_names}}: {{ enterprise.size}}">{{ enterprise.name }} {{ enterprise.last_names}}</option>
+                                                </select>
+                                                <small class="form-text alert-info">
+                                                    Empresa que contrata el servicio del sistema
+                                                </small>
+                                                <small *ngIf="mustShowError('reference_enterprise')" class="form-text alert-danger">
+                                                    Tipo de servicio, es obligatorio
+                                                </small>
+                                            </div>
+                                            <div class="form-group col-sm-6">
+                                                <label for="type_service">Tipo Id</label>
+                                                <select (change)="onFindValuesByService()" id="typeServiceSelected" class="form-control form-control-sm" formControlName="type_service" required>
+                                                    <option value="" selected>Seleccione...</option>
+                                                    <option *ngFor="let service of servicesList; let i = index" value="{{i}}">{{ service.code_service }}</option>
+                                                </select>
+                                                <small *ngIf="mustShowError('type_service')" class="form-text alert-danger">
+                                                    Tipo de servicio, es obligatorio
+                                                </small>
+                                            </div>
+                                        </div>
+
+                                        <pre>
+                                            {{ serviceEnterpriseForm.value | json }}
+                                        </pre>
+                                        <pre>
+                                            {{ serviceSelected | json }}
+                                        </pre>
+
+                                        <div class="row">
+                                            <div class="form-group col-sm-6">
+                                                <label for="date_init_service">Fecha inicial</label>
+                                                <div class="input-group mb-3">
+                                                    <div class="input-group-prepend">
+                                                        <span class="btn text-small btn-sm btn-outline-primary" [owlDateTimeTrigger]="date_init"><fa-icon [icon]="faCalendar" class="text-primary"></fa-icon></span>
+                                                    </div>
+                                                    <input type="text" class="form-control text-small" placeholder="Fecha inicial" formControlName="date_init_service" [owlDateTime]="date_init">
+                                                    <owl-date-time [pickerType]="'calendar'" #date_init></owl-date-time>
+                                                    <small *ngIf="mustShowError('date_init_service')" class="form-text alert-danger">
+                                                        Fecha inicial, es obligatorio
+                                                    </small>
+                                                </div>        
+                                            </div>
+                                            <div class="form-group col-sm-6">
+                                                <label for="days_service">Días contratados</label>
+                                                <input readonly type="text" class="form-control form-control-sm"  formControlName="days_service">
+                                            </div>
+                                            <div class="form-group col-sm-6">
+                                                <label for="state_service">Estado del servicio</label>
+                                                <select class="form-control form-control-sm" formControlName="state_service" required>
+                                                    <option value="" selected>Seleccione...</option>
+                                                    <option *ngFor="let state of stateList" value="{{ state.value}}">{{ state.name }}</option>
+                                                </select>
+                                                <small *ngIf="mustShowError('state_service')" class="form-text alert-danger">
+                                                    Estado de servicio, es obligatorio
+                                                </small>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="form-group col-sm-12">
+                                                <label for="observation">Observaciones</label>
+                                                <textarea class="form-control" id="observation" rows="3" formControlName="observation"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> 
+                            </div>
+                            <!--end información de servicio-->
+
+                            <!-- información de tipo de servicio-->
+                            <div class="col-sm-4">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h6>Detalle del servicio a contratar</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <table class="table table-sm table-striped">
+                                                    <tr>
+                                                        <th>Código servicio</th>
+                                                        <td>{{ serviceSelected.code_service }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Tipo de empresa</th>
+                                                        <td>{{ serviceSelected.type_enterprise }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Modo de prestación</th>
+                                                        <td>{{ serviceSelected.mode_service }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Tipo de servicio</th>
+                                                        <td>{{ serviceSelected.type_service }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Valor</th>
+                                                        <td>{{ serviceSelected.value_service | number }}</td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--fin información de tipo de servicio-->
+                        </div>
+
+                        <!--start buttons form-->
+                        <div class="row justify-content-end margin-top-2rem">
+                            <div class="col-sm-4 text-right align-self-end">
+                                <button type="submit" (click)="saveServiceEnterprise()" [disabled]="serviceEnterpriseForm.invalid" class="btn btn-sm btn-outline-primary" type="button">
+                                    <fa-icon [icon]="faSave" class="text-outline-secondary mb-2 mr-1"></fa-icon>Guardar
+                                </button>
+                            </div>
+                        </div>
+                        <!--end buttons form-->
+
+                    </form>
+                    <!-- end main info-->
+                </div>
+            </div>
+            <!-- end content -->
+        </section>
+    </main>
+</app-pages>

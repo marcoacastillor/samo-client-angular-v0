@@ -28,6 +28,17 @@ export class TypeServiceService {
     );
   }
 
+  public getBySizes$(size:string): Observable<TypeService[]> {
+    let url = this._url + '/get-by-sizes-enterprise/' + size.trim();
+    return this.userService.validateOptionByToken('TYPE_SERVICE_GET_BY_SIZE').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.get<TypeService[]>(url);
+        }
+      })
+    );
+  }
+
   public store$(typService: TypeService): Observable<TypeService> {
     return this.userService.validateOptionByToken('TYPE_SERVICE_CRT').pipe(
       switchMap(validate => {

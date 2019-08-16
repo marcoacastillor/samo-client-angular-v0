@@ -34,11 +34,8 @@ import { ListOptionComponent } from './options/list-option/list-option.component
 import { NewOptionComponent } from './options/new-option/new-option.component';
 import { ModalAsignOptionComponent } from './modules/show-module/modal-asign-option/modal-asign-option.component';
 import { AsignOptionComponent } from './modules/show-module/asign-option/asign-option.component';
-import { ShowServiceManageComponent } from './service-manage/show-service-manage/show-service-manage.component';
-import { NewServiceManageComponent } from './service-manage/new-service-manage/new-service-manage.component';
 import { ServiceEnterpriseService } from 'src/app/shared/services/service-enterprise.service';
 import { PositionService } from 'src/app/shared/services/position.service';
-import { ListServiceManageComponent } from './service-manage/list-service-manage/list-service-manage.component';
 
 @NgModule({
   imports: [
@@ -53,7 +50,7 @@ import { ListServiceManageComponent } from './service-manage/list-service-manage
   declarations: [
     MainUserComponent, ShowUserComponent, ListUserComponent, NewUserComponent, 
     MainRolComponent, ShowRolComponent, ListRolComponent, NewRolComponent, 
-    MainModuleComponent, ListModuleComponent, NewModuleComponent, ShowModuleComponent, NewComponentComponent, NewOptionComponent, ModalComponentComponent, MainOptionComponent, ListOptionComponent, ModalAsignOptionComponent, AsignOptionComponent, ShowServiceManageComponent, NewServiceManageComponent, ListServiceManageComponent
+    MainModuleComponent, ListModuleComponent, NewModuleComponent, ShowModuleComponent, NewComponentComponent, NewOptionComponent, ModalComponentComponent, MainOptionComponent, ListOptionComponent, ModalAsignOptionComponent, AsignOptionComponent
   ],
   providers: [ EnterpriseService, UserService, RolService, UtilsService, PersonService, ModuleService, ParameterService, ComponentService, OptionService, ServiceEnterpriseService, PositionService ]
 })

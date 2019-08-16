@@ -160,6 +160,31 @@ export class ProductService {
     );
   }
 
+  /**
+   * 
+   */
+  public getByCodeFilterAndTypeINProduction$(codeProduct: string): Observable<Product[]> {
+    let url = this._url + '/get-by-code-filter-and-type-inproduction/' + codeProduct;
+    return this.userService.validateOptionByToken('PRD_GET_BY_CODEFILTER_AND_TYPE_INPRODUCTION').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.get<Product[]>(url);
+        }
+      })
+    );
+  }
+
+  public getByNameFilterAndTypeINProduction$(nameProduct: string): Observable<Product[]> {
+    let url = this._url + '/get-by-name-filter-and-type-inproduction/' + nameProduct;
+    return this.userService.validateOptionByToken('PRD_GET_BY_NAMEFILTER_AND_TYPE_INPRODUCTION').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.get<Product[]>(url);
+        }
+      })
+    );
+  }
+
   public store$(product: Product): Observable<Product> {
     return this.userService.validateOptionByToken('PRD_CRT').pipe(
       switchMap(validate => {

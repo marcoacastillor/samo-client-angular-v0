@@ -43,6 +43,7 @@
                         <app-periods-product-info
                         [productLst]="dataProductProducts"
                         [stateProduction]="state"
+                        [stateProcess]="productionProcess.state"
                         (onDeleteDetail)="onDeleteDetail($event)"
                         ></app-periods-product-info>
                     </div>
@@ -50,6 +51,7 @@
                         <app-periods-intermediaty-info
                         [productLst]="dataProductIntermediaty"
                         [stateProduction]="state"
+                        [stateProcess]="productionProcess.state"
                         (onDeleteDetail)="onDeleteDetail($event)"
                         ></app-periods-intermediaty-info>
                     </div>
@@ -57,6 +59,7 @@
                         <app-periods-input-info
                         [inputsProductLst]="dataProductInputs"
                         [stateProduction]="state"
+                        [stateProcess]="productionProcess.state"
                         (onDeleteDetail)="onDeleteDetail($event)"
                         ></app-periods-input-info>
                     </div>      

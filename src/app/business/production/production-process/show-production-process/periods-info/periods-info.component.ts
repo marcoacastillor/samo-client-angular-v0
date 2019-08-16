@@ -36,6 +36,25 @@ export class PeriodsInfoComponent implements OnInit {
   ngOnInit() {
   }
 
+  ngOnChanges(changes: SimpleChanges)
+  {
+    if(changes.cuttingPeriodList)
+    {
+      if(changes.cuttingPeriodList.currentValue != changes.cuttingPeriodList.previousValue)
+      {
+        this.cuttingPeriodList = changes.cuttingPeriodList.currentValue;
+      }
+    }
+
+    if(changes.productionProcess)
+    {
+      if(changes.productionProcess.currentValue != changes.productionProcess.previousValue)
+      {
+        this.productionProcess = changes.productionProcess.currentValue;
+      }
+    }
+  }
+
   getDataByCuttingPeriod(id_cutting_period: number){
     this.getData.emit(id_cutting_period);
 
@@ -73,8 +92,6 @@ export class PeriodsInfoComponent implements OnInit {
   }
 
   onCreateDetailProduct(detailProduct: DetailProductInput){
-    console.log(detailProduct);
-    
     this.detailProductInputService.store$(detailProduct).subscribe(
       detailPrdInput => {
         this.getDataByCuttingPeriod(detailPrdInput.fk_id_cutting_period)

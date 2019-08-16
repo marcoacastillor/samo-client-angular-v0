@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
 import { ProductionProcess } from 'src/app/shared/models/production-process';
 import { faPlusCircle, faAlignJustify, faStopwatch, faEye } from '@fortawesome/free-solid-svg-icons';
 import { ParameterService } from 'src/app/shared/services/parameter.service';
@@ -28,6 +28,17 @@ export class ListProductionProcessComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+  }
+  
+  ngOnChanges(changes: SimpleChanges)
+  {
+    if(changes.cuttingPeriodList)
+    {
+      if(changes.productionProcessList.currentValue != changes.productionProcessList.previousValue)
+      {
+        this.productionProcessList = changes.productionProcessList.currentValue;
+      }
+    }
   }
 
   selectElement(prdProd: ProductionProcess){

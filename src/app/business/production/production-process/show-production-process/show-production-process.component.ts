@@ -14,7 +14,6 @@ export class ShowProductionProcessComponent implements OnInit {
 
   @Input() public productionProcess: ProductionProcess;
   @Input() public cuttingPeriodList: CuttingPeriod[];
-  
   @Input() public state: string;
   
   @Input() public dataProductInputs:DetailProductInput[] = [];
@@ -34,6 +33,33 @@ export class ShowProductionProcessComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+  }
+
+  ngOnChanges(changes: SimpleChanges)
+  {
+    if(changes.cuttingPeriodList)
+    {
+      if(changes.cuttingPeriodList.currentValue != changes.cuttingPeriodList.previousValue)
+      {
+        this.cuttingPeriodList = changes.cuttingPeriodList.currentValue;
+      }
+    }
+    
+    if(changes.productionProcess)
+    {
+      if(changes.productionProcess.currentValue != changes.productionProcess.previousValue)
+      {
+        this.productionProcess = changes.productionProcess.currentValue;
+      }
+    }
+
+    if(changes.state)
+    {
+      if(changes.state.currentValue != changes.state.previousValue)
+      {
+        this.state = changes.state.currentValue;
+      }
+    }
   }
 
   onGetData(id_cutting_period: number){

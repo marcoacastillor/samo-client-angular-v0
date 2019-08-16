@@ -22,6 +22,7 @@ export class OwnerListComponent implements OnInit {
   enterprise: Enterprise = new Enterprise;
 
   parameterList: Parameter[] = [];
+  categories      = {'categories' : [environment.regimen,environment.size_enterprise]};
 
   success = false;
   message = '';
@@ -95,7 +96,7 @@ export class OwnerListComponent implements OnInit {
   }
 
   public loadParametersEnterprise(){
-    this.parameterService.getByCodeCategory$(environment.regimen).subscribe(
+    this.parameterService.getByMultipleCodeCategory$(this.categories).subscribe(
       lst_parameters => this.parameterList = lst_parameters
     )
   }

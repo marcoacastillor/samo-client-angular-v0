@@ -21,6 +21,9 @@ export class ModalEnterpriseFormComponent implements OnInit {
   @Output() public create = new EventEmitter<Enterprise>();
   @Output() public update = new EventEmitter<Enterprise>();
 
+  regimen = environment.regimen;
+  sizes = environment.size_enterprise;
+
   constructor(
     private fb: FormBuilder,
     private formToolService: FormToolsService,

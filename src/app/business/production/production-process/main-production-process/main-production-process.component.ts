@@ -82,6 +82,7 @@ export class MainProductionProcessComponent implements OnInit {
     this.productionProcessService.update$(productionProcess).subscribe(
       productionProcess => {
         this.productionProcess = productionProcess;
+        this.loadCuttingPeriod(productionProcess.pk_id_production_process);
         this.setMessage('Operación exitosa');
       },
       this.onError

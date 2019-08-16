@@ -61,7 +61,7 @@ export class ProductFormModalComponent implements OnInit, OnChanges {
 
     if (nameProduct.length > 0) {
       if (filter.timeStamp - this.lastkeydown1 > 200) {
-        this.productService.getByNameFilterAndType$(nameProduct).subscribe(
+        this.productService.getByNameFilterAndTypeINProduction$(nameProduct).subscribe(
             lstProducts => this.lstProductsNames = lstProducts
         )
       }
@@ -74,7 +74,7 @@ export class ProductFormModalComponent implements OnInit, OnChanges {
 
     if (codeProduct.length > 0) {
       if (filter.timeStamp - this.lastkeydown1 > 200) {
-        this.productService.getByCodeFilterAndType$(codeProduct).subscribe(
+        this.productService.getByCodeFilterAndTypeINProduction$(codeProduct).subscribe(
             lstProducts => this.lstProductsCodes = lstProducts
         )
       }
