@@ -18,7 +18,7 @@ export class CategoryService {
   }
 
   public getAll$(): Observable<Category[]> {
-    return this.userService.validateOptionByToken('CAT_LIST').pipe(
+    return this.userService.validateOptionByToken('Category:getAll').pipe(
       switchMap(validate => {
         if (validate) {
           return this.http.get<Category[]>(this._url);
@@ -28,7 +28,7 @@ export class CategoryService {
   }
 
   public store$(cmp: Category): Observable<Category> {
-    return this.userService.validateOptionByToken('CAT_CRT').pipe(
+    return this.userService.validateOptionByToken('Category:create').pipe(
       switchMap(validate => {
         if (validate) {
           return this.http.post<Category>(this._url, cmp);
@@ -39,7 +39,7 @@ export class CategoryService {
 
   public show$(id_cmp: number): Observable<Category> {
     const url = this._url + '/' + id_cmp;
-    return this.userService.validateOptionByToken('CAT_SHOW').pipe(
+    return this.userService.validateOptionByToken('Category:show').pipe(
       switchMap(validate => {
         if (validate) {
           return this.http.get<Category>(url);
@@ -49,7 +49,7 @@ export class CategoryService {
   }
 
   public update$(cmp: Category): Observable<Category> {
-    return this.userService.validateOptionByToken('CAT_UPD').pipe(
+    return this.userService.validateOptionByToken('Category:update').pipe(
       switchMap(validate => {
         if (validate) {
           return this.http.put<Category>(this._url, cmp);
@@ -60,7 +60,7 @@ export class CategoryService {
 
   public delete$(id: number): Observable<Category> {
     const url = this._url + '/' + id.toString();
-    return this.userService.validateOptionByToken('CAT_DEL').pipe(
+    return this.userService.validateOptionByToken('Category:delete').pipe(
       switchMap(validate => {
         if (validate) {
           return this.http.delete<Category>(url);

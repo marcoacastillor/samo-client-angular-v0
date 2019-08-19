@@ -11,8 +11,6 @@ export class CardComponent implements OnInit {
   @Input() public value: string;
   @Input() public status: StatusMessage;
 
-  @Input() public lstMessages: StatusMessage[];
-
   constructor() { }
 
   ngOnInit() {

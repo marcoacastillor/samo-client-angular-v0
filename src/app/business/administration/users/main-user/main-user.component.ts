@@ -37,6 +37,9 @@ export class MainUserComponent implements OnInit {
   public rol: Rol = new Rol;
   public user: User = new User;
   public activeUser: User = new User;
+
+  public person:Person = new Person;
+  public enterprise:Enterprise = new Enterprise;
   
   constructor(
     private globalStoreService: GlobalStoreService,
@@ -120,18 +123,14 @@ export class MainUserComponent implements OnInit {
     this.listUser = false;
 
     this.usuarioService.show$(id).pipe(
-      tap(this.loadUser),
-      switchMap((user: User): Observable<Person> => this.personService.show$(user.fk_id_person)),
-      tap(this.loadPerson),
+      tap((user:User) => this.user = user),
+      tap((user: User) => this.personService.show$(user.fk_id_person).subscribe(
+        person => this.person = person
+      )),
+      tap((user:User) => this.enterpriseService.show$(user.fk_id_enterprise).subscribe(
+        enterprise => this.enterprise = enterprise
+      ))
     ).subscribe(this.onSuccess);
-  }
-
-  private loadUser = (user: User): void => {
-    this.user = user;
-  }
-
-  private loadPerson = (person: Person): void => {
-    this.user.person = person;
   }
 
   public onNew(user: User) {

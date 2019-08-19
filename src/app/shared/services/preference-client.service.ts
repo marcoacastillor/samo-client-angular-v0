@@ -19,7 +19,7 @@ export class PreferenceClientService {
 
   public getByPerson$(id_person: number): Observable<PreferenceClient> {
     let url = this._url + '/get-by-person/' + id_person.toString();
-    return this.userService.validateOptionByToken('PREF_CLIENT_GET_BY_PERSON').pipe(
+    return this.userService.validateOptionByToken('PreferenceClient:getByPerson').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<PreferenceClient>(url);
@@ -29,7 +29,7 @@ export class PreferenceClientService {
   }
 
   public create$(preferceClient: PreferenceClient): Observable<PreferenceClient> {
-    return this.userService.validateOptionByToken('PREF_CLIENT_CREATE').pipe(
+    return this.userService.validateOptionByToken('PreferenceClient:create').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.post<PreferenceClient>(this._url, preferceClient);
@@ -39,7 +39,7 @@ export class PreferenceClientService {
   }
 
   public update$(preferceClient: PreferenceClient): Observable<PreferenceClient> {
-    return this.userService.validateOptionByToken('PREF_CLIENT_UPDATE').pipe(
+    return this.userService.validateOptionByToken('PreferenceClient:update').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.put<PreferenceClient>(this._url, preferceClient);

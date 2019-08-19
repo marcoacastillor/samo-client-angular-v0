@@ -16,7 +16,7 @@ export class ModuleService {
     ) {}
 
   public getAll$(): Observable<Module[]> {
-    return this.userService.validateOptionByToken('MOD_LIST').pipe(
+    return this.userService.validateOptionByToken('Module:getAll').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<Module[]>(this._url);
@@ -27,7 +27,7 @@ export class ModuleService {
 
   public show$(id_module: number): Observable<Module> {
     const url = this._url + '/' +id_module;
-    return this.userService.validateOptionByToken('MOD_SHOW').pipe(
+    return this.userService.validateOptionByToken('Module:show').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<Module>(url);
@@ -37,7 +37,7 @@ export class ModuleService {
   }
 
   public store$(module: Module): Observable<Module> {
-    return this.userService.validateOptionByToken('MOD_CRT').pipe(
+    return this.userService.validateOptionByToken('Module:create').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.post<Module>(this._url, module);
@@ -47,7 +47,7 @@ export class ModuleService {
   }
 
   public update$(module: Module): Observable<Module> {
-    return this.userService.validateOptionByToken('MOD_UPD').pipe(
+    return this.userService.validateOptionByToken('Module:update').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.put<Module>(this._url, module);
@@ -59,7 +59,7 @@ export class ModuleService {
   public getAllDetailed$(id_rol: number): Observable<Module[]> {
     const url = this._url + '/get-modules-detailed/'+id_rol;
 
-    return this.userService.validateOptionByToken('MOD_LIST_DET').pipe(
+    return this.userService.validateOptionByToken('Module:getModulesDetailed').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<Module[]>(url);
@@ -71,7 +71,7 @@ export class ModuleService {
   public getModulesByRol$(id_rol: String): Observable<Module[]> {
     const url = this._url + '/get-modules-by-rol/' + id_rol;
 
-    return this.userService.validateOptionByToken('MOD_GET_BY_ROL').pipe(
+    return this.userService.validateOptionByToken('Module:getByRol').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<Module[]>(url);
@@ -82,7 +82,7 @@ export class ModuleService {
   
   public delete$(id: number): Observable<Module> {
     const url = this._url + '/' + id.toString();
-    return this.userService.validateOptionByToken('MOD_DEL').pipe(
+    return this.userService.validateOptionByToken('Module:delete').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.delete<Module>(url);

@@ -1,1 +1,244 @@
-detalle
+<app-pages title="Detalle de prestación de servicio">  
+    <main>       
+        <section>
+            <!-- start menu main-->
+            <div class="row bg-gray">
+                <div class="col-sm-6 text-left">
+                    Detalle de cliente
+                </div>
+                <div class="col-sm-6 text-right">
+                    <div class="btn-group btn-group-sm">
+                        <a routerLink='../../list' class="btn text-ultra-small btn-sm btn-outline-primary" type="button">
+                            <fa-icon [icon]="faThList" class="text-outline-secondary mb-2 mr-1"></fa-icon>Ver todos
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- end menu main-->
+
+            <!-- start content -->
+            <div class="row margin-top-1rem">
+                <div class="col-sm-12">
+
+                    <!-- start info options-->
+                    <div class="row" *ngIf="success">
+                        <div class="col-sm-12">
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>Éxito</strong> {{ message }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end info options-->
+                    
+                    <!-- start info options-->
+                    <div class="row back-colo-f6">
+                        <div class="col-sm-12 text-left align-self-start alert alert-info" *ngIf="!enterprise.cypher_key">
+                            <p>Para poder gestionar la información de los clientes, debe generar una llave de seguridad.</p>
+                        </div>    
+
+                        <div class="col-sm-12 text-left align-self-start" *ngIf="enterprise.cypher_key">
+                            <div class="btn-group btn-group-sm">
+                                <div class="dropdown">
+                                    <button class="btn btn-sm dropdown-toggle" type="button" id="payments" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <fa-icon [icon]="faDonate" class="text-outline-secondary mb-2 mr-1"></fa-icon>Pagos
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="payments">
+                                        <button class="dropdown-item text-small text-secondary" type="button" data-toggle="modal" data-target="#paymentModal">
+                                            <fa-icon [icon]="faDollarSign" class="text-outline-secondary mb-2 mr-1"></fa-icon>Agregar pago
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end info options-->
+                    
+                    <!-- start main info-->
+                    <div class="row margin-top-1rem">
+                        <!-- start client info-->
+                        <div class="col-sm-4 back-colo-f6">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table class="table table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th colspan="2"><h4>Cliente</h4></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th>NIT</th>
+                                                <td>{{ enterprise.nit }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Nombre</th>
+                                                <td>{{ enterprise.name }}{{ enterprise.last_names }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Dirección</th>
+                                                <td>{{ enterprise.addresss }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Teléfono</th>
+                                                <td>{{ enterprise.phone }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Tamaño</th>
+                                                <td>{{ enterprise.size }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Cypher Key</th>
+                                                <td *ngIf="!enterprise.cypher_key">
+                                                    <button (click)="generateCypherKey(enterprise.pk_id_enterprise)" class="dropdown-item text-small text-primary" type="button">
+                                                        <fa-icon [icon]="faShieldAlt" class="text-outline-primary mb-2 mr-1"></fa-icon>Generar llave de seguridad
+                                                    </button>
+                                                </td>
+                                                <td *ngIf="enterprise.cypher_key">{{ enterprise.cypher_key }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <!-- start contract-->
+                            <div class="row margin-top-2rem">
+                                <div class="col-sm-12">
+                                    <table class="table table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th colspan="2"><h4>Servicio contratado</h4></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th>Código servicio</th>
+                                                <td>{{ typeService.code_service }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Modalidad servicio</th>
+                                                <td>{{ typeService.mode_service }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Tipo servicio</th>
+                                                <td>{{ typeService.type_service }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Valor del servicio</th>
+                                                <td>{{ typeService.value_service | number }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- end contract-->
+                        </div>
+                        <!-- end client info-->
+                        
+                        <!-- start service info-->
+                        <div class="col-sm-8 back-color-ff">
+                            
+                            <!-- start contract-->
+                            <div class="row">
+                                <div class="col-xl-12 col-sm-12">
+                                    <table class="table table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th colspan="4"><h4>Condiciones del contrato</h4></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th>Fecha inicial del contrato</th>
+                                                <td>{{ serviceEnterprise.date_init_service }}</td>
+                                                <th>Fecha final del contrato</th>
+                                                <td>{{ serviceEnterprise.date_end_service }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Dias contratados</th>
+                                                <td>{{ serviceEnterprise.days_service | number }}</td>
+                                                <th>Estado del servicio</th>
+                                                <td>{{ serviceEnterprise.state_service }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Estado de pagos</th>
+                                                <td>{{ serviceEnterprise.state_payment_service }}</td>
+                                                <th>Saldo</th>
+                                                <td>{{ serviceEnterprise.balance_service | number }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Fecha inicial del acceso</th>
+                                                <td>{{ accessEnterprise.date_init_access }}</td>
+                                                <th>Fecha final del acceso</th>
+                                                <td>{{ accessEnterprise.date_end_access }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th colspan="4">Token de acceso</th>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="4" class="text-primary"><h6>{{ accessEnterprise.cypher_key }}</h6></td>       
+                                            </tr>
+                                            <tr>
+                                                <th colspan="4">Observaciones</th>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="4">{{ serviceEnterprise.observation }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- end contract-->
+                            <!-- start payments-->
+                            <div class="row margin-top-2rem">
+                                <div class="col-sm-12">
+                                    <table class="table table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th colspan="5"><h4>Pagos</h4></th>
+                                            </tr>
+                                            <tr>
+                                                <th>Fecha de pago</th>
+                                                <th>Valor pagado</th>
+                                                <th>Referencia de pago</th>
+                                                <th>Fecha inicial servicio</th>
+                                                <th>Fecha final servicio</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let payment of paymentLst">
+                                                <td>{{ payment.date_payment }}</td>
+                                                <td>{{ payment.value_payment | number }}</td>
+                                                <td>{{ payment.reference_payment }}</td>
+                                                <td>{{ payment.date_init_service }}</td>
+                                                <td>{{ payment.date_end_service }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table> 
+                                </div>
+                            </div>
+                            <!-- end payments-->
+                        </div>
+                        <!-- end client info-->
+                    </div>
+                    <!-- end main info-->
+                </div>
+            </div>
+            <!-- end content -->
+        </section>
+    </main>
+</app-pages>  
+
+
+
+<!-- información de pago de clientes-->
+<app-form-payment-modal
+[total]="typeService.value_service"
+[balance]="serviceEnterprise.balance_service"
+[fk_id_enterprise_service]="serviceEnterprise.pk_id_service_enterprise"
+(addPayment)="onAddPayment($event)"
+>
+</app-form-payment-modal>
+<!-- fin información de pago de clientes-->

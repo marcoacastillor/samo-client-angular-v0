@@ -19,7 +19,7 @@ export class OptionService {
   }
 
   public getAll$(): Observable<Results> {
-    return this.userService.validateOptionByToken('OPT_LIST').pipe(
+    return this.userService.validateOptionByToken('Option:getAll').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<Results>(this._url);
@@ -30,7 +30,7 @@ export class OptionService {
 
   public getByFilter$(filter: string): Observable<Results> {
     const url = this._url + '/get-by-filter/' + filter;
-    return this.userService.validateOptionByToken('OPT_GET_BY_FILTER').pipe(
+    return this.userService.validateOptionByToken('Option:getByFilter').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<Results>(url);
@@ -40,7 +40,7 @@ export class OptionService {
   }
 
   public store$(option: Option): Observable<Option> {
-    return this.userService.validateOptionByToken('OPT_CRT').pipe(
+    return this.userService.validateOptionByToken('Option:create').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.post<Option>(this._url, option);
@@ -51,7 +51,7 @@ export class OptionService {
 
   public show$(id_option: number): Observable<Option> {
     const url = this._url + '/' + id_option;
-    return this.userService.validateOptionByToken('OPT_SHOW').pipe(
+    return this.userService.validateOptionByToken('Option:show').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get< Option>(url);
@@ -62,7 +62,7 @@ export class OptionService {
 
   public delete$(id: number): Observable<Option> {
     const url = this._url + '/' + id.toString();
-    return this.userService.validateOptionByToken('OPT_DEL').pipe(
+    return this.userService.validateOptionByToken('Option:delete').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.delete<Option>(url);
@@ -72,7 +72,7 @@ export class OptionService {
   }
 
   public update$(option: Option): Observable<Option> {
-    return this.userService.validateOptionByToken('OPT_UPD').pipe(
+    return this.userService.validateOptionByToken('Option:update').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.put<Option>(this._url, option);

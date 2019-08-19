@@ -19,86 +19,89 @@
     <div class="row margin-top-1rem">
         <div class="col-sm-6">
             <!--start información básica -->
-            <div class="card">
-                <div class="card-body">
-                    <div class="card-title card-header">Información de usuario</div>
-                    <div class="card-text">
-                        <div class="row">
-                            <div class="col-sm-6 font-weight-bold text-small">Nombre de usuario</div>
-                            <div class="col-sm-6">{{ user.username }}</div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6 font-weight-bold text-small">Correo electronico</div>
-                            <div class="col-sm-6">{{ user.email }}</div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6 font-weight-bold text-small">Estado</div>
-                            <div class="col-sm-6">{{ user.state_user }}</div>
-                        </div>
-                    </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th colspan="2"><h4>Usuario</h4></th>
+                            </tr>
+                        </thead>
+                        <tr>
+                            <th>Username</th>
+                            <td>{{ user.username }}</td>
+                        </tr>
+                        <tr>
+                            <th>Correo electrónico</th>
+                            <td>{{ user.email }}</td>
+                        </tr>
+                        <tr>
+                            <th>Estado</th>
+                            <td>{{ user.state_user }}</td>
+                        </tr>
+                        <tr>
+                            <th colspan="2"><h4>Empresa</h4></th>
+                        </tr>
+                        <tr>
+                            <th>Nombre</th>
+                            <td>{{ enterprise.name }}{{ enterprise.last_names }}</td>
+                        </tr>
+                        <tr>
+                            <th>Dirección</th>
+                            <td>{{ enterprise.address }}</td>
+                        </tr>
+                        <tr>
+                            <th>Teléfono</th>
+                            <td>{{ enterprise.phone }}</td>
+                        </tr>
+                        <tr>
+                            <th colspan="2"><h4>Rol</h4></th>
+                        </tr>        
+                        <tr>
+                            <th>Nombre</th>
+                            <td>{{ user.rol.name }}</td>
+                        </tr>
+                    </table>
                 </div>
             </div>
             <!-- end información básica -->
         </div>
         <div class="col-sm-6">
-            <!-- start información persona -->
-            <div class="card" *ngIf="user.person">
-                <div class="card-body">
-                    <div class="card-title card-header">Persona asociada al usuario</div>
-                    <div class="card-text">
-                        <div class="row">
-                            <div class="col-sm-6 font-weight-bold text-small">Tipo identificacion</div>
-                            <div class="col-sm-6">{{ user.person.type_id }}</div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6 font-weight-bold text-small">Número de identificacion</div>
-                            <div class="col-sm-6">{{ user.person.number_id }}</div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6 font-weight-bold text-small">Nombres</div>
-                            <div class="col-sm-6">{{ user.person.names }}</div>
-                        </div> 
-                        <div class="row">
-                            <div class="col-sm-6 font-weight-bold text-small">Apellidos</div>
-                            <div class="col-sm-6">{{ user.person.last_names }}</div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6 font-weight-bold text-small">Dirección</div>
-                            <div class="col-sm-6">{{ user.person.address }}</div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6 font-weight-bold text-small">Teléfono</div>
-                            <div class="col-sm-6">{{ user.person.phone }}</div>
-                        </div>  
-                    </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th colspan="2"><h4>Información personal</h4></th>
+                            </tr>
+                        </thead>
+                        <tr>
+                            <th>Tipo Id</th>
+                            <td>{{ person.type_id }}</td>
+                        </tr>
+                        <tr>
+                            <th>Número de id</th>
+                            <td>{{ person.number_id }}</td>
+                        </tr>
+                        <tr>
+                            <th>Nombre</th>
+                            <td>{{ person.names }}</td>
+                        </tr>
+                        <tr>
+                            <th>Apellido</th>
+                            <td>{{ person.last_names }}</td>
+                        </tr>
+                        <tr>
+                            <th>Dirección</th>
+                            <td>{{ person.address }}</td>
+                        </tr>
+                        <tr>
+                            <th>Teléfono</th>
+                            <td>{{ person.phone }}</td>
+                        </tr>
+                    </table>
                 </div>
             </div>
-            <!-- end información persona -->
         </div>
     </div>
-
-    <div class="row">
-        <div class="col-sm-6">
-            <!-- start information rol -->
-            <div class="card" *ngIf="user.rol">
-                <div class="card-body">
-                    <div class="card-title card-header">Información de rol y permisos de usuario</div>
-                    <div class="card-text">
-                        <div class="row">
-                            <div class="col-sm-6 font-weight-bold text-small">Rol</div>
-                            <div class="col-sm-6">{{ user.rol.name }}</div>
-                        </div> 
-                        <div class="row">
-                            <div class="col-sm-6 font-weight-bold text-small">Opciones para el rol</div>
-                            <div class="col-sm-6">
-                                <li *ngFor="let option of user.rol.options">{{ option.code }} : {{ option.description }}</li>
-                            </div>
-                        </div> 
-                    </div>
-                </div>
-            </div>
-            <!-- end information rol -->
-        </div>
-    </div>
-    <!-- end content -->
 </section>

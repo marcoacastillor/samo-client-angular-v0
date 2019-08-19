@@ -19,7 +19,7 @@ export class LaboralConditionService {
 
   public getInfoByEnterprisePerson$(id: number): Observable<LaboralCondition> {
     const url = this._url + '/'+id;
-    return this.userService.validateOptionByToken('LABORAL_CONDITION_GET_INFO_BY_CONTRACT').pipe(
+    return this.userService.validateOptionByToken('LaboralCondition:getInfoByContract').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<LaboralCondition>(url);
@@ -29,7 +29,7 @@ export class LaboralConditionService {
   }
 
   public create$(laboralCondition: LaboralCondition): Observable<LaboralCondition> {
-    return this.userService.validateOptionByToken('LABORAL_CONDITION_CRT').pipe(
+    return this.userService.validateOptionByToken('LaboralCondition:create').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.post<LaboralCondition>(this._url, laboralCondition);
@@ -39,7 +39,7 @@ export class LaboralConditionService {
   }
 
   public update$(laboralCondition: LaboralCondition): Observable<LaboralCondition> {
-    return this.userService.validateOptionByToken('LABORAL_CONDITION_UPD').pipe(
+    return this.userService.validateOptionByToken('LaboralCondition:update').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.put<LaboralCondition>(this._url, laboralCondition);

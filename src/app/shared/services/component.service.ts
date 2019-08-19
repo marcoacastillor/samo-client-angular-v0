@@ -18,7 +18,7 @@ export class ComponentService {
   }
 
   public getAll$(): Observable<MComponent[]> {
-    return this.userService.validateOptionByToken('CMP_LIST').pipe(
+    return this.userService.validateOptionByToken('Component:getAll').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<MComponent[]>(this._url);
@@ -28,7 +28,7 @@ export class ComponentService {
   }
 
   public store$(cmp: MComponent): Observable<MComponent> {
-    return this.userService.validateOptionByToken('CMP_CRT').pipe(
+    return this.userService.validateOptionByToken('Component:create').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.post<MComponent>(this._url, cmp);
@@ -39,7 +39,7 @@ export class ComponentService {
 
   public addOptionsByComponent$(options_component: any): Observable<MComponent> {
     const url = this._url + '/asign-options'
-    return this.userService.validateOptionByToken('CMP_ASIGN_OPTIONS').pipe(
+    return this.userService.validateOptionByToken('Component:asignOptions').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.post<MComponent>(url, options_component);
@@ -50,7 +50,7 @@ export class ComponentService {
 
   public show$(id_cmp: number): Observable<MComponent> {
     const url = this._url + '/' + id_cmp;
-    return this.userService.validateOptionByToken('CMP_SHOW').pipe(
+    return this.userService.validateOptionByToken('Component:show').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<MComponent>(url);
@@ -60,7 +60,7 @@ export class ComponentService {
   }
 
   public update$(cmp: MComponent): Observable<MComponent> {
-    return this.userService.validateOptionByToken('CMP_UPD').pipe(
+    return this.userService.validateOptionByToken('Component:update').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.put<MComponent>(this._url, cmp);
@@ -71,7 +71,7 @@ export class ComponentService {
 
   public delete$(id: number): Observable<MComponent> {
     const url = this._url + '/' + id.toString();
-    return this.userService.validateOptionByToken('CMP_DEL').pipe(
+    return this.userService.validateOptionByToken('Component:delete').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.delete<MComponent>(url);
@@ -82,7 +82,7 @@ export class ComponentService {
 
   public getComponentsByModule$(id_module: number): Observable<MComponent[]> {
     const url = this._url + '/get-components-by-module/' + id_module;
-    return this.userService.validateOptionByToken('CMP_GET_BY_MOD').pipe(
+    return this.userService.validateOptionByToken('Component:getByModule').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<MComponent[]>(url);

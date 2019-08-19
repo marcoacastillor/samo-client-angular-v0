@@ -19,7 +19,7 @@ export class ExpensesService {
   }
 
   public getAll$(): Observable<Expense[]> {
-    return this.userService.validateOptionByToken('EXP_LIST').pipe(
+    return this.userService.validateOptionByToken('Expense:getAll').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<Expense[]>(this._url);
@@ -29,7 +29,7 @@ export class ExpensesService {
   }
 
   public store$(expense: Expense): Observable<Expense> {
-    return this.userService.validateOptionByToken('EXP_CRT').pipe(
+    return this.userService.validateOptionByToken('Expense:create').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.post<Expense>(this._url, expense);
@@ -40,7 +40,7 @@ export class ExpensesService {
 
   public show$(id_expense: number): Observable<Expense> {
     const url = this._url + '/' + id_expense;
-    return this.userService.validateOptionByToken('EXP_SHOW').pipe(
+    return this.userService.validateOptionByToken('Expense:show').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<Expense>(url);
@@ -51,7 +51,7 @@ export class ExpensesService {
 
   public delete$(id: number): Observable<Expense> {
     const url = this._url + '/' + id.toString();
-    return this.userService.validateOptionByToken('EXP_DEL').pipe(
+    return this.userService.validateOptionByToken('Expense:delete').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.delete<Expense>(url);
@@ -61,7 +61,7 @@ export class ExpensesService {
   }
 
   public update$(expense: Expense): Observable<Expense> {
-    return this.userService.validateOptionByToken('EXP_UPD').pipe(
+    return this.userService.validateOptionByToken('Expense:update').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.put<Expense>(this._url, expense);
@@ -72,7 +72,7 @@ export class ExpensesService {
 
   public getByFilter$(filter: any): Observable<Results> {
     const url = this._url + '/get-by-filter';
-    return this.userService.validateOptionByToken('EXP_GET_BY_FILTER').pipe(
+    return this.userService.validateOptionByToken('Expense:getByFilter').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.post<Results>(url,filter);

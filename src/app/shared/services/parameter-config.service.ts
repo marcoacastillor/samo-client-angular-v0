@@ -20,7 +20,7 @@ export class ParameterConfigService {
 
   public getByEnterprise$(id_enterprise: number): Observable<ParameterConfig[]> {
     let url = this._url + '/get-by-enterprise/' + id_enterprise.toString();
-    return this.userService.validateOptionByToken('PARAM_CONFIG_GET_BY_ENTERPRISE').pipe(
+    return this.userService.validateOptionByToken('ParameterConfig:getByEnterprise').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<ParameterConfig[]>(url);
@@ -30,7 +30,7 @@ export class ParameterConfigService {
   }
 
   public store$(cmp: ParameterConfig): Observable<ParameterConfig> {
-    return this.userService.validateOptionByToken('PARAM_CONFIG_CRT').pipe(
+    return this.userService.validateOptionByToken('ParameterConfig:create').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.post<ParameterConfig>(this._url, cmp);
@@ -41,7 +41,7 @@ export class ParameterConfigService {
 
   public createAllsParamsBytype$(type: string, id_enterprise: number): Observable<Boolean> {
     let url = this._url + '/create-all-params-by-type/' + type + '/' + id_enterprise.toString();
-    return this.userService.validateOptionByToken('PARAM_CONFIG_CRT_ALL_BY_TYPE').pipe(
+    return this.userService.validateOptionByToken('ParameterConfig:createAllParamsByType').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<Boolean>(url);
@@ -51,7 +51,7 @@ export class ParameterConfigService {
   }
 
   public update$(cmp: ParameterConfig): Observable<ParameterConfig> {
-    return this.userService.validateOptionByToken('PARAM_CONFIG_UPD').pipe(
+    return this.userService.validateOptionByToken('ParameterConfig:update').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.put<ParameterConfig>(this._url, cmp);
@@ -62,7 +62,7 @@ export class ParameterConfigService {
 
   public updateByEnterpriseAndCodeAndValue$(id_enterprise: number, code: string, value: string):Observable<ParameterConfig> {
     let url = this._url + '/update-by-enterprise-and-code-and-value/' + id_enterprise.toString() + '/' + code + '/' + value; 
-    return this.userService.validateOptionByToken('PARAM_CONFIG_UPD_BY_ENTERPRISE_CODE_AND_VALUE').pipe(
+    return this.userService.validateOptionByToken('ParameterConfig:updateByEnterpriseAndCodeAndValue').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<ParameterConfig>(url);
@@ -73,7 +73,7 @@ export class ParameterConfigService {
 
   public delete$(id: number): Observable<ParameterConfig> {
     let url = this._url + '/' + id.toString();
-    return this.userService.validateOptionByToken('PARAM_CONFIG_DEL').pipe(
+    return this.userService.validateOptionByToken('ParameterConfig:delete').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.delete<ParameterConfig>(url);

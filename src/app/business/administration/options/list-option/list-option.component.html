@@ -22,8 +22,9 @@
                 <thead class="bg-secondary text-white">
                     <tr>
                         <th>Acciones</th>
-                        <th>Código</th>
-                        <th>Nombre</th>
+                        <th>Objeto de negocio</th>
+                        <th>Acción</th>
+                        <th>Descripción</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -46,7 +47,8 @@
                                 </div>
                             </div>
                         </td>
-                        <td>{{ option.code }}</td>
+                        <td>{{ option.business_object }}</td>
+                        <td>{{ option.action }}</td>
                         <td>{{ option.description }}</td>
                     </tr>
                 </tbody>

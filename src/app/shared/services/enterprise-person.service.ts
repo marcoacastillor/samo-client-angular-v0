@@ -19,7 +19,7 @@ export class EnterprisePersonService {
 
   public getActiveInfoByPerson$(id: number): Observable<EnterprisePerson> {
     const url = this._url + '/get-active-info-by-person/'+ id.toString();
-    return this.userService.validateOptionByToken('ENT_PERSON_GET_ACTIVE_INFO_BY_PERSON').pipe(
+    return this.userService.validateOptionByToken('EnterprisePerson:getActiveInfoByPerson').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<EnterprisePerson>(url);
@@ -30,7 +30,7 @@ export class EnterprisePersonService {
 
   public getAllInfoByPerson$(id: number): Observable<EnterprisePerson[]> {
     const url = this._url + '/get-all-by-person/'+ id.toString();
-    return this.userService.validateOptionByToken('ENT_PERSON_GET_ALL_INFO_BY_PERSON').pipe(
+    return this.userService.validateOptionByToken('EnterprisePerson:getAllByPerson').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<EnterprisePerson[]>(url);
@@ -41,7 +41,7 @@ export class EnterprisePersonService {
 
   public show$(id: number): Observable<EnterprisePerson> {
     const url = this._url + '/'+ id.toString();
-    return this.userService.validateOptionByToken('ENT_PERSON_GET_INFO').pipe(
+    return this.userService.validateOptionByToken('EnterprisePerson:show').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<EnterprisePerson>(url);
@@ -52,7 +52,7 @@ export class EnterprisePersonService {
 
   public inactivateContract$(id: number): Observable<EnterprisePerson> {
     const url = this._url + '/inactivate-contract/'+ id.toString();
-    return this.userService.validateOptionByToken('ENT_PERSON_INACTIVATE_CONTRACT').pipe(
+    return this.userService.validateOptionByToken('EnterprisePerson:inactiveContract').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<EnterprisePerson>(url);
@@ -62,7 +62,7 @@ export class EnterprisePersonService {
   }
 
   public update$(enterprisePerson: EnterprisePerson): Observable<EnterprisePerson> {
-    return this.userService.validateOptionByToken('ENT_PERSON_UPD').pipe(
+    return this.userService.validateOptionByToken('EnterprisePerson:update').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.put<EnterprisePerson>(this._url,enterprisePerson);

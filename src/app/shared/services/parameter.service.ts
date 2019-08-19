@@ -18,7 +18,7 @@ export class ParameterService {
   }
 
   public store$(cmp: Parameter): Observable<Parameter> {
-    return this.userService.validateOptionByToken('PARAM_CRT').pipe(
+    return this.userService.validateOptionByToken('Parameter:create').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.post<Parameter>(this._url, cmp);
@@ -30,7 +30,7 @@ export class ParameterService {
 
   public getByCodeCategory$(code: string): Observable<Parameter[]> {
     const url = this._url + '/get-param-by-categ/' +code;
-    return this.userService.validateOptionByToken('PARAM_GET_PARAM_BY_CATEG').pipe(
+    return this.userService.validateOptionByToken('Parameter:getByCategory').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<Parameter[]>(url);
@@ -41,7 +41,7 @@ export class ParameterService {
 
   public getByMultipleCodeCategory$(codes: any): Observable<any[]> {
     const url = this._url + '/get-param-by-multiple-categ';
-    return this.userService.validateOptionByToken('PARAM_GET_PARAM_BY_MULTIPLE_CATEG').pipe(
+    return this.userService.validateOptionByToken('Parameter:getByMultipleCategory').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.post<any[]>(url,codes);
@@ -51,7 +51,7 @@ export class ParameterService {
   }
   
   public update$(cmp: Parameter): Observable<Parameter> {
-    return this.userService.validateOptionByToken('PARAM_UPD').pipe(
+    return this.userService.validateOptionByToken('Parameter:update').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.put<Parameter>(this._url, cmp);
@@ -62,7 +62,7 @@ export class ParameterService {
 
   public delete$(id: number): Observable<Parameter> {
     const url = this._url + '/' + id.toString();
-    return this.userService.validateOptionByToken('PARAM_DEL').pipe(
+    return this.userService.validateOptionByToken('Parameter:delete').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.delete<Parameter>(url);

@@ -19,7 +19,7 @@ export class ProductionProcessService {
 
   public getAllByEnterprise$(id_enterprise: number): Observable<ProductionProcess[]> {
     let url = this._url + '/' + id_enterprise.toString();
-    return this.userService.validateOptionByToken('PRD_PRCSS_LIST').pipe(
+    return this.userService.validateOptionByToken('ProductionProcess:getAllByEnterprise').pipe(
       switchMap(validate => {
         if (validate) {
           return this.http.get<ProductionProcess[]>(url);
@@ -29,7 +29,7 @@ export class ProductionProcessService {
   }
 
   public store$(productionProcess: ProductionProcess): Observable<ProductionProcess> {
-    return this.userService.validateOptionByToken('PRD_PRCSS_CRT').pipe(
+    return this.userService.validateOptionByToken('ProductionProcess:create').pipe(
       switchMap(validate => {
         if (validate) {
           return this.http.post<ProductionProcess>(this._url,productionProcess);
@@ -39,7 +39,7 @@ export class ProductionProcessService {
   }
 
   public update$(productionProcess: ProductionProcess): Observable<ProductionProcess> {
-    return this.userService.validateOptionByToken('PRD_PRCSS_UPD').pipe(
+    return this.userService.validateOptionByToken('ProductionProcess:update').pipe(
       switchMap(validate => {
         if (validate) {
           return this.http.put<ProductionProcess>(this._url,productionProcess);

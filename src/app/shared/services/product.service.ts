@@ -19,7 +19,7 @@ export class ProductService {
   }
 
   public getAll$(): Observable<Results> {
-    return this.userService.validateOptionByToken('PRD_LIST').pipe(
+    return this.userService.validateOptionByToken('Product:getAll').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<Results>(this._url);
@@ -30,7 +30,7 @@ export class ProductService {
 
   public getValueStock$(): Observable<any> {
     const url = this._url + '/get-value-stock';
-    return this.userService.validateOptionByToken('PRD_GET_VALUE_STOCK').pipe(
+    return this.userService.validateOptionByToken('Product:getValueStock').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<any>(url);
@@ -41,7 +41,7 @@ export class ProductService {
 
   public show$(id_product: number): Observable<Product> {
     const url = this._url + '/' + id_product;
-    return this.userService.validateOptionByToken('PRD_SHOW').pipe(
+    return this.userService.validateOptionByToken('Product:show').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<Product>(url);
@@ -51,7 +51,7 @@ export class ProductService {
   }
 
   public update$(product: Product): Observable<Product> {
-    return this.userService.validateOptionByToken('PRD_UPD').pipe(
+    return this.userService.validateOptionByToken('Product:update').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.put<Product>(this._url, product);
@@ -62,7 +62,7 @@ export class ProductService {
 
   public delete$(id: number): Observable<Product> {
     let url = this._url + '/' + id;
-    return this.userService.validateOptionByToken('PRD_DEL').pipe(
+    return this.userService.validateOptionByToken('Product:delete').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.delete<Product>(url);
@@ -73,7 +73,7 @@ export class ProductService {
 
   public getTopSoldProducts$(from_date: string, to_date: string): Observable<any> {
     let url = this._url + '/get-top-sold-products/'+from_date+'/'+to_date;
-    return this.userService.validateOptionByToken('PRD_REPORT_TOP_SOLD_PRODUCTS').pipe(
+    return this.userService.validateOptionByToken('Product:getTopSoldProducts').pipe(
       switchMap(validate => {
         if(validate){
           //return this.http.post<any>(url,report);
@@ -85,7 +85,7 @@ export class ProductService {
 
   public searchByFilter$(product: Product): Observable<Results> {
     let url = this._url + '/get-by-filter';
-    return this.userService.validateOptionByToken('PRD_GET_BY_FILTER').pipe(
+    return this.userService.validateOptionByToken('Product:getByFilter').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.post<Results>(url,product);
@@ -96,7 +96,7 @@ export class ProductService {
 
   public getByCode$(code: string,type:string): Observable<Product> {
     let url = this._url + '/get-by-code-and-type/' + code+'/'+type;
-    return this.userService.validateOptionByToken('PRD_GET_BY_CODE_AND_TYPE').pipe(
+    return this.userService.validateOptionByToken('Product:getByCodeAndType').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<Product>(url);
@@ -107,7 +107,7 @@ export class ProductService {
 
   public getSalesProductsByCodeFilter$(codeProduct: string): Observable<Product[]> {
     let url = this._url + '/get-sales-products-by-code-filter/' + codeProduct;
-    return this.userService.validateOptionByToken('PRD_GET_SALES_PRODUCTS_BY_CODEFILTER').pipe(
+    return this.userService.validateOptionByToken('Product:getSalesProductByCodeFilter').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<Product[]>(url);
@@ -118,7 +118,7 @@ export class ProductService {
 
   public getSalesProductsByNameFilter$(nameProduct: string): Observable<Product[]> {
     let url = this._url + '/get-sales-products-by-name-filter/' + nameProduct;
-    return this.userService.validateOptionByToken('PRD_GET_SALES_PRODUCTS_BY_NAMEFILTER').pipe(
+    return this.userService.validateOptionByToken('Product:getSalesProductByNameFilter').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<Product[]>(url);
@@ -129,7 +129,7 @@ export class ProductService {
 
   public getNotSalesProductsByNameFilter$(nameProduct: string): Observable<Product[]> {
     let url = this._url + '/get-not-sales-products-by-name-filter/' + nameProduct;
-    return this.userService.validateOptionByToken('PRD_GET_NOT_SALES_PRODUCTS_BY_NAMEFILTER').pipe(
+    return this.userService.validateOptionByToken('Product:getNotSalesProductsByNameFilter').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<Product[]>(url);
@@ -140,7 +140,7 @@ export class ProductService {
 
   public getByCodeFilterAndType$(codeProduct: string): Observable<Product[]> {
     let url = this._url + '/get-by-code-filter-and-type/' + codeProduct;
-    return this.userService.validateOptionByToken('PRD_GET_BY_CODEFILTER_AND_TYPE').pipe(
+    return this.userService.validateOptionByToken('Product:getByCodeFilterAndType').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<Product[]>(url);
@@ -151,7 +151,7 @@ export class ProductService {
 
   public getByNameFilterAndType$(nameProduct: string): Observable<Product[]> {
     let url = this._url + '/get-by-name-filter-and-type/' + nameProduct;
-    return this.userService.validateOptionByToken('PRD_GET_BY_NAMEFILTER_AND_TYPE').pipe(
+    return this.userService.validateOptionByToken('Product:getByNameFilterAndType').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<Product[]>(url);
@@ -165,7 +165,7 @@ export class ProductService {
    */
   public getByCodeFilterAndTypeINProduction$(codeProduct: string): Observable<Product[]> {
     let url = this._url + '/get-by-code-filter-and-type-inproduction/' + codeProduct;
-    return this.userService.validateOptionByToken('PRD_GET_BY_CODEFILTER_AND_TYPE_INPRODUCTION').pipe(
+    return this.userService.validateOptionByToken('Product:getByCodeFilterAndTypeINProduction').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<Product[]>(url);
@@ -176,7 +176,7 @@ export class ProductService {
 
   public getByNameFilterAndTypeINProduction$(nameProduct: string): Observable<Product[]> {
     let url = this._url + '/get-by-name-filter-and-type-inproduction/' + nameProduct;
-    return this.userService.validateOptionByToken('PRD_GET_BY_NAMEFILTER_AND_TYPE_INPRODUCTION').pipe(
+    return this.userService.validateOptionByToken('Product:getByNameFilterAndTypeINProduction').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<Product[]>(url);
@@ -186,7 +186,7 @@ export class ProductService {
   }
 
   public store$(product: Product): Observable<Product> {
-    return this.userService.validateOptionByToken('PRD_CRT').pipe(
+    return this.userService.validateOptionByToken('Product:create').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.post<Product>(this._url, product);
@@ -197,7 +197,7 @@ export class ProductService {
 
   public getByType$(type: string): Observable<Product[]> {
     let url = this._url + '/get-by-type/' + type;
-    return this.userService.validateOptionByToken('PRD_GET_BY_TYPE').pipe(
+    return this.userService.validateOptionByToken('Product:getByType').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<Product[]>(url);
@@ -211,7 +211,7 @@ export class ProductService {
    */
   public getAllByEnterprise$(id_enterprise: number):Observable<Product[]> {
     let url = this._url + '/get-all-by-enterprise/' + id_enterprise.toString();
-    return this.userService.validateOptionByToken('PRD_GET_ALL_BY_ENTERPRISE').pipe(
+    return this.userService.validateOptionByToken('Product:getAllByEnterprise').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<Product[]>(url);
@@ -222,7 +222,7 @@ export class ProductService {
 
   public getByCodeFilterAndEnterprise$(code:string, id:number):Observable<Product[]> {
     let url = this._url + '/get-all-by-codeFilter-and-enterprise/' + code + '/' + id.toString();
-    return this.userService.validateOptionByToken('PRD_GET_ALL_BY_CODEFILTER_AND_ENTERPRISE').pipe(
+    return this.userService.validateOptionByToken('Product:getAllByCodeFilterAndEnterprise').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<Product[]>(url);
@@ -233,7 +233,7 @@ export class ProductService {
 
   public getByNameFilterAndEnterprise$(code:string, id:number):Observable<Product[]> {
     let url = this._url + '/get-all-by-nameFilter-and-enterprise/' + code + '/' + id.toString();
-    return this.userService.validateOptionByToken('PRD_GET_ALL_BY_NAMEFILTER_AND_ENTERPRISE').pipe(
+    return this.userService.validateOptionByToken('Product:getAllByNameFilterAndEnterprise').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<Product[]>(url);
@@ -244,7 +244,7 @@ export class ProductService {
 
   public getByReferenceFilterAndEnterprise$(code:string, id:number):Observable<Product[]> {
     let url = this._url + '/get-all-by-referenceFilter-and-enterprise/' + code + '/' + id.toString();
-    return this.userService.validateOptionByToken('PRD_GET_ALL_BY_REFERENCEFILTER_AND_ENTERPRISE').pipe(
+    return this.userService.validateOptionByToken('Product:getAllbyReferenceFilterAndEnterprise').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<Product[]>(url);

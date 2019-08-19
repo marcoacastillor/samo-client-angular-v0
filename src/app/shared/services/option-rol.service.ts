@@ -16,7 +16,7 @@ export class OptionRolService {
   }
 
   public getModulesByRol$(rol_option: RolOption): Observable<boolean> {
-    return this.userService.validateOptionByToken('OPTROL_GETMOD_BY_ROL').pipe(
+    return this.userService.validateOptionByToken('OptionRol:getModulesByRol').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.post<boolean>(this._url,rol_option);

@@ -18,7 +18,7 @@ export class FinancialReportService {
 
   public getResultsByPeriodAndEnterprise$(from_date:string, to_date:string,id_enterprise:number): Observable<any> {
     let url = this._url + '/statement-income-by-period-and-enterprise/' + from_date + '/' + to_date + '/'+ id_enterprise.toString();
-    return this.userService.validateOptionByToken('GET_STATEMENT_INCOME_REPORT').pipe(
+    return this.userService.validateOptionByToken('Reports:getStatementIncomeReport').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<any>(url);
@@ -29,7 +29,7 @@ export class FinancialReportService {
 
   public getBalanceByPeriodAndEnterprise$(from_date:string, to_date:string,id_enterprise:number): Observable<any> {
     let url = this._url + '/balance-by-period-and-enterprise/' + from_date + '/' + to_date + '/'+ id_enterprise.toString();
-    return this.userService.validateOptionByToken('GET_BALANCE_REPORT').pipe(
+    return this.userService.validateOptionByToken('Reports:getBalanceByPeriodAndEnterprise').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<any>(url);
@@ -40,7 +40,7 @@ export class FinancialReportService {
 
   public getCashFlowByDateAndEnterprise$(actual_date:string, id_enterprise:number): Observable<any> {
     let url = this._url + '/cashflow-by-date-and-enterprise/' + actual_date + '/'+ id_enterprise.toString();
-    return this.userService.validateOptionByToken('GET_CASH_FLOW_BY_DATES_AND_ENTERPRISE_REPORT').pipe(
+    return this.userService.validateOptionByToken('Reports:getCashFlowByDatesAndEnterprise').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<any>(url);

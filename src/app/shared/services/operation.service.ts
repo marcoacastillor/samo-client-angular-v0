@@ -24,7 +24,7 @@ export class OperationService {
 
   public getByType$(type: string): Observable<Results> {
     let url = this._url + '/get-by-type/' + type;
-    return this.userService.validateOptionByToken('OPE_LIST_OPERATIONS').pipe(
+    return this.userService.validateOptionByToken('Operation:getByType').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<Results>(url);
@@ -35,7 +35,7 @@ export class OperationService {
 
   public getAllByTypeAndEnterprise$(type: string, id_enterprise: number): Observable<Operation[]> {
     let url = this._url + '/get-by-type-and-enterprise/' + type + '/' + id_enterprise;
-    return this.userService.validateOptionByToken('OPE_LIST_BY_TYPE_AND_ENTERPRISE').pipe(
+    return this.userService.validateOptionByToken('Operation:getByTypeAndEnterprise').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<Operation[]>(url);
@@ -46,7 +46,7 @@ export class OperationService {
 
   public getConsolidateByDates$(fromDate: string, toDate: string, type_operation: string): Observable<ConsolidateOperation> {
     let url = this._url + '/get-consolidate-operations-by-dates/'+fromDate+'/'+toDate+'/'+type_operation;
-    return this.userService.validateOptionByToken('OPE_GET_OPERATIONS_BY_DATES').pipe(
+    return this.userService.validateOptionByToken('Operation:getConsolidateByDates').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<ConsolidateOperation>(url);
@@ -57,7 +57,7 @@ export class OperationService {
 
   public getListByProduct$(id: number,fromDate: string,toDate: string): Observable<AbstractStock> {
     let url = this._url + '/get-list-by-products/'+id.toString()+'/'+fromDate+'/'+toDate;
-    return this.userService.validateOptionByToken('OPE_GET_OPERATIONS_BY_PRODUCT').pipe(
+    return this.userService.validateOptionByToken('Operation:getListByProduct').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<AbstractStock>(url);
@@ -68,7 +68,7 @@ export class OperationService {
 
   public searchByFilter$(filter: string, type: string): Observable<Results> {
     let url = this._url + '/get-by-filter/' + filter + '/' + type;
-    return this.userService.validateOptionByToken('OPE_GET_BY_FILTER').pipe(
+    return this.userService.validateOptionByToken('Operation:getByFilter').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<Results>(url);
@@ -79,7 +79,7 @@ export class OperationService {
 
   public getByNameProviderAndTypeAndEnterprise$(nameProvider:string,type:string,id_enterprise:number): Observable<Operation[]> {
     let url = this._url + '/get-by-providername-and-type-and-enterprise/' + nameProvider + '/' + type + '/' + id_enterprise.toString() ;
-    return this.userService.validateOptionByToken('OPE_GET_PROVIDERNAME_AND_TYPE_AND_ENTERPRISE').pipe(
+    return this.userService.validateOptionByToken('Operation:getByProviderNameAndTypeAndEnterprise').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<Operation[]>(url);
@@ -90,7 +90,7 @@ export class OperationService {
 
   public getByDateOperationAndTypeAndEnterprise$(date_operation:string,type:string,id_enterprise:number): Observable<Operation[]> {
     let url = this._url + '/get-by-date-and-type-and-enterprise/' + date_operation + '/' + type + '/' + id_enterprise.toString() ;
-    return this.userService.validateOptionByToken('OPE_GET_DATEOPERATION_AND_TYPE_AND_ENTERPRISE').pipe(
+    return this.userService.validateOptionByToken('Operation:getByDateAndTypeAndEnterprise').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<Operation[]>(url);
@@ -101,7 +101,7 @@ export class OperationService {
 
   public getByPaymentTypeAndTypeAndEnterprise$(payment_type:string,type:string,id_enterprise:number): Observable<Operation[]> {
     let url = this._url + '/get-by-paymenttype-and-type-and-enterprise/' + payment_type + '/' + type + '/' + id_enterprise.toString() ;
-    return this.userService.validateOptionByToken('OPE_GET_PAYMENTTYPE_AND_TYPE_AND_ENTERPRISE').pipe(
+    return this.userService.validateOptionByToken('Operation:getByPaymentTypeAndTypeAndEnterprise').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<Operation[]>(url);
@@ -112,7 +112,7 @@ export class OperationService {
 
   public getByNumberInvoiceTypeAndTypeAndEnterprise$(number_invoice:string,type:string,id_enterprise:number): Observable<Operation[]> {
     let url = this._url + '/get-by-numberinvoice-and-type-and-enterprise/' + number_invoice + '/' + type + '/' + id_enterprise.toString() ;
-    return this.userService.validateOptionByToken('OPE_GET_NUMBERINVOICE_AND_TYPE_AND_ENTERPRISE').pipe(
+    return this.userService.validateOptionByToken('Operation:getByNumberInvoiceAndTypeAndEnterprise').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<Operation[]>(url);
@@ -127,7 +127,7 @@ export class OperationService {
 
   public storeOperation$(operation: Operation): Observable<Operation> {
     let url = this._url + '/create-operation';
-    return this.userService.validateOptionByToken('OPE_OPERATION_CRT').pipe(
+    return this.userService.validateOptionByToken('Operation:create').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.post<Operation>(url, operation);
@@ -137,7 +137,7 @@ export class OperationService {
   }
 
   public updateOperation$(operation: Operation): Observable<Operation> {
-    return this.userService.validateOptionByToken('OPE_OPERATION_UPD').pipe(
+    return this.userService.validateOptionByToken('Operation:update').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.put<Operation>(this._url, operation);
@@ -148,7 +148,7 @@ export class OperationService {
 
   public changeState$(id: number, state: string): Observable<Operation> {
     let url = this._url + '/change-state/' + id.toString() + '/' + state;
-    return this.userService.validateOptionByToken('OPE_CHANGE_STATE').pipe(
+    return this.userService.validateOptionByToken('Operation:changeState').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<Operation>(url);
@@ -159,7 +159,7 @@ export class OperationService {
 
   public getOperationPDF$(id_operation: number): Observable<string> {
     let url = this._url + '/get-pdf-small-operation/' + id_operation.toString();
-    return this.userService.validateOptionByToken('OPE_GET_PDF_SMALL').pipe(
+    return this.userService.validateOptionByToken('Operation:getPDFSmall').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<string>(url);
@@ -170,7 +170,7 @@ export class OperationService {
 
   public store_purchase$(purchase: Purchase): Observable<Purchase> {
     let url = this._url + '/create-purchase';
-    return this.userService.validateOptionByToken('OPE_PURCHASE_CRT').pipe(
+    return this.userService.validateOptionByToken('Operation:createPurchase').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.post<Purchase>(url, purchase);
@@ -181,7 +181,7 @@ export class OperationService {
 
   public store_purchase_file$(operation: Operation): Observable<StatusMessage[]> {
     let url = this._url + '/create-purchase-file';
-    return this.userService.validateOptionByToken('OPE_PURCHASE_FILE_CRT').pipe(
+    return this.userService.validateOptionByToken('Operation:createPurchaseFile').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.post<StatusMessage[]>(url, operation);
@@ -192,7 +192,7 @@ export class OperationService {
 
   public store_sale$(operation: Operation): Observable<Operation> {
     let url = this._url + '/create-sale';
-    return this.userService.validateOptionByToken('OPE_SALE_CRT').pipe(
+    return this.userService.validateOptionByToken('Operation:createSale').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.post<Operation>(url, operation);
@@ -203,7 +203,7 @@ export class OperationService {
 
   public show_purchase$(id_purchase: number): Observable<Purchase> {
     const url = this._url + '/' + id_purchase;
-    return this.userService.validateOptionByToken('OPE_OPERATION_SHOW').pipe(
+    return this.userService.validateOptionByToken('Operation:show').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<Purchase>(url);
@@ -214,7 +214,7 @@ export class OperationService {
 
   public getDetailOperation$(id_operation: number): Observable<Operation> {
     const url = this._url + '/get-detail/' + id_operation;
-    return this.userService.validateOptionByToken('OPE_OPERATION_GET_DETAIL').pipe(
+    return this.userService.validateOptionByToken('Operation:getDetail').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<Operation>(url);
@@ -225,7 +225,7 @@ export class OperationService {
 
   public getOperationByProvider$(id_enterprise: number): Observable<Operation[]> {
     const url = this._url + '/get-operation-by-provider/' + id_enterprise;
-    return this.userService.validateOptionByToken('OPE_OPERATION_GET_BY_PROVIDER').pipe(
+    return this.userService.validateOptionByToken('Operation:getOperationsByProvider').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<Operation[]>(url);
@@ -236,7 +236,7 @@ export class OperationService {
 
   public getOperationByClient$(id_person:number): Observable<Operation[]> {
     const url = this._url + '/get-operation-by-client/' + id_person;
-    return this.userService.validateOptionByToken('OPE_OPERATION_GET_BY_CLIENT').pipe(
+    return this.userService.validateOptionByToken('Operation:getOperationsByClient').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<Operation[]>(url);
@@ -253,7 +253,7 @@ export class OperationService {
       'type_operation': type_operation
     };
     let url = this._url + '/get-by-payment-type-and-dates-and-type';
-    return this.userService.validateOptionByToken('OPE_GET_BY_PAYMENTTYPE_AND_DATES_AND_TYPE').pipe(
+    return this.userService.validateOptionByToken('Operation:getByPaymentTypeAndDatesAndType').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.post<Operation[]>(url,params);

@@ -19,7 +19,7 @@ export class TypeServiceService {
   }
 
   public getAll$(): Observable<TypeService[]> {
-    return this.userService.validateOptionByToken('TYPE_SERVICE_LIST').pipe(
+    return this.userService.validateOptionByToken('TypeService:getAll').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<TypeService[]>(this._url);
@@ -30,7 +30,7 @@ export class TypeServiceService {
 
   public getBySizes$(size:string): Observable<TypeService[]> {
     let url = this._url + '/get-by-sizes-enterprise/' + size.trim();
-    return this.userService.validateOptionByToken('TYPE_SERVICE_GET_BY_SIZE').pipe(
+    return this.userService.validateOptionByToken('TypeService:getBySize').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<TypeService[]>(url);
@@ -40,7 +40,7 @@ export class TypeServiceService {
   }
 
   public store$(typService: TypeService): Observable<TypeService> {
-    return this.userService.validateOptionByToken('TYPE_SERVICE_CRT').pipe(
+    return this.userService.validateOptionByToken('TypeService:create').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.post<TypeService>(this._url, typService);
@@ -50,7 +50,7 @@ export class TypeServiceService {
   }
 
   public update$(typseService: TypeService): Observable<TypeService> {
-    return this.userService.validateOptionByToken('TYPE_SERVICE_UPD').pipe(
+    return this.userService.validateOptionByToken('TypeService:update').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.put<TypeService>(this._url, typseService);
@@ -61,7 +61,7 @@ export class TypeServiceService {
 
   public show$(id_type_service: number): Observable<TypeService> {
     const url = this._url + '/' + id_type_service;
-    return this.userService.validateOptionByToken('TYPE_SERVICE_SHOW').pipe(
+    return this.userService.validateOptionByToken('TypeService:show').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<TypeService>(url);
@@ -72,7 +72,7 @@ export class TypeServiceService {
 
   public delete$(id: number): Observable<TypeService> {
     const url = this._url + '/' + id.toString();
-    return this.userService.validateOptionByToken('TYPE_SERVICE_DEL').pipe(
+    return this.userService.validateOptionByToken('TypeService:delete').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.delete<TypeService>(url);

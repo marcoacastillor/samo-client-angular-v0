@@ -19,7 +19,7 @@ export class OperationProductService {
 
   public getProductsByOperation$(id_operation: number): Observable<OperationProduct[]> {
     let url = this._url + '/get-by-operation/' + id_operation.toString();
-    return this.userService.validateOptionByToken('OP_PRD_GET_BY_OPERATION').pipe(
+    return this.userService.validateOptionByToken('OperationProduct:getByOperation').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<OperationProduct[]>(url);
@@ -29,7 +29,7 @@ export class OperationProductService {
   }
   
   public store$(product: any): Observable<OperationProduct> {
-    return this.userService.validateOptionByToken('OP_PRD_STORE_OPERATION_PRODUCT').pipe(
+    return this.userService.validateOptionByToken('OperationProduct:create').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.post<OperationProduct>(this._url, product);
@@ -40,7 +40,7 @@ export class OperationProductService {
 
   public delete$(id:number): Observable<OperationProduct> {
     let url = this._url + '/' + id.toString();
-    return this.userService.validateOptionByToken('OP_PRD_DEL_OPERATION_PRODUCT').pipe(
+    return this.userService.validateOptionByToken('OperationProduct:delete').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.delete<OperationProduct>(url);

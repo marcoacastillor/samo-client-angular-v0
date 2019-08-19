@@ -21,6 +21,8 @@
                 <div [ngClass]="getClassShow()">
                     <app-show-user 
                     [user]="user" 
+                    [person]="person" 
+                    [enterprise]="enterprise" 
                     (cancel)="onCancelShow($event)">
                     </app-show-user>
                 </div>

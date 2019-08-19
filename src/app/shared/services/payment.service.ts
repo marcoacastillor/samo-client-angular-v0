@@ -18,7 +18,7 @@ export class PaymentService {
   }
 
   public store$(payment: Payment): Observable<Payment> {
-    return this.userService.validateOptionByToken('PAY_CRT').pipe(
+    return this.userService.validateOptionByToken('Payment:create').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.post<Payment>(this._url, payment);
@@ -29,7 +29,7 @@ export class PaymentService {
 
   public delete$(id: number): Observable<Payment> {
     let url = this._url + '/' + id.toString();
-    return this.userService.validateOptionByToken('PAY_DEL').pipe(
+    return this.userService.validateOptionByToken('Payment:delete').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.delete<Payment>(url);
@@ -40,7 +40,7 @@ export class PaymentService {
 
   public getPaymentsByOperation$(id_operation: number): Observable<Payment[]> {
     let url = this._url + '/get-by-operation/' + id_operation.toString();
-    return this.userService.validateOptionByToken('PAY_GET_BY_OPERATION').pipe(
+    return this.userService.validateOptionByToken('Payment:getByOperation').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<Payment[]>(url);

@@ -11,6 +11,9 @@ import { environment } from 'src/environments/environment';
 import * as moment from 'moment';
 import { Parameter } from 'src/app/shared/models/parameter';
 import { ParameterService } from 'src/app/shared/services/parameter.service';
+import { ActivatedRoute } from '@angular/router';
+import { ServiceEnterprise } from 'src/app/shared/models/service-enterprise';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-service-manager-create',
@@ -19,6 +22,7 @@ import { ParameterService } from 'src/app/shared/services/parameter.service';
 })
 export class ServiceManagerCreateComponent implements OnInit {
   serviceEnterpriseForm: FormGroup;
+  id_enterprise_service = '';
 
   faThList = faThList;
   faSave = faSave;
@@ -27,6 +31,7 @@ export class ServiceManagerCreateComponent implements OnInit {
   enterpriseList: Enterprise[] = [];
   servicesList: TypeService[] = [];
   stateList: Parameter[] = [];
+  serviceEnterprise: ServiceEnterprise = new ServiceEnterprise;
 
   serviceSelected: TypeService = new TypeService;
 
@@ -34,6 +39,7 @@ export class ServiceManagerCreateComponent implements OnInit {
   message = '';
   
   constructor(
+    private activateRoute: ActivatedRoute,
     private fb: FormBuilder,
     private enterpriseService: EnterpriseService,
     private typeService: TypeServiceService,
@@ -44,6 +50,18 @@ export class ServiceManagerCreateComponent implements OnInit {
 
   ngOnInit() {
     this.initForm();
+    let id = this.activateRoute.snapshot.params['id']
+    this.id_enterprise_service = id;
+    if(id == 'new'){
+      this.serviceEnterprise = new ServiceEnterprise();
+    }
+    else{
+      this.serviceEnterpriseService.show$(parseInt(id)).pipe(
+        tap((serviceEnterprise:ServiceEnterprise) => this.loadTypeServiceBySize(serviceEnterprise.reference_enterprise.split(':')[2])),
+        tap((serviceEnterprise:ServiceEnterprise) => this.serviceEnterprise = serviceEnterprise),
+        tap(() => this.initForm())
+      ).subscribe()
+    }
     this.loadEnterpriseOwners();
     this.loadParameters();
   }
@@ -64,54 +82,61 @@ export class ServiceManagerCreateComponent implements OnInit {
     let enterprise = (<HTMLInputElement>document.getElementById('enterpriseSelected')).value;
     if(enterprise.length > 0)
     {
-      this.typeService.getBySizes$(enterprise.split(':')[2]).subscribe(
-        lst_type_service => this.servicesList = lst_type_service
-      )
+      this.loadTypeServiceBySize(enterprise.split(':')[2]);
     }
+  }
+
+  private loadTypeServiceBySize(size:string){
+    this.typeService.getBySizes$(size).subscribe(
+      lst_type_service => this.servicesList = lst_type_service
+    )
   }
 
   private initForm(){
     this.serviceEnterpriseForm = this.fb.group({
-      pk_id_service_enterprise: [''],
-      reference_enterprise: ['',Validators.required],
-      type_service: ['',Validators.required],
-      fk_id_type_service: ['',Validators.required],
-      date_init_service: ['',Validators.required],
-      date_end_service: [''],
-      days_service: [''],
-      state_service: ['',Validators.required],
-      observation: ['']
+      pk_id_service_enterprise: [this.serviceEnterprise.pk_id_service_enterprise],
+      reference_enterprise: [this.serviceEnterprise.reference_enterprise,Validators.required],
+      fk_id_type_service: [this.serviceEnterprise.fk_id_type_service,Validators.required],
+      date_init_service: [this.serviceEnterprise.date_init_service,Validators.required],
+      date_end_service: [this.serviceEnterprise.date_end_service],
+      days_service: [this.serviceEnterprise.days_service],
+      state_service: [this.serviceEnterprise.state_service,Validators.required],
+      balance_service: [this.serviceEnterprise.balance_service,Validators.required],
+      observation: [this.serviceEnterprise.observation]
     })
   }
 
-  public onFindValuesByService(){
-    let enterprise = (<HTMLInputElement>document.getElementById('typeServiceSelected')).value;
-    if(enterprise.length > 0)
-    {
-      let serviceSelected = this.servicesList[enterprise];
-      this.serviceSelected = serviceSelected;
+  private getTypeService(id:number){
+    const resultado = this.servicesList.filter( type_service => type_service.pk_id_type_service === id);
+    this.serviceSelected = resultado[0];
+  }
 
-      if(serviceSelected.type_service == 'MENSUAL'){
+  public onFindValuesByService(){
+    let id_type_service = (<HTMLInputElement>document.getElementById('typeServiceSelected')).value;
+    if(id_type_service.length > 0)
+    {
+      this.getTypeService(parseInt(id_type_service));
+      if(this.serviceSelected.type_service == 'MENSUAL'){
         this.serviceEnterpriseForm.patchValue(
           {
             days_service: 30,
-            fk_id_type_service: serviceSelected.pk_id_service_enterprise
+            balance_service: this.serviceSelected.value_service
           }
         )
       }
-      if(serviceSelected.type_service == 'ANUAL'){
+      if(this.serviceSelected.type_service == 'ANUAL'){
         this.serviceEnterpriseForm.patchValue(
           {
             days_service: 365,
-            fk_id_type_service: serviceSelected.pk_id_service_enterprise
+            balance_service: this.serviceSelected.value_service
           }
         )
       }
-      if(serviceSelected.type_service == 'PROPIETARIO'){
+      if(this.serviceSelected.type_service == 'PROPIETARIO'){
         this.serviceEnterpriseForm.patchValue(
           {
-            days_service: '',
-            fk_id_type_service: serviceSelected.pk_id_service_enterprise
+            days_service: 36500,
+            balance_service: this.serviceSelected.value_service
           }
         )
       }
@@ -126,6 +151,20 @@ export class ServiceManagerCreateComponent implements OnInit {
       () => {
         this.success = true;
         this.message = 'Se crea un registro correctamente';
+        this.serviceEnterpriseForm.reset();
+        this.serviceSelected = new TypeService;
+      }
+    )
+  }
+
+  updateServiceEnterprise(){
+    this.serviceEnterpriseForm.patchValue({
+      date_init_service: moment(this.serviceEnterpriseForm.value.date_init_service).format('YYYY-MM-DD')
+    })
+    this.serviceEnterpriseService.update$(this.serviceEnterpriseForm.value).subscribe(
+      () => {
+        this.success = true;
+        this.message = 'Se actualiza el registro correctamente';
       }
     )
   }

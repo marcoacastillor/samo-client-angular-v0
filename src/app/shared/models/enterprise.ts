@@ -8,6 +8,7 @@ export class Enterprise {
     public phone: string;
     public ubication_city: string;
     public external_reference: string;
+    public cypher_key: string;
 
     public size: string;
     public DIAN_billing_resolution: string;

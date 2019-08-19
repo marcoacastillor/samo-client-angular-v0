@@ -19,37 +19,85 @@
             <!-- start content -->
             <div class="row margin-top-1rem">
                 <div class="col-sm-12">
-                    <table class="table table-sm table-striped">
-                        <thead class="bg-secondary text-white">
-                            <tr>
-                                <th>Acciones</th>
-                                <th>Empresa</th>
-                                <th>Servicio</th>
-                                <th>Fecha de inicio</th>
-                                <th>Fecha de fin</th>
-                                <th>Días contratados</th>
-                                <th>Estado</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let client of lstClients">
-                                <td>
-                                    <a routerLink='../show/{{client.pk_id_service_enterprise}}' class="btn text-ultra-small btn-sm btn-outline-primary" type="button">
-                                        <fa-icon [icon]="faEye" class="text-outline-secondary mb-2 mr-1"></fa-icon>Ver detalle
-                                    </a>
-                                </td>
-                                <td>{{ client.reference_enterprise }}</td>
-                                <td>{{ client.code_service }}</td>
-                                <td>{{ client.date_init_service | date }}</td>
-                                <td>{{ client.date_end_service | date }}</td>
-                                <td>{{ client.days_service | number }}</td>
-                                <td>{{ client.state_service }}</td>
-                            </tr>
-                        </tbody>
-                    </table>  
+
+                    <!-- start info options-->
+                    <div class="row" *ngIf="success">
+                        <div class="col-sm-12">
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>Éxito</strong> {{ message }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end info options-->
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table class="table table-sm table-striped">
+                                <thead class="bg-secondary text-white">
+                                    <tr>
+                                        <th>Acciones</th>
+                                        <th>Empresa</th>
+                                        <th>Servicio</th>
+                                        <th>Fecha de inicio</th>
+                                        <th>Fecha de fin</th>
+                                        <th>Días contratados</th>
+                                        <th>Estado</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let client of lstClients">
+                                        <td>
+                                            <a routerLink='../show/{{client.pk_id_service_enterprise}}' class="btn text-ultra-small btn-sm btn-outline-primary" type="button">
+                                                <fa-icon [icon]="faEye" class="text-outline-secondary mb-2 mr-1"></fa-icon>Ver detalle
+                                            </a>
+                                            <a routerLink='../create/{{client.pk_id_service_enterprise}}' class="btn text-ultra-small btn-sm btn-outline-success" type="button">
+                                                <fa-icon [icon]="faEdit" class="text-outline-success mb-2 mr-1"></fa-icon>Editar
+                                            </a>
+                                            <button (click)="onSelect(client)" class="btn text-ultra-small btn-sm btn-outline-danger" type="button" data-toggle="modal" data-target="#deleteObject">
+                                                <fa-icon [icon]="faTrash" class="text-outline-danger mb-2 mr-1"></fa-icon>Eliminar
+                                            </button>
+                                        </td>
+                                        <td>{{ client.reference_enterprise.split(':')[1] }}</td>
+                                        <td>{{ client.code_service }}</td>
+                                        <td>{{ client.date_init_service | date }}</td>
+                                        <td>{{ client.date_end_service | date }}</td>
+                                        <td>{{ client.days_service | number }}</td>
+                                        <td>{{ client.state_service }}</td>
+                                    </tr>
+                                </tbody>
+                            </table> 
+                        </div>
+                    </div> 
                 </div>
             </div>
             <!-- end content -->
         </section>
     </main>
 </app-pages>
+
+
+<!-- Modal -->
+<div class="modal fade" id="deleteObject" tabindex="-1" role="dialog" aria-labelledby="deleteObject" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Confirmación de mensaje</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="alert alert-danger" role="alert">
+                Se va a eliminar un registro, desea confirmar la operación?.
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="button" (click)="deleteObject()" data-dismiss="modal" class="btn btn-danger">Eliminar</button>
+        </div>
+        </div>
+    </div>
+</div>

@@ -5,7 +5,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CardComponent } from './card/card.component';
 import { PagesComponent } from './pages/pages.component';
 import { UserService } from './services/user.service';
-import { MatAccordion } from '@angular/material';
 
 @NgModule({
   imports: [

@@ -16,7 +16,7 @@ export class RolService {
   }
 
   public getAll$(): Observable<Rol[]> {
-    return this.userService.validateOptionByToken('ROL_LIST').pipe(
+    return this.userService.validateOptionByToken('Rol:getAll').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<Rol[]>(this._url);
@@ -26,7 +26,7 @@ export class RolService {
   }
 
   public store$(rol: Rol): Observable<Rol> {
-    return this.userService.validateOptionByToken('ROL_CRT').pipe(
+    return this.userService.validateOptionByToken('Rol:create').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.post<Rol>(this._url, rol);
@@ -37,7 +37,7 @@ export class RolService {
 
   public show$(id_rol: number): Observable<Rol> {
     const url = this._url + '/' + id_rol;
-    return this.userService.validateOptionByToken('ROL_SHOW').pipe(
+    return this.userService.validateOptionByToken('Rol:show').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<Rol>(url);
@@ -48,7 +48,7 @@ export class RolService {
 
   public delete$(id: number): Observable<Rol> {
     const url = this._url + '/' + id.toString();
-    return this.userService.validateOptionByToken('ROL_DEL').pipe(
+    return this.userService.validateOptionByToken('Rol:delete').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.delete<Rol>(url);
@@ -59,7 +59,7 @@ export class RolService {
 
   public getRolWithOptions$(id: number): Observable<Rol> {
     const url = this._url + '/get-options-selected-by-rol/' +id.toString();
-    return this.userService.validateOptionByToken('ROL_GET_WITH_OPTIONS').pipe(
+    return this.userService.validateOptionByToken('Rol:getWithOptions').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<Rol>(url);
@@ -69,7 +69,7 @@ export class RolService {
   }
 
   public update$(Rol: Rol): Observable<Rol> {
-    return this.userService.validateOptionByToken('ROL_UPD').pipe(
+    return this.userService.validateOptionByToken('Rol:update').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.put<Rol>(this._url, Rol);

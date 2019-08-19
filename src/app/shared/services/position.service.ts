@@ -20,7 +20,7 @@ export class PositionService {
 
   public getByEnterpsie$(id_enterprise: number): Observable<Position[]> {
     let url = this._url + '/list/' + id_enterprise;
-    return this.userService.validateOptionByToken('POSITION_LIST').pipe(
+    return this.userService.validateOptionByToken('Position:getByEnterprise').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<Position[]>(url);
@@ -30,7 +30,7 @@ export class PositionService {
   }
 
   public store$(position: Position): Observable<Position> {
-    return this.userService.validateOptionByToken('POSITION_CRT').pipe(
+    return this.userService.validateOptionByToken('Position:create').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.post<Position>(this._url, position);
@@ -40,7 +40,7 @@ export class PositionService {
   }
 
   public update$(position: Position): Observable<Position> {
-    return this.userService.validateOptionByToken('POSITION_UPD').pipe(
+    return this.userService.validateOptionByToken('Position:update').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.put<Position>(this._url, position);
@@ -51,7 +51,7 @@ export class PositionService {
 
   public show$(id_position: number): Observable<Position> {
     const url = this._url + '/' + id_position;
-    return this.userService.validateOptionByToken('POSITION_SHOW').pipe(
+    return this.userService.validateOptionByToken('Position:show').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<Position>(url);
@@ -62,7 +62,7 @@ export class PositionService {
 
   public delete$(id: number): Observable<Position> {
     const url = this._url + '/' + id.toString();
-    return this.userService.validateOptionByToken('POSITION_DEL').pipe(
+    return this.userService.validateOptionByToken('Position:delete').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.delete<Position>(url);

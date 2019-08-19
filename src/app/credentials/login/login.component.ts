@@ -21,9 +21,12 @@ import { EnterpriseService } from 'src/app/shared/services/enterprise.service';
 })
 export class LoginComponent implements OnInit {
   authenticationForm: FormGroup;
-  status: StatusMessage = null;
   userLogin: User = new User;
   personLogin: Person = new Person;
+
+  success = true;
+  code = '0';
+  description = 'asdf';
 
   public user$: Observable<User> = this.globalStoreService.getUser$();
 
@@ -40,8 +43,13 @@ export class LoginComponent implements OnInit {
     }
 
   ngOnInit() {
+    this.initForm();
+  }
+
+  private initForm(){
     this.authenticationForm = this.fb.group({
       username: ['', Validators.required],
+      token:[''],
       password: ['', [Validators.required, Validators.minLength(3)]],
     });
   }
@@ -77,8 +85,18 @@ export class LoginComponent implements OnInit {
         }
       )
     }),
+    tap((user:User) => {
+      this.globalStoreService.setUser(user);
+    })
   )
-  .subscribe(this.loadUser, this.onError);
+  .subscribe(
+    () => this.router.navigateByUrl('/sales-admin/modules'), 
+    (error:any) => {
+      this.success = false;
+      this.code = error.error.code;
+      this.description = error.error.message;
+      this.initForm();
+  });
 }
   
   public getErrors(controlName: string): any {
@@ -91,25 +109,5 @@ export class LoginComponent implements OnInit {
 
   public hasError(controlName: string, errorCode: string): any {
     return this.formToolService.hasError(this.authenticationForm, controlName, errorCode);
-  }
-
-  /*
-  * ------------------------------------------
-  * Funciones validación de resultado
-  * ------------------------------------------
-  */
-  private loadUser = () => {
-    this.globalStoreService.setUser(this.userLogin);
-    this.router.navigateByUrl('/sales-admin/modules');
-  }
-
-  private onError = (error: any) => {
-      this.status = new StatusMessage;
-      this.globalStoreService.setUser(null);
-
-      this.authenticationForm.reset();
-      this.status.code = error.status;
-      this.status.desc = error.statusText;
-      this.status.serverDesc = error.error.error;
   }
 }

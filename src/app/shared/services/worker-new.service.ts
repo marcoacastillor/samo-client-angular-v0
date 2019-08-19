@@ -19,7 +19,7 @@ export class WorkerNewService {
 
   public getInfoByEnterprisePerson$(id: number): Observable<WorkerNews[]> {
     const url = this._url + '/'+id;
-    return this.userService.validateOptionByToken('WORKER_NEWS_GET_INFO_BY_CONTRACT').pipe(
+    return this.userService.validateOptionByToken('WorkerNews:getByContract').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<WorkerNews[]>(url);
@@ -29,7 +29,7 @@ export class WorkerNewService {
   }
 
   public create$(workerNew: WorkerNews): Observable<WorkerNews> {
-    return this.userService.validateOptionByToken('WORKER_NEWS_CRT').pipe(
+    return this.userService.validateOptionByToken('WorkerNews:create').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.post<WorkerNews>(this._url, workerNew);
@@ -40,7 +40,7 @@ export class WorkerNewService {
 
   public getByPeriodAndContract$(id_period:number, id_contract:number): Observable<WorkerNews[]> {
     const url = this._url + '/get-by-period-and-contract/'+id_period+'/'+id_contract;
-    return this.userService.validateOptionByToken('WORKER_NEWS_GET_PERIOD_AND_CONTRACT').pipe(
+    return this.userService.validateOptionByToken('WorkerNews:getByPeriodAndContract').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<WorkerNews[]>(url);

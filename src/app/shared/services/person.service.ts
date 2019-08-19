@@ -18,7 +18,7 @@ export class PersonService {
   }
 
   public index$(): Observable<Person[]> {
-    return this.userService.validateOptionByToken('PRS_LIST').pipe(
+    return this.userService.validateOptionByToken('Person:getAll').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<Person[]>(this._url);
@@ -29,7 +29,7 @@ export class PersonService {
 
   public getEmployeesByEnterprise$(id_enterprise: number): Observable<Person[]> {
     const url = this._url + '/get-employees-by-enterprise-list/'+id_enterprise;
-    return this.userService.validateOptionByToken('PRS_GET_EMPLOYEE_BY_ENTERPRISE').pipe(
+    return this.userService.validateOptionByToken('Person:getEmployeeByEnterpriseList').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<Person[]>(url);
@@ -40,7 +40,7 @@ export class PersonService {
 
   public getActiveEmployeesByEnterprise$(id_enterprise: number): Observable<Person[]> {
     const url = this._url + '/get-active-employee-by-enterprise/'+id_enterprise;
-    return this.userService.validateOptionByToken('PRS_GET_EMPLOYEE_BY_ENTERPRISE').pipe(
+    return this.userService.validateOptionByToken('Person:getActiveEmployeeByEnterprise').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<Person[]>(url);
@@ -52,7 +52,7 @@ export class PersonService {
 
   public showByExternalReference$(externalReference: string): Observable<Person> {
     const url = this._url + '/show-external-reference/' + externalReference;
-    return this.userService.validateOptionByToken('PRS_SHOW_EXTERNAL_REFERENCE').pipe(
+    return this.userService.validateOptionByToken('Person:getByExternalRererence').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<Person>(url);
@@ -63,7 +63,7 @@ export class PersonService {
 
   public createPerson$(person: Person): Observable<Person> {
     let url = this._url + '/create-person';
-    return this.userService.validateOptionByToken('PRS_CRT').pipe(
+    return this.userService.validateOptionByToken('Person:createPerson').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.post<Person>(url, person);
@@ -74,7 +74,7 @@ export class PersonService {
 
   public createEmployee$(person: Person): Observable<Person> {
     let url = this._url + '/create-employee';
-    return this.userService.validateOptionByToken('PRS_CRT').pipe(
+    return this.userService.validateOptionByToken('Person:createEmployee').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.post<Person>(url, person);
@@ -85,7 +85,7 @@ export class PersonService {
 
   public updateClient$(person: Person): Observable<Person> {
     let url = this._url + '/update-client'
-    return this.userService.validateOptionByToken('PRS_UPD').pipe(
+    return this.userService.validateOptionByToken('Person:udateClient').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.put<Person>(url, person);
@@ -96,7 +96,7 @@ export class PersonService {
 
   public updateEmployee$(person: Person): Observable<Person> {
     let url = this._url + '/update-employee'
-    return this.userService.validateOptionByToken('PRS_UPD').pipe(
+    return this.userService.validateOptionByToken('Person:updateEmployee').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.put<Person>(url, person);
@@ -107,7 +107,7 @@ export class PersonService {
 
   public show$(id: number): Observable<Person> {
     const url = this._url+ '/' + id;
-    return this.userService.validateOptionByToken('PRS_SHOW').pipe(
+    return this.userService.validateOptionByToken('Person:show').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<Person>(url);
@@ -123,7 +123,7 @@ export class PersonService {
 
   public getByTypeAndNumberId$(type: string, id: string): Observable<Person> {
     const url = this._url+ '/get-by-type-and-number-id/'+type+'/'+id;
-    return this.userService.validateOptionByToken('PRS_GET_BY_ID').pipe(
+    return this.userService.validateOptionByToken('Person:getByTypeIdAndNumber').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<Person>(url);
@@ -134,7 +134,7 @@ export class PersonService {
 
   public getEmployeesByEnterpriseRs$(id_enterprise: number): Observable<Results> {
     const url = this._url+ '/get-employees-by-enterprise/'+id_enterprise.toString();
-    return this.userService.validateOptionByToken('PRS_EMPLOYEE_BY_ENTERPRISE').pipe(
+    return this.userService.validateOptionByToken('Person:getEmployeeByEnterprise').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<Results>(url);
@@ -145,7 +145,7 @@ export class PersonService {
 
   public getClientsByEnterprise$(id_enterprise: number): Observable<Person[]> {
     const url = this._url+ '/get-clients-by-enterprise/'+id_enterprise.toString();
-    return this.userService.validateOptionByToken('PRS_CLIENTS_BY_ENTERPRISE').pipe(
+    return this.userService.validateOptionByToken('Person:getClientsByEnterprise').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<Person[]>(url);
@@ -156,7 +156,7 @@ export class PersonService {
 
   public searchEmployeeByFilter$(filter: string, id_enterprise: number): Observable<Results> {
     let url = this._url + '/get-employee-by-filter-and-enterprise/' + filter + '/' + id_enterprise;
-    return this.userService.validateOptionByToken('PRS_GET_EMPLOYEE_BY_FILTER_AND_ENTERPRISE').pipe(
+    return this.userService.validateOptionByToken('Person:getEmployeeByFilterAndEnterprise').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<Results>(url);
@@ -167,7 +167,7 @@ export class PersonService {
 
   public searchClientsByFilter$(filter: string, id_enterprise: number): Observable<Results> {
     let url = this._url + '/get-client-by-filter-and-enterprise/' + filter + '/' + id_enterprise;
-    return this.userService.validateOptionByToken('PRS_GET_CLIENT_BY_FILTER_AND_ENTERPRISE').pipe(
+    return this.userService.validateOptionByToken('Person:getClientByFilterAndEnterprise').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<Results>(url);
@@ -178,7 +178,7 @@ export class PersonService {
 
   public inactivate$(id: number): Observable<Person> {
     const url = this._url + '/inactivate-employee/' + id.toString();
-    return this.userService.validateOptionByToken('PRS_INACTIVATE').pipe(
+    return this.userService.validateOptionByToken('Person:inactiveEmployee').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<Person>(url);
@@ -189,7 +189,7 @@ export class PersonService {
 
   public getPersonsByIdFilter$(id_client: string): Observable<Person[]> {
     const url = this._url + '/get-persons-by-id-filter/' + id_client.toString();
-    return this.userService.validateOptionByToken('PRS_GET_BY_ID_FILTER').pipe(
+    return this.userService.validateOptionByToken('Person:getPersionsByIdFilter').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<Person[]>(url);
@@ -200,7 +200,7 @@ export class PersonService {
 
   public getPersonsByNamesFilter$(names_client: string): Observable<Person[]> {
     const url = this._url + '/get-persons-by-names-filter/' + names_client.toString();
-    return this.userService.validateOptionByToken('PRS_GET_BY_NAMES_FILTER').pipe(
+    return this.userService.validateOptionByToken('Person:getPersonsByNameFilter').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<Person[]>(url);
@@ -211,7 +211,7 @@ export class PersonService {
 
   public getLaboralInfoByPerson$(id_person: number): Observable<Person> {
     const url = this._url + '/get-laboral-info-by-person/' + id_person.toString();
-    return this.userService.validateOptionByToken('PRS_GET_LABORAL_INFO_BY_PERSON').pipe(
+    return this.userService.validateOptionByToken('Person:getLaboralInfoByPerson').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<Person>(url);
@@ -222,7 +222,7 @@ export class PersonService {
 
   public deleteLaboralInfo$(id:number): Observable<EnterprisePerson> {
     const url = this._url + '/delete-laboral-info-of-person/' + id.toString();
-    return this.userService.validateOptionByToken('PRS_DEL_LABORAL_INFO_OF_PERSON').pipe(
+    return this.userService.validateOptionByToken('Person:deleteLaboralInfoByPerson').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.delete<EnterprisePerson>(url);
@@ -233,7 +233,7 @@ export class PersonService {
 
   public deleteClient$(id:number): Observable<Person> {
     const url = this._url + '/delete-client/' + id.toString();
-    return this.userService.validateOptionByToken('PRS_DEL_CLIENT').pipe(
+    return this.userService.validateOptionByToken('Person:deleteClient').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.delete<Person>(url);
@@ -243,7 +243,7 @@ export class PersonService {
   }
 
   public update$(person:Person): Observable<Person> {
-    return this.userService.validateOptionByToken('PRS_UPD_INFO').pipe(
+    return this.userService.validateOptionByToken('Person:update').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.put<Person>(this._url,person);

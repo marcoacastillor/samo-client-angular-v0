@@ -26,7 +26,7 @@ export class UserService {
   }
 
   public getAll$(): Observable<User[]> {
-    return this.validateOptionByToken('USR_LIST').pipe(
+    return this.validateOptionByToken('User:getAll').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<User[]>(this._url);
@@ -37,7 +37,7 @@ export class UserService {
 
   public show$(id: number): Observable<User> {
     const url = this._url + '/' + id.toString();
-    return this.validateOptionByToken('USR_SHOW').pipe(
+    return this.validateOptionByToken('User:show').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<User>(url);
@@ -47,7 +47,7 @@ export class UserService {
   }
 
   public store$(user: User): Observable<User> {
-    return this.validateOptionByToken('USR_CRT').pipe(
+    return this.validateOptionByToken('User:create').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.post<User>(this._url, user);
@@ -58,7 +58,7 @@ export class UserService {
 
   public delete$(id: number): Observable<User> {
     const url = this._url + '/' + id.toString();
-    return this.validateOptionByToken('USR_DEL').pipe(
+    return this.validateOptionByToken('User:delete').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.delete<User>(url);
@@ -68,7 +68,7 @@ export class UserService {
   }
 
   public update$(user: User): Observable<User> {
-    return this.validateOptionByToken('USR_UPD').pipe(
+    return this.validateOptionByToken('User:update').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.put<User>(this._url, user);
@@ -79,7 +79,7 @@ export class UserService {
 
   public inactiveUserByPerson$(id_person: number): Observable<User> {
     const url = this._url + '/inactive-user-by-person/' + id_person.toString()
-    return this.validateOptionByToken('USR_INACTIVE_BY_PERSON').pipe(
+    return this.validateOptionByToken('User:inactiveByPerson').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<User>(url);

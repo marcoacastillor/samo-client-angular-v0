@@ -83,7 +83,6 @@ export class NewComponentComponent implements OnInit, OnChanges {
     url_image: [''],
     file_image: [null],
     url_angular_component: [this.comp.url_angular_component],
-    display_user: [this.comp.display_user]
     });
   }
 
