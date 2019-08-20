@@ -18,22 +18,33 @@ export class OptionService {
     ) {
   }
 
-  public getAll$(): Observable<Results> {
+  public getAll$(): Observable<Option[]> {
     return this.userService.validateOptionByToken('Option:getAll').pipe(
       switchMap(validate => {
         if(validate){
-          return this.http.get<Results>(this._url);
+          return this.http.get<Option[]>(this._url);
         }
       })
     );
   }
 
-  public getByFilter$(filter: string): Observable<Results> {
-    const url = this._url + '/get-by-filter/' + filter;
-    return this.userService.validateOptionByToken('Option:getByFilter').pipe(
+  public getByBusinessObject$(business_object: string): Observable<Option[]> {
+    const url = this._url + '/get-by-business-object/' + business_object;
+    return this.userService.validateOptionByToken('Option:getByBusinessObject').pipe(
       switchMap(validate => {
         if(validate){
-          return this.http.get<Results>(url);
+          return this.http.get<Option[]>(url);
+        }
+      })
+    );
+  }
+
+  public getByAction$(action: string): Observable<Option[]> {
+    const url = this._url + '/get-by-action/' + action;
+    return this.userService.validateOptionByToken('Option:getByAction').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.get<Option[]>(url);
         }
       })
     );

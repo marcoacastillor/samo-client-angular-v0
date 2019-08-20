@@ -1,0 +1,102 @@
+<app-pages title="Módulos del sistema">  
+    <main>            
+        <section>
+            <!-- start menu main-->
+            <div class="row bg-gray">
+                <div class="col-sm-6 text-left">
+                    Listado de todas los módulos
+                </div>
+                <div class="col-sm-6 text-right">
+                    <div class="btn-group btn-group-sm">
+                        <button (click)="newModule()" type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#moduleModal">
+                            <fa-icon [icon]="faPlusCircle" class="text-outline-primary mb-2 mr-1"></fa-icon>Crear
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- end menu main-->
+
+            <!-- start content -->
+            <div class="row margin-top-1rem">
+
+                <div class="col-sm-12">
+                    <!-- start info options-->
+                    <div class="row" *ngIf="success">
+                        <div class="col-sm-12">
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>Éxito:</strong> {{ message }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end info options-->
+                </div>
+
+                <div class="col-sm-12">
+                    <table class="table table-sm table-striped">
+                        <thead class="bg-secondary text-white">
+                            <tr>
+                                <th colspan="2">Nombre</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let module of lstModules">
+                                <td>
+                                    <div class="btn-group">
+                                        <a routerLink='../show/{{module.pk_id_module}}' class="btn text-ultra-small btn-sm btn-outline-primary" type="button">
+                                            <fa-icon [icon]="faEye" class="text-outline-secondary mb-2 mr-1"></fa-icon>Ver detalle
+                                        </a>
+                                        <button (click)="selectModule(module)" type="button" class="btn text-ultra-small btn-sm btn-outline-primary" data-toggle="modal" data-target="#moduleModal">
+                                            <fa-icon [icon]="faEdit" class="text-primary mb-2 mr-1" title="Actualizar registro"></fa-icon>Editar
+                                        </button>
+                                        <button (click)="selectModule(module)" type="button" class="text-ultra-small btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#deleteProduct">
+                                            <fa-icon [icon]="faTrash" class="text-outline-danger mb-2 mr-1"></fa-icon>Eliminar
+                                        </button> 
+                                    </div>
+                                </td>
+                                <td>{{ module.name }}</td>
+                                <td>{{ module.description }}</td>
+                            </tr>
+                        </tbody>
+                    </table>  
+                </div>
+            </div>
+            <!-- end content -->
+        </section>
+    </main>
+</app-pages>
+
+<!-- Sección de creación de módulo-->
+<app-module-form-modal
+[module]="selectedModule"
+(update)="onUpdate($event)"
+(create)="onCreate($event)"
+>
+</app-module-form-modal>
+<!-- fin Sección de creación de módulo-->
+
+<!-- Modal -->
+<div class="modal fade" id="deleteProduct" tabindex="-1" role="dialog" aria-labelledby="deleteProduct" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Confirmación de mensaje</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="alert alert-danger" role="alert">
+                Se va a eliminar un registro, desea confirmar la operación?.
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="button" (click)="deleteModule()" data-dismiss="modal" class="btn btn-danger">Eliminar</button>
+        </div>
+        </div>
+    </div>
+</div>

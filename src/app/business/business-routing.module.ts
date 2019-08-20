@@ -14,6 +14,10 @@ const routes: Routes = [
         loadChildren: './administration/administration.module#AdministrationModule'
       },
       {
+        path: 'access-manager',
+        loadChildren: './access-manager/access-manager.module#AccessManagerModule'
+      },
+      {
         path: 'configuration',
         loadChildren: './configuration/configuration.module#ConfigurationModule'
       },

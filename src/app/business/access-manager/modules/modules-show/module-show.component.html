@@ -1,0 +1,173 @@
+<app-pages title="Detalle de módulo">  
+    <main>       
+        <section>
+            <!-- start menu main-->
+            <div class="row bg-gray">
+                <div class="col-sm-6 text-left">
+                    Detalle de modulo
+                </div>
+                <div class="col-sm-6 text-right">
+                    <div class="btn-group btn-group-sm">
+                        <a routerLink='/sales-admin/access-manager/modules/list' class="btn text-ultra-small btn-sm btn-outline-primary" type="button">
+                            <fa-icon [icon]="faThList" class="text-outline-secondary mb-2 mr-1"></fa-icon>Ver todos
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- end menu main-->
+
+            <!-- start content -->
+            <div class="row margin-top-1rem">
+                <div class="col-sm-12">
+
+                    <!-- start info options-->
+                    <div class="row back-colo-f6">
+                        <div class="col-sm-12 text-left align-self-start">
+                            <div class="btn-group btn-group-sm">
+                                <div class="dropdown">
+                                    <button class="btn btn-sm dropdown-toggle" type="button" id="products" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <fa-icon [icon]="faCartArrowDown" class="text-outline-secondary mb-2 mr-1"></fa-icon>Componentes
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="products">
+                                        <button (click)="newComponent()" class="dropdown-item text-small text-secondary" type="button" data-toggle="modal" data-target="#componentModal">
+                                            <fa-icon [icon]="faPlus" class="text-outline-secondary mb-2 mr-1"></fa-icon>Agregar componente
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end info options-->
+
+                    <div class="col-sm-12">
+                        <!-- start info options-->
+                        <div class="row" *ngIf="success">
+                            <div class="col-sm-12">
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <strong>Éxito:</strong> {{ message }}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end info options-->
+                    </div>
+                    
+                    
+                    <!-- start main info-->
+                    <div class="row margin-top-1rem">
+
+                        <!-- start module info-->
+                        <div class="col-sm-6">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table class="table table-sm">
+                                        <thead>
+                                            <tr>
+                                                <td colspan="2"><h4>Información de módulo</h4></td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th>Nombre</th>
+                                                <td>{{ module.name }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Descripción</th>
+                                                <td>{{ module.description }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Módulo Angular</th>
+                                                <td><pre>{{ module.url_angular_module }}</pre></td>
+                                            </tr>
+                                            <tr>
+                                                <th>Icono</th>
+                                                <td><span class="{{ module.icon_name }}"></span> : [{{ module.icon_name }}]</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Prioridad de visualización</th>
+                                                <td>{{ module.order_module }}</td>
+                                            </tr>
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end module info-->
+
+                        <div class="col-sm-6">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table class="table table-sm">
+                                        <thead>
+                                            <tr>
+                                                <td colspan="2"><h4>Información de componentes</h4></td>
+                                            </tr>
+                                            <tr>
+                                                <th colspan="2" class="text-rigth">Nombre</th>
+                                                <th>Url compoente</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let component of lstComponent">
+                                                <td>
+                                                    <div class="btn-group">
+                                                        <button (click)="selectComponent(component)" type="button" class="btn text-ultra-small btn-sm btn-outline-primary" data-toggle="modal" data-target="#componentModal">
+                                                            <fa-icon [icon]="faEdit" class="text-primary mb-2 mr-1" title="Actualizar registro"></fa-icon>Editar
+                                                        </button>
+                                                        <button (click)="selectComponent(component)" type="button" class="text-ultra-small btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#deleteComponent">
+                                                            <fa-icon [icon]="faTrash" class="text-outline-danger mb-2 mr-1"></fa-icon>Eliminar
+                                                        </button> 
+                                                    </div>
+                                                </td>
+                                                <td>{{ component.name}}</td>
+                                                <td>{{ component.url_angular_component}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end main info-->
+                </div>
+            </div>
+            <!-- end content -->
+        </section>
+    </main>
+</app-pages>  
+
+<!-- información de componente -->
+<app-component-form-modal
+[component]="selectedComponet"
+(create)="onCreateComponent($event)"
+(update)="onUpdateComponent($event)"
+>
+</app-component-form-modal>
+<!-- fin información de componente -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="deleteComponent" tabindex="-1" role="dialog" aria-labelledby="deleteComponent" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Confirmación de mensaje</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="alert alert-danger" role="alert">
+                Se va a eliminar un registro, desea confirmar la operación?.
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="button" (click)="deleteComponent()" data-dismiss="modal" class="btn btn-danger">Eliminar</button>
+        </div>
+        </div>
+    </div>
+</div>

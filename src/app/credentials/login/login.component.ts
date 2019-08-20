@@ -22,11 +22,10 @@ import { EnterpriseService } from 'src/app/shared/services/enterprise.service';
 export class LoginComponent implements OnInit {
   authenticationForm: FormGroup;
   userLogin: User = new User;
-  personLogin: Person = new Person;
 
   success = true;
-  code = '0';
-  description = 'asdf';
+  code = '';
+  description = '';
 
   public user$: Observable<User> = this.globalStoreService.getUser$();
 

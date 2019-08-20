@@ -1,0 +1,92 @@
+<div class="modal fade" id="moduleModal" tabindex="-1" role="dialog" aria-labelledby="moduleModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Módulo</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="card">
+                <div class="card-body">
+                    <form [formGroup]="moduleForm">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="name">Nombre</label>
+                                    <input type="text" class="form-control text-small" placeholder="Nombre" formControlName="name" required>
+                                    <small *ngIf="mustShowError('name')" class="form-text alert-danger">
+                                    Nombre, es obligatorio
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="url_angular_module">Módulo angular</label>
+                                    <input type="text" class="form-control text-small" placeholder="Modulo angular" formControlName="url_angular_module" required>
+                                    <small *ngIf="mustShowError('url_angular_module')" class="form-text alert-danger">
+                                    Componente Angular, es obligatorio
+                                    </small>
+                                </div>
+                            </div> 
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="icon_name">Ícono de módulo</label>
+                                    <input type="text" class="form-control text-small" placeholder="Nombre del ícono" formControlName="icon_name" required>
+                                    <small *ngIf="mustShowError('icon_name')" class="form-text alert-danger">
+                                    Nombre de icon es obligatorio
+                                    </small>
+                                </div>
+                            </div> 
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="order_module">Órden de módulo</label>
+                                    <input type="number" class="form-control text-small" placeholder="Órden de módulo" formControlName="order_module" required>
+                                    <small *ngIf="mustShowError('order_module')" class="form-text alert-danger">
+                                    Nombre de icon es obligatorio
+                                    </small>
+                                </div>
+                            </div> 
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="description">Descripción</label>
+                                    <textarea class="form-control text-small" placeholder="Descripcion" formControlName="description" required rows="3"></textarea>
+                                    <small *ngIf="mustShowError('description')" class="form-text alert-danger">
+                                        Descripción es obligatorio
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="url_image">imagen</label>
+                                    <input type="file" (change)="onFileSelected($event)" class="form-control-file text-small" placeholder="Imagen" formControlName="url_image" required />
+                                    <small *ngIf="mustShowError('url_image')" class="form-text alert-danger">
+                                    Imágen es obligatorio
+                                    </small>
+                                </div>
+                            </div> 
+                        </div>
+        
+                        <!--start buttons forms-->
+                        <div class="row justify-content-end">
+                            <div class="col-sm-4 text-right align-self-end">
+                                <button *ngIf="module.pk_id_module" type="submit" class="btn btn-outline-success btn-sm mb-2 mr-1" [disabled]="moduleForm.invalid" (click)="updateModule()">Actualizar</button>
+                                <button *ngIf="!module.pk_id_module" type="submit" class="btn btn-outline-primary btn-sm mb-2 mr-1" [disabled]="moduleForm.invalid" (click)="createModule()">Guardar</button>
+                            </div>
+                        </div>
+                        <!--end buttons forms-->
+                    </form>
+                </div>
+            </div>   
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        </div>
+        </div>
+    </div>
+</div>

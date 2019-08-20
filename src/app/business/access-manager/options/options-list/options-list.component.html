@@ -1,0 +1,142 @@
+<app-pages title="Opciones del sistema">  
+    <main>            
+        <section>
+            <!-- start menu main-->
+            <div class="row bg-gray">
+                <div class="col-sm-6 text-left">
+                    Listado de todas las opciones
+                </div>
+                <div class="col-sm-6 text-right">
+                    <div class="btn-group btn-group-sm">
+                        <button (click)="newOption()" type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#optionModal">
+                            <fa-icon [icon]="faPlusCircle" class="text-outline-primary mb-2 mr-1"></fa-icon>Crear
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- end menu main-->
+
+            <!--inicio buscador de productos -->
+            <div class="row margin-top-1rem">
+                <div class="col-sm-12 text-ultra-small">
+                    <div class="accordion" id="buscador">
+                        <div class="card">
+                            <div class="row" id="headingOne">
+                                <div class="col-sm-8">
+                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        <fa-icon [icon]="faSearch" class="text-outline-primary mb-2 mr-1"></fa-icon>Buscador de opciones
+                                    </button>
+                                </div>                
+                                <div class="col-sm-4 text-right">
+                                    <button class="btn btn-link" (click)=loadAllOptions() type="button" data-toggle="collapse" aria-expanded="true" aria-controls="collapseOne">
+                                        <fa-icon [icon]="faSearch" class="text-outline-primary mb-2 mr-1"></fa-icon>Cargar por defecto
+                                    </button>
+                                </div>                
+                            </div>
+                            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#buscador">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <input id="businessObject" (keypress)="onFindByBusinessObject($event)" class="form-control form-control-sm" type="text" placeholder="Digite objeto de negocio">
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <input id="action" (keypress)="onFindByAction($event)" class="form-control form-control-sm" type="text" placeholder="Digite acción">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 text-ultra-small">
+                    <p class="alert alert-info">
+                        Se muestra un listado de los 20 últimos registros. Para obtener otros productos, utilice el buscador.
+                    </p>
+                </div>
+            </div>
+            <!--fin buscador de productos -->
+
+            <!-- start content -->
+            <div class="row margin-top-1rem">
+
+                <div class="col-sm-12">
+                    <!-- start info options-->
+                    <div class="row" *ngIf="success">
+                        <div class="col-sm-12">
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>Éxito:</strong> {{ message }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end info options-->
+                </div>
+
+                <div class="col-sm-12">
+                    <table class="table table-sm table-striped">
+                        <thead class="bg-secondary text-white">
+                            <tr>
+                                <th colspan="2">Objeto de negocio</th>
+                                <th>Acción</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let option of lstOptions">
+                                <td>
+                                    <div class="btn-group">
+                                        <button (click)="selectOption(option)" type="button" class="btn text-ultra-small btn-sm btn-outline-primary" data-toggle="modal" data-target="#optionModal">
+                                            <fa-icon [icon]="faEdit" class="text-primary mb-2 mr-1" title="Actualizar registro"></fa-icon>Editar
+                                        </button>
+                                        <button (click)="selectOption(option)" type="button" class="text-ultra-small btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#deleteOption">
+                                            <fa-icon [icon]="faTrash" class="text-outline-danger mb-2 mr-1"></fa-icon>Eliminar
+                                        </button> 
+                                    </div>
+                                </td>
+                                <td>{{ option.business_object }}</td>
+                                <td>{{ option.action }}</td>
+                                <td>{{ option.description }}</td>
+                            </tr>
+                        </tbody>
+                    </table>  
+                </div>
+            </div>
+            <!-- end content -->
+        </section>
+    </main>
+</app-pages>
+
+<!-- Sección de creación de módulo-->
+<app-option-form-modal
+[option]="selectedOption"
+(update)="onUpdate($event)"
+(create)="onCreate($event)"
+>
+</app-option-form-modal>
+<!-- fin Sección de creación de módulo-->
+
+<!-- Modal -->
+<div class="modal fade" id="deleteOption" tabindex="-1" role="dialog" aria-labelledby="deleteOption" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Confirmación de mensaje</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="alert alert-danger" role="alert">
+                Se va a eliminar un registro, desea confirmar la operación?.
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="button" (click)="deleteOption()" data-dismiss="modal" class="btn btn-danger">Eliminar</button>
+        </div>
+        </div>
+    </div>
+</div>

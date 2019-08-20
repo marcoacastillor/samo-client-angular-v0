@@ -14,6 +14,7 @@ export class User {
   public created_at: string;
   public update_at: string;
   public state_user: string;
+  
   public rol: Rol;
   public person: Person;
   public enterprise: Enterprise;
