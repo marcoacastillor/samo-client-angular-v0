@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges, ChangeDetectorRef } from '@angular/core';
 import { faSave } from '@fortawesome/free-solid-svg-icons';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Enterprise } from 'src/app/shared/models/enterprise';
@@ -27,6 +27,7 @@ export class ModalEnterpriseFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private formToolService: FormToolsService,
+    private cd: ChangeDetectorRef
     
   ) { }
 
@@ -59,9 +60,30 @@ export class ModalEnterpriseFormComponent implements OnInit {
       DIAN_billing_resolution: [this.enterprise.DIAN_billing_resolution],
       footer_billing: [this.enterprise.footer_billing],
       size: [this.enterprise.size],
-      email: [this.enterprise.email, Validators.email]
+      email: [this.enterprise.email, Validators.email],
+      url_logo: [this.enterprise.url_logo],
+      url_image: ['']
     })
   }
+
+  public onFileSelected(event:any) {
+    let reader = new FileReader();
+
+    if(event.target.files && event.target.files.length){
+      const [image] = event.target.files;
+      reader.readAsDataURL(image);
+
+      reader.onload = () => {
+        this.enterpriseForm.patchValue({
+          url_logo: reader.result
+        });
+
+        // need to run CD since file load runs outside of zone
+        this.cd.markForCheck();
+      }
+    }
+  }
+
 
   createEnterprise(){
     this.create.emit(this.enterpriseForm.value);

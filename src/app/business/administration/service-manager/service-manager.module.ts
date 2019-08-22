@@ -14,6 +14,7 @@ import { PaymentServicesService } from 'src/app/shared/services/payment-services
 import { ServiceEnterpriseService } from 'src/app/shared/services/service-enterprise.service';
 import { FormPaymentModalComponent } from './service-manager-show/form-payment-modal/form-payment-modal.component';
 import { AccessEnterpriseService } from 'src/app/shared/services/access-enterprise.service';
+import { ParameterService } from 'src/app/shared/services/parameter.service';
 
 @NgModule({
   imports: [
@@ -25,7 +26,7 @@ import { AccessEnterpriseService } from 'src/app/shared/services/access-enterpri
     OwlNativeDateTimeModule
   ],
   providers: [
-    TypeServiceService, EnterpriseService, ServiceEnterpriseService, PaymentServicesService, AccessEnterpriseService 
+    TypeServiceService, EnterpriseService, ServiceEnterpriseService, PaymentServicesService, AccessEnterpriseService, ParameterService 
   ],
   declarations: [ServiceManagerListComponent, ServiceManagerShowComponent, ServiceManagerCreateComponent, FormPaymentModalComponent]
 })

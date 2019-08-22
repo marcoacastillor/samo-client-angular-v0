@@ -11,6 +11,7 @@ import { AuthenticationService } from '../shared/services/authentication.service
 import { HttpClientModule } from '@angular/common/http';
 import { PersonService } from '../shared/services/person.service';
 import { EnterpriseService } from '../shared/services/enterprise.service';
+import { RolService } from '../shared/services/rol.service';
 
 @NgModule({
   imports: [
@@ -22,6 +23,6 @@ import { EnterpriseService } from '../shared/services/enterprise.service';
   ],
   declarations: [LoginComponent],
   exports: [ LoginComponent ],
-  providers: [ UserService, AuthenticationService, PersonService, EnterpriseService ]
+  providers: [ UserService, AuthenticationService, PersonService, EnterpriseService, RolService ]
 })
 export class CredentialsModule { }

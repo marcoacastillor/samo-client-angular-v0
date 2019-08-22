@@ -13,6 +13,7 @@ import { tap } from 'rxjs/operators';
 import { PersonService } from 'src/app/shared/services/person.service';
 import { Person } from 'src/app/shared/models/person';
 import { EnterpriseService } from 'src/app/shared/services/enterprise.service';
+import { RolService } from 'src/app/shared/services/rol.service';
 
 @Component({
   selector: 'app-login',
@@ -37,7 +38,8 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private personService: PersonService,
     private authenticationService: AuthenticationService,
-    private enterPriseService: EnterpriseService
+    private enterPriseService: EnterpriseService,
+    private rolService: RolService
      ) {
     }
 
@@ -64,29 +66,30 @@ export class LoginComponent implements OnInit {
       this.userLogin = user
     }),
     tap((user:User) => {
+      this.rolService.showLogin$(user.fk_id_rol).subscribe(
+        rol => this.userLogin.rol = rol
+      )
+    }),
+    tap((user:User) => {
+      this.personService.showLogin$(user.fk_id_person).subscribe(
+        person => this.userLogin.person = person
+      )
+    }),
+    tap((user:User) => {
+      this.enterPriseService.showLogin$(user.fk_id_enterprise).subscribe(
+        enterprise => this.userLogin.enterprise = enterprise
+      )
+    }),
+    tap((user:User) => {
+      this.globalStoreService.setUser(user);
+    }),
+    tap((user:User) => {
       let auth = new Authentication;
       auth.api_token = user.api_token;
       auth.username = user.username;
 
       this.authenticationService.store$(auth).subscribe();
     }),
-    tap((user:User) => {
-      this.personService.showLogin$(user.fk_id_person).subscribe(
-        person => {
-          this.userLogin.person = person;
-        }
-      )
-    }),
-    tap((user:User) => {
-      this.enterPriseService.showLogin$(user.fk_id_enterprise).subscribe(
-        enterprise => {
-          this.userLogin.enterprise = enterprise;
-        }
-      )
-    }),
-    tap((user:User) => {
-      this.globalStoreService.setUser(user);
-    })
   )
   .subscribe(
     () => this.router.navigateByUrl('/sales-admin/modules'), 

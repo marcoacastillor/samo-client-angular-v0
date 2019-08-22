@@ -1,0 +1,236 @@
+<app-pages title="Detalle de rol">  
+    <main>       
+        <section>
+            <!-- start menu main-->
+            <div class="row bg-gray">
+                <div class="col-sm-6 text-left">
+                    Detalle de rol
+                </div>
+                <div class="col-sm-6 text-right">
+                    <div class="btn-group btn-group-sm">
+                        <a routerLink='/sales-admin/access-manager/rols/list' class="btn text-ultra-small btn-sm btn-outline-primary" type="button">
+                            <fa-icon [icon]="faThList" class="text-outline-secondary mb-2 mr-1"></fa-icon>Ver todos
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- end menu main-->
+
+            <!-- start content -->
+            <div class="row margin-top-1rem">
+                <div class="col-sm-12">
+                    <!-- start info options-->
+                    <div class="row" *ngIf="success">
+                        <div class="col-sm-12">
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>Éxito:</strong> {{ message }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end info options-->
+                </div>
+            </div>
+                
+            <!-- start main info-->
+            <div class="row margin-top-1rem">
+                <!-- start module info-->
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th colspan="2"><h4>Rol</h4></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <td>{{ rol.name }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Descripción</th>
+                                        <td>{{ rol.description }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- end module info-->
+            </div>
+            <!-- end main info-->
+
+            <div class="row margin-top-1rem">
+                <div class="col-sm-4">
+                    <!-- inicio muestra de información -->
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <!-- inicio menú-->
+                                    <div class="row back-colo-f6" *ngIf="rol.pk_id_rol != 1">
+                                        <div class="col-sm-12 text-right align-self-end">
+                                            <div class="btn-group btn-group-sm">
+                                                <div class="dropdown">
+                                                    <button class="btn btn-sm dropdown-toggle" type="button" id="products" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <fa-icon [icon]="faFolderOpen" class="text-outline-secondary mb-2 mr-1"></fa-icon>Módulos
+                                                    </button>
+                                                    <div class="dropdown-menu" aria-labelledby="products">
+                                                        <button (click)="getAllModels()" class="dropdown-item text-small text-secondary" type="button" data-toggle="modal" data-target="#componentModal">
+                                                            <fa-icon [icon]="faPlus" class="text-outline-secondary mb-2 mr-1"></fa-icon>Gestión de Módulos y componentes
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- fin menu-->
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">Módulos y componentes del rol</h5>
+                                    <div class="accordion" id="accordionModules">
+                                        <div class="card" *ngFor="let module of lstModules">
+                                            <div class="card-header" id="headingOne">
+                                                <h4 class="mb-0">
+                                                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" [attr.data-target]="'#tap_'+module.pk_id_module" aria-expanded="true" [attr.aria-controls]="'tap_'+module.pk_id_module">
+                                                    {{ module.name }}
+                                                    </button>
+                                                </h4>
+                                            </div>
+                                            <div *ngIf="module" id="tap_{{module.pk_id_module}}" class="collapse" aria-labelledby="headingOne" data-parent="#accordionModules">
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                        <div class="col-sm-12">
+                                                            <table class="table table-sm table-hover">
+                                                                <tr *ngFor="let component of module.components">
+                                                                    <td>{{ component.name }}</td>
+                                                                    <td>
+                                                                        <button (click)="delComponent(component.pk_id_visualization_rol)" type="button" class="btn text-ultra-small btn-sm btn-outline-danger">
+                                                                            <fa-icon [icon]="faArrowAltCircleLeft" class="text-danger mb-2 mr-1" title="Actualizar registro"></fa-icon>Del
+                                                                        </button>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-8">
+                    <!-- inicio muestra de información -->
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <!-- inicio menú-->
+                                    <div class="row back-colo-f6" *ngIf="rol.pk_id_rol != 1">
+                                        <div class="col-sm-12 text-right align-self-end">
+                                            <div class="btn-group btn-group-sm">
+                                                <div class="dropdown">
+                                                    <button class="btn btn-sm dropdown-toggle" type="button" id="products" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <fa-icon [icon]="faTasks" class="text-outline-secondary mb-2 mr-1"></fa-icon>Opciones
+                                                    </button>
+                                                    <div class="dropdown-menu" aria-labelledby="products">
+                                                        <button (click)="getAllObjects()" class="dropdown-item text-small text-secondary" type="button" data-toggle="modal" data-target="#optionModal">
+                                                            <fa-icon [icon]="faPlus" class="text-outline-secondary mb-2 mr-1"></fa-icon>Gestión de opciones
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- fin menu-->
+                                </div>
+
+                                <div class="card-body">
+                                    <h5 class="card-title">Opciones del rol</h5>
+                                    <div class="row">
+                                        <div class="col-sm-12" *ngIf="lstOptions.length > 0">
+                                            <table class="table table-sm table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>Objeto de negocio</th>
+                                                        <th>Acción</th>
+                                                        <th colspan="2">Descripción</th>
+                                                    </tr>
+                                                </thead>
+                                                <tr *ngFor="let option of lstOptions; let i = index">
+                                                    <td>{{ i+1 }}</td>
+                                                    <td>{{ option.business_object }}</td>
+                                                    <td>{{ option.action }}</td>
+                                                    <td>{{ option.description }}</td>
+                                                    <td>
+                                                        <button (click)="delOption(option.pk_id_option_rol)" type="button" class="btn text-ultra-small btn-sm btn-outline-danger">
+                                                            <fa-icon [icon]="faArrowAltCircleLeft" class="text-danger mb-2 mr-1" title="Actualizar registro"></fa-icon>Del
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- inicio muestra de información -->
+                </div>
+            </div>
+            <!-- end content -->
+        </section>
+    </main>
+</app-pages>  
+
+<!-- componentes -->
+<app-component-form-modal
+[lstAllModules]="lstAllModules"
+[pk_id_rol]="rol.pk_id_rol"
+(refresh)="onRefresh($event)"
+>
+</app-component-form-modal>
+<!--fin componentes -->
+
+<!-- opciones -->
+<app-option-form-modal
+[lstAllObjects]="lstAllObjects"
+[pk_id_rol]="rol.pk_id_rol"
+(refresh)="onRefreshOptions($event)"
+>
+</app-option-form-modal>
+<!--fin opciones -->
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="deleteComponent" tabindex="-1" role="dialog" aria-labelledby="deleteComponent" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Confirmación de mensaje</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="alert alert-danger" role="alert">
+                Se va a eliminar un registro, desea confirmar la operación?.
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="button" (click)="deleteComponent()" data-dismiss="modal" class="btn btn-danger">Eliminar</button>
+        </div>
+        </div>
+    </div>
+</div>

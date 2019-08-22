@@ -1,5 +1,6 @@
 export class PayingEmployee {
     public pk_id_paying_info: number;
+    public fk_id_cutting_period: number;
     public fk_id_enterprise_person: number;
     public date_init_period: string;
     public date_end_period: string;

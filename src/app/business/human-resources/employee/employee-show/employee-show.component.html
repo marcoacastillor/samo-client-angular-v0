@@ -35,7 +35,7 @@
                     
                     <!-- start info options-->
                     <div class="row back-colo-f6">
-                        <div class="col-sm-4 text-left align-self-start" *ngIf="allEnterprisePerson.length > 0">
+                        <div class="col-sm-12 text-left align-self-start" *ngIf="allEnterprisePerson.length > 0">
                             <div class="btn-group btn-group-sm">
                                 <div class="dropdown">
                                     <button class="btn  btn-sm dropdown-toggle" type="button" id="laboral" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -50,42 +50,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-8 text-right align-self-end" *ngIf="enterprisePerson.state == 'Activo'">
-                            <div class="btn-group btn-group-sm">
-                                <div class="dropdown">
-                                    <button class="btn  btn-sm dropdown-toggle" type="button" id="laboral" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <fa-icon [icon]="faAddressCard" class="text-outline-secondary mb-2 mr-1"></fa-icon>Laboral
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="laboral">
-                                        <button class="dropdown-item text-small text-secondary" (click)="loadPersonalParameters()"  type="button" data-toggle="modal" data-target="#personalModal">
-                                            <fa-icon [icon]="faUserCheck" class="text-outline-secondary mb-2 mr-1"></fa-icon>Editar información personal
-                                        </button>
-                                        <div class="dropdown-divider"></div>
-                                        <button class="dropdown-item text-small text-secondary"  (click)="loadContractParameters()" type="button" data-toggle="modal" data-target="#enterprisePersonModal">
-                                            <fa-icon [icon]="faServer" class="text-outline-secondary mb-2 mr-1"></fa-icon>Editar contrato
-                                        </button>
-                                        <div class="dropdown-divider"></div>
-                                        <button class="dropdown-item text-small text-secondary" (click)="loadLaboralConditionParameters()"  type="button" data-toggle="modal" data-target="#laboralConditionModal">
-                                            <fa-icon [icon]="faFileSignature" class="text-outline-secondary mb-2 mr-1"></fa-icon>Editar condiciones laborales
-                                        </button>
-                                        <div class="dropdown-divider"></div>
-                                        <button class="dropdown-item text-small text-secondary" (click)="inactiveContract(enterprisePerson.pk_id_enterprise_person)"  type="button">
-                                            <fa-icon [icon]="faFilePrescription" class="text-outline-secondary mb-2 mr-1"></fa-icon>Inactivar contrato
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="dropdown">
-                                    <button class="btn  btn-sm dropdown-toggle" type="button" id="newsWorker" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <fa-icon [icon]="faFolderOpen" class="text-outline-secondary mb-2 mr-1"></fa-icon>Novedades
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="newsWorker">
-                                        <button class="dropdown-item text-small text-secondary" (click)="loadWorkerNewsParameter()" type="button" data-toggle="modal" data-target="#workerNewModal">
-                                            <fa-icon [icon]="faFolderPlus" class="text-outline-secondary mb-2 mr-1"></fa-icon>Agregar novedad
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                     <!-- end info options-->
 
@@ -93,15 +57,29 @@
                     <div class="row margin-top-1rem">
                         
                         <!-- start provider info-->
-                        <div class="col-sm-4 back-colo-f6">
-                            <div class="row">
-                                <div class="col-sm-12">
+                        <div class="col-sm-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="row">
+                                        <div class="col-sm-8">Datos personales</div>
+                                        <div class="col-sm-4 text-right align-self-end" *ngIf="enterprisePerson.state == 'Activo'">                                                
+                                            <div class="btn-group btn-group-sm">
+                                                <div class="dropdown">
+                                                    <button class="btn  btn-sm dropdown-toggle" type="button" id="laboral" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <fa-icon [icon]="faAddressCard" class="text-outline-secondary mb-2 mr-1"></fa-icon>Laboral
+                                                    </button>
+                                                    <div class="dropdown-menu" aria-labelledby="laboral">
+                                                        <button class="dropdown-item text-small text-secondary" (click)="loadPersonalParameters()"  type="button" data-toggle="modal" data-target="#personalModal">
+                                                            <fa-icon [icon]="faUserCheck" class="text-outline-secondary mb-2 mr-1"></fa-icon>Editar información personal
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body">
                                     <table class="table table-sm">
-                                        <thead>
-                                            <tr>
-                                                <th colspan="2"><h4>Datos personales</h4></th>
-                                            </tr>
-                                        </thead>
                                         <tbody>
                                             <tr>
                                                 <th>Identificación</th>
@@ -127,16 +105,42 @@
                                     </table>
                                 </div>
                             </div>
+                            
                         </div>
                         <!-- end peson info-->
                         
                         <!-- start laboral info-->
                         <div class="col-sm-8 back-color-ff">
-                            <!-- start laboral condition-->
-                            <div class="row margin-top-2rem">
-                                <div class="col-sm-6">
-                                    <div class="row justify-content-start">
-                                        <div class="col-sm-12 tezt-left">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="row">
+                                        <div class="col-sm-8">Datos de contrato</div>
+                                        <div class="col-sm-4 text-right align-self-end" *ngIf="enterprisePerson.state == 'Activo'">                                                
+                                            <div class="btn-group btn-group-sm dropleft" role="group">
+                                                <button class="btn  btn-sm dropdown-toggle" type="button" id="laboral" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <fa-icon [icon]="faAddressCard" class="text-outline-secondary mb-2 mr-1"></fa-icon>Contrato
+                                                </button>
+                                                <div class="dropdown-menu">
+                                                    <button class="dropdown-item text-small text-secondary"  (click)="loadContractParameters()" type="button" data-toggle="modal" data-target="#enterprisePersonModal">
+                                                        <fa-icon [icon]="faServer" class="text-outline-secondary mb-2 mr-1"></fa-icon>Editar contrato
+                                                    </button>
+                                                    <div class="dropdown-divider"></div>
+                                                    <button class="dropdown-item text-small text-secondary" (click)="loadLaboralConditionParameters()"  type="button" data-toggle="modal" data-target="#laboralConditionModal">
+                                                        <fa-icon [icon]="faFileSignature" class="text-outline-secondary mb-2 mr-1"></fa-icon>Editar condiciones laborales
+                                                    </button>
+                                                    <div class="dropdown-divider"></div>
+                                                    <button class="dropdown-item text-small text-secondary" (click)="inactiveContract(enterprisePerson.pk_id_enterprise_person)"  type="button">
+                                                        <fa-icon [icon]="faFilePrescription" class="text-outline-secondary mb-2 mr-1"></fa-icon>Inactivar contrato
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <!-- start laboral condition-->
+                                    <div class="row">
+                                        <div class="col-sm-6">
                                             <table class="table table-sm">
                                                 <tbody>
                                                     <tr>
@@ -158,11 +162,7 @@
                                                 </tbody>
                                             </table>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="row justify-content-end">
-                                        <div class="col-sm-12 text-right">
+                                        <div class="col-sm-6">
                                             <table class="table table-sm">
                                                 <tbody class="text-success">
                                                     <tr>
@@ -213,38 +213,71 @@
                                             </table>
                                         </div>
                                     </div>
+                                    <!-- end información laboral-->
                                 </div>
                             </div>
-                            <!-- end información laboral-->
                         </div>
                         <!-- end purchase info-->
                     </div>
                     <!-- end main info-->
 
                     <!-- start novedades-->
-                    <div class="row margin-top-2rem justify-content-end" *ngIf="workerNews.length > 0">
+                    <div class="row margin-top-2rem justify-content-end">
                         <div class="col-sm-12">
-                            <table class="table table-sm">
-                                <thead>
-                                    <tr>
-                                        <td colspan="4"><h4>Novedades por trabajador</h4></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Tipo</th>
-                                        <th>Descripción</th>
-                                        <th>Fecha de novedad</th>
-                                        <th>Valor</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr *ngFor="let news of workerNews">
-                                        <td>{{ news.type_new }}</td>
-                                        <td>{{ news.description_new }}</td>
-                                        <td>{{ news.date_new }}</td>
-                                        <td>{{ news.value_new | number }}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="row">
+                                        <div class="col-sm-8">Novedades por trabajador</div>
+                                        <div class="col-sm-4 text-right align-self-end" *ngIf="enterprisePerson.state == 'Activo'">                                                
+                                            <div class="btn-group btn-group-sm dropleft" role="group">
+                                                <button class="btn  btn-sm dropdown-toggle" type="button" id="laboral" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <fa-icon [icon]="faFolderOpen" class="text-outline-secondary mb-2 mr-1"></fa-icon>Novedades
+                                                </button>
+                                                <div class="dropdown-menu">
+                                                    <button class="dropdown-item text-small text-secondary" (click)="loadWorkerNewsParameter()" type="button" data-toggle="modal" data-target="#workerNewModal">
+                                                        <fa-icon [icon]="faFolderPlus" class="text-outline-secondary mb-2 mr-1"></fa-icon>Agregar novedad
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <table class="table table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th colspan="2">Tipo</th>
+                                                <th>Descripción</th>
+                                                <th>Fecha de novedad</th>
+                                                <th>Valor</th>
+                                                <th>Estado</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let news of workerNews">
+                                                <td>
+                                                    <div class="btn-group">
+                                                        <button *ngIf="news.state_worker_new == 'Pendiente'" class="text-ultra-small btn btn-outline-primary btn-sm" (click)="selectWorkNew(news);loadWorkerNewsParameter();" type="button" data-toggle="modal" data-target="#workerNewModal">
+                                                            <fa-icon [icon]="faEdit" class="text-outline-primary mb-2 mr-1"></fa-icon>Editar
+                                                        </button> 
+                                                        <button *ngIf="news.state_worker_new == 'Pendiente'" class="text-ultra-small btn btn-outline-danger btn-sm" (click)="selectWorkNew(news)" type="button" data-toggle="modal" data-target="#deleteWorkerNew">
+                                                            <fa-icon [icon]="faTrash" class="text-outline-danger mb-2 mr-1"></fa-icon>Eliminar
+                                                        </button> 
+                                                        <button *ngIf="news.state_worker_new != 'Pendiente'" class="text-ultra-small btn btn-outline-secondary btn-sm" type="button">
+                                                            <fa-icon [icon]="faBan" class="text-outline-secondary mb-2 mr-1"></fa-icon>
+                                                        </button> 
+                                                    </div>
+                                                </td>
+                                                <td>{{ news.type_new }}</td>
+                                                <td>{{ news.description_new }}</td>
+                                                <td>{{ news.date_new }}</td>
+                                                <td>{{ news.value_new | number }}</td>
+                                                <td>{{ news.state_worker_new }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table> 
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <!-- end novedades-->
@@ -266,14 +299,13 @@
                                         <th>Caja de compensación</th>
                                         <th>Total descuentos</th>
                                         <th>Otros ingresos</th>
-                                        <th>Valor neto a pagar</th>
+                                        <th>Valor neto pagado</th>
                                         <th>Estado del pago</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let payment of paymentsEmployee">
                                         <td>{{ payment.date_payment }}</td>
-                                        <td>$ {{ payment.value_payment | number }}</td>
                                         <td>$ {{ payment.ibc_value | number }}</td>
                                         <td>$ {{ payment.health_value | number }}</td>
                                         <td>$ {{ payment.pension_value | number }}</td>
@@ -281,6 +313,7 @@
                                         <td>$ {{ payment.compensation_value | number }}</td>
                                         <td>$ {{ payment.total_discounts_value | number }}</td>
                                         <td>$ {{ payment.other_income_value | number }}</td>
+                                        <td>$ {{ payment.net_payment_value | number }}</td>
                                         <td>{{ payment.state_paying }}</td>
                                     </tr>
                                 </tbody>
@@ -327,7 +360,32 @@
 <app-modal-worker-new-form
 [workerNewsParameterList]="workerNewsParameterList"
 [fk_id_enterprise_person]="enterprisePerson.pk_id_enterprise_person"
+[selectedWorkerNew]="selectedWorkerNew"
 (create)="createWorkerNews($event)"
+(update)="updateWorkerNews($event)"
 >
 </app-modal-worker-new-form>
 <!--end formulario novedad laboral-->
+
+<!-- Modal -->
+<div class="modal fade" id="deleteWorkerNew" tabindex="-1" role="dialog" aria-labelledby="deleteWorkerNew" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Confirmación de mensaje</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="alert alert-danger" role="alert">
+                Se va a eliminar un registro, desea confirmar la operación?.
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="button" (click)="deleteWorkerNew()" data-dismiss="modal" class="btn btn-danger">Eliminar</button>
+        </div>
+        </div>
+    </div>
+</div>

@@ -15,7 +15,7 @@
                         <div class="row">
                             <div class="form-group col-sm-6">
                                 <label for="code_product">Código de barras</label>
-                                <small id="codeHelp" class="form-text text-muted">Digite el codigo o parte del códido de barras del producto.</small>
+                                <small id="codeHelp" class="form-text text-muted">Busque por códido de barras del producto.</small>
                                 <input type="text" id="filterProductCode" (keypress)="onFindProductCode($event)" class="form-control form-control-sm" aria-describedby="codeHelp" formControlName="code_product">
                                 <!-- start autocomplete-->
                                 <div class="autocomplete container-fluid">
@@ -32,7 +32,7 @@
 
                             <div class="form-group col-sm-6">
                                 <label for="name_product">Nombre del producto</label>
-                                <small id="codeHelp" class="form-text text-muted">Digite el nombre o parte del del nombre de barras del producto.</small>
+                                <small id="codeHelp" class="form-text text-muted">Busque por nombre de del producto.</small>
                                 <input type="text" id="filterProductName" (keypress)="onFindProductName($event)" class="form-control form-control-sm" aria-describedby="codeHelp" formControlName="name_product">
                                 <!-- start autocomplete-->
                                 <div class="autocomplete container-fluid">

@@ -1,0 +1,70 @@
+<div class="modal fade" id="optionModal" tabindex="-1" role="dialog" aria-labelledby="optionModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Agregar opción</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                            <div class="form-group col-sm-12">
+                                <label for="module">Objetos de negocio</label>
+                                <select class="form-control form-control-sm" (change)="loadActionsByBusinessObject($event.target.value)">
+                                    <option value="">Seleccione...</option>
+                                    <option value="{{ object.business_object }}" *ngFor="let object of lstAllObjects">{{ object.business_object }}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row margin-top-1rem">
+                            <div class="col-sm-6">
+                                <table class="table table-sm table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th colspan="2"><h6>Acciones disponibles</h6></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let option of lstOptions">
+                                            <td>{{ option.business_object}}<br />{{ option.action }}</td>
+                                            <td>
+                                                <button (click)="addOption(option)" type="button" class="btn text-ultra-small btn-sm btn-outline-primary">
+                                                    <fa-icon [icon]="faArrowAltCircleRight" class="text-primary mb-2 mr-1" title="Actualizar registro"></fa-icon>Add
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-sm-6">
+                                <table class="table table-sm table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th colspan="2"><h6>Acciones seleccionados</h6></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let option of lstSelectedOptions">
+                                            <td>
+                                                <button (click)="delOption(option.pk_id_option_rol,option.business_object)" type="button" class="btn text-ultra-small btn-sm btn-outline-danger">
+                                                    <fa-icon [icon]="faArrowAltCircleLeft" class="text-danger mb-2 mr-1" title="Actualizar registro"></fa-icon>Del
+                                                </button>
+                                            </td>
+                                            <td>{{ option.business_object}}<br />{{ option.action }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                </div>
+            </div>   
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        </div>
+        </div>
+    </div>
+</div>

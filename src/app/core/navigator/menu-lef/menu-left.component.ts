@@ -5,6 +5,7 @@ import { faSignOutAlt, faTasks, faFileInvoiceDollar, faSync } from '@fortawesome
 import { GlobalStoreService } from '../../services/global-store.service';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/shared/services/authentication.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-menu-lef',
@@ -22,6 +23,8 @@ export class MenuLeftComponent implements OnInit {
 
   statusSales = '';
   statusUsers = '';
+
+  url_storage = environment.url_sales_storage;
   
   constructor(
     private globalStore: GlobalStoreService,

@@ -59,6 +59,7 @@ export const environment = {
   url_payment_service: 'http://localhost/usuariosV0/public/payment-service',
   url_access_enterprise:'http://localhost/usuariosV0/public/access_enterprise',
   url_parameter_config: 'http://localhost/usuariosV0/public/parameter_config',
+  url_visualization_rol: 'http://localhost/usuariosV0/public/visualization_rol',
   url_refresh_users: 'http://localhost/usuariosV0/public/clear',
   
   url_refresh_sales: 'http://localhost/ventasV0/public/clear',

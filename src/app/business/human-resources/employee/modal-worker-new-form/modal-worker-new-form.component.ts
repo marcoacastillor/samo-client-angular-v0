@@ -19,8 +19,10 @@ export class ModalWorkerNewFormComponent implements OnInit {
 
   @Input() public fk_id_enterprise_person: WorkerNews;
   @Input() public workerNewsParameterList: Parameter[];
-
+  @Input() public selectedWorkerNew: WorkerNews;
+  
   @Output() public create = new EventEmitter<WorkerNews>();
+  @Output() public update = new EventEmitter<WorkerNews>();
 
   constructor(
     private fb: FormBuilder,
@@ -41,20 +43,34 @@ export class ModalWorkerNewFormComponent implements OnInit {
         this.initForm();
       }
     }
+
+    if(changes.selectedWorkerNew)
+    {
+      if(changes.selectedWorkerNew.currentValue != changes.selectedWorkerNew.previousValue)
+      {
+        this.selectedWorkerNew = changes.selectedWorkerNew.currentValue;
+        this.initForm();
+      }
+    }
   }
 
   private initForm(){
     this.workerNewForm = this.fb.group({
+      pk_id_worker_news: [this.selectedWorkerNew.pk_id_worker_news],
       fk_id_enterprise_person: [this.fk_id_enterprise_person,Validators.required],
-      type_new: ['',Validators.required],
-      description_new: ['',Validators.required],
-      date_new: [''],
-      value_new: ['',Validators.required]
+      type_new: [this.selectedWorkerNew.type_new,Validators.required],
+      description_new: [this.selectedWorkerNew.description_new,Validators.required],
+      date_new: [],
+      value_new: [this.selectedWorkerNew.value_new,Validators.required]
     })
   }
 
   createNorkerNew(){
     this.create.emit(this.workerNewForm.value);
+  }
+
+  updateNorkerNew(){
+    this.update.emit(this.workerNewForm.value);
   }
 
   /**

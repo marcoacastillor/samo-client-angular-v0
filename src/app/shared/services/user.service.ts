@@ -35,6 +35,17 @@ export class UserService {
     );
   }
 
+  public getUserByEnteprise$(id_enterprise:number): Observable<User[]> {
+    let url = this._url + '/get-by-enterprise/' + id_enterprise;
+    return this.validateOptionByToken('User:getByEnterprise').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.get<User[]>(url);
+        }
+      })
+    );
+  }
+
   public show$(id: number): Observable<User> {
     const url = this._url + '/' + id.toString();
     return this.validateOptionByToken('User:show').pipe(

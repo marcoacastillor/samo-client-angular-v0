@@ -8,10 +8,11 @@
             </button>
         </div>
         <div class="modal-body">
-            <div class="card">
-                <div class="card-body">
-                   <div class="row">
-                        <div class="col-sm-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header"><h4>Información contractual</h4></div>
+                        <div class="card-body">
                             <table class="table table-sm text-small">
                                 <tbody>
                                     <tr>
@@ -46,15 +47,18 @@
                             </table>
                         </div>
                     </div>
-                    <div class="row margin-top-1rem">
-                        <div class="col-sm-12">
+                </div>
+            </div>
+
+            <div class="row margin-top-1rem">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header"><h4>Información novedades</h4></div>
+                        <div class="card-body">
                             <table class="table table-sm text-small">
                                 <thead>
                                     <tr>
-                                        <th colspan="4">Novedades del período</th>
-                                    </tr>
-                                    <tr>
-                                        <th>Tipo</th>
+                                        <th colspan="2">Tipo</th>
                                         <th>Descripción</th>
                                         <th>Fecha</th>
                                         <th>Valor</th>
@@ -63,6 +67,19 @@
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let worker of workerNewsLst">
+                                        <td *ngIf="worker.state_worker_new === 'Pendiente' && period_state != 'Pagado'">
+                                            <button (click)="updatePayingEmployee(worker.pk_id_worker_news)" class="dropdown-item text-small text-primary" type="button" data-dismiss="modal">
+                                                <fa-icon [icon]="faPlus" class="text-outline-primary mb-2 mr-1"></fa-icon>Add
+                                            </button>
+                                        </td>
+                                        <td *ngIf="worker.state_worker_new === 'Contabilizada' && period_state != 'Pagado'">
+                                            <button (click)="updatePayingEmployee(worker.pk_id_worker_news)" class="dropdown-item text-small text-danger" type="button" data-dismiss="modal">
+                                                <fa-icon [icon]="faPlus" class="text-outline-danger mb-2 mr-1"></fa-icon>Del
+                                            </button>
+                                        </td>
+                                        <td *ngIf="worker.state_worker_new === 'Liquidada'">
+                                            <fa-icon [icon]="faBan" class="text-outline-secondary mb-2 mr-1"></fa-icon>
+                                        </td>
                                         <td>{{ worker.type_new }}</td>
                                         <td>{{ worker.description_new }}</td>
                                         <td>{{ worker.date_new }}</td>
@@ -73,7 +90,6 @@
                             </table>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>

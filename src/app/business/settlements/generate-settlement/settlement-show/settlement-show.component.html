@@ -43,7 +43,7 @@
                                 <div class="col-sm-12 text-left align-self-start">
                                     <div class="btn-group btn-group-sm">
                                         <div class="dropdown">
-                                            <button class="btn text-ultra-small btn-sm dropdown-toggle" type="button" id="operation" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <button class="btn btn-sm dropdown-toggle" type="button" id="operation" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 <fa-icon [icon]="faFileInvoiceDollar" class="text-outline-secondary mb-2 mr-1"></fa-icon>Liquidación
                                             </button>
                                             <div class="dropdown-menu" aria-labelledby="settlement">
@@ -106,8 +106,8 @@
                                         <tbody>
                                             <tr *ngFor="let employee of employeeLst">
                                                 <td>
-                                                    <div class="btn-group">
-                                                        <button (click)="getWorkerNewByPeriodAndContract(selectedPeriod.pk_id_cutting_period,employee.laboralCondition.fk_id_enterprise_person)" class="btn text-ultra-small btn-sm" type="button" data-toggle="modal" data-target="#workerNewModal">
+                                                    <div class="btn-group" *ngIf="selectedPeriod.state != 'Abierto'">
+                                                        <button (click)="selectPayingInfo(employee.payingEmployee);getWorkerNewByPeriodAndContract(selectedPeriod.pk_id_cutting_period,employee.laboralCondition.fk_id_enterprise_person)" class="btn btn-sm" type="button" data-toggle="modal" data-target="#workerNewModal">
                                                             <fa-icon [icon]="faFileInvoiceDollar" class="text-outline-primary mb-2 mr-1"></fa-icon>detalle
                                                         </button>
                                                     </div>
@@ -161,5 +161,8 @@
 [workerNewsLst]="workerNewsLst"
 [laboral_condition]="laboral_condition"
 [production_period]="production_period"
+[selectedPayingInfo]="selectedPayingInfo"
+[period_state]="selectedPeriod.state"
+(updateByWorker)="onUpdateByWorker($event)"
 >
 </app-modal-worker-new-show>

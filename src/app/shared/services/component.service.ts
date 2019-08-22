@@ -90,4 +90,26 @@ export class ComponentService {
       })
     );
   }
+
+  public getComponentsByModuleAndRol$(id_module: number, id_rol: number): Observable<MComponent[]> {
+    const url = this._url + '/get-components-by-module-and-rol/' + id_module + '/' + id_rol;
+    return this.userService.validateOptionByToken('Component:getComponentsByModuleAndRol').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.get<MComponent[]>(url);
+        }
+      })
+    );
+  }
+
+  public getNotComponentsByModuleAndRol$(id_module: number, id_rol: number): Observable<MComponent[]> {
+    const url = this._url + '/get-not-components-by-module-and-rol/' + id_module + '/' + id_rol;
+    return this.userService.validateOptionByToken('Component:getNotComponentsByModuleAndRol').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.get<MComponent[]>(url);
+        }
+      })
+    );
+  }
 }

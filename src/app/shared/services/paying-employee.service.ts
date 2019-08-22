@@ -5,6 +5,7 @@ import { UserService } from './user.service';
 import { Observable } from 'rxjs';
 import { PayingEmployee } from '../models/paying-employee';
 import { switchMap } from 'rxjs/operators';
+import { WorkerNews } from '../models/worker-news';
 
 @Injectable({
   providedIn: 'root'
@@ -53,6 +54,17 @@ export class PayingEmployeeService {
   public generateAllSettlementAndEnterprise$(id_cutting_period: number, id_enterprise: number): Observable<any>{
     const url = this._url + '/generate-all-settlement-by-period-and-enterprise/'+id_cutting_period.toString() + '/' + id_enterprise.toString();
     return this.userService.validateOptionByToken('PayingEmployee:generateAllSettlementByPeriodAndEnterprise').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.get<any>(url);
+        }
+      })
+    );
+  }
+
+  public updatePayingEmpworkerNewloyeeByIdAnd$(id:number,id_worker:number):Observable<PayingEmployee>{
+    const url = this._url + '/update-paying-employee-by-worker_news/'+id.toString()+'/'+id_worker.toString();
+    return this.userService.validateOptionByToken('PayingEmployee:UpdatePayingEmployeeByWorkerWews').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<any>(url);

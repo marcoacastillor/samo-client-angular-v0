@@ -42,8 +42,11 @@
 
                         <div class="row justify-content-end">
                             <div class="col-sm-4 text-right align-self-end">
-                                <button type="submit" (click)="createNorkerNew()" [disabled]="workerNewForm.invalid" class="btn btn-sm btn-outline-primary" type="button" data-dismiss="modal">
+                                <button *ngIf="!selectedWorkerNew.pk_id_worker_news" type="submit" (click)="createNorkerNew()" [disabled]="workerNewForm.invalid" class="btn btn-sm btn-outline-primary" type="button" data-dismiss="modal">
                                     <fa-icon [icon]="faSave" class="text-outline-secondary mb-2 mr-1"></fa-icon>Crear
+                                </button>
+                                <button *ngIf="selectedWorkerNew.pk_id_worker_news" type="submit" (click)="updateNorkerNew()" [disabled]="workerNewForm.invalid" class="btn btn-sm btn-outline-primary" type="button" data-dismiss="modal">
+                                    <fa-icon [icon]="faSave" class="text-outline-secondary mb-2 mr-1"></fa-icon>Actualizar
                                 </button>
                             </div>
                         </div>

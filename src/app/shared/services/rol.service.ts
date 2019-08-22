@@ -25,6 +25,17 @@ export class RolService {
     );
   }
 
+  public getAllNotSuperadmin$(): Observable<Rol[]> {
+    let url = this._url + '/get-not-superadmin'
+    return this.userService.validateOptionByToken('Rol:getNotSuperadmin').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.get<Rol[]>(url);
+        }
+      })
+    );
+  }
+
   public store$(rol: Rol): Observable<Rol> {
     return this.userService.validateOptionByToken('Rol:create').pipe(
       switchMap(validate => {
@@ -44,6 +55,11 @@ export class RolService {
         }
       })
     );
+  }
+
+  public showLogin$(id:number): Observable<Rol>{
+    const url = this._url + '/show-login/' + id;
+    return this.http.get<Rol>(url);
   }
 
   public delete$(id: number): Observable<Rol> {

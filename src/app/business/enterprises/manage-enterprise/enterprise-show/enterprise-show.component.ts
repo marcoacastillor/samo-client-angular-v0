@@ -46,6 +46,8 @@ export class EnterpriseShowComponent implements OnInit {
   lstParametersEnterprise: Parameter[] = [];
   lstParametersEmployee:Parameter[] = [];
 
+  url_storage = environment.url_sales_storage;
+
   //parametros para empresas
   regimen    = environment.regimen;
   size       = environment.size_enterprise;

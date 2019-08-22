@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faThList, faAddressCard, faUserCheck, faServer, faFileSignature, faFolderOpen, faFolderPlus, faFilePrescription } from '@fortawesome/free-solid-svg-icons';
+import { faThList, faAddressCard, faUserCheck, faServer, faFileSignature, faFolderOpen, faFolderPlus, faFilePrescription, faTrash, faEdit, faBan } from '@fortawesome/free-solid-svg-icons';
 import { ActivatedRoute } from '@angular/router';
 import { Person } from 'src/app/shared/models/person';
 import { EnterprisePerson } from 'src/app/shared/models/enterprise-person';
@@ -32,6 +32,9 @@ export class EmployeeShowComponent implements OnInit {
   faFolderOpen = faFolderOpen;
   faFolderPlus = faFolderPlus;
   faFilePrescription = faFilePrescription;
+  faTrash = faTrash;
+  faEdit = faEdit;
+  faBan = faBan;
 
   id_person: number;
   person: Person = new Person;
@@ -40,6 +43,8 @@ export class EmployeeShowComponent implements OnInit {
   workerNews: WorkerNews[] = [];
   paymentsEmployee: PayingEmployee[] = [];
   allEnterprisePerson: EnterprisePerson[] = [];
+  selectedWorkerNew: WorkerNews = new WorkerNews;
+
 
   //parametros para información personal
   //cargar parámetros para la creación del empleado
@@ -107,6 +112,10 @@ export class EmployeeShowComponent implements OnInit {
         )
       })
     ).subscribe()
+  }
+
+  public selectWorkNew(news:WorkerNews){
+    this.selectedWorkerNew = news;
   }
 
   public getLaboralDetailByContract(id_contract: number){
@@ -252,6 +261,30 @@ export class EmployeeShowComponent implements OnInit {
           this.workerNews = worker_news;
           this.success = true;
           this.message = 'Se creó novedad para el trabajador.';
+        }
+      )
+    )
+  }
+
+  public updateWorkerNews(worker_mews: WorkerNews){
+    this.workerNewsService.update$(worker_mews).subscribe(
+      () => this.workerNewsService.getInfoByEnterprisePerson$(this.enterprisePerson.pk_id_enterprise_person).subscribe(
+        worker_news => {
+          this.workerNews = worker_news;
+          this.success = true;
+          this.message = 'Se actualizó novedad para el trabajador.';
+        }
+      )
+    )
+  }
+
+  public deleteWorkerNew(){
+    this.workerNewsService.delete$(this.selectedWorkerNew.pk_id_worker_news).subscribe(
+      () => this.workerNewsService.getInfoByEnterprisePerson$(this.enterprisePerson.pk_id_enterprise_person).subscribe(
+        worker_news => {
+          this.workerNews = worker_news;
+          this.success = true;
+          this.message = 'Se actualizó novedad para el trabajador.';
         }
       )
     )

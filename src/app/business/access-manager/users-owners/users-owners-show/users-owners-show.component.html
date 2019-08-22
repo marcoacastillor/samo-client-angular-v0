@@ -1,0 +1,166 @@
+<app-pages title="Detalle de usuario">  
+    <main>       
+        <section>
+            <!-- start menu main-->
+            <div class="row bg-gray">
+                <div class="col-sm-6 text-left">
+                    Detalle de usuario
+                </div>
+                <div class="col-sm-6 text-right">
+                    <div class="btn-group btn-group-sm">
+                        <a routerLink='/sales-admin/access-manager/users-owners/list' class="btn text-ultra-small btn-sm btn-outline-primary" type="button">
+                            <fa-icon [icon]="faThList" class="text-outline-secondary mb-2 mr-1"></fa-icon>Ver todos
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- end menu main-->
+
+            <!-- start content -->
+            <div class="row margin-top-1rem">
+                <!-- información básica-->
+                <div class="col-sm-8">
+                    <div class="card">
+                        <div class="card-body">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th colspan="2"><h4>Información personal</h4></th>
+                                    </tr>
+                                </thead>
+                                <tr>
+                                    <th>Tipo Id</th>
+                                    <td>{{ person.type_id }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Número de id</th>
+                                    <td>{{ person.number_id }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <td>{{ person.names }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Apellido</th>
+                                    <td>{{ person.last_names }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Dirección</th>
+                                    <td>{{ person.address }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Teléfono</th>
+                                    <td>{{ person.phone }}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th colspan="2"><h4>Rol</h4></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <td>{{ rol.name }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th colspan="2"><h4>Usuario</h4></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th>Username</th>
+                                        <td>{{ user.username }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Correo electrónico</th>
+                                        <td>{{ user.email }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Estado</th>
+                                        <td>{{ user.state_user }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-8">
+                    <div class="card">
+                        <div class="card-body">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th colspan="2"><h4>Información de acceso</h4></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th>Fecha de inicio</th>
+                                        <td>{{ accessEnterprise.date_init_access }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Fecha final</th>
+                                        <td>{{ accessEnterprise.date_end_access }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Token de acceso</th>
+                                        <td>{{ accessEnterprise.cypher_key }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th colspan="2"><h4>Empresa</h4></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <td>{{ enterprise.name }}{{ enterprise.last_names }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Dirección</th>
+                                        <td>{{ enterprise.address }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Teléfono</th>
+                                        <td>{{ enterprise.phone }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end content -->
+        </section>
+    </main>
+</app-pages>  

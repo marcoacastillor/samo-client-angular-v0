@@ -8,9 +8,6 @@
             </button>
         </div>
 
-        <pre>
-            {{ enterpriseForm.value.type }}
-        </pre>
         <div class="modal-body">
             <div class="card">
                 <div class="card-body">
@@ -86,6 +83,17 @@
                                     </small>
                                 </small>
                             </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="url_image">imagen</label>
+                                    <input type="file" (change)="onFileSelected($event)" class="form-control-file text-small" placeholder="Logo" formControlName="url_image" />
+                                    <small *ngIf="mustShowError('url_image')" class="form-text alert-danger">
+                                    Imágen es obligatorio
+                                    </small>
+                                </div>
+                            </div> 
                         </div>
 
                         <!-- botones -->

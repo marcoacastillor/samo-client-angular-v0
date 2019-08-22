@@ -90,6 +90,18 @@
                                 <input type="text" class="form-control form-control-sm"  formControlName="footer_billing">
                             </div>
                         </div>
+                        <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="url_image">imagen</label>
+                                        <input type="file" (change)="onFileSelected($event)" class="form-control-file text-small" placeholder="Logo" formControlName="url_image" />
+                                        <small *ngIf="mustShowError('url_image')" class="form-text alert-danger">
+                                        Imágen es obligatorio
+                                        </small>
+                                    </div>
+                                </div> 
+                            </div>
+    
 
                         <!-- botones -->
                         <div class="row justify-content-end">

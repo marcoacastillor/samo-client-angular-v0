@@ -12,6 +12,7 @@ import { WorkerNews } from 'src/app/shared/models/worker-news';
 import { LaboralConditionService } from 'src/app/shared/services/laboral-condition.service';
 import { DetailProductInputService } from 'src/app/shared/services/detail-product-input.service';
 import { LaboralCondition } from 'src/app/shared/models/laboral-condition';
+import { PayingEmployee } from 'src/app/shared/models/paying-employee';
 
 @Component({
   selector: 'app-settlement-show',
@@ -34,6 +35,7 @@ export class SettlementShowComponent implements OnInit {
   selectedPeriod: CuttingPeriod = new CuttingPeriod;
   laboral_condition: LaboralCondition = new LaboralCondition;
   production_period = 0;
+  selectedPayingInfo: PayingEmployee = new PayingEmployee;
 
   success = false;
   message = '';
@@ -103,10 +105,27 @@ export class SettlementShowComponent implements OnInit {
       switchMap(() => this.laboralConditionService.getInfoByEnterprisePerson$(idContract)),
       tap((laboral_condition:LaboralCondition) => this.laboral_condition = laboral_condition),
       tap((laboral_condition:LaboralCondition) => {
-        this.detailProductInputService.getByCuttingPeriodAndProduct$(idPeriod,laboral_condition.pk_product_unit).subscribe(
-          detail_cutting_input => this.production_period = detail_cutting_input
-        )
+        if(laboral_condition.pk_product_unit){
+          this.detailProductInputService.getByCuttingPeriodAndProduct$(idPeriod,laboral_condition.pk_product_unit).subscribe(
+            detail_cutting_input => this.production_period = detail_cutting_input
+          )
+        }
       })
     ).subscribe()
+  }
+
+  public selectPayingInfo(payingInfo:any){
+    this.selectedPayingInfo = payingInfo;
+  }
+
+  public onUpdateByWorker(id_worker:number){
+    this.payingEmployeeService.updatePayingEmpworkerNewloyeeByIdAnd$(this.selectedPayingInfo.pk_id_paying_info,id_worker).subscribe(
+      selectedPaying => {
+        this.success = true;
+        this.message = 'Se agregó novedad a liquidación del trabajador, correctamente.';
+        this.getSettlementInfoById(selectedPaying.fk_id_cutting_period);
+
+      }
+    )
   }
 }

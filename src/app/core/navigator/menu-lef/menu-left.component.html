@@ -21,22 +21,16 @@
         </ul>
 
         <ul class="list-unstyled CTAs">
-            <li class="nav-item">
-                <a  href="#" class="downloads">Tutoriales</a>
-            </li>
-
-            <!-- start botones temporales-->
-            <li class="nav-item">
+            <li class="active">
                 <button (click)="updateAppsSales()" class="dropdown-item text-small" type="button">
                     <fa-icon [icon]="faSync" class="downloads"></fa-icon>Ventas: {{ statusSales }}
                 </button>
             </li>
-            <li class="nav-item">
+            <li class="active">
                 <button  (click)="updateAppsUser()" class="dropdown-item text-small" type="button">
                     <fa-icon [icon]="faSync" class="downloads"></fa-icon>Usuarios: {{ statusUsers }}
                 </button>
-            </li>    
-            <!-- end botones temporales-->
+            </li>
         </ul>
     </nav>
 
@@ -44,21 +38,25 @@
     <div id="content">
         <div class="container-fluid">
             <div class="row nav-custom bg-white">
-                <div class="col-sm-4">
+                <div class="col-sm-6">
                     <div class="row">
-                        <div class="col-sm-2">
+                        <div class="col-sm-1">
                             <button (click)="troggleSideBar()"  type="button" id="sidebarCollapse" class="btn btn-sm">
                                 <i class="fas fa-align-left"></i>
                             </button>
                         </div>
-                        <div class="col-sm-10 col align-self-start" *ngIf="user.person && user.enterprise">
-                            <h6>{{ user.enterprise.name }}</h6>
-                            <span class="text-muted text-small">{{ user.person.names }} {{ user.person.last_names }}</span>
+                        <div class="col-sm-11 media position-relative" *ngIf="user.person && user.enterprise && user.rol">
+                            <img *ngIf="user.enterprise.url_logo" class="align-self-center mr-3" src="{{ url_storage + user.enterprise.url_logo }}" alt="{{ user.enterprise.name }}" height="100px">
+                            <div class="media-body">
+                                <h5 class="mt-0">{{ user.enterprise.name }}</h5>
+                                <span class="text-muted text-small">{{ user.person.names }} {{ user.person.last_names }}</span><br/>
+                                <span class="text-muted text-small">{{ user.rol.name }}</span>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-sm-8 text-right col align-self-start" *ngIf="user.person">
+                <div class="col-sm-6 text-right col align-self-start" *ngIf="user.person">
                     <ul class="nav justify-content-end">
                         <li class="nav-item">
                             <button [routerLink]="['./sales-admin/modules']" class="dropdown-item text-small text-secondary" type="button">

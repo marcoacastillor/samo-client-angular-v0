@@ -9,6 +9,7 @@ export class Enterprise {
     public ubication_city: string;
     public external_reference: string;
     public cypher_key: string;
+    public url_logo: string;
 
     public size: string;
     public DIAN_billing_resolution: string;

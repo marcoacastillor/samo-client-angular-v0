@@ -107,26 +107,28 @@ export class NewOrderDetailComponent implements OnInit {
     let enterprise_purchase = this.getParameters(environment.enterprise_purchase_fact);
     let prefix_purchase = this.getParameters(environment.prefix_purchase);
     let current_purchase = this.getParameters(environment.current_purchase);
-      
+     
     if(enterprise_purchase){
       if(prefix_purchase){
         if(current_purchase){
           number_invoice = prefix_purchase + (Number(current_purchase) + 1);
+          
         }
         else{
-          number_invoice = prefix_purchase +'1';
+          number_invoice = prefix_purchase + 1;
         }
       }
       this.readOnly = true;
     }
     
+
     //Actualizar datos sobre numeración de facturas
     this.code_paramSelected    = environment.current_purchase;
     this.value_paramSelected   = (Number(current_purchase) + 1).toString();
 
     this.operationForm.patchValue({
       number_invoice: number_invoice,
-      current_invoice: (Number(current_purchase) + 1)
+      current_invoice: current_purchase + '1'
     });
   }
 

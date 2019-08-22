@@ -27,7 +27,7 @@
                 <tbody>
                     <tr *ngFor="let cuttPeriod of cuttingPeriodList" id="{{cuttPeriod.pk_id_cutting_period}}">
                         <td>
-                            <button *ngIf="cuttPeriod.state === 'Abierto' || productionProcess.state === 'Activo'" type="button" (click)="selectPeriod(cuttPeriod)" class="text-ultra-small btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#deletePeriod">
+                            <button *ngIf="cuttPeriod.state === 'Abierto' && productionProcess.state === 'Activo'" type="button" (click)="selectPeriod(cuttPeriod)" class="text-ultra-small btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#deletePeriod">
                                 <fa-icon [icon]="faTrash" class="text-outline-danger mb-2 mr-1"></fa-icon>Eliminar
                             </button>    
                             <button (click)="getDataByCuttingPeriod(cuttPeriod.pk_id_cutting_period);selectPeriod(cuttPeriod)" class="text-ultra-small btn btn-outline-primary btn-sm" type="button">
