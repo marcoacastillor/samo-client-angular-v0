@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-info',
   template: `
     <p>
-      info works!
+      info works! asdf
     </p>
   `,
   styles: []
