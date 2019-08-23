@@ -7,7 +7,6 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { FinancialReportService } from 'src/app/shared/services/financial-report.service';
-import { ReportFormComponent } from './report-form/report-form.component';
 
 @NgModule({
   imports: [
@@ -21,6 +20,6 @@ import { ReportFormComponent } from './report-form/report-form.component';
   providers: [
     FinancialReportService
   ],
-  declarations: [BalanceShowComponent, ReportFormComponent]
+  declarations: [BalanceShowComponent]
 })
 export class BalanceModule { }

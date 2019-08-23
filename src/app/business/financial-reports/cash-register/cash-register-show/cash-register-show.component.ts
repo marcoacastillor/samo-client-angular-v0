@@ -45,10 +45,10 @@ export class CashRegisterShowComponent implements OnInit {
 
   public getClassSelected(date_report:string){
     if(date_report == this.actual_date){
-      return 'card border border-primary bg-success';
+      return 'card bg-info text-white';
     }
     else{
-      return 'card border border-primary';
+      return 'card';
     }
     
   }

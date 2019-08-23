@@ -4,7 +4,8 @@
             <div class="col-sm-8 text-left">
                 <h5 class="card-title">Períodos del proceso de producción</h5>
             </div>
-            <div class="col-sm-4 text-right" *ngIf="productionProcess.state === 'Activo'">
+            <!-- <div class="col-sm-4 text-right" *ngIf="productionProcess.state === 'Activo' && date_now >= activeCuttingPeriod.date_end">-->
+                <div class="col-sm-4 text-right" *ngIf="productionProcess.state === 'Activo'">
                 <div class="btn-group btn-group-sm">
                     <button (click)="createPeriod()" type="button" class="btn btn-outline-primary btn-sm">
                         <fa-icon [icon]="faPlusCircle" class="text-outline-primary mb-2 mr-1"></fa-icon>Crear

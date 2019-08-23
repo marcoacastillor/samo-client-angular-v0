@@ -23,6 +23,8 @@ export class RolsShowComponent implements OnInit {
   faPlus = faPlus;
   faArrowAltCircleLeft = faArrowAltCircleLeft;
 
+  success = false;
+  message = '';
   
   id_rol = 0;
   rol:Rol = new Rol;
@@ -93,15 +95,4 @@ export class RolsShowComponent implements OnInit {
       }
     )
   }
-
-  /*
-  public delOption(id:number){
-    this.optionRolService.delete$(id).subscribe(
-      option => {
-        this.getVisualizationByRol(visualization.fk_id_rol);
-      }
-    )
-  }
-  */
-
 }

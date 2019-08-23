@@ -269,7 +269,7 @@ export class NewOrderDetailComponent implements OnInit {
     this.operationForm.get('product').patchValue({
       code: product.code,
       number_units: 1,
-      cost_price: product.cost_price
+      cost_price: 0
     });
 
     //pone el focus sobre el input de código.

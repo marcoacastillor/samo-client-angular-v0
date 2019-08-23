@@ -20,17 +20,19 @@
                                 </small>
                             </div>
                             <div class="form-group col-sm-4">
-                                <label for="description">Descripción</label>
-                                <input readonly type="text" class="form-control form-control-sm"  formControlName="description" required>
-                                <small *ngIf="mustShowError('description')" class="form-text alert-danger">
-                                    Descripción, es obligatorio
-                                </small>
-                            </div>
-                            <div class="form-group col-sm-4">
                                 <label for="value">Valor</label>
                                 <input type="text" class="form-control form-control-sm"  formControlName="value" required>
                                 <small *ngIf="mustShowError('value')" class="form-text alert-danger">
                                     Valor, es obligatorio
+                                </small>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-sm-12">
+                                <label for="description">Descripción</label>
+                                <input readonly type="text" class="form-control form-control-sm"  formControlName="description" required>
+                                <small *ngIf="mustShowError('description')" class="form-text alert-danger">
+                                    Descripción, es obligatorio
                                 </small>
                             </div>
                         </div>

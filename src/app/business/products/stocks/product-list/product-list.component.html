@@ -76,6 +76,7 @@
                                         <th>Código</th>
                                         <th>Nombre</th>
                                         <th>Referencia</th>
+                                        <th>Tipo de producto</th>
                                         <th>Presentación</th>
                                         <th>Paquetes disponibles</th>
                                         <th>Unidades disponibles</th>
@@ -99,6 +100,7 @@
                                         <td>{{ product.code }}</td>
                                         <td>{{ product.name }}</td>
                                         <td>{{ product.reference }}</td>
+                                        <td>{{ product.type_product }}</td>
                                         <td>{{ product.presentation }}</td>
                                         <td *ngIf="product.presentation != 'INDIVIDUAL'">
                                             {{ product.units_available / product.units_package | number }}

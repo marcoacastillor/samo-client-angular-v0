@@ -52,7 +52,7 @@ export const environment = {
   min_products: 20,
   medium_products: 50,
   days_sold: 7,
-  consolidate_day: 2,
+  consolidate_day: 30,
 
   type_operation_purchase: 'PURCHASE',
   type_operation_sale: 'SALE',

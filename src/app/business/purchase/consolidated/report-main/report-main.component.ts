@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { faCalendar, faEye } from '@fortawesome/free-solid-svg-icons';
+import { faCalendar, faSync, faUpload } from '@fortawesome/free-solid-svg-icons';
 import { environment } from 'src/environments/environment';
 import * as moment from 'moment';
 import { OperationService } from 'src/app/shared/services/operation.service';
@@ -14,7 +14,7 @@ import { Operation } from 'src/app/shared/models/operation';
   styles: []
 })
 export class ReportMainComponent implements OnInit {
-  faEye = faEye;
+  faUpload  = faUpload;
   faCalendar = faCalendar;
 
   reportForm: FormGroup;
@@ -39,8 +39,8 @@ export class ReportMainComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.dateEnd = moment().add(+this.consolidate_day,'days').format('YYYY-MM-DD');
-    this.dateInit = moment().add().format('YYYY-MM-DD');
+    this.dateEnd = moment().format('YYYY-MM-DD');
+    this.dateInit = moment().add(-this.consolidate_day,'days').format('YYYY-MM-DD');
     
     this.initUpdForm(this.dateInit, this.dateEnd);
     this.loadData();

@@ -3,7 +3,7 @@
         <section>
             <!-- start menu main-->
             <div class="row bg-gray">
-                <div class="col-sm-6 text-left">
+                <div class="col-lg-6 text-left">
                     Reporte de compras por período
                 </div>
             </div>
@@ -11,186 +11,221 @@
 
             <!-- start dates form-->
             <div class="row margin-top-1rem">
-                <div class="col-sm-4">
+                <div class="col-sm-3">
+                    <div class="card">
+                        <div class="card-header"><h6>Criterios de búsqueda</h6></div>
+                        <div class="card-body">
+                            <form [formGroup]="reportForm">
+                                <div class="form-group">
+                                    <label for="from_date">Fecha inicial</label>
+                                    <div class="input-group input-group-sm mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="btn text-small btn-sm btn-outline-secondary" [owlDateTimeTrigger]="from_date"><fa-icon [icon]="faCalendar" class="text-secondary"></fa-icon></span>
+                                        </div>
+                                        <input type="text" class="form-control text-small" placeholder="Desde" formControlName="from_date" [owlDateTime]="from_date">
+                                        <owl-date-time [pickerType]="'calendar'" #from_date></owl-date-time>
+                                    </div>
+                                    <small id="emailHelp" class="form-text text-muted">Fecha inicial del rango a buscar datos.</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="to_date">Fecha final</label>
+                                    <div class="input-group input-group-sm mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="btn text-small btn-sm btn-outline-secondary" [owlDateTimeTrigger]="to_date"><fa-icon [icon]="faCalendar" class="text-secondary"></fa-icon></span>
+                                        </div>
+                                        <input type="text" class="form-control text-small" placeholder="Desde" formControlName="to_date" [owlDateTime]="to_date">
+                                        <owl-date-time [pickerType]="'calendar'" #to_date></owl-date-time>
+                                    </div>
+                                    <small id="emailHelp" class="form-text text-muted">Fecha final del rango a buscar datos.</small>
+                                </div>
+                                <button type="submit" class="btn btn-outline-success btn-sm mb-2 mr-1" (click)="loadData()">Buscar</button>        
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-9">
+                    
+                    <!-- consolidados-->
                     <div class="row">
-                        <form [formGroup]="reportForm">
-                            <div class="col-sm-12">
-                                <div class="input-group input-group-sm mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="inputGroup-sizing-sm">Fecha inicial</span>
-                                    </div>
-                                    <div class="input-group-prepend">
-                                        <span class="btn text-small btn-sm btn-outline-primary" [owlDateTimeTrigger]="from_date"><fa-icon [icon]="faCalendar" class="text-primary"></fa-icon></span>
-                                    </div>
-                                    <input type="text" class="form-control text-small" placeholder="Desde" formControlName="from_date" [owlDateTime]="from_date">
-                                    <owl-date-time [pickerType]="'calendar'" #from_date></owl-date-time>
-                                </div>
-                            </div>
-                            <div class="col-sm-12">
-                                <div class="input-group input-group-sm mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="inputGroup-sizing-sm">Fecha  final</span>
-                                    </div>
-                                    <div class="input-group-prepend">
-                                        <span class="btn text-small btn-sm btn-outline-primary" [owlDateTimeTrigger]="to_date"><fa-icon [icon]="faCalendar" class="text-primary"></fa-icon></span>
-                                    </div>
-                                    <input type="text" class="form-control text-small" placeholder="Hasta" formControlName="to_date" [owlDateTime]="to_date">
-                                    <owl-date-time [pickerType]="'calendar'" #to_date></owl-date-time>
-                                    <div class="input-group-append">
-                                        <button type="submit" class="btn btn-outline-success btn-sm mb-2 mr-1" (click)="loadData()">Buscar</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="row" *ngIf="consolidates">
                         <div class="col-sm-12">
                             <div class="card">
+                                <div class="card-header"><h6>Resultados de la búsqueda</h6></div>
                                 <div class="card-body">
-                                    <h6 class="m-b-20">Compras totales</h6>
-                                    <div class="row container-fluid text-primary">
-                                        <div class="col-sm-2 col-xl-4 text-left">
-                                            <h1><i class="fas fa-dollar-sign "></i></h1>
+                                    <div class="row" *ngIf="consolidates">
+                                        <div class="col-lg-6 col-xl-3">
+                                            <div class="card">
+                                                <div class="card-header bg-primary text-white">
+                                                    <h6 class="alert-heading">Compras totales</h6>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                        <div class="col-sm-2 col-xl-4 text-left">
+                                                            <h4><i class="fas fa-dollar-sign "></i></h4>
+                                                        </div>
+                                                        <div class="col-sm-10 col-xl-8 text-right">
+                                                            <h5><span>${{ consolidates.operations_values.total_operation | number }}</span></h5>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="card-footer text-small text-muted">
+                                                    <div class="row">
+                                                        <div class="col-lg-6 col-xl-6 text-left">
+                                                            Total compras
+                                                        </div>
+                                                        <div class="col-lg-6 col-xl-6 text-right">
+                                                            {{ consolidates.operations_totals.total_operation | number }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="col-sm-10 col-xl-8 text-right">
-                                            <h3><span>${{ consolidates.operations_values.total_operation | number }}</span></h3>
+                                        <div class="col-lg-6 col-xl-3">
+                                            <div class="card">
+                                                <div class="card-header bg-success text-white">
+                                                    <div class="row">
+                                                        <h6 class="alert-heading">Compras de contado</h6>
+                                                    </div>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                        <div class="col-sm-2 col-xl-2 text-left">
+                                                            <h4><i class="fas fa-dollar-sign "></i></h4>
+                                                        </div>
+                                                        <div class="col-sm-10 col-xl-10 text-right">
+                                                            <h5><span>${{ consolidates.operations_values.efecty_operation | number }}</span></h5>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="card-footer text-small text-muted">
+                                                    <div class="row">
+                                                        <div class="col-sm-2 col-xl-2 text-left">
+                                                            <button type="button" class="btn btn-sm btn-outline-info text-ultra-small" *ngIf="consolidates.operations_totals.efecty_operation > 0" (click)="findOperationByTypePayment(efecty)">
+                                                                <fa-icon [icon]="faUpload" class="text-outline-secondary mb-2 mr-1"></fa-icon>
+                                                            </button>
+                                                        </div>
+                                                        <div class="col-lg-6 col-xl-6 text-left">
+                                                            Total compras
+                                                        </div>
+                                                        <div class="col-sm-4 col-xl-4 text-right">
+                                                            {{ consolidates.operations_totals.efecty_operation | number }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="row container-fluid">
-                                        <div class="col-sm-6 col-xl-6 text-left">
-                                            <h6>Total</h6>
+                                        <div class="col-lg-6 col-xl-3">
+                                            <div class="card">
+                                                <div class="card-header bg-danger text-white">
+                                                    <h6 class="alert-heading">Compras a crédito</h6>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                        <div class="col-sm-2 col-xl-2 text-left">
+                                                            <h4><i class="fas fa-dollar-sign"></i></h4>
+                                                        </div>
+                                                        <div class="col-sm-10 col-xl-10 text-right">
+                                                            <h5><span>{{ consolidates.operations_values.credit_operation | number }}</span></h5>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="card-footer text-small text-muted">
+                                                    <div class="row">
+                                                        <div class="col-sm-2 col-xl-2 text-left">
+                                                            <button type="button" class="btn btn-sm btn-outline-info text-ultra-small" *ngIf="consolidates.operations_totals.credit_operation > 0" (click)="findOperationByTypePayment(credit)">
+                                                                <fa-icon [icon]="faUpload" class="text-outline-secondary mb-2 mr-1"></fa-icon>
+                                                            </button>
+                                                        </div>
+                                                        <div class="col-lg-6 col-xl-6 text-left">
+                                                            Total compras
+                                                        </div>
+                                                        <div class="col-sm-4 col-xl-4 text-right">
+                                                            {{ consolidates.operations_totals.credit_operation | number }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="col-sm-6 col-xl-6 text-right">
-                                            <h6><span>{{ consolidates.operations_totals.total_operation | number }}</span></h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h6 class="m-b-20">Compras de contado</h6>
-                                    <div class="row container-fluid text-success">
-                                        <div class="col-sm-2 col-xl-4 text-left">
-                                            <h1><i class="fas fa-dollar-sign "></i></h1>
-                                        </div>
-                                        <div class="col-sm-10 col-xl-8 text-right">
-                                            <h3><span>${{ consolidates.operations_values.efecty_operation | number }}</span></h3>
-                                        </div>
-                                    </div>
-                                    <div class="row container-fluid">
-                                        <div class="col-sm-6 col-xl-6 text-left">
-                                            <h6>Total</h6>
-                                        </div>
-                                        <div class="col-sm-6 col-xl-6 text-right">
-                                            <h6>
-                                                <span>{{ consolidates.operations_totals.efecty_operation | number }}</span>
-                                                <button type="button" class="badge badge-success" *ngIf="consolidates.operations_totals.efecty_operation > 0" (click)="findOperationByTypePayment(efecty)">
-                                                    <fa-icon [icon]="faEye" class="mb-2 mr-1"></fa-icon>
-                                                </button>                                    
-                                            </h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h6 class="m-b-20">Compras a crédito</h6>
-                                    <div class="row container-fluid text-danger">
-                                        <div class="col-sm-2 col-xl-4 text-left">
-                                            <h1><i class="fas fa-dollar-sign"></i></h1>
-                                        </div>
-                                        <div class="col-sm-10 col-xl-8 text-right">
-                                            <h3><span>{{ consolidates.operations_values.credit_operation | number }}</span></h3>
-                                        </div>
-                                    </div>
-                                    <div class="row container-fluid">
-                                        <div class="col-sm-6 col-xl-6 text-left">
-                                            <h6>Total</h6>
-                                        </div>
-                                        <div class="col-sm-6 col-xl-6 text-right">
-                                            <h6>
-                                                <span>{{ consolidates.operations_totals.credit_operation | number }}</span>
-                                                <button type="button" class="badge badge-danger" *ngIf="consolidates.operations_totals.credit_operation > 0" (click)="findOperationByTypePayment(credit)">
-                                                    <fa-icon [icon]="faEye" class="mb-2 mr-1"></fa-icon>
-                                                </button>
-                                            </h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h6 class="m-b-20">Compras con descuento</h6>
-                                    <div class="row container-fluid text-secondary">
-                                        <div class="col-sm-2 col-xl-4 text-left">
-                                            <h1><i class="fas fa-dollar-sign"></i></h1>
-                                        </div>
-                                        <div class="col-sm-10 col-xl-8 text-right">
-                                            <h3><span>{{ consolidates.operations_values.discount_operation | number }}</span></h3>
-                                        </div>
-                                    </div>
-                                    <div class="row container-fluid">
-                                        <div class="col-sm-6 col-xl-6 text-left">
-                                            <h6>Total</h6>
-                                        </div>
-                                        <div class="col-sm-6 col-xl-6 text-right">
-                                            <h6>
-                                                <span>{{ consolidates.operations_totals.discount_operation | number }}</span>
-                                                <button type="button" class="badge badge-secondary" *ngIf="consolidates.operations_totals.discount_operation > 0" (click)="findOperationByTypePayment(discount)">
-                                                    <fa-icon [icon]="faEye" class="mb-2 mr-1"></fa-icon>
-                                                </button>
-                                            </h6>
+                                        <div class="col-lg-6 col-xl-3">
+                                            <div class="card">
+                                                <div class="card-header bg-info text-white">
+                                                    <h6 class="alert-heading">Compras con descuento</h6>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                        <div class="col-sm-2 col-xl-2 text-left">
+                                                            <h4><i class="fas fa-dollar-sign"></i></h4>
+                                                        </div>
+                                                        <div class="col-sm-10 col-xl-10 text-right">
+                                                            <h5><span>{{ consolidates.operations_values.discount_operation | number }}</span></h5>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="card-footer text-small text-muted">
+                                                    <div class="row">
+                                                        <div class="col-sm-2 col-xl-2 text-left">
+                                                            <button type="button" class="btn btn-sm btn-outline-info text-ultra-small" *ngIf="consolidates.operations_totals.discount_operation > 0" (click)="findOperationByTypePayment(discount)">
+                                                                <fa-icon [icon]="faUpload" class="text-outline-secondary mb-2 mr-1"></fa-icon>
+                                                            </button>
+                                                        </div>
+                                                        <div class="col-lg-6 col-xl-6 text-left">
+                                                            Total compras
+                                                        </div>
+                                                        <div class="col-sm-4 col-xl-4 text-right">
+                                                            {{ consolidates.operations_totals.discount_operation | number }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                    <!-- fin consolidados-->
 
-                <!--inicia información de operaciones-->
-                <div class="col-sm-8">
-                    <table class="table table-sm table-striped">
-                        <thead class="bg-secondary text-white">
-                            <tr>
-                                <td colspan="7"><h6>Listado de operaciones por tipo de pago</h6></td>
-                            </tr>
-                            <tr>
-                                <th colspan="2">Número</th>
-                                <th>Cliente</th>
-                                <th>Fecha venta</th>
-                                <th>Tipo de pago</th>
-                                <th>Valor</th>
-                                <th>Saldo</th>
-                                <th>Estado</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let order of lstOperations">
-                                <td>
-                                    <a routerLink='/sales-admin/purchases/purchase-detailed-show/{{order.pk_id_operation}}' class="btn text-ultra-small btn-sm btn-outline-primary" type="button">
-                                        <fa-icon [icon]="faEye" class="text-outline-secondary mb-2 mr-1"></fa-icon>Ver detalle
-                                    </a>
-                                </td>
-                                <td>{{ order.number_invoice }}</td>
-                                <td>{{ order.external_reference.split(":")[3] }} : {{ order.external_reference.split(":")[2]  }}</td>
-                                <td>{{ order.date_operation }}</td>
-                                <td>{{ order.payment_type }}</td>
-                                <td>{{ order.total_operation | number }}</td>
-                                <td>{{ order.total_operation - (order.total_discounts + order.total_pays) | number }}</td>
-                                <td>{{ order.state_operation }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <!-- resultados -->
+                    <div class="row margin-top-1rem">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header"><h6>Operaciones</h6></div>
+                                <div class="card-body">
+                                    <table class="table table-sm table-striped" *ngIf="lstOperations">
+                                        <thead>
+                                            <tr>
+                                                <th colspan="2">Número</th>
+                                                <th>Cliente</th>
+                                                <th>Fecha venta</th>
+                                                <th>Tipo de pago</th>
+                                                <th>Valor</th>
+                                                <th>Saldo</th>
+                                                <th>Estado</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let order of lstOperations">
+                                                <td>
+                                                    <a routerLink='/sales-admin/purchases/purchase-detailed-show/{{order.pk_id_operation}}' class="btn text-ultra-small btn-sm btn-outline-primary" type="button">
+                                                        <fa-icon [icon]="faEye" class="text-outline-secondary mb-2 mr-1"></fa-icon>Ver detalle
+                                                    </a>
+                                                </td>
+                                                <td>{{ order.number_invoice }}</td>
+                                                <td>{{ order.external_reference.split(":")[3] }} : {{ order.external_reference.split(":")[2]  }}</td>
+                                                <td>{{ order.date_operation }}</td>
+                                                <td>{{ order.payment_type }}</td>
+                                                <td>{{ order.total_operation | number }}</td>
+                                                <td>{{ order.total_operation - (order.total_discounts + order.total_pays) | number }}</td>
+                                                <td>{{ order.state_operation }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- resultados -->
+                    
                 </div>
-                <!--fin información de operaciones-->
-                
             </div>
             <!-- end dates form-->
         </section>

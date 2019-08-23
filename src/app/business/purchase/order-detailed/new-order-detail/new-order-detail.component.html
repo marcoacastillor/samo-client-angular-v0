@@ -110,6 +110,10 @@
                                                 <th>Precio de compra por unidad</th>
                                                 <td>{{ product.cost_price | number }}</td>
                                             </tr>
+                                            <tr *ngIf="product.presentation != 'INDIVIDUAL'">
+                                                <th>Precio de compra por {{ product.presentation }}</th>
+                                                <td>{{ product.cost_price * product.units_package | number }}</td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>

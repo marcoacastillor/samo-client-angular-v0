@@ -61,6 +61,17 @@ export class CuttingPeriodService {
     );
   }
 
+  public getActivePeriodByProductionProcess$(id_production_process:number): Observable<CuttingPeriod> {
+    let url = this._url + '/get-active-by-production-process/' + id_production_process.toString();
+    return this.userService.validateOptionByToken('CuttingPeriod:getActiveByProductionProcess').pipe(
+      switchMap(validate => {
+        if (validate) {
+          return this.http.get<CuttingPeriod>(url);
+        }
+      })
+    );
+  }
+
 
   public store$(cuttingPeriod: CuttingPeriod): Observable<CuttingPeriod> {
     return this.userService.validateOptionByToken('CuttingPeriod:create').pipe(

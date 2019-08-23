@@ -91,16 +91,17 @@ export class ProductFormModalComponent implements OnInit, OnChanges {
       name_product: product.name,
       presentation: product.presentation
     });
-
+    
+    this.selectedPresentation = product.presentation;
     if(this.product.type_product == 'Producto Insumo'){
-      if(this.selectedPresentation == 'INDIVIDUAL'){
+      if(product.presentation == 'INDIVIDUAL'){
         this.initUpdForm(this.product.units_available);
       }else{
         this.initUpdForm(this.product.units_available/this.product.units_package);
       }
     }
     else{
-      this.initUpdForm(1000);
+      this.initUpdForm(10000);
     }
   }
 

@@ -1,10 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
 import { CuttingPeriod } from 'src/app/shared/models/cutting-period';
-import { faAlignJustify, faArchive, faPlusCircle, faTrash, faArrowCircleRight, faFolderPlus } from '@fortawesome/free-solid-svg-icons';
+import { faAlignJustify, faPlusCircle, faTrash, faArrowCircleRight, faFolderPlus } from '@fortawesome/free-solid-svg-icons';
 import { ProductionProcess } from 'src/app/shared/models/production-process';
 import { DetailProductInput } from 'src/app/shared/models/detail-product-input';
 import { DetailProductInputService } from 'src/app/shared/services/detail-product-input.service';
 import { UtilsService } from 'src/app/shared/services/utils.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-periods-info',
@@ -18,10 +19,13 @@ export class PeriodsInfoComponent implements OnInit {
   faTrash = faTrash;
   faFolderPlus = faFolderPlus;
 
+  date_now = moment().format('YYYY-MM-DD');
+
   cuttingPeriod: CuttingPeriod = new CuttingPeriod;
   detailProductInput: DetailProductInput = new DetailProductInput;
 
   @Input() public cuttingPeriodList: CuttingPeriod[];
+  @Input() public activeCuttingPeriod: CuttingPeriod;
   @Input() public productionProcess: ProductionProcess;
   
   @Output() public getData = new EventEmitter<Number>();
@@ -53,6 +57,16 @@ export class PeriodsInfoComponent implements OnInit {
         this.productionProcess = changes.productionProcess.currentValue;
       }
     }
+
+
+    if(changes.activeCuttingPeriod)
+    {
+      if(changes.activeCuttingPeriod.currentValue != changes.activeCuttingPeriod.previousValue)
+      {
+        this.activeCuttingPeriod = changes.activeCuttingPeriod.currentValue;
+      }
+    }
+
   }
 
   getDataByCuttingPeriod(id_cutting_period: number){

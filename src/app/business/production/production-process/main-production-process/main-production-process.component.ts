@@ -9,6 +9,7 @@ import { CuttingPeriod } from 'src/app/shared/models/cutting-period';
 import { DataProductCuttingPeriod } from 'src/app/shared/models/data-product-cutting-period';
 import { DetailProductInputService } from 'src/app/shared/services/detail-product-input.service';
 import { DetailProductInput } from 'src/app/shared/models/detail-product-input';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-main-production-process',
@@ -25,6 +26,7 @@ export class MainProductionProcessComponent implements OnInit {
 
   productionProcessList: ProductionProcess[];
   cuttingPeriodList: CuttingPeriod[];
+  activeCuttingPeriod: CuttingPeriod = new CuttingPeriod;
   
   dataProductProducts:  DetailProductInput[] = [];
   dataProductInputs: DetailProductInput[] = [];
@@ -62,9 +64,14 @@ export class MainProductionProcessComponent implements OnInit {
   }
 
   loadCuttingPeriod(id_production_process: number){
-    this.cuttingPeriodService.getAllByProductionProcess$(id_production_process).subscribe(
-      lstCuttingPeriod => this.cuttingPeriodList = lstCuttingPeriod
-    )
+    this.cuttingPeriodService.getAllByProductionProcess$(id_production_process).pipe(
+      tap(lstCuttingPeriod => this.cuttingPeriodList = lstCuttingPeriod),
+      tap(() => {
+        this.cuttingPeriodService.getActivePeriodByProductionProcess$(id_production_process).subscribe(
+          active_cutting => this.activeCuttingPeriod = active_cutting
+        )
+      }),
+    ).subscribe()
   }
 
   onGetData(id_cutting_period: number){

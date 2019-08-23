@@ -6,75 +6,112 @@
                 <div class="col-sm-6 text-left">
                     Estado de ingresos y egresos
                 </div>
-                <div class="col-sm-6 text-right">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#formReport">
-                        <fa-icon [icon]="faSearch" class="text-outline-secondary mb-2 mr-1"></fa-icon>Parámetros de búsqueda..
-                    </button>
-                </div>
             </div>
             <!-- end menu main-->
 
             <!-- start dates form-->
             <div class="row margin-top-1rem">
-                <!--inicia sección datos-->
-                <div class="col-sm-12" *ngIf="report">
-                    <table class="table table-sm table-striped text-big-report">
-                        <thead class="bg-secondary text-white">
-                            <tr>
-                                <td colspan="7"><h6>Ingresos y egresos para el periodo entre {{ from_date | date }} a {{ to_date | date }}</h6></td>
-                            </tr>
-                            <tr>
-                                <th>Cuenta</th>
-                                <th>Valor</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Ventas</td>
-                                <td>{{ report.sales | number }}</td>
-                            </tr>
-                            <tr>
-                                <td>Costo de venta</td>
-                                <td>{{ report.cost | number }}</td>
-                            </tr>
-                            <tr class="text-primary">
-                                <th>Márgen de contribución</th>
-                                <th>{{ (report.sales - report.cost) | number }}</th>
-                            </tr>
-                            <tr>
-                                <td>Gastos de operación</td>
-                                <td>{{ (report.operational_expenses) | number }}</td>
-                            </tr>
-                            <tr>
-                                <td>Utilidad del ejercicio</td>
-                                <td>{{ (report.sales - report.cost) -report.operational_expenses | number }}</td>
-                            </tr>
-                            <tr>
-                                <td>Gastos financieros</td>
-                                <td>{{ report.financial_expenses | number }}</td>
-                            </tr>
-                            <tr>
-                                <td>Utilidad antes de impuestos</td>
-                                <td>{{ (report.sales - report.cost) - (report.operational_expenses + report.financial_expenses) | number }}</td>
-                            </tr>
-                            <tr>
-                                <td>Impuestos</td>
-                                <td>{{ report.total_tax | number }}</td>
-                            </tr>
-                            <tr>
-                                <td>Utilidad</td>
-                                <td>{{ (report.sales - report.cost) - (report.operational_expenses + report.financial_expenses + report.total_tax) | number }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
+
+                <!-- criterios de búsqueda -->
+                <div class="col-sm-3">
+                    <div class="card">
+                        <div class="card-header"><h6>Criterios de búsqueda</h6></div>
+                        <div class="card-body">
+                            <form [formGroup]="reportForm">
+                                <div class="form-group">
+                                    <label for="from_date">Fecha inicial</label>
+                                    <div class="input-group input-group-sm mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="btn text-small btn-sm btn-outline-secondary" [owlDateTimeTrigger]="from_date"><fa-icon [icon]="faCalendar" class="text-secondary"></fa-icon></span>
+                                        </div>
+                                        <input type="text" class="form-control text-small" placeholder="Desde" formControlName="from_date" [owlDateTime]="from_date">
+                                        <owl-date-time [pickerType]="'calendar'" #from_date></owl-date-time>
+                                    </div>
+                                    <small id="emailHelp" class="form-text text-muted">Fecha inicial del rango a buscar datos.</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="to_date">Fecha final</label>
+                                    <div class="input-group input-group-sm mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="btn text-small btn-sm btn-outline-secondary" [owlDateTimeTrigger]="to_date"><fa-icon [icon]="faCalendar" class="text-secondary"></fa-icon></span>
+                                        </div>
+                                        <input type="text" class="form-control text-small" placeholder="Desde" formControlName="to_date" [owlDateTime]="to_date">
+                                        <owl-date-time [pickerType]="'calendar'" #to_date></owl-date-time>
+                                    </div>
+                                    <small id="emailHelp" class="form-text text-muted">Fecha final del rango a buscar datos.</small>
+                                </div>
+                                <button type="submit" class="btn btn-outline-success btn-sm mb-2 mr-1" (click)="getDataByPeriod()">Buscar</button>        
+                            </form>
+                        </div>
+                    </div>
                 </div>
-                <!--fin sección datos-->
+                <!-- criterios de búsqueda -->
+
+                <!-- resultados -->
+                <div class="col-sm-9">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header bg-info text-white"><h4>Resultados</h4></div>
+                                <div class="card-body" *ngIf="report">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <table class="table table-sm table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Cuenta</th>
+                                                        <th>Valor</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Ventas</td>
+                                                        <td>{{ report.sales | number }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Costo de venta</td>
+                                                        <td>{{ report.cost | number }}</td>
+                                                    </tr>
+                                                    <tr class="text-primary">
+                                                        <th>Márgen de contribución</th>
+                                                        <th>{{ (report.sales - report.cost) | number }}</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Gastos de operación</td>
+                                                        <td>{{ (report.operational_expenses) | number }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Utilidad del ejercicio</td>
+                                                        <td>{{ (report.sales - report.cost) -report.operational_expenses | number }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Gastos financieros</td>
+                                                        <td>{{ report.financial_expenses | number }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Utilidad antes de impuestos</td>
+                                                        <td>{{ (report.sales - report.cost) - (report.operational_expenses + report.financial_expenses) | number }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Impuestos</td>
+                                                        <td>{{ report.total_tax | number }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Utilidad</td>
+                                                        <td>{{ (report.sales - report.cost) - (report.operational_expenses + report.financial_expenses + report.total_tax) | number }}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- resultados -->                 
             </div>
             <!-- end dates form-->
         </section>
     </main>
 </app-pages>
-
-<app-report-form
-(findData)="getDataByPeriod($event)">
-</app-report-form>

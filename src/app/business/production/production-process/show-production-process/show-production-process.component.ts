@@ -14,6 +14,7 @@ export class ShowProductionProcessComponent implements OnInit {
 
   @Input() public productionProcess: ProductionProcess;
   @Input() public cuttingPeriodList: CuttingPeriod[];
+  @Input() public activeCuttingPeriod: CuttingPeriod;
   @Input() public state: string;
   
   @Input() public dataProductInputs:DetailProductInput[] = [];
@@ -58,6 +59,14 @@ export class ShowProductionProcessComponent implements OnInit {
       if(changes.state.currentValue != changes.state.previousValue)
       {
         this.state = changes.state.currentValue;
+      }
+    }
+
+    if(changes.activeCuttingPeriod)
+    {
+      if(changes.activeCuttingPeriod.currentValue != changes.activeCuttingPeriod.previousValue)
+      {
+        this.activeCuttingPeriod = changes.activeCuttingPeriod.currentValue;
       }
     }
   }
