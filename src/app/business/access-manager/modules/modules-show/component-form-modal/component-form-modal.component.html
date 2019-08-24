@@ -12,19 +12,31 @@
                     <div class="card-body">
                         <form [formGroup]="componentForm">
                             <div class="row">
-                                <div class="col-sm-6">
+                                <div class="col-sm-4">
                                     <div class="form-group">
                                         <label for="name">Nombre</label>
                                         <input type="text" class="form-control text-small" placeholder="Nombre" formControlName="name" required>
                                         <small *ngIf="mustShowError('name')" class="form-text alert-danger">
-                                        Nombre es obligatorio
+                                        Nombre, es obligatorio
                                         </small>
                                     </div>
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-4">
                                     <div class="form-group">
                                         <label for="url_angular_component">Módulo angular</label>
-                                        <input type="text" class="form-control text-small" placeholder="Modulo angular" formControlName="url_angular_component">
+                                        <input type="text" class="form-control text-small" placeholder="Modulo angular" formControlName="url_angular_component" required>
+                                        <small *ngIf="mustShowError('url_angular_component')" class="form-text alert-danger">
+                                        Módulo angular,  es obligatorio
+                                        </small>
+                                    </div>
+                                </div> 
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label for="order_component">Órden de visualización</label>
+                                        <input type="number" class="form-control text-small" placeholder="Órden de visualización" formControlName="order_component" required>
+                                        <small *ngIf="mustShowError('order_component')" class="form-text alert-danger">
+                                        Órden de visualización, es obligatorio
+                                        </small>
                                     </div>
                                 </div> 
                             </div>
@@ -32,7 +44,7 @@
                             <!--start buttons forms-->
                             <div class="row justify-content-end">
                                 <div class="col-sm-4 text-right align-self-end">
-                                    <button *ngIf="component.pk_id_component" type="submit" class="btn btn-outline-success btn-sm mb-2 mr-1" [disabled]="componentForm.invalid" (click)="updateModule()">Actualizar</button>
+                                    <button *ngIf="component.pk_id_component" type="submit" class="btn btn-outline-success btn-sm mb-2 mr-1" [disabled]="componentForm.invalid" (click)="updateModule()" data-dismiss="modal">Actualizar</button>
                                     <button *ngIf="!component.pk_id_component" type="submit" class="btn btn-outline-primary btn-sm mb-2 mr-1" [disabled]="componentForm.invalid" (click)="createModule()">Guardar</button>
                                 </div>
                             </div>

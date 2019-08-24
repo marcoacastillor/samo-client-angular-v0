@@ -1,0 +1,104 @@
+<app-pages title="Reporte por fechas">  
+    <main>            
+        <section>
+            <!-- start menu main-->
+            <div class="row bg-gray">
+                <div class="col-sm-12 text-left">
+                    Reporte de compras por fecha
+                </div>
+            </div>
+            <!-- end menu main-->
+
+            <!-- start dates form-->
+            <div class="row margin-top-1rem">
+                <!-- criterios de búsqueda -->
+                <div class="col-sm-3">
+                    <div class="card">
+                        <div class="card-header"><h6>Criterios de búsqueda</h6></div>
+                        <div class="card-body">
+                            <form [formGroup]="reportForm">
+                                <div class="form-group">
+                                    <label for="from_date">Fecha inicial</label>
+                                    <div class="input-group input-group-sm mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="btn text-small btn-sm btn-outline-secondary" [owlDateTimeTrigger]="from_date"><fa-icon [icon]="faCalendar" class="text-secondary"></fa-icon></span>
+                                        </div>
+                                        <input type="text" class="form-control text-small" placeholder="Desde" formControlName="from_date" [owlDateTime]="from_date">
+                                        <owl-date-time [pickerType]="'calendar'" #from_date></owl-date-time>
+                                    </div>
+                                    <small id="emailHelp" class="form-text text-muted">Fecha inicial del rango a buscar datos.</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="to_date">Fecha final</label>
+                                    <div class="input-group input-group-sm mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="btn text-small btn-sm btn-outline-secondary" [owlDateTimeTrigger]="to_date"><fa-icon [icon]="faCalendar" class="text-secondary"></fa-icon></span>
+                                        </div>
+                                        <input type="text" class="form-control text-small" placeholder="Desde" formControlName="to_date" [owlDateTime]="to_date">
+                                        <owl-date-time [pickerType]="'calendar'" #to_date></owl-date-time>
+                                    </div>
+                                    <small id="emailHelp" class="form-text text-muted">Fecha final del rango a buscar datos.</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="payment_type">Tipo de pago</label>
+                                    <input type="text" class="form-control text-small" placeholder="Desde" formControlName="payment_type">
+                                    <small id="emailHelp" class="form-text text-muted">Tipo de pago de factura.</small>
+                                </div>
+                                <button type="submit" class="btn btn-outline-success btn-sm mb-2 mr-1" (click)="getDataByParams()">Buscar</button>        
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- criterios de búsqueda -->
+
+                <!-- resultados -->
+                <div class="col-sm-9">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header bg-info text-white"><h4>Resultados</h4></div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="card">
+                                                <div class="card-header bg-success text-white"><h6>Operaciones de compra</h6></div>
+                                                <div class="card-body">
+                                                    <table class="table table-sm table-hover">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Proveedor</th>
+                                                                <th>Número de factura</th>
+                                                                <th>Fecha</th>
+                                                                <th>Tipo de pago</th>
+                                                                <th>Total</th>
+                                                                <th>Saldo</th>
+                                                                <th>Estado</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr *ngFor="let operation of lstOperations">
+                                                                <td>{{ operation.external_reference.split(':')[2] }}</td>
+                                                                <td>{{ operation.number_invoice }}</td>
+                                                                <td>{{ operation.date_operation }}</td>
+                                                                <td>{{ operation.payment_type }}</td>
+                                                                <td>{{ operation.total_operation | number}}</td>
+                                                                <td>{{ operation.total_operation - operation.total_pays | number}}</td>
+                                                                <td>{{ operation.state_operation }}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- resultados -->                
+            </div>
+            <!-- end dates form-->
+        </section>
+    </main>
+</app-pages>

@@ -40,10 +40,13 @@ export class ClientFormComponent implements OnInit {
   
   activeUser: User = new User;
   parametersList: Parameter[] = [];
+  lstClients: Person[] = [];
 
   success = false;
   message = '';
   id_person = '';
+
+  lastkeydown1 = 0;
 
   constructor(
     private activateRoute: ActivatedRoute,
@@ -141,7 +144,35 @@ export class ClientFormComponent implements OnInit {
       )
     ).subscribe()
   }
-  
+
+  onFindClient(filter: any){
+    let idClient = (<HTMLInputElement>document.getElementById('filterClient')).value;
+    this.lstClients = [];
+
+    if (idClient.length > 0) {
+      if (filter.timeStamp - this.lastkeydown1 > 200) {
+        this.personService.getPersonsByIdFilter$(idClient).subscribe(
+          lstClients => {
+            this.lstClients = lstClients;
+          },
+        )
+      }
+    }
+  }
+
+  selectClient(person: Person){
+    this.lstClients = [];
+    this.clientForm.patchValue({
+      type_id: person.type_id,
+      number_id: person.number_id,
+      names: person.names,
+      last_names: person.last_names,
+      address: person.address,
+      phone: person.phone
+    })
+  }
+
+
   /**
   * Funciones para verificar si los formularios son obligatorios o no.
   */

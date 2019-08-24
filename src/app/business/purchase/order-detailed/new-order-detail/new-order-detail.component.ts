@@ -237,7 +237,7 @@ export class NewOrderDetailComponent implements OnInit {
     this.enterprise = provider;
     this.lstProviders = [];
     this.operationForm.patchValue({
-      external_reference: provider.nit
+      external_reference: provider.pk_id_enterprise
     })
   }
 

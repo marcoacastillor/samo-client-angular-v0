@@ -5,4 +5,5 @@ export class MComponent {
     public fk_id_module: number;
     public name: string;
     public url_angular_component: string;
+    public order_component: number;
 }

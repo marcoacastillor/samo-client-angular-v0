@@ -56,7 +56,18 @@
                                             </div>
                                             <div class="form-group col-sm-6">
                                                 <label for="number_id">Número Id</label>
-                                                <input type="text" id="filterClient" class="form-control form-control-sm"  formControlName="number_id" required>
+                                                <input type="text" id="filterClient" (keypress)="onFindClient($event)" class="form-control form-control-sm"  formControlName="number_id" required>
+                                                <!-- start autocomplete-->
+                                                <div class="autocomplete container-fluid">
+                                                    <div id="autocomplete-list" class="autocomplete-items text-ultra-small">
+                                                        <div class="items row" *ngFor="let person of lstClients">
+                                                            <div class="col-sm-12" (click)="selectClient(person)">
+                                                                {{ person.type_id }} - {{ person.number_id }} {{ person.names }} {{ person.last_names }}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- start autocomplete-->
                                                 <small *ngIf="mustShowError('number_id')" class="form-text alert-danger">
                                                     Número de id, es obligatorio
                                                 </small>

@@ -144,7 +144,7 @@ export class EmployeeFormComponent implements OnInit {
 
     if (nameProduct.length > 0) {
       if (filter.timeStamp - this.lastkeydown1 > 200) {
-        this.productService.getNotSalesProductsByNameFilter$(nameProduct).subscribe(
+        this.productService.getPaymentsProductsByNameFilter$(nameProduct).subscribe(
           lstProducts => {
             this.lstProducts = lstProducts;
           },

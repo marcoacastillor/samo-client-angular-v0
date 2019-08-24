@@ -40,7 +40,6 @@ export class ComponentFormModalComponent implements OnInit {
 
   public updateModule(){
     this.update.emit(this.componentForm.value);
-    this.componentForm.reset();
   }
   
   public createModule(){
@@ -54,6 +53,7 @@ export class ComponentFormModalComponent implements OnInit {
     fk_id_module: [component.fk_id_module,Validators.required],
     name: [component.name,Validators.required],
     url_angular_component: [component.url_angular_component,Validators.required],
+    order_component: [component.order_component,Validators.required]
     });
   }
   

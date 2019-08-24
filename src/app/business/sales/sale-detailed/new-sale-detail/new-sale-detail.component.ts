@@ -317,7 +317,7 @@ export class NewSaleDetailComponent implements OnInit {
     this.person = person;
     this.lstClients = [];
     this.operationForm.patchValue({
-      external_reference: person.number_id
+      external_reference: person.pk_id_person
     })
   }
 

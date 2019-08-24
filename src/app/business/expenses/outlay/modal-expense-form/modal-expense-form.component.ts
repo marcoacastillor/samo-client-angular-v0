@@ -94,27 +94,23 @@ export class ModalExpenseFormComponent implements OnInit {
     let enterprise_purchase = this.getParameters(environment.enterprise_purchase_fact);
     let prefix_purchase     = this.getParameters(environment.prefix_purchase);
     let current_purchase    = this.getParameters(environment.current_purchase);
-      
+
     if(enterprise_purchase){
       if(prefix_purchase){
-        if(current_purchase){
+        if(current_purchase)
           number_purchase = prefix_purchase + (Number(current_purchase) + 1);
-        }
-        else{
-          number_purchase = '1';
-        }
+        else
+          current_purchase = '1';
+          number_purchase = prefix_purchase + (Number(current_purchase));
       }
-      else if(current_purchase){
+      else if(current_purchase)
           number_purchase = (Number(current_purchase) + 1).toString();
-        }
-        else{
-          number_purchase = '1';
-        }
+        else
+          current_purchase = '1';
       }
-    else{
+    else
       number_purchase = '';
-    }
-
+    
     this.expenseForm.patchValue({
       number_voucher: number_purchase,
       actual_value: Number(current_purchase) + 1,
@@ -126,12 +122,11 @@ export class ModalExpenseFormComponent implements OnInit {
     let number_voucher = '';
     let current_voucher = this.getParameters(environment.current_voucher);
     
-    if(current_voucher){
+    if(current_voucher)
       number_voucher = (Number(current_voucher) + 1).toString();
-    }
-    else{
+    else
       number_voucher = '1';
-    }
+    
   
     this.expenseForm.patchValue({
       number_voucher: number_voucher,

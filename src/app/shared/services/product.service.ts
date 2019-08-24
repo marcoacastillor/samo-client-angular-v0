@@ -138,6 +138,20 @@ export class ProductService {
     );
   }
 
+  public getPaymentsProductsByNameFilter$(nameProduct: string): Observable<Product[]> {
+    let url = this._url + '/get-payments-products-by-name-filter/' + nameProduct;
+    return this.userService.validateOptionByToken('Product:getPaymentsProductsByNameFilter').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.get<Product[]>(url);
+        }
+      })
+    );
+  }
+
+
+  
+
   public getByCodeFilterAndType$(codeProduct: string): Observable<Product[]> {
     let url = this._url + '/get-by-code-filter-and-type/' + codeProduct;
     return this.userService.validateOptionByToken('Product:getByCodeFilterAndType').pipe(

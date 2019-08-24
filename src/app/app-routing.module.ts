@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { SelectivePreloadingStrategyService } from './selective-preloading-strategy.service';
 
 const routes: Routes = [
   {
@@ -13,7 +14,8 @@ const routes: Routes = [
   },
   {
     path: "sales-admin",
-    loadChildren: './business/business.module#BusinessModule'
+    loadChildren: './business/business.module#BusinessModule',
+    data: { preload: true }
   },
   {
     path: 'not-found',
@@ -26,7 +28,10 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes,{
+    enableTracing: false, // <-- debugging purposes only
+    preloadingStrategy: SelectivePreloadingStrategyService,
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

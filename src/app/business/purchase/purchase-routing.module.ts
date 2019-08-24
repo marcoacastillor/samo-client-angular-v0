@@ -10,8 +10,12 @@ const routes: Routes = [
     path:'',
     children: [
       {
-        path: "consolidated",
-        loadChildren: './consolidated/consolidated.module#ConsolidatedModule'
+        path: "purchase-consolidated",
+        loadChildren: './consolidated/consolidated.module#ConsolidatedModule',
+      },
+      {
+        path: "purchase-reports",
+        loadChildren: './purchase-reports/purchase-reports.module#PurchaseReportsModule',
       }
     ]
   },
