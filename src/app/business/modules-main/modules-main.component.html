@@ -13,13 +13,13 @@
 
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-sm-3" *ngFor="let module of modules">
+                            <div class="col-sm-4 margin-top-1rem" *ngFor="let module of modules">
                                 <div class="card">
-                                    <img class="img-fluid" src="{{ url_storage + module.url_image }}" alt="{{ module.description }}" width="100%">
+                                    <img class="rounded mx-auto d-block" src="{{ url_storage + module.url_image }}" alt="{{ module.description }}" height="100px">
                                     <div class="card-header">
                                         {{ module.name }}
                                     </div>
-                                    <div class="card-body">
+                                    <div class="card-body text-small text-justify" style="height: 100px">
                                         {{ module.description}}
                                     </div>
                                 </div>
