@@ -1,26 +1,33 @@
 <app-pages title="Módulos del sistema">  
     <main>
-        <section>
-            <article>
-                <p class="text-justify">
-                    A continuación se muestran todos los módulos con los que cuenta el sistema. <br />
-                    Dependiendo del rol del usuario se puede acceder a uno o a varios módulos. Si desea tener acceso a un módulo en particular, comuníquese con el administrador del sistema.   
-                </p>
-            </article>
-        </section>
-        <section>
-            <table class="table">
-                <tr *ngFor="let module of modules">
-                    <td>
-                        <img class="align-self-start mr-3" src="{{ url_storage + module.url_image }}" alt="{{ module.description }}" width="80">
-                    </td>
-                    <td>
-                        <h6>{{ module.name }}</h6>
-                        <pre>{{ module.url_angular_module}}</pre>
-                        <p>{{ module.description}}</p>
-                    </td>
-                </tr>
-            </table>
-        </section>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">Módulos del sistema</div>
+                    <div class="card-body">
+                            <p class="text-justify">
+                                A continuación se muestran todos los módulos con los que cuenta el sistema. <br />
+                                Dependiendo del rol del usuario se puede acceder a uno o a varios módulos. Si desea tener acceso a un módulo en particular, comuníquese con el administrador del sistema.   
+                            </p>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-3" *ngFor="let module of modules">
+                                <div class="card">
+                                    <img class="img-fluid" src="{{ url_storage + module.url_image }}" alt="{{ module.description }}" width="100%">
+                                    <div class="card-header">
+                                        {{ module.name }}
+                                    </div>
+                                    <div class="card-body">
+                                        {{ module.description}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
 </app-pages>
