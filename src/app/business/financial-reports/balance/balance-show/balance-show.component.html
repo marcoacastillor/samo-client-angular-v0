@@ -67,16 +67,16 @@
                                                         </thead>
                                                         <tbody>
                                                             <tr>
-                                                                <td>Cajas y bancos</td>
-                                                                <td>{{ report.assets.cash | number }}</td>
+                                                                <td>Caja</td>
+                                                                <td>{{ report.assets.cash | number: '1.0-0' }}</td>
                                                             </tr>
                                                             <tr>
                                                                 <td>Clientes</td>
-                                                                <td>{{ report.assets.clients | number }}</td>
+                                                                <td>{{ report.assets.clients | number: '1.0-0' }}</td>
                                                             </tr>
                                                             <tr>
                                                                 <td>Inventarios</td>
-                                                                <td>{{ (report.assets.stocks) | number }}</td>
+                                                                <td>{{ (report.assets.stocks) | number: '1.0-0' }}</td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
@@ -98,15 +98,15 @@
                                                         <tbody>
                                                             <tr>
                                                                 <td>Proveedores</td>
-                                                                <td>{{ report.pasives.providers | number }}</td>
+                                                                <td>{{ report.pasives.providers | number: '1.0-0' }}</td>
                                                             </tr>
                                                             <tr>
                                                                 <td>Bancos</td>
-                                                                <td>{{ report.pasives.banks | number }}</td>
+                                                                <td>{{ report.pasives.banks | number: '1.0-0' }}</td>
                                                             </tr>
                                                             <tr>
                                                                 <td>Empleados</td>
-                                                                <th>{{ report.pasives.employees | number }}</th>
+                                                                <th>{{ report.pasives.employees | number: '1.0-0' }}</th>
                                                             </tr>
                                                         </tbody>
                                                     </table>

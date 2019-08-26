@@ -41,7 +41,10 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="payment_type">Tipo de pago</label>
-                                    <input type="text" class="form-control text-small" placeholder="Desde" formControlName="payment_type">
+                                    <select (change)="getDataByParams()" class="form-control form-control-sm" formControlName="payment_type">
+                                        <option value="" selected>Seleccione...</option>
+                                        <option *ngFor="let param of lstParameters" value="{{param.value}}">{{ param.name }}</option>
+                                    </select>
                                     <small id="emailHelp" class="form-text text-muted">Tipo de pago de factura.</small>
                                 </div>
                                 <button type="submit" class="btn btn-outline-success btn-sm mb-2 mr-1" (click)="getDataByParams()">Buscar</button>        
@@ -56,41 +59,32 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="card">
-                                <div class="card-header bg-info text-white"><h4>Resultados</h4></div>
+                                <div class="card-header bg-success text-white"><h6>Operaciones de compra</h6></div>
                                 <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="card">
-                                                <div class="card-header bg-success text-white"><h6>Operaciones de compra</h6></div>
-                                                <div class="card-body">
-                                                    <table class="table table-sm table-hover">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Proveedor</th>
-                                                                <th>Número de factura</th>
-                                                                <th>Fecha</th>
-                                                                <th>Tipo de pago</th>
-                                                                <th>Total</th>
-                                                                <th>Saldo</th>
-                                                                <th>Estado</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr *ngFor="let operation of lstOperations">
-                                                                <td>{{ operation.external_reference.split(':')[2] }}</td>
-                                                                <td>{{ operation.number_invoice }}</td>
-                                                                <td>{{ operation.date_operation }}</td>
-                                                                <td>{{ operation.payment_type }}</td>
-                                                                <td>{{ operation.total_operation | number}}</td>
-                                                                <td>{{ operation.total_operation - operation.total_pays | number}}</td>
-                                                                <td>{{ operation.state_operation }}</td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <table class="table table-sm table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Proveedor</th>
+                                                <th>Número de factura</th>
+                                                <th>Fecha</th>
+                                                <th>Tipo de pago</th>
+                                                <th>Total</th>
+                                                <th>Saldo</th>
+                                                <th>Estado</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let operation of lstOperations">
+                                                <td>{{ operation.external_reference.split(':')[2] }}</td>
+                                                <td>{{ operation.number_invoice }}</td>
+                                                <td>{{ operation.date_operation }}</td>
+                                                <td>{{ operation.payment_type }}</td>
+                                                <td>{{ operation.total_operation | number}}</td>
+                                                <td>{{ operation.total_operation - operation.total_pays | number}}</td>
+                                                <td>{{ operation.state_operation }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>

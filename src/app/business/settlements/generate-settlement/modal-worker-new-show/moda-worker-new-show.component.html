@@ -21,7 +21,7 @@
                                     </tr>
                                     <tr *ngIf="laboral_condition.salary_type == 'FIJO'">
                                         <th>Salario</th>
-                                        <td>{{ laboral_condition.salary | number }}</td>
+                                        <td>{{ laboral_condition.salary | number: '1.0-0' }}</td>
                                     </tr>
                                     <tr *ngIf="laboral_condition.salary_type != 'FIJO'">
                                         <th>Unidad de producción</th>
@@ -29,19 +29,19 @@
                                     </tr>
                                     <tr *ngIf="laboral_condition.salary_type != 'FIJO'">
                                         <th>Valor Unidad de producción</th>
-                                        <td>{{ laboral_condition.value_product_unit | number }}</td>
+                                        <td>{{ laboral_condition.value_product_unit | number: '1.0-0' }}</td>
                                     </tr>
                                     <tr *ngIf="laboral_condition.salary_type != 'FIJO'">
                                         <th>Cantidad producida en el período</th>
-                                        <td>{{ production_period | number }}</td>
+                                        <td>{{ production_period | number: '1.0-0' }}</td>
                                     </tr>
                                     <tr *ngIf="laboral_condition.salary_type != 'FIJO'">
                                         <th>Total a pagar</th>
-                                        <td>{{ production_period * laboral_condition.value_product_unit | number }}</td>
+                                        <td>{{ production_period * laboral_condition.value_product_unit | number: '1.0-0' }}</td>
                                     </tr>
                                     <tr *ngIf="laboral_condition.salary_type == 'FIJO'">
                                         <th>Total a pagar</th>
-                                        <td>{{ laboral_condition.salary | number }}</td>
+                                        <td>{{ laboral_condition.salary | number: '1.0-0' }}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -83,7 +83,7 @@
                                         <td>{{ worker.type_new }}</td>
                                         <td>{{ worker.description_new }}</td>
                                         <td>{{ worker.date_new }}</td>
-                                        <td>{{ worker.value_new | number }}</td>
+                                        <td>{{ worker.value_new | number: '1.0-0' }}</td>
                                         <td>{{ worker.state_worker_new }}</td>
                                     </tr>
                                 </tbody>

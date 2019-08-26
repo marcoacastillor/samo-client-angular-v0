@@ -17,6 +17,8 @@ import { PersonService } from 'src/app/shared/services/person.service';
 import { Person } from 'src/app/shared/models/person';
 import { EnterpriseService } from 'src/app/shared/services/enterprise.service';
 import { Enterprise } from 'src/app/shared/models/enterprise';
+import { User } from 'src/app/shared/models/user';
+import { GlobalStoreService } from 'src/app/core/services/global-store.service';
 
 @Component({
   selector: 'app-show-sale-detail',

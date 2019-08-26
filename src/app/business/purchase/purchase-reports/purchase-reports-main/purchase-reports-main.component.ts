@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { faAngleDoubleRight } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-purchase-reports-main',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styles: []
 })
 export class PurchaseReportsMainComponent implements OnInit {
-
+  faAngleDoubleRight = faAngleDoubleRight;
   constructor() { }
 
   ngOnInit() {

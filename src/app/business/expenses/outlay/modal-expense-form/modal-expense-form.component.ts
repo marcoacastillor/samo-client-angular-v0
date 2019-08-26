@@ -90,7 +90,7 @@ export class ModalExpenseFormComponent implements OnInit {
   }
 
   public selectNumberPurchase(){
-    let number_purchase     = '';
+    let number_purchase     = '0';
     let enterprise_purchase = this.getParameters(environment.enterprise_purchase_fact);
     let prefix_purchase     = this.getParameters(environment.prefix_purchase);
     let current_purchase    = this.getParameters(environment.current_purchase);
@@ -98,22 +98,24 @@ export class ModalExpenseFormComponent implements OnInit {
     if(enterprise_purchase){
       if(prefix_purchase){
         if(current_purchase)
-          number_purchase = prefix_purchase + (Number(current_purchase) + 1);
+          number_purchase = prefix_purchase + (parseInt(current_purchase) + 1);
         else
+        {
           current_purchase = '1';
-          number_purchase = prefix_purchase + (Number(current_purchase));
+          number_purchase = prefix_purchase + parseInt(current_purchase);
+        }
       }
       else if(current_purchase)
-          number_purchase = (Number(current_purchase) + 1).toString();
+          number_purchase = (parseInt(current_purchase) + 1).toString();
         else
           current_purchase = '1';
       }
     else
-      number_purchase = '';
+      number_purchase = '1';
     
     this.expenseForm.patchValue({
       number_voucher: number_purchase,
-      actual_value: Number(current_purchase) + 1,
+      actual_value: parseInt(current_purchase) + 1,
       type_expense: 'Factura Equivalente'
     });
   }
@@ -136,6 +138,8 @@ export class ModalExpenseFormComponent implements OnInit {
   }
 
   private getParameters(code: string){
+    console.log(JSON.stringify(this.parameterEnterprise));
+
     if(this.parameterEnterprise)
     {
       const resultado = this.parameterEnterprise.filter( parameter => parameter.code === code );

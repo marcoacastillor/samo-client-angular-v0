@@ -52,21 +52,21 @@
                                                         <tbody>
                                                             <tr>
                                                                 <td>Ventas de contado</td>
-                                                                <td>{{ report.incomes.cash | number }}</td>
+                                                                <td>{{ report.incomes.cash | number: '1.0-0' }}</td>
                                                             </tr>
                                                             <tr>
                                                                 <td>Pagos de cuentas a crédito</td>
-                                                                <td>{{ report.incomes.payment_clients | number }}</td>
+                                                                <td>{{ report.incomes.payment_clients | number: '1.0-0' }}</td>
                                                             </tr>
                                                             <tr>
                                                                 <td>Otras ingresos</td>
-                                                                <th>{{ report.incomes.other | number }}</th>
+                                                                <th>{{ report.incomes.other | number: '1.0-0' }}</th>
                                                             </tr>
                                                         </tbody>
                                                         <thead>
                                                             <tr>
                                                                 <th>Total</th>
-                                                                <th>{{ (report.incomes.cash + report.incomes.payment_clients + report.incomes.other) | number }}</th>
+                                                                <th>{{ (report.incomes.cash + report.incomes.payment_clients + report.incomes.other) | number: '1.0-0' }}</th>
                                                             </tr>
                                                         </thead>
                                                     </table>
@@ -90,25 +90,25 @@
                                                         <tbody>
                                                             <tr>
                                                                 <td>Compras a proveedores de contado</td>
-                                                                <td>{{ report.expenses.credit | number }}</td>
+                                                                <td>{{ report.expenses.credit | number: '1.0-0' }}</td>
                                                             </tr>
                                                             <tr>
                                                                 <td>Pago a proveedores</td>
-                                                                <td>{{ report.expenses.payment_providers | number }}</td>
+                                                                <td>{{ report.expenses.payment_providers | number: '1.0-0' }}</td>
                                                             </tr>
                                                             <tr>
                                                                 <td>Otros gastos</td>
-                                                                <td>{{ report.expenses.other | number }}</td>
+                                                                <td>{{ report.expenses.other | number: '1.0-0' }}</td>
                                                             </tr>
                                                             <tr>
                                                                 <td>Pagos e empleados</td>
-                                                                <td>{{ report.expenses.employee | number }}</td>
+                                                                <td>{{ report.expenses.employee | number: '1.0-0' }}</td>
                                                             </tr>
                                                         </tbody>
                                                         <thead>
                                                             <tr>
                                                                 <th>Total</th>
-                                                                <th>{{ (report.expenses.credit + report.expenses.payment_providers + report.expenses.other + report.expenses.employee) | number }}</th>
+                                                                <th>{{ (report.expenses.credit + report.expenses.payment_providers + report.expenses.other + report.expenses.employee) | number: '1.0-0' }}</th>
                                                             </tr>
                                                         </thead>
                                                     </table>
@@ -123,7 +123,7 @@
                                         <div class="col-sm-12">
                                             <div class="card shadow-sm p-3 mb-5 bg-white rounded">
                                                 <div class="card-body text-center">
-                                                    <h4>Efectivo en caja : {{ (report.incomes.cash + report.incomes.payment_clients + report.incomes.other) - (report.expenses.credit + report.expenses.payment_providers + report.expenses.other + report.expenses.employee) | number  }}</h4>
+                                                    <h4>Efectivo en caja : {{ (report.incomes.cash + report.incomes.payment_clients + report.incomes.other) - (report.expenses.credit + report.expenses.payment_providers + report.expenses.other + report.expenses.employee) | number: '1.0-0'  }}</h4>
                                                 </div>
                                             </div>
                                         </div>

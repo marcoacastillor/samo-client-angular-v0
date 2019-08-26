@@ -16,6 +16,8 @@ import { ParameterService } from 'src/app/shared/services/parameter.service';
 import { Parameter } from 'src/app/shared/models/parameter';
 import { environment } from 'src/environments/environment';
 import { ProductOperation } from 'src/app/shared/models/product-operation';
+import { User } from 'src/app/shared/models/user';
+import { GlobalStoreService } from 'src/app/core/services/global-store.service';
 
 @Component({
   selector: 'app-show-order-detail',

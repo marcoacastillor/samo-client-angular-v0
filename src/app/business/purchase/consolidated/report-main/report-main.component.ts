@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { faCalendar, faSync, faUpload } from '@fortawesome/free-solid-svg-icons';
+import { faCalendar, faSync, faUpload, faEye } from '@fortawesome/free-solid-svg-icons';
 import { environment } from 'src/environments/environment';
 import * as moment from 'moment';
 import { OperationService } from 'src/app/shared/services/operation.service';
@@ -16,6 +16,7 @@ import { Operation } from 'src/app/shared/models/operation';
 export class ReportMainComponent implements OnInit {
   faUpload  = faUpload;
   faCalendar = faCalendar;
+  faEye = faEye;
 
   reportForm: FormGroup;
   lstOperations: Operation[] = [];

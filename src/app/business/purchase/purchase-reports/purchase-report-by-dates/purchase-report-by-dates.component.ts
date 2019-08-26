@@ -9,6 +9,7 @@ import { FormToolsService } from 'src/app/shared/services/form-tools.service';
 import * as moment from 'moment';
 import { OperationService } from 'src/app/shared/services/operation.service';
 import { Operation } from 'src/app/shared/models/operation';
+import { ParameterService } from 'src/app/shared/services/parameter.service';
 
 @Component({
   selector: 'app-purchase-report-by-dates',
@@ -33,6 +34,7 @@ export class PurchaseReportByDatesComponent implements OnInit {
     private globalStoreService: GlobalStoreService,
     private operationService: OperationService,
     private formToolService: FormToolsService,
+    private parameterService: ParameterService,
     private fb: FormBuilder,
     ) { }
 
@@ -42,14 +44,25 @@ export class PurchaseReportByDatesComponent implements OnInit {
     this.dateInit = moment().add(-this.consolidate_day,'days').format('YYYY-MM-DD');
     this.initUpdForm(this.dateInit,this.dateEnd);
     this.getDataByParams();
+    this.getParameters();
   }
 
-  //paymentType: string, fromDate: string, toDate: string, type_operation: string
+  private getParameters(){
+    this.parameterService.getByCodeCategory$(environment.type_payment).subscribe(
+      lst_parameters => this.lstParameters = lst_parameters
+    )
+  }
 
   public getDataByParams(){
     this.operationService.getByPaymentTypeAndDatesAndType$(this.reportForm.value.payment_type,moment(this.reportForm.value.from_date).format('YYYY-MM-DD'),moment(this.reportForm.value.to_date).format('YYYY-MM-DD'),environment.purchase).subscribe(
       lst_operations => this.lstOperations = lst_operations
     )
+    
+    /*
+    this.operationService.getByPaymentTypeAndDatesAndType$(this.reportForm.value.payment_type,moment(this.reportForm.value.from_date).format('YYYY-MM-DD'),moment(this.reportForm.value.to_date).format('YYYY-MM-DD'),environment.purchase).subscribe(
+      lst_operations => this.lstOperations = lst_operations
+    )
+    */
   }
 
   private initUpdForm(dateInit: string, dateEnd: string) {

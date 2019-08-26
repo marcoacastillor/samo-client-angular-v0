@@ -17,10 +17,10 @@
                                 <div class="form-group">
                                     <label for="number_voucher">Número de comprobante</label>
                                     <div class="input-group-prepend">
-                                        <button type="button" (click)="selectNumberVoucher()" class="btn text-small btn-sm btn-outline-primary">
+                                        <button type="button" *ngIf="!expense.pk_id_expense" (click)="selectNumberVoucher()" class="btn text-small btn-sm btn-outline-primary">
                                             <fa-icon [icon]="faClone" class="text-primary mb-2 mr-1" title="Consecutivo"></fa-icon>
                                         </button>
-                                        <button type="button" (click)="selectNumberPurchase()" class="btn text-small btn-sm btn-outline-primary">
+                                        <button type="button" *ngIf="!expense.pk_id_expense" (click)="selectNumberPurchase()" class="btn text-small btn-sm btn-outline-primary">
                                             <fa-icon [icon]="faDonate" class="text-primary mb-2 mr-1" title="Generar factura equivalente"></fa-icon>
                                         </button>
                                         <input type="text" readonly class="form-control form-control-sm" placeholder="#Comprobante" formControlName="number_voucher" required>

@@ -10,6 +10,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { OperationService } from 'src/app/shared/services/operation.service';
+import { ParameterService } from 'src/app/shared/services/parameter.service';
 
 @NgModule({
   imports: [
@@ -21,7 +22,7 @@ import { OperationService } from 'src/app/shared/services/operation.service';
     OwlNativeDateTimeModule
   ],
   providers: [
-    OperationService
+    OperationService, ParameterService
   ],
   declarations: [PurchaseReportsMainComponent, PurchaseReportByDatesComponent, PurchaseReportByDebtTimeComponent, PurchaseReportByExternalComponent]
 })
