@@ -1,7 +1,12 @@
+/*
 @import url('https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap');
+*/
+@import url('https://fonts.googleapis.com/css?family=Lato|Montserrat|Poppins|Roboto+Condensed&display=swap');
+
 
 body {
-    font-family: 'Roboto Condensed', sans-serif;
+    /*font-family: 'Roboto Condensed', sans-serif;*/
+    font-family: 'Lato', sans-serif;
     background: #fafafa;
 }
 
