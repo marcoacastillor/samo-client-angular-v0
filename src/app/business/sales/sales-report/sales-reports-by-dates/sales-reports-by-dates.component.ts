@@ -1,25 +1,25 @@
 import { Component, OnInit } from '@angular/core';
+import { faEye, faEdit, faSearch, faCalendar } from '@fortawesome/free-solid-svg-icons';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { faSearch, faCalendar, faEye, faEdit } from '@fortawesome/free-solid-svg-icons';
 import { User } from 'src/app/shared/models/user';
 import { Parameter } from 'src/app/shared/models/parameter';
+import { Operation } from 'src/app/shared/models/operation';
+import { OperationProduct } from 'src/app/shared/models/operation-product';
 import { environment } from 'src/environments/environment';
 import { GlobalStoreService } from 'src/app/core/services/global-store.service';
-import { FormToolsService } from 'src/app/shared/services/form-tools.service';
-import * as moment from 'moment';
 import { OperationService } from 'src/app/shared/services/operation.service';
-import { Operation } from 'src/app/shared/models/operation';
+import { FormToolsService } from 'src/app/shared/services/form-tools.service';
 import { ParameterService } from 'src/app/shared/services/parameter.service';
 import { OperationProductService } from 'src/app/shared/services/operation-product.service';
-import { OperationProduct } from 'src/app/shared/models/operation-product';
+import * as moment from 'moment';
 import { tap } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-purchase-report-by-dates',
-  templateUrl: 'purchase-report-by-dates.component.html',
+  selector: 'app-sales-reports-by-dates',
+  templateUrl: 'sales-reports-by-dates.component.html',
   styles: []
 })
-export class PurchaseReportByDatesComponent implements OnInit {
+export class SalesReportsByDatesComponent implements OnInit {
   faEye = faEye;
   faEdit = faEdit;
   
@@ -69,7 +69,7 @@ export class PurchaseReportByDatesComponent implements OnInit {
       this.reportForm.value.payment_type,
       moment(this.reportForm.value.from_date).format('YYYY-MM-DD'),
       moment(this.reportForm.value.to_date).format('YYYY-MM-DD'),
-      environment.purchase,environment.type_aggregated,
+      environment.sales,environment.type_aggregated,
       null
       ).subscribe(
       lst_operations => this.lstOperationsAggregate = lst_operations
@@ -81,7 +81,7 @@ export class PurchaseReportByDatesComponent implements OnInit {
       this.reportForm.value.payment_type,
       moment(this.reportForm.value.from_date).format('YYYY-MM-DD'),
       moment(this.reportForm.value.to_date).format('YYYY-MM-DD'),
-      environment.purchase,
+      environment.sales,
       environment.type_disaggregated,
       id
       ).subscribe(

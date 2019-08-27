@@ -1,0 +1,114 @@
+<div class="modal fade" id="operationSmallModal" tabindex="-1" role="dialog" aria-labelledby="operationSmallModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Resumen de operación</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card" *ngIf="operation.pk_id_operation">
+                        <div class="card-body shadow p-3 mb-5 bg-white rounded">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <h5>Órden de pedido: # {{ operation.number_invoice }}</h5>
+                                    <div class="row">
+                                        <table class="table table-sm text-muted text-small">
+                                            <tr>
+                                                <td>Fecha</td>
+                                                <td>{{ operation.date_operation }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Tipo de pago</td>
+                                                <td>{{ operation.payment_type }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Status</td>
+                                                <td class="badge badge-pill badge-success">{{ operation.state_operation | lowercase }}</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 text-right">
+                                    <h5 *ngIf="operation.type == 'PURCHASE'">Proveedor: {{ operation.external_reference.split(':')[2] }}</h5>
+                                    <h5 *ngIf="operation.type == 'SALE'">Cliente: {{ operation.external_reference.split(':')[2] }}</h5>
+                                    <div class="row text-muted">
+                                        <div class="col-sm-6">
+                                            Saldo
+                                        </div>
+                                        <div class="col-sm-6">
+                                            {{ operation.total_operation - operation.total_pays | number }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>    
+                        </div>
+
+                        <div class="card-body shadow p-3 mb-5 bg-white rounded">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table class="table table-sm table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Producto</th>
+                                                <th>Presentación</th>
+                                                <th>Cantidad</th>
+                                                <th>Valor unitario</th>
+                                                <th>Impuesto</th>
+                                                <th>Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let product of lstProducts" class="text-muted">
+                                                <td><strong>{{ product.name}}</strong><br/>{{ product.code }}</td>
+                                                <td>{{ product.presentation | lowercase }}</td>
+                                                <td>{{ product.number_units | number}}</td>
+                                                <td>{{ product.price_unit | number}}</td>
+                                                <td>( {{product.tax}} %) {{ product.value_tax | number}}</td>
+                                                <td>{{ product.total_product | number }}</td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td colspan="4" rowspan="6"></td>
+                                                <td>Subtotal</td>
+                                                <td>{{ operation.subtotal_operation | number }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Impuestos</td>
+                                                <td>{{ operation.total_tax | number }}</td>
+                                            </tr>
+                                            <tr class="text-success">
+                                                <td>Total</td>
+                                                <td>{{ operation.total_operation | number }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Pagos</td>
+                                                <td>{{ operation.total_pays | number }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Descuentos</td>
+                                                <td>{{ operation.total_discounts | number }}</td>
+                                            </tr>
+                                            <tr class="text-primary">
+                                                <td>Neto</td>
+                                                <td>{{ operation.subtotal_operation - operation.total_discounts | number }}</td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>   
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        </div>
+        </div>
+    </div>
+</div>

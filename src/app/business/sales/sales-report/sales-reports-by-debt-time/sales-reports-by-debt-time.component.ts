@@ -1,25 +1,25 @@
 import { Component, OnInit } from '@angular/core';
+import { faEye, faEdit, faSearch, faCalendar } from '@fortawesome/free-solid-svg-icons';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { faSearch, faCalendar, faEye, faEdit } from '@fortawesome/free-solid-svg-icons';
 import { User } from 'src/app/shared/models/user';
 import { Parameter } from 'src/app/shared/models/parameter';
-import { environment } from 'src/environments/environment';
-import { GlobalStoreService } from 'src/app/core/services/global-store.service';
-import { FormToolsService } from 'src/app/shared/services/form-tools.service';
-import * as moment from 'moment';
-import { OperationService } from 'src/app/shared/services/operation.service';
 import { Operation } from 'src/app/shared/models/operation';
+import { OperationProduct } from 'src/app/shared/models/operation-product';
+import { GlobalStoreService } from 'src/app/core/services/global-store.service';
+import { OperationService } from 'src/app/shared/services/operation.service';
+import { FormToolsService } from 'src/app/shared/services/form-tools.service';
 import { ParameterService } from 'src/app/shared/services/parameter.service';
 import { OperationProductService } from 'src/app/shared/services/operation-product.service';
-import { OperationProduct } from 'src/app/shared/models/operation-product';
+import * as moment from 'moment';
+import { environment } from 'src/environments/environment';
 import { tap } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-purchase-report-by-dates',
-  templateUrl: 'purchase-report-by-dates.component.html',
+  selector: 'app-sales-reports-by-debt-time',
+  templateUrl: 'sales-reports-by-debt-time.component.html',
   styles: []
 })
-export class PurchaseReportByDatesComponent implements OnInit {
+export class SalesReportsByDebtTimeComponent implements OnInit {
   faEye = faEye;
   faEdit = faEdit;
   
@@ -36,10 +36,6 @@ export class PurchaseReportByDatesComponent implements OnInit {
 
   selectedOperation:Operation = new Operation;
 
-  public dateInit: string;
-  public dateEnd: string;
-  public consolidate_day: number = environment.consolidate_day;
-
   constructor(
     private globalStoreService: GlobalStoreService,
     private operationService: OperationService,
@@ -51,49 +47,25 @@ export class PurchaseReportByDatesComponent implements OnInit {
 
   ngOnInit() {
     this.activeUser = this.globalStoreService.getUser();
-    this.dateEnd = moment().add().format('YYYY-MM-DD');
-    this.dateInit = moment().add(-this.consolidate_day,'days').format('YYYY-MM-DD');
-    this.initUpdForm(this.dateInit,this.dateEnd);
-    this.getDataByParams();
+    this.initUpdForm();
     this.getParameters();
   }
 
   private getParameters(){
-    this.parameterService.getByCodeCategory$(environment.type_payment).subscribe(
+    this.parameterService.getByCodeCategory$(environment.debt_time_invocie).subscribe(
       lst_parameters => this.lstParameters = lst_parameters
     )
   }
 
   public getDataByParams(){
-    this.operationService.getByPaymentTypeAndDatesAndTypeAndAggregate$(
-      this.reportForm.value.payment_type,
-      moment(this.reportForm.value.from_date).format('YYYY-MM-DD'),
-      moment(this.reportForm.value.to_date).format('YYYY-MM-DD'),
-      environment.purchase,environment.type_aggregated,
-      null
-      ).subscribe(
-      lst_operations => this.lstOperationsAggregate = lst_operations
-    )
-  }
-
-  public getOperationsByProviderAndParams(id:number){
-    this.operationService.getByPaymentTypeAndDatesAndTypeAndAggregate$(
-      this.reportForm.value.payment_type,
-      moment(this.reportForm.value.from_date).format('YYYY-MM-DD'),
-      moment(this.reportForm.value.to_date).format('YYYY-MM-DD'),
-      environment.purchase,
-      environment.type_disaggregated,
-      id
-      ).subscribe(
+    this.operationService.getByTypeAndDebtTime$(environment.sales,this.reportForm.value.debt_time).subscribe(
       lst_operations => this.lstOperations = lst_operations
     )
   }
 
-  private initUpdForm(dateInit: string, dateEnd: string) {
+  private initUpdForm() {
     this.reportForm = this.fb.group({
-      from_date: [dateInit],
-      to_date: [dateEnd],
-      payment_type: ['']
+      debt_time: ['']
     });
   }
 

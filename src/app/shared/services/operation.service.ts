@@ -110,6 +110,8 @@ export class OperationService {
     );
   }
 
+  
+
   public getByNumberInvoiceTypeAndTypeAndEnterprise$(number_invoice:string,type:string,id_enterprise:number): Observable<Operation[]> {
     let url = this._url + '/get-by-numberinvoice-and-type-and-enterprise/' + number_invoice + '/' + type + '/' + id_enterprise.toString() ;
     return this.userService.validateOptionByToken('Operation:getByNumberInvoiceAndTypeAndEnterprise').pipe(
@@ -257,6 +259,36 @@ export class OperationService {
       switchMap(validate => {
         if(validate){
           return this.http.post<Operation[]>(url,params);
+        }
+      })
+    );
+  }
+
+  public getByPaymentTypeAndDatesAndTypeAndAggregate$(paymentType: string, fromDate: string, toDate: string, type_operation: string, aggregate:string,provider:number): Observable<Operation[]> {
+    let params = {
+      'payment_type': paymentType,
+      'from_date': fromDate,
+      'to_date': toDate,
+      'type_operation': type_operation,
+      'aggregate': aggregate,
+      'provider':provider
+    };
+    let url = this._url + '/get-by-payment-type-and-dates-and-type-and-aggregate';
+    return this.userService.validateOptionByToken('Operation:getByPaymentTypeAndDatesAndTypeAndAggregate').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.post<Operation[]>(url,params);
+        }
+      })
+    );
+  }
+
+  public getByTypeAndDebtTime$(type:string,debt_time:number):Observable<Operation[]>{
+    const url = this._url + '/get-by-type-and-debt-time/' + type + '/' + debt_time;
+    return this.userService.validateOptionByToken('Operation:getByTypeAndDebtTime').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.get<Operation[]>(url);
         }
       })
     );

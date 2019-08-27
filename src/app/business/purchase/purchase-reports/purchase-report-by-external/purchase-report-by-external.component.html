@@ -1,0 +1,126 @@
+<app-pages title="Reporte por proveedor">  
+    <main>            
+        <section>
+            <!-- start menu main-->
+            <div class="row bg-gray">
+                <div class="col-sm-12 text-left">
+                    Reporte de compras por proveedor
+                </div>
+            </div>
+            <!-- end menu main-->
+
+            <!-- start dates form-->
+            <div class="row margin-top-1rem">
+                <!-- criterios de búsqueda -->
+                <div class="col-sm-3">
+                    <div class="card">
+                        <div class="card-header"><h6>Criterios de búsqueda</h6></div>
+                        <div class="card-body">
+                            <form [formGroup]="reportForm">
+                                <div class="form-group">
+                                    <label for="from_date">Proveedor</label>
+                                    <small id="emailHelp" class="form-text text-muted">Digite nombre del proveedor a buscar.</small>
+                                    <input type="text" id="filterProvider" (keypress)="onFindProvider($event)" class="form-control text-small" placeholder="Proveedor" formControlName="provider">
+                                    <!-- start autocomplete-->
+                                    <div class="autocomplete container-fluid">
+                                        <div id="autocomplete-list" class="autocomplete-items text-ultra-small">
+                                            <div class="items row" *ngFor="let enterprise of lstProviders">
+                                                <div class="col-sm-12" (click)="selectProvider(enterprise)">
+                                                    {{ enterprise.nit }} {{ enterprise.name }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- start autocomplete-->
+                                </div>
+                                <div class="form-group">
+                                    <label for="from_date">Fecha inicial</label>
+                                    <small id="emailHelp" class="form-text text-muted">Fecha inicial del rango a buscar datos.</small>
+                                    <div class="input-group input-group-sm mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="btn text-small btn-sm btn-outline-secondary" [owlDateTimeTrigger]="from_date_2"><fa-icon [icon]="faCalendar" class="text-secondary"></fa-icon></span>
+                                        </div>
+                                        <input type="text" class="form-control text-small" placeholder="Desde" formControlName="from_date" [owlDateTime]="from_date_2">
+                                        <owl-date-time [pickerType]="'calendar'" #from_date_2></owl-date-time>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="to_date">Fecha final</label>
+                                    <small id="emailHelp" class="form-text text-muted">Fecha final del rango a buscar datos.</small>
+                                    <div class="input-group input-group-sm mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="btn text-small btn-sm btn-outline-secondary" [owlDateTimeTrigger]="to_date_2"><fa-icon [icon]="faCalendar" class="text-secondary"></fa-icon></span>
+                                        </div>
+                                        <input type="text" class="form-control text-small" placeholder="Desde" formControlName="to_date" [owlDateTime]="to_date_2">
+                                        <owl-date-time [pickerType]="'calendar'" #to_date_2></owl-date-time>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="payment_type">Tipo de pago</label>
+                                    <small id="emailHelp" class="form-text text-muted">Tipo de pago de factura.</small>
+                                    <select (change)="getOperationsByProviderAndParams()" class="form-control form-control-sm" formControlName="payment_type">
+                                        <option value="" selected>Todas...</option>
+                                        <option *ngFor="let param of lstParameters" value="{{param.value}}">{{ param.name }}</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn btn-outline-success btn-sm mb-2 mr-1" (click)="getOperationsByProviderAndParams()">Buscar</button>        
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- criterios de búsqueda -->
+
+                <!-- resultados -->
+                <div class="col-sm-9">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header bg-success text-white"><h6>Operaciones de compra</h6></div>
+                                <div class="card-body">
+                                    <table class="table table-sm table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Acciones</th>
+                                                <th>Número de factura</th>
+                                                <th>Fecha de compra</th>
+                                                <th>Tipo de pago</th>
+                                                <th>Valor de factura</th>
+                                                <th>Estado de factura/th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let operation of lstOperations">
+                                                <td>
+                                                    <div class="btn-group">
+                                                        <button (click)="selectOperation(operation)" type="button" class="btn text-ultra-small btn-sm btn-outline-secondary" data-toggle="modal" data-target="#operationSmallModal">
+                                                            <fa-icon [icon]="faEye" class="text-secondary mb-2 mr-1" title="Actualizar registro"></fa-icon>Ver
+                                                        </button>
+                                                        <a routerLink="/sales-admin/purchases/purchase-detailed-show/{{operation.pk_id_operation}}" type="button" class="text-ultra-small btn btn-outline-secondary btn-sm">
+                                                            <fa-icon [icon]="faEdit" class="text-outline-secondary mb-2 mr-1"></fa-icon>Editar
+                                                        </a> 
+                                                    </div>
+                                                </td>
+                                                <td>{{ operation.number_invoice }}</td>
+                                                <td>{{ operation.date_operation }}</td>
+                                                <td>{{ operation.payment_type }}</td>
+                                                <td>{{ operation.total_operation | number: '1.0-0' }}</td>
+                                                <td>{{ operation.state_operation }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- resultados -->                
+            </div>
+            <!-- end dates form-->
+        </section>
+    </main>
+</app-pages>
+
+<app-small-operation 
+[operation]="selectedOperation" 
+[lstProducts]="lstProducts">
+</app-small-operation>

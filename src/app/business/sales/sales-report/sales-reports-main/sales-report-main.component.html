@@ -1,0 +1,69 @@
+<app-pages title="Reportes de venta">  
+    <main>            
+        <section>
+            <!-- start menu main-->
+            <div class="row bg-gray">
+                <div class="col-sm-12 text-left">
+                    Reportes de ventas consolidados por cliente
+                </div>
+            </div>
+            <!-- end menu main-->
+
+            <!-- start dates form-->
+            <div class="row margin-top-1rem">
+                
+                <!-- resultados -->
+                <div class="col-sm-4">
+                    <div class="card">
+                        <div class="card-header bg-success text-white">Reporte por fechas</div>
+                        <div class="card-body" style="height: 130px;">
+                            <h5 class="card-title">Buscar ventas por fechas</h5>
+                            <p class="card-text text-small">Reporte que muestra por tipo de venta, y un rango de fechas, todas las ventas consolidadas por cliente, realizadas por la empresa. Se puede filtrar y ver el detalle de cada venta.</p>
+                        </div>
+                        <div class="card-body" role="alert">
+                            <a routerLink="./by-dates" class="btn btn-outline-success btn-sm">
+                                Ir al reporte ...<fa-icon [icon]="faAngleDoubleRight" class="text-outline-success mb-2 mr-1"></fa-icon>
+                            </a>
+                        </div>
+                    </div>    
+                </div>
+                <!-- resultados --> 
+
+                 <!-- resultados -->
+                 <div class="col-sm-4">
+                    <div class="card">
+                        <div class="card-header bg-success text-white">Reporte por tiempo de cobro</div>
+                        <div class="card-body" style="height: 130px;">
+                            <h5 class="card-title">Buscar ventas por dias de mora en pago</h5>
+                            <p class="card-text text-small">Reporte que muestra listado de clientes que tienen facturas por pagar en un rango determinado. Los rangos son, de cero a 30 dias, de 30 a 60 dias y mayor a 60 dias de mora. </p>
+                        </div>
+                        <div class="card-body" role="alert">
+                            <a routerLink="./by-debt-time" class="btn btn-outline-success btn-sm">
+                                Ir al reporte ...<fa-icon [icon]="faAngleDoubleRight" class="text-outline-success mb-2 mr-1"></fa-icon>
+                            </a>
+                        </div>
+                    </div>    
+                </div>
+                <!-- resultados --> 
+                
+                <!-- resultados -->
+                <div class="col-sm-4">
+                    <div class="card">
+                        <div class="card-header bg-success text-white">Reporte por cliente</div>
+                        <div class="card-body" style="height: 130px;">
+                            <h5 class="card-title">Buscar ventas por cliente</h5>
+                            <p class="card-text text-small">Reporte que muestra dado un cliente, el historial de ventas que se ha tenido con él. Muestra todas la facturas filtradas por fechas, tipo de pago y cliente.</p>
+                        </div>
+                        <div class="card-body" role="alert">
+                            <a routerLink="./by-client" class="btn btn-outline-success btn-sm">
+                                Ir al reporte ...<fa-icon [icon]="faAngleDoubleRight" class="text-outline-success mb-2 mr-1"></fa-icon>
+                            </a>
+                        </div>
+                    </div>    
+                </div>
+                <!-- resultados --> 
+            </div>
+            <!-- end dates form-->
+        </section>
+    </main>
+</app-pages>

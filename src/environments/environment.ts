@@ -57,6 +57,9 @@ export const environment = {
   type_operation_purchase: 'PURCHASE',
   type_operation_sale: 'SALE',
 
+  type_disaggregated: 'disaggregate',
+  type_aggregated: 'aggregate',
+
   state_user: 'STATE_USER',
   type_payment: 'PAYMENT_TYPE',
   type_enterprise: 'TYPE_ENTERPRISE',
@@ -129,6 +132,7 @@ export const environment = {
 
   cutting_active_state: 'Abierto',
   state_service: 'STATE_SERVICE',
+  debt_time_invocie: 'DEBT_TIME_INVOICE',
 
   
 };

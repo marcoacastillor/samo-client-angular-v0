@@ -59,7 +59,7 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="card">
-                                <div class="card-header bg-success text-white"><h6>Operaciones de compra</h6></div>
+                                <div class="card-header bg-success text-white"><h6>Operaciones de venta</h6></div>
                                 <div class="card-body">
                                     <div class="accordion" id="accordionOperation">
                                         <div class="card" *ngFor="let operation of lstOperationsAggregate">
@@ -90,7 +90,7 @@
                                                             <th>Fecha de compra</th>
                                                             <th>Tipo de pago</th>
                                                             <th>Valor de factura</th>
-                                                            <th>Estado de factura/th>
+                                                            <th>Estado de factura</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -100,7 +100,7 @@
                                                                     <button (click)="selectOperation(operation)" type="button" class="btn text-ultra-small btn-sm btn-outline-secondary" data-toggle="modal" data-target="#operationSmallModal">
                                                                         <fa-icon [icon]="faEye" class="text-secondary mb-2 mr-1" title="Actualizar registro"></fa-icon>Ver
                                                                     </button>
-                                                                    <a routerLink="/sales-admin/purchases/purchase-detailed-show/{{operation.pk_id_operation}}" type="button" class="text-ultra-small btn btn-outline-secondary btn-sm">
+                                                                    <a routerLink="/sales-admin/sales/sales-detailed-show/{{operation.pk_id_operation}}" type="button" class="text-ultra-small btn btn-outline-secondary btn-sm">
                                                                         <fa-icon [icon]="faEdit" class="text-outline-secondary mb-2 mr-1"></fa-icon>Editar
                                                                     </a> 
                                                                 </div>

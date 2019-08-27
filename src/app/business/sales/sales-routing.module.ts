@@ -11,6 +11,10 @@ const routes: Routes = [
       {
         path: "consolidated",
         loadChildren: './consolidated-sale/consolidated-sale.module#ConsolidatedSaleModule'
+      },
+      {
+        path: "sales-reports",
+        loadChildren: './sales-report/sales-report.module#SalesReportModule',
       }
     ]
   },
