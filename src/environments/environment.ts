@@ -134,6 +134,9 @@ export const environment = {
   state_service: 'STATE_SERVICE',
   debt_time_invocie: 'DEBT_TIME_INVOICE',
 
+  category_clothes: 'CATEGORY_CLOTHES',
+  sizes_clothes: 'SIZES_CLOTHES'
+
   
 };
 

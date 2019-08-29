@@ -14,6 +14,7 @@ import { PersonService } from 'src/app/shared/services/person.service';
 import { Person } from 'src/app/shared/models/person';
 import { EnterpriseService } from 'src/app/shared/services/enterprise.service';
 import { RolService } from 'src/app/shared/services/rol.service';
+import { AccessEnterpriseService } from 'src/app/shared/services/access-enterprise.service';
 
 @Component({
   selector: 'app-login',
@@ -39,7 +40,8 @@ export class LoginComponent implements OnInit {
     private personService: PersonService,
     private authenticationService: AuthenticationService,
     private enterPriseService: EnterpriseService,
-    private rolService: RolService
+    private rolService: RolService,
+    private accessEnterpriseService: AccessEnterpriseService
      ) {
     }
 
@@ -68,6 +70,11 @@ export class LoginComponent implements OnInit {
     tap((user:User) => {
       this.rolService.showLogin$(user.fk_id_rol).subscribe(
         rol => this.userLogin.rol = rol
+      )
+    }),
+    tap((user:User) => {
+      this.accessEnterpriseService.getAccessByEnterpriseLogin$(user.fk_id_enterprise).subscribe(
+        access_enterprise => this.userLogin.access_enterprise = access_enterprise
       )
     }),
     tap((user:User) => {

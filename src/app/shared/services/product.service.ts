@@ -266,4 +266,16 @@ export class ProductService {
       })
     );
   }
+
+  public getConsecutiveProductByEnterprise(id_enterprise: number):Observable<number>{
+    let url = this._url + '/get-consecurive-by-enterprise/' + id_enterprise.toString();
+    return this.userService.validateOptionByToken('Product:getConsecutiveByEnterprise').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.get<number>(url);
+        }
+      })
+    );
+  }
+
 }

@@ -1,72 +1,122 @@
-<app-pages title="">  
-  <main>
-    <section>
-      <!-- sección primera-->
+<div class="container-fluid">
+
+    <header class="blog-header py-3">
+      <div class="row flex-nowrap justify-content-between align-items-center">
+        <div class="col-12 text-center">
+          <h2>Sales System</h2>
+        </div>
+      </div>
+    </header>
+  
+  <div class="jumbotron p-4 p-md-5 text-white rounded bg-dark">
+    <div class="col-md-8 px-0">
+      <h1 class="display-4 font-italic">Sistema de gestión y control de ventas</h1>
+      <p class="lead my-3">SalesSystem es un software facíl y sencillo diseñado para pymes donde puedes llevar al día y desde cualquier 
+          lugar, la administraciónj de tu negocio. Gestiona información de ventas, compras, inventarios, procesos productivos, incluyendo reportes
+          contables de forma eficiente y segura.</p>
+    </div>
+  </div>
+
+
+  <div class="row mb-2">
+    <div class="col-md-6">
+      <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+          <strong class="d-inline-block mb-2 text-primary">Arquitectura</strong>
+          <h3 class="mb-0">Construcción del sistema</h3>
+          <p class="card-text mb-auto">
+              SalesSystem fue diseñado bajo un enfoque de arquitectura distribuida y orientada a web, para ofrecer el acceso a la información en tiempo real 
+              y con una alta disponibilidad. Se desarrollo bajo tecnologías de punta, para ofrecer una mejor experiencia de usuario, seguridad, accesibilidad y escalabilidad 
+              cuando el sistema, asi se requiera.
+          </p>
+        </div>
+        <div class="col-auto d-none d-lg-block">
+          <img src="assets/images/arquitectura.png" width="200" height="250" background="#55595c" color="#eceeef" text="Thumbnail">
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+          <strong class="d-inline-block mb-2 text-success">Tecnología</strong>
+          <p class="mb-auto">
+              Para la construcción del sistema se eligió para desarrollo de la capa de presentación a AngularJS versión 6 y para la lógica de negocio se escogió a PHP-Laravel versión 5.1, y se exponen recuersos REST para dar accesibilidad a múltiples clientes.
+          </p>
+        </div>
+        <div class="col-auto d-none d-lg-block">
+            <img src="assets/images/tecnologia.png" width="200" height="250" background="#55595c" color="#eceeef" text="Thumbnail">
+        </div>
+      </div>
+    </div>
+
+
+    <main role="main" class="container-fluid">
       <div class="row">
-        <div class="col-sm-6 col-lg-6">
-            <div class="card" style="height: 280px">
-              <div class="card-header bg-custom text-white"><h4>Arquitectura</h4></div>
-              <div class="card-body text-small text-justify">
-                <p>
-                    SalesSystem fue diseñado bajo un enfoque de arquitectura distribuida y orientada a web, para ofrecer el acceso a la información en tiempo real 
-                    y con una alta disponibilidad. Se desarrollo bajo tecnologías de punta, para ofrecer una mejor experiencia de usuario, seguridad, accesibilidad y escalabilidad 
-                    cuando el asi se requiera
-                </p>
+        <div class="col-md-8 blog-main">
+          <h3 class="pb-4 mb-4 font-italic border-bottom">
+            Módulos del sistema
+          </h3>
+      
+          <div class="blog-post">
+            <h2 class="blog-post-title">Compras</h2>
+            <p>El módulo de compras permite una gestión organizada de todas las compras realizadas por la empresa, permite llevar un control sobre las compras por período de tiempo, cuentas por pagar, estado de cuenta por proveedor, tiempo de recaudo de facturas, entre otras funcionalidades.</p>
+          </div><!-- /.blog-post -->
 
-                <p>
-                  SalesSystem, a pesar de ser orientado a un ambiente web, también se puede instalar de forma local a través de la instalación de una máquina virtuales
-                  con todo el software requerido para que el sistema pueda funcionar adecuadamente y bajo unas condiciones de seguridad que exige su negocio.
-                </p>                
-              </div>
-            </div>
-        </div>
+          <div class="blog-post">
+            <h2 class="blog-post-title">Ventas</h2>
+            <p>El módulo de ventas permite una gestión organizada de todas las facturas generadas, permite llevar un control sobre las ventas por período de tiempo, cuentas por cobrar, estado de cuenta por clientes, tiempo de recaudo de facturas, , entre otras funcionalidades.</p>
+          </div><!-- /.blog-post -->
 
-        <div class="col-sm-6 col-lg-6">
-            <div class="card" style="height: 280px">
-                <div class="card-header bg-custom-1 text-white"><h4>Tecnologia</h4></div>
-                <div class="card-body text-small text-justify">
-                  <p>
-                      SalesSystem, fue construido con tecnología que se encuentra a la vanguardia.
-                  </p>
-                  <p>
-                      Es así como se eligió como framework de desarrollo para la capa de presentación a AngularJS versión 6.
-                  </p>
-                  <p>
-                    Se construye el backend en PHP-Laravel versión 5.1, y se exponen recuersos REST para dar accesibilidad a múltiples clientes
-                  </p>
-                </div>
-              </div>
-        </div>
+          <div class="blog-post">
+            <h2 class="blog-post-title">Inventarios</h2>
+            <p>El módulo de inventarios gestiona la información de todos los productos que el se pueden comercializar, ya sean éstos comprados a terceros o producidos por la emrpesa. Igualmente permite llevar un control de inventarios, generación de código de barras propios y reportes de productos.</p>
+          </div><!-- /.blog-post -->
 
-      </div>
-      <!-- seccion primera-->
-      <div class="row margin-top-1rem">
-          <div class="col-sm-12 col-lg-12">
-              <div class="card">
-                <div class="card-header bg-custom-2 text-white"><h4>Sales System</h4></div>
-                <div class="card-body text-small text-justify">
-                  <p>
-                      SalesSystem es un software facíl y sencillo diseñado para pymes donde puedes llevar al día y desde cualquier 
-                      lugar la administraciónj del negocio en lo concerniente a ventas, compras, inventarios, procesos productivos y 
-                      muchas funciones, incluyendo reportes contables de tu negocio de forma eficiente y segura.
-                  </p>
-    
-                  <p>
-                      Igualmente, permite tener la información organizada, centralizada y organizada para que conocer el estado del
-                      negocio en tiempo real. SalesSystem es una solución ideal para empresas independientes, prestadores de
-                      servicios, empresas en el sector de retail, droguerías,
-                      salsamentarías, almacenes de cadena y comercio al detal, entre otros.
-                  </p>
-    
-                  <p>
-                      Puedes realizar facturas, llevar el control de gastos, recaudos, bancos, inventarios,
-                      indicadores de gestión y mucho más. También genera tus facturas como un archivo
-                      PDF que puedes imprimir o enviar por correo a tus clientes como factura original.
-                  </p>
-                </div>
-              </div>
-            </div>
-      </div>
-    </section>
-  </main>
-</app-pages>
+          <div class="blog-post">
+            <h2 class="blog-post-title">Recurso Humano</h2>
+            <p>Módulo que permite llevar un registro sobre todas las personas que tienen algún vinculo con la empresa, pueden ser clientes o trabajadores, para los trabajadores, permite llevar un registro sobre contratación, novedades de nómina, pago de salario, entre otras funcionalidades.</p>
+          </div><!-- /.blog-post -->
+
+          <div class="blog-post">
+            <h2 class="blog-post-title">Procesos de producción</h2>
+            <p>Éste módulo, permite llevar un control sobre los productos que produce la empresa para comercializar, llevando un control sobre los insumos necesarios en cada proceso productivo, dividiendo el proceso en períodos de corte para un mayor control sobre los productos, tanto resultantes como insumos utilizados en cada período.</p>
+          </div><!-- /.blog-post -->
+
+          <div class="blog-post">
+            <h2 class="blog-post-title">Liquidación</h2>
+            <p>Módulo que permite llevar un control sobre los las liquidaciones realizadas dado un período, para cada trabajador de la empresa, el sistema permite generar pagos por unidad productiva o salario fijo.</p>
+          </div><!-- /.blog-post -->
+
+          <div class="blog-post">
+            <h2 class="blog-post-title">Egresos</h2>
+            <p>Módulo que gestiona los gastos realizados por la empresa dia a dia, permite llevar una numéración consecutiva y/o facturas equivalentes.</p>
+          </div><!-- /.blog-post -->
+
+          <div class="blog-post">
+            <h2 class="blog-post-title">Empresas</h2>
+            <p>En el módulo de empresas, se lleva un control sobre todas las empresas proveedoras con las que la empresa tiene alguna relación, permitiendo hacer un seguimiento de histórico de comrpas, cuentas por pagar.</p>
+          </div><!-- /.blog-post -->
+          
+          <div class="blog-post">
+            <h2 class="blog-post-title">Administración y gestión de acceso</h2>
+            <p>Toda la administración de usuarios, roles y permisos para usuarios, se realiza en éste módulo, con este modulo se garantiza la seguridad de la información contenida en el sistema, dado que implementa un sistema de acceso al sistema por token bajo encripción SSH, con algoritmo de cifrado SHA156. Se configura un tiempo de expiración del token para renovar accesos y validar seguirdad.</p>
+          </div><!-- /.blog-post -->
+          
+          
+        </div><!-- /.blog-main -->
+      
+        <aside class="col-md-4 blog-sidebar">
+          <div class="p-4 mb-3 bg-light rounded">
+            <h4 class="font-italic">Noticias destacadas</h4>
+            <p class="mb-0">En esta sección se muestran las publicaciones destacadas de la semana.</p>
+          </div>
+        </aside><!-- /.blog-sidebar -->
+      
+      </div><!-- /.row -->
+      
+      </main><!-- /.container -->
+  </div>
+
+
+</div>

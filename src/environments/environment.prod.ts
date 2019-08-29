@@ -132,4 +132,7 @@ export const environment = {
   cutting_active_state: 'Abierto',
   state_service: 'STATE_SERVICE',
   debt_time_invocie: 'DEBT_TIME_INVOICE',
+
+  category_clothes: 'CATEGORY_CLOTHES',
+  sizes_clothes: 'SIZES_CLOTHES'
 };

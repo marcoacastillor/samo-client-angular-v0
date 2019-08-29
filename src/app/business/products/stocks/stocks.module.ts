@@ -11,6 +11,8 @@ import { ProductShowComponent } from './product-show/product-show.component';
 import { ProductFormClothesComponent } from './product-form-clothes/product-form-clothes.component';
 import { ProductFormFoodComponent } from './product-form-food/product-form-food.component';
 import { ParameterService } from 'src/app/shared/services/parameter.service';
+import { BarcodeFormComponent } from './product-form-clothes/barcode-form/barcode-form.component';
+import { EnterpriseService } from 'src/app/shared/services/enterprise.service';
 
 @NgModule({
   imports: [
@@ -22,8 +24,8 @@ import { ParameterService } from 'src/app/shared/services/parameter.service';
     //OwlNativeDateTimeModule,
   ],
   providers: [
-    ProductService, UtilsService, ParameterService
+    ProductService, UtilsService, ParameterService, EnterpriseService
   ],
-  declarations: [ProductListComponent, ProductShowComponent, ProductFormClothesComponent, ProductFormFoodComponent]
+  declarations: [ProductListComponent, ProductShowComponent, ProductFormClothesComponent, ProductFormFoodComponent, BarcodeFormComponent]
 })
 export class StocksModule { }

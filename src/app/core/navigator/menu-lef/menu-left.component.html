@@ -38,14 +38,6 @@
     <div id="content">
         <div class="container-fluid">
             <div class="row nav-custom bg-white">
-                <div class="col-sm-6" *ngIf="!user.username">
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <h2>Sales System</h2>
-                        </div>
-                    </div>
-                </div>
-                
                 <div class="col-sm-6" *ngIf="user.username">
                     <div class="row">
                         <div class="col-sm-1">
@@ -58,7 +50,8 @@
                             <div class="media-body">
                                 <h5 class="mt-0">{{ user.enterprise.name }}</h5>
                                 <span class="text-muted text-small">{{ user.person.names }} {{ user.person.last_names }}</span><br/>
-                                <span class="text-muted text-small">{{ user.rol.name }}</span>
+                                <span class="text-muted text-small">{{ user.rol.name }}</span><br/>
+                                <span class="text-muted text-small" *ngIf="user.access_enterprise">Acceso desde: {{ user.access_enterprise.date_init_access }} hasta: {{ user.access_enterprise.date_end_access }}</span>
                             </div>
                         </div>
                     </div>

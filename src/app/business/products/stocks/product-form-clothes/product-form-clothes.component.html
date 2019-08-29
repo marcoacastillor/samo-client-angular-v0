@@ -35,7 +35,7 @@
                     
                     <form [formGroup]="clothesForm">
                         <div class="row">
-                            <div class="col-sm-3">
+                            <div class="col-sm-4">
                                 <div class="form-group">
                                     <label for="name">Nombre</label>
                                     <input type="text" class="form-control text-small" placeholder="Nombre" formControlName="name" required>
@@ -44,16 +44,23 @@
                                     </small>
                                 </div>
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-4">
                                 <div class="form-group">
                                     <label for="code">Código de barras</label>
-                                    <input type="text" class="form-control text-small" placeholder="Código de barras" formControlName="code" required>
-                                    <small *ngIf="mustShowError('code')" class="form-text alert-danger">
-                                    Código es obligatorio
-                                    </small>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <button type="button" (click)="loadBarCodeParameters()" class="btn text-small btn-sm btn-outline-primary" data-toggle="modal" data-target="#barcodeModal">
+                                                <fa-icon [icon]="faRedoAlt" class="text-primary mb-2 mr-1" title="Generar código de barras"></fa-icon>
+                                            </button>
+                                        </div>
+                                        <input type="text" class="form-control text-small" placeholder="Código de barras" formControlName="code" required>
+                                        <small *ngIf="mustShowError('code')" class="form-text alert-danger">
+                                            Código es obligatorio
+                                        </small>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-4">
                                 <div class="form-group">
                                     <label for="type_product">Tipo de producto</label>
                                     <select class="form-control form-control-sm text-small" formControlName="type_product" required>
@@ -67,7 +74,7 @@
                         </div>
                     
                         <div class="row"> 
-                            <div class="col-sm-3">
+                            <div class="col-sm-4">
                                 <div class="form-group">
                                     <label for="reference">Referencia</label>
                                     <input type="text" class="form-control text-small" placeholder="Código de barras" formControlName="reference" required>
@@ -76,7 +83,7 @@
                                     </small>
                                 </div>
                             </div>   
-                            <div class="col-sm-3" *ngIf="clothesForm.value.type_product == 'Producto Comercializable'">
+                            <div class="col-sm-4" *ngIf="clothesForm.value.type_product == 'Producto Comercializable'">
                                 <div class="form-group">
                                     <label for="sale_price_unit">Precio venta por unidad</label>
                                     <input type="number" class="form-control text-small" placeholder="Precio venta unidad" formControlName="sale_price_unit" required>
@@ -95,7 +102,7 @@
                         </div>
 
                         <div class="row"> 
-                            <div class="col-sm-3">
+                            <div class="col-sm-4">
                                 <div class="form-group">
                                     <label for="size">Talla</label>
                                     <input type="text" class="form-control text-small" placeholder="Código de barras" formControlName="size" required>
@@ -104,7 +111,7 @@
                                     </small>
                                 </div>
                             </div> 
-                            <div class="col-sm-3">
+                            <div class="col-sm-4">
                                 <div class="form-group">
                                     <label for="color">Color</label>
                                     <input type="text" class="form-control text-small" placeholder="Código de barras" formControlName="color" required>
@@ -113,7 +120,7 @@
                                     </small>
                                 </div>
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-4">
                                 <div class="form-group">
                                     <label for="trademark">Marca</label>
                                     <input type="text" class="form-control text-small" placeholder="Código de barras" formControlName="trademark" required>
@@ -145,3 +152,11 @@
         </section>
     </main>
 </app-pages>  
+
+<app-barcode-form
+[parametersBarCode]="parametersBarCode"
+[enterprise]="enterprise.nit"
+[consecutive]="consecutive"
+(setCodeBar)="setCodeBar($event)"
+>
+</app-barcode-form>

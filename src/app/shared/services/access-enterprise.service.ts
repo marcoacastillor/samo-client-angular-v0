@@ -38,4 +38,9 @@ export class AccessEnterpriseService {
     );
   }
 
+  public getAccessByEnterpriseLogin$(id:number): Observable<AccessEnterprise> {
+    let url = this._url + '/get-token-access-login/' + id.toString();
+    return this.http.get<AccessEnterprise>(url);
+  }
+
 }

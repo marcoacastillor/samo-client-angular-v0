@@ -65,17 +65,20 @@
                                         <div class="card" *ngFor="let operation of lstOperationsAggregate">
                                             <div class="card-header" id="headingOne">
                                                 <div class="row">
-                                                    <div class="col-sm-8">
+                                                    <div class="col-sm-6">
                                                         <h6 class="mb-0">
                                                             <button (click)="getOperationsByProviderAndParams(operation.external_reference)" class="btn btn-link" type="button" data-toggle="collapse" [attr.data-target]="'#tap_'+operation.external_reference.split(':')[1]" aria-expanded="true" [attr.aria-controls]="'tap_'+operation.external_reference">
                                                             {{ operation.external_reference.split(':')[2] }}
                                                             </button>
                                                         </h6>
                                                     </div>
-                                                    <div class="col-sm-4">
-                                                        <h4>
-                                                            $ {{ operation.total_operation | number: '1.0-0' }}
-                                                        </h4>
+                                                    <div class="col-sm-3">
+                                                        <h6>Total venta</h6>
+                                                        <h4>$ {{ operation.total_operation | number: '1.0-0' }}</h4>
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <h6>Valor por pagar</h6>
+                                                        <h4>$ {{ operation.balance_operation | number: '1.0-0' }}</h4>
                                                     </div>
                                                 </div>
                                             </div>
@@ -89,8 +92,9 @@
                                                             <th>Número de factura</th>
                                                             <th>Fecha de compra</th>
                                                             <th>Tipo de pago</th>
-                                                            <th>Valor de factura</th>
-                                                            <th>Estado de factura/th>
+                                                            <th>Valor</th>
+                                                            <th>Saldo</th>
+                                                            <th>Estado</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -109,6 +113,7 @@
                                                             <td>{{ operation.date_operation }}</td>
                                                             <td>{{ operation.payment_type }}</td>
                                                             <td>{{ operation.total_operation | number: '1.0-0' }}</td>
+                                                            <td>{{ (operation.total_operation - operation.total_pays) | number: '1.0-0' }}</td>
                                                             <td>{{ operation.state_operation }}</td>
                                                         </tr>
                                                     </tbody>

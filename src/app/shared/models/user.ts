@@ -2,6 +2,7 @@ import { Rol } from "./rol";
 import { Person } from "./person";
 import { Module } from "./module";
 import { Enterprise } from "./enterprise";
+import { AccessEnterprise } from "./access-enterprise";
 
 export class User {
   public pk_id_user: number;
@@ -18,6 +19,7 @@ export class User {
   public rol: Rol;
   public person: Person;
   public enterprise: Enterprise;
+  public access_enterprise: AccessEnterprise;
 
   public modules: Module[];
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faThList, faSave } from '@fortawesome/free-solid-svg-icons';
+import { faThList, faSave, faBarcode, faRedoAlt } from '@fortawesome/free-solid-svg-icons';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Product } from 'src/app/shared/models/product';
 import { Parameter } from 'src/app/shared/models/parameter';
@@ -8,6 +8,10 @@ import { ActivatedRoute } from '@angular/router';
 import { ProductService } from 'src/app/shared/services/product.service';
 import { FormToolsService } from 'src/app/shared/services/form-tools.service';
 import { ParameterService } from 'src/app/shared/services/parameter.service';
+import { User } from 'src/app/shared/models/user';
+import { GlobalStoreService } from 'src/app/core/services/global-store.service';
+import { Enterprise } from 'src/app/shared/models/enterprise';
+import { EnterpriseService } from 'src/app/shared/services/enterprise.service';
 
 @Component({
   selector: 'app-product-form-clothes',
@@ -17,9 +21,11 @@ import { ParameterService } from 'src/app/shared/services/parameter.service';
 export class ProductFormClothesComponent implements OnInit {
   faThList = faThList;
   faSave = faSave;
+  faRedoAlt = faRedoAlt;
 
   clothesForm: FormGroup;
   showPackageInfo: boolean = false;
+  userActive: User = new User;
 
   id_product = '';
   product: Product = new Product;
@@ -28,22 +34,30 @@ export class ProductFormClothesComponent implements OnInit {
   message = '';
 
   parametersList: Parameter[] = [];
+  parametersBarCode: Parameter[] = [];
 
   //consultar parámetros
   type_product  = environment.product_type;
   presentation  = environment.presentation_product;
 
-  categories      = {'categories' : [this.type_product,this.presentation]};
+  categories            = {'categories' : [this.type_product,this.presentation]};
+  bar_code_categories   = {'categories' : [environment.category_clothes,environment.sizes_clothes]};
+
+  enterprise: Enterprise = new Enterprise;
+  consecutive: number = 0;
 
   constructor(
     private activateRoute: ActivatedRoute,
     private productService: ProductService,
     private fb: FormBuilder,
     private formToolService: FormToolsService,
-    private parameterService: ParameterService
+    private parameterService: ParameterService,
+    private globalStoreService: GlobalStoreService,
+    private enterpriseService: EnterpriseService
   ) { }
 
   ngOnInit() {
+    this.userActive = this.globalStoreService.getUser();
     this.createFormFood();
     this.id_product = this.activateRoute.snapshot.params['id'];
     this.initProduct(this.id_product)
@@ -65,11 +79,26 @@ export class ProductFormClothesComponent implements OnInit {
     )
   }
 
+  public loadBarCodeParameters(){
+    this.enterpriseService.show$(this.userActive.fk_id_enterprise).subscribe(
+      enterprise => this.enterprise = enterprise
+    );
+
+    this.parameterService.getByMultipleCodeCategory$(this.bar_code_categories).subscribe(
+      parameters_list => this.parametersBarCode = parameters_list
+    )
+
+    this.productService.getConsecutiveProductByEnterprise(this.userActive.fk_id_enterprise).subscribe(
+      consecutive => this.consecutive = consecutive
+    )
+  }
+
   private newProduct()
   {
     this.product = new Product;
     this.product.category = environment.clothes;  
     this.product.presentation = environment.individual;
+    this.product.units_package =  0;
     this.product.sale_price_package =  0;
     this.product.sale_price_unit = 0;
     this.createFormFood();
@@ -121,6 +150,15 @@ export class ProductFormClothesComponent implements OnInit {
         this.message = 'Se actualizó información de producto correctamente.';
       }
     )
+  }
+
+  public setCodeBar(code_bar:string){
+    let codeBar = code_bar.split(':');
+    this.clothesForm.patchValue({
+      code: codeBar[0]+codeBar[1]+codeBar[2]+codeBar[3],
+      reference: codeBar[4],
+      size: codeBar[2]
+    })
   }
 
   /**

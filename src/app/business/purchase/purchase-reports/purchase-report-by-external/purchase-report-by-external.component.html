@@ -75,7 +75,7 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="card">
-                                <div class="card-header bg-success text-white"><h6>Operaciones de compra</h6></div>
+                                <div class="card-header bg-success text-white"><h6>Operaciones de compra <span class="badge badge-light">Encontrados : {{lstOperations.length}}</span> </h6></div>
                                 <div class="card-body">
                                     <table class="table table-sm table-hover">
                                         <thead>
@@ -84,8 +84,9 @@
                                                 <th>Número de factura</th>
                                                 <th>Fecha de compra</th>
                                                 <th>Tipo de pago</th>
-                                                <th>Valor de factura</th>
-                                                <th>Estado de factura/th>
+                                                <th>Valor</th>
+                                                <th>Saldo</th>
+                                                <th>Estado</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -104,6 +105,7 @@
                                                 <td>{{ operation.date_operation }}</td>
                                                 <td>{{ operation.payment_type }}</td>
                                                 <td>{{ operation.total_operation | number: '1.0-0' }}</td>
+                                                <td>{{ (operation.total_operation - operation.total_pays) | number: '1.0-0' }}</td>
                                                 <td>{{ operation.state_operation }}</td>
                                             </tr>
                                         </tbody>
