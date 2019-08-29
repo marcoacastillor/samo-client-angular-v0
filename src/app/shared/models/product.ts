@@ -9,6 +9,7 @@ export class Product {
     public sale_price_package: number;
     public type_product: string;
     public units_available: number;
+    public units_separated: number;
     public cost_price: number;
     public cost_production: number;
     public html_barcode: string;

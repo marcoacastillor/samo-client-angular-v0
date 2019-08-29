@@ -13,14 +13,14 @@
 
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-sm-4 margin-top-1rem" *ngFor="let module of modules">
-                                <div class="card">
-                                    <img class="rounded mx-auto d-block" src="{{ url_storage + module.url_image }}" alt="{{ module.description }}" height="100px">
-                                    <div class="card-header">
-                                        {{ module.name }}
+                            <div class="col-md-6" *ngFor="let module of modules">
+                                <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                                    <div class="col p-4 d-flex flex-column position-static">
+                                    <strong class="d-inline-block mb-2 text-primary">{{ module.name }}</strong>
+                                        <p class="card-text mb-auto">{{ module.description}}</p>
                                     </div>
-                                    <div class="card-body text-small text-justify" style="height: 120px">
-                                        {{ module.description}}
+                                    <div class="col-auto d-none d-lg-block">
+                                        <img src="{{ url_storage + module.url_image }}" width="150" height="200" background="#55595c" color="#eceeef" text="Thumbnail">
                                     </div>
                                 </div>
                             </div>

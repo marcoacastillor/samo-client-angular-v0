@@ -38,6 +38,17 @@ export class OperationProductService {
     );
   }
 
+  public deliveryProduct$(product:any):Observable<OperationProduct>{
+    let url = this._url + '/delivery-product'
+    return this.userService.validateOptionByToken('OperationProduct:deliveryProduct').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.post<OperationProduct>(url, product);
+        }
+      })
+    );
+  }
+
   public delete$(id:number): Observable<OperationProduct> {
     let url = this._url + '/' + id.toString();
     return this.userService.validateOptionByToken('OperationProduct:delete').pipe(

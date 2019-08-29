@@ -80,6 +80,7 @@
                                         <th>Presentación</th>
                                         <th>Paquetes disponibles</th>
                                         <th>Unidades disponibles</th>
+                                        <th>Unidades separadas</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -112,6 +113,7 @@
                                             <fa-icon [icon]="faFlag" [ngClass]="getClassByUnits(product.units_available)"></fa-icon>
                                             {{ product.units_available | number }}
                                         </td>
+                                        <td>{{ product.units_separated | number}}</td>
                                     </tr>
                                 </tbody>
                                 <tfoot>

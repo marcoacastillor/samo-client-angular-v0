@@ -22,6 +22,7 @@ import { FormProductModalComponent } from './sale-detailed/show-sale-detail/form
 import { FormPaymentModalComponent } from './sale-detailed/show-sale-detail/form-payment-modal/form-payment-modal.component';
 import { EnterpriseService } from 'src/app/shared/services/enterprise.service';
 import { ParameterConfigService } from 'src/app/shared/services/parameter-config.service';
+import { FormDeliveryProductComponent } from './sale-detailed/show-sale-detail/form-delivery-product/form-delivery-product.component';
 
 @NgModule({
   imports: [
@@ -34,6 +35,6 @@ import { ParameterConfigService } from 'src/app/shared/services/parameter-config
   ],
   providers: [
     GlobalStoreService, OperationService, ParameterService, ProductService, PersonService, PaymentService, NotesService, OperationProductService, EnterpriseService, ParameterConfigService],
-  declarations: [ListSaleDetailComponent, ShowSaleDetailComponent, NewSaleDetailComponent, ListClientModalComponent, FormOperationModalComponent, FormProductModalComponent, FormPaymentModalComponent]
+  declarations: [ListSaleDetailComponent, ShowSaleDetailComponent, NewSaleDetailComponent, ListClientModalComponent, FormOperationModalComponent, FormProductModalComponent, FormPaymentModalComponent, FormDeliveryProductComponent]
 })
 export class SalesModule { }

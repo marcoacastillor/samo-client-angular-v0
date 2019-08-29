@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faThList, faFileInvoiceDollar, faCartArrowDown, faDonate, faEdit, faLock, faPrint, faPlus, faDollarSign, faUndo, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { faThList, faFileInvoiceDollar, faCartArrowDown, faDonate, faEdit, faLock, faPrint, faPlus, faDollarSign, faUndo, faTrashAlt, faHandSpock } from '@fortawesome/free-solid-svg-icons';
 import { OperationProduct } from 'src/app/shared/models/operation-product';
 import { Notes } from 'src/app/shared/models/notes';
 import { Payment } from 'src/app/shared/models/payment';
@@ -19,6 +19,7 @@ import { EnterpriseService } from 'src/app/shared/services/enterprise.service';
 import { Enterprise } from 'src/app/shared/models/enterprise';
 import { User } from 'src/app/shared/models/user';
 import { GlobalStoreService } from 'src/app/core/services/global-store.service';
+import { Product } from 'src/app/shared/models/product';
 
 @Component({
   selector: 'app-show-sale-detail',
@@ -39,13 +40,16 @@ export class ShowSaleDetailComponent implements OnInit {
   faDollarSign = faDollarSign;
   faUndo = faUndo;
   faTrashAlt = faTrashAlt;
+  faHandSpock = faHandSpock;
 
   lstProducts: OperationProduct[] = [];
   lstNotes: Notes[] = [];
   lstPayments: Payment[] = [];
-  operation: Operation = new Operation();
-  person: Person = new Person();
-  enterprise: Enterprise = new Enterprise();
+
+  operation: Operation = new Operation;
+  person: Person = new Person;
+  enterprise: Enterprise = new Enterprise;
+  selectedProduct: Product = new Product;
 
   lstParams: Parameter[] = [];
   individual      = environment.individual;
@@ -112,6 +116,21 @@ export class ShowSaleDetailComponent implements OnInit {
   public getMultipleParams(){
     this.parameterService.getByMultipleCodeCategory$(this.categories).subscribe(
       lstParams => this.lstParams = lstParams
+    )
+  }
+
+  public deliveryProduct(product:any){
+    this.selectedProduct = product;
+  }
+
+  public updateDelivery(product:any){
+    console.log(product);
+    this.operationProductService.deliveryProduct$(product).subscribe(
+      () => {
+        this.getOperationDetail(this.id_operation);
+        this.success = true;
+        this.message = 'Se actualizó la operación correctamente.';
+      }
     )
   }
 

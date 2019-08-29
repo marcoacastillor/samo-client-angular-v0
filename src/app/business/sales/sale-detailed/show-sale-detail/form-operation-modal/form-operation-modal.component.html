@@ -31,7 +31,7 @@
                                 <input type="text" readonly class="form-control form-control-sm" aria-describedby="ninvoiceHelp" formControlName="number_invoice">
                                 <small id="ninvoiceHelp" class="form-text text-muted">Ingresar número de factura.</small>
                             </div>
-                            <div class="form-group col-sm-3">
+                            <div class="form-group col-sm-3" *ngIf="operationForm.value.payment_type != 'Separado'">
                                 <label for="payment_type">Tipo de pago</label>
                                 <select class="form-control form-control-sm" formControlName="payment_type">
                                     <option value="" selected>Seleccione...</option>
