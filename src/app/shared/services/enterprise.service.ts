@@ -40,6 +40,17 @@ export class EnterpriseService {
     );
   }
 
+  public getProvidersByProduct$(id_product:number): Observable<string[]> {
+    const url = this._url + '/get-provider-by-product/'+id_product.toString();
+    return this.userService.validateOptionByToken('Enterprise:getProviderByProduct').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.get<string[]>(url);
+        }
+      })
+    );
+  }
+
   public getByFilter$(filter: any, type: string): Observable<Results> {
     const url = this._url + '/get-list-by-filter-and-type/' + type;
     return this.userService.validateOptionByToken('Enterprise:listByFilterAndType').pipe(

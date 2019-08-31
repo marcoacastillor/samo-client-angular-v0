@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { faCalendar, faUpload, faEye } from '@fortawesome/free-solid-svg-icons';
+import { faCalendar, faUpload, faEye, faEdit } from '@fortawesome/free-solid-svg-icons';
 import { environment } from 'src/environments/environment';
 import { ConsolidateOperation } from 'src/app/shared/models/consolidate-operation';
 import { OperationService } from 'src/app/shared/services/operation.service';
 import { ConsolidateTotals } from 'src/app/shared/models/consolidate-totals';
 import * as moment from 'moment';
 import { Operation } from 'src/app/shared/models/operation';
+import { tap } from 'rxjs/operators';
+import { OperationProduct } from 'src/app/shared/models/operation-product';
+import { OperationProductService } from 'src/app/shared/services/operation-product.service';
 
 @Component({
   selector: 'app-report-main',
@@ -17,9 +20,13 @@ export class ReportMainComponent implements OnInit {
   faUpload = faUpload;
   faCalendar = faCalendar;
   faEye = faEye;
+  faEdit = faEdit;
 
   reportForm: FormGroup;
   lstOperations: Operation[] = [];
+
+  selectedOperation: Operation = new Operation;
+  lstProducts: OperationProduct[] = [];
   
   public dateInit: string;
   public dateEnd: string;
@@ -34,18 +41,29 @@ export class ReportMainComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private operationService: OperationService,
+    private operationProductService: OperationProductService
   ) { 
     this.consolidates.operations_totals = new ConsolidateTotals;
     this.consolidates.operations_values = new ConsolidateTotals;
   }
 
   ngOnInit() {
-    this.dateEnd = moment().format('YYYY-MM-DD');
+    this.dateEnd = moment().add(+1,'days').format('YYYY-MM-DD');
     this.dateInit = moment().add(-this.consolidate_day,'days').format('YYYY-MM-DD');
     
     this.initUpdForm(this.dateInit, this.dateEnd);
     this.loadData();
   }
+
+  public selectOperation(operation:Operation){
+    this.operationProductService.getProductsByOperation$(operation.pk_id_operation).pipe(
+      tap((lstProducts: OperationProduct[]) => {
+        this.lstProducts = lstProducts
+      }),
+      tap(() => this.selectedOperation = operation)
+    ).subscribe()
+  }
+  
 
   /*
   * ------------------------------------------

@@ -68,7 +68,7 @@
                                                     <td>{{ operation.date_operation }}</td>
                                                     <td>{{ operation.payment_type }}</td>
                                                     <td>{{ operation.total_operation | number: '1.0-0' }}</td>
-                                                    <td>{{ (operation.total_operation - operation.total_pays) | number: '1.0-0' }}</td>
+                                                    <td>{{ ((operation.total_operation - operation.total_discounts) - operation.total_pays) | number: '1.0-0' }}</td>
                                                     <td>{{ operation.state_operation }}</td>
                                                 </tr>
                                             </tbody>

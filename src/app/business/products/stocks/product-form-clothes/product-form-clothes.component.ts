@@ -88,9 +88,13 @@ export class ProductFormClothesComponent implements OnInit {
       parameters_list => this.parametersBarCode = parameters_list
     )
 
-    this.productService.getConsecutiveProductByEnterprise(this.userActive.fk_id_enterprise).subscribe(
-      consecutive => this.consecutive = consecutive
-    )
+    if(this.product.pk_id_product > 0){
+      this.consecutive = parseInt(this.product.code.split('00')[1]);
+    }else{
+      this.productService.getConsecutiveProductByEnterprise(this.userActive.fk_id_enterprise).subscribe(
+        consecutive => this.consecutive = consecutive+1
+      )
+    }
   }
 
   private newProduct()

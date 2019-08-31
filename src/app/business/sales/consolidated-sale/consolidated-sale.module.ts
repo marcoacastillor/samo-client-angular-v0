@@ -6,6 +6,7 @@ import { ReportMainComponent } from './report-main/report-main.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+import { OperationProductService } from 'src/app/shared/services/operation-product.service';
 
 @NgModule({
   imports: [
@@ -15,6 +16,9 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
     FontAwesomeModule,
     OwlDateTimeModule, 
     OwlNativeDateTimeModule
+  ],
+  providers: [
+    OperationProductService
   ],
   declarations: [ReportMainComponent]
 })

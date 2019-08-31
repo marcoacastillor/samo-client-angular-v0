@@ -40,7 +40,7 @@ export class ReportMainComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.dateEnd = moment().format('YYYY-MM-DD');
+    this.dateEnd = moment().add(+1,'days').format('YYYY-MM-DD');
     this.dateInit = moment().add(-this.consolidate_day,'days').format('YYYY-MM-DD');
     
     this.initUpdForm(this.dateInit, this.dateEnd);

@@ -37,7 +37,7 @@ export class BarcodeFormComponent implements OnInit {
   }
 
   public selectBarCode(){
-    this.setCodeBar.emit(this.enterprise+':'+this.category+':'+this.size+':00'+(this.consecutive+1)+':'+this.nameCategory)
+    this.setCodeBar.emit(this.enterprise+':'+this.category+':'+this.size+':00'+this.consecutive+':'+this.nameCategory)
   }
 
 }

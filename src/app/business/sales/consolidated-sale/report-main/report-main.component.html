@@ -209,8 +209,11 @@
                                         <tbody>
                                             <tr *ngFor="let order of lstOperations">
                                                 <td>
+                                                    <button (click)="selectOperation(order)" type="button" class="btn text-ultra-small btn-sm btn-outline-secondary" data-toggle="modal" data-target="#operationSmallModal">
+                                                        <fa-icon [icon]="faEye" class="text-secondary mb-2 mr-1" title="Actualizar registro"></fa-icon>Ver
+                                                    </button>
                                                     <a routerLink='/sales-admin/sales/sales-detailed-show/{{order.pk_id_operation}}' class="btn text-ultra-small btn-sm btn-outline-primary" type="button">
-                                                        <fa-icon [icon]="faEye" class="text-outline-secondary mb-2 mr-1"></fa-icon>Ver detalle
+                                                        <fa-icon [icon]="faEdit" class="text-outline-secondary mb-2 mr-1"></fa-icon>Editar
                                                     </a>
                                                 </td>
                                                 <td>{{ order.number_invoice }}</td>
@@ -236,3 +239,8 @@
         </section>
     </main>
 </app-pages>
+
+<app-small-operation 
+[operation]="selectedOperation" 
+[lstProducts]="lstProducts">
+</app-small-operation>

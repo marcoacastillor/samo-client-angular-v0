@@ -59,7 +59,7 @@ export class SalesReportsByClientComponent implements OnInit {
 
   ngOnInit() {
     this.activeUser = this.globalStoreService.getUser();
-    this.dateEnd = moment().add().format('YYYY-MM-DD');
+    this.dateEnd = moment().add(+1,'days').format('YYYY-MM-DD');
     this.dateInit = moment().add(-this.consolidate_day,'days').format('YYYY-MM-DD');
     this.initUpdForm(this.dateInit,this.dateEnd);
     this.getParameters();

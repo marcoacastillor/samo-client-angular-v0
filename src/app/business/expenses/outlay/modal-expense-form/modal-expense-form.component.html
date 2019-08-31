@@ -7,7 +7,6 @@
             <span aria-hidden="true">&times;</span>
             </button>
         </div>
-
         <div class="modal-body">
             <div class="card">
                 <div class="card-body">
@@ -34,13 +33,13 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="name_provider">Proveedor del servicio</label>
-                                    <input type="text" id="filterProvider" (keypress)="onFindProvider($event)" class="form-control form-control-sm" formControlName="name_provider" required>
+                                    <input type="text" id="filterProviderExpense" (keypress)="onFindProviderExpense($event)" class="form-control form-control-sm" formControlName="name_provider" required>
                                     <small class="form-text text-muted">Digite nombre del proveedor.</small>
                                     <!-- start autocomplete-->
                                     <div class="autocomplete container-fluid">
                                         <div id="autocomplete-list" class="autocomplete-items text-ultra-small">
                                             <div class="items row" *ngFor="let provider of lstProviders">
-                                                <div class="col-sm-12" (click)="selectProvider(provider)">
+                                                <div class="col-sm-12" (click)="selectProviderExpense(provider)">
                                                     {{ provider.nit }} _ {{ provider.name }} {{ provider.last_names }}
                                                 </div>
                                             </div>

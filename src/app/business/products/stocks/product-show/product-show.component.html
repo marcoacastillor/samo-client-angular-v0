@@ -27,118 +27,141 @@
                         <div class="col-sm-6">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <table class="table table-sm">
-                                        <thead>
-                                            <tr>
-                                                <th colspan="2"><h6>Producto</h6></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th>Nombre</th>
-                                                <td>{{ product.name }}</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Código de barras</th>
-                                                <td>{{ product.code }}</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Presentación</th>
-                                                <td>{{ product.presentation }}</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Tipo de producto</th>
-                                                <td>{{ product.type_product }}</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Referencia</th>
-                                                <td>{{ product.reference }}</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Categoría</th>
-                                                <td>{{ product.category }}</td>
-                                            </tr>
-                                            <tr *ngIf="product.category == 'VESTUARIO'">
-                                                <th>Talla</th>
-                                                <td>{{ product.size }}</td>
-                                            </tr>
-                                            <tr *ngIf="product.category == 'VESTUARIO'">
-                                                <th>Color</th>
-                                                <td>{{ product.color }}</td>
-                                            </tr>
-                                            <tr *ngIf="product.category == 'VESTUARIO'">
-                                                <th>Marca</th>
-                                                <td>{{ product.trademark }}</td>
-                                            </tr>
-                                            <tr *ngIf="product.presentation != 'INDIVIDUAL'">
-                                                <th>Unidades por paquete</th>
-                                                <td>{{ product.units_package | number }}</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Precio de venta unidad</th>
-                                                <td>{{ product.sale_price_unit | number }}</td>
-                                            </tr>
-                                            <tr *ngIf="product.presentation != 'INDIVIDUAL'">
-                                                <th>Precio de venta por paquete</th>
-                                                <td>{{ product.sale_price_package | number }}</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Costo por unidad</th>
-                                                <td>{{ product.cost_price | number }}</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Costo de producción por unidad</th>
-                                                <td>{{ product.cost_production | number }}</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Unidades disponibles</th>
-                                                <td>{{ product.units_available |  number }}</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                    <div class="card">
+                                        <div class="card-header">Información básica</div>
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-sm-6"><h6>Nombre</h6></div>
+                                                <div class="col-sm-6">{{ product.name }}</div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-6"><h6>Código de barras</h6></div>
+                                                <div class="col-sm-6">{{ product.code }}</div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-6"><h6>Presentación</h6></div>
+                                                <div class="col-sm-6">{{ product.presentation }}</div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-6"><h6>Tipo de producto</h6></div>
+                                                <div class="col-sm-6">{{ product.type_product }}</div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-6"><h6>Referencia</h6></div>
+                                                <div class="col-sm-6">{{ product.reference }}</div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-6"><h6>Categoria</h6></div>
+                                                <div class="col-sm-6">{{ product.category }}</div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <h6>Código de barras</h6>
+                                                    <p>
+                                                        <img src="data:image/png;base64,{{ product.url_barcode }}" alt="barcode" />
+                                                    </p>
+                                                    <p>
+                                                        <button (click)="getPDFCode(product.html_barcode)" class="btn btn-sm btn-outline-primary text-ultra-small">
+                                                            Imprimir código de barra
+                                                        </button>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
+                                
+                                <!-- inicio vestuario-->
+                                <div class="col-sm-12 margin-top-1rem" *ngIf="product.category == 'VESTUARIO'">
+                                    <div class="card">
+                                        <div class="card-header">Información adicional</div>
+                                        <div class="card-body">
+                                            <div class="row" *ngIf="product.category == 'VESTUARIO'">
+                                                <div class="col-sm-6">Talla</div>
+                                                <div class="col-sm-6">{{ product.size }}</div>
+                                            </div>
+                                            <div class="row" *ngIf="product.category == 'VESTUARIO'">
+                                                <div class="col-sm-6">Color</div>
+                                                <div class="col-sm-6">{{ product.color }}</div>
+                                            </div>
+                                            <div class="row" *ngIf="product.category == 'VESTUARIO'">
+                                                <div class="col-sm-6">Marca</div>
+                                                <div class="col-sm-6">{{ product.trademark }}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- end vestuario-->
+
+
                             </div>
                         </div>
                         <!-- start provider info-->
 
                         <!-- start provider info-->
                         <div class="col-sm-6">
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <table class="table table-sm">
-                                            <thead>
-                                                <tr>
-                                                    <th colspan="2"><h6>Código de barras</h6></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <th>Código de barras</th>
-                                                    <td>
-                                                        <p>
-                                                            <button (click)="getPDFCode(product.html_barcode)" class="badge badge-success text-ultra-small">
-                                                                Imprimir código de barra
-                                                            </button>
-                                                        </p>
-                                                        <p>
-                                                            <img src="data:image/png;base64,{{ product.url_barcode }}" alt="barcode" />
-                                                        </p>
-                                                    </td>
-                                                </tr> 
-                                            </tbody>
-                                        </table>
+                            <div class="row">
+
+                                <div class="col-sm-12">
+                                    <div class="card">
+                                        <div class="card-header">Información comercialización</div>
+                                        <div class="card-body">
+                                            <div class="row" *ngIf="product.presentation != 'INDIVIDUAL'">
+                                                <div class="col-sm-6">Unidades por {{ product.presentation }}</div>
+                                                <div class="col-sm-4">{{ product.size }}</div>
+                                            </div>
+                                            <div class="row" *ngIf="product.presentation == 'INDIVIDUAL'">
+                                                <div class="col-sm-8">Precio de venta por unidad</div>
+                                                <div class="col-sm-4">{{ product.sale_price_unit | number }}</div>
+                                            </div>
+                                            <div class="row" *ngIf="product.presentation != 'INDIVIDUAL'">
+                                                <div class="col-sm-8">Precio de venta por paquete</div>
+                                                <div class="col-sm-4">{{ product.sale_price_package | number }}</div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-8">Costo por unidad</div>
+                                                <div class="col-sm-4">{{ product.cost_price | number }}</div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-8">Costo de producción por unidad</div>
+                                                <div class="col-sm-4">{{ product.cost_production | number }}</div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-8 text-primary"><h5>Unidades disponibles</h5></div>
+                                                <div class="col-sm-4 text-primary"><h5>{{ product.units_available | number }}</h5></div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
+                                
+                                <!-- inicio vestuario-->
+                                <div class="col-sm-12  margin-top-1rem">
+                                    <div class="card">
+                                        <div class="card-header">Información proveedores del producto</div>
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <table class="table table-sm table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>NIT</th>
+                                                            <th>Nombre</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let nameProvider of providerList">
+                                                            <td>{{ nameProvider['external_reference'].split(':')[3] }}</td>
+                                                            <td>{{ nameProvider['external_reference'].split(':')[2] }}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- end vestuario-->
                             </div>
-                            <!-- start provider info-->
-                        
-                        <!-- start purchase info-->
-                        <div class="col-sm-6 back-color-ff">
-                            
-                            
-                            
                         </div>
-                        <!-- end purchase info-->
+                        <!-- start provider info-->
                     </div>
                     <!-- end main info-->
                 </div>

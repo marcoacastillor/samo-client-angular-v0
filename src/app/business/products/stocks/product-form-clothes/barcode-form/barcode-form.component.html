@@ -63,12 +63,12 @@
                             Consecutivo
                         </div>
                         <div class="col-sm-10">
-                            {{ consecutive + 1 }}
+                            {{ consecutive }}
                         </div>
                     </div>
                     <div class="row margin-top-1rem"> 
                         <div class="col-sm-12 text-center shadow-sm rounded">
-                            <button type="button" (click)="selectBarCode()" class="btn btn-sm btn-outline-info" data-dismiss="modal"><h3>{{ enterprise }}{{ category }}{{ size }}00{{ consecutive + 1 }}</h3></button>
+                            <button type="button" (click)="selectBarCode()" class="btn btn-sm btn-outline-info" data-dismiss="modal"><h3>{{ enterprise }}{{ category }}{{ size }}00{{ consecutive }}</h3></button>
                         </div>
                     </div>
                 </div>

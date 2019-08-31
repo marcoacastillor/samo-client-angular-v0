@@ -66,39 +66,43 @@
                                                 <tbody>
                                                     <tr>
                                                         <td>Ventas</td>
-                                                        <td>{{ report.sales | number: '1.0-0'}}</td>
+                                                        <td>${{ report.sales | number: '1.0-0'}}</td>
                                                     </tr>
                                                     <tr>
                                                         <td>Costo de venta</td>
-                                                        <td>{{ report.cost | number: '1.0-0' }}</td>
+                                                        <td>${{ report.cost | number: '1.0-0' }}</td>
                                                     </tr>
                                                     <tr class="text-primary">
                                                         <th>Márgen de contribución</th>
-                                                        <th>{{ (report.sales - report.cost) | number: '1.0-0' }}</th>
+                                                        <th>${{ (report.sales - report.cost) | number: '1.0-0' }}</th>
                                                     </tr>
                                                     <tr>
                                                         <td>Gastos de operación</td>
-                                                        <td>{{ (report.operational_expenses) | number: '1.0-0' }}</td>
+                                                        <td>${{ (report.operational_expenses) | number: '1.0-0' }}</td>
                                                     </tr>
                                                     <tr>
+                                                        <td>Otros gastos</td>
+                                                        <td>${{ (report.other_expenses) | number: '1.0-0' }}</td>
+                                                    </tr>
+                                                    <tr class="text-primary">
                                                         <td>Utilidad del ejercicio</td>
-                                                        <td>{{ (report.sales - report.cost) -report.operational_expenses | number: '1.0-0' }}</td>
+                                                        <td>${{ (report.sales - report.cost) - (report.operational_expenses + report.other_expenses) | number: '1.0-0' }}</td>
                                                     </tr>
                                                     <tr>
                                                         <td>Gastos financieros</td>
-                                                        <td>{{ report.financial_expenses | number: '1.0-0' }}</td>
+                                                        <td>${{ report.financial_expenses | number: '1.0-0' }}</td>
                                                     </tr>
-                                                    <tr>
+                                                    <tr class="text-primary">
                                                         <td>Utilidad antes de impuestos</td>
-                                                        <td>{{ (report.sales - report.cost) - (report.operational_expenses + report.financial_expenses) | number: '1.0-0' }}</td>
+                                                        <td>${{ (report.sales - report.cost) - ((report.operational_expenses + report.other_expenses) + report.financial_expenses) | number: '1.0-0' }}</td>
                                                     </tr>
                                                     <tr>
                                                         <td>Impuestos</td>
-                                                        <td>{{ report.total_tax | number: '1.0-0' }}</td>
+                                                        <td>${{ report.total_tax | number: '1.0-0' }}</td>
                                                     </tr>
-                                                    <tr>
-                                                        <td>Utilidad</td>
-                                                        <td>{{ (report.sales - report.cost) - (report.operational_expenses + report.financial_expenses + report.total_tax) | number: '1.0-0' }}</td>
+                                                    <tr class="text-success">
+                                                        <td><h3>Utilidad</h3></td>
+                                                        <td><h3>${{ (report.sales - report.cost) - ((report.operational_expenses + report.other_expenses) + report.financial_expenses + report.total_tax) | number: '1.0-0' }}</h3></td>
                                                     </tr>
                                                 </tbody>
                                             </table>

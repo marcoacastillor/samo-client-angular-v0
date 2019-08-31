@@ -1,8 +1,50 @@
 export const environment = {
   production: true,
 
+  /*
+  url_user: 'https://www.sanratsolutions.com/dev/usuariosV0/public/users',
+  url_module: 'https://www.sanratsolutions.com/dev/usuariosV0/public/modules',
+  url_component: 'https://www.sanratsolutions.com/dev/usuariosV0/public/components',
+  url_rol: 'https://www.sanratsolutions.com/dev/usuariosV0/public/rols',
+  url_rol_option: 'https://www.sanratsolutions.com/dev/usuariosV0/public/rols_options',
+  url_option: 'https://www.sanratsolutions.com/dev/usuariosV0/public/options',
+  url_category: 'https://www.sanratsolutions.com/dev/usuariosV0/public/categories',
+  url_parameter: 'https://www.sanratsolutions.com/dev/usuariosV0/public/parameters',
+  url_storage: 'https://www.sanratsolutions.com/dev/usuariosV0/storage/app/public/',
+  url_ventas_storage: 'https://www.sanratsolutions.com/dev/ventasV0/storage/app/public/',
+  url_type_service: 'https://www.sanratsolutions.com/dev/usuariosV0/public/type-service',
+  url_service_enterprise: 'https://www.sanratsolutions.com/dev/usuariosV0/public/service-enterprise',
+  url_payment_service: 'https://www.sanratsolutions.com/dev/usuariosV0/public/payment-service',
+  url_access_enterprise:'https://www.sanratsolutions.com/dev/usuariosV0/public/access_enterprise',
+  url_parameter_config: 'https://www.sanratsolutions.com/dev/usuariosV0/public/parameter_config',
+  url_visualization_rol: 'https://www.sanratsolutions.com/dev/usuariosV0/public/visualization_rol',
+  url_refresh_users: 'https://www.sanratsolutions.com/dev/usuariosV0/public/clear',
   
-
+  url_refresh_sales: 'https://www.sanratsolutions.com/dev/ventasV0/public/clear',
+  url_authentication_ventas: 'https://www.sanratsolutions.com/dev/ventasV0/public/authentication',
+  url_person: 'https://www.sanratsolutions.com/dev/ventasV0/public/persons',
+  url_enterprise: 'https://www.sanratsolutions.com/dev/ventasV0/public/enterprises',
+  url_operation: 'https://www.sanratsolutions.com/dev/ventasV0/public/operations',
+  url_products: 'https://www.sanratsolutions.com/dev/ventasV0/public/products',
+  url_payment: 'https://www.sanratsolutions.com/dev/ventasV0/public/payments',
+  url_expenses: 'https://www.sanratsolutions.com/dev/ventasV0/public/expenses',
+  url_note: 'https://www.sanratsolutions.com/dev/ventasV0/public/notes',
+  url_position: 'https://www.sanratsolutions.com/dev/ventasV0/public/positions',
+  url_production_process: 'https://www.sanratsolutions.com/dev/ventasV0/public/production_process',
+  url_cutting_period: 'https://www.sanratsolutions.com/dev/ventasV0/public/cutting_period',
+  url_cutting_period_product: 'https://www.sanratsolutions.com/dev/ventasV0/public/cutting_period_product',
+  url_detail_product_input: 'https://www.sanratsolutions.com/dev/ventasV0/public/detail_product_input',
+  url_operation_product: 'https://www.sanratsolutions.com/dev/ventasV0/public/operation_product',
+  url_notes: 'https://www.sanratsolutions.com/dev/ventasV0/public/notes',
+  url_enterprise_person: 'https://www.sanratsolutions.com/dev/ventasV0/public/enterprise_person',
+  url_laboral_condition: 'https://www.sanratsolutions.com/dev/ventasV0/public/laboral_condition',
+  url_worker_news: 'https://www.sanratsolutions.com/dev/ventasV0/public/worker_news',
+  url_payment_employee: 'https://www.sanratsolutions.com/dev/ventasV0/public/paying_employee',
+  url_preference_client: 'https://www.sanratsolutions.com/dev/ventasV0/public/preference_client',
+  url_sales_storage: 'https://www.sanratsolutions.com/dev/ventasV0/storage/app/public/',
+  url_financial_report: 'https://www.sanratsolutions.com/dev/ventasV0/public/financial_report',
+*/
+  
   url_user: 'http://localhost/usuariosV0/public/users',
   url_module: 'http://localhost/usuariosV0/public/modules',
   url_component: 'http://localhost/usuariosV0/public/components',
@@ -20,7 +62,7 @@ export const environment = {
   url_parameter_config: 'http://localhost/usuariosV0/public/parameter_config',
   url_visualization_rol: 'http://localhost/usuariosV0/public/visualization_rol',
   url_refresh_users: 'http://localhost/usuariosV0/public/clear',
-  
+
   url_refresh_sales: 'http://localhost/ventasV0/public/clear',
   url_authentication_ventas: 'http://localhost/ventasV0/public/authentication',
   url_person: 'http://localhost/ventasV0/public/persons',
@@ -44,14 +86,14 @@ export const environment = {
   url_preference_client: 'http://localhost/ventasV0/public/preference_client',
   url_sales_storage: 'http://localhost/ventasV0/storage/app/public/',
   url_financial_report: 'http://localhost/ventasV0/public/financial_report',
-  
+
   
   clearMessageDelayMs: 5000,
   refreshInterval: 1000,
   min_products: 20,
   medium_products: 50,
   days_sold: 7,
-  consolidate_day: 2,
+  consolidate_day: 7,
 
   type_operation_purchase: 'PURCHASE',
   type_operation_sale: 'SALE',

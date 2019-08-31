@@ -60,8 +60,8 @@ export class ModalExpenseFormComponent implements OnInit {
     }
   }
 
-  onFindProvider(filter: any){
-    let nameProvider = (<HTMLInputElement>document.getElementById('filterProvider')).value;
+  onFindProviderExpense(filter: any){
+    let nameProvider = (<HTMLInputElement>document.getElementById('filterProviderExpense')).value;
     this.lstProviders = [];
 
     if (nameProvider.length > 0) {
@@ -79,7 +79,7 @@ export class ModalExpenseFormComponent implements OnInit {
     }
   }
 
-  selectProvider(enterprise: Enterprise){
+  selectProviderExpense(enterprise: Enterprise){
     this.emptyProv = false;
     this.enterprise = enterprise;
     this.lstProviders = [];
@@ -138,8 +138,6 @@ export class ModalExpenseFormComponent implements OnInit {
   }
 
   private getParameters(code: string){
-    console.log(JSON.stringify(this.parameterEnterprise));
-
     if(this.parameterEnterprise)
     {
       const resultado = this.parameterEnterprise.filter( parameter => parameter.code === code );
