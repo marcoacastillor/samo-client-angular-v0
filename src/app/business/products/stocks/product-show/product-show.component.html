@@ -107,8 +107,8 @@
                                         <div class="card-header">Información comercialización</div>
                                         <div class="card-body">
                                             <div class="row" *ngIf="product.presentation != 'INDIVIDUAL'">
-                                                <div class="col-sm-6">Unidades por {{ product.presentation }}</div>
-                                                <div class="col-sm-4">{{ product.size }}</div>
+                                                <div class="col-sm-8">Unidades por {{ product.presentation }}</div>
+                                                <div class="col-sm-4">{{ product.units_package | number }}</div>
                                             </div>
                                             <div class="row" *ngIf="product.presentation == 'INDIVIDUAL'">
                                                 <div class="col-sm-8">Precio de venta por unidad</div>

@@ -1,0 +1,37 @@
+<app-pages title="Reportes de producto">  
+    <main>            
+        <section>
+            <!-- start menu main-->
+            <div class="row bg-gray">
+                <div class="col-sm-12 text-left">
+                    Reportes de productos e inventarios
+                </div>
+            </div>
+            <!-- end menu main-->
+
+            <!-- start dates form-->
+            <div class="row margin-top-1rem">
+                
+                <!-- resultados -->
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-header bg-primary text-white">Reporte por producto</div>
+                        <div class="card-body" style="height: 130px;">
+                            <h5 class="card-title">Buscar por producto y fechas</h5>
+                            <p class="card-text text-small">Reporte que muestra por fechas y un producto, el historial de compras y ventas de ese producto en esa fecha. Con éste reporte se puede realizar un seguimiento del historial de compras y ventas del producto.</p>
+                        </div>
+                        <div class="card-body" role="alert">
+                            <a routerLink="./by-dates-and-product" class="btn btn-outline-primary btn-sm">
+                                Ir al reporte ...<fa-icon [icon]="faAngleDoubleRight" class="text-outline-primary mb-2 mr-1"></fa-icon>
+                            </a>
+                        </div>
+                    </div>    
+                </div>
+                <!-- resultados --> 
+                
+                 
+            </div>
+            <!-- end dates form-->
+        </section>
+    </main>
+</app-pages>

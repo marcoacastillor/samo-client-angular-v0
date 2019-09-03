@@ -9,6 +9,10 @@ const routes: Routes = [
         path: 'stocks',
         loadChildren: './stocks/stocks.module#StocksModule'
       },
+      {
+        path: 'products-reports',
+        loadChildren: './products-reports/products-reports.module#ProductsReportsModule'
+      }
     ]
   }
 ];

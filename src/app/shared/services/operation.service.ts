@@ -66,17 +66,6 @@ export class OperationService {
     );
   }
 
-  public searchByFilter$(filter: string, type: string): Observable<Results> {
-    let url = this._url + '/get-by-filter/' + filter + '/' + type;
-    return this.userService.validateOptionByToken('Operation:getByFilter').pipe(
-      switchMap(validate => {
-        if(validate){
-          return this.http.get<Results>(url);
-        }
-      })
-    );
-  }
-
   public getByNameProviderAndTypeAndEnterprise$(nameProvider:string,type:string,id_enterprise:number): Observable<Operation[]> {
     let url = this._url + '/get-by-providername-and-type-and-enterprise/' + nameProvider + '/' + type + '/' + id_enterprise.toString() ;
     return this.userService.validateOptionByToken('Operation:getByProviderNameAndTypeAndEnterprise').pipe(
@@ -170,6 +159,7 @@ export class OperationService {
     );
   }
 
+  /*
   public store_purchase$(purchase: Purchase): Observable<Purchase> {
     let url = this._url + '/create-purchase';
     return this.userService.validateOptionByToken('Operation:createPurchase').pipe(
@@ -179,7 +169,7 @@ export class OperationService {
         }
       })
     );
-  }
+  }*/
 
   public store_purchase_file$(operation: Operation): Observable<StatusMessage[]> {
     let url = this._url + '/create-purchase-file';
@@ -192,6 +182,7 @@ export class OperationService {
     );
   }
 
+  /*
   public store_sale$(operation: Operation): Observable<Operation> {
     let url = this._url + '/create-sale';
     return this.userService.validateOptionByToken('Operation:createSale').pipe(
@@ -202,6 +193,7 @@ export class OperationService {
       })
     );
   }
+  
 
   public show_purchase$(id_purchase: number): Observable<Purchase> {
     const url = this._url + '/' + id_purchase;
@@ -213,8 +205,9 @@ export class OperationService {
       })
     );
   }
+  */
 
-  public getDetailOperation$(id_operation: number): Observable<Operation> {
+ public getDetailOperation$(id_operation: number): Observable<Operation> {
     const url = this._url + '/get-detail/' + id_operation;
     return this.userService.validateOptionByToken('Operation:getDetail').pipe(
       switchMap(validate => {
@@ -224,6 +217,7 @@ export class OperationService {
       })
     );
   }
+
 
   public getOperationByProvider$(id_enterprise: number): Observable<Operation[]> {
     const url = this._url + '/get-operation-by-provider/' + id_enterprise;

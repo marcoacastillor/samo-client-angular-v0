@@ -90,6 +90,10 @@
                                                 <th>Presentación</th>
                                                 <td>{{ product.presentation }}</td>
                                             </tr>
+                                            <tr *ngIf="product.presentation != 'INDIVIDUAL'">
+                                                <th>Unidades por {{ product.presentation }}</th>
+                                                <td>{{ product.units_package | number }}</td>
+                                            </tr>
                                             <tr>
                                                 <th>Categoría</th>
                                                 <td>{{ product.category }}</td>

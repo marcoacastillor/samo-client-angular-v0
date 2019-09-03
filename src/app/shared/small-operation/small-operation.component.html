@@ -65,8 +65,10 @@
                                             <tr *ngFor="let product of lstProducts" class="text-muted">
                                                 <td><strong>{{ product.name}}</strong><br/>{{ product.code }}</td>
                                                 <td>{{ product.presentation | lowercase }}</td>
-                                                <td>{{ product.number_units | number}}</td>
-                                                <td>{{ product.price_unit | number}}</td>
+                                                <td *ngIf="product.presentation == 'INDIVIDUAL'">{{ product.number_units | number}}</td>
+                                                <td *ngIf="product.presentation != 'INDIVIDUAL'">{{ product.number_package | number}}</td>
+                                                <td *ngIf="product.presentation == 'INDIVIDUAL'">{{ product.price_unit | number}}</td>
+                                                <td *ngIf="product.presentation != 'INDIVIDUAL'">{{ product.price_package | number}}</td>
                                                 <td>( {{product.tax}} %) {{ product.value_tax | number}}</td>
                                                 <td>{{ product.total_product | number }}</td>
                                             </tr>

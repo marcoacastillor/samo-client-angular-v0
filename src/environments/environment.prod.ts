@@ -87,7 +87,9 @@ export const environment = {
   url_sales_storage: 'http://localhost/ventasV0/storage/app/public/',
   url_financial_report: 'http://localhost/ventasV0/public/financial_report',
 
-  
+  url_authentication_credits: 'http://localhost/creditsV0/public/authentcation',
+
+
   clearMessageDelayMs: 5000,
   refreshInterval: 1000,
   min_products: 20,

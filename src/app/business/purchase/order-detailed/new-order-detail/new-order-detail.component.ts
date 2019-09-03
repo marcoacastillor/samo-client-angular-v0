@@ -10,13 +10,11 @@ import { Enterprise } from 'src/app/shared/models/enterprise';
 import { Product } from 'src/app/shared/models/product';
 import { EnterpriseService } from 'src/app/shared/services/enterprise.service';
 import { ProductService } from 'src/app/shared/services/product.service';
-import { ProductOperation } from 'src/app/shared/models/product-operation';
 import { ParameterService } from 'src/app/shared/services/parameter.service';
 import { Parameter } from 'src/app/shared/models/parameter';
 import { tap } from 'rxjs/operators';
 import { ParameterConfigService } from 'src/app/shared/services/parameter-config.service';
 import { ParameterConfig } from 'src/app/shared/models/parameter-config';
-import { Operation } from 'src/app/shared/models/operation';
 
 @Component({
   selector: 'app-new-order-detail',
@@ -104,8 +102,8 @@ export class NewOrderDetailComponent implements OnInit {
 
   public selectNumberInvoice(){
     let number_invoice = '';
-    let enterprise_purchase = this.getParameters(environment.enterprise_purchase_fact);
     let prefix_purchase = this.getParameters(environment.prefix_purchase);
+    let enterprise_purchase = this.getParameters(environment.enterprise_purchase_fact);
     let current_purchase = this.getParameters(environment.current_purchase);
      
     if(enterprise_purchase){
@@ -118,6 +116,14 @@ export class NewOrderDetailComponent implements OnInit {
           number_invoice = prefix_purchase + 1;
         }
       }
+      else{
+        if(current_purchase){
+          number_invoice = (Number(current_purchase) + 1).toString();
+        }
+        else{
+          number_invoice = '1';
+        } 
+      }
       this.readOnly = true;
     }
     
@@ -128,7 +134,7 @@ export class NewOrderDetailComponent implements OnInit {
 
     this.operationForm.patchValue({
       number_invoice: number_invoice,
-      current_invoice: current_purchase + '1'
+      current_invoice: parseInt(current_purchase) + '1'
     });
   }
 
