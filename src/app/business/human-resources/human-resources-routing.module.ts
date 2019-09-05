@@ -13,6 +13,10 @@ const routes: Routes = [
       {
         path: 'employee',
         loadChildren: './employee/employee.module#EmployeeModule'
+      },
+      {
+        path: 'associated',
+        loadChildren: './associated/associated.module#AssociatedModule'
       }
     ]
   }

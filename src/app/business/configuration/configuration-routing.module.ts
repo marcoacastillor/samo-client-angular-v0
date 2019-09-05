@@ -5,6 +5,15 @@ import { AdminTypeServiceComponent } from './type-service/admin-type-service/adm
 
 const routes: Routes = [
   {
+    path: '',
+    children: [
+      {
+        path: "credit-line",
+        loadChildren: './credit-line/credit-line.module#CreditLineModule',
+      },
+    ]
+  },
+  {
     path: 'parameters',
     component: AdminParamComponent,
   },

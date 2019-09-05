@@ -7,12 +7,17 @@ import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class AuthenticationService {
-  private _url = environment.url_authentication_ventas;
   constructor(private http: HttpClient) {
   }
 
-  public store$(auth: Authentication): Observable<Authentication> {
-    return this.http.post<Authentication>(this._url,auth);
+  public storeSales$(auth: Authentication): Observable<Authentication> {
+    let url = environment.url_authentication_ventas;
+    return this.http.post<Authentication>(url,auth);
+  }
+
+  public storeCredits$(auth: Authentication): Observable<Authentication> {
+    let url = environment.url_authentication_credits;
+    return this.http.post<Authentication>(url,auth);
   }
 
   public refreshSales(): Observable<string>{
@@ -22,6 +27,11 @@ export class AuthenticationService {
 
   public refreshUsers(): Observable<string>{
     let url = environment.url_refresh_users;
+    return this.http.get<string>(url)
+  }
+
+  public refreshCredits(): Observable<string>{
+    let url = environment.url_refresh_credits;
     return this.http.get<string>(url)
   }
 }

@@ -72,6 +72,19 @@ export class PersonService {
     );
   }
 
+  public createPersonBasic$(person: Person): Observable<Person> {
+    let url = this._url + '/create-person-basic';
+    return this.userService.validateOptionByToken('Person:createPersonBasic').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.post<Person>(url, person);
+        }
+      })
+    );
+  }
+
+  
+
   public createEmployee$(person: Person): Observable<Person> {
     let url = this._url + '/create-employee';
     return this.userService.validateOptionByToken('Person:createEmployee').pipe(

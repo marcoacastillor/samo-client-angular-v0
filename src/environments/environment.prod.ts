@@ -87,7 +87,10 @@ export const environment = {
   url_sales_storage: 'http://localhost/ventasV0/storage/app/public/',
   url_financial_report: 'http://localhost/ventasV0/public/financial_report',
 
-  url_authentication_credits: 'http://localhost/creditsV0/public/authentcation',
+  url_credit_line: 'http://localhost/creditsV0/public/credit_line',
+  url_associated_info: 'http://localhost/creditsV0/public/associated_info',
+  url_authentication_credits: 'http://localhost/creditsV0/public/authentication',
+  url_refresh_credits: 'http://localhost/creditsV0/public/clear',
 
 
   clearMessageDelayMs: 5000,
@@ -178,5 +181,7 @@ export const environment = {
   debt_time_invocie: 'DEBT_TIME_INVOICE',
 
   category_clothes: 'CATEGORY_CLOTHES',
-  sizes_clothes: 'SIZES_CLOTHES'
+  sizes_clothes: 'SIZES_CLOTHES',
+
+  term_interest: 'TERM_INTEREST'
 };

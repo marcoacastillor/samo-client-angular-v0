@@ -23,6 +23,7 @@ export class MenuLeftComponent implements OnInit {
 
   statusSales = '';
   statusUsers = '';
+  statusCredits = '';
 
   url_storage = environment.url_sales_storage;
   
@@ -60,6 +61,12 @@ export class MenuLeftComponent implements OnInit {
   updateAppsSales(){
     this.authService.refreshSales().subscribe(
       () => this.statusSales = 'actualizado'
+    );
+  }
+  //Ruta que actualiza sistema de ventas
+  updateAppsCredits(){
+    this.authService.refreshCredits().subscribe(
+      () => this.statusCredits = 'actualizado'
     );
   }
 

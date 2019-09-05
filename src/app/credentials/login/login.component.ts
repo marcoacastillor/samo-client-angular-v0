@@ -95,7 +95,14 @@ export class LoginComponent implements OnInit {
       auth.api_token = user.api_token;
       auth.username = user.username;
 
-      this.authenticationService.store$(auth).subscribe();
+      this.authenticationService.storeSales$(auth).subscribe();
+    }),
+    tap((user:User) => {
+      let auth = new Authentication;
+      auth.api_token = user.api_token;
+      auth.username = user.username;
+
+      this.authenticationService.storeCredits$(auth).subscribe();
     }),
   )
   .subscribe(
