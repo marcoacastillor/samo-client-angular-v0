@@ -98,34 +98,42 @@
                                                             <table class="table table-sm table-hover" *ngIf="resultData.purchase">
                                                                 <thead>
                                                                     <tr>
-                                                                        <th colspan="3">Totales</th>
-                                                                        <th>{{ resultData.total_purchase[0].packages | number }}</th>
-                                                                        <th>{{ resultData.total_purchase[0].units | number }}</th>
+                                                                        <th>Totales</th>
+                                                                        <th>
+                                                                            <span class="font-weight-bold">Paquetes <span class="badge badge-danger">{{ resultData.total_purchase[0].packages | number }}</span></span>
+                                                                        </th>
+                                                                        <th>
+                                                                            <span class="font-weight-bold">Unidades <span class="badge badge-danger">{{ resultData.total_purchase[0].units | number }}</span></span>
+                                                                        </th>
                                                                     </tr>
                                                                     <tr>
-                                                                        <th>Acciones</th>
-                                                                        <th>Fecha</th>
-                                                                        <th>Factura</th>
-                                                                        <th>Paquetes</th>
-                                                                        <th>Unidades</th>
+                                                                        <th colspan="3">Información compra</th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
                                                                     <tr *ngFor="let operation of resultData.purchase">
-                                                                        <td>
-                                                                            <div class="btn-group">
-                                                                                <button (click)="selectOperation(operation)" type="button" class="btn text-ultra-small btn-sm btn-outline-secondary" data-toggle="modal" data-target="#operationSmallModal">
-                                                                                    <fa-icon [icon]="faEye" class="text-secondary mb-2 mr-1" title="Actualizar registro"></fa-icon>Ver
-                                                                                </button>
-                                                                                <a routerLink="/sales-admin/purchases/purchase-detailed-show/{{operation.pk_id_operation}}" type="button" class="text-ultra-small btn btn-outline-secondary btn-sm">
-                                                                                    <fa-icon [icon]="faEdit" class="text-outline-secondary mb-2 mr-1"></fa-icon>Editar
-                                                                                </a> 
+                                                                        <td colspan="3">
+                                                                            <div class="row">
+                                                                                <div class="col-sm-6">
+                                                                                    <a (click)="selectOperation(operation)" type="button" class="stretched-link" data-toggle="modal" data-target="#operationSmallModal">
+                                                                                        <fa-icon [icon]="faEye" class="text-danger mb-2 mr-1" title="Ver registro"></fa-icon>
+                                                                                    </a>
+                                                                                    <a routerLink="/sales-admin/purchases/purchase-detailed-show/{{operation.pk_id_operation}}" class="stretched-link alert-link">
+                                                                                        <fa-icon [icon]="faEdit" class="text-danger mb-2 mr-1" title="Editar registro"></fa-icon>
+                                                                                    </a>
+                                                                                    {{ operation.number_invoice }}
+                                                                                </div>
+                                                                                <div class="col-sm-6">{{ operation.date_operation }}</div>
+                                                                            </div>
+                                                                            <div class="row">
+                                                                                <div class="col-sm-6">
+                                                                                    <span class="font-weight-bold">Paquetes <span class="badge badge-danger">{{ operation.number_package | number }}</span></span>
+                                                                                </div>
+                                                                                <div class="col-sm-6">
+                                                                                    <span class="font-weight-bold">Unidades <span class="badge badge-danger">{{ operation.number_units | number }}</span></span>
+                                                                                </div>
                                                                             </div>
                                                                         </td>
-                                                                        <td>{{ operation.date_operation }}</td>
-                                                                        <td>{{ operation.number_invoice }}</td>
-                                                                        <td>{{ operation.number_package | number }}</td>
-                                                                        <td>{{ operation.number_units | number }}</td>
                                                                     </tr>
                                                                 </tbody>
                                                             </table>
@@ -152,40 +160,48 @@
                                                             </div>            
                                                         </div>
                                                         <div class="card-body">
-                                                                <table class="table table-sm table-hover" *ngIf="resultData.sales">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th colspan="3">Totales</th>
-                                                                            <th>{{ resultData.total_sales[0].packages | number }}</th>
-                                                                            <th>{{ resultData.total_sales[0].units | number }}</th>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <th>Acciones</th>
-                                                                            <th>Fecha</th>
-                                                                            <th>Factura</th>
-                                                                            <th>Paquetes</th>
-                                                                            <th>Unidades</th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        <tr *ngFor="let operation of resultData.sales">
-                                                                            <td>
-                                                                                <div class="btn-group">
-                                                                                    <button (click)="selectOperation(operation)" type="button" class="btn text-ultra-small btn-sm btn-outline-secondary" data-toggle="modal" data-target="#operationSmallModal">
-                                                                                        <fa-icon [icon]="faEye" class="text-secondary mb-2 mr-1" title="Actualizar registro"></fa-icon>Ver
-                                                                                    </button>
-                                                                                    <a routerLink="/sales-admin/purchases/purchase-detailed-show/{{operation.pk_id_operation}}" type="button" class="text-ultra-small btn btn-outline-secondary btn-sm">
-                                                                                        <fa-icon [icon]="faEdit" class="text-outline-secondary mb-2 mr-1"></fa-icon>Editar
-                                                                                    </a> 
+                                                            <table class="table table-sm table-hover" *ngIf="resultData.sales">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Totales</th>
+                                                                        <th>
+                                                                            <span class="font-weight-bold">Paquetes <span class="badge badge-primary">{{ resultData.total_sales[0].packages | number }}</span></span>
+                                                                        </th>
+                                                                        <th>
+                                                                            <span class="font-weight-bold">Unidades <span class="badge badge-primary">{{ resultData.total_sales[0].units | number }}</span></span>
+                                                                        </th>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th colspan="3">Información compra</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr *ngFor="let operation of resultData.sales">
+                                                                        <td colspan="3">
+                                                                            <div class="row">
+                                                                                <div class="col-sm-6">
+                                                                                    <a (click)="selectOperation(operation)" type="button" class="stretched-link" data-toggle="modal" data-target="#operationSmallModal">
+                                                                                        <fa-icon [icon]="faEye" class="text-primary mb-2 mr-1" title="Ver registro"></fa-icon>
+                                                                                    </a>
+                                                                                    <a routerLink="/sales-admin/sales/sales-detailed-show/{{operation.pk_id_operation}}" class="stretched-link alert-link">
+                                                                                        <fa-icon [icon]="faEdit" class="text-primary mb-2 mr-1" title="Editar registro"></fa-icon>
+                                                                                    </a>
+                                                                                    {{ operation.number_invoice }}
                                                                                 </div>
-                                                                            </td>
-                                                                            <td>{{ operation.date_operation }}</td>
-                                                                            <td>{{ operation.number_invoice }}</td>
-                                                                            <td>{{ operation.number_package | number }}</td>
-                                                                            <td>{{ operation.number_units | number }}</td>
-                                                                        </tr>
-                                                                    </tbody>
-                                                                </table>
+                                                                                <div class="col-sm-6">{{ operation.date_operation }}</div>
+                                                                            </div>
+                                                                            <div class="row">
+                                                                                <div class="col-sm-6">
+                                                                                    <span class="font-weight-bold">Paquetes <span class="badge badge-primary">{{ operation.number_package | number }}</span></span>
+                                                                                </div>
+                                                                                <div class="col-sm-6">
+                                                                                    <span class="font-weight-bold">Unidades <span class="badge badge-primary">{{ operation.number_units | number }}</span></span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
                                                         </div>
                                                     </div>
                                                 </div>

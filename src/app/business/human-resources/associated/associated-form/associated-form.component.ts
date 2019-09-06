@@ -60,6 +60,7 @@ export class AssociatedFormComponent implements OnInit {
    }
 
   ngOnInit() {
+    this.activeUser = this.globalStoreService.getUser();
     let id = this.activateRoute.snapshot.params['id'];
     if(id == 'new'){
       this.associatedSelected = new AssociatedInfo;
@@ -69,7 +70,6 @@ export class AssociatedFormComponent implements OnInit {
       this.getDataById(id);
     }
     this.id = id;
-    this.activeUser = this.globalStoreService.getUser();
     this.loadParameters();
   }
 
@@ -106,7 +106,8 @@ export class AssociatedFormComponent implements OnInit {
         external_reference_person: [associatedInfo.external_reference_person],
         date_of_admission: [associatedInfo.date_of_admission, Validators.required],
         min_contribution: [associatedInfo.min_contribution, Validators.required],
-        period_contribution: [associatedInfo.period_contribution]
+        period_contribution: [associatedInfo.period_contribution],
+        total_contribution: [0],
       })
     })
   }

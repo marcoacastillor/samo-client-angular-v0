@@ -25,9 +25,7 @@ export class CreditLineListComponent implements OnInit {
   constructor(
     private creditLineService:CreditLineService,
     private parametersService: ParameterService
-  ) { 
-    this.resultOperation.code = -1;
-  }
+  ) {}
 
   ngOnInit() {
     this.getAllCreditLine();

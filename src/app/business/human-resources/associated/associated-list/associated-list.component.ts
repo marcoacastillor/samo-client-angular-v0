@@ -6,6 +6,7 @@ import { GlobalStoreService } from 'src/app/core/services/global-store.service';
 import { PersonService } from 'src/app/shared/services/person.service';
 import { AssociatedInfoService } from 'src/app/shared/services/associated-info.service';
 import { AssociatedInfo } from 'src/app/shared/models/associated-info';
+import { ResultOperation } from 'src/app/shared/models/result-operation';
 
 @Component({
   selector: 'app-associated-list',
@@ -18,40 +19,37 @@ export class AssociatedListComponent implements OnInit {
   faTrash = faTrash;
   faEdit = faEdit;
 
-  person: Person = new Person;
+  person: AssociatedInfo = new AssociatedInfo;
   lstAssociated: AssociatedInfo[] = [];
   activeUser: User = new User;
 
-  success = false;
-  message =  '';
+  resultOperation: ResultOperation = new ResultOperation;
 
   constructor(
     private globalStoreService: GlobalStoreService,
-    private personService: PersonService,
     private associatedInfoService: AssociatedInfoService
   ) { }
 
   ngOnInit() {
     this.activeUser = this.globalStoreService.getUser();
-    this.loadAllClients(this.activeUser.fk_id_enterprise);
+    this.loadAllAssociated(this.activeUser.fk_id_enterprise);
   }
 
-  private loadAllClients(id_enterprise: number){
+  private loadAllAssociated(id_enterprise: number){
     this.associatedInfoService.getAssociatedByEnterprise$(id_enterprise).subscribe(
       lst_associated => this.lstAssociated = lst_associated
     )
   }
 
-  selectPerson(person:Person){
+  selectPerson(person:AssociatedInfo){
     this.person = person;
   }
 
-  deleteClient(){
-    this.personService.deleteClient$(this.person.pk_id_person).subscribe(
-      () => {
-        this.success = true;
-        this.message = 'Se eliminó correctamente el asociado';
-        this.loadAllClients(this.activeUser.fk_id_enterprise);
+  deleteAssociated(){
+    this.associatedInfoService.deleteAssociated$(this.person.pk_id_associated_info).subscribe(
+      result_operation => {
+        this.resultOperation = result_operation;
+        this.loadAllAssociated(this.activeUser.fk_id_enterprise);
       }
     )
   }

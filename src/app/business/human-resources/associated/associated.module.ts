@@ -11,6 +11,8 @@ import { AssociatedShowComponent } from './associated-show/associated-show.compo
 import { ParameterService } from 'src/app/shared/services/parameter.service';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { AssociatedInfoService } from 'src/app/shared/services/associated-info.service';
+import { CreditAssociatedService } from 'src/app/shared/services/credit-associated.service';
+import { AssociatedContributionService } from 'src/app/shared/services/associated-contribution.service';
 
 @NgModule({
   imports: [
@@ -22,7 +24,7 @@ import { AssociatedInfoService } from 'src/app/shared/services/associated-info.s
     OwlNativeDateTimeModule,
   ],
   providers: [
-    PersonService, ParameterService, AssociatedInfoService
+    PersonService, ParameterService, AssociatedInfoService, CreditAssociatedService, AssociatedContributionService
   ],
   declarations: [AssociatedListComponent, AssociatedFormComponent, AssociatedShowComponent]
 })

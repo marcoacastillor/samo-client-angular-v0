@@ -42,11 +42,13 @@ export class CreditLineFormModalComponent implements OnInit {
   }
 
   public createCreditLine(){
-    this.create.emit(this.creditLineForm.value)
+    this.create.emit(this.creditLineForm.value);
+    this.initUpdForm();
   }
 
   public updateCreditLine(){
     this.update.emit(this.creditLineForm.value)
+    this.initUpdForm();
   }
   
   private initUpdForm() {

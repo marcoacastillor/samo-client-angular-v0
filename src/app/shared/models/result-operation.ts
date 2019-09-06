@@ -4,7 +4,7 @@ export class ResultOperation {
     response: any;
 
     constructor(){
-        this.code = 0;
+        this.code = 99;
         this.description = '';
     }
 }

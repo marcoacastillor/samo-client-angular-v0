@@ -57,6 +57,10 @@ const routes: Routes = [
         path: 'financial-reports',
         loadChildren: './financial-reports/financial-reports.module#FinancialReportsModule'
       },
+      {
+        path: 'credits',
+        loadChildren: './credits/credits.module#CreditsModule'
+      },
     ]
   },
   {

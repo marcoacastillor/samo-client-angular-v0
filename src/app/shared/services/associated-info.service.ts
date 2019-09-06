@@ -41,6 +41,18 @@ AssociatedInfoService {
     );
   }
 
+  public getValuesByEnterprise$(id_enterprise: number): Observable<any> {
+    const url = this._url + '/get-values-by-enterprise/'+id_enterprise;
+    return this.userService.validateOptionByToken('AssociatedInfo:getValuesByEnterprise').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.get<any>(url);
+        }
+      })
+    );
+  }
+
+
   public create$(associatedInfo:AssociatedInfo): Observable<ResultOperation> {
     return this.userService.validateOptionByToken('AssociatedInfo:create').pipe(
       switchMap(validate => {
@@ -62,6 +74,18 @@ AssociatedInfoService {
     );
   }
 
+  public deleteAssociated$(id:number): Observable<ResultOperation> {
+    let url = this._url + '/' + id.toString();
+    return this.userService.validateOptionByToken('AssociatedInfo:delete').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.delete<ResultOperation>(url);
+        }
+      })
+    );
+  }
+
+  
   public show$(id:number): Observable<AssociatedInfo> {
     let url = this._url + '/' + id.toString();
     return this.userService.validateOptionByToken('AssociatedInfo:show').pipe(
