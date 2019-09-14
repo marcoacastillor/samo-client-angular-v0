@@ -214,7 +214,6 @@ export class EnterpriseShowComponent implements OnInit {
    * Funciones parámetros de empleado
    */
   public loadParametersEmployee(){
-    this.employee = new Employee;
     this.parameterService.getByMultipleCodeCategory$(this.categories_employee).pipe(
       tap((parametersLst: Parameter[]) => {
          this.lstParametersEmployee = parametersLst
@@ -223,13 +222,14 @@ export class EnterpriseShowComponent implements OnInit {
   }
 
   public selectEmployee(employee: any){
+    this.loadParametersEmployee();
     this.employee = employee;
   }
 
   public saveEmployee(laboralInfo: any){
     this.personService.createEmployee$(laboralInfo).subscribe(
       () => {
-        this.personService.getEmployeesByEnterprise$(this.enterprise.pk_id_enterprise).subscribe(
+        this.personService.getActiveEmployeesByEnterprise$(this.enterprise.pk_id_enterprise).subscribe(
           employees => {
             this.lstEmployee = employees;
             this.success = true;
@@ -243,7 +243,7 @@ export class EnterpriseShowComponent implements OnInit {
   public deleteEmployee(){
     this.personService.deleteLaboralInfo$(this.employee.pk_id_person).subscribe(
       () => {
-        this.personService.getEmployeesByEnterprise$(this.enterprise.pk_id_enterprise).subscribe(
+        this.personService.getActiveEmployeesByEnterprise$(this.enterprise.pk_id_enterprise).subscribe(
           employees => {
             this.success = true;
             this.lstEmployee = employees;
@@ -257,7 +257,7 @@ export class EnterpriseShowComponent implements OnInit {
   public updateEmployee(laboralInfo:any){
     this.personService.updateEmployee$(laboralInfo).subscribe(
       () => {
-        this.personService.getEmployeesByEnterprise$(this.enterprise.pk_id_enterprise).subscribe(
+        this.personService.getActiveEmployeesByEnterprise$(this.enterprise.pk_id_enterprise).subscribe(
           employees => {
             this.success = true;
             this.lstEmployee = employees;

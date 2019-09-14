@@ -41,6 +41,20 @@ AssociatedInfoService {
     );
   }
 
+
+  public getAssociatedByIdFilterAndEnterprise$(id_filter:string, id_enterprise: number): Observable<AssociatedInfo[]> {
+    const url = this._url + '/get-associated-by-id-filter-and-enterprise/'+ id_filter + '/' + id_enterprise;
+    return this.userService.validateOptionByToken('AssociatedInfo:getAssociatedByIdFilterAndEnterprise').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.get<AssociatedInfo[]>(url);
+        }
+      })
+    );
+  }
+
+
+
   public getValuesByEnterprise$(id_enterprise: number): Observable<any> {
     const url = this._url + '/get-values-by-enterprise/'+id_enterprise;
     return this.userService.validateOptionByToken('AssociatedInfo:getValuesByEnterprise').pipe(

@@ -157,11 +157,6 @@ export class NewOrderDetailComponent implements OnInit {
     this.parameterService.getByMultipleCodeCategory$(this.categories).pipe(
       tap((params:Parameter[]) => this.lstParams = params),
       tap(() => {
-        this.enterpriseService.show$(this.activeUser.fk_id_enterprise).subscribe(
-          enterprise =>this.enterprise = enterprise
-        )
-      }),
-      tap(() => {
         this.getParametersByEnterprise();
       }),
     ).subscribe()

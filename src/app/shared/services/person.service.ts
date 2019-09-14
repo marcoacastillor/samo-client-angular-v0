@@ -37,6 +37,7 @@ export class PersonService {
       })
     );
   }
+  
 
   public getActiveEmployeesByEnterprise$(id_enterprise: number): Observable<Person[]> {
     const url = this._url + '/get-active-employee-by-enterprise/'+id_enterprise;

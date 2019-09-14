@@ -1,0 +1,65 @@
+<div class="modal fade" id="approvedModal" tabindex="-1" role="dialog" aria-labelledby="approvedModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Aprobación de crédito</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="card">
+                <div class="card-header">
+                    Decisión sobre solicitud del préstamo
+                </div>
+                <div class="card-body">
+                    <div class="row alert alert-info">
+                        <div class="col-sm-12">
+                            <p>La decisión del presente crédito ha sido</p>
+                            <hr>
+                            <h4 class="alert-heading">{{ decision }}</h4>.
+                            <hr>
+                            <p>En el cuadro de abajo, escribir las razones para la decisión si es necesario.</p>
+                        </div>
+                    </div>
+                    <form [formGroup]="creditForm">
+                        <div class="row" *ngIf="decision == 'Aprobado'">
+                            <div class="col-sm-4 ">
+                                <div class="form-group">
+                                    <label for="amount_approved">Valor aprobado</label>
+                                    <input type="text" class="form-control form-control-sm" formControlName="amount_approved" required>
+                                    <small *ngIf="mustShowError('amount_approved')" class="form-text alert-danger">
+                                        Valor aprovado, es obligatorio
+                                    </small>
+                                    <small class="text-danger" *ngIf="hasError('amount_approved','max')">
+                                        Valor no puede ser mayor a <strong>{{ this.getErrors('amount_approved').max.max | number }}</strong>
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <textarea class="form-control" rows="3" placeholder="Observación sobre la decisión del préstamo" formControlName="observation"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- buttons-->
+                        <div class="row margin-top-1rem justify-content-end">
+                            <div class="col-sm-4 text-right align-self-end">
+                                <button type="submit" (click)="updateCredit()" [disabled]="creditForm.invalid" class="btn btn-sm btn-outline-primary" type="button" data-dismiss="modal">
+                                    <fa-icon [icon]="faSave" class="text-outline-secondary mb-2 mr-1"></fa-icon>Actualizar
+                                </button>
+                            </div>
+                        </div>
+                        <!-- buttons-->
+                        
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        </div>
+        </div>
+    </div>
+</div>

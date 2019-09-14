@@ -3,7 +3,7 @@ import { AssociatedInfo } from 'src/app/shared/models/associated-info';
 import { User } from 'src/app/shared/models/user';
 import { GlobalStoreService } from 'src/app/core/services/global-store.service';
 import { AssociatedInfoService } from 'src/app/shared/services/associated-info.service';
-import { faEye } from '@fortawesome/free-solid-svg-icons';
+import { faEye, faEllipsisV, faPlusCircle, faAngleDoubleRight } from '@fortawesome/free-solid-svg-icons';
 import { CreditAssociated } from 'src/app/shared/models/credit-associated';
 import { CreditAssociatedService } from 'src/app/shared/services/credit-associated.service';
 import { environment } from 'src/environments/environment';
@@ -15,10 +15,14 @@ import { environment } from 'src/environments/environment';
 })
 export class RotativeCreditsMainComponent implements OnInit {
   faEye = faEye;
+  faEllipsisV = faEllipsisV;
+  faPlusCircle = faPlusCircle;
+  faAngleDoubleRight = faAngleDoubleRight;
 
   lstAssociated: AssociatedInfo[] = [];
   lstCreditApproved: CreditAssociated[] = [];
   lstCreditSolicited: CreditAssociated[] = [];
+  lstCreditDisbursment: CreditAssociated[] = [];
 
   associated_count = 0;
   associated_value = 0;
@@ -31,6 +35,12 @@ export class RotativeCreditsMainComponent implements OnInit {
 
   credit_settlet_count = 0;
   credit_settlet_value = 0;
+
+  credit_disbursment_count = 0;
+  credit_disbursment_value = 0;
+
+  credit_performance_value = 0;
+  financial_performance = environment.financial_performance;
   
   activeUser: User = new User;
   
@@ -71,6 +81,17 @@ export class RotativeCreditsMainComponent implements OnInit {
         this.credit_settlet_count = result.count;
         this.credit_settlet_value = result.value;
       }
+    );
+    this.creditAssociatedService.getValuesByEnterpriseAndState$(id_enterprise,environment.state_credit_disbursment).subscribe(
+      result => {
+        this.credit_disbursment_count = result.count;
+        this.credit_disbursment_value = result.value;
+      }
+    );
+    this.creditAssociatedService.getPerformanceByEnterprise$(id_enterprise).subscribe(
+      result => {
+        this.credit_performance_value = result.value;
+      }
     )
   }
 
@@ -81,6 +102,9 @@ export class RotativeCreditsMainComponent implements OnInit {
     this.creditAssociatedService.getByEnterpriseAndState$(id_enterprise,environment.state_credit_approved).subscribe(
       lst_credits => this.lstCreditApproved = lst_credits
     );
+    this.creditAssociatedService.getByEnterpriseAndState$(id_enterprise,environment.state_credit_disbursment).subscribe(
+      lst_credits => this.lstCreditDisbursment = lst_credits
+    );
   }
 
   private loadAllAssociated(id_enterprise: number){
@@ -88,5 +112,7 @@ export class RotativeCreditsMainComponent implements OnInit {
       lst_associated => this.lstAssociated = lst_associated
     )
   }
+
+  
 
 }

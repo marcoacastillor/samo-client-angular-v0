@@ -54,6 +54,7 @@ export class ModalEmployeeFormComponent implements OnInit {
     {
       if(changes.employee.currentValue != changes.employee.previousValue)
       {
+        this.employee = changes.employee.currentValue;
         this.initForm();
       }
     }

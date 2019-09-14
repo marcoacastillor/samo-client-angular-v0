@@ -175,7 +175,6 @@ export class AssociatedFormComponent implements OnInit {
         this.associatedInfoService.update$(this.associatedForm.get('associated').value).subscribe(
           result_operation => {
             this.resultOperation = result_operation;
-            //this.initForm(this.personSelected,this.associatedSelected);
           }
         )
       }),

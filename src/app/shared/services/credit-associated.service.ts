@@ -29,6 +29,17 @@ export class CreditAssociatedService {
     );
   }
 
+  public getAllByEnterprise$(id_enterprise:number): Observable<CreditAssociated[]> {
+    let url = this._url + '/get-all-by-enterprise/' + id_enterprise;
+    return this.userService.validateOptionByToken('CreditAssociated:getAllByEnterprise').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.get<CreditAssociated[]>(url);
+        }
+      })
+    );
+  }
+
   public getByAssociated$(id:number): Observable<CreditAssociated[]> {
     let url = this._url + '/get-by-associated/' + id.toString();
     return this.userService.validateOptionByToken('CreditAssociated:getByAssociated').pipe(
@@ -62,6 +73,16 @@ export class CreditAssociatedService {
     );
   }
 
+  public getPerformanceByEnterprise$(id_enterprise:number): Observable<any> {
+    let url = this._url + '/get-performance-by-enterprise/' + id_enterprise.toString();
+    return this.userService.validateOptionByToken('CreditAssociated:getPerformanceByEnterprise').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.get<any>(url);
+        }
+      })
+    );
+  }
 
   public create$(creditAssociated:CreditAssociated): Observable<ResultOperation> {
     return this.userService.validateOptionByToken('CreditAssociated:create').pipe(
@@ -73,12 +94,68 @@ export class CreditAssociatedService {
     );
   }
 
+  public update$(creditAssociated:CreditAssociated): Observable<ResultOperation> {
+    return this.userService.validateOptionByToken('CreditAssociated:update').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.put<ResultOperation>(this._url,creditAssociated);
+        }
+      })
+    );
+  }
+
+  public updateState$(creditAssociated:CreditAssociated): Observable<ResultOperation> {
+    let url = this._url + '/update-state-credit';
+    return this.userService.validateOptionByToken('CreditAssociated:updateStateCredit').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.put<ResultOperation>(url,creditAssociated);
+        }
+      })
+    );
+  }
+
+  public updateDisbursmentDate$(creditAssociated:CreditAssociated): Observable<ResultOperation> {
+    let url = this._url + '/update-disbursment-date';
+    return this.userService.validateOptionByToken('CreditAssociated:updateDisbursmentDate').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.put<ResultOperation>(url,creditAssociated);
+        }
+      })
+    );
+  }
+
+  //
+
   public show$(id:number): Observable<CreditAssociated> {
     let url = this._url + '/' + id.toString();
     return this.userService.validateOptionByToken('CreditAssociated:show').pipe(
       switchMap(validate => {
         if(validate){
           return this.http.get<CreditAssociated>(url);
+        }
+      })
+    );
+  }
+
+  public delete$(id:number): Observable<ResultOperation> {
+    let url = this._url + '/' + id.toString();
+    return this.userService.validateOptionByToken('CreditAssociated:delete').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.delete<ResultOperation>(url);
+        }
+      })
+    );
+  }
+
+  public getPMT$(interest:number,time_term:string,term:number,loan:number): Observable<number> {
+    let url = this._url + '/get-pmt/' + interest.toString() + '/' + time_term +'/' + term.toString() + '/' + loan.toString();
+    return this.userService.validateOptionByToken('CreditAssociated:getPMT').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.get<number>(url);
         }
       })
     );

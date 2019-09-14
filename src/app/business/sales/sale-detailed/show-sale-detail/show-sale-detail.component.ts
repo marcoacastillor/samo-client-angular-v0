@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faThList, faFileInvoiceDollar, faCartArrowDown, faDonate, faEdit, faLock, faPrint, faPlus, faDollarSign, faUndo, faTrashAlt, faHandSpock } from '@fortawesome/free-solid-svg-icons';
+import { faThList, faFileInvoiceDollar, faCartArrowDown, faDonate, faEdit, faLock, faPrint, faPlus, faDollarSign, faUndo, faTrashAlt, faHandSpock, faUnlock } from '@fortawesome/free-solid-svg-icons';
 import { OperationProduct } from 'src/app/shared/models/operation-product';
 import { Notes } from 'src/app/shared/models/notes';
 import { Payment } from 'src/app/shared/models/payment';
@@ -35,6 +35,7 @@ export class ShowSaleDetailComponent implements OnInit {
   faDonate = faDonate;
   faEdit = faEdit;
   faLock = faLock;
+  faUnlock = faUnlock;
   faPrint = faPrint;
   faPlus = faPlus;
   faDollarSign = faDollarSign;
@@ -191,6 +192,17 @@ export class ShowSaleDetailComponent implements OnInit {
         this.getOperationDetail(operation.pk_id_operation.toString());
         this.success = true;
         this.message = 'Se bloquea la factura.';
+      }
+    )
+  }
+
+  public unBlockInvoice()
+  {
+    this.operationService.changeState$(this.operation.pk_id_operation,environment.state_opened_purchase).subscribe(
+      operation => {
+        this.getOperationDetail(operation.pk_id_operation.toString());
+        this.success = true;
+        this.message = 'Se abrió la factura.';
       }
     )
   }

@@ -111,26 +111,26 @@
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
-                                                                    <tr *ngFor="let operation of resultData.purchase">
+                                                                    <tr *ngFor="let opPurchase of resultData.purchase">
                                                                         <td colspan="3">
                                                                             <div class="row">
                                                                                 <div class="col-sm-6">
-                                                                                    <a (click)="selectOperation(operation)" type="button" class="stretched-link" data-toggle="modal" data-target="#operationSmallModal">
+                                                                                    <a (click)="selectOperation(opPurchase)" type="button" class="stretched-link" data-toggle="modal" data-target="#operationSmallModal">
                                                                                         <fa-icon [icon]="faEye" class="text-danger mb-2 mr-1" title="Ver registro"></fa-icon>
                                                                                     </a>
-                                                                                    <a routerLink="/sales-admin/purchases/purchase-detailed-show/{{operation.pk_id_operation}}" class="stretched-link alert-link">
+                                                                                    <a routerLink="../../../purchases/purchase-detailed-show/{{opPurchase.pk_id_operation}}" class="stretched-link alert-link">
                                                                                         <fa-icon [icon]="faEdit" class="text-danger mb-2 mr-1" title="Editar registro"></fa-icon>
                                                                                     </a>
-                                                                                    {{ operation.number_invoice }}
+                                                                                    {{ opPurchase.number_invoice }}
                                                                                 </div>
-                                                                                <div class="col-sm-6">{{ operation.date_operation }}</div>
+                                                                                <div class="col-sm-6">{{ opPurchase.date_operation }}</div>
                                                                             </div>
                                                                             <div class="row">
                                                                                 <div class="col-sm-6">
-                                                                                    <span class="font-weight-bold">Paquetes <span class="badge badge-danger">{{ operation.number_package | number }}</span></span>
+                                                                                    <span class="font-weight-bold">Paquetes <span class="badge badge-danger">{{ opPurchase.number_package | number }}</span></span>
                                                                                 </div>
                                                                                 <div class="col-sm-6">
-                                                                                    <span class="font-weight-bold">Unidades <span class="badge badge-danger">{{ operation.number_units | number }}</span></span>
+                                                                                    <span class="font-weight-bold">Unidades <span class="badge badge-danger">{{ opPurchase.number_units | number }}</span></span>
                                                                                 </div>
                                                                             </div>
                                                                         </td>
@@ -183,7 +183,7 @@
                                                                                     <a (click)="selectOperation(operation)" type="button" class="stretched-link" data-toggle="modal" data-target="#operationSmallModal">
                                                                                         <fa-icon [icon]="faEye" class="text-primary mb-2 mr-1" title="Ver registro"></fa-icon>
                                                                                     </a>
-                                                                                    <a routerLink="/sales-admin/sales/sales-detailed-show/{{operation.pk_id_operation}}" class="stretched-link alert-link">
+                                                                                    <a routerLink="../../../sales/sales-detailed-show/{{operation.pk_id_operation}}" class="stretched-link alert-link">
                                                                                         <fa-icon [icon]="faEdit" class="text-primary mb-2 mr-1" title="Editar registro"></fa-icon>
                                                                                     </a>
                                                                                     {{ operation.number_invoice }}

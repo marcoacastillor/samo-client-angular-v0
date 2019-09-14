@@ -50,6 +50,7 @@ export const environment = {
   url_credit_line: 'http://localhost/creditsV0/public/credit_line',
   url_associated_info: 'http://localhost/creditsV0/public/associated_info',
   url_credit_associated: 'http://localhost/creditsV0/public/credit_associated',
+  url_credit_payment: 'http://localhost/creditsV0/public/credit_payment',
   url_associated_contribution: 'http://localhost/creditsV0/public/associated_contribution',
   url_authentication_credits: 'http://localhost/creditsV0/public/authentication',
   url_refresh_credits: 'http://localhost/creditsV0/public/clear',
@@ -149,6 +150,9 @@ export const environment = {
   state_credit_approved: 'Aprobado',
   state_credit_disbursment: 'Desembolsado',
   state_credit_paid_out: 'Pagado',
+
+  financial_performance: 3,
+  max_approval: 5,
   
 };
 

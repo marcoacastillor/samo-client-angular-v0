@@ -1,0 +1,75 @@
+<div class="modal fade" id="simulationModal" tabindex="-1" role="dialog" aria-labelledby="simulationModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Simulación de crédito</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="card">
+                <div class="card-header">
+                    Cuotas y comportamiento de crédito
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="card">
+                                <h6>Valor de crédito</h6>
+                                {{ value_total | number }}
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="card">
+                                <h6>Número de cuotas</h6>
+                                {{ num_fees | number }}
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="card">
+                                <h6>Interés {{ time_interest }}</h6>    
+                                {{ month_interest | number }}%
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="card">
+                                <h6>Valor de cuota</h6>    
+                                {{ value_payment | number }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row margin-top-1rem">
+                        <div class="col-sm-12">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th># cuota</th>
+                                        <th>Valor cuota mensual</th>
+                                        <th>Abono a capital</th>
+                                        <th>Abono a interés</th>
+                                        <th>Saldo</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let payment of lstPayments">
+                                        <td>{{ payment.number_fee | number }}</td>
+                                        <td>{{ payment.normal_payment_value | number }}</td>
+                                        <td>{{ payment.capital_value | number }}</td>
+                                        <td>{{ payment.interest_value | number }}</td>
+                                        <td>{{ payment.payment_received | number }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        </div>
+        </div>
+    </div>
+</div>

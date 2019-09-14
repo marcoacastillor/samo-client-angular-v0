@@ -4,4 +4,6 @@ export class CreditLine {
     public description: string;
     public interest: number;
     public term_interest: string;
+    public max_payment_deadline: number;
+    public code: string;
 }

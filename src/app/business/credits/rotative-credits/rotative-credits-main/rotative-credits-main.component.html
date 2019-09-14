@@ -11,215 +11,339 @@
 
             <!-- start content -->
             <div class="row margin-top-1rem">
-                <div class="col-sm-12">
-
-                    <!-- start main info-->
+                <div class="col-sm-12">                    
+                    <!-- consolidados -->
                     <div class="row">
-                        
-                        <!-- start afiliados-->
-                        <div class="col-sm-8">
-                            <!-- consolidados -->
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <div class="card">
-                                        <div class="card-header bg-secondary text-white">Información sobre asociados</div>
-                                        <div class="card-body">
-                                            <div class="row">
-                                                <div class="col-sm-12">
-                                                    <div class="card">
-                                                        <div class="card-body">
-                                                            <div class="card-title"><h6>Total asociados <span class="badge badge-primary">{{ associated_count | number }}</span></h6></div>
-                                                            <h1 class="text-primary">$ {{ associated_value | number }}</h1>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- consolidados -->
-
-                            <!-- asociados -->
-                            <div class="row margin-top-1rem">
-                                <div class="col-sm-12">
-                                    <div class="card">
-                                        <div class="card-header bg-secondary text-white">Información sobre asociados</div>
-                                        <div class="card-body">
-                                            <table class="table table-sm table-hover">
-                                                <thead>
-                                                    <tr>
-                                                        <td colspan="6" class="aler alert-warning">Se muestran los últimos 10 asociados</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Acciones</th>
-                                                        <th>Identificación</th>
-                                                        <th>Nombres</th>
-                                                        <th>Apellidos</th>
-                                                        <th>Fecha vinculación</th>
-                                                        <th>Aportes</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr *ngFor="let associated of lstAssociated">
-                                                        <td>
-                                                            <a routerLink='/sales-admin/human-resource/associated/show/{{associated.pk_id_associated_info}}' class="btn text-ultra-small btn-sm btn-outline-primary" type="button">
-                                                                <fa-icon [icon]="faEye" class="text-outline-secondary mb-2 mr-1"></fa-icon>Ver detalle
-                                                            </a>
-                                                        </td>
-                                                        <td>{{ associated.external_reference_person.split(':')[1] }} {{ associated.external_reference_person.split(':')[2] }}</td>
-                                                        <td>{{ associated.external_reference_person.split(':')[3] }}</td>
-                                                        <td>{{ associated.external_reference_person.split(':')[4] }}</td>
-                                                        <td>{{ associated.date_of_admission }}</td>
-                                                        <td>$ {{ associated.min_contribution | number }} {{ associated.period_contribution }}</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- asociados -->
-
-                            <!-- asociados -->
-                            <div class="row margin-top-1rem">
-                                <div class="col-sm-12">
-                                    <div class="card">
-                                            <div class="card-header bg-primary text-white">Últimos aprobados</div>
-                                        <div class="card-body">
-                                            <table class="table table-sm">
-                                                <thead>
-                                                    <tr>
-                                                        <td colspan="10" class="aler alert-warning">Se muestran los últimos 10 asociados</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Acciones</th>
-                                                        <th>Código</th>
-                                                        <th>Valor solicitado</th>
-                                                        <th>Valor aprobado</th>
-                                                        <th>Plazo en Meses</th>
-                                                        <th>Número de cuotas</th>
-                                                        <th>Fecha solicitud</th>
-                                                        <th>Fecha desembolso</th>
-                                                        <th>Saldo</th>
-                                                        <th>Estado</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr *ngFor="let credit of lstCreditApproved">
-                                                        <td>
-                                                            <a routerLink='/sales-admin/human-resource/associated/show/{{credit.pk_id_credit_associated}}' class="btn text-ultra-small btn-sm btn-outline-primary" type="button">
-                                                                <fa-icon [icon]="faEye" class="text-outline-secondary mb-2 mr-1"></fa-icon>Ver detalle
-                                                            </a>
-                                                        </td>
-                                                        <td>{{ credit.code }}</td>
-                                                        <td>{{ credit.amount_solicited | number }}</td>
-                                                        <td>{{ credit.amount_approved | number }}</td>
-                                                        <td>{{ credit.payment_deadline | number }}</td>
-                                                        <td>{{ credit.number_fees | number }}</td>
-                                                        <td>{{ credit.application_date }}</td>
-                                                        <td>{{ credit.disbursment_date }}</td>
-                                                        <td>{{ credit.balance_credit | number }}</td>
-                                                        <td>{{ credit.state }}</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- asociados -->
-
-                            <!-- asociados -->
-                            <div class="row margin-top-1rem">
-                                <div class="col-sm-12">
-                                    <div class="card">
-                                        <div class="card-header bg-info text-white">Últimos solicitados</div>
-                                        <div class="card-body">
-                                            <table class="table table-sm">
-                                                <thead>
-                                                    <tr>
-                                                        <td colspan="10" class="aler alert-warning">Se muestran los últimos 10 asociados</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Acciones</th>
-                                                        <th>Código</th>
-                                                        <th>Valor solicitado</th>
-                                                        <th>Valor aprobado</th>
-                                                        <th>Plazo en Meses</th>
-                                                        <th>Número de cuotas</th>
-                                                        <th>Fecha solicitud</th>
-                                                        <th>Fecha desembolso</th>
-                                                        <th>Saldo</th>
-                                                        <th>Estado</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr *ngFor="let credit of lstCreditSolicited">
-                                                        <td>
-                                                            <a routerLink='/sales-admin/human-resource/associated/show/{{credit.pk_id_credit_associated}}' class="btn text-ultra-small btn-sm btn-outline-primary" type="button">
-                                                                <fa-icon [icon]="faEye" class="text-outline-secondary mb-2 mr-1"></fa-icon>Ver detalle
-                                                            </a>
-                                                        </td>
-                                                        <td>{{ credit.code }}</td>
-                                                        <td>{{ credit.amount_solicited | number }}</td>
-                                                        <td>{{ credit.amount_approved | number }}</td>
-                                                        <td>{{ credit.payment_deadline | number }}</td>
-                                                        <td>{{ credit.number_fees | number }}</td>
-                                                        <td>{{ credit.application_date }}</td>
-                                                        <td>{{ credit.disbursment_date }}</td>
-                                                        <td>{{ credit.balance_credit | number }}</td>
-                                                        <td>{{ credit.state }}</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- asociados -->
-                        </div>
-                        <!-- start afiliados-->
-
-                        <!-- start creditos-->
-                        <div class="col-sm-4">
+                        <div class="col-sm-12">
                             <div class="card">
-                                <div class="card-header">Información sobre créditos</div>
+                                <div class="card-header bg-primary text-white">Información consolidada</div>
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    <div class="card-title"><h6>Total Aprobados <span class="badge badge-primary">{{ credit_assinged_count | number }}</span></h6></div>
-                                                    <h1 class="text-primary">$ {{ credit_assinged_value | number }}</h1>
-                                                </div>
-                                            </div>
-                                        </div>
-        
-                                        <div class="col-sm-12">
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    <div class="card-title"><h6>Solicitados <span class="badge badge-info">{{ credit_solicited_count }}</span></h6></div>
-                                                    <h1 class="text-info">$ {{ credit_solicited_value | number }}</h1>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-12">
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    <div class="card-title"><h6>Liquidados <span class="badge badge-secondary">{{ credit_settlet_count | number }}</span></h6></div>
-                                                    <h1 class="text-secondary">$ {{ credit_settlet_value | number }}</h1>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <table class="table table-sm table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        <div class="btn-group btn-group-sm">
+                                                            <div class="dropdown">
+                                                                <button class="btn btn-sm dropdown" type="button" id="operation" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                    <fa-icon [icon]="faEllipsisV" class="text-outline-secondary mb-2 mr-1"></fa-icon>
+                                                                </button>
+                                                                <div class="dropdown-menu" aria-labelledby="operation">
+                                                                    <button class="dropdown-item text-small text-secondary"  type="button">
+                                                                        <fa-icon [icon]="faPlusCircle" class="text-outline-secondary mb-2 mr-1"></fa-icon>Registrar aporte
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        Aportes
+                                                    </th>
+                                                    <th>Rendimiento</th>
+                                                    <th>Dividendos ({{ financial_performance | number }} % )</th>
+                                                    <th>Total</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr class="text-success">
+                                                    <td><h2>$ {{ associated_value | number }}</h2></td>
+                                                    <td><h2>$ {{ credit_performance_value | number }}</h2></td>
+                                                    <td><h2>$ {{ ((credit_performance_value * financial_performance )/100) | number }}</h2></td>
+                                                    <td><h2>$ {{ (associated_value + credit_performance_value) | number }}</h2></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>                                                
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- start creditos-->
                     </div>
-                    <!-- end main info-->
+                    <!-- consolidados -->
 
+                    <!-- asociados -->
+                    <div class="row margin-top-1rem">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header bg-warning text-white">
+                                    <div class="row">
+                                        <div class="col-sm-4">Asociados <span class="badge badge-primary">{{ associated_count | number }}</span></div>
+                                        <div class="col-sm-8 text-right">$ {{ associated_value | number }}</div>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <table class="table table-sm table-hover">
+                                        <thead>
+                                            <tr class="aler alert-warning">
+                                                <td colspan="6">
+                                                    <div class="btn-group btn-group-sm dropleft">
+                                                        <div class="dropdown">
+                                                            <button class="btn btn-sm dropdown" type="button" id="operation" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                <fa-icon [icon]="faEllipsisV" class="text-outline-secondary mb-2 mr-1"></fa-icon>
+                                                            </button>
+                                                            <div class="dropdown-menu" aria-labelledby="operation">
+                                                                <a routerLink='/sales-admin/human-resource/associated/create/new' class="dropdown-item text-small text-secondary"  type="button">
+                                                                    <fa-icon [icon]="faPlusCircle" class="text-outline-secondary mb-2 mr-1"></fa-icon>Nuevo asociado
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    Se muestran los últimos 10 asociados
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>Acciones</th>
+                                                <th>Identificación</th>
+                                                <th>Nombres</th>
+                                                <th>Apellidos</th>
+                                                <th>Fecha vinculación</th>
+                                                <th>Aportes</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let associated of lstAssociated">
+                                                <td>
+                                                    <a routerLink='/sales-admin/human-resource/associated/show/{{associated.pk_id_associated_info}}' class="btn text-ultra-small btn-sm btn-outline-primary" type="button">
+                                                        <fa-icon [icon]="faEye" class="text-outline-secondary mb-2 mr-1"></fa-icon>Ver detalle
+                                                    </a>
+                                                </td>
+                                                <td>{{ associated.external_reference_person.split(':')[1] }} {{ associated.external_reference_person.split(':')[2] }}</td>
+                                                <td>{{ associated.external_reference_person.split(':')[3] }}</td>
+                                                <td>{{ associated.external_reference_person.split(':')[4] }}</td>
+                                                <td>{{ associated.date_of_admission }}</td>
+                                                <td>$ {{ associated.min_contribution | number }} {{ associated.period_contribution }}</td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td colspan="6" class="text-right">
+                                                    <a routerLink="/sales-admin/human-resource/associated/list" class="btn btn-outline-primary btn-sm">
+                                                        Ver todos ...<fa-icon [icon]="faAngleDoubleRight" class="text-outline-primary mb-2 mr-1"></fa-icon>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- asociados -->
+
+                    <!-- asociados -->
+                    <div class="row margin-top-1rem">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header bg-info text-white">
+                                    <div class="row">
+                                        <div class="col-sm-4">Créditos Solicitados <span class="badge badge-primary">{{ credit_solicited_count | number }}</span></div>
+                                        <div class="col-sm-8 text-right">$ {{ credit_solicited_value | number }}</div>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <table class="table table-sm">
+                                        <thead>
+                                            <tr class="aler alert-warning">
+                                                <td colspan="10">
+                                                    <div class="btn-group btn-group-sm dropleft">
+                                                        <div class="dropdown">
+                                                            <button class="btn btn-sm dropdown" type="button" id="operation" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                <fa-icon [icon]="faEllipsisV" class="text-outline-secondary mb-2 mr-1"></fa-icon>
+                                                            </button>
+                                                            <div class="dropdown-menu" aria-labelledby="operation">
+                                                                <a routerLink='../create/new' class="dropdown-item text-small text-secondary"  type="button">
+                                                                    <fa-icon [icon]="faPlusCircle" class="text-outline-secondary mb-2 mr-1"></fa-icon>Nuevo crédito
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    Se muestran los últimos 10 registros
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>Acciones</th>
+                                                <th>Código</th>
+                                                <th>Valor solicitado</th>
+                                                <th>Valor aprobado</th>
+                                                <th>Plazo en Meses</th>
+                                                <th>Número de cuotas</th>
+                                                <th>Fecha solicitud</th>
+                                                <th>Fecha desembolso</th>
+                                                <th>Saldo</th>
+                                                <th>Estado</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let credit of lstCreditSolicited">
+                                                <td>
+                                                    <a routerLink='../show/{{credit.pk_id_credit_associated}}' class="btn text-ultra-small btn-sm btn-outline-primary" type="button">
+                                                        <fa-icon [icon]="faEye" class="text-outline-secondary mb-2 mr-1"></fa-icon>Ver detalle
+                                                    </a>
+                                                </td>
+                                                <td>{{ credit.code }}</td>
+                                                <td>{{ credit.amount_solicited | number }}</td>
+                                                <td>{{ credit.amount_approved | number }}</td>
+                                                <td>{{ credit.payment_deadline | number }}</td>
+                                                <td>{{ credit.number_fees | number }}</td>
+                                                <td>{{ credit.application_date }}</td>
+                                                <td>{{ credit.disbursment_date }}</td>
+                                                <td>{{ credit.balance_credit | number }}</td>
+                                                <td>{{ credit.state }}</td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td colspan="10" class="text-right">
+                                                    <a routerLink="../list" class="btn btn-outline-primary btn-sm">
+                                                        Ver todos ...<fa-icon [icon]="faAngleDoubleRight" class="text-outline-primary mb-2 mr-1"></fa-icon>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- asociados -->
+
+                    <!-- asociados -->
+                    <div class="row margin-top-1rem">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header bg-success text-white">
+                                    <div class="row">
+                                        <div class="col-sm-4">Créditos Aprobados <span class="badge badge-primary">{{ credit_assinged_count | number }}</span></div>
+                                        <div class="col-sm-8 text-right">$ {{ credit_assinged_value | number }}</div>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <table class="table table-sm">
+                                        <thead>
+                                            <tr class="aler alert-warning">
+                                                <td colspan="10">Se muestran los últimos 10 créditos registros</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Acciones</th>
+                                                <th>Código</th>
+                                                <th>Valor solicitado</th>
+                                                <th>Valor aprobado</th>
+                                                <th>Plazo en Meses</th>
+                                                <th>Número de cuotas</th>
+                                                <th>Fecha solicitud</th>
+                                                <th>Fecha desembolso</th>
+                                                <th>Saldo</th>
+                                                <th>Estado</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let credit of lstCreditApproved">
+                                                <td>
+                                                    <a routerLink='../show/{{credit.pk_id_credit_associated}}' class="btn text-ultra-small btn-sm btn-outline-primary" type="button">
+                                                        <fa-icon [icon]="faEye" class="text-outline-secondary mb-2 mr-1"></fa-icon>Ver detalle
+                                                    </a>
+                                                </td>
+                                                <td>{{ credit.code }}</td>
+                                                <td>{{ credit.amount_solicited | number }}</td>
+                                                <td>{{ credit.amount_approved | number }}</td>
+                                                <td>{{ credit.payment_deadline | number }}</td>
+                                                <td>{{ credit.number_fees | number }}</td>
+                                                <td>{{ credit.application_date }}</td>
+                                                <td>{{ credit.disbursment_date }}</td>
+                                                <td>{{ credit.balance_credit | number }}</td>
+                                                <td>{{ credit.state }}</td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td colspan="10" class="text-right">
+                                                    <a routerLink="../list" class="btn btn-outline-primary btn-sm">
+                                                        Ver todos ...<fa-icon [icon]="faAngleDoubleRight" class="text-outline-primary mb-2 mr-1"></fa-icon>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- asociados -->
+
+
+                    <!-- asociados -->
+                    <div class="row margin-top-1rem">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header bg-info text-white">
+                                    <div class="row">
+                                        <div class="col-sm-4">Créditos Desembolsados <span class="badge badge-primary">{{ credit_disbursment_count | number }}</span></div>
+                                        <div class="col-sm-8 text-right">$ {{ credit_disbursment_value | number }}</div>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <table class="table table-sm">
+                                        <thead>
+                                            <tr class="aler alert-warning">
+                                                <td colspan="10">
+                                                    <div class="btn-group btn-group-sm dropleft">
+                                                        <div class="dropdown">
+                                                            <button class="btn btn-sm dropdown" type="button" id="operation" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                <fa-icon [icon]="faEllipsisV" class="text-outline-secondary mb-2 mr-1"></fa-icon>
+                                                            </button>
+                                                            <div class="dropdown-menu" aria-labelledby="operation">
+                                                                <a routerLink='../create/new' class="dropdown-item text-small text-secondary"  type="button">
+                                                                    <fa-icon [icon]="faPlusCircle" class="text-outline-secondary mb-2 mr-1"></fa-icon>Nuevo crédito
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    Se muestran los últimos 10 registros
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>Acciones</th>
+                                                <th>Código</th>
+                                                <th>Valor solicitado</th>
+                                                <th>Valor aprobado</th>
+                                                <th>Plazo en Meses</th>
+                                                <th>Número de cuotas</th>
+                                                <th>Fecha solicitud</th>
+                                                <th>Fecha desembolso</th>
+                                                <th>Saldo</th>
+                                                <th>Estado</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let credit of lstCreditDisbursment">
+                                                <td>
+                                                    <a routerLink='../show/{{credit.pk_id_credit_associated}}' class="btn text-ultra-small btn-sm btn-outline-primary" type="button">
+                                                        <fa-icon [icon]="faEye" class="text-outline-secondary mb-2 mr-1"></fa-icon>Ver detalle
+                                                    </a>
+                                                </td>
+                                                <td>{{ credit.code }}</td>
+                                                <td>{{ credit.amount_solicited | number }}</td>
+                                                <td>{{ credit.amount_approved | number }}</td>
+                                                <td>{{ credit.payment_deadline | number }}</td>
+                                                <td>{{ credit.number_fees | number }}</td>
+                                                <td>{{ credit.application_date }}</td>
+                                                <td>{{ credit.disbursment_date }}</td>
+                                                <td>{{ credit.balance_credit | number }}</td>
+                                                <td>{{ credit.state }}</td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td colspan="10" class="text-right">
+                                                    <a routerLink="../list" class="btn btn-outline-primary btn-sm">
+                                                        Ver todos ...<fa-icon [icon]="faAngleDoubleRight" class="text-outline-primary mb-2 mr-1"></fa-icon>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- asociados -->
                 </div>
             </div>
             <!-- end content -->            

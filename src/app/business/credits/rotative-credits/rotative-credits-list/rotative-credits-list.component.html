@@ -1,0 +1,105 @@
+<app-pages title="Créditos">  
+    <main>            
+        <section>
+            <!-- start menu main-->
+            <div class="row bg-gray">
+                <div class="col-sm-6 text-left">
+                    Listado de todos los Créditos
+                </div>
+                <div class="col-sm-6 text-right">
+                    <div class="btn-group btn-group-sm">
+                        <a routerLink='../create/new' type="button" class="btn btn-outline-primary btn-sm">
+                            <fa-icon [icon]="faPlusCircle" class="text-outline-primary mb-2 mr-1"></fa-icon>Crear
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- end menu main-->
+
+            <div class="row margin-top-1rem">
+                <div class="col-sm-12">
+                    <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="resultOperation.code === 0">
+                        <strong>Éxito.</strong> {{ resultOperation.description }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="resultOperation.code != 0 && resultOperation.code != 99">
+                        <strong>Error.</strong> {{ resultOperation.description }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- start content -->
+            <div class="row margin-top-1rem">
+                <div class="col-sm-12">
+                    <table class="table table-sm table-striped">
+                        <thead class="bg-secondary text-white">
+                            <tr>
+                                <th>Acciones</th>
+                                <th>Código</th>
+                                <th>Valor solicitado</th>
+                                <th>Valor aprobado</th>
+                                <th>Plazo en Meses</th>
+                                <th>Número de cuotas</th>
+                                <th>Fecha solicitud</th>
+                                <th>Saldo</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let credit of lstCredits">
+                                <td>
+                                    <a routerLink='../show/{{credit.pk_id_credit_associated}}' class="btn text-ultra-small btn-sm btn-outline-primary" type="button">
+                                        <fa-icon [icon]="faEye" class="text-outline-secondary mb-2 mr-1"></fa-icon>Ver
+                                    </a>
+                                    <a routerLink='../create/{{credit.pk_id_credit_associated}}' class="btn text-ultra-small btn-sm btn-outline-primary" type="button">
+                                        <fa-icon [icon]="faEdit" class="text-outline-secondary mb-2 mr-1"></fa-icon>Editar
+                                    </a>
+                                    <button  (click)="selectCredit(credit)" class="btn text-ultra-small btn btn-sm btn-outline-danger" type="button" data-toggle="modal" data-target="#deleteCredit">
+                                        <fa-icon [icon]="faTrash" class="text-outline-danger mb-2 mr-1"></fa-icon>Eliminar
+                                    </button> 
+                                </td>
+                                <td>{{ credit.code }}</td>
+                                <td>{{ credit.amount_solicited | number }}</td>
+                                <td>{{ credit.amount_approved | number }}</td>
+                                <td>{{ credit.payment_deadline | number }}</td>
+                                <td>{{ credit.number_fees | number }}</td>
+                                <td>{{ credit.application_date }}</td>
+                                <td>{{ credit.balance_credit | number }}</td>
+                                <td>{{ credit.state }}</td>
+                            </tr>
+                        </tbody>
+                    </table>  
+                </div>
+            </div>
+            <!-- end content -->
+        </section>
+    </main>
+</app-pages>
+
+<!-- Modal -->
+<div class="modal fade" id="deleteCredit" tabindex="-1" role="dialog" aria-labelledby="deleteCredit" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Confirmación de mensaje</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="alert alert-danger" role="alert">
+                Se va a eliminar un registro, desea confirmar la operación?.
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="button" (click)="deleteCredit()" data-dismiss="modal" class="btn btn-danger">Eliminar</button>
+        </div>
+        </div>
+    </div>
+</div>

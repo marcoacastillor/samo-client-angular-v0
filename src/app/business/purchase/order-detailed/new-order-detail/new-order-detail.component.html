@@ -311,7 +311,7 @@
                                         </select>
                                     </div>
                                     <div class="col-sm-2 align-self-center text-rigth">
-                                        <button type="submit" (click)="addProduct()" [disabled]="operationForm.get('product').value.cost_price == 0 && operationForm.get('product').value.number_units == 0" class="btn btn-sm btn-outline-primary" type="button">
+                                        <button type="submit" (click)="addProduct()" [disabled]="operationForm.get('product').value.cost_price == 0 && operationForm.get('product').value.number_units == 0 && operationForm.get('product').value.code != null" class="btn btn-sm btn-outline-primary" type="button">
                                             <fa-icon [icon]="faPlusCircle" class="text-outline-secondary mb-2 mr-1"></fa-icon>Agregar
                                         </button>
                                     </div>

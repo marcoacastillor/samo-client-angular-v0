@@ -1,0 +1,227 @@
+<app-pages title="Gestión de crédito">  
+    <main>            
+        <section>
+            <!-- start menu main-->
+            <div class="row bg-gray">
+                <div class="col-sm-6 text-left">
+                    Registro de crédito
+                </div>
+                <div class="col-sm-6 text-right">
+                    <div class="btn-group btn-group-sm">
+                        <a routerLink='../../list' class="btn text-ultra-small btn-sm btn-outline-primary" type="button">
+                            <fa-icon [icon]="faThList" class="text-outline-secondary mb-2 mr-1"></fa-icon>Ver todos
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- end menu main-->
+
+            <!-- start content -->
+            <div class="row margin-top-1rem">
+                <div class="col-sm-12">
+
+                    <div class="row margin-top-1rem">
+                        <div class="col-sm-12">
+                            <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="resultOperation.code == 0">
+                                <strong>Éxito.</strong> {{ resultOperation.description }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="resultOperation.code != 0 && resultOperation.code != 99">
+                                <strong>Error.</strong> {{ resultOperation.description }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row margin-top-1rem">
+                        <!-- datos de crédito-->
+                        <div class="col-sm-4">
+
+                            <!-- información de asociado -->
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            Información sobre asociado
+                                        </div>
+                                        <div class="card-body">
+                                            <table class="table table-sm">
+                                                <tbody>
+                                                    <tr>
+                                                        <th>Id</th>
+                                                        <td>{{ associatedSelected.external_reference_person.split(':')[1] }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Nombres</th>
+                                                        <td>{{ associatedSelected.external_reference_person.split(':')[2] }} {{ associatedSelected.external_reference_person.split(':')[3] }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Total aportes</th>
+                                                        <td>{{ associatedSelected.total_contribution | number }}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- información de asociado -->
+                            
+                            <!-- información de línea de crédito -->
+                            <div class="row margin-top-1rem">
+                                <div class="col-sm-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            Información sobre línea de crédito
+                                        </div>
+                                        <div class="card-body">
+                                            <table class="table table-sm">
+                                                <tbody>
+                                                    <tr>
+                                                        <th>Nombre</th>
+                                                        <td>{{ selectedCredit.name }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Código</th>
+                                                        <td>{{ selectedCredit.code }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Descripción</th>
+                                                        <td>{{ selectedCredit.description }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Interés pactado</th>
+                                                        <td>{{ selectedCredit.interest  | number}}% {{ selectedCredit.term_interest}} </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Máximo plazo concedido</th>
+                                                        <td>{{ selectedCredit.max_payment_deadline | number }}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- información de línea de crédito -->
+                            
+                        </div>
+                        <!-- datos de crédito-->
+
+                        <!-- datos de crédito-->
+                        <div class="col-sm-8">
+
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            Información sobre asociado
+                                        </div>
+                                        <div class="card-body">
+                                            <!-- start main info-->
+                                            <form [formGroup]="creditForm">
+                                                <div class="row">
+                                                    <div class="form-group col-sm-6">
+                                                        <label for="names">Asociado</label>
+                                                        <input type="text" id="filterAssociated" [readonly]="readOnly" (keypress)="onFindAssociated($event)" class="form-control form-control-sm"  formControlName="names" required>
+                                                        <small class="text-muted">Digite CC o nombres del asociado</small>
+                                                        <!-- start autocomplete-->
+                                                        <div class="autocomplete container-fluid">
+                                                            <div id="autocomplete-list" class="autocomplete-items text-ultra-small">
+                                                                <div class="items row" *ngFor="let person of lstAssociated">
+                                                                    <div class="col-sm-12" (click)="selectAssociated(person)">
+                                                                        {{ person.external_reference_person.split(':')[1] }} - {{ person.external_reference_person.split(':')[2] }} {{ person.external_reference_person.split(':')[3] }}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- start autocomplete-->
+                                                        <small *ngIf="mustShowError('names')" class="form-text alert-danger">
+                                                            Asociado, es obligatorio
+                                                        </small>
+                                                    </div>
+                                                    <div class="form-group col-sm-6">
+                                                        <label for="fk_id_credit_line">Línea de crédito</label>
+                                                        <select id="creditLine" (change)="updateMaxPaymentDeadline()" class="form-control form-control-sm" formControlName="fk_id_credit_line" required>
+                                                            <option value="" selected>Seleccione...</option>
+                                                            <option *ngFor="let credit of lstCreditLine" value="{{ credit.pk_id_credit_line }}">{{ credit.pk_id_credit_line }} :  {{ credit.name }}</option>
+                                                        </select>
+                                                        <small *ngIf="mustShowError('fk_id_credit_line')" class="form-text alert-danger">
+                                                            Línea de crédito, es obligatorio
+                                                        </small>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-group col-sm-3">
+                                                        <label for="amount_solicited">Valor solicitado</label>
+                                                        <input type="number" class="form-control form-control-sm"  formControlName="amount_solicited" required> 
+                                                        <small class="alert-danger">Máximo valor {{ max_value_approved | number }}</small>
+                                                        <small *ngIf="mustShowError('amount_solicited')" class="form-text alert-danger">
+                                                            Valor aprobado, es obligatorio
+                                                        </small>
+                                                    </div>
+                                                    <div class="form-group col-sm-3">
+                                                        <label for="payment_deadline">Plazo en meses</label>
+                                                        <input type="number" class="form-control form-control-sm"  formControlName="payment_deadline" required> 
+                                                        <small class="alert-danger">Máximo valor {{ max_payment_deadline | number }}</small>
+                                                        <small *ngIf="mustShowError('payment_deadline')" class="form-text alert-danger">
+                                                            Plazo en meses, es obligatorio
+                                                        </small>
+                                                    </div>
+                                                    <div class="form-group col-sm-3">
+                                                        <label for="number_fees">Número de cuotas</label>
+                                                        <input type="number" (blur)="simulateCredit()" class="form-control form-control-sm"  formControlName="number_fees" required> 
+                                                        <small class="alert-danger">Máximo valor {{ max_payment_deadline | number }}</small>
+                                                        <small *ngIf="mustShowError('number_fees')" class="form-text alert-danger">
+                                                            Número de cuotas, es obligatorio
+                                                        </small>
+                                                    </div>
+                                                    <div class="form-group col-sm-3">
+                                                        <label for="value_payment">Cuota a pagar</label>
+                                                        <input readonly type="number" class="form-control form-control-sm" placeholder="Valor de la cuota mensual"  formControlName="value_payment"> 
+                                                    </div>
+                                                </div>
+                                                
+                                                <!--start buttons form-->
+                                                <div class="row justify-content-end margin-top-2rem">
+                                                    <div class="col-sm-4 text-right align-self-end">
+                                                        <button type="submit" (click)="simulateCredit()" [disabled]="creditForm.invalid || creditForm.value.payment_deadline > max_payment_deadline || creditForm.value.number_fees > max_payment_deadline || creditForm.value.amount_solicited > max_value_approved" class="btn btn-sm btn-outline-primary" type="button"  data-toggle="modal" data-target="#simulationModal">
+                                                            <fa-icon [icon]="faDonate" class="text-outline-secondary mb-2 mr-1"></fa-icon>Simular
+                                                        </button>
+                                                        <button *ngIf="!creditSelected.pk_id_credit_associated" type="submit" (click)="saveCredit()" [disabled]="creditForm.invalid || creditForm.value.payment_deadline > max_payment_deadline || creditForm.value.number_fees > max_payment_deadline || creditForm.value.amount_solicited > max_value_approved" class="btn btn-sm btn-outline-primary" type="button">
+                                                            <fa-icon [icon]="faSave" class="text-outline-secondary mb-2 mr-1"></fa-icon>Guardar
+                                                        </button>
+                                                        <button *ngIf="creditSelected.pk_id_credit_associated" type="submit" (click)="updateCredit()" [disabled]="creditForm.invalid || creditForm.value.payment_deadline > max_payment_deadline || creditForm.value.number_fees > max_payment_deadline  || creditForm.value.amount_solicited > max_value_approved" class="btn btn-sm btn-outline-primary" type="button">
+                                                            <fa-icon [icon]="faSave" class="text-outline-secondary mb-2 mr-1"></fa-icon>Actualizar
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <!--end buttons form-->
+
+                                            </form>
+                                            <!-- end main info-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                            
+                        </div>
+                        <!-- datos de crédito-->
+                    </div>
+                </div>
+            </div>
+            <!-- end content -->
+        </section>
+    </main>
+</app-pages>
+
+<app-simulation-credit-modal
+[value_payment]="this.creditForm.value.value_payment"
+[value_total]="this.creditForm.value.amount_solicited"
+[num_fees]="this.creditForm.value.number_fees"
+[month_interest]="this.selectedCredit.interest"
+[time_interest]="this.selectedCredit.term_interest"
+></app-simulation-credit-modal>

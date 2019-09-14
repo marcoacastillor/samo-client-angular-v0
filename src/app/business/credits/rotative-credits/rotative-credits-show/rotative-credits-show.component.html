@@ -1,0 +1,297 @@
+<app-pages title="Detalle de crédito">  
+    <main>       
+        <section>
+            <!-- start menu main-->
+            <div class="row bg-gray">
+                <div class="col-sm-6 text-left">
+                    Información detallada
+                </div>
+                <div class="col-sm-6 text-right">
+                    <div class="btn-group btn-group-sm">
+                        <a routerLink='../../list' class="btn  btn-sm btn-outline-primary" type="button">
+                            <fa-icon [icon]="faThList" class="text-outline-secondary mb-2 mr-1"></fa-icon>Ver todos
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- end menu main-->
+
+            <div class="row margin-top-1rem">
+                <div class="col-sm-12">
+                    <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="resultOperation.code == 0">
+                        <strong>Éxito.</strong> {{ resultOperation.description }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="resultOperation.code != 0 && resultOperation.code != 99">
+                        <strong>Error.</strong> {{ resultOperation.description }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- start content -->
+            <div class="row margin-top-1rem">
+                
+                <!-- información asociado-->
+                <div class="col-sm-5">
+                    
+                    <!-- información básica-->
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    Datos personales Asociado
+                                </div>
+                                <div class="card-body">
+                                    <table class="table table-sm">
+                                        <tbody>
+                                            <tr>
+                                                <th>Identificación</th>
+                                                <td>{{ person.type_id }} {{ person.number_id }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Nombre</th>
+                                                <td>{{ person.names }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Apellidos</th>
+                                                <td>{{ person.last_names }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Dirección</th>
+                                                <td>{{ person.address }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Teléfono</th>
+                                                <td>{{ person.phone }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Fecha de afiliación</th>
+                                                <td>{{ associatedInfo.date_of_admission }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Aportes</th>
+                                                <td>{{ associatedInfo.min_contribution | number }} {{ associatedInfo.period_contribution }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Toral aportes</th>
+                                                <td>{{ associatedInfo.total_contribution | number }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- información básica-->
+
+                    <!-- información consolidado créditos-->
+                    <div class="row margin-top-1rem">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    Información línea de crédito
+                                </div>
+                                <div class="card-body">
+                                    <table class="table table-sm">
+                                        <tbody>
+                                            <tr>
+                                                <th>Línea de crédito</th>
+                                                <td>{{ creditLine.name }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Interés cobrado</th>
+                                                <td>{{ creditLine.interest | number }}% {{ creditLine.term_interest}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Máximo número de cuotas</th>
+                                                <td>{{ creditLine.max_payment_deadline | number }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- información consolidado créditos-->
+                </div>
+                <!-- fin información asociado-->
+
+                <!-- información crédito-->
+                <div class="col-sm-7">
+
+                    <!-- información consolidado créditos-->
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    Histórico de créditos por asociado
+                                </div>
+                                <div class="card-body">
+                                    <table class="table table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th>Código</th>
+                                                <th>Fecha solicitud</th>
+                                                <th>Saldo</th>
+                                                <th>Estado</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let credit of lstCredit">
+                                                <td>{{ credit.code }}</td>
+                                                <td>{{ credit.application_date }}</td>
+                                                <td>{{ credit.balance_credit | number }}</td>
+                                                <td>{{ credit.state }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- información consolidado créditos-->
+                    
+                    <!-- información consolidado créditos-->
+                    <div class="row margin-top-1rem">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="row">
+                                        <div class="col-sm-8">
+                                            Detalle de crédito
+                                        </div>
+                                        <div class="col-sm-4 text-right">
+                                            <div class="btn-group" role="group" *ngIf="creditAssociated.state == 'Aprobado'">
+                                                <button type="button" (click)="updateDisbursmentDate()" class="btn btn-sm btn-outline-secondary">Registrar fecha de desembolso</button>
+                                            </div>
+                                            <div class="btn-group" role="group" *ngIf="creditAssociated.state == 'Solicitado'">
+                                                <button type="button" (click)="setDecisionCredit('Rechazado')" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#approvedModal">Rechazar</button>
+                                                <button type="button" (click)="setDecisionCredit('Aprobado')" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#approvedModal">Aprobar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <table class="table table-sm">
+                                        <tbody>
+                                            <tr>
+                                                <th>Código</th>
+                                                <td>{{ creditAssociated.code }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Fecha solicitud</th>
+                                                <td>{{ creditAssociated.application_date }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Fecha desembolso</th>
+                                                <td>{{ creditAssociated.disbursment_date }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Monto solicitado</th>
+                                                <td>{{ creditAssociated.amount_solicited | number }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Monto aprobado</th>
+                                                <td>{{ creditAssociated.amount_approved | number }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Plazo en meses</th>
+                                                <td>{{ creditAssociated.payment_deadline | number }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Número de cuotas pactadas</th>
+                                                <td>{{ creditAssociated.number_fees | number }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Saldo de crédito</th>
+                                                <td>{{ creditAssociated.balance_credit | number }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Rendimientos generados</th>
+                                                <td>{{ creditAssociated.financial_performance | number }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Estado de crédito</th>
+                                                <td>{{ creditAssociated.state }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- información consolidado créditos-->    
+                </div>
+                <!-- fin información crédito-->
+            </div>
+            <!-- end content -->
+
+            <!-- información pagos-->
+            <div class="row margin-top-1rem">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col-sm-8">
+                                    Pagos de crédito
+                                </div>
+                                <div class="col-sm-4 text-right" *ngIf="creditAssociated.state == 'Desembolsado'">
+                                    <div class="btn-group" role="group">
+                                        <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#creditPaymentModal">Pagar cuota</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Número de cuota</th>
+                                        <th>Pago normal</th>
+                                        <th>Pago a interes</th>
+                                        <th>Pago a capital</th>
+                                        <th>Fecha programada de pago</th>
+                                        <th>Fecha de pago</th>
+                                        <th>Dias de retraso</th>
+                                        <th>Valor adicional</th>
+                                        <th>Cargo adicional</th>
+                                        <th>Valor neto recibido</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let payment of lstPayments">
+                                        <td>{{ payment.number_fee | number}}</td>
+                                        <td>{{ payment.normal_payment_value }}</td>
+                                        <td>{{ payment.interest_value }}</td>
+                                        <td>{{ payment.capital_value }}</td>
+                                        <td>{{ payment.scheduled_payment_date }}</td>
+                                        <td>{{ payment.real_payment_date }}</td>
+                                        <td>{{ payment.days_late }}</td>
+                                        <td>{{ payment.additional_charge }}</td>
+                                        <td>{{ payment.description_addiontal_charge }}</td>
+                                        <td>{{ payment.payment_received }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- información pagos-->
+            
+        </section>
+    </main>
+</app-pages>  
+
+<app-approved-form-modal
+[decision]="decision"
+[id]="creditAssociated.pk_id_credit_associated"
+[amount_solicited]="creditAssociated.amount_solicited"
+(update)="onUpdateState($event)"
+>
+</app-approved-form-modal>

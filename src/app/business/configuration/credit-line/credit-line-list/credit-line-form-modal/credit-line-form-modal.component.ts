@@ -58,6 +58,8 @@ export class CreditLineFormModalComponent implements OnInit {
       description: [this.creditLine.description, Validators.required],
       interest: [this.creditLine.interest, [Validators.required, Validators.min(0), Validators.max(100)]],
       term_interest: [this.creditLine.term_interest, Validators.required],
+      max_payment_deadline: [this.creditLine.max_payment_deadline, Validators.required],
+      code: [this.creditLine.code, Validators.required]
       });
   }
 

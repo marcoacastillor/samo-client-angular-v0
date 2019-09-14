@@ -38,6 +38,7 @@
                 <thead class="bg-secondary text-white">
                     <tr>
                         <th>Acciones</th>
+                        <th>Código</th>
                         <th>Nombre</th>
                         <th>Descripción</th>
                         <th>Interés cobrado</th>
@@ -56,6 +57,7 @@
                                 </button>
                             </div>
                         </td>
+                        <td>{{ line.code }}</td>
                         <td>{{ line.name }}</td>
                         <td>{{ line.description }}</td>
                         <td>{{ line.interest | number }} %</td>

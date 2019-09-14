@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { CreditLine } from '../models/credit-line';
 import { switchMap } from 'rxjs/operators';
 import { ResultOperation } from '../models/result-operation';
+import { identifierModuleUrl } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +25,17 @@ export class CreditLineService {
       switchMap(validate => {
         if(validate){
           return this.http.get<CreditLine[]>(this._url);
+        }
+      })
+    );
+  }
+
+  public show$(id:number): Observable<CreditLine> {
+    let url = this._url + '/' + id.toString();
+    return this.userService.validateOptionByToken('CreditLine:show').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.get<CreditLine>(url);
         }
       })
     );

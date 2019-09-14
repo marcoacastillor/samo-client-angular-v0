@@ -512,7 +512,8 @@ export class NewSaleDetailComponent implements OnInit {
             //w.close();         
           }
         )
-      })
+      }),
+      tap(() => this.loadClientOther())
     )
     .subscribe()
   }
@@ -531,7 +532,8 @@ export class NewSaleDetailComponent implements OnInit {
         this.parameterConfigService.updateByEnterpriseAndCodeAndValue$(this.activeUser.fk_id_enterprise,this.code_paramSelected,this.value_paramSelected).subscribe(
           () => { this.getParametersByEnterprise();}
         )
-      })
+      }),
+      tap(() => this.loadClientOther())
     )
     .subscribe()
   }
