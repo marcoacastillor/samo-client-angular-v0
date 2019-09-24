@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-
+  
   url_user: 'http://localhost/usuariosV0/public/users',
   url_module: 'http://localhost/usuariosV0/public/modules',
   url_component: 'http://localhost/usuariosV0/public/components',

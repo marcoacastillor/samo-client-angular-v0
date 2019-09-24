@@ -76,6 +76,7 @@ export class CreditLineListComponent implements OnInit {
       result => 
       {
         this.resultOperation = result;
+        this.creditLine = result.response;
         this.getAllCreditLine();
       }
     )

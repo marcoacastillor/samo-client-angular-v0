@@ -3,10 +3,12 @@ import { AssociatedInfo } from 'src/app/shared/models/associated-info';
 import { User } from 'src/app/shared/models/user';
 import { GlobalStoreService } from 'src/app/core/services/global-store.service';
 import { AssociatedInfoService } from 'src/app/shared/services/associated-info.service';
-import { faEye, faEllipsisV, faPlusCircle, faAngleDoubleRight } from '@fortawesome/free-solid-svg-icons';
+import { faEye, faEllipsisV, faPlusCircle, faAngleDoubleRight, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { CreditAssociated } from 'src/app/shared/models/credit-associated';
 import { CreditAssociatedService } from 'src/app/shared/services/credit-associated.service';
 import { environment } from 'src/environments/environment';
+import { CreditPaymentService } from 'src/app/shared/services/credit-payment.service';
+import { ExpensesService } from 'src/app/shared/services/expenses.service';
 
 @Component({
   selector: 'app-rotative-credits-main',
@@ -18,6 +20,7 @@ export class RotativeCreditsMainComponent implements OnInit {
   faEllipsisV = faEllipsisV;
   faPlusCircle = faPlusCircle;
   faAngleDoubleRight = faAngleDoubleRight;
+  faSearch = faSearch;
 
   lstAssociated: AssociatedInfo[] = [];
   lstCreditApproved: CreditAssociated[] = [];
@@ -40,14 +43,19 @@ export class RotativeCreditsMainComponent implements OnInit {
   credit_disbursment_value = 0;
 
   credit_performance_value = 0;
+  credit_payments_value = 0;
+  credit_expenses_value = 0;
   financial_performance = environment.financial_performance;
   
   activeUser: User = new User;
+  lastkeydown1 = 0;
   
   constructor(
     private globalStoreService: GlobalStoreService,
     private associatedInfoService: AssociatedInfoService,
-    private creditAssociatedService: CreditAssociatedService
+    private creditAssociatedService: CreditAssociatedService,
+    private creditPaymentService: CreditPaymentService,
+    private expenseService: ExpensesService
   ) { }
 
   ngOnInit() {
@@ -90,9 +98,20 @@ export class RotativeCreditsMainComponent implements OnInit {
     );
     this.creditAssociatedService.getPerformanceByEnterprise$(id_enterprise).subscribe(
       result => {
-        this.credit_performance_value = result.value;
+        this.credit_performance_value = result;
+      }
+    );
+    this.creditPaymentService.getPaymentsByenterprise$(id_enterprise).subscribe(
+      result => {
+        this.credit_payments_value = result;
+      }
+    );
+    this.expenseService.getExpensesByEnterprise$(id_enterprise).subscribe(
+      result => {
+        this.credit_expenses_value = result;
       }
     )
+    
   }
 
   private loadCreditsByEnterprise(id_enterprise:number){
@@ -107,11 +126,27 @@ export class RotativeCreditsMainComponent implements OnInit {
     );
   }
 
-  private loadAllAssociated(id_enterprise: number){
+  public loadAllAssociated(id_enterprise: number){
     this.associatedInfoService.getAssociatedByEnterprise$(id_enterprise).subscribe(
       lst_associated => this.lstAssociated = lst_associated
     )
   }
+
+  onFindAssociated(filter: any){
+    let idAssociated = (<HTMLInputElement>document.getElementById('filterAssociated')).value;
+    this.lstAssociated = [];
+
+    if (idAssociated.trim().length > 0) {
+      if (filter.timeStamp - this.lastkeydown1 > 200) {
+        this.associatedInfoService.getAssociatedByIdFilterAndEnterprise$(idAssociated.trim(), this.activeUser.fk_id_enterprise).subscribe(
+          lst_persons => {
+            this.lstAssociated = lst_persons;
+          },
+        )
+      }
+    }
+  }
+
 
   
 

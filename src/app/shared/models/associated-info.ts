@@ -6,6 +6,7 @@ export class AssociatedInfo {
     public min_contribution: number;
     public period_contribution: string;
     public total_contribution: number;
+    public administrative_expenses: number;
 
     constructor(){
         this.external_reference_person = '::::';

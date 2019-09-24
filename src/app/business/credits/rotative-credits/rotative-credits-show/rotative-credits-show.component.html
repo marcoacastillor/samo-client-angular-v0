@@ -162,10 +162,10 @@
                             <div class="card">
                                 <div class="card-header">
                                     <div class="row">
-                                        <div class="col-sm-8">
+                                        <div class="col-sm-6">
                                             Detalle de crédito
                                         </div>
-                                        <div class="col-sm-4 text-right">
+                                        <div class="col-sm-6 text-right">
                                             <div class="btn-group" role="group" *ngIf="creditAssociated.state == 'Aprobado'">
                                                 <button type="button" (click)="updateDisbursmentDate()" class="btn btn-sm btn-outline-secondary">Registrar fecha de desembolso</button>
                                             </div>
@@ -181,7 +181,11 @@
                                         <tbody>
                                             <tr>
                                                 <th>Código</th>
-                                                <td>{{ creditAssociated.code }}</td>
+                                                <td>
+                                                    <a routerLink='../../rotative-credit/show/{{creditAssociated.pk_id_credit_associated}}' class="dropdown-item text-small text-secondary"  type="button">
+                                                        <fa-icon [icon]="faEye" class="text-outline-secondary mb-2 mr-1"></fa-icon>{{ creditAssociated.code }}
+                                                    </a>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <th>Fecha solicitud</th>
@@ -216,6 +220,14 @@
                                                 <td>{{ creditAssociated.financial_performance | number }}</td>
                                             </tr>
                                             <tr>
+                                                <th>Observaciones</th>
+                                                <td>{{ creditAssociated.observation }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Valor cuota mensual</th>
+                                                <td>{{ creditAssociated.monthly_fee | number }}</td>
+                                            </tr>
+                                            <tr>
                                                 <th>Estado de crédito</th>
                                                 <td>{{ creditAssociated.state }}</td>
                                             </tr>
@@ -236,16 +248,7 @@
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-header">
-                            <div class="row">
-                                <div class="col-sm-8">
-                                    Pagos de crédito
-                                </div>
-                                <div class="col-sm-4 text-right" *ngIf="creditAssociated.state == 'Desembolsado'">
-                                    <div class="btn-group" role="group">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#creditPaymentModal">Pagar cuota</button>
-                                    </div>
-                                </div>
-                            </div>
+                            Pagos de crédito
                         </div>
                         <div class="card-body">
                             <table class="table table-sm">
@@ -266,15 +269,15 @@
                                 <tbody>
                                     <tr *ngFor="let payment of lstPayments">
                                         <td>{{ payment.number_fee | number}}</td>
-                                        <td>{{ payment.normal_payment_value }}</td>
-                                        <td>{{ payment.interest_value }}</td>
-                                        <td>{{ payment.capital_value }}</td>
+                                        <td>{{ payment.normal_payment_value | number }}</td>
+                                        <td>{{ payment.interest_value | number }}</td>
+                                        <td>{{ payment.capital_value | number }}</td>
                                         <td>{{ payment.scheduled_payment_date }}</td>
                                         <td>{{ payment.real_payment_date }}</td>
                                         <td>{{ payment.days_late }}</td>
-                                        <td>{{ payment.additional_charge }}</td>
-                                        <td>{{ payment.description_addiontal_charge }}</td>
-                                        <td>{{ payment.payment_received }}</td>
+                                        <td>{{ payment.additional_charge | number }}</td>
+                                        <td>{{ payment.description_additional_charge }}</td>
+                                        <td>{{ payment.payment_received | number }}</td>
                                     </tr>
                                 </tbody>
                             </table>

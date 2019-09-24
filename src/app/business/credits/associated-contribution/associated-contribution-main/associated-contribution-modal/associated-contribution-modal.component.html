@@ -1,0 +1,64 @@
+<div class="modal fade" id="contributionModal" tabindex="-1" role="dialog" aria-labelledby="contributionModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Aportes</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="card">
+                <div class="card-header">
+                    Registro de aporte
+                </div>
+                <div class="card-body">
+                    <form [formGroup]="contributionForm">
+                        <div class="row">
+                            <div class="col-sm-8 alert alert-info">
+                                <h4>Tenga en cuenta que:</h4>
+                                <hr>
+                                <p>Al valor del aporte se deben sumar $ 2000, por concepto de gastos administrativos. De lo contrario, se van a descontar del valor apotado.</p>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <div class="row">
+                                    <div class="col-sm-12 text-right">
+                                        <div class="form-group">
+                                            <label for="value_contribution">Valor aporte</label>
+                                            <input type="text" class="form-control form-control-lg" formControlName="value_contribution" required>
+                                            <small *ngIf="mustShowError('value_contribution')" class="form-text alert-danger">
+                                                Valor de aporte, es obligatorio
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        El valor a aportar es: {{ (contributionForm.value.value_contribution - 2000) | number }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
+                        <!-- buttons-->
+                        <div class="row margin-top-1rem">
+                            <div class="col-sm-4">
+                                <button type="submit" (click)="createContrubution()" [disabled]="contributionForm.invalid" class="btn btn-sm btn-outline-primary" type="button" data-dismiss="modal">
+                                    <fa-icon [icon]="faSave" class="text-outline-secondary mb-2 mr-1"></fa-icon>Registrar
+                                </button>
+                            </div>
+                        </div>
+                        <!-- buttons-->
+                        
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        </div>
+        </div>
+    </div>
+</div>

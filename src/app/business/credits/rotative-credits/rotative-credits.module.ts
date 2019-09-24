@@ -15,6 +15,7 @@ import { CreditLineService } from 'src/app/shared/services/credit-line.service';
 import { CreditPaymentService } from 'src/app/shared/services/credit-payment.service';
 import { ApprovedFormModalComponent } from './rotative-credits-show/approved-form-modal/approved-form-modal.component';
 import { SimulationCreditModalComponent } from './rotative-credits-form/simulation-credit-modal/simulation-credit-modal.component';
+import { ExpensesService } from 'src/app/shared/services/expenses.service';
 
 @NgModule({
   imports: [
@@ -26,7 +27,7 @@ import { SimulationCreditModalComponent } from './rotative-credits-form/simulati
     //OwlNativeDateTimeModule,
   ],
   providers: [
-    AssociatedInfoService, CreditAssociatedService, CreditLineService, PersonService, CreditPaymentService 
+    AssociatedInfoService, CreditAssociatedService, CreditLineService, PersonService, CreditPaymentService, ExpensesService 
   ],
   declarations: [RotativeCreditsMainComponent, RotativeCreditsFormComponent, RotativeCreditsShowComponent, RotativeCreditsListComponent, ApprovedFormModalComponent, SimulationCreditModalComponent]
 })

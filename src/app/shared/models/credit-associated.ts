@@ -12,5 +12,7 @@ export class CreditAssociated {
     public disbursment_date: string;
     public number_fees: number;
     public state: string;
-    public value_payment: number;
+    public monthly_fee: number;
+    public interest: number;
+    public observation: string;
 }

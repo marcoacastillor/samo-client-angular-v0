@@ -15,7 +15,7 @@
                     <tr *ngFor="let prd of productLst">
                         <td>
                             <button type="button" *ngIf="stateProduction == 'Abierto' && stateProcess != 'Cerrado'" (click)="selectDetailProductInput(prd)" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#deleteDetailProductInputInter">
-                                <fa-icon [icon]="faTrash" class="text-outline-danger mb-2 mr-1"></fa-icon>{{ stateProduction}} - {{stateProcess}}
+                                <fa-icon [icon]="faTrash" class="text-outline-danger mb-2 mr-1"></fa-icon>
                             </button>
                         </td>
                         <td>{{ prd.name }}</td>

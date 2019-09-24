@@ -109,8 +109,9 @@ export class RotativeCreditsFormComponent implements OnInit {
       code: [this.creditSelected.code,Validators.required],
       amount_solicited: [this.creditSelected.amount_solicited],
       payment_deadline: [this.creditSelected.payment_deadline,Validators.required],
-      value_payment: [this.creditSelected.value_payment],
+      monthly_fee: [this.creditSelected.monthly_fee],
       number_fees: [this.creditSelected.number_fees, Validators.required],
+      interest: [this.creditSelected.interest],
       names: [this.associatedSelected.external_reference_person.split(':')[1]+ ' ' + this.associatedSelected.external_reference_person.split(':')[2] + ' ' + this.associatedSelected.external_reference_person.split(':')[3] + ' ' + this.associatedSelected.external_reference_person.split(':')[4], Validators.required],
     })
   }
@@ -149,12 +150,20 @@ export class RotativeCreditsFormComponent implements OnInit {
       let selectedCredit = this.lstCreditLine.filter(credit => credit.pk_id_credit_line === parseInt(creditLine));
       this.selectedCredit = selectedCredit[0];
 
+      let interest = 0;
+      if(selectedCredit[0].term_interest == 'Anual'){
+        interest = selectedCredit[0].interest / 12; 
+      }else{
+        interest = selectedCredit[0].interest; 
+      }
+
       this.max_payment_deadline = selectedCredit[0].max_payment_deadline;
       this.creditForm.patchValue({
         fk_id_credit_line: selectedCredit[0].pk_id_credit_line,
         number_fees: this.max_payment_deadline,
         payment_deadline: this.max_payment_deadline,
-        code: selectedCredit[0].code
+        code: selectedCredit[0].code,
+        interest:interest 
       });
 
       this.simulateCredit();
@@ -181,7 +190,7 @@ export class RotativeCreditsFormComponent implements OnInit {
   simulateCredit(){
     this.creditAssociatedService.getPMT$(this.selectedCredit.interest, this.selectedCredit.term_interest, this.creditForm.value.number_fees, this.creditForm.value.amount_solicited).subscribe(
       pmt => this.creditForm.patchValue({
-        value_payment: pmt
+        monthly_fee: pmt
       })
     )
   }

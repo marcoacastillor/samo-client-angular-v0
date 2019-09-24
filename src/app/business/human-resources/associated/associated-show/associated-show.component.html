@@ -183,7 +183,11 @@
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let credit of lstCreditAssociated">
-                                        <td>{{ credit.code }}</td>
+                                        <td>
+                                            <a routerLink='/sales-admin/credits/rotative-credit/show/{{credit.pk_id_credit_associated}}' class="dropdown-item text-small text-secondary"  type="button">
+                                                <fa-icon [icon]="faEye" class="text-outline-secondary mb-2 mr-1"></fa-icon>{{ credit.code }}
+                                            </a>
+                                        </td>
                                         <td>{{ credit.amount_solicited | number }}</td>
                                         <td>{{ credit.amount_approved | number }}</td>
                                         <td>{{ credit.payment_deadline | number }}</td>

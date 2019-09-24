@@ -193,11 +193,11 @@ export class NewSaleDetailComponent implements OnInit {
 
     //Actualizar datos sobre numeración de facturas
     this.code_paramSelected    = environment.current_invoice;
-    this.value_paramSelected   = (Number(current_invoice) + 1).toString();
+    this.value_paramSelected   = (Number(number_invoice)).toString();
 
     this.operationForm.patchValue({
       number_invoice: number_invoice,
-      current_invoice: (Number(current_invoice) + 1)
+      current_invoice: (Number(number_invoice) + 1)
     });
   }
 

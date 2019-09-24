@@ -134,7 +134,7 @@
                                                             <div id="autocomplete-list" class="autocomplete-items text-ultra-small">
                                                                 <div class="items row" *ngFor="let person of lstAssociated">
                                                                     <div class="col-sm-12" (click)="selectAssociated(person)">
-                                                                        {{ person.external_reference_person.split(':')[1] }} - {{ person.external_reference_person.split(':')[2] }} {{ person.external_reference_person.split(':')[3] }}
+                                                                        {{ person.external_reference_person.split(':')[1] }} - {{ person.external_reference_person.split(':')[2] }} {{ person.external_reference_person.split(':')[3] }} {{ person.external_reference_person.split(':')[4] }}
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -174,15 +174,15 @@
                                                     </div>
                                                     <div class="form-group col-sm-3">
                                                         <label for="number_fees">Número de cuotas</label>
-                                                        <input type="number" (blur)="simulateCredit()" class="form-control form-control-sm"  formControlName="number_fees" required> 
+                                                        <input type="number" (keypress)="simulateCredit()" (blur)="simulateCredit()" class="form-control form-control-sm"  formControlName="number_fees" required> 
                                                         <small class="alert-danger">Máximo valor {{ max_payment_deadline | number }}</small>
                                                         <small *ngIf="mustShowError('number_fees')" class="form-text alert-danger">
                                                             Número de cuotas, es obligatorio
                                                         </small>
                                                     </div>
                                                     <div class="form-group col-sm-3">
-                                                        <label for="value_payment">Cuota a pagar</label>
-                                                        <input readonly type="number" class="form-control form-control-sm" placeholder="Valor de la cuota mensual"  formControlName="value_payment"> 
+                                                        <label for="monthly_fee">Cuota a pagar</label>
+                                                        <input readonly type="number" class="form-control form-control-sm" placeholder="Valor de la cuota mensual"  formControlName="monthly_fee"> 
                                                     </div>
                                                 </div>
                                                 
@@ -219,7 +219,7 @@
 </app-pages>
 
 <app-simulation-credit-modal
-[value_payment]="this.creditForm.value.value_payment"
+[value_payment]="this.creditForm.value.monthly_fee"
 [value_total]="this.creditForm.value.amount_solicited"
 [num_fees]="this.creditForm.value.number_fees"
 [month_interest]="this.selectedCredit.interest"

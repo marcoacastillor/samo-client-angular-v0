@@ -9,6 +9,7 @@ export class CreditPayment {
     public real_payment_date: number;
     public days_late: number;
     public additional_charge: number;
-    public description_addiontal_charge: string;
+    public description_additional_charge: string;
     public payment_received: number;
+    public contribution: number;
 }

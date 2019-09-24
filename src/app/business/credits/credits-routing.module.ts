@@ -9,6 +9,10 @@ const routes: Routes = [
         path: "rotative-credit",
         loadChildren: './rotative-credits/rotative-credits.module#RotativeCreditsModule',
       },
+      {
+        path: "associated-contribution",
+        loadChildren: './associated-contribution/associated-contribution.module#AssociatedContributionModule',
+      },
     ]
   },
 ];

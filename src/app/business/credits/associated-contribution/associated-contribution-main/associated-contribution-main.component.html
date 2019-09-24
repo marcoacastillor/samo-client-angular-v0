@@ -1,0 +1,194 @@
+<app-pages title="Gestión de pagos y aportes">  
+    <main>       
+        <section>
+            <!-- start menu main-->
+            <div class="row bg-gray">
+                <div class="col-sm-6 text-left">
+                    Pagos
+                </div>
+            </div>
+            <!-- end menu main-->
+
+            <div class="row margin-top-1rem">
+                <div class="col-sm-12">
+                    <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="resultOperation.code == 0">
+                        <strong>Éxito.</strong> {{ resultOperation.description }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="resultOperation.code != 0 && resultOperation.code != 99">
+                        <strong>Error.</strong> {{ resultOperation.description }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- start content -->
+            <div class="row margin-top-1rem">
+                <!-- información asociado -->
+                <div class="col-sm-5">  
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header">Buscador de asociado</div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="form-group col-sm-12">
+                                            <label for="names">Asociado</label>
+                                            <input type="text" id="filterAssociated" (keypress)="onFindAssociated($event)" class="form-control form-control-sm">
+                                            <small class="text-muted">Digite CC o nombres del asociado</small>
+                                            <!-- start autocomplete-->
+                                            <div class="autocomplete container-fluid" *ngIf="lstAssociated.length > 0">
+                                                <div id="autocomplete-list" class="autocomplete-items text-ultra-small">
+                                                    <div class="items row" *ngFor="let person of lstAssociated">
+                                                        <div class="col-sm-12" (click)="selectAssociated(person)">
+                                                            {{ person.external_reference_person.split(':')[1] }} - {{ person.external_reference_person.split(':')[2] }} {{ person.external_reference_person.split(':')[3] }} {{ person.external_reference_person.split(':')[4] }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                  
+
+                    <div class="row margin-top-1rem">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            Información asociado
+                                        </div>
+                                        <div class="col-sm-6 text-right" *ngIf="person.pk_id_person">
+                                            <div class="btn-group" role="group">
+                                                <a routerLink='/sales-admin/human-resource/associated/show/{{associatedSelected.pk_id_associated_info}}' class="btn btn-sm btn-outline-secondary">Detalle</a>
+                                                <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#contributionModal">Registrar aporte</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <table class="table table-sm">
+                                        <tbody>
+                                            <tr>
+                                                <th>Identificación</th>
+                                                <td>{{ person.type_id }} {{ person.number_id }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Nombre</th>
+                                                <td>{{ person.names }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Apellidos</th>
+                                                <td>{{ person.last_names }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Dirección</th>
+                                                <td>{{ person.address }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Teléfono</th>
+                                                <td>{{ person.phone }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Fecha de afiliación</th>
+                                                <td>{{ associatedSelected.date_of_admission }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Aportes</th>
+                                                <td>{{ associatedSelected.min_contribution | number }} {{ associatedSelected.period_contribution }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Total aportes</th>
+                                                <td>{{ associatedSelected.total_contribution | number }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Aporte a Gastos administrativos</th>
+                                                <td>{{ associatedSelected.administrative_expenses | number }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- información asociado -->
+
+                <!-- información pagos -->
+                <div class="col-sm-7">                    
+                    <div class="card">
+                        <div class="card-header">Información créditos desembolsados</div>
+                        <div class="card-body">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Acciones</th>
+                                        <th>Código</th>
+                                        <th>Fecha solicitud</th>
+                                        <th>Valor de la cuota</th>
+                                        <th>Valor préstamo</th>
+                                        <th>Saldo</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let credit of lstCredit">
+                                        <td>
+                                            <div class="btn-group btn-group-sm dropleft">
+                                                <div class="dropdown">
+                                                    <button class="btn btn-sm dropdown" type="button" id="operation" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <fa-icon [icon]="faCogs" class="text-outline-secondary mb-2 mr-1"></fa-icon>
+                                                    </button>
+                                                    <div class="dropdown-menu" aria-labelledby="operation">
+                                                        <button class="dropdown-item text-small text-secondary" (click)="selectCredit(credit)"  type="button" data-toggle="modal" data-target="#paymentModal" *ngIf="credit.state === 'Desembolsado' && credit.balance_credit > 0">
+                                                            <fa-icon [icon]="faPlusCircle" class="text-outline-secondary mb-2 mr-1"></fa-icon>Registrar pago
+                                                        </button>
+                                                        <div class="dropdown-divider"></div>
+                                                        <a routerLink='../../rotative-credit/show/{{credit.pk_id_credit_associated}}' class="dropdown-item text-small text-secondary"  type="button">
+                                                            <fa-icon [icon]="faEye" class="text-outline-secondary mb-2 mr-1"></fa-icon>Detalle
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>{{ credit.code }}</td>
+                                        <td>{{ credit.application_date }}</td>
+                                        <td>{{ credit.monthly_fee | number }}</td>
+                                        <td>{{ credit.amount_approved | number }}</td>
+                                        <td>{{ credit.balance_credit | number }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- información pagos -->    
+            </div>
+            <!-- end content -->       
+        </section>
+    </main>
+</app-pages>  
+
+<!-- aportes -->
+<app-associated-contribution-modal
+[associatedSelected]="associatedSelected"
+(create)="onCreate($event)"
+>
+</app-associated-contribution-modal>
+<!-- aportes -->
+
+<!-- pago cuota-->
+<app-credit-payment-modal
+[selectedCredit]="selectedCredit"
+[creditPaymentSelected]="creditPaymentSelected"
+[associatedSelected]="associatedSelected"
+(create)="onCreatePayment($event)"
+>
+</app-credit-payment-modal>
+<!-- pago cuota-->

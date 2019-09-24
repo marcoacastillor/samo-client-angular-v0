@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Person } from 'src/app/shared/models/person';
 import { CreditAssociated } from 'src/app/shared/models/credit-associated';
 import { CreditLine } from 'src/app/shared/models/credit-line';
-import { faThList } from '@fortawesome/free-solid-svg-icons';
+import { faThList, faEye } from '@fortawesome/free-solid-svg-icons';
 import { CreditPayment } from 'src/app/shared/models/credit-payment';
 import { ActivatedRoute } from '@angular/router';
 import { CreditAssociatedService } from 'src/app/shared/services/credit-associated.service';
@@ -21,6 +21,7 @@ import { ResultOperation } from 'src/app/shared/models/result-operation';
 })
 export class RotativeCreditsShowComponent implements OnInit {
   faThList = faThList;
+  faEye = faEye;
 
   id = '';
   decision: string = '';

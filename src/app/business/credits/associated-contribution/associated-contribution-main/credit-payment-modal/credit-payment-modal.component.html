@@ -1,0 +1,149 @@
+<div class="modal fade" id="paymentModal" tabindex="-1" role="dialog" aria-labelledby="paymentModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Pago de crédito</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            Liquidación de cuota
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table class="table table-sm">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <span class="text-muted">Código crédito</span><br/> <h6>{{ selectedCredit.code }}</h6>
+                                                </td>
+                                                <td>
+                                                    <span class="text-muted">Fecha desembolso</span><br/> <h6>$ {{ selectedCredit.disbursment_date }}</h6>
+                                                </td>
+                                                <td>
+                                                    <span class="text-muted">Saldo crédito</span><br/> <h6>$ {{ selectedCredit.balance_credit | number }}</h6>
+                                                </td>
+                                                <td>
+                                                    <span class="text-muted">Cuota mensual fija</span><br/> <h6>$ {{ selectedCredit.monthly_fee | number }}</h6>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="row margin-top-1rem">
+                                <!-- liquidación cuota-->
+                                <div class="col-sm-6">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            Valores calculados
+                                        </div>
+                                        <div class="card-body">
+                                            <table class="table table-sm">
+                                                <tbody>
+                                                    <tr>
+                                                        <th>Cuota #</th>
+                                                        <td>{{ creditPaymentSelected.number_fee | number }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Fecha programada de pago</th>
+                                                        <td>{{ creditPaymentSelected.scheduled_payment_date }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Dias mora</th>
+                                                        <td>{{ days_late | number }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Abono a interes</th>
+                                                        <td>{{ creditPaymentSelected.interest_value | number }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Abono a capital</th>
+                                                        <td>{{ paymentForm.value.payment_received - (creditPaymentSelected.interest_value + creditPaymentSelected.additional_charge ) | number }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>{{ creditPaymentSelected.description_additional_charge}}</th>
+                                                        <td>{{ creditPaymentSelected.additional_charge | number }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Aporte mensual</th>
+                                                        <td>{{ paymentForm.value.contribution | number }}</td>
+                                                    </tr>
+                                                </tbody>
+                                                <tfoot>
+                                                    <tr>
+                                                        <th>Total a pagar</th>
+                                                        <th>{{  (paymentForm.value.payment_received) + paymentForm.value.contribution | number }}</th>
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- liquidación cuota-->
+
+                                <!-- valores a pagar-->
+                                <div class="col-sm-6">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            Valores a pagar
+                                        </div>
+                                        <div class="card-body">
+                                            <form [formGroup]="paymentForm">
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="payment_received">Valor recibido</label>
+                                                            <input type="number" class="text-success form-control form-control-lg" formControlName="payment_received" required>
+                                                            <small *ngIf="hasError('payment_received','required')" class="form-text alert-danger">
+                                                                Valor recibido, es obligatorio
+                                                            </small>
+                                                            <small *ngIf="hasError('payment_received','min')" class="form-text alert-danger">
+                                                                El valor mínimo es <strong>{{ this.getErrors('payment_received').min.min | number }}</strong>
+                                                            </small>
+                                                            <small *ngIf="hasError('payment_received','max')" class="form-text alert-danger">
+                                                                El valor máximo es <strong>{{ this.getErrors('payment_received').max.max | number }}</strong>
+                                                            </small>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="contribution">Aporte mensual</label>
+                                                            <input type="number" class="text-success form-control form-control-lg" formControlName="contribution">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- buttons-->
+                                                <div class="row margin-top-1rem justify-content-end">
+                                                    <div class="col-sm-4 text-right align-self-end">
+                                                        <button type="submit" (click)="createPayment()" [disabled]="paymentForm.invalid" class="btn btn-sm btn-outline-primary" type="button" data-dismiss="modal">
+                                                            <fa-icon [icon]="faSave" class="text-outline-secondary mb-2 mr-1"></fa-icon>Registrar
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <!-- buttons-->
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- valores a pagar-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        </div>
+        </div>
+    </div>
+</div>

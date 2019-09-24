@@ -80,5 +80,16 @@ export class ExpensesService {
       })
     );
   }
+
+  public getExpensesByEnterprise$(id_enterprise:number): Observable<number> {
+    const url = this._url + '/get-by-enterprise/' + id_enterprise.toString();
+    return this.userService.validateOptionByToken('Expense:getByEnterprise').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.get<number>(url);
+        }
+      })
+    );
+  }
   
 }

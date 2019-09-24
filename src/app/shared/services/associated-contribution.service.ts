@@ -5,6 +5,8 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { UserService } from './user.service';
+import { AssociatedInfo } from '../models/associated-info';
+import { ResultOperation } from '../models/result-operation';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +26,16 @@ export class AssociatedContributionService {
       switchMap(validate => {
         if(validate){
           return this.http.get<AssociatedContribution[]>(url);
+        }
+      })
+    );
+  }
+
+  public create$(associated_info:AssociatedContribution): Observable<ResultOperation> {
+    return this.userService.validateOptionByToken('AssociatedContribution:create').pipe(
+      switchMap(validate => {
+        if(validate){
+          return this.http.post<ResultOperation>(this._url,associated_info);
         }
       })
     );
