@@ -143,7 +143,11 @@
                                         </thead>
                                         <tbody>
                                             <tr *ngFor="let credit of lstCredit">
-                                                <td>{{ credit.code }}</td>
+                                                <td>
+                                                    <a routerLink='../../rotative-credit/show/{{creditAssociated.pk_id_credit_associated}}' class="dropdown-item text-small text-secondary"  type="button">
+                                                        <fa-icon [icon]="faEye" class="text-outline-secondary mb-2 mr-1"></fa-icon>{{ credit.code }}
+                                                    </a>
+                                                </td>
                                                 <td>{{ credit.application_date }}</td>
                                                 <td>{{ credit.balance_credit | number }}</td>
                                                 <td>{{ credit.state }}</td>
@@ -181,11 +185,7 @@
                                         <tbody>
                                             <tr>
                                                 <th>Código</th>
-                                                <td>
-                                                    <a routerLink='../../rotative-credit/show/{{creditAssociated.pk_id_credit_associated}}' class="dropdown-item text-small text-secondary"  type="button">
-                                                        <fa-icon [icon]="faEye" class="text-outline-secondary mb-2 mr-1"></fa-icon>{{ creditAssociated.code }}
-                                                    </a>
-                                                </td>
+                                                <td>{{ creditAssociated.code }}</td>
                                             </tr>
                                             <tr>
                                                 <th>Fecha solicitud</th>

@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Product } from 'src/app/shared/models/product';
 import { EnterpriseService } from 'src/app/shared/services/enterprise.service';
 import { tap } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-product-show',

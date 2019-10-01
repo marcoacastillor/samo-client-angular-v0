@@ -157,11 +157,12 @@ export class NewSaleDetailComponent implements OnInit {
             number_invoice = '';
           }
           else{
-            number_invoice = prefix_invoice + (next_number) 
+            number_invoice = prefix_invoice + (next_number.toString()) 
           }
         }
         else{
-          number_invoice = (Number(invoice_init)).toString();
+          next_number = (Number(invoice_init));
+          number_invoice = prefix_invoice + next_number.toString();
         }
       }
       else{
@@ -178,10 +179,11 @@ export class NewSaleDetailComponent implements OnInit {
         {
           if(invoice_init)
           {
-            number_invoice = (Number(invoice_init)).toString();
+            next_number = Number(current_invoice);
+            number_invoice = next_number.toString();
           }
           else{
-            number_invoice = '';
+            number_invoice = '1';
           }
         }
       }
@@ -193,7 +195,7 @@ export class NewSaleDetailComponent implements OnInit {
 
     //Actualizar datos sobre numeración de facturas
     this.code_paramSelected    = environment.current_invoice;
-    this.value_paramSelected   = (Number(number_invoice)).toString();
+    this.value_paramSelected   = next_number.toString();
 
     this.operationForm.patchValue({
       number_invoice: number_invoice,
@@ -405,10 +407,10 @@ export class NewSaleDetailComponent implements OnInit {
 
   public setPackageByProduct(){
     this.units_available = this.product.units_available / this.product.units_package;
-    this.selectedPresentation = 'PAQUETE';
+    this.selectedPresentation = this.product.presentation;
     this.operationForm.get('product').patchValue({
       cost_price: this.product.sale_price_package,
-      presentation: 'PAQUETE'
+      presentation: this.product.presentation
     });
   }
 
